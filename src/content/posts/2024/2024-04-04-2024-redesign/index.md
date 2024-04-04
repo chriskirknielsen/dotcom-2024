@@ -140,7 +140,7 @@ I wanted to wrap my code blocks in a custom element instead of some hardcoded me
 
 ### Smarter SVGs
 
-I went all in for this version to use the [Cheerio library](https://cheerio.js.org/). This allows me to write standard SVG files instead of NJK with conditionally injected attributes. It's a lot cleaner, and doesn't require any code edits after I'm done optimising the SVG. I can provide all the attributes I need to the bespoke `svg` shortcode I made (see [my article about SVGs in Eleventy](http://localhost:2024/blog/manage-your-svg-files-with-eleventys-render-plugin/), though note that Cheerio wasn't used at that time) and not worry about the right format and whatnot.
+I went all in for this version to use the [Cheerio library](https://cheerio.js.org/). This allows me to write standard SVG files instead of NJK with conditionally injected attributes. It's a lot cleaner, and doesn't require any code edits after I'm done optimising the SVG. I can provide all the attributes I need to the bespoke `svg` shortcode I made (see [my article about SVGs in Eleventy](/blog/manage-your-svg-files-with-eleventys-render-plugin/), though note that Cheerio wasn't used at that time) and not worry about the right format and whatnot.
 
 It is more costly to run Cheerio instead of inlining NJK instructions, but I don't use a lot of SVGs, and also, if the options are identical, I cache the processed result so that if two different pages use the same SVG, it only gets run once, saving a little bit of time.
 
