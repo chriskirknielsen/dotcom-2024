@@ -191,7 +191,7 @@ As far as the files that are spit out, I end up with slightly heavier files due 
 
 ## Takeaways
 
-ESM is pretty cool, custom element as super cool, open source is amazing, and if you read through _all_ of this ramble, thank you, and congratulations: I am not good a trimming down content!
+ESM is pretty cool, custom elements are super cool, open source is amazing, and if you read through _all_ of this ramble, thank you, and congratulations: I am not good a trimming down content!
 
 If anything, I hope you have fun with the theme picker. It's my happy place.
 
