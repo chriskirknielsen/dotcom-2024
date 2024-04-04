@@ -1,0 +1,48 @@
+.inline-list {
+    text-wrap: balance;
+
+    &:is(:not([data-flow]), [data-flow="block"]) {
+        display: block;
+    }
+
+    &[data-flow="run-in"] {
+        display: inline-block;
+    }
+
+    & > li {
+        --item-gap: max(var(--GAP, 0px), 12px, 0.75em);
+
+        display: inline;
+
+        & > a {
+            display: inline-block;
+            padding-block: var(--GAP, 0px);
+        }
+    }
+
+    & > li:not(:last-child) {
+        &::after {
+            content: ' ';
+
+            letter-spacing: var(--item-gap);
+            /* Ensure there is at least 8px between items */
+            background: var(--separator, radial-gradient(circle at center, currentColor 2px, transparent 0));
+            opacity: 0.75;
+        }
+    }
+}
+
+.flex-list {
+    list-style-type: "";
+    display: flex;
+    flex-wrap: wrap;
+    gap: max(8px, var(--list-gap, var(--size-xs)));
+
+    & .button {
+        --CTA-display: flex;
+    }
+}
+
+[data-list] > li + li {
+    margin-block-start: 1em;
+}

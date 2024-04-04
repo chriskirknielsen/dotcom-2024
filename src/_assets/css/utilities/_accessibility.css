@@ -1,0 +1,129 @@
+:focus-visible {
+	outline: var(--_focus-outline);
+	outline-offset: var(--_focus-outline-offset);
+}
+
+.visually-hidden,
+.skip-link:not(:focus),
+.tooltip:not(:hover, :focus-within) > .tooltip-content {
+	position: absolute;
+	width: 1px;
+	height: 0;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+
+	white-space: nowrap;
+	border: 0;
+
+	clip: rect(0 0 0 0);
+}
+
+.skip-link:focus {
+	position: fixed;
+	inset-block-start: 1rem;
+	inset-inline-start: 1rem;
+	z-index: 99;
+
+	display: inline-block;
+	padding: var(--size-xs);
+
+	color: var(--C-heading);
+	background-color: var(--C-surface);
+	outline-color: var(--C-accent);
+
+	/* When a skip-link is added to a specific part of the page and not the entire content */
+	&[data-skiplink='local'] {
+		position: absolute;
+	}
+}
+
+.tooltip {
+	--TOOLTIP-arrow-size: var(--size-xs);
+	--TOOLTIP-offset-block: var(--size-2xs);
+	--TOOLTIP-inset-block: calc(100% + var(--TOOLTIP-arrow-size) + var(--TOOLTIP-offset-block));
+
+	position: relative;
+	display: flex;
+	/* We can't use display:contents as we need the position:relative effect, so flex will ensure the tooltip element wraps around its content nice and snug */
+
+	/* Position in the BLOCK then INLINE directions, or both at once (start center, end, center end…) */
+	&[data-tooltip-pos^="end"] {
+		--TOOLTIP-block-start: var(--TOOLTIP-inset-block);
+		--TOOLTIP-block-end: auto;
+		--TOOLTIP-arrow-y: -50%;
+	}
+
+	&[data-tooltip-pos^="center"] {
+		--TOOLTIP-block: 50%;
+	}
+
+	&[data-tooltip-pos$="end"] {
+		--TOOLTIP-inline: auto 0;
+	}
+
+	&[data-tooltip-pos$="center"] {
+		--TOOLTIP-inline: 50%;
+		--TOOLTIP-translate-x: -50%;
+	}
+
+
+	&::before,
+	& > .tooltip-content {
+		/* Prevents hiding other content below the tooltip */
+		pointer-events: none;
+
+		position: absolute;
+		inset-block: var(--TOOLTIP-block-start, auto) var(--TOOLTIP-block-end, var(--TOOLTIP-inset-block));
+
+		display: block;
+		margin: auto;
+
+		color: var(--C-surface);
+		background-color: var(--C-text);
+	}
+
+	@media (--accept-motion) {
+
+		&:is(:hover, :focus-within)::before,
+		&:is(:hover, :focus-within) > .tooltip-content {
+			transition: transform var(--easing-in-out) 200ms;
+			animation: fadeIn var(--easing-in-out) 200ms;
+		}
+	}
+
+	&::before {
+		content: '';
+		z-index: 1;
+
+		inset-inline: 0;
+
+		width: var(--TOOLTIP-arrow-size);
+		height: var(--TOOLTIP-arrow-size);
+
+		transform: scale(0) translateY(var(--TOOLTIP-arrow-y, 50%)) rotate(45deg);
+	}
+
+	&:is(:hover, :focus-within)::before {
+		transform: scale(1) translateY(var(--TOOLTIP-arrow-y, 50%)) rotate(45deg);
+	}
+
+	& > .tooltip-content {
+		z-index: 2;
+		inset-inline: var(--TOOLTIP-inline, 0 auto);
+
+		width: auto;
+		width: max-content;
+		max-width: 20ch;
+		height: auto;
+		padding: 0 var(--size-2xs);
+
+		font-size: 0.75rem;
+		font-family: var(--_font-body-family);
+		line-height: 1.6;
+		text-align: center;
+		border-radius: var(--_corner);
+
+		transform: translateX(var(--TOOLTIP-translate-x, 0%));
+	}
+}

@@ -1,0 +1,54 @@
+<header class="header-wrap | container">
+    <div class="header">
+        <a href="/" class="header-logo" {{ '/' | current(page) | safe }}>
+            {% svg "logo", {
+                class: "logo",
+                title: "Home"
+            } %}
+        </a>
+
+        {% component "cta", {
+            iconStack: {
+                'idle': 'menu-icon',
+                'pressed': 'close'
+            },
+            label: {
+                aria: 'Toggle Menu'
+            },
+            ctaClass: 'header-menu-toggle linecap-auto hide-when-viewport--large',
+            ctaAttr: 'data-toggle-pressed'
+        } %}
+
+        <div class="header-menu">
+            <nav>
+                <ul>
+                    {% for menuItem in nav.navbar %}
+                        <li>
+                            <a href="{{ menuItem.path }}" {{ menuItem.path | current(page) | safe }} class="header-link">{{ menuItem.label }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            <div class="header-themepicker">
+                <div id="header-themepicker-heading" class="header-themepicker-heading | h2 | hide-when-viewport--large">
+                    {% svg 'palette', { class: 'inline-icon' } %}
+                    <span>Theme Picker</span>
+                </div>
+                {% component "cta", {
+                    iconStack: {
+                        'idle': 'palette',
+                        'pressed': 'close'
+                    },
+                    label: {
+                        aria: 'Toggle Theme Picker'
+                    },
+                    ctaAttr: 'data-toggle-pressed aria-controls="themepicker"',
+                    ctaClass: 'header-themepicker-toggle linecap-auto hide-when-viewport--small'
+                } %}
+                {% webcomponent "theme-picker", { id: 'themepicker', 'light': 'dawn', 'dark': 'dusk', 'aria-labelledby': 'header-themepicker-heading' } %}
+                {% js "foot" %}{%- include "assets/js/components/theme-picker.js" -%}{% endjs %}
+            </div>
+        </div>
+    </div>
+</header>

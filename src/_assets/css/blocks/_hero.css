@@ -1,0 +1,23 @@
+.hero {
+    --HERO-rule-thickness: 1px;
+    --HERO-rule-color: var(--_hero-rule-color);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--size-m);
+    padding-block-end: var(--flow-space);
+
+    text-align: center;
+    border-block-end: var(--HERO-rule-thickness) solid var(--HERO-rule-color);
+}
+
+.hero-heading {
+    font-size: calc(var(--typeScale-3) * var(--HERO-title-factor, 2) * var(--HERO-title-scaling, 1));
+}
+
+.hero-sup,
+.hero-sub {
+    font-size: var(--typeScale-n1);
+    line-height: 1.1;
+}

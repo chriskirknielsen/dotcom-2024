@@ -1,0 +1,21 @@
+<svg
+    width="680"
+    height="240"
+    viewBox="0 0 680 240"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    style="background: repeating-conic-gradient(#333 0% 25%, #3330 0% 50%) 50% 0 / 120px 120px"
+>
+    <path
+        d="M128 118.887L327.167 45L582 186.5L128 118.887Z"
+        fill="#DC3898"
+        style="filter:drop-shadow(2px 4px 0 #99FCFC)"
+    />
+    <path
+        d="M139 51C290 51 534.5 75 406 75C269.631 75 92 99 276 99C451.258 99 697 120 387.5 117C139.9 114.6 492 149.5 678.5 140"
+        stroke="#99FCFC"
+        stroke-width="6"
+        stroke-linecap="round"
+    />
+</svg>

@@ -1,0 +1,40 @@
+---
+title: Projects
+summary: Some of the things I've made, either passion projects or real-world work
+---
+
+<div class="cards" data-grid-cols="3">
+	{% for project in collections._projects | reverse %}
+		<li class="card-wrapper">
+			{% set projectDesc %}<p class="fontSize-smaller">{{ project.data.summary }}</p>{% endset %}
+			{% component 'card', {
+				link: project.url,
+				image: {
+					src: project.data.customMetaImage,
+					alt: "",
+					width: 600,
+					height: 600,
+					lazy: loop.index >= 8
+				},
+				heading: project.data.title,
+				description: project.data.summary
+			} %}
+		</li>
+	{% endfor %}
+</div>
+
+<h2 class="h3">Random mini projects</h2>
+{% set miniProjects = [
+	{ name: "Custom Fonts", url: "/fonts/", blurb: "Hand-made typefaces" },
+	{ name: "Timezone Overlap Finder (2024)", url: "https://timezone-overlap-finder.netlify.app/", blurb: "A simple way to find common ground across timezones" },
+	{ name: "One-Page Calendar (2023)", url: "https://one-page-calendar.netlify.app/", blurb: "A single grid for every single day in a calendar year" },
+	{ name: "srcsetsizes (2021)", url: "https://srcsetsizes.netlify.app/", blurb: "A tool to set up the srcset and sizes attributes on an image element in HTML" },
+	{ name: "Casualty Friday (2013)", url: "https://casualty-friday.netlify.app/", blurb: "A choice-based Flash game project I made during my design study years" }
+] %}
+<ul>
+	{% for miniProject in miniProjects %}
+		<li>
+			<a href="{{ miniProject.url | url }}">{{ miniProject.name }}</a>{% if miniProject.blurb %}: {{ miniProject.blurb }}{% endif %}
+		</li>
+	{% endfor %}
+</ul>

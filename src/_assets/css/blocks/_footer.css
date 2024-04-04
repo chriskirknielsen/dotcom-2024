@@ -1,0 +1,49 @@
+.footer-wrap {
+    position: relative;
+    z-index: 2;
+
+    &::before {
+        content: '— ' var(--_footer-special-char) ' —';
+        pointer-events: none;
+
+        position: absolute;
+        inset: 0 0 auto;
+
+        display: inline-block;
+
+        color: transparent;
+        text-shadow: 0 0 0 var(--C-heading);
+        line-height: 1;
+        letter-spacing: 0.5em;
+        text-indent: 0.5em;
+        /* Counter-balance the offset from letter-spacing */
+        text-align: center;
+
+        transform: translateY(-50%);
+    }
+}
+
+.footer {
+    position: relative;
+    isolation: isolate;
+    z-index: 3;
+
+    padding-block: var(--size-2xl);
+
+    text-align: center;
+}
+
+.footer-decorator {
+    grid-column: 1 / -1;
+
+    img,
+    svg {
+        inline-size: 100%;
+        block-size: auto;
+        max-block-size: 320px;
+    }
+
+    img[width='1'][height='1'] {
+        display: none;
+    }
+}

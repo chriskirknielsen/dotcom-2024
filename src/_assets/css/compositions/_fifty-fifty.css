@@ -1,0 +1,10 @@
+.fifty-fifty {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--size-xl);
+
+    & > * {
+        flex-grow: 1;
+        flex-basis: calc((var(--layout-breakpoint, 42rem) - 100%) * 999);
+    }
+}

@@ -1,0 +1,12 @@
+.grouper {
+    display: flex;
+    gap: var(--GAP, var(--size-m));
+}
+
+.grouper--wrap {
+    flex-wrap: wrap;
+}
+
+.grouper--vertical {
+    flex-direction: column;
+}

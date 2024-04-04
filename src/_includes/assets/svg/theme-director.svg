@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <clipPath id="director-icon-clip"><path fill="none" stroke-width="0" d="M0 4.15h24V24H0z"/></clipPath>
+    </defs>
+    <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" clip-path="url(#director-icon-clip)">
+        <path d="M2.94 4.15 12 19.85l9.06-15.7"/>
+        <path d="M6.73 4.15 12 13.29l5.28-9.14"/>
+        <path d="M10.52 4.15 12 6.72l1.48-2.57"/>
+    </g>
+</svg>

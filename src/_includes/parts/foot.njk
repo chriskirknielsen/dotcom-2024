@@ -1,0 +1,11 @@
+{% css "foot" %}{% include "assets/css/font-face.css" %}{% endcss %}
+{% js "foot" %}{% include "assets/js/site.js" %}{% endjs %}
+
+<style>
+	{%- getBundle "css", "foot" -%}
+</style>
+<script>
+	{% getBundle "js", "foot" %}
+	{% getBundle "js", "foot-codewrap" %}
+	{% getBundle "js", "foot-about" %}
+</script>

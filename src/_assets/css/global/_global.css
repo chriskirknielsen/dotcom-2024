@@ -1,0 +1,20 @@
+html {
+	color-scheme: var(--_color-scheme);
+	color: var(--C-text);
+	background-color: var(--C-canvas);
+}
+
+@media (--accept-motion) {
+	html:focus-within {
+		scroll-behavior: smooth;
+	}
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+body > footer {
+	margin-block-start: auto;
+}

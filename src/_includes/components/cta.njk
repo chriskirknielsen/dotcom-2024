@@ -1,0 +1,32 @@
+{% set iconBefore = iconBefore or false %}
+{% set iconClass = iconClass or 'inline-icon' %}
+{% set ctaType = 'a' if url else 'button' %}
+{% setAsync "iconRender" %}
+    {% if icon %}
+        {% svg icon, { class: iconClass + ' linecap-auto', ariaHidden: true } %}
+    {% elseif iconStack %}
+        <div class="cellstack">
+            {% svg iconStack.idle, { class: "button-content button-content--idle", ariaHidden: true } %}
+            {% svg iconStack.pressed, { class: "button-content button-content--pressed", ariaHidden: true } %}
+        </div>
+    {% endif %}
+{% endsetAsync %}
+{% set emptyLabel = true %}
+{% set labelRender -%}
+{% if label.aria %}
+    <span class="visually-hidden">{{ label.aria }}</span>
+    {% if label.plain %}
+        {% set emptyLabel = false %}
+        <span aria-hidden="true">{{ label.plain }}</span>
+    {% endif %}
+{% elseif label %}
+    {% set emptyLabel = false %}
+    <span>{{ label }}</span>
+{% endif %}
+{% endset %}
+<{{ctaType}} {% if url %}href="{{url}}"{% else %}type="{{type or 'button'}}"{% endif %} class="button {% if (icon or iconStack) and emptyLabel %}button--icon{% endif %} {% if ctaClass %} | {{ ctaClass }}{% endif %}" {{ ctaAttr | safe }}>
+    {% if icon and iconBefore %}{{ iconRender | safe }}{% endif %}
+    {{ labelRender | safe }}
+    {% if (icon or iconStack) and not iconBefore %}{{ iconRender | safe }}
+    {% endif %}
+</{{ctaType}}>

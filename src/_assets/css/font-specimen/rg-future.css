@@ -1,0 +1,30 @@
+@import url('./_base.css');
+@import url('./_rg.css');
+
+:root {
+    /* Title fills exactly the entire viewport width at this size, scaled 80% to avoid surprises */
+    --main-heading-magic-number: calc(28vw * 0.8);
+    --single-glyph-magic-number: 25vw;
+    --palette-01: #fff8fc;
+    --palette-02: #b5e5f8;
+    --palette-03: #180e30;
+    --palette-04: #2d4f79;
+    --palette-05: #973e26;
+    --palette-06: #dda969;
+    --palette-07: #ecd237;
+    --body-font: Roboto, Helvetica, Arial, sans-serif;
+    --color-main: var(--palette-01);
+    --color-alt: var(--palette-02);
+    --bg-main: var(--palette-04);
+    --bg-alt: var(--palette-03);
+    --link: var(--palette-07);
+    --link-active: var(--palette-06);
+}
+
+h2::before {
+    color: var(--palette-06);
+}
+
+.download-button {
+    letter-spacing: 0.0125em;
+}

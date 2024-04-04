@@ -1,0 +1,94 @@
+.button {
+	--CTA-display: inline-flex;
+	--CTA-text-color: var(--_cta-text-color);
+	--CTA-bg-color: var(--_cta-bg-color);
+	--CTA-border-color: var(--_cta-border-color);
+	--CTA-border-radius: var(--_cta-border-radius);
+	--CTA-box-shadow: var(--_cta-box-shadow);
+	--CTA-padding: var(--_cta-padding-block) var(--_cta-padding-inline);
+
+	position: relative;
+	flex-shrink: 0;
+	display: var(--CTA-display);
+	align-items: center;
+	justify-content: center;
+	gap: var(--_cta-padding-inline);
+	padding: var(--CTA-padding);
+
+	line-height: 1;
+	color: var(--CTA-text-color);
+	background: var(--CTA-bg-color);
+	border: var(--_cta-border-width) solid var(--CTA-border-color);
+	border-radius: var(--CTA-border-radius);
+	box-shadow: var(--CTA-box-shadow);
+
+	@media (--accept-motion) {
+		transition-property: color, text-decoration-color, background-color, border-color, box-shadow, filter;
+		transition-duration: var(--anim-short);
+		transition-timing-function: var(--easing-in-out);
+	}
+
+	&.button--icon {
+		--CTA-padding: var(--_cta-padding-block);
+	}
+
+	&.button--icon,
+	&.button--tag {
+		text-decoration: none;
+	}
+
+	&:any-link {
+		text-decoration-color: currentColor;
+
+		&:is(:hover, :focus-visible) {
+			/* Avoid link style overrides flash */
+			--LINK-skip-ink: var(--_link-skip-ink);
+			--LINK-underline-offset: var(--_link-underline-offset);
+			--LINK-decoration-thickness: var(--_link-decoration-thickness);
+			text-decoration-color: transparent;
+		}
+	}
+
+	&:is(:hover, :focus-visible) {
+		--CTA-text-color: var(--_cta-text-color-active);
+		--CTA-bg-color: var(--_cta-bg-color-active);
+		--CTA-border-color: var(--_cta-border-color-active);
+		--CTA-box-shadow: var(--_cta-box-shadow-active);
+	}
+
+	:checked + &.button--cbox,
+	&[data-persist-pressed-style][aria-pressed='true'] {
+		--CTA-text-color: var(--_cta-text-color-pressed);
+		--CTA-bg-color: var(--_cta-bg-color-pressed);
+		--CTA-border-color: var(--_cta-border-color-pressed);
+		--CTA-box-shadow: var(--_cta-box-shadow-pressed);
+
+		&:is(:hover, :focus-visible) {
+			opacity: 0.8;
+		}
+	}
+
+	&.button--tag,
+	&.button--cbox {
+		--CTA-padding: var(--_cta-padding-block) var(--size-xs);
+	}
+
+	:checked + &.button--cbox {
+		text-decoration: underline;
+	}
+
+	.button-content {
+		@media (--accept-motion) {
+			transition-property: visibility, transform, opacity;
+			transition-duration: var(--anim-short);
+			transition-timing-function: var(--easing-in-out);
+		}
+	}
+
+	&[aria-pressed='true'] .button-content--idle,
+	&:not([aria-pressed='true']) .button-content--pressed {
+		visibility: hidden;
+		transform: scale(0, 0.8);
+		opacity: 0;
+	}
+}

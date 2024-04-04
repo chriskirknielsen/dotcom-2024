@@ -1,0 +1,25 @@
+---
+layout: page.njk
+backlink: { url: "/projects/", label: "Back to Projects" }
+---
+
+{{ content | safe }}
+
+{% if externalUrl %}
+<p class="post-external | spaced-items inlined-items">
+	{% component "cta", {
+		url: externalUrl,
+		label: projectButtonLabel,
+		icon: 'arrow-right'
+	} %}
+	{% if extraCta %}
+		{% for extraCtaItem in extraCta %}
+		{% component "cta", {
+			url: extraCtaItem.url,
+			label: extraCtaItem.label,
+			icon: extraCtaItem.icon or 'arrow-right'
+		} %}
+		{% endfor %}
+	{% endif %}
+</p>
+{% endif %}

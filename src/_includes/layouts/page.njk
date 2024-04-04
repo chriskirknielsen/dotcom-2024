@@ -1,0 +1,19 @@
+{% extends "layouts/content.njk" %}
+
+{% block theContent %}
+
+    {% block pageContent %}
+        {% component "hero", {
+            heroTitle: heroTitle or title,
+            heroSub: summary if not heroHideSummary else null,
+            heroSup: heroSup or null,
+            heroCta: heroCta or null
+        } %}
+        {% if autoToc or autoHeadingAnchors %}
+            {{ content | autoHeadingAnchors(true) | safe }}
+        {% else %}
+            {{ content | safe }}
+        {% endif %}
+    {% endblock %}
+
+{% endblock %}

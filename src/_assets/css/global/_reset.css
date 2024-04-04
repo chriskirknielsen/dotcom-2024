@@ -1,0 +1,119 @@
+/* Modern reset: https://piccalil.li/blog/a-more-modern-css-reset/ */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+	-moz-text-size-adjust: none;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
+	height: 100%;
+}
+
+/* Remove default margin and padding in favour of better control in authored CSS */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* Adjust list padding, slightly magic number to fit a counter and dot for <ol> elements */
+:is(ul, ol):where(:not([class])) {
+	padding-inline-start: 1.625ch;
+}
+
+/* Set core body defaults */
+body {
+	min-height: 100%;
+	line-height: 1.6;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+.h1,
+.h2,
+.h3,
+.h4,
+button,
+.button,
+input,
+label {
+	line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3 {
+	text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:where(:not([class])) {
+	text-decoration-skip-ink: auto;
+	text-decoration: underline;
+	color: currentColor;
+}
+
+/* Make images easier to work with */
+svg,
+img,
+picture {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+	min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+	scroll-margin-block: 5ex;
+}
+
+/* Interactive elements should look interactive */
+a,
+button,
+summary {
+	cursor: pointer;
+}
+
+/* Hidden means hidden */
+[hidden]:not(#\#) {
+	display: none !important;
+}
+
+/* Easily customisable buttons */
+:where(.button-reset) {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+
+	text-align: center;
+	text-decoration: none;
+	color: currentColor;
+	border: none;
+	background: none;
+
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}

@@ -1,0 +1,25 @@
+.callout {
+    --CALLOUT-border: var(--layout-side-border);
+    --CALLOUT-padding: calc(var(--layout-gutter) - var(--CALLOUT-border));
+    --CALLOUT-label-font-size: 1.75em;
+
+    position: relative;
+
+    padding: var(--CALLOUT-padding);
+
+    border: var(--CALLOUT-border) solid var(--C-accent);
+    background-color: var(--C-surface);
+}
+
+.callout-label {
+    display: block;
+    margin-block-end: var(--size-xs);
+
+    font-size: var(--CALLOUT-label-font-size);
+    color: var(--C-heading);
+
+    &[style*="--callout-emoji:"]::before {
+        content: var(--callout-emoji) ' ';
+        font-style: normal;
+    }
+}

@@ -1,0 +1,26 @@
+<!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <path d="M18.475,11.3l-7.1,7.1c-1.6,1.6-4.1,1.6-5.7,0h0c-1.6-1.6-1.6-4.1,0-5.7l7.1-7.1c1.6-1.6,4.1-1.6,5.7,0h0c1.5,1.6,1.5,4.1,0,5.7Z" fill="none" stroke="currentColor" stroke-width="2"/>
+  <path d="M18.475,5.6c-1.6-1.6-4.1-1.6-5.7,0l-3.8,3.8,5.7,5.7,3.8-3.8c1.5-1.6,1.5-4.1,0-5.7ZM14.875,8l-2,2c-.2.2-.5.3-.7.3s-.5-.1-.7-.3c-.4-.4-.4-1,0-1.4l2-2c.4-.4,1-.4,1.4,0s.4,1,0,1.4Z" fill="currentColor"/>
+</svg> -->
+
+<!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <path fill="currentColor" d="m13.94 11.46-2.65.51.85-3.75c.04-.19-.22-.28-.3-.1l-2.65 5.3a.2.2 0 0 0 .22.29l2.64-.51-.84 3.75c-.04.19.21.28.3.1l2.65-5.3a.2.2 0 0 0-.22-.29Z"/>
+  <g fill="none" stroke="currentColor">
+    <path stroke-width="1" d="M11.96 4.99 4.39 18.11h15.15L11.96 4.99z"/>
+    <path stroke-width="2" d="M15.74 18.61h4.68l-2.34-4.05M14.3 8.02l-2.34-4.05-2.33 4.05m-3.78 6.54-2.34 4.05h4.68"/>
+  </g>
+</svg> -->
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g transform="rotate(45 12 12)">
+    <g fill="none" stroke="currentColor" >
+      <rect width="13" height="13" x="5.5" y="5.5" stroke-width="2" rx="2" />
+      <rect width="8.12" height="8.12" x="7.95" y="7.95" stroke-width="1" />
+    </g>
+    <g fill="currentColor">
+      <path d="M15.1 2.15h1v2h-1zm-3.56 0h1v2h-1zm-3.56 0h1v2h-1z"/>
+      <path d="M2.18 8.94v-1h2v1zm0 3.56v-1h2v1zm0 3.56v-1h2v1z"/>
+      <path d="M8.98 21.86h-1v-2h1zm3.56 0h-1v-2h1zm3.56 0h-1v-2h1z"/>
+      <path d="M21.89 15.06v1h-2v-1zm.01-3.56v1h-2v-1zm0-3.56v1h-2v-1z"/>
+    </g>
+  </g>
+</svg>

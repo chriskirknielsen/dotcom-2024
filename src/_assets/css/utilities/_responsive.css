@@ -1,0 +1,11 @@
+@media (--small-viewport) {
+    .hide-when-viewport--small {
+        display: none !important;
+    }
+}
+
+@media (--large-viewport) {
+    .hide-when-viewport--large {
+        display: none !important;
+    }
+}

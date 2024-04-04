@@ -1,0 +1,41 @@
+{% set attrs = componentAttrs | objToAttr %}
+{% set tooltipPos = 'start end' %}
+<theme-picker {{ attrs | safe }}>
+	<div class="theme-picker-scheme-group">
+		<span class="theme-picker-scheme-label">
+            System
+        </span>
+		<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}">
+			<button class="button button--icon" data-theme-set="" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-system-description">
+				{% svg "device-desktop", { class: "hide-when-viewport--small" } %}
+				{% svg "device-phone", { class: "hide-when-viewport--large" } %}
+			</button>
+			<span class="tooltip-content" id="theme-picker-system-description">
+				<span class="visually-hidden">Toggle theme:</span>
+				System Default
+				<span class="visually-hidden">(auto)</span>
+			</span>
+		</div>
+	</div>
+
+	{% set themesBySchemes = themes | groupby('scheme') %}
+	{% for scheme, groupedthemes in themesBySchemes %}
+		<div class="theme-picker-scheme-group">
+			<span class="theme-picker-scheme-label">
+				{{ scheme | capitalize }}
+			</span>
+			{% for theme in groupedthemes %}
+				<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}">
+					<button class="tooltip-anchor | button button--icon" data-theme-set="{{ theme.key }}" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-{{ theme.key }}-description">
+						{% svg "theme-"+theme.key %}
+					</button>
+					<span class="tooltip-content" id="theme-picker-{{ theme.key }}-description">
+						<span class="visually-hidden">Toggle theme:</span>
+						{{ theme.label }}
+						<span class="visually-hidden">({{ scheme }})</span>
+					</span>
+				</div>
+			{% endfor %}
+		</div>
+	{% endfor %}
+</theme-picker>

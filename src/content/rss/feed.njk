@@ -1,0 +1,38 @@
+---
+permalink: '/rss.xml'
+---
+{%- set collectionPostsLocale = collections['_posts'] -%}
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+    <title>{{ metadata.title }}</title>
+    <subtitle>{{ metadata.description }}</subtitle>
+    <link href="{{ metadata.url }}/{{ permalink }}" rel="self"/>
+    <link href="{{ metadata.url }}"/>
+    <updated>{{ collectionPostsLocale | rssLastUpdatedDate }}</updated>
+    <id>{{ metadata.url }}</id>
+    <author>
+        <name>{{ metadata.author.name }}</name>
+        <email>{{ metadata.author.email }}</email>
+    </author>
+    {%- for post in collectionPostsLocale | reverse %}
+        {% set absolutePostUrl %}{{ post.url | url | absoluteUrl(metadata.url) }}{% endset %}
+        {% set postTemplateContent = post.templateContent %}
+        {%- if stripScripts %}{% set postTemplateContent = postTemplateContent | stripScripts %}
+        {% endif %}
+        <entry>
+            <title>{{ post.data.title }}</title>
+            <link href="{{ absolutePostUrl }}"/>
+            {% set postDate = post.date %}
+            {% if post.data and post.data.date %}{% set postDate = post.data.date %}
+            {% endif %}
+            <updated>{{ postDate | dateFormat({ format: 'iso', lang: lang }) }}</updated>
+            <id>{{ absolutePostUrl }}</id>
+            <content type="html">
+                {%- if injectDescription %}{{ '<p>' | escape }}{{ post.data.summary }}{{ '</p>' | escape }}
+                {% endif %}
+                {{- postTemplateContent | htmlToAbsoluteUrls(absolutePostUrl) -}}
+            </content>
+        </entry>
+    {%- endfor %}
+</feed>

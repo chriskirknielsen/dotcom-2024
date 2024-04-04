@@ -1,0 +1,70 @@
+---js
+{
+	tags: ['_designs'],
+	pagination: {
+		data: 'designs',
+		size: 1,
+		alias: 'design',
+		addAllPagesToCollections: true,
+		before: function(paginationData, fullData) {
+			paginationData.sort((a,b) => new Date(a.date) - new Date(b.date));
+			return paginationData;
+		}
+	},
+	eleventyComputed: {
+		permalink: "designs/{{ design.slug | slug }}/",
+		pageTitle: "{{ design.name | safe }}",
+		title: "{{ design.name | safe }}",
+		summary: "{{ design.description | safe }}",
+		summary: (data) => data.design.description,
+		customMetaImage: (data) => `/${data.assets.images}/designs/${data.design.img}`,
+		date: (data) => new Date(data.design.date),
+	},
+	heroSup: "Design",
+	heroCta: [{ url: "/designs/#filter:__restore__", label: "Back to Designs", icon: "arrow-left", iconBefore: true }]
+}
+---
+
+<article class="fifty-fifty">
+	{% if design.img %}
+	<div>
+		<img src="{{ '/' + assets.images + '/designs/' + design.img | url }}" alt="" width="600" height="600" class="single-media | inline-size-100pc">
+	</div>
+	{% endif %}
+
+	<div class="flow">
+
+	{% if design.links %}
+		<h2>Available on</h2>
+		<ul class="flow">
+			{%- for site, url in design.links %}
+			<li><a href="{{ url | url }}">{{ site }}</a></li>
+			{% endfor -%}
+		</ul>
+	{% endif %}
+
+	{% if design.note %}
+		<p class="fontStyle-italic fontSize-smaller">{{ design.note | markdown(true) }}</p>
+	{% endif %}
+	
+	{% if design.variant %}
+		<h2 class="h3">Variant{% if (design.variant | length) != 1 %}s{% endif %}</h2>
+		<ul class="flow">
+			{%- for variantSlug in design.variant %}
+			{% set variantDesign = designs | find('slug', variantSlug) %}
+			<li><a href="{{ '/designs/' + (variantDesign.slug | slug) + '/' | url }}">{{ variantDesign.name | safe }}</a></li>
+			{% endfor -%}
+		</ul>
+	{% endif %}
+	
+	{% if design.similar %}
+		<h2 class="h3">Similar designs</h2>
+		<ul class="flow">
+			{%- for otherDesignSlug in design.similar %}
+			{% set otherDesign = designs | find('slug', otherDesignSlug) %}
+			<li><a href="{{ '/designs/' + (otherDesign.slug | slug) + '/' | url }}">{{ otherDesign.name | safe }}</a></li>
+			{% endfor -%}
+		</ul>
+	{% endif %}
+	</div>
+</article>

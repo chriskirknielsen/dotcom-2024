@@ -1,0 +1,66 @@
+---
+title: About
+heroTitle: "Hiya, I'm Chris (he/him)"
+summary: 'A French Dane living in the USA who used to be a designer and who now likes to build on the web.'
+heroHideSummary: true
+permalink: '/about/'
+heroCta: [{ label: "/now", url: "/now", ctaClass: "button--tag" }, { label: "/uses", url: "/uses", ctaClass: "button--tag" }, { label: "/games", url: "/games", ctaClass: "button--tag" }]
+autoHeadingAnchors: true
+---
+
+<p class="fontWeight-bold textAlign-center textWrap-balance">
+I'm a French Dane living in the USA who used to be a designer and who now likes to build on the web.
+</p>
+
+{% webcomponent 'cycling-expander', { 'data-about': 'facts' }, {
+    buttonLabel: "Chris's Random Fact-o-tron",
+    listItems: [
+        ["👀", "Can read the Cyrillic alphabet… kinda."],
+        ["🕰", "His favourite movie is likely Back to the Future, though the dad is a creep."],
+        ["☕️", "Used to drink lots of tea, but now it's coffee!"],
+        ["🕵️", "Leans into his pareidolia to make life more fun."],
+        ["🤓", "Enjoys maths/physics YouTube videos despite not grasping everything."],
+        ["🛹", "Practiced skateboarding for a while, then decided playing Tony Hawk was safer."],
+        ["⛰", "Truly wishes to be a more outdoorsy person (help)."],
+        ["🏃‍♂️", "Runs a few times a week, but still far from marathon-ready."],
+        ["🐈", "Loves animals, please introduce your pet."],
+        ["😴", "Sleeps on his side but wakes up on his back."],
+        ["📚", "Loves learning but also helping — ask away about anything!"],
+        ["🎸", "His favourite band of all time is Thrice, just ask for a recommendation!"],
+        ["💜", "Appreciates you reading through these facts."]
+    ]
+} -%}
+{%- js "foot-about" %}{%- include "assets/js/components/cycling-expander.js" -%}{% endjs %}
+
+{% renderTemplate "md" %}
+## But Why Websites?
+
+I used the family computer growing up to mess around on MS Paint, and moved on to Photoshop (_of course_ I had a licence key). Then I learned to edit MySpace pages, and eventually make entire sites (webmaster days!) before my first zit. I later studied **graphic design** for 4 years, then freelanced juggling between that, some **motion design**, and **web development** for neat clients for a few years. Turns out coding was my calling, which I've been focusing on since then. (I became a CSS nerd, whoops)
+
+## Side Projects
+
+I've built a handful of tools like [VisuBezier](/projects/visubezier/) and [SVGFM](/projects/svgfm/), and written for a couple of outlets like [CSS-Tricks](https://css-tricks.com/author/chriskirknielsen/) (RIP) and [Smashing Magazine](https://www.smashingmagazine.com/author/chriskirknielsen/). I still do a fair bit of design, including making [stickers/apparel](/designs/) (mostly webdev and gaming) to scratch that itch. I've also made [a few typefaces](/fonts/), as I am a massive font nerd (when I was 9, I had a CD-ROM called "1001 Fonts" for crying out loud). I have [various projects listed here](/projects/), some professional, some personal, all totally very super cool. I also used to make [electronica music as Chronoise](https://chronoise.com) but that's been a while… It is a very satisfying creative outlet (synthesizers!), which I highly recommend.
+{% endrenderTemplate %}
+
+<div>{% include 'components/web/synth.njk' %}</div>
+
+{%- js "foot-about" %}
+Array.from(document.querySelectorAll('.synth-slider, .synth-waveform-button, .synth-key')).forEach((synthControl) => (synthControl.disabled = false));
+{%- include "assets/js/components/synth.js" -%}
+{% endjs %}
+
+{% renderTemplate "md" %}
+## Hobbies
+
+While I'm not watching as many as in the past, I still indulge in a decent amount of movies and TV shows (I love a good quote). So much good stuff to watch, so little time! I appreciate [video games](/games/), especially narrative and puzzle games, and I enjoy reading a lot when I'm not staring at a screen (e-ink doesn't count, right?), despite being a pretty [slow reader](http://goodreads.com/chriskirknielsen). I also run, which is not something I'd ever have throught myself capable of doing, and yet…!
+
+Curiosity is part of my DNA (alongside the bald gene!) and I treasure understanding how things work. **Oh, and I love (dad) jokes, puns, and any kind of wordplay.**
+
+## Languages
+
+I find languages fascinating! I grew up in Lyon, France, born to **Danish** parents. Australia was my home for a year as a child, speaking **English** with a Down Under accent, and I even held a baby koala. So if I blurt a word in **French**, sorry, three languages just keep blending in that bald head of mine. I do know a decent amount of **Italian** but natives seem to prefer to answer me in English. I took **Japanese** in high school, but didn't apply myself (and instead learned to read the Cyrillic alphabet?), so I'm not good at it, but I'm "learning" again with DuoLingo (mostly vocabulary).
+
+## Skills, a.k.a. The Professional Section
+
+I'm a "creative developer", a.k.a. "design engineer", meaning I can code and design, keeping an eye on details (including fonts!). **HTML, CSS, and JavaScript** (not React!) are my primary tools, but I don't shy away from **PHP and MySQL** (especially for WordPress projects). I use **git** to keep my projects neatly tracked, and like to write squeaky-clean code. I'm very comfortable with the Adobe Creative Suite, especially **Photoshop, Illustrator, and After Effects**, and I've become good buds with **Figma** at this point.
+{% endrenderTemplate %}

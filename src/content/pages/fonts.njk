@@ -1,0 +1,22 @@
+---
+title: "Font Directory"
+summary: You might find a cool, nerdy font by yours truly
+---
+
+<ul class="cards" data-grid-cols="3">
+    {% for font in collections._fonts | sort(false, false, "inputPath") %}
+        <li class="card-wrapper">
+            {% component 'card', {
+                link: font.url,
+                image: {
+                    src: font.data.customMetaImage,
+                    alt: "",
+                    width: 600,
+                    height: 600
+                },
+                heading: font.data.title,
+                description: font.data.summary
+            } %}
+        </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,27 @@
+.inline-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--size-s);
+    justify-content: center;
+    align-items: stretch;
+
+    & > label {
+        align-self: center;
+    }
+
+    & > input {
+        flex: 1 1 auto;
+        min-inline-size: 12ch;
+    }
+}
+
+:is(form, [data-formlike]) :is(input, select, textarea) {
+    padding: var(--size-2xs) var(--size-s);
+
+    border: 1px solid currentColor;
+    border-radius: var(--_corner);
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}

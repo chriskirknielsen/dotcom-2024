@@ -1,0 +1,30 @@
+---
+title: Archives
+summary: A digital museum of the previous versions of this website
+versionsInfo: {
+    2016: "Definitely a student's website and here is some long text that will extend me far",
+    2018: "The DeLorean got an upgrade",
+    2020: "A little more web-dev oriented",
+    2022: "I… uh… made it better with themes!"
+}
+---
+
+<ol class="cards" data-grid-cols="2">
+{% for versionYear, versionDescription in versionsInfo | dictsort | reverse %}
+	<li class="card-wrapper">
+		{% component 'card', {
+			link: "https://"+versionYear+".chriskirknielsen.com",
+			image: {
+				src: "/"+assets.images+"/site-archives/year-"+versionYear+".jpg",
+				alt: "",
+				width: 600,
+				height: 600,
+				focusPoint: "50% 0",
+				lazy: loop.index >= 8
+			},
+			heading: versionYear,
+			description: versionDescription
+		} %}
+    </li>
+{% endfor %}
+</ol>

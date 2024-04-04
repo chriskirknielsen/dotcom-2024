@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="420" preserveAspectRatio="xMidYMin meet" viewBox="0 0 1200 420" style="
+	background: radial-gradient(100% 100% at 50% 67%, #f0f2f1, #b6c0c2, 80%, #222425) no-repeat center;
+">
+	<defs>
+		<radialGradient id="linear-gradient" cx="50%" cy="100%" r="98%" fx="50%" fy="100%">
+			<stop offset="0" stop-color="#d9dbda"/>
+			<stop offset="0.85" stop-color="#2b373b"/>
+			<stop offset="0.99" stop-color="#222425"/>
+		</radialGradient>
+		<path id="pyramid" fill="url(#linear-gradient)" d="M370.68 0h458.64L600 324 370.68 0Z" />
+	</defs>
+	<use xlink:href="#pyramid" opacity=".78"/>
+	<use xlink:href="#pyramid" transform="scale(0.78 1)" transform-origin="50% 100%"/>
+</svg>

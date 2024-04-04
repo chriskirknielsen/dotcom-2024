@@ -1,0 +1,11 @@
+_site/
+design/
+node_modules/
+package-lock.json
+.env
+*.code-workspace
+.netlify
+.cache
+src/_includes/assets/css/style.css
+src/_includes/assets/css/font-face.css
+styleguide.njk

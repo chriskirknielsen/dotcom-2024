@@ -1,0 +1,63 @@
+.container {
+	--content-width: min(100%, var(--layout-max-content));
+	--content-cols: 5;
+	--content-subcol: calc((var(--content-width) - var(--layout-gutter) * (var(--content-cols) - 1)) / var(--content-cols));
+	--content-subcol-minmax: minmax(0, var(--content-subcol));
+	--content-subcol-minmax--minus-gutter-half: minmax(0, calc((var(--content-subcol) - var(--layout-gutter)) / 2));
+
+	display: grid;
+	/*
+	--content-cols: 5;
+	grid-template-columns:
+		[--fullbleed-start --start2center-start]
+		minmax(0, 1fr)
+		[--wide-start]
+		var(--layout-gutter)
+		[--container-start --body-start]
+		var(--content-subcol-minmax)
+		var(--layout-gutter)
+		var(--content-subcol-minmax)
+		var(--layout-gutter)
+		var(--content-subcol-minmax--minus-gutter-half)
+		[--start2center-end]
+		var(--layout-gutter)
+		[--center2end-start]
+		var(--content-subcol-minmax--minus-gutter-half)
+		var(--layout-gutter)
+		var(--content-subcol-minmax)
+		[--body-end]
+		var(--layout-gutter)
+		[--side-start]
+		var(--content-subcol-minmax)
+		[--side-end --container-end]
+		var(--layout-gutter)
+		[--wide-end]
+		minmax(0, 1fr)
+		[--center2end-end --fullbleed-end];
+		*/
+	--content-cols: 3;
+	grid-template-columns:
+		[--fullbleed-start --start2center-start] minmax(0, 1fr) [--wide-start] var(--layout-gutter) [--container-start --body-start] var(--content-subcol-minmax) var(--layout-gutter) var(--content-subcol-minmax--minus-gutter-half) [--start2center-end] var(--layout-gutter) [--center2end-start] var(--content-subcol-minmax--minus-gutter-half) [--body-end] var(--layout-gutter) [--side-start] var(--content-subcol-minmax) [--side-end --container-end] var(--layout-gutter) [--wide-end] minmax(0, 1fr) [--center2end-end --fullbleed-end];
+}
+
+:where(.container > *),
+.content {
+	grid-column: --container;
+}
+
+.content-wide {
+	grid-column: --wide;
+}
+
+.container > .container,
+.content-fullbleed {
+	grid-column: --fullbleed;
+}
+
+.container[style*='--grid-block-gutter:'] {
+	gap: calc(var(--layout-gutter) * var(--grid-block-gutter, 1)) 0;
+}
+
+.container > :is(.callout, .image-gallery, .codeblock) {
+	grid-column: --wide;
+}

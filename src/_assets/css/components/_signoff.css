@@ -1,0 +1,42 @@
+.signoff {
+	grid-column: --wide;
+
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--_card-padding);
+	padding: var(--_card-padding);
+
+	color: var(--_signoff-text-color);
+	border: var(--_signoff-border);
+	border-radius: clamp(0px, var(--_corner) * 999, var(--_card-corner));
+	background: var(--_signoff-background);
+	box-shadow: var(--_shadow);
+
+	& > * {
+		flex-basis: calc((20rem - 100%) * 999);
+	}
+}
+
+.signoff-photo {
+	flex-grow: 1;
+	align-self: start;
+
+	/* inline-size: clamp(3rem, 25%, 12rem); */
+	min-inline-size: 3rem;
+
+	& > img {
+		max-inline-size: min(100%, 10rem);
+		margin-inline: auto;
+
+		border-radius: var(--_corner);
+	}
+}
+
+.signoff-message {
+	flex-grow: 6;
+	align-self: center;
+}
+
+.signoff-title {
+	color: var(--_signoff-heading-color);
+}

@@ -1,0 +1,48 @@
+@custom-media --reduce-motion (prefers-reduced-motion: reduce);
+@custom-media --accept-motion (prefers-reduced-motion: no-preference);
+@custom-media --prefers-light (prefers-color-scheme: light);
+@custom-media --prefers-dark (prefers-color-scheme: dark);
+/*! viewport-based rules and theme conditions are pulled into _tokens.css in the re-compilation step */
+/* @custom-media --small-viewport (width <=36rem);
+@custom-media --large-viewport (width > 36rem); */
+
+/* Theme-based element visibility */
+/* @media (--prefers-light) {
+    html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='dawn']) {
+        display: none !important;
+    }
+}
+
+@media (--prefers-dark) {
+    html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='dusk']) {
+        display: none !important;
+    }
+}
+
+html[data-theme]:not([data-theme='dawn']) [data-theme-condition='dawn'] {
+    display: none !important;
+}
+
+html[data-theme]:not([data-theme='dusk']) [data-theme-condition='dusk'] {
+    display: none !important;
+}
+
+html[data-theme]:not([data-theme='vapor']) [data-theme-condition='vapor'] {
+    display: none !important;
+}
+
+html[data-theme]:not([data-theme='cyberpunk']) [data-theme-condition='cyberpunk'] {
+    display: none !important;
+}
+
+html[data-theme]:not([data-theme='vintage']) [data-theme-condition='vintage'] {
+    display: none !important;
+}
+
+html[data-theme]:not([data-theme='campfire']) [data-theme-condition='campfire'] {
+    display: none !important;
+}
+
+html[data-theme]:not([data-theme='director']) [data-theme-condition='director'] {
+    display: none !important;
+} */

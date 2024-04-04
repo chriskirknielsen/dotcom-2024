@@ -1,0 +1,46 @@
+{% set attrs %}class="{{ ('card ' + (classes or '')) | trim }}" {% if cardAttrs %}{{ cardAttrs | safe }}{% endif %}{% endset %}
+{% if containsLinks %}
+<div {{ attrs | trim | safe }}>
+{% else %}
+<a href="{{ link | url }}" {{ attrs | trim | safe }}>
+{% endif %}
+	{% if image %}
+		<div class="card-image">
+			{% if image.link %}<a href="{{ image.link | url }}">{% endif %}
+				<img
+					src="{{ image.src }}"
+					alt="{{ image.alt }}"
+					width="{{ image.width }}"
+					height="{{ image.height }}"
+					{% if image.lazy %}loading="lazy"{% endif %}
+					{% if image.focusPoint %}style="--CARD-image-focus-point: {{ image.focusPoint }};"{% endif %}
+				>
+			{% if image.link %}</a>{% endif %}
+			{% if image.decorator %}
+				<div class="card-decorator | fontSize-tiny">{{ image.decorator | safe }}</div>
+			{% endif %}
+		</div>
+	{% endif %}
+
+	<div class="card-content">
+		{% if eyebrow %}{{ eyebrow | safe }}
+		{% endif %}
+		{% if heading %}
+			<{{ headingTag or 'h2' }} class="h3 | card-heading">
+			{% if headingLink %}<a href="{{ headingLink | url }}">{% endif %}
+				{{ heading | safe }}
+			{% if headingLink %}</a>{% endif %}
+			</{{ headingTag or 'h2' }}>
+		{% endif %}
+		
+		{% if descriptionMarkup %}
+			{{ descriptionMarkup | safe }}
+		{% elseif description %}
+			<p>{{ description | safe }}</p>
+		{% endif %}
+	</div>
+{% if not containsLinks %}
+</a>
+{% else %}
+</div>
+{% endif %}

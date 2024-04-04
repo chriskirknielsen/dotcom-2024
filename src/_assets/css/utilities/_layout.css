@@ -1,0 +1,15 @@
+.inline-size-100pc {
+    inline-size: 100%;
+}
+
+.display-block {
+    display: block;
+}
+
+.marginBlockStart-auto {
+    margin-block-start: auto;
+}
+
+.justifyContent-center {
+    justify-content: center;
+}

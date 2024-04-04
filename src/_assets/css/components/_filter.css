@@ -1,0 +1,49 @@
+.filtering {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: baseline;
+	gap: 0.5em;
+	margin: 0;
+	padding: 0;
+
+	border: 0;
+}
+
+.filtering-item {
+	display: inline-block;
+
+	& input[type='radio']:focus-visible + label {
+		outline: 4px dashed var(--C-accent);
+	}
+}
+
+.filtering-tag {
+	position: relative;
+}
+
+[data-filtered-item] {
+	position: relative;
+	transition: all var(--anim-medium) var(--easing-in-out);
+	transition-property: visibility, z-index;
+
+	@media (--reduce-motion) {
+		&[aria-hidden='true'] {
+			display: none;
+		}
+	}
+
+	&[aria-hidden='false'] {
+		z-index: 10;
+
+		visibility: visible;
+	}
+
+	&[aria-hidden='true'] {
+		position: absolute;
+		z-index: 0;
+
+		visibility: hidden;
+		pointer-events: none;
+	}
+}

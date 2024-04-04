@@ -1,0 +1,330 @@
+.homepage-logo {
+	--HOME-logo-bg: var(--C-surface);
+	--HOME-logo-line-color: var(--C-heading);
+	--HOME-logo-text-color: var(--C-text);
+	--HOME-logo-name-color: var(--C-heading);
+	--HOME-logo-line-weight: clamp(1px, 0.1vw, 1.25px);
+	--HOME-logo-text-font: var(--_font-body-family);
+	--HOME-logo-text-size: clamp(0.75rem, calc(0.75rem + ((1vw - 0.16rem) * 1.0417)), 1.25rem);
+	--HOME-logo-text-scaling: 1;
+	--HOME-logo-text-style: italic;
+	--HOME-logo-text-transform: none;
+
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: [--edge-start] 1fr [--center-start] auto [--center-end] 1fr [--edge-end];
+	grid-template-rows:
+		[--deco-start] var(--deco-sizing, 0.9fr) [--text-start --text-above-start] auto [--text-above-end --name-start] 1fr [--name-end --text-below-start] auto [--text-below-end --text-end] var(--deco-sizing, 0.9fr) [--deco-end];
+	place-content: center;
+	gap: 0;
+	overflow: hidden;
+	/* Constrain the graphic to the allocated grid columns */
+
+	contain: paint;
+	isolation: isolate;
+
+	/* Reset the h1 font settings */
+	color: var(--HOME-logo-name-color);
+	font-family: var(--HOME-logo-text-font);
+	font-size: calc(var(--HOME-logo-text-scaling) * var(--HOME-logo-text-size));
+	letter-spacing: 0;
+	text-shadow: none;
+
+	/* Fade the lines out if the viewport is large */
+	mask: linear-gradient(90deg, transparent 0, red calc((100% - var(--layout-max-content)) / 2), red calc(100% - (100% - var(--layout-max-content)) / 2), transparent 100%) repeat-y 50% 50% / max(100%, var(--layout-max-content)) 100%;
+
+	&::before,
+	&::after {
+		content: '';
+		grid-column: --edge;
+		width: 100%;
+		grid-row: --text;
+		align-self: stretch;
+		border-width: var(--HOME-logo-line-weight) 0;
+		border-style: solid;
+	}
+
+	&::before {
+		z-index: -3;
+		border-color: var(--HOME-logo-line-color) transparent;
+	}
+
+	&::after {
+		z-index: -1;
+		border-color: transparent;
+		background: var(--HOME-logo-bg);
+		background-clip: padding-box;
+	}
+}
+
+.homepage-logo-circles {
+	z-index: -2;
+	grid-column: --center;
+	grid-row: --deco;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	aspect-ratio: 1;
+	block-size: 100%;
+	justify-self: center;
+	/* Fix for Firefox not properly handling aspect-ratio in an auto grid track */
+
+	svg {
+		inline-size: auto;
+		block-size: 100%;
+
+		* {
+			vector-effect: non-scaling-stroke;
+		}
+
+		circle {
+			stroke-width: var(--HOME-logo-line-weight);
+			fill: var(--HOME-logo-bg);
+		}
+	}
+}
+
+.homepage-logo-circle--deco {
+	color: var(--HOME-logo-line-color);
+	stroke: var(--HOME-logo-line-color);
+	stroke-width: var(--HOME-logo-line-weight);
+}
+
+@media (--accept-motion) {
+	[data-deco-anim] {
+		transform-origin: 50% 50%;
+		animation: resetTransform calc(var(--CTX-factor, 1) * var(--anim-medium)) var(--CTX-easing, var(--easing-out)) 1 forwards;
+		animation-delay: calc(300ms + var(--CTX-delay, 0) * 100ms);
+	}
+
+	[data-deco-anim]:not([data-deco-anim="path"]),
+	[data-deco-anim="transform"] {
+		transform: var(--CTX-from, none);
+		transform-origin: 50% 50%;
+
+		will-change: transform;
+		animation-name: resetTransform;
+	}
+
+	[data-deco-anim="path"] {
+		/*!
+			pathLength is 1 but vector-effect:non-scaling-stroke causes the ratio
+			between initial size and final size to affect the dasharray/offset, so
+			we use a magic number here, as the initial SVG is 100x100 and
+			its maximum size on desktop is a little under 700x700, we end up
+			with a ratio of ~7 that properly reveals the paths
+			ALSO, with * 1px: need to provide a unit for Firefox… https://bugzilla.mozilla.org/show_bug.cgi?id=1887572
+		*/
+		--CTX-ratio: 7;
+
+		stroke-dasharray: calc(var(--CTX-dasharray-line, 1) * var(--CTX-ratio) * 1px) calc(var(--CTX-dasharray-gap, 1) * var(--CTX-ratio) * 1px);
+		stroke-dashoffset: calc(var(--CTX-dashoffset, 1) * var(--CTX-ratio) * 1px);
+
+		will-change: stroke-dashoffset;
+		animation-name: pathDraw;
+	}
+}
+
+.homepage-logo-circle--outer {
+	stroke: var(--HOME-logo-line-color);
+	stroke-width: var(--HOME-logo-line-weight);
+}
+
+.homepage-logo-circle--inner {
+	stroke: var(--HOME-logo-text-color);
+	stroke-width: var(--HOME-logo-line-weight);
+}
+
+.homepage-logo-name {
+	grid-row: --name;
+	grid-column: --edge;
+	max-block-size: 100%;
+	inline-size: 100%;
+	max-inline-size: 64rem;
+	margin: auto;
+	overflow: visible;
+
+	& path {
+		fill: var(--HOME-logo-name-color);
+
+		transform-origin: 50% 50%;
+	}
+}
+
+@media (--accept-motion) {
+
+	[data-name-part] {
+		transform: scale(0.9) translateY(10%);
+		will-change: transform;
+
+		animation-name: fadeIn, resetTransform;
+		animation-timing-function: var(--easing-out);
+		animation-duration: var(--anim-eternity);
+		animation-fill-mode: both, forwards;
+		animation-delay: calc(var(--anim-short) + var(--d, 0) * var(--anim-delay) * var(--f, 2));
+	}
+
+	[data-name-part="last"] {
+		--f: 4;
+	}
+}
+
+@keyframes resetTransform {
+	100% {
+		transform: none;
+	}
+}
+
+@keyframes pathDraw {
+	100% {
+		stroke-dashoffset: 0;
+	}
+}
+
+.homepage-logo-text {
+	grid-column: --edge;
+
+	display: flex;
+	gap: 0.75em;
+	justify-content: center;
+	align-items: center;
+	padding-block: 0.5em;
+
+	line-height: 1.1;
+	font-weight: normal;
+	font-style: var(--HOME-logo-text-style);
+	text-transform: var(--HOME-logo-text-transform);
+	text-align: center;
+	text-wrap: balance;
+	color: var(--HOME-logo-text-color);
+
+	&::before,
+	&::after {
+		flex: 1 1 0;
+		content: '';
+		block-size: var(--HOME-logo-line-weight);
+		background: currentColor;
+	}
+}
+
+.homepage-logo-text--above {
+	grid-row: --text-above;
+}
+
+.homepage-logo-text--below {
+	grid-row: --text-below;
+}
+
+.homepage-side {
+	container: --side / inline-size;
+	display: grid;
+	grid-template-columns: 1fr;
+	place-items: center;
+	align-content: center;
+	gap: var(--layout-gutter);
+}
+
+.homepage-photo {
+	--HOME-photo-border-width: 1px;
+
+	position: relative;
+	isolation: isolate;
+
+	max-inline-size: 12rem;
+	margin-inline: auto;
+
+	color: var(--C-surface);
+	border: var(--HOME-photo-border-width) solid var(--C-text);
+	/* border-radius: calc(var(--_corner) * 4); */
+	border-radius: 50%;
+	background: var(--C-accent);
+	box-shadow: var(--_shadow-active);
+
+	& > img {
+		/* border-radius: calc(var(--_corner) * 4 - var(--HOME-photo-border-width)); */
+		border-radius: inherit;
+		filter: grayscale(1);
+		mix-blend-mode: luminosity;
+	}
+}
+
+.homepage-social {
+	display: grid;
+	grid-template-columns: repeat(var(--GRID-cols, 4), minmax(1rem, auto));
+	gap: max(8px, var(--size-xs));
+
+	list-style-type: '';
+
+	@container (width < 12rem) {
+		--GRID-cols: 2;
+	}
+}
+
+@media (--small-viewport) {
+	.homepage-logo {
+		--deco-sizing: 0.5fr;
+	}
+
+	.homepage-logo-circles {
+		max-block-size: 133vw;
+		/*! Magic number, to avoid oversized circles on Safari, looks decent */
+		overflow: hidden;
+		/* Prevent the graphic from taking up more than the necessary size on Safari, causing the rest of the grid to be oversized */
+	}
+
+	.homepage-logo-name--stack {
+		inline-size: 85%;
+	}
+
+	.homepage-logo-name--wide {
+		display: none;
+	}
+
+	.homepage-logo-text--extra {
+		display: none;
+	}
+}
+
+@media (--large-viewport) {
+	.homepage-logo-circles {
+		max-inline-size: calc(100vw - 20px);
+	}
+
+	.homepage-logo-name--stack {
+		display: none;
+	}
+
+	[data-homepage='body'] {
+		grid-column: --body;
+		align-self: center;
+	}
+
+	[data-homepage='side'] {
+		grid-column: --side;
+	}
+
+	[data-homepage='featured'] {
+		grid-column: --container-start / --start2center-end;
+	}
+
+	[data-homepage='latest'] {
+		grid-column: --center2end-start / --container-end;
+	}
+}
+
+.homepage-posts {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+	gap: var(--flow-space) var(--layout-gutter);
+}
+
+.homepage-postgroup {
+	display: grid;
+	gap: var(--size-s) var(--layout-gutter);
+	grid-template-rows: auto 1fr;
+	grid-template-columns: inherit;
+}
+
+.homepage-postheading {
+	grid-column: 1 / -1;
+}

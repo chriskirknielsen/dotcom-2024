@@ -1,0 +1,71 @@
+## Netlify build settings
+##[build]
+##  publish = "_site"
+##  command = "eleventy"
+
+[[plugins]]
+package = "netlify-plugin-cache"
+
+  [plugins.inputs]
+  paths = [".cache"] # Remote Asset Cache
+
+[[plugins]]
+package = "netlify-plugin-debug-cache"
+
+## Cache control for CSS files
+[[headers]]
+  for = "/assets/css/*.css"
+  [headers.values]
+    cache-control = '''
+    public,
+    max-age=1209600'''
+
+## Special page redirects
+[[redirects]]
+  from = "/design/"
+  to = "/designs/"
+[[redirects]]
+  from = "/shirts/"
+  to = "/designs/"
+[[redirects]]
+  from = "/posters/"
+  to = "/designs/"
+[[redirects]]
+  from = "/art/"
+  to = "/designs/"
+[[redirects]]
+  from = "/thanks/"
+  to = "/colophon/"
+[[redirects]]
+  from = "/follow/"
+  to = "/rss.xml"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/.well-known/avatar"
+  to = "/assets/img/profile.jpg"
+  status = 200
+[[redirects]]
+  from = "/.well-known/pronouns"
+  to = "/.well-known/pronouns.txt"
+  status = 200
+
+## Legacy URL redirects
+[[redirects]]
+  from = "/acknowledgements/"
+  to = "/colophon/"
+  status = 301
+[[redirects]]
+  from = "/fr/*"
+  to = "/fr/index.html"
+  status = 303
+[[redirects]]
+  from = "/da/*"
+  to = "/da/index.html"
+  status = 303
+
+## Error 404 redirect
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

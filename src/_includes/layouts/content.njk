@@ -1,0 +1,13 @@
+{% extends "layouts/base.njk" %}
+
+{% block baseContent %}
+	<div class="page-content | container{% if useFlow != false %} flow{% endif %}"{% if gridBlockGutter %}style="--grid-block-gutter: {{ gridBlockGutter }};"{% endif %}>
+		{% block theContent %}
+			{{ content | safe }}
+		{% endblock %}
+	</div>
+{% endblock %}
+
+{% if ("</code-wrap>" in content) %}
+	{% js "foot-codewrap" %}{%- include "assets/js/components/code-wrap.js" -%}{% endjs %}
+{% endif %}

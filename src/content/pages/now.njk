@@ -1,0 +1,61 @@
+---
+title: Now
+summary: What am I doing these days?
+permalink: /now/
+section: now
+heroCta: [{ url: "https://nownownow.com/about", label: "What is this?" }]
+nowInfo: {
+    home: { heading: "Living" },
+    music: { heading: "Listening" },
+    sport: { heading: "Training" },
+    show: { heading: "Watching", detail: "Season" },
+    book: { heading: "Reading" },
+    game: { heading: "Playing" },
+}
+---
+
+{%- set lastKey = '' -%}
+{% macro nowList(nowKey, nowItems, nowData) %}
+    {% set detailPrefix = nowData.detail or false %}
+    {% set imageWidth = 600 %}
+    {% set imageHeight = 600 %}
+    {% set cloudinaryParams = 'c_fill,g_auto:faces,h_' + imageHeight + ',w_' + imageWidth + '/q_auto:eco' %}
+    {% for nowItem in nowItems %}
+        <div class="now-item">
+            {% if lastKey != nowKey %}
+                <h2 class="now-section-heading" aria-hidden="true">{{ nowInfo[nowKey].heading }}</h2>
+            {% endif %}
+
+            {% if nowItem.image %}
+                {% set nowItemImage = 'https://res.cloudinary.com/chriskirknielsen/image/fetch/' + cloudinaryParams + '/' + (
+                nowItem.image | urlencode) %}
+                <img src="{{ nowItemImage | url }}" alt="" aria-hidden="true" class="now-item-image" width="{{ imageWidth }}" height="{{ imageHeight }}">
+            {% endif %}
+
+            <p class="now-item-content | fontSize-small">
+                {% if nowItem.link %}
+                    <a href="{{ nowItem.link | url }}">
+                    {% endif %}
+                    <strong class="display-block h4 uuuufontSize-larger">
+                        {{- nowItem.title }}
+                        {% if nowItem.detail %}({% if detailPrefix %}{{ detailPrefix }}&nbsp;{% endif %}{{ nowItem.detail }}){% endif -%}
+                    </strong>
+                    {% if nowItem.link %}
+                    </a>
+                {% endif %}
+                {% if nowItem.blurb %}{{ nowItem.blurb | markdown(true) | safe }}
+                {% endif %}
+            </p>
+        </div>
+        {%- set lastKey = nowKey -%}
+    {% endfor %}
+{% endmacro %}
+
+<div class="now-grid">
+    {% for nowKey, nowData in nowInfo %}
+        <h2 class="visually-hidden">{{ nowInfo[nowKey].heading }}</h2>
+        {%- if now[nowKey] -%}
+            {{ nowList(nowKey, now[nowKey], nowData) -}}
+        {%- endif -%}
+    {%- endfor -%}
+</div>

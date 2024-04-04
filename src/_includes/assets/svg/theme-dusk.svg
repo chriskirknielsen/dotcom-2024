@@ -1,0 +1,21 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  id="Layer_1"
+  width="24"
+  height="24"
+  data-name="Layer 1"
+  viewBox="0 0 24 24"
+>
+  <path
+    fill="currentColor"
+    d="M12 4.3A7.7 7.7 0 0 0 4.3 12h15.4c0-4.3-3.4-7.7-7.7-7.7Z"
+  />
+  <path
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="1.5"
+    d="M16.4 17.4H7.6m5.5 2.7h-2.2m7.5-5.4H5.6M20.8 12H3.2"
+  />
+</svg>

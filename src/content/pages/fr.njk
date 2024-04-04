@@ -1,0 +1,12 @@
+---
+permalink: /fr/
+title: Site en français ?
+lang: fr
+---
+
+<p>Navré mais par manque d'intérêt j'ai décidé de ne pas continuer de développer mon site en français… Je n'y ai publié que deux articles (dont une traduction !) et maintenir l'intégralité de certaines pages en trois versions (anglais, français, et danois) était un peu lourd. Si une de mes pages en anglais vous pose un doute, contactez-moi (par email ou sur Mastodon), je serais ravi de vous répondre ! Quant à mes articles en français, ils restent disponibles sur mon blog, et sont listés ci-dessous :</p>
+
+{% component 'postlist', {
+    postlist: collections['_posts.fr'],
+    groupByYear: false
+} %}

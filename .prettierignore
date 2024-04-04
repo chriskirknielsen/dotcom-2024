@@ -1,0 +1,5 @@
+src/content/**/*.md
+node_modules/**/*
+
+# The footer needs the very specific whitespace setup to properly have the inline list separators
+src/_includes/parts/footer.njk

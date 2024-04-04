@@ -1,0 +1,53 @@
+/** Absolute font sizes */
+.fontSize-tiny {
+    font-size: var(--typeScale-n2);
+}
+
+.fontSize-small {
+    font-size: var(--typeScale-n1);
+}
+
+.fontSize-normal {
+    font-size: var(--typeScale-0);
+}
+
+.fontSize-large {
+    font-size: var(--typeScale-1);
+}
+
+/** Relative font sizes */
+.fontSize-smaller {
+    font-size: 0.75em;
+}
+
+.fontSize-larger {
+    font-size: 1.25em;
+}
+
+/** Font weights */
+.fontWeight-bold {
+    font-weight: bold;
+}
+
+/** Font styles */
+.fontStyle-italic {
+    font-style: italic;
+}
+
+/** Text alignment */
+.textAlign-start {
+    text-align: start;
+}
+
+.textAlign-center {
+    text-align: center;
+}
+
+/** Text effects */
+.textTransform-uppercase {
+    text-transform: uppercase;
+}
+
+.textWrap-balance {
+    text-wrap: balance;
+}

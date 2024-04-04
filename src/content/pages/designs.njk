@@ -1,0 +1,93 @@
+---
+title: Designs
+summary: A collection of posters and shirt designs I've made, available across multiple print-on-demand shops
+---
+
+{% set activeDesigns = designs | selectattr('showInGallery') %}
+
+<div class="textAlign-center">
+	<h2 class="visually-hidden" id="designs-shops-label">Shops</h2>
+	<ul class="designs-stores | flex-list justifyContent-center | fontWeight-bold fontSize-small" aria-labelledby="designs-shops-label" style="--list-gap: var(--size-m);">
+		{% for merchStore, merchUrl in metadata.merch %}
+			{% set storeIconName %}store-icon-{{ merchStore | lower }}{% endset %}
+			{% if merchStore == 'CottonBureau' %}
+				<li hidden>{% svg storeIconName, { class: 'store-icon', id: storeIconName } %}</li>
+			{% else %}
+			<li>
+				<a href="{{ merchUrl | url }}">
+					{% svg storeIconName, { class: 'store-icon', id: storeIconName } %}
+					{{ merchStore }}
+				</a>
+			</li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+</div>
+
+<hr>
+
+<filtered-tiles class="flow" filters="{{ activeDesigns | pluck('tags') | flatten | unique | sort | join(",") }}">
+	<ul data-filtered-tiles-group class="cards" style="--spaced-items-gap:var(--size-m);">
+		{% for design in activeDesigns %}
+			<li class="card-wrapper" id="{{ design.slug }}"
+				data-tags="{{ design.tags | join(",") }}"
+				aria-hidden="false"
+				{% if enableViewTransitions %}style="view-transition-name:{{ design.slug }}"{% endif %}
+			>
+			{% set designPermalink = '/designs/' + design.slug + '/' | url %}
+			{% setAsync "designVariant" -%}
+				{% if design.variant %}
+					<div class="grouper">
+						{% svg "arrow-bidir", { class: "inline-icon" } %}
+						<span>Variant available</span>
+					</div>
+				{% endif %}
+			{%- endsetAsync %}
+			{% set designLinks %}
+				<ul role="list" class="flex-list | marginBlockStart-auto" {% if enableViewTransitions %}style="view-transition-name:{{ design.slug }}-list;"{% endif %}>
+					{%- for site, url in design.links %}
+					{% set siteIconId %}store-icon-{{ site | lower }}{% endset %}
+					<li>
+						<a href="{{ url | url }}" class="store-icon-linkwrap | display-block">
+							<span class="visually-hidden">Get on {{ site }}</span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1080 1080" class="store-icon-inline" aria-hidden="true">
+								<title>{{ site }}</title>
+								<use href="#{{ siteIconId }}" fill="currentColor" />
+							</svg>
+						</a>
+					</li>
+					{% endfor -%}
+				</ul>
+			{% endset %}
+
+			{% component 'card', {
+				image: {
+					decorator: designVariant,
+					src: '/' + assets.images + '/designs/' + design.img,
+					alt: "",
+					width: 600,
+					height: 600,
+					lazy: loop.index >= 8,
+					link: '/designs/' + design.slug + '/'
+				},
+				heading: design.name,
+				headingLink: '/designs/' + design.slug + '/',
+				descriptionMarkup: designLinks,
+				cardAttrs: designAttrs,
+				containsLinks: true
+			} %}
+			</li>
+		{% endfor %}
+	</ul>
+
+	<template data-filtered-tiles-template>
+		<div class="filtering-item">
+			<input type="radio" class="visually-hidden">
+			<label class="button button--cbox filtering-tag"></label>
+		</div>
+	</template>
+</filtered-tiles>
+
+<script>
+{% include "assets/js/components/filtered-tiles.js" %}
+</script>

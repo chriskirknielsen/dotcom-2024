@@ -1,0 +1,131 @@
+code-wrap {
+    display: block;
+}
+
+.codeblock {
+    --CODEBLOCK-border-width: 1px;
+    --CODEBLOCK-padding: calc(var(--layout-gutter) - var(--CODEBLOCK-border-width));
+    --CODEBLOCK-border-color: var(--C-accent);
+    --CODEBLOCK-toolbar-color: var(--C-surface);
+}
+
+.codeblock-toolbar {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    gap: 1em;
+
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25em 0.25em 0.25em var(--layout-gutter);
+
+    color: var(--CODEBLOCK-toolbar-color);
+    border-radius: var(--_corner) var(--_corner) 0 0;
+    background: var(--CODEBLOCK-border-color);
+}
+
+.codeblock-toolbar-label {
+    font-family: var(--fontStack-monospace);
+    font-size: 0.875em;
+    letter-spacing: 0.01em;
+}
+
+.codeblock-copy {
+    margin-inline-start: auto;
+
+    &.is-copied .codeblock-copy__idle,
+    &:not(.is-copied) .codeblock-copy__copied {
+        display: none !important;
+    }
+}
+
+.codeblock-pre {
+    position: relative;
+
+    inline-size: 100%;
+    padding: var(--CODEBLOCK-padding);
+    overflow: auto;
+
+    border: var(--CODEBLOCK-border-width) solid var(--CODEBLOCK-border-color);
+    border-block-start-width: 0;
+    background-color: var(--CODE-bg, var(--C-surface));
+}
+
+:not(pre) > code {
+    padding: 0.0625em 0.125em;
+
+    white-space: pre-wrap;
+    word-break: break-word;
+
+    color: var(--C-heading);
+    background: var(--CODE-bg, var(--C-surface));
+    border-radius: var(--_corner);
+}
+
+.token.namespace {
+    opacity: 0.7;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: var(--C-inactive, #808080);
+}
+
+.token.boolean,
+.token.number,
+.token.atrule,
+.token.attr-value,
+.token.keyword,
+.token.important,
+.token.property,
+.token.deleted,
+.token.tag {
+    color: var(--C-heading);
+}
+
+.token.selector,
+.token.inserted {
+    color: var(--C-heading);
+}
+
+.token.attr-name,
+.token.string,
+.token.entity,
+.token.url,
+.token.string,
+.style .token.string,
+.token.attr-value {
+    color: var(--C-accent-alt, var(--C-accent));
+}
+
+.token.regex,
+.token.statement,
+.token.attr-name,
+.token.style,
+.token.script,
+.token.punctuation,
+.token.script .token.keyword {
+    color: var(--C-accent);
+}
+
+.token.placeholder,
+.token.variable {
+    color: var(--C-text);
+}
+
+.token.important,
+.token.statement,
+.token.bold {
+    font-weight: bold;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+.token.italic {
+    font-style: italic;
+}

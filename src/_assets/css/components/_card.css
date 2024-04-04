@@ -1,0 +1,145 @@
+.cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(var(--gridlist-cell-size, 12.5rem), 1fr));
+	gap: var(--layout-gutter);
+
+	&:is(ul, ol) {
+		list-style-type: '';
+	}
+
+	@media (--large-viewport) {
+		&[data-grid-cols='3'] {
+			--gridlist-cell-size: 16rem;
+		}
+
+		&[data-grid-cols='2'] {
+			--gridlist-cell-size: 24rem;
+		}
+	}
+}
+
+.card-wrapper {
+	container: cardWrap / inline-size;
+
+	display: flex;
+	/* Stretch by default */
+}
+
+.card {
+	--CARD-text-color: var(--_card-text-color);
+	--CARD-border-width: var(--_card-border-width, 1px);
+	--CARD-border-color: var(--_card-border-color);
+	--CARD-border-radius: clamp(0px, var(--_corner) * 999, var(--_card-corner));
+	--CARD-bg-color: var(--_card-bg-color);
+	--CARD-shadow: var(--_shadow);
+	--CARD-transition-base: var(--anim-short) var(--easing-out);
+
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	/* Hide image corners if they poke out of the container */
+
+	text-decoration: none;
+	color: var(--CARD-text-color);
+	border: var(--CARD-border-width) solid var(--CARD-border-color);
+	border-radius: clamp(0px, var(--_corner) * 999, var(--_card-corner));
+	/* background: var(--CARD-bg-color); */
+	box-shadow: var(--CARD-shadow);
+
+	@media (--accept-motion) {
+		transition: var(--CARD-transition-base);
+		transition-property: color, background-color, box-shadow, border-color, transform;
+		will-change: transform;
+	}
+
+	&:any-link:is(:hover, :focus-visible) {
+		--CARD-text-color: var(--_card-text-color-active);
+	}
+
+	&:any-link:is(:hover, :focus-visible),
+	&:has(:is(.card-image, .card-heading) > a:is(:hover, :focus-visible)) {
+		--CARD-border-color: var(--_card-border-color-active);
+		--CARD-bg-color: var(--_card-bg-color-active);
+		--CARD-shadow: var(--_shadow-active);
+		transform: scale(1.01);
+
+		& .card-image img {
+			transform: scale(1.05);
+		}
+	}
+}
+
+.card-image {
+	position: relative;
+
+	align-self: stretch;
+	overflow: clip;
+
+	img {
+		max-block-size: 300px;
+		object-fit: cover;
+		object-position: var(--CARD-image-focus-point, 50% 50%);
+
+		transition: transform var(--CARD-transition-base);
+	}
+}
+
+.card-decorator {
+	pointer-events: none;
+
+	position: absolute;
+	inset: auto 0 var(--size-m) auto;
+	z-index: 1;
+
+	padding: 1px var(--size-xs);
+
+	border: 1px solid var(--CARD-border-color);
+	border-inline-end-width: 0;
+	border-radius: var(--_corner) 0 0 var(--_corner);
+	color: var(--CARD-text-color);
+	background: var(--CARD-bg-color);
+}
+
+.card-content {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-xs);
+	padding: var(--_card-padding);
+
+	font-size: var(--typeScale-n1);
+	background: var(--CARD-bg-color);
+}
+
+.card-heading {
+
+	&,
+	& > a {
+		--LINK-color: var(--_card-heading-color);
+		color: var(--LINK-color);
+		transition: color var(--CARD-transition-base);
+	}
+
+	.card:any-link:is(:hover, :focus-visible) &,
+	& > a:is(:hover, :focus-visible) {
+		--LINK-color: var(--_card-heading-color-active);
+	}
+}
+
+/* Horizontal card layout */
+@container (18.75rem < inline-size < 26.4375rem) {
+	.card {
+		flex-direction: row;
+		width: 100%;
+	}
+
+	.card-image {
+		flex: 0 0 auto;
+		width: 8rem;
+	}
+
+	.card-image img {
+		block-size: 100%;
+		max-block-size: 100%;
+	}
+}

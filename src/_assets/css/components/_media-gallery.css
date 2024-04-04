@@ -1,0 +1,60 @@
+.image-gallery {
+    display: grid;
+    gap: var(--size-m);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    justify-items: center;
+    align-items: stretch;
+
+    & :is(img, video) {
+        inline-size: 100%;
+    }
+
+    /* Images can be clicked to be seen fully */
+    & img {
+        object-fit: cover;
+    }
+
+    /* Videos should appear without any cropping */
+    & video {
+        block-size: auto;
+    }
+
+    & :is(picture, a:not(figcaption > a)) {
+        display: flex;
+        flex-direction: column;
+
+        & > :is(img, video) {
+            flex-grow: 1;
+        }
+    }
+
+    & > figure {
+        display: flex;
+        flex-direction: column;
+
+        & > :is(picture, img, a) {
+            flex-grow: 1;
+        }
+
+        & > figcaption {
+            padding: var(--size-xs) var(--size-s);
+
+            font-size: 0.75em;
+            text-align: center;
+            color: var(--C-text);
+            background-color: var(--C-surface-alt, var(--C-surface));
+        }
+    }
+
+    & > :is(figure, picture, a, img, video) {
+        inline-size: 100%;
+        max-inline-size: calc(var(--layout-max-content) * 0.8);
+        overflow: hidden;
+    }
+}
+
+.image-gallery > :is(figure, picture, a, img, video),
+.single-media {
+    border-radius: var(--_corner);
+    box-shadow: var(--_shadow);
+}

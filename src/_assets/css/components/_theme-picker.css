@@ -1,0 +1,9 @@
+theme-picker {
+	&:not(:defined) {
+		display: none;
+	}
+}
+
+[data-theme-set] {
+	flex-shrink: 0;
+}

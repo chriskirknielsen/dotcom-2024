@@ -1,0 +1,50 @@
+{% extends "layouts/page.njk" %}
+
+{% block pageContent %}
+    {% set dateInfo %}
+    <time datetime="{{ date | dateFormat({ format: 'iso' }) }}" title="{{ date | dateFormat({ format: 'iso' }) }}">{{ date | dateFormat({ format: 'nice', lang: lang }) }}</time>
+    {% if updated %}
+        <br>
+        <span class="fontSize-tiny">(Updated
+            {%- if (updated | dateFormat) != (date | dateFormat) -%}
+                <time datetime="{{ updated | dateFormat({ format: 'iso' }) }}" title="{{ updated | dateFormat({ format: 'iso' }) }}">
+                    {{ updated | dateFormat({ format: 'nice', lang: lang }) }}</time>
+            {%- endif %})
+        </span>
+    {% endif %}
+    {% endset %}
+    {% component "hero", {
+        heroTags: tags,
+        heroTitle: title,
+        heroSup: dateInfo
+    } %}
+
+    <section class="post-content | container | flow">
+        {% if toc %}
+            <div class="toc | flow">
+                <p class="toc-title | h3" id="toc-title">Table of Contents</p>
+                {{ content | autoToc('toc-list | fontSize-small', 'toc-title') | safe }}
+            </div>
+        {% endif %}
+
+        {{ content | safe }}
+    </section>
+
+    <footer class="signoff">
+        <div class="signoff-photo">
+            <img
+			src="/{{ assets.images }}/profile.jpg"
+			alt="A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head."
+			width="512"
+			height="512"
+		/>
+        </div>
+        <div class="signoff-message">
+            <p class="signoff-title | h4">Hey, I'm Chris, a front-end developer, CSS nerd, and designer.</p>
+            <p class="signoff-body">
+			You can find me on <a href="{{ social.mastodon.url }}">{% svg 'mastodon', { class: 'inline-icon inline-icon--middle', ariaHidden: true } %} Mastodon</a>. I've designed some cool
+			shirts/stickers if you'd like to check those out. Thanks a ton!
+		</p>
+        </div>
+    </footer>
+{% endblock %}

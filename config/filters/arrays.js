@@ -1,0 +1,19 @@
+export default function (eleventyConfig) {
+	/** Plucks out the property of each object in a provided list, returns an array of those plucked properties. */
+	eleventyConfig.addFilter('pluck', function (list, key) {
+		const arr = Array.isArray(list) ? list : Object.values(list); // Make sure our list is an array, if not, turn the values of the object into an array
+		return arr.map((o) => o[key]);
+	});
+
+	/** Finds the first object in a provided list whose prop matches the value. */
+	eleventyConfig.addFilter('find', (array, prop, value) => array.find((item) => item[prop] === value));
+
+	/** Ensure every value of the provided list is unique. */
+	eleventyConfig.addFilter('unique', (arr) => [...new Set(arr)]);
+
+	/** Flattens an array to a single level. */
+	eleventyConfig.addFilter('flatten', (array) => array.flat(Infinity));
+
+	/** Removes values from a list that don't begin with the provided string. Can be reverse with a boolean argument */
+	eleventyConfig.addFilter('startsWith', (list, str, flip = false) => list.filter((value) => String(value).startsWith(str) ^ flip)); // Bitwise XOR, wild stuff
+}

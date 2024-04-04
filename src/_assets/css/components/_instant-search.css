@@ -1,0 +1,34 @@
+.search-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.search-filter {
+    min-inline-size: 12ch;
+}
+
+@supports (grid-template-rows: subgrid) {
+    .search-results {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.25em 0.5ch;
+    }
+
+    .search-result-item {
+        display: grid;
+        grid-column: 1 / -1;
+        grid-template-columns: subgrid;
+        align-items: baseline;
+
+        & > [data-result-slot='type'] {
+            grid-column: 1;
+            text-align: end;
+        }
+
+        & > [data-result-slot='info'] {
+            grid-column: 2;
+        }
+    }
+}

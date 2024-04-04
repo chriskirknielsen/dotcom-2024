@@ -1,0 +1,28 @@
+<footer class="footer-wrap | container">
+    <div class="footer | grouper grouper--vertical">
+        <div style="--GAP: 0.5rem;">
+            {% for footerNav in [nav.navbar, nav.footerExtras, nav.footerMisc, nav.footerSocial, nav.slashPages] %}
+                <ul class="inline-list">
+                    {% for navItem in footerNav %}
+                        <li><a
+                            href="{{ navItem.path if (not navItem.isRepoFileLink) else (metadata.repo + "/blob/main/" + page.inputPath) }}"
+                            {{ navItem.path | current(page) | safe }}
+                        >{{ navItem.label }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </div>
+
+        <p>
+            <strong>{{ metadata.author.name }}</strong>
+            <br>
+			&copy; {{ metadata.currentYear | toRomanNumeral }}
+        </p>
+    </div>
+
+    <div class="footer-decorator">
+        {% for theme in themes %}
+            {% if not theme.hiddenFooterIllustration %}{% footersvg 'footer-deco-'+theme.key+'.svg', { 'data-theme-condition': theme.key } %}{% endif %}
+        {% endfor %}
+    </div>
+</footer>

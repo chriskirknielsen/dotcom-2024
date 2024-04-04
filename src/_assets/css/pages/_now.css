@@ -1,0 +1,69 @@
+.now-grid {
+    --now-item-min: min(100%, 16rem);
+    --now-item-mask: linear-gradient(0deg, hsl(0 0% 0% / 0), 67%, hsl(0 0% 0% / 0.75));
+    /* Keep it relatively faint */
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--now-item-min), 1fr));
+    gap: var(--size-xl) var(--size-l);
+}
+
+.now-item {
+    isolation: isolate;
+    display: grid;
+    grid-template-rows:
+        calc(var(--typeScale-2) / 4 * 3)
+        /* Most of an h2 size */
+        auto var(--now-item-image-fill, 1fr)
+        /* At least a little of the image should be revealed*/
+        auto 1rem;
+    grid-template-columns: 1fr;
+    min-block-size: clamp(12rem, 33vh, 24rem);
+
+    & > * {
+        grid-column: 1;
+    }
+}
+
+.now-section-heading {
+    grid-row: 1 / span 2;
+}
+
+.now-item:has(.now-item-image) {
+    --now-item-image-fill: minmax(clamp(2rem, 10vh, 10rem), 1fr);
+}
+
+.now-item:has(.now-item-image) :is(.now-section-heading, .now-item-content) {
+    text-shadow: 0 1px 0 var(--C-canvas), 0 0 4px var(--C-canvas);
+}
+
+.now-section-heading,
+.now-item-content {
+    padding-inline: var(--size-m);
+}
+
+.now-item-content {
+    padding-block: var(--size-m) 0;
+    grid-row: 4 / -1;
+}
+
+.now-item-image {
+    /* 1: A little trick to ensure the grid item doesn't quite participate in the row sizing, but still takes up the available space (basically zero height relative to itself, 100% height relative to the container. */
+
+    z-index: -1;
+    grid-row: 2 / -2;
+
+    height: 0;
+    /*1*/
+    inline-size: 100%;
+    min-block-size: 100%;
+    /*1*/
+
+    object-fit: cover;
+    object-position: 50% 33%;
+    /* Keep the focus higher into the image-fill space */
+    border-radius: var(--_corner);
+
+    filter: saturate(0.5);
+    mask: var(--now-item-mask);
+}

@@ -1,0 +1,51 @@
+main {
+	position: relative;
+	isolation: isolate;
+	z-index: 1;
+
+	background: var(--_main-background, transparent);
+}
+
+/* Due to tabindex for the skip-link, we don't want an outline here as it isn't a truly focusable element */
+main:focus-visible {
+	outline: 0;
+}
+
+.page-content {
+	padding-block: var(--PAGE-block-padding-start, var(--size-2xl)) var(--PAGE-block-padding-end, var(--size-2xl));
+}
+
+.post-content {
+	& > .toc {
+		& > ul {
+			columns: 150px 2;
+			column-gap: var(--layout-gutter);
+		}
+
+		li {
+			page-break-inside: avoid;
+		}
+	}
+
+	@media (--toc-side) {
+		& > .toc {
+			position: sticky;
+			inset-block-start: 0;
+
+			/* Large-ish negative number (-9 should cover most cases since having a TOC means there's at least a moderate amount of content)
+			   fills up all the rows since `1 / -1` makes the first item in the main column take up as much space as just this TOC row… */
+			grid-row: 1 / -9;
+			grid-column: --fullbleed-start / --wide-start;
+			justify-self: end;
+			align-self: start;
+			max-block-size: 100dvh;
+			overflow: auto;
+			padding-block: var(--layout-gutter);
+			padding-inline: calc(var(--layout-gutter) * 2) var(--layout-gutter);
+
+			& + * {
+				--flow-space: 0px;
+			}
+		}
+	}
+}

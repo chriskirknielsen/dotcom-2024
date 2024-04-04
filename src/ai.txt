@@ -1,0 +1,45 @@
+# Spawning AI
+# Prevent datasets from using the following file types
+
+User-Agent: *
+Disallow: *.txt
+Disallow: *.pdf
+Disallow: *.html
+Disallow: *.bmp
+Disallow: *.gif
+Disallow: *.ico
+Disallow: *.jpeg
+Disallow: *.jpg
+Disallow: *.png
+Disallow: *.svg
+Disallow: *.tif
+Disallow: *.tiff
+Disallow: *.webp
+Disallow: *.aac
+Disallow: *.aiff
+Disallow: *.amr
+Disallow: *.flac
+Disallow: *.m4a
+Disallow: *.mp3
+Disallow: *.oga
+Disallow: *.opus
+Disallow: *.wav
+Disallow: *.wma
+Disallow: *.mp4
+Disallow: *.webm
+Disallow: *.ogg
+Disallow: *.avi
+Disallow: *.mov
+Disallow: *.wmv
+Disallow: *.flv
+Disallow: *.mkv
+Disallow: *.js
+Disallow: *.css
+Disallow: *.otf
+Disallow: *.zip
+Disallow: *.ttf
+Disallow: *.woff
+Disallow: *.woff2
+Disallow: *.njk
+Disallow: /
+Disallow: *
