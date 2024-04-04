@@ -129,19 +129,21 @@
 }
 
 /* Horizontal card layout */
-@container (inline-size > 20rem) {
-	.card {
-		flex-direction: row;
-		width: 100%;
-	}
+@media (--small-viewport) {
+	@container (inline-size > 20rem) {
+		.card {
+			flex-direction: row;
+			width: 100%;
+		}
 
-	.card-image {
-		flex: 0 0 auto;
-		width: 8rem;
-	}
+		.card-image {
+			flex: 0 0 auto;
+			width: 8rem;
+		}
 
-	.card-image img {
-		block-size: 100%;
-		max-block-size: 100%;
+		.card-image img {
+			block-size: 100%;
+			max-block-size: 100%;
+		}
 	}
 }
