@@ -3,7 +3,7 @@ export default {
 	title: 'chriskirknielsen',
 	description: 'A creative developer',
 	url: 'https://chriskirknielsen.com',
-	repo: 'https://github.com/chriskirknielsen/chriskirknielsen.com',
+	repo: 'https://github.com/chriskirknielsen/dotcom-2024',
 	author: {
 		name: 'Christopher Kirk-Nielsen',
 		shortname: 'Chris',
