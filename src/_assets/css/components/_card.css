@@ -38,6 +38,7 @@
 	flex-direction: column;
 	overflow: hidden;
 	/* Hide image corners if they poke out of the container */
+	inline-size: 100%;
 
 	text-decoration: none;
 	color: var(--CARD-text-color);
@@ -77,6 +78,7 @@
 
 	img {
 		max-block-size: 300px;
+		inline-size: 100%;
 		object-fit: cover;
 		object-position: var(--CARD-image-focus-point, 50% 50%);
 
@@ -127,7 +129,7 @@
 }
 
 /* Horizontal card layout */
-@container (18.75rem < inline-size < 26.4375rem) {
+@container (inline-size > 20rem) {
 	.card {
 		flex-direction: row;
 		width: 100%;
