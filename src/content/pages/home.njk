@@ -120,22 +120,22 @@ summary:  "Welcome to the personal website of the one they call Christopher Kirk
 		</svg>
 	</div>
 
-	<p class="homepage-logo-text homepage-logo-text--above">
+	<span class="homepage-logo-text homepage-logo-text--above">
 		<span>
 			<span class="homepage-logo-text--essential">Welcome to the personal website of</span>
 			<span class="homepage-logo-text--extra">the one they call</span>
 		</span>
-	</p>
+	</span>
 
 	{% svg "name-wide", { class: "homepage-logo-name homepage-logo-name--wide", title: metadata.author.name } %}
 	{% svg "name-stack", { class: "homepage-logo-name homepage-logo-name--stack", title: metadata.author.name } %}
 
-	<p class="homepage-logo-text homepage-logo-text--below">
+	<span class="homepage-logo-text homepage-logo-text--below">
 		<span>
 			<span class="homepage-logo-text--essential">a creative developer</span>
 			<span class="homepage-logo-text--extra">with zero awards who is, in fact, a CSS nerd</span>
 		</span>
-	</p>
+	</span>
 </h1>
 
 <div class="flow" data-homepage="body">
@@ -151,6 +151,8 @@ summary:  "Welcome to the personal website of the one they call Christopher Kirk
 	</p>
 </div>
 <aside class="homepage-side" data-homepage="side">
+	<h2 class="visually-hidden">Good Old Hyperlinks</h2>
+
 	<div class="homepage-photo">
 		<img src="/{{ assets.images }}/profile.jpg" alt="A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head." width="512" height="512">
 	</div>

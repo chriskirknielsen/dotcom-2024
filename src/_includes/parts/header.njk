@@ -1,6 +1,6 @@
 <header class="header-wrap | container">
     <div class="header">
-        <a href="/" class="header-logo" {{ '/' | current(page) | safe }}>
+        <a href="/" class="header-logo" {{ '/' | current(page) | safe }} aria-label="Home">
             {% svg "logo", {
                 class: "logo",
                 title: "Home"
@@ -20,7 +20,7 @@
         } %}
 
         <div class="header-menu">
-            <nav>
+            <nav aria-label="Navigation">
                 <ul>
                     {% for menuItem in nav.navbar %}
                         <li>

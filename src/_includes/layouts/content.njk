@@ -1,7 +1,7 @@
 {% extends "layouts/base.njk" %}
 
 {% block baseContent %}
-	<div class="page-content | container{% if useFlow != false %} flow{% endif %}"{% if gridBlockGutter %}style="--grid-block-gutter: {{ gridBlockGutter }};"{% endif %}>
+	<div class="page-content | container{% if useFlow != false %} flow{% endif %}"{% if gridBlockGutter %} style="--grid-block-gutter: {{ gridBlockGutter }};"{% endif %}>
 		{% block theContent %}
 			{{ content | safe }}
 		{% endblock %}
