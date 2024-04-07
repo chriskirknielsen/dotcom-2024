@@ -31,4 +31,4 @@ Tycho is an electronic music artist who makes very soothing tracks. But another 
 
 Oh and pretty cool thing: Tycho himself retweeted my generator!
 
-{% image "./tycho-retweet.jpg", "A Twitter app notification saying ISO50 (Tycho's Twitter handle) has retweeted a tweet of mine linking to the Tycho Art Generator", "The ultimate seal of approval", { width: 800, height: 580 } %}
+{% image "./tycho-retweet.jpg" | toRoot, "A Twitter app notification saying ISO50 (Tycho's Twitter handle) has retweeted a tweet of mine linking to the Tycho Art Generator", "The ultimate seal of approval", { width: 800, height: 580 } %}

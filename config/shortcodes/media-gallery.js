@@ -1,5 +1,6 @@
 //* Imports
 import pluginImage from '@11ty/eleventy-img';
+import { toNetlifyImage } from '../utils/image-transforms.js';
 
 function imageGalleryShortcode(pictures, addClass = []) {
 	let galleryClasses = [];
@@ -27,8 +28,8 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 
 	const isGroupContext = type === 'image' && options.hasOwnProperty('group') && options.group; // Whether the image is part of a group
 	const sizes = ['100vw', '(min-width: 50rem) 50rem'].join(', ');
-	const widths = options.widths || [480, 800, 1200];
-	const srcset = widths.map((w) => `${src}?nf_resize=fit&w=${w} ${w}w`);
+	const widths = type === 'video' ? [] : options.widths || [480, 800, 1200];
+	const srcset = widths.map((w) => `${toNetlifyImage(src, { w: w })} ${w}w`);
 
 	if (alt.indexOf('"') > -1) {
 		alt = alt.split('"').join('&quot;');
@@ -54,7 +55,7 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 			attrs.poster = options.poster;
 		}
 	} else if (type === 'image') {
-		attrs = { loading: 'lazy', decoding: 'async', alt: alt, srcset: srcset.join(','), sizes: sizes };
+		attrs = { loading: 'lazy', decoding: 'async', alt: alt, srcset: srcset.join(', '), sizes: sizes };
 	}
 
 	// Assign a ratio to the media
@@ -102,7 +103,7 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 	if (type === 'video') {
 		mediaMarkup = `<video src="${src}" ${attrsStr}></video>`;
 	} else if (type === 'image') {
-		mediaMarkup = `<a href="${src}"><img src="${src}?nf_resize=fit&w=${widths.at(-2)}" ${attrsStr} /></a>`;
+		mediaMarkup = `<a href="${src}"><img src="${toNetlifyImage(src, { w: widths.at(-2) })}" ${attrsStr} /></a>`;
 	}
 
 	let output;
@@ -120,22 +121,18 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 	return output;
 }
 
-function imageShortcode(src, alt, caption = '', options = {}) {
-	return mediaShortcode('image', src, alt, caption, options);
-}
-
-function videoShortcode(src, alt, caption = '', options = {}) {
-	return mediaShortcode('video', src, alt, caption, options);
-}
+const imageShortcode = (src, alt, caption = '', options = {}) => mediaShortcode('image', src, alt, caption, options);
+const videoShortcode = (src, alt, caption = '', options = {}) => mediaShortcode('video', src, alt, caption, options);
 
 export default function (eleventyConfig, options = {}) {
 	const galleryClasses = options.galleryClasses || null;
 
-	const mediaHandler = (shortcodeHandler) => {
+	function mediaHandler(shortcodeHandler) {
 		return function (src, alt = '', caption = '', opts = {}) {
 			return shortcodeHandler(src, alt, caption, Object.assign({ _galleryClasses: galleryClasses }, opts));
 		};
-	};
+	}
+
 	eleventyConfig.addShortcode('image', mediaHandler(imageShortcode));
 	eleventyConfig.addShortcode('video', mediaHandler(videoShortcode));
 	eleventyConfig.addPairedShortcode('gallery', (pictures) => imageGalleryShortcode(pictures, galleryClasses));

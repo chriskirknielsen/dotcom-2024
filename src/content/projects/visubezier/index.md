@@ -9,7 +9,7 @@ projectButtonLabel: Get the extension
 
 After years of using Notepad++, I landed on using Brackets, a code editor by Adobe. It was pretty simple but had some nice things like an [easing curve editor](./brackets-curve-editor.png). When the VS Code wave hit me, I was left missing such a feature, so I made my own extension to preview what CSS timing functions look like.
 
-{% image "./visubezier-preview.gif", "Hovering a CSS timing function in VS Code reveals a little popover with a preview of the animation and the graph of the easing curve.", "", { width: 540, height: 250 } %}
+{% image "./visubezier-preview.gif" | toRoot, "Hovering a CSS timing function in VS Code reveals a little popover with a preview of the animation and the graph of the easing curve.", "", { width: 540, height: 250 } %}
 
 It is held together by duct tape but it works! All this despite being in TypeScript, which I do not use anywhere else. I like [types, to an extent](/blog/fine-types-arent-the-worst/), but this is a step too far for me.
 

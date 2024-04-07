@@ -49,7 +49,7 @@ With that little tweak, we can now safely use our CSS selector to find links out
 
 Note that if you’re in control of the markup, this is pretty unlikely to be all that useful, but if you’re imposed a library that just hands out `<div>`s like candy on Halloween, then it might be useful! In my case, we were looking for interactive elements in automated browser tests that were not inside a disabled component, but those could wildly vary in terms of markup. So `button:not([aria-disabled=true] *)` resolved it.
 
-{% image "is-this-scope.jpg", "A variation of the meme where an anime character looks at a butterfly and says 'Is this a pigeon?'. This one is captioned 'Is this at-scope?' with the text ':has()' superimposed on the butterfly.", null, { ratio: 1200/630 } %}
+{% image "./is-this-scope.jpg", "A variation of the meme where an anime character looks at a butterfly and says 'Is this a pigeon?'. This one is captioned 'Is this at-scope?' with the text ':has()' superimposed on the butterfly.", null, { ratio: 1200/630 } %}
 
 It kind of looks like "doughnut scoping" when I think about it. If we wanted to do something like this in a card component but not for links inside of the card content, we might do:
 

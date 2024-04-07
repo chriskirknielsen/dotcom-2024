@@ -7,7 +7,7 @@ import numberFilters from './config/filters/numbers.js';
 import arrayFilters from './config/filters/arrays.js';
 import objectFilters from './config/filters/objects.js';
 import dateFilters from './config/filters/dates.js';
-import helperFilters from './config/filters/helpers.js';
+import urlFilters from './config/filters/urls.js';
 import { default as minifierFilters, cachedJsmin, cachedCssmin } from './config/filters/minifiers.js';
 
 import callout from './config/shortcodes/callout.js';
@@ -28,7 +28,7 @@ import pageAssetsPluginMxbckFix from 'eleventy-plugin-page-assets';
 import pluginSyntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
 
 //* Helpers
-const importInline = async (path, name = 'default') => (await import(path))[name]; // Allows eleventyConfig.addPlugin(await importInline('./config/shortcodes/codepen.js'));
+// const importInline = async (path, name = 'default') => (await import(path))[name]; // Allows eleventyConfig.addPlugin(await importInline('./config/shortcodes/codepen.js'));
 
 //* Constants
 const rootDir = 'src'; // Root folder
@@ -71,18 +71,12 @@ export default async function (eleventyConfig) {
 			},
 		],
 	});
-	eleventyConfig.addPlugin(pluginRss);
-	eleventyConfig.addPlugin(assetCompiler, { fontsDir: '/assets/fonts' });
-	eleventyConfig.addPlugin(mediaGallery, { galleryClasses: ['image-gallery'] });
-	eleventyConfig.addPlugin(callout, { markdownEngine: md });
-	eleventyConfig.addPlugin(codepen);
-	eleventyConfig.addPlugin(expander);
 	eleventyConfig.addPlugin(stringFilters);
 	eleventyConfig.addPlugin(numberFilters);
 	eleventyConfig.addPlugin(arrayFilters);
 	eleventyConfig.addPlugin(objectFilters);
 	eleventyConfig.addPlugin(dateFilters);
-	eleventyConfig.addPlugin(helperFilters);
+	eleventyConfig.addPlugin(urlFilters);
 	eleventyConfig.addPlugin(minifierFilters, { useCache: true });
 	eleventyConfig.addPlugin(pageAssetsPluginMxbckFix, {
 		mode: 'directory',
@@ -102,6 +96,12 @@ export default async function (eleventyConfig) {
 			class: (context) => `${context.language ? 'language-' + context.language : ''} codeblock-pre`.trim(),
 		},
 	});
+	eleventyConfig.addPlugin(pluginRss);
+	eleventyConfig.addPlugin(assetCompiler, { fontsDir: '/assets/fonts' });
+	eleventyConfig.addPlugin(mediaGallery, { galleryClasses: ['image-gallery'] });
+	eleventyConfig.addPlugin(callout, { markdownEngine: md });
+	eleventyConfig.addPlugin(codepen);
+	eleventyConfig.addPlugin(expander);
 	eleventyConfig.addPlugin(markdownLibrary, {
 		anchorClass: 'heading-anchor',
 		outerCustomElement: 'code-wrap',

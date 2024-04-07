@@ -26,4 +26,4 @@ When the survey was first opened, it had been pointed out to us that the logo di
 
 We were wrong. So I adjusted the logo, but for your entertainment, here is the logo for… State of Ass:
 
-{% image "./state-of-ass.jpg", 'A logo that should read as CSS made of quarter-circles, but the C can be mistaken for a lowercase A, spelling out "ass" instead…', "The State of Ass may be a thing but I am not involved", { width: 1280, height: 640 } %}
+{% image "./state-of-ass.jpg" | toRoot, 'A logo that should read as CSS made of quarter-circles, but the C can be mistaken for a lowercase A, spelling out "ass" instead…', "The State of Ass may be a thing but I am not involved", { width: 1280, height: 640 } %}

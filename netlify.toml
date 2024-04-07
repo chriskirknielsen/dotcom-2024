@@ -2,6 +2,8 @@
 ##[build]
 ##  publish = "_site"
 ##  command = "eleventy"
+[dev]
+  targetPort = 2024
 
 [[plugins]]
 package = "netlify-plugin-cache"

@@ -24,4 +24,4 @@ Just like the CSS design, I animated this one for extra fun. Click to restart th
 
 I was also quite happy with this detail for the t-shirt, coming up with a symbol for optional chaining, which in JavaScript, lets you access a sub-property if it exists with the syntax `prop?.subprop`.
 
-{% image "./optional-chaining.jpg", "A close-up for the Optional Chaining section on the shirt, featuring a chain link, with one of them being a question mark", "", { width: 1280, height: 720 } %}
+{% image "./optional-chaining.jpg" | toRoot, "A close-up for the Optional Chaining section on the shirt, featuring a chain link, with one of them being a question mark", "", { width: 1280, height: 720 } %}
