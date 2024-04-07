@@ -11,6 +11,6 @@ After years of using Notepad++, I landed on using Brackets, a code editor by Ado
 
 {% image "./visubezier-preview.gif", "Hovering a CSS timing function in VS Code reveals a little popover with a preview of the animation and the graph of the easing curve.", "", { width: 540, height: 250 } %}
 
-It is held together by duct tape but it works! All this despite being in TypeScript, which I do not use anywhere else. I like [typings, to an extent](/blog/fine-types-arent-the-worst/), but this is a step too far for me.
+It is held together by duct tape but it works! All this despite being in TypeScript, which I do not use anywhere else. I like [types, to an extent](/blog/fine-types-arent-the-worst/), but this is a step too far for me.
 
 Do note that is only offers a preview of the animation and the resulting easing curve — no editing as of yet. One day, I'll dig into the core of VS Code and figure out how to replicate, within VisuBezier, the Brackets feature, or something like what you see on the excellent [cubic-bezier.com](https://cubic-bezier.com) by Lea Verou. But until that time comes, this will have to do. And if you use VS Code, please give it a try, I'd love some feedback!

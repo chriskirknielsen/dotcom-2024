@@ -14,7 +14,7 @@ Following a pretty successful collaboration on the CSS shirt, Sacha asked me onc
 We went through quite a few iterations, especially for the background shape that ended up being this tesseract-looking thing with multiple light sources.
 
 {% gallery %}
-{% image customMetaImage, "A logo for the State of JS, with JS written in stacked lines on top of a multi-faceted haxagon with blue, cyan, and pink highlights. Inside of it is another hexagon with three colours covering it fully: yellow, red, and blue.", "", { ratio: "600/600", group: true } %}
+{% image customMetaImage, "A logo for the State of JS, with JS written in stacked lines on top of a multi-faceted hexagon with blue, cyan, and pink highlights. Inside of it is another hexagon with three colours covering it fully: yellow, red, and blue.", "", { ratio: "600/600", group: true } %}
 {% image '/' + assets.images + '/designs/' + shirtData.slug + '.jpg', "A rework of the logo for the survey rearranged to look like an old blank VHS tape, on a black t-shirt.", 'Get yours at <a href="'+shirtData.links.CottonBureau+'">CottonBureau</a>', { ratio: "600/600", group: true } %}
 {% endgallery %}
 

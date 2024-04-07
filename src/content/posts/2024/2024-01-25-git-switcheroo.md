@@ -5,7 +5,7 @@ tags:
     - snippet
     - git
 templateEngineOverride: njk,md
-original: https://tweets.chriskirknielsen.com/1573313737502515206/
+originalUrl: https://tweets.chriskirknielsen.com/1573313737502515206/
 originalTitle: From chriskirknielsen's tweet archive
 ---
 

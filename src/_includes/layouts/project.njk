@@ -9,7 +9,7 @@ backlink: { url: "/projects/", label: "Back to Projects" }
 <p class="post-external | spaced-items inlined-items">
 	{% component "cta", {
 		url: externalUrl,
-		label: projectButtonLabel,
+		label: projectButtonLabel or "View Project",
 		icon: 'arrow-right'
 	} %}
 	{% if extraCta %}

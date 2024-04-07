@@ -25,7 +25,7 @@ I grabbed a handful of photos of him, created a bunch of fake titles and tagline
 
 ## Tycho Art Generator
 
-Tycho is an electronic music artist who makes very soothing tracks. But another name is [ISO50](https://iso50.com/), the graphic designer side of Scott Hansen. He makes his own art for his album covers and tour posters, and you can distill some of that essence into a basic idea of a triangle and/or a circle with a few vibrant colour palettes. So I figured, why not create a generator that spits out Tycho art? It's nowhere near as sophisicated as the real thing, but once in a while, it comes pretty close!
+Tycho is an electronic music artist who makes very soothing tracks. But another name is [ISO50](https://iso50.com/), the graphic designer side of Scott Hansen. He makes his own art for his album covers and tour posters, and you can distill some of that essence into a basic idea of a triangle and/or a circle with a few vibrant colour palettes. So I figured, why not create a generator that spits out Tycho art? It's nowhere near as sophisticated as the real thing, but once in a while, it comes pretty close!
 
 {% codepen "https://codepen.io/chriskirknielsen/pen/gOXYQNL", "result", 560 %}
 

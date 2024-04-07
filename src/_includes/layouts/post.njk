@@ -27,7 +27,29 @@
             </div>
         {% endif %}
 
+        {% if originalUrl %}
+            <div>
+            {% if originalTitle %}
+                {% component 'cta', { url: originalUrl, label: originalTitle, icon: 'arrow-right' } %}
+            {% else %}
+                View original post: <a href="{{ originalUrl | url }}">{{ originalUrl }}</a>
+            {% endif %}
+            </div>
+            <hr>
+        {% endif %}
+
         {{ content | safe }}
+
+        {% if externalUrl%}
+            <hr>
+            <div>
+            {% if externalHost %}
+                {% component 'cta', { url: externalUrl, label: 'View original post on '+externalHost, icon: 'arrow-right' } %}
+            {% else %}
+                View original post: <a href="{{ externalUrl | url }}">{{ externalUrl }}</a>
+            {% endif %}
+            </div>
+        {% endif %}
     </section>
 
     <footer class="signoff">
@@ -42,9 +64,8 @@
         <div class="signoff-message">
             <p class="signoff-title | h4">Hey, I'm Chris, a front-end developer, CSS nerd, and designer.</p>
             <p class="signoff-body">
-			You can find me on <a href="{{ social.mastodon.url }}">{% svg 'mastodon', { class: 'inline-icon inline-icon--middle', ariaHidden: true } %} Mastodon</a>. I've designed some cool
-			shirts/stickers if you'd like to check those out. Thanks a ton!
-		</p>
+                You can find me on <a href="{{ social.mastodon.url }}">{% svg 'mastodon', { class: 'inline-icon inline-icon--middle', ariaHidden: true } %} Mastodon</a>. I've <a href="/designs/">designed some cool apparel</a> if you'd like to check that out. Thanks a ton!
+            </p>
         </div>
     </footer>
 {% endblock %}
