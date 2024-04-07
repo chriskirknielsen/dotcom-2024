@@ -27,20 +27,25 @@ nowInfo: {
             {% endif %}
 
             {% if nowItem.image %}
-                {% set nowItemImage = 'https://res.cloudinary.com/chriskirknielsen/image/fetch/' + cloudinaryParams + '/' + (
-                nowItem.image | urlencode) %}
-                <img src="{{ nowItemImage | url }}" alt="" aria-hidden="true" class="now-item-image" width="{{ imageWidth }}" height="{{ imageHeight }}">
+                <img
+                    src="{{ nowItem.image | toCloudinary(cloudinaryParams) | url }}"
+                    alt=""
+                    aria-hidden="true"
+                    class="now-item-image"
+                    width="{{ imageWidth }}"
+                    height="{{ imageHeight }}"
+                >
             {% endif %}
 
             <p class="now-item-content | fontSize-small">
                 {% if nowItem.link %}
                     <a href="{{ nowItem.link | url }}">
-                    {% endif %}
-                    <strong class="display-block h4 uuuufontSize-larger">
+                {% endif %}
+                    <strong class="display-block h4">
                         {{- nowItem.title }}
                         {% if nowItem.detail %}({% if detailPrefix %}{{ detailPrefix }}&nbsp;{% endif %}{{ nowItem.detail }}){% endif -%}
                     </strong>
-                    {% if nowItem.link %}
+                {% if nowItem.link %}
                     </a>
                 {% endif %}
                 {% if nowItem.blurb %}{{ nowItem.blurb | markdown(true) | safe }}
