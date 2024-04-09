@@ -1,4 +1,4 @@
-function toNetlifyImage(url, options = null) {
+function toNetlifyImage(url, options = {}) {
 	if (!url) {
 		throw new Error('Cannot convert to Netlify Image CDN: `url` value missing!');
 	}

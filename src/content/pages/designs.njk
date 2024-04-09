@@ -63,7 +63,7 @@ summary: A collection of posters and shirt designs I've made, available across m
 			{% component 'card', {
 				image: {
 					decorator: designVariant,
-					src: '/' + assets.images + '/designs/' + design.img,
+					src: [assets.images, 'designs', design.img] | toPath | toNetlifyImage({ w: 320 }),
 					alt: "",
 					width: 600,
 					height: 600,

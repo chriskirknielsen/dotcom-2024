@@ -11,9 +11,6 @@ export default function (eleventyConfig) {
 		return replacedWords.join(' ');
 	});
 
-	/** Removes any slash at the end of a string. */
-	eleventyConfig.addFilter('removeTrailingSlash', (str) => str.trim().replace(/\/$/g, ''));
-
 	/** Calculates a factor to use to have a smaller ratio for larger strings */
 	eleventyConfig.addFilter('sizeFactor', function (string) {
 		string = string || '';

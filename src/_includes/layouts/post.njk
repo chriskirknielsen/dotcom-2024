@@ -55,7 +55,7 @@
     <footer class="signoff">
         <div class="signoff-photo">
             <img
-			src="/{{ assets.images }}/profile.jpg"
+			src="{{ [assets.images, 'profile.jpg'] | toPath | toNetlifyImage({ w: 160 }) }}"
 			alt="A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head."
 			width="512"
 			height="512"
