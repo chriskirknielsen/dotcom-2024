@@ -34,7 +34,7 @@ summary: Some of the things I've made, either passion projects or real-world wor
 <ul>
 	{% for miniProject in miniProjects %}
 		<li>
-			<a href="{{ miniProject.url | url }}">{{ miniProject.name }}</a>{% if miniProject.blurb %}: {{ miniProject.blurb }}{% endif %}
+			<a href="{{ miniProject.url }}">{{ miniProject.name }}</a>{% if miniProject.blurb %}: {{ miniProject.blurb }}{% endif %}
 		</li>
 	{% endfor %}
 </ul>

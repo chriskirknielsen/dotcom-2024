@@ -24,10 +24,10 @@
 <meta property="og:site_name" content="{{ metadata.title }}">
 <meta property="og:locale" content="{{ metadata.lang }}">
 <meta property="og:type" content="{% if section == "post" %}article{% else %}website{% endif %}">
-<meta property="og:url" content="{{ (page.url or '/') | url | absoluteUrl(metadata.url) }}">
+<meta property="og:url" content="{{ (page.url or '/') | absoluteUrl(metadata.url) }}">
 
 {% set meta_image_url %}{{ customMetaImage or ([assets.images, 'metaimage.jpg'] | toPath) }}{% endset %}
-<meta name="twitter:image" property="og:image" content="{{ meta_image_url | trim | url | absoluteUrl(metadata.url) }}">
+<meta name="twitter:image" property="og:image" content="{{ meta_image_url | trim | absoluteUrl(metadata.url) }}">
 <meta name="twitter:image:alt" property="og:image:alt" content="{{ title  }}"/>
 
 <link href="{{ social.mastodon.url }}" rel="me">

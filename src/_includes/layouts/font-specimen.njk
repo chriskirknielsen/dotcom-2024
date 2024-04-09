@@ -4,13 +4,13 @@
 {% css miniSiteSlug %}{% include 'assets/css/font-specimen/'+page.fileSlug+'.css' %}{% endcss %}
 {%- for fontSpecimenName, fontSpecimensFaces in fontSpecimen -%}
     {# Preload the "default" font #}
-    {%- set fontPreload -%}<link rel="preload" href="{{ './' + fontSpecimensFaces[0].file | url }}" as="font" type="font/woff2" crossorigin>{% endset %}
+    {%- set fontPreload -%}<link rel="preload" href="'./'{{ fontSpecimensFaces[0].file }}" as="font" type="font/woff2" crossorigin>{% endset %}
 
     {% css miniSiteSlug %}
     {%- for fontSpecimenFace in fontSpecimensFaces -%}
 		@font-face {
 			font-family: '{{ fontSpecimenName }}';
-			src: url('{{ './' + fontSpecimenFace.file | url }}') format('woff2');
+			src: url('{{ './' + fontSpecimenFace.file }}') format('woff2');
 			font-weight: {{ fontSpecimenFace.weight or 400 }};
 			font-style: {{ fontSpecimenFace.style or 'normal' }};
 			font-display: swap;
@@ -95,9 +95,9 @@
         </main>
 
         <footer class="footer">
-            Font built with {{ fontLove or 'love' }} by <a href="{{ '/' | url }}">{{ metadata.author.name }}</a>
+            Font built with {{ fontLove or 'love' }} by <a href="/">{{ metadata.author.name }}</a>
             |
-            <a href="{{ '/fonts/' | url }}">Font Directory</a>
+            <a href="/fonts/">Font Directory</a>
         </footer>
 
         <script>

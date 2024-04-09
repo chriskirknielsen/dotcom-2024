@@ -28,7 +28,7 @@
 <article class="fifty-fifty">
 	{% if design.img %}
 	<div>
-		<img src="{{ '/' + assets.images + '/designs/' + design.img | url }}" alt="" width="600" height="600" class="single-media | inline-size-100pc">
+		<img src="{{ [assets.images, 'designs', design.img] | toPath | toNetlifyImage }}" alt="" width="600" height="600" class="single-media | inline-size-100pc">
 	</div>
 	{% endif %}
 
@@ -38,7 +38,7 @@
 		<h2>Available on</h2>
 		<ul class="flow">
 			{%- for site, url in design.links %}
-			<li><a href="{{ url | url }}">{{ site }}</a></li>
+			<li><a href="{{ url }}">{{ site }}</a></li>
 			{% endfor -%}
 		</ul>
 	{% endif %}
@@ -52,7 +52,7 @@
 		<ul class="flow">
 			{%- for variantSlug in design.variant %}
 			{% set variantDesign = designs | find('slug', variantSlug) %}
-			<li><a href="{{ '/designs/' + (variantDesign.slug | slug) + '/' | url }}">{{ variantDesign.name | safe }}</a></li>
+			<li><a href="{{ ['designs', (variantDesign.slug | slug)] | toPath }}/">{{ variantDesign.name | safe }}</a></li>
 			{% endfor -%}
 		</ul>
 	{% endif %}
@@ -62,7 +62,7 @@
 		<ul class="flow">
 			{%- for otherDesignSlug in design.similar %}
 			{% set otherDesign = designs | find('slug', otherDesignSlug) %}
-			<li><a href="{{ '/designs/' + (otherDesign.slug | slug) + '/' | url }}">{{ otherDesign.name | safe }}</a></li>
+			<li><a href="{{ ['designs', (otherDesign.slug | slug)] | toPath }}/">{{ otherDesign.name | safe }}</a></li>
 			{% endfor -%}
 		</ul>
 	{% endif %}

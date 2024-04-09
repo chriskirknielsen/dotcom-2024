@@ -14,7 +14,7 @@ summary: A collection of posters and shirt designs I've made, available across m
 				<li hidden>{% svg storeIconName, { class: 'store-icon', id: storeIconName } %}</li>
 			{% else %}
 			<li>
-				<a href="{{ merchUrl | url }}">
+				<a href="{{ merchUrl }}">
 					{% svg storeIconName, { class: 'store-icon', id: storeIconName } %}
 					{{ merchStore }}
 				</a>
@@ -34,7 +34,7 @@ summary: A collection of posters and shirt designs I've made, available across m
 				aria-hidden="false"
 				{% if enableViewTransitions %}style="view-transition-name:{{ design.slug }}"{% endif %}
 			>
-			{% set designPermalink = '/designs/' + design.slug + '/' | url %}
+			{% set designPermalink = '/designs/' + design.slug + '/' %}
 			{% setAsync "designVariant" -%}
 				{% if design.variant %}
 					<div class="grouper">
@@ -48,7 +48,7 @@ summary: A collection of posters and shirt designs I've made, available across m
 					{%- for site, url in design.links %}
 					{% set siteIconId %}store-icon-{{ site | lower }}{% endset %}
 					<li>
-						<a href="{{ url | url }}" class="store-icon-linkwrap | display-block">
+						<a href="{{ url }}" class="store-icon-linkwrap | display-block">
 							<span class="visually-hidden">Get on {{ site }}</span>
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1080 1080" class="store-icon-inline" aria-hidden="true">
 								<title>{{ site }}</title>
@@ -68,10 +68,10 @@ summary: A collection of posters and shirt designs I've made, available across m
 					width: 600,
 					height: 600,
 					lazy: loop.index >= 8,
-					link: '/designs/' + design.slug + '/'
+					link: designPermalink
 				},
 				heading: design.name,
-				headingLink: '/designs/' + design.slug + '/',
+				headingLink: designPermalink,
 				descriptionMarkup: designLinks,
 				cardAttrs: designAttrs,
 				containsLinks: true

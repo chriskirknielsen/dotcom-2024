@@ -28,7 +28,7 @@ nowInfo: {
 
             {% if nowItem.image %}
                 <img
-                    src="{{ nowItem.image | toCloudinary(cloudinaryParams) | url }}"
+                    src="{{ nowItem.image | toCloudinary(cloudinaryParams) }}"
                     alt=""
                     aria-hidden="true"
                     class="now-item-image"
@@ -39,7 +39,7 @@ nowInfo: {
 
             <p class="now-item-content | fontSize-small">
                 {% if nowItem.link %}
-                    <a href="{{ nowItem.link | url }}">
+                    <a href="{{ nowItem.link }}">
                 {% endif %}
                     <strong class="display-block h4">
                         {{- nowItem.title }}
@@ -48,7 +48,8 @@ nowInfo: {
                 {% if nowItem.link %}
                     </a>
                 {% endif %}
-                {% if nowItem.blurb %}{{ nowItem.blurb | markdown(true) | safe }}
+                {% if nowItem.blurb %}
+                    {{ nowItem.blurb | markdown(true) | safe }}
                 {% endif %}
             </p>
         </div>

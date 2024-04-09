@@ -32,7 +32,7 @@
             {% if originalTitle %}
                 {% component 'cta', { url: originalUrl, label: originalTitle, icon: 'arrow-right' } %}
             {% else %}
-                View original post: <a href="{{ originalUrl | url }}">{{ originalUrl }}</a>
+                View original post: <a href="{{ originalUrl }}">{{ originalUrl }}</a>
             {% endif %}
             </div>
             <hr>
@@ -46,7 +46,7 @@
             {% if externalHost %}
                 {% component 'cta', { url: externalUrl, label: 'View original post on '+externalHost, icon: 'arrow-right' } %}
             {% else %}
-                View original post: <a href="{{ externalUrl | url }}">{{ externalUrl }}</a>
+                View original post: <a href="{{ externalUrl }}">{{ externalUrl }}</a>
             {% endif %}
             </div>
         {% endif %}

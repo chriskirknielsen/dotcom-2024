@@ -28,7 +28,7 @@
                                 {% if post.data.lang and post.data.lang != 'en' %}
                                     <span class="color-text fontSize-smaller">({{post.data.lang}})</span>
                                 {% endif %}
-                                <a href="{{ post.url | url }}" class="heading-anchor">
+                                <a href="{{ post.url }}" class="heading-anchor">
                                     {{- post.data.title or "(oops, untitled post)" -}}
                                 </a>
                             </h2>

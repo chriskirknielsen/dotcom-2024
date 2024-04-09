@@ -2,11 +2,11 @@
 {% if containsLinks %}
 <div {{ attrs | trim | safe }}>
 {% else %}
-<a href="{{ link | url }}" {{ attrs | trim | safe }}>
+<a href="{{ link }}" {{ attrs | trim | safe }}>
 {% endif %}
 	{% if image %}
 		<div class="card-image">
-			{% if image.link %}<a href="{{ image.link | url }}">{% endif %}
+			{% if image.link %}<a href="{{ image.link }}">{% endif %}
 				<img
 					src="{{ image.src }}"
 					alt="{{ image.alt }}"
@@ -27,7 +27,7 @@
 		{% endif %}
 		{% if heading %}
 			<{{ headingTag or 'h2' }} class="h3 | card-heading">
-			{% if headingLink %}<a href="{{ headingLink | url }}">{% endif %}
+			{% if headingLink %}<a href="{{ headingLink }}">{% endif %}
 				{{ heading | safe }}
 			{% if headingLink %}</a>{% endif %}
 			</{{ headingTag or 'h2' }}>

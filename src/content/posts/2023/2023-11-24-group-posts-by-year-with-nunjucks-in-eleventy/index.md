@@ -58,7 +58,7 @@ My first intuition was to use `groupby` as-is, which outputs an object, whose ke
 	<div class="postlist-group-list">
 	{% for post in posts | reverse %}
 		<p class="postlist-post">
-			<a href="{{ post.url | url }}">{{ post.data.title }}</a>
+			<a href="{{ post.url }}">{{ post.data.title }}</a>
 		</p>
 	{% endfor %}
 	</div>
@@ -84,7 +84,7 @@ If only we could sort objects… oh wait, [we can](https://www.notion.so/group-p
 	<div class="postlist-group-list">
 	{% for post in posts | reverse %}
 		<p class="postlist-post">
-			<a href="{{ post.url | url }}">{{ post.data.title }}</a>
+			<a href="{{ post.url }}">{{ post.data.title }}</a>
 		</p>
 	{% endfor %}
 	</div>
