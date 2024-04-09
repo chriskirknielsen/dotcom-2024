@@ -16,10 +16,9 @@
 		{% getBundle "js", "head" %}
 		</script>
 
-		{# Inline CSS #}
-		<style id="inline-styles">/*INLINE_CSS*/</style>
+		{# Inline CSS instead of <link href="/assets/css/style.css" rel="stylesheet"> #}
+		<style>{{ assets.inlineCssPlaceholder }}</style>
 		
-		{# <link href="/assets/css/style.css" rel="stylesheet"> #}
 		{# RSS feed #}
 		<link rel="alternate" type="application/rss+xml" title="{{ metadata.title }}" href="{{ (rssFeedOverride or nav.rss.path) | absoluteUrl(metadata.url) }}">
 		{% endblock %}

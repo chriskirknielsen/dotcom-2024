@@ -1,5 +1,7 @@
 //* Imports
 import 'dotenv/config';
+import assets from './src/_data/assets.js';
+
 import assetCompiler from './config/before/asset-compiler.js';
 
 import stringFilters from './config/filters/strings.js';
@@ -163,7 +165,7 @@ export default async function (eleventyConfig) {
 
 	//* Transforms
 	eleventyConfig.addPlugin(cssTransforms, {
-		placeholder: '/*INLINE_CSS*/',
+		placeholder: assets.inlineCssPlaceholder,
 		pathToCss: [`./${rootDir}/${includesDir}/assets/css/style.css`],
 		dynamicAttributes: ['data-theme', 'aria-pressed', 'href'],
 		safelist: purgeCssList._global.safe,
