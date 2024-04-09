@@ -154,12 +154,12 @@ summary:  "Welcome to the personal website of the one they call Christopher Kirk
 	<h2 class="visually-hidden">Good Old Hyperlinks</h2>
 
 	<div class="homepage-photo">
-		<img src="{{ [assets.images, 'profile.jpg'] | toPath | toNetlifyImage({ w: 256 }) }}" alt="A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head." width="512" height="512">
+		<img src="{{ [assets.images, 'profile-256.jpg'] | toPath }}" alt="A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head." width="512" height="512">
 	</div>
 
 	<ul class="homepage-social">
 		<li>
-			<a href="{{ nav.rss.path }}" class="button button--icon" aria-label="{{ nav.rss.label }}">{% svg 'rss', {title: nav.rss.label} %}</a>
+			<a href="{{ nav.rss.path }}" class="button button--icon" aria-label="{{ nav.rss.label }}">{% svg 'rss', { title: nav.rss.label } %}</a>
 		</li>
 		<li>
 			<a href="{{ social.mastodon.url }}" class="button button--icon" aria-label="Find me on {{ social.mastodon.label }}">{% svg 'mastodon', {title: social.mastodon.label} %}</a>
