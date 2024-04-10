@@ -9,7 +9,7 @@
 			{% if image.link %}<a href="{{ image.link }}">{% endif %}
 				<img
 					src="{{ image.src }}"
-					alt="{{ image.alt }}"
+					alt="{{ image.alt or (heading if image.link else '') }}"
 					width="{{ image.width }}"
 					height="{{ image.height }}"
 					{% if image.lazy %}loading="lazy"{% endif %}

@@ -64,7 +64,7 @@ summary: A collection of posters and shirt designs I've made, available across m
 				image: {
 					decorator: designVariant,
 					src: [assets.images, 'designs', design.img] | toPath | toNetlifyImage({ w: 320 }),
-					alt: "",
+					alt: design.name,
 					width: 600,
 					height: 600,
 					lazy: loop.index >= 8,

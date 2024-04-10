@@ -10,7 +10,7 @@ summary: Some of the things I've made, either passion projects or real-world wor
 			{% component 'card', {
 				link: project.url,
 				image: {
-					src: project.data.customMetaImage,
+					src: project.data.customMetaImage | toNetlifyImage({ w: 400 }),
 					alt: "",
 					width: 600,
 					height: 600,
