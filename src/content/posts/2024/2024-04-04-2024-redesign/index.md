@@ -159,7 +159,7 @@ p {
 }
 ```
 
-I also noticed some issue with the homepage "logo", notably the circles which would grow past the limit of the grid cell they were in. For this one, a little `max-block-size` with a magic number did the trick… I should file a bug, huh?
+I also noticed some issue with the homepage wordmark (or my "large" logo, if you will), notably the circles which would grow past the limit of the grid cell they were in. For this one, a little `max-block-size` with a magic number did the trick… I should file a bug, huh?
 
 And something comical: the "welcome" text around my name on the homepage? It's got responsive sizing, but Safari is doing something funky, so every time I refresh the page, the font size grows. Not present in Technology Preview but this one's weird. And funny!
 
@@ -169,9 +169,9 @@ And something comical: the "welcome" text around my name on the homepage? It's g
 
 With Firefox, I had to file a few bugs, and found existing ones that corresponded to what I was seeing.
 
-First, my homepage logo is a little beast of a grid to get the elements to layer correctly, and sadly an `aspect-ratio` alongside an auto-sized column doesn’t work ([bug 1719273](https://bugzilla.mozilla.org/show_bug.cgi?id=1719273)). I worked around it by using `justify-self: center` so the element would still be in the right place — phew!
+First, my homepage wordmark is a little beast of a grid to get the elements to layer correctly, and sadly an `aspect-ratio` alongside an auto-sized column doesn’t work ([bug 1719273](https://bugzilla.mozilla.org/show_bug.cgi?id=1719273)). I worked around it by using `justify-self: center` so the element would still be in the right place — phew!
 
-Still related to this homepage logo, I was trying to animate the “decorative” pieces in the circle. `vector-effect: non-scaling-stroke` doesn’t work with `scale` transform ([bug 1734476](https://bugzilla.mozilla.org/show_bug.cgi?id=1734476)), and working around it with a near-zero starting scale also causes issues ([bug 1883285](https://bugzilla.mozilla.org/show_bug.cgi?id=1883285), pretty much the same problem).
+Still related to this wordmark, I was trying to animate the “decorative” pieces in the circle. `vector-effect: non-scaling-stroke` doesn’t work with `scale` transform ([bug 1734476](https://bugzilla.mozilla.org/show_bug.cgi?id=1734476)), and working around it with a near-zero starting scale also causes issues ([bug 1883285](https://bugzilla.mozilla.org/show_bug.cgi?id=1883285), pretty much the same problem).
 
 Finally, I was trying to animate strokes on this same section, and with the `stroke-dasharray`/`stroke-dashoffset` trick, I was hoping to make my life easy with the `pathLength` attribute. Wrong! Due to the non-scaling stroke, this doesn’t match, so I figured, “fine, I’ll hardcode a ratio and throw this all in a `calc()`”, but being SVG elements, I didn’t provide a unit, which Firefox considers a mistake (see [bug 1884525](https://bugzilla.mozilla.org/show_bug.cgi?id=1884525)). Be that as it may, it works on Chrome and Safari, so it feels like the spec should update to allow this since you can provide the property as a unitless number, just not a unitless calculation…
 

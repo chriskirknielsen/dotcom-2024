@@ -157,7 +157,7 @@
 		transform: scale(0.9) translateY(10%);
 		will-change: transform;
 
-		animation-name: fadeIn, resetTransform;
+		animation-name: fadeIn, resetTransform, unblur;
 		animation-timing-function: var(--easing-out);
 		animation-duration: var(--anim-eternity);
 		animation-fill-mode: both, forwards;
@@ -166,6 +166,12 @@
 
 	[data-name-part="last"] {
 		--f: 4;
+	}
+}
+
+@keyframes unblur {
+	0% {
+		filter: blur(8px);
 	}
 }
 
