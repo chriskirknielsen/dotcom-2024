@@ -1,0 +1,21 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="32"
+    height="32"
+    viewBox="0 0 32 32"
+>
+    <g id="gaming-dreamcast-logo">
+        <rect
+            fill="none"
+            width="100%"
+            height="100%"
+        ></rect>
+        <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.2"
+            d="M29.2 16S28.4 3.5 14.8 4C3.4 4.6 2.9 14.4 2.9 16s-.2 12.2 11.6 11.7C26 27.2 24.2 18 24 17.1c-.2-.7-.8-8.3-9.3-8.3-6.7 0-9.1 8.8-5.6 12.4 2.6 2.6 8.6 3 10.1-1.7 1.3-3.9-2.2-6.3-5-6.2s-3.9 3.4-2 5c1.1.8 3 .5 3 .5"
+        />
+    </g>
+</svg>

@@ -1,0 +1,34 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="80"
+    height="32"
+    viewBox="0 0 80 32"
+>
+    <symbol
+        id="gaming-vertical-psv-logo"
+        width="32"
+        height="80"
+        viewBox="0 0 32 80"
+    >
+        <rect
+            fill="none"
+            width="100%"
+            height="100%"
+        ></rect>
+        <use
+            xlink:href="#gaming-psv-logo"
+            transform="translate(32 0) rotate(90 0 0) "
+        ></use>
+    </symbol>
+    <g id="gaming-psv-logo">
+        <rect
+            fill="none"
+            width="100%"
+            height="100%"
+        ></rect>
+        <path
+            fill="currentColor"
+            d="M24.6 8.9h5.5v1.5h-4.7c-1.3 0-1.6 1-1.6 1.8V18c0 2.1-1 3.4-3.5 3.4h-5.6v-1.5h4.9c1 0 1.6-.8 1.6-1.9v-5.7c0-1.8.8-3.3 3.4-3.3Zm-8 3.3c0-1.8-1.1-3.3-3.7-3.3h-10v1.5h9.2c1.4-.1 1.9 1 1.9 1.8 0 1-.4 1.8-1.9 1.9h-6c-1.9 0-3.2 1.4-3.2 3.5v3.7h2.6v-3.8c0-1.1.6-1.7 1.4-1.7h6c2.6 0 3.6-1.5 3.6-3.6ZM40 17.8c-.3.6-.8.5-1 0l-5-9h-2.8l6 11.4c.2.3.6 1.1 1.7 1.2 1 0 1.7-1.1 1.9-1.5l5.8-11H45l-4.8 9Zm8.3 3.5H51V9h-2.6v12.4Zm29.8 0h-3l-1.4-2.6h-8l-1.3 2.7h-1.8l5.9-11.1c.2-.4.8-1.5 1.9-1.5 1 0 1.4.9 1.6 1.2l6 11.4Zm-5.1-4-2.6-4.8c-.2-.5-.8-.6-1.1 0l-2.6 4.8H73Zm-7.8-6.8V8.8H52.7v1.5h5v11h2.5v-11h5Z"
+        />
+    </g>
+</svg>

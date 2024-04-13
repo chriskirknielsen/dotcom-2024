@@ -4,6 +4,10 @@
     z-index: 2;
 
     --CTA-display: flex;
+
+    &::-webkit-details-marker {
+        display: none;
+    }
 }
 
 .expander-button-arrow {

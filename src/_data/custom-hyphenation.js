@@ -11,4 +11,6 @@ export default {
 	Nunjucks: 'Nun&shy;jucks',
 	Grouping: 'Group&shy;ing',
 	Directory: 'Direct&shy;ory',
+	Gaming: 'Gam&shy;ing',
+	Collection: 'Collec&shy;tion',
 };

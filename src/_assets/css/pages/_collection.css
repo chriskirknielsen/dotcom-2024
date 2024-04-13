@@ -1,0 +1,330 @@
+.gaming-platform-toggle {
+    --CTA-display: flex;
+}
+
+.gaming-platform-group {
+    --game-case-plastic: #fff8;
+    --game-spine-text: #333639;
+    --game-spine-bg: #f8f8f8;
+    --game-spine-radius: 0.125em;
+    /* From mm measurements */
+    --spine-ratio: calc(var(--spine-depth) / var(--spine-height));
+    --spine-mm-to-px-factor: 0.125;
+    --spine-block-size: calc(var(--spine-height) * var(--spine-mm-to-px-factor) * 1em);
+    --spine-inline-size: calc(var(--spine-depth) * var(--spine-mm-to-px-factor) * 1em);
+    --spine-font-weight: 700;
+    --spine-font-stack: sans-serif-condensed, sans-serif;
+    --spine-font-family: var(--spine-font-stack);
+    --spine-letter-spacing: normal;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, calc(var(--spine-inline-size)));
+    grid-auto-rows: calc(var(--spine-block-size));
+    justify-content: center;
+    gap: var(--size-l) var(--size-2xs);
+    margin-block-start: var(--size-m);
+    list-style-type: '';
+}
+
+.gaming-logo {
+    block-size: 1em;
+    inline-size: auto;
+}
+
+.gaming-spine {
+    position: relative;
+    isolation: isolate;
+
+    display: flex;
+    block-size: var(--spine-block-size);
+    inline-size: var(--spine-inline-size);
+
+    color: var(--game-spine-text);
+    border-radius: var(--game-spine-radius);
+    background: var(--game-case-plastic);
+    box-shadow: 0px 0.5px 0.4px hsl(0deg 0% 0% / 0.33),
+        0px 0.9px 0.7px -1.7px hsl(0deg 0% 0% / 0.25),
+        0px 3.9px 2.9px -3.3px hsl(0deg 0% 0% / 0.16),
+        0px 12px 9px -5px hsl(0deg 0% 0% / 0.08);
+}
+
+.gaming-spine-paper {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spine-paper-gap, 0.25em);
+
+    background: var(--game-spine-bg);
+}
+
+.gaming-spine-top {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--spine-paper-padding, 0.25em);
+
+    color: var(--game-spine-top-text, currentColor);
+    background: var(--game-spine-top-bg, transparent);
+}
+
+.gaming-spine-logo {
+    max-inline-size: min(100%, 1.25em);
+}
+
+.gaming-spine-logo,
+.gaming-spine-logo-extra {
+    margin-inline: auto;
+}
+
+.gaming-spine-label {
+    position: relative;
+
+    flex: 1 0 0;
+    display: flex;
+    align-items: center;
+    padding: var(--spine-paper-padding, 0.25em);
+
+    writing-mode: vertical-rl;
+    text-wrap: balance;
+    font-family: var(--spine-font-family);
+    font-weight: var(--spine-font-weight);
+    letter-spacing: var(--spine-letter-spacing);
+    font-size: 0.75em;
+    line-height: 0.9;
+}
+
+[data-gaming-platform="ps5"],
+[data-gaming-platform="ps4"] {
+    --game-case-plastic: #504de5e6;
+
+    & .gaming-spine {
+        border-block: 0.1875em solid transparent;
+    }
+
+    & .gaming-spine-top {
+        gap: 0.25em;
+    }
+}
+
+[data-gaming-platform="ps5"] {
+    & .gaming-spine-top {
+        box-shadow: 0 0.125em 0 #0054a5;
+    }
+}
+
+[data-gaming-platform="ps4"] {
+    & .gaming-spine {
+        --game-spine-top-text: #f8f8f8;
+        --game-spine-top-bg: #0054a5;
+    }
+}
+
+[data-gaming-platform="ps3"] {
+    & .gaming-spine {
+        border-block: 0.1875em solid transparent;
+        border-block-start-width: 2em;
+
+        &[data-gaming-branding='old'] {
+            --game-spine-top-text: #2c2e31;
+            --game-spine-top-bg: #d85454;
+
+            & .gaming-spine-top {
+                inline-size: 100%;
+                aspect-ratio: 1.2;
+                padding: 0;
+            }
+
+            & .gaming-spine-logo {
+                max-inline-size: 95%;
+            }
+        }
+
+        &[data-gaming-branding='new'] {
+            --game-spine-top-text: #f8f8f8;
+            --game-spine-top-bg: #2c2e31;
+
+            & .gaming-spine-top {
+                box-shadow: 0 0.125em 0 #d85454;
+            }
+
+            &[data-gaming-edition="essentials"] {
+                --game-spine-text: #f8f8f8;
+                --game-spine-bg: #d85454;
+            }
+        }
+    }
+}
+
+[data-gaming-platform="ps5"],
+[data-gaming-platform="ps4"],
+[data-gaming-platform="ps3"] {
+    --spine-height: 170;
+    --spine-depth: 15;
+}
+
+[data-gaming-platform="ps2"] {
+    --game-case-plastic: #2e60c1;
+    --game-spine-top-text: #f8f8f8;
+    --game-spine-top-bg: #464a4f;
+    --spine-height: 190;
+    --spine-depth: 14;
+    --spine-paper-padding: 0.25em 0.25em 0.5em;
+
+    & .gaming-spine {
+        border-block: 0.1875em solid transparent;
+
+        &[data-gaming-edition="platinum"] {
+            --game-case-plastic: #c2dae8;
+            --game-spine-text: #bfd0d9;
+            --game-spine-bg: #464a4f;
+            --game-spine-top-text: #464a4f;
+            --game-spine-top-bg: #90a2ac;
+        }
+    }
+
+    & .gaming-spine-top {
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    & .gaming-spine-logo {
+        background: #333639;
+        border: 1px solid #c1c1c1;
+    }
+
+    & .gaming-spine-logo-extra {
+        inline-size: 67%;
+    }
+}
+
+[data-gaming-platform="ps1"] {
+    --game-spine-text: #ffffff;
+    --game-spine-bg: #333639;
+    --spine-height: 142;
+    --spine-depth: 15;
+    --spine-paper-gap: 1em;
+
+    & .gaming-spine {
+        text-transform: uppercase;
+
+        border-block: 0.25em solid transparent;
+
+        &[data-gaming-edition="platinum"] {
+            --game-spine-text: #333639;
+            --game-spine-bg: #b4b8be;
+            --spine-letter-spacing: 0;
+        }
+    }
+
+    & .gaming-spine-paper {
+        margin-inline-start: 0.125em;
+        border-inline-end: 0.125em solid #1c1e20;
+    }
+
+    & .gaming-spine-logo {
+        background: #333639;
+        border: 1px solid #c1c1c1;
+    }
+
+    & .gaming-spine-label {
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+[data-gaming-platform="psp"] {
+    --spine-height: 168;
+    --spine-depth: 14;
+    --game-spine-top-text: #f8f8f8;
+    --game-spine-top-bg: #464a4f;
+
+    & .gaming-spine {
+        border-block: 0.125em solid transparent;
+    }
+
+    & .gaming-spine-logo {
+        background: #f8f8f8;
+    }
+
+    & .gaming-spine-top {
+        gap: 0.5em;
+        padding-block-end: 0.5em;
+    }
+
+    & .gaming-spine-logo-extra {
+        inline-size: 100%;
+    }
+}
+
+[data-gaming-platform="psv"] {
+    --game-case-plastic: #504de5e6;
+    --spine-height: 135;
+    --spine-depth: 12;
+    --game-spine-top-text: #f8f8f8;
+    --game-spine-top-bg: #0054a5;
+
+    & .gaming-spine {
+        border-block: 0.125em solid transparent;
+    }
+}
+
+[data-gaming-platform="dreamcast"] {
+    --game-spine-bg: #3b6fc4;
+    --game-spine-text: #edfcff;
+    --spine-height: 142;
+    --spine-depth: 14;
+
+    & .gaming-spine {
+        text-transform: uppercase;
+        border: 0.125em solid transparent;
+
+        &::before {
+            content: '';
+
+            position: absolute;
+            inset-block: -0.125em;
+            inset-inline-end: -0.125em;
+            inline-size: 80%;
+            z-index: -1;
+
+            border-radius: inherit;
+            background-color: #5581c4;
+        }
+    }
+
+    & .gaming-spine-paper {
+        border-radius: 0.0625em;
+    }
+
+    & .gaming-spine-label {
+        justify-content: center;
+    }
+}
+
+[data-gaming-platform="gameboy"],
+[data-gaming-platform="gameboy-advance"] {
+    --spine-height: 142;
+    --spine-depth: 20;
+}
+
+/* Font overrides */
+[data-gaming-platform="ps1"],
+[data-gaming-platform="dreamcast"] {
+    --spine-font-family: LibreFranklin, 'Libre Franklin', 'Franklin Gothic', var(--spine-font-stack);
+    --spine-font-weight: 800;
+    --spine-letter-spacing: 0.05em;
+}
+
+[data-gaming-platform="ps2"] {
+    --spine-font-family: var(--spine-font-stack);
+}
+
+@font-face {
+    font-family: LibreFranklin;
+    font-weight: 800;
+    font-style: normal;
+    src: local(LibreFranklin), local('Libre Franklin'), url(/assets/fonts/LibreFranklin-ExtraBold.woff2);
+    font-display: swap;
+}
