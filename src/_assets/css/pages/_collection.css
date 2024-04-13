@@ -46,6 +46,13 @@
         0px 0.9px 0.7px -1.7px hsl(0deg 0% 0% / 0.25),
         0px 3.9px 2.9px -3.3px hsl(0deg 0% 0% / 0.16),
         0px 12px 9px -5px hsl(0deg 0% 0% / 0.08);
+
+    will-change: transform;
+    transition: transform var(--anim-short) var(--easing-in-out);
+
+    &:hover {
+        transform: scale(1.025);
+    }
 }
 
 .gaming-spine-paper {
