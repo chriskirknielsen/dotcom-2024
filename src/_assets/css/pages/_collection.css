@@ -48,10 +48,18 @@
         0px 12px 9px -5px hsl(0deg 0% 0% / 0.08);
 
     will-change: transform;
+    transform-origin: 50% 100%;
     transition: transform var(--anim-short) var(--easing-in-out);
 
+    /* Scale up the hovered item */
     &:hover {
         transform: scale(1.025);
+    }
+
+    /* Previous and next games slightly scale up */
+    &:has(+ &:hover),
+    &:hover + & {
+        transform: scale(1.0125);
     }
 }
 
