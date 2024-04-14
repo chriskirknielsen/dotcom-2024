@@ -4,7 +4,7 @@ import notionDatabaseQuery from '../../config/utils/notion-db.js';
 export default notionDatabaseQuery({
 	databaseId: process.env.NOTION_DATABASE_ID_LUDOTHEQUE,
 	label: 'gamescollection.js',
-	propsToUse: ['Title', 'Sort Title', 'Edition', 'Platform', 'Year', 'Sub-item'],
+	propsToUse: ['Title', 'Sort Title', 'Edition', 'Platform', 'Format', 'Discs', 'Year', 'Sub-item'],
 	filter: {
 		and: [
 			{
@@ -45,6 +45,8 @@ export default notionDatabaseQuery({
 			sortTitle: props['Sort Title'].rich_text.map((textBlock) => textBlock.plain_text).join(''),
 			edition: props.Edition.rich_text.map((textBlock) => textBlock.plain_text).join(''),
 			platform: props.Platform.select?.name,
+			format: props.Format.select?.name,
+			discs: props.Discs.number || null,
 			year: props.Year.number || null,
 			subItems: props['Sub-item'].relation || [],
 		};

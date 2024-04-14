@@ -1,3 +1,18 @@
+[data-games-toggled] {
+    & > span {
+        display: inline-block;
+        inline-size: 1em;
+    }
+
+    &:not([data-games-toggled="true"]) > span::before {
+        content: '►';
+    }
+
+    &[data-games-toggled="true"] > span::before {
+        content: '▼';
+    }
+}
+
 .gaming-platform-toggle {
     --CTA-display: flex;
 }
@@ -89,7 +104,8 @@
 }
 
 .gaming-spine-logo,
-.gaming-spine-logo-extra {
+.gaming-spine-logo-extra,
+.gaming-spine-info-icon {
     margin-inline: auto;
 }
 
@@ -101,7 +117,7 @@
     align-items: center;
     margin: var(--spine-paper-padding, 0.25em);
 
-    font-size: calc(0.75em * var(--spine-title-scale));
+    font-size: calc(0.75em * var(--spine-title-scale) * var(--spine-title-scale));
 
     /* Place the text itself in an absolute container, so the writing mode doesn't affect the layout (buggy in Firefox and Safari) */
     & > span {
@@ -118,6 +134,19 @@
         letter-spacing: var(--spine-letter-spacing);
         line-height: 0.9;
     }
+}
+
+.gaming-spine-info {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    padding: var(--spine-paper-padding, 0.25em);
+}
+
+.gaming-spine-info-icon {
+    max-inline-size: min(75%, 1em);
+
+    opacity: 0.5;
 }
 
 [data-gaming-platform="ps5"],

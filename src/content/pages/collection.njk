@@ -19,8 +19,13 @@ platformLabels: {
 
 {% renderTemplate "md" %}Drawing _a little_ inspiration from [Robb Knight's list](https://rknight.me/collections/games/) (although I took the easy route with the spines instead of cover art…), here's my (mostly accurate) collection of video games (many of which are collecting something of their own: dust!), though some are digital versions.{% endrenderTemplate %}
 
+<hr>
+
 <div class="grouper grouper--toolbar" data-formlike>
-    <button type="button" class="button" data-games-toggle>Toggle All</button>
+    <button type="button" class="button" data-games-toggled>
+        <span aria-hidden="true"></span>
+        Toggle All
+    </button>
     
     <div>
         <label for="spine-sizing" class="fontWeight-bold">Size:</label>
@@ -118,6 +123,20 @@ platformLabels: {
                             {% endif %}
                         </div>
                         <div class="gaming-spine-label" style="--spine-title-scale: {{ game.title | sizeFactor }}"><span>{{ game.title | replace("'", '’') }}</span></div>
+                        {% if not game.discs %}
+                            <div class="gaming-spine-info | tooltip" data-tooltip-pos="end center">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24 "
+                                    class="gaming-spine-info-icon"
+                                    aria-hidden="true"
+                                ><use xlink:href="#icon-no-disc"></use></svg>
+                                <span class="tooltip-content">Digital</span>
+                            </div>
+                        {% endif %}
                         {# {% if game.year %} ({{ game.year }}){% endif %} #}
                         {# {% if game.edition and game.edition != game.title %}— {{ game.edition }}{% endif %} #}
                         {# {% if (game.subItems | length) > 0 %} (includes {{ game.subItems | length }} games){% endif %} #}
@@ -129,13 +148,15 @@ platformLabels: {
 {% endfor %}
 {# <textarea>{{ glyphList.split('') | unique | join }}</textarea> #}
 
+{% svg 'no-disc', { class: 'visually-hidden' } %}
+
 <script>
 const eachDom = (s, fn) => Array.from(document.querySelectorAll(s)).forEach(fn);
 document.addEventListener('click', function(e) {
-    const toggleAll = e.target.closest('[data-games-toggle]');
+    const toggleAll = e.target.closest('[data-games-toggled]');
     if (!toggleAll) { return; }
-    toggleAll.dataset.open = String(toggleAll.dataset.open !== 'true');
-    eachDom('details', (d) => d.open = toggleAll.dataset.open === 'true');
+    toggleAll.dataset.gamesToggled = String(toggleAll.dataset.gamesToggled !== 'true');
+    eachDom('details', (d) => d.open = toggleAll.dataset.gamesToggled === 'true');
 });
 document.addEventListener('change', function(e) {
     const select = e.target.closest('[data-games-sizing]');

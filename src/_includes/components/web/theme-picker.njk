@@ -26,7 +26,7 @@
 			</span>
 			{% for theme in groupedthemes %}
 				<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}">
-					<button class="tooltip-anchor | button button--icon" data-theme-set="{{ theme.key }}" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-{{ theme.key }}-description">
+					<button class="button button--icon" data-theme-set="{{ theme.key }}" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-{{ theme.key }}-description">
 						{% svg "theme-"+theme.key %}
 					</button>
 					<span class="tooltip-content" id="theme-picker-{{ theme.key }}-description">
