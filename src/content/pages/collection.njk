@@ -5,12 +5,21 @@ permalink: /games/library/
 section: games
 autoHeadingAnchors: true
 heroCta: [{ label: "/games", url: "/games" }]
-platformLabels: { 'PS5': 'PlayStation 5', 'PS4': 'PlayStation 4', 'PS3': 'PlayStation 3', 'PS2': 'PlayStation 2', 'PS1': 'PlayStation', 'PSV': 'PS Vita', 'PSP': 'PlayStation Portable', 'Dreamcast': 'Dreamcast' }
+platformLabels: {
+    'PS5': 'PlayStation 5',
+    'PS4': 'PlayStation 4',
+    'PS3': 'PlayStation 3',
+    'PS2': 'PlayStation 2',
+    'PS1': 'PlayStation',
+    'PSV': 'PS Vita',
+    'PSP': 'PlayStation Portable',
+    'Dreamcast': 'Dreamcast'
+}
 ---
 
 {% renderTemplate "md" %}Drawing _a little_ inspiration from [Robb Knight's list](https://rknight.me/collections/games/) (although I took the easy route with the spines instead of cover art…), here's my (mostly accurate) collection of video games (many of which are collecting something of their own: dust!), though some are digital versions.{% endrenderTemplate %}
 
-{% set glyphList = '' %}
+{# {% set glyphList = '' %} #}
 {% for platform, games in gamescollection | groupby('platform') | dictsort | sortentries(platformLabels | keys) %}
     {% set platformSlug = platform | lower | replace(' ', '-') %}
     {% setAsync "expanderLabel" %}
@@ -25,7 +34,7 @@ platformLabels: { 'PS5': 'PlayStation 5', 'PS4': 'PlayStation 4', 'PS3': 'PlaySt
                     {% if game.edition in ['Essentials', 'Platinum'] %}data-gaming-edition="{{ game.edition | lower | replace(' ', '-') }}"{% endif %}
                     {% if platformSlug == 'ps3' %}data-gaming-branding="{{ 'old' if game.year < 2009 else 'new' }}"{% endif %}
                 >
-                    {% set glyphList = [glyphList, game.title] | join %}
+                    {# {% set glyphList = [glyphList, game.title] | join %} #}
                     <div class="gaming-spine-paper">
                         <div class="gaming-spine-top">
                             {% if platformSlug == 'ps3' %}
@@ -95,7 +104,7 @@ platformLabels: { 'PS5': 'PlayStation 5', 'PS4': 'PlayStation 4', 'PS3': 'PlaySt
                                 {% endif %}
                             {% endif %}
                         </div>
-                        <div class="gaming-spine-label">{{ game.title | replace("'", '’') }}</div>
+                        <div class="gaming-spine-label" style="--spine-title-scale: {{ game.title | sizeFactor }}"><span>{{ game.title | replace("'", '’') }}</span></div>
                         {# {% if game.year %} ({{ game.year }}){% endif %} #}
                         {# {% if game.edition and game.edition != game.title %}— {{ game.edition }}{% endif %} #}
                         {# {% if (game.subItems | length) > 0 %} (includes {{ game.subItems | length }} games){% endif %} #}

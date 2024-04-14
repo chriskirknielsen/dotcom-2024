@@ -91,15 +91,25 @@
     flex: 1 0 0;
     display: flex;
     align-items: center;
-    padding: var(--spine-paper-padding, 0.25em);
+    margin: var(--spine-paper-padding, 0.25em);
 
-    writing-mode: vertical-rl;
-    text-wrap: balance;
-    font-family: var(--spine-font-family);
-    font-weight: var(--spine-font-weight);
-    letter-spacing: var(--spine-letter-spacing);
-    font-size: 0.75em;
-    line-height: 0.9;
+    font-size: calc(0.75em * var(--spine-title-scale));
+
+    /* Place the text itself in an absolute container, so the writing mode doesn't affect the layout (buggy in Firefox and Safari) */
+    & > span {
+        position: absolute;
+        inset: 0;
+
+        display: flex;
+        align-items: center;
+
+        writing-mode: vertical-rl;
+        text-wrap: balance;
+        font-family: var(--spine-font-family);
+        font-weight: var(--spine-font-weight);
+        letter-spacing: var(--spine-letter-spacing);
+        line-height: 0.9;
+    }
 }
 
 [data-gaming-platform="ps5"],
@@ -234,11 +244,6 @@
         background: #333639;
         border: 1px solid #c1c1c1;
     }
-
-    & .gaming-spine-label {
-        justify-content: center;
-        text-align: center;
-    }
 }
 
 [data-gaming-platform="psp"] {
@@ -304,10 +309,6 @@
     & .gaming-spine-paper {
         border-radius: 0.0625em;
     }
-
-    & .gaming-spine-label {
-        justify-content: center;
-    }
 }
 
 [data-gaming-platform="gameboy"],
@@ -322,6 +323,11 @@
     --spine-font-family: LibreFranklin, 'Libre Franklin', 'Franklin Gothic', var(--spine-font-stack);
     --spine-font-weight: 800;
     --spine-letter-spacing: 0.05em;
+
+    & .gaming-spine-label > span {
+        justify-content: center;
+        text-align: center;
+    }
 }
 
 [data-gaming-platform="ps2"] {
