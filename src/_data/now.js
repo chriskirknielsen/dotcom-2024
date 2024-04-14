@@ -1,6 +1,5 @@
 import 'dotenv/config';
-import { AssetCache } from '@11ty/eleventy-fetch';
-import { Client as NotionClient } from '@notionhq/client';
+import notionDatabaseQuery from '../../config/utils/notion-db.js';
 
 /**
  * Group an array of objects by a property.
@@ -54,84 +53,23 @@ function richTextBlockToMd(block) {
 	return mdString;
 }
 
-export default async function () {
-	// Set up Notion stuff
-	const notionClient = new NotionClient({ auth: process.env.NOTION_BEARER_TOKEN });
-	const nowDatabaseId = process.env.NOTION_DATABASE_ID_NOW;
-
-	// Initialise the asset caches
-	const dbInfoCache = new AssetCache('now_database_last_edit');
-	const dbDataCache = new AssetCache('now_database_content');
-
-	// Local dev: allow complete bypass
-	const LOCAL_DEV_SKIP_NOW_CACHE = process?.env?.LOCAL_DEV_SKIP_NOW_CACHE ? [true, 'true'].includes(process.env.LOCAL_DEV_SKIP_NOW_CACHE) : false;
-	if (LOCAL_DEV_SKIP_NOW_CACHE) {
-		console.log('now.js: Skipping data pull for local development.');
-	}
-
-	// Grab the database's latest info (not the content, just metadata about it)
-	const dbInfo =
-		!LOCAL_DEV_SKIP_NOW_CACHE && dbInfoCache.cachedObject
-			? { last_edited_time: await dbInfoCache.getCachedContents('text') }
-			: await notionClient.databases.retrieve({
-					database_id: nowDatabaseId,
-			  });
-
-	// Determine when the DB was last edited, or created
-	const dbLastEdit = dbInfo.last_edited_time || dbInfo.created_time || '';
-
-	// Check if there is a cache object for the value we're after
-	const isCachePresent = !LOCAL_DEV_SKIP_NOW_CACHE && dbInfoCache.cachedObject && dbDataCache.cachedObject;
-
-	if (isCachePresent) {
-		// Get the last cached value for the DB info
-		const cacheLastEdit = (await dbInfoCache.getCachedContents('text')) || null;
-
-		// If the cached last edit matches the live last edit, return the cached DB contents and stop here
-		if (dbLastEdit === cacheLastEdit) {
-			const dbCache = await dbDataCache.getCachedContents('json');
-			console.log('now.js: Found and reused cached data.');
-			return dbCache;
-		}
-	}
-
-	console.log('now.js: No cached data, fetching latest data.');
-
-	// If this has changed, save the new last edit date value
-	dbInfoCache.save(dbLastEdit, 'text');
-
-	// Based on the DB info, build a list of the IDs for the properties needed for the Now page based on their name
-	const databaseProps = dbInfo.properties;
-	const propsToUse = ['title', 'detail', 'blurb', 'category', 'link', 'image'];
-	let propsById = [];
-	for (let p in databaseProps) {
-		if (propsToUse.includes(p)) {
-			propsById.push(databaseProps[p].id);
-		}
-	}
-
-	// Grab the results from the database
-	const dbData = await notionClient.databases
-		.query({
-			database_id: nowDatabaseId,
-			filter_properties: propsById,
-			filter: {
-				and: [
-					{
-						property: 'category',
-						select: { is_not_empty: true },
-					},
-					{
-						property: 'archived',
-						checkbox: { equals: false },
-					},
-				],
+export default notionDatabaseQuery({
+	databaseId: process.env.NOTION_DATABASE_ID_NOW,
+	label: 'now.js',
+	propsToUse: ['title', 'detail', 'blurb', 'category', 'link', 'image'],
+	filter: {
+		and: [
+			{
+				property: 'category',
+				select: { is_not_empty: true },
 			},
-		})
-		.then((data) => data.results);
-
-	// Only keep useful data
-	const dbDataCleaned = dbData.map((entry) => {
+			{
+				property: 'archived',
+				checkbox: { equals: false },
+			},
+		],
+	},
+	entryPostProcess: (entry) => {
 		const props = entry.properties;
 
 		return {
@@ -142,14 +80,6 @@ export default async function () {
 			link: props.link.url,
 			image: props.image.files.length > 0 ? (props.image.files[0].type === 'external' ? props.image.files[0].external.url : props.image.files[0].file.url) : null,
 		};
-	});
-
-	// Group the data by category
-	const dbDataGrouped = groupBy(dbDataCleaned, 'category');
-
-	// Save the data in the cache
-	dbDataCache.save(dbDataGrouped, 'json');
-
-	// And finally, return the data
-	return dbDataGrouped;
-}
+	},
+	dataPostProcess: (data) => groupBy(data, 'category'),
+});
