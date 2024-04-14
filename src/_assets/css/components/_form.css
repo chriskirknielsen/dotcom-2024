@@ -15,11 +15,17 @@
     }
 }
 
-:is(form, [data-formlike]) :is(input, select, textarea) {
+:is(form, [data-formlike]) :is(input, select, textarea, select) {
     padding: var(--size-2xs) var(--size-s);
 
-    border: 1px solid currentColor;
+    color: var(--_cta-text-color);
+    border: 1px solid var(--_cta-border-color);
     border-radius: var(--_corner);
+    background: var(--_cta-bg-color);
+
+    &:focus {
+        border-color: var(--_cta-border-color-active);
+    }
 
     &:disabled {
         cursor: not-allowed;

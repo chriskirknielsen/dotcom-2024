@@ -10,3 +10,9 @@
 .grouper--vertical {
     flex-direction: column;
 }
+
+.grouper--toolbar {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+}
