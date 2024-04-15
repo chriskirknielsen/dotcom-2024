@@ -144,7 +144,7 @@
 }
 
 .gaming-spine-info-icon {
-    max-inline-size: min(75%, 1em);
+    max-inline-size: min(50%, 0.75em);
 
     opacity: 0.5;
 }
@@ -261,8 +261,6 @@
     --spine-paper-gap: 1em;
 
     & .gaming-spine {
-        text-transform: uppercase;
-
         border-block: 0.25em solid transparent;
 
         &[data-gaming-edition="platinum"] {
@@ -326,7 +324,6 @@
     --spine-depth: 14;
 
     & .gaming-spine {
-        text-transform: uppercase;
         border: 0.125em solid transparent;
 
         &::before {
@@ -364,6 +361,7 @@
     & .gaming-spine-label > span {
         justify-content: center;
         text-align: center;
+        text-transform: uppercase;
     }
 }
 
