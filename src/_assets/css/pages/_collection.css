@@ -376,3 +376,42 @@
     src: local(LibreFranklin), local('Libre Franklin'), url(/assets/fonts/LibreFranklin-ExtraBold.woff2);
     font-display: swap;
 }
+
+.gaming-details-dialog {
+    position: fixed;
+    inset: 0;
+
+    min-inline-size: 50vw;
+    max-inline-size: min(99%, 90vw);
+    margin: auto;
+
+    color: var(--C-text);
+    border: 2px solid var(--C-text);
+    border-radius: var(--_corner);
+    background: var(--C-surface);
+
+    &:not([open]) {
+        display: none;
+    }
+}
+
+.gaming-details-dialog-content {
+    position: relative;
+
+    padding: var(--size-2xl);
+}
+
+:root:has(dialog[open]) {
+    scrollbar-gutter: stable;
+    overflow: hidden;
+}
+
+::backdrop {
+    background: #000a
+}
+
+.gaming-details-dialog-close {
+    position: absolute;
+    inset: var(--size-s) var(--size-s) auto auto;
+    z-index: 1;
+}

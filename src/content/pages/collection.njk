@@ -3,7 +3,6 @@ title: Gaming Library
 summary: Dang, I've played a lot of games, eh?
 permalink: /games/library/
 section: games
-autoHeadingAnchors: true
 heroCta: [{ label: "/games", url: "/games" }]
 platformLabels: {
     'PS5': 'PlayStation 5',
@@ -17,7 +16,7 @@ platformLabels: {
 }
 ---
 
-{% renderTemplate "md" %}Drawing _a little_ inspiration from [Robb Knight's list](https://rknight.me/collections/games/) (although I took the easy route with the spines instead of cover art…), here's my (mostly accurate) collection of video games (many of which are collecting something of their own: dust!), though some are digital versions.{% endrenderTemplate %}
+{% renderTemplate "md" %}Drawing _a little_ inspiration from [Robb Knight's list](https://rknight.me/collections/games/) (although I took the easy route with the spines instead of cover art…), here's my (mostly accurate) collection of video games (many of which are collecting something of their own: dust!).{% endrenderTemplate %}
 
 <hr>
 
@@ -51,6 +50,7 @@ platformLabels: {
                     class="gaming-spine"
                     {% if game.edition in ['Essentials', 'Platinum'] %}data-gaming-edition="{{ game.edition | lower | replace(' ', '-') }}"{% endif %}
                     {% if platformSlug == 'ps3' %}data-gaming-branding="{{ 'old' if game.year < 2009 else 'new' }}"{% endif %}
+                    data-game="{{ game | dump | escape }}"
                 >
                     {# {% set glyphList = [glyphList, game.title] | join %} #}
                     <div class="gaming-spine-paper">
@@ -123,20 +123,6 @@ platformLabels: {
                             {% endif %}
                         </div>
                         <div class="gaming-spine-label" style="--spine-title-scale: {{ game.title | sizeFactor }}"><span>{{ game.title | replace("'", '’') }}</span></div>
-                        {% if not game.discs %}
-                            <div class="gaming-spine-info | tooltip" data-tooltip-pos="end center">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24 "
-                                    class="gaming-spine-info-icon"
-                                    aria-hidden="true"
-                                ><use xlink:href="#icon-no-disc"></use></svg>
-                                <span class="tooltip-content">Digital</span>
-                            </div>
-                        {% endif %}
                         {# {% if game.year %} ({{ game.year }}){% endif %} #}
                         {# {% if game.edition and game.edition != game.title %}— {{ game.edition }}{% endif %} #}
                         {# {% if (game.subItems | length) > 0 %} (includes {{ game.subItems | length }} games){% endif %} #}
@@ -149,14 +135,90 @@ platformLabels: {
 {# <textarea>{{ glyphList.split('') | unique | join }}</textarea> #}
 
 {% svg 'no-disc', { class: 'visually-hidden' } %}
+<template id="gaming-details-dialog-template">
+    <div class="gaming-details-dialog-content">
+        {% component "cta", {
+            icon: 'close',
+            label: { aria: 'Close' },
+            ctaClass: 'gaming-details-dialog-close',
+            ctaAttr: 'data-hide-game-info'
+        } %}
+        <div class="flow" style="--flow-space: var(--size-s);">
+            <h2>
+                <span data-slot="title"></span>
+                <span data-slot="year" class="font-reset fontSize-small" hidden></span>
+            </h2>
 
-<script>
+            <p data-slot="edition" class="fontStyle-italic" style="--flow-space: var(--size-2xs);" hidden></p>
+            <p>
+                <strong>Region:</strong>
+                <span data-slot="region"></span>
+            </p>
+            
+            <p>
+                <strong>Platform:</strong>
+                <span data-slot="platform"></span>
+                (<span data-slot="format"></span>)
+            </p>
+            <p data-slot="subItems" hidden></p>
+        </div>
+    </div>
+</template>
+<dialog id="gaming-details-dialog" class="gaming-details-dialog"></dialog>
+
+{% js "foot-gamescollection" %}
 const eachDom = (s, fn) => Array.from(document.querySelectorAll(s)).forEach(fn);
+document.addEventListener('DOMContentLoaded', function(e) {
+    eachDom('.gaming-spine-label', (spine) => {
+        const button = document.createElement('button')
+        spine.getAttributeNames().forEach(attr => button.setAttribute(attr, spine.getAttribute(attr)));
+        button.type = 'button';
+        button.classList.add('button-reset');
+        button.innerHTML = spine.innerHTML;
+        spine.replaceWith(button);
+    });
+});
 document.addEventListener('click', function(e) {
-    const toggleAll = e.target.closest('[data-games-toggled]');
-    if (!toggleAll) { return; }
-    toggleAll.dataset.gamesToggled = String(toggleAll.dataset.gamesToggled !== 'true');
-    eachDom('details', (d) => d.open = toggleAll.dataset.gamesToggled === 'true');
+    let target;
+    if ((target = e.target.closest('[data-games-toggled]'))) {
+        target.dataset.gamesToggled = String(target.dataset.gamesToggled !== 'true');
+        eachDom('details', (d) => d.open = target.dataset.gamesToggled === 'true');
+    } else if ((target = e.target.closest('.gaming-spine-label'))) {
+        const gameData = JSON.parse(target.closest('[data-game]').getAttribute('data-game'));
+        const dialog = document.getElementById('gaming-details-dialog');
+        const template = document.getElementById('gaming-details-dialog-template');
+        const clone = template.content.cloneNode(true);
+        
+        clone.querySelector('[data-slot="title"]').innerText = gameData.title;
+
+        clone.querySelector('[data-slot="year"]').hidden = !gameData.year;
+        clone.querySelector('[data-slot="year"]').innerText = '('+gameData.year+')';
+        
+        clone.querySelector('[data-slot="edition"]').hidden = !gameData.edition;
+        clone.querySelector('[data-slot="edition"]').innerText = gameData.edition;
+
+        clone.querySelector('[data-slot="region"]').innerText = gameData.region;
+
+        clone.querySelector('[data-slot="platform"]').innerText = gameData.platform;
+        clone.querySelector('[data-slot="format"]').innerText = !gameData.discs ? 'digital' : (gameData.discs > 1 ? `${gameData.discs} discs` : 'disc');
+
+        clone.querySelector('[data-slot="subItems"]').hidden = gameData.subItems.length === 0;
+        clone.querySelector('[data-slot="subItems"]').innerText = gameData.subItems ? `Includes ${gameData.subItems.length} games` : '';
+
+        Array.from(dialog.childNodes).forEach(el => el.remove());
+        dialog.append(clone);
+        try {
+            dialog.showModal();
+        } catch (error) {
+            dialog.setAttribute('open','');
+        }
+    } else if ((target = e.target.closest('[data-hide-game-info]'))) {
+        try {
+            target.closest('dialog').close();
+        } catch (error) {
+            dialog.removeAttribute('open');
+        }
+    }
 });
 document.addEventListener('change', function(e) {
     const select = e.target.closest('[data-games-sizing]');
@@ -165,4 +227,4 @@ document.addEventListener('change', function(e) {
     const sizeMap = { sm: '0.75em', md: '1em', lg: '1.25em' };
     eachDom('[data-gaming-platform]', (g) => g.style.fontSize = sizeMap[selectedValue]);
 });
-</script>
+{% endjs %}

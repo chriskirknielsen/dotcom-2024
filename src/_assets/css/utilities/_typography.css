@@ -1,3 +1,11 @@
+.font-reset {
+    font: initial;
+    font-family: var(--_font-body-family);
+    font-size: var(--typeScale-0);
+    letter-spacing: normal;
+    color: var(--C-text);
+}
+
 /** Absolute font sizes */
 .fontSize-tiny {
     font-size: var(--typeScale-n2);
