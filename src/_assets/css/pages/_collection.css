@@ -258,7 +258,6 @@
     --game-spine-bg: #333639;
     --spine-height: 142;
     --spine-depth: 15;
-    --spine-paper-gap: 1em;
 
     & .gaming-spine {
         border-block: 0.25em solid transparent;
@@ -384,6 +383,8 @@
     min-inline-size: 50vw;
     max-inline-size: min(99%, 90vw);
     margin: auto;
+    padding: var(--size-m);
+    overflow: auto;
 
     color: var(--C-text);
     border: 2px solid var(--C-text);
@@ -395,23 +396,26 @@
     }
 }
 
-.gaming-details-dialog-content {
-    position: relative;
-
-    padding: var(--size-2xl);
-}
-
 :root:has(dialog[open]) {
     scrollbar-gutter: stable;
     overflow: hidden;
 }
 
 ::backdrop {
-    background: #000a
+    background: #000a;
 }
 
 .gaming-details-dialog-close {
-    position: absolute;
-    inset: var(--size-s) var(--size-s) auto auto;
+    position: sticky;
+    inset: 0 0 auto auto;
     z-index: 1;
+
+    align-self: flex-start;
+}
+
+.gaming-details-dialog input[type="checkbox"] {
+    block-size: 1em;
+    inline-size: 1em;
+
+    accent-color: var(--C-accent);
 }

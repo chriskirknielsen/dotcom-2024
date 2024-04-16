@@ -1,6 +1,6 @@
 .container {
 	--content-width: min(100%, var(--layout-max-content));
-	--content-cols: 5;
+	/* --content-cols: 5; */
 	--content-subcol: calc((var(--content-width) - var(--layout-gutter) * (var(--content-cols) - 1)) / var(--content-cols));
 	--content-subcol-minmax: minmax(0, var(--content-subcol));
 	--content-subcol-minmax--minus-gutter-half: minmax(0, calc((var(--content-subcol) - var(--layout-gutter)) / 2));

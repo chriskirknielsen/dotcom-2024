@@ -20,7 +20,7 @@ platformLabels: {
 
 <hr>
 
-<div class="grouper grouper--toolbar" data-formlike>
+<div class="grouper grouper--wrap grouper--toolbar" data-formlike>
     <button type="button" class="button" data-games-toggled>
         <span aria-hidden="true"></span>
         Toggle All
@@ -136,95 +136,61 @@ platformLabels: {
 
 {% svg 'no-disc', { class: 'visually-hidden' } %}
 <template id="gaming-details-dialog-template">
-    <div class="gaming-details-dialog-content">
-        {% component "cta", {
-            icon: 'close',
-            label: { aria: 'Close' },
-            ctaClass: 'gaming-details-dialog-close',
-            ctaAttr: 'data-hide-game-info'
-        } %}
-        <div class="flow" style="--flow-space: var(--size-s);">
+    <div class="flow" style="--flow-space: var(--size-s);">
+        <div class="grouper grouper--toolbar">
             <h2>
                 <span data-slot="title"></span>
-                <span data-slot="year" class="font-reset fontSize-small" hidden></span>
+                <span data-slot-show="year" class="font-reset fontSize-small">(<span data-slot="year"></span>)</span>
             </h2>
 
-            <p data-slot="edition" class="fontStyle-italic" style="--flow-space: var(--size-2xs);" hidden></p>
-            <p>
-                <strong>Region:</strong>
-                <span data-slot="region"></span>
-            </p>
-            
-            <p>
-                <strong>Platform:</strong>
-                <span data-slot="platform"></span>
-                (<span data-slot="format"></span>)
-            </p>
-            <p data-slot="subItems" hidden></p>
+            {% component "cta", {
+                icon: 'close',
+                label: { aria: 'Close' },
+                ctaClass: 'gaming-details-dialog-close',
+                ctaAttr: 'data-hide-game-info autofocus'
+            } %}
         </div>
+        <p data-slot="edition" class="fontStyle-italic" style="--flow-space: var(--size-2xs);" hidden></p>
+
+        <dl>
+            <dt class="grouper grouper--icon-text-pair">
+                {% svg 'world', { class: 'inline-icon' } %}
+                <span>Region:</span>
+            </dt>
+            <dd data-slot="region"></dd>
+            
+            <dt class="grouper grouper--icon-text-pair">
+                {% svg 'controller', { class: 'inline-icon linecap-auto' } %}
+                <span>Platform:</span>
+            </dt>
+            <dd>
+                <span data-slot="platform"></span>
+                (<span data-slot-computed="format"></span>)
+            </dd>
+
+            <dt data-slot-show="dlc" class="grouper grouper--icon-text-pair">
+                {% svg 'added', { class: 'inline-icon linecap-auto' } %}
+                <span>DLC:</span>
+            </dt>
+            <dd data-slot="dlc"></dd>
+
+            <dt class="grouper grouper--icon-text-pair">
+                {% svg 'checkbox', { class: 'inline-icon linecap-auto' } %}
+                <span>Completed:</span>
+            </dt>
+            <dd>
+                <input type="checkbox" aria-hidden="true" data-slot-checkbox="completed">
+                <span class="visually-hidden" data-slot-computed="completed"></span>
+            </dd>
+
+            <dt data-slot-show="subItems" class="grouper grouper--icon-text-pair">
+                {% svg 'folder', { class: 'inline-icon linecap-auto' } %}
+                <span>Includes:</span>
+            </dt>
+            <dd data-slot-show="subItems" data-slot-computed="subItems"></dd>
+        </dl>
     </div>
 </template>
 <dialog id="gaming-details-dialog" class="gaming-details-dialog"></dialog>
 
-{% js "foot-gamescollection" %}
-const eachDom = (s, fn) => Array.from(document.querySelectorAll(s)).forEach(fn);
-document.addEventListener('DOMContentLoaded', function(e) {
-    eachDom('.gaming-spine-label', (spine) => {
-        const button = document.createElement('button')
-        spine.getAttributeNames().forEach(attr => button.setAttribute(attr, spine.getAttribute(attr)));
-        button.type = 'button';
-        button.classList.add('button-reset');
-        button.innerHTML = spine.innerHTML;
-        spine.replaceWith(button);
-    });
-});
-document.addEventListener('click', function(e) {
-    let target;
-    if ((target = e.target.closest('[data-games-toggled]'))) {
-        target.dataset.gamesToggled = String(target.dataset.gamesToggled !== 'true');
-        eachDom('details', (d) => d.open = target.dataset.gamesToggled === 'true');
-    } else if ((target = e.target.closest('.gaming-spine-label'))) {
-        const gameData = JSON.parse(target.closest('[data-game]').getAttribute('data-game'));
-        const dialog = document.getElementById('gaming-details-dialog');
-        const template = document.getElementById('gaming-details-dialog-template');
-        const clone = template.content.cloneNode(true);
-        
-        clone.querySelector('[data-slot="title"]').innerText = gameData.title;
-
-        clone.querySelector('[data-slot="year"]').hidden = !gameData.year;
-        clone.querySelector('[data-slot="year"]').innerText = '('+gameData.year+')';
-        
-        clone.querySelector('[data-slot="edition"]').hidden = !gameData.edition;
-        clone.querySelector('[data-slot="edition"]').innerText = gameData.edition;
-
-        clone.querySelector('[data-slot="region"]').innerText = gameData.region;
-
-        clone.querySelector('[data-slot="platform"]').innerText = gameData.platform;
-        clone.querySelector('[data-slot="format"]').innerText = !gameData.discs ? 'digital' : (gameData.discs > 1 ? `${gameData.discs} discs` : 'disc');
-
-        clone.querySelector('[data-slot="subItems"]').hidden = gameData.subItems.length === 0;
-        clone.querySelector('[data-slot="subItems"]').innerText = gameData.subItems ? `Includes ${gameData.subItems.length} games` : '';
-
-        Array.from(dialog.childNodes).forEach(el => el.remove());
-        dialog.append(clone);
-        try {
-            dialog.showModal();
-        } catch (error) {
-            dialog.setAttribute('open','');
-        }
-    } else if ((target = e.target.closest('[data-hide-game-info]'))) {
-        try {
-            target.closest('dialog').close();
-        } catch (error) {
-            dialog.removeAttribute('open');
-        }
-    }
-});
-document.addEventListener('change', function(e) {
-    const select = e.target.closest('[data-games-sizing]');
-    if (!select) { return; }
-    const selectedValue = select.value || 'md';
-    const sizeMap = { sm: '0.75em', md: '1em', lg: '1.25em' };
-    eachDom('[data-gaming-platform]', (g) => g.style.fontSize = sizeMap[selectedValue]);
-});
-{% endjs %}
+{% js "foot-gamescollection" %}{% include "assets/js/gaming-library.js" %}{% endjs %}

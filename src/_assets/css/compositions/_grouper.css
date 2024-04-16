@@ -12,7 +12,17 @@
 }
 
 .grouper--toolbar {
-    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: stretch;
+    align-items: baseline;
+}
+
+.grouper--icon-text-pair {
+    align-items: center;
+
+    & > svg {
+        flex: 0 0 auto;
+        align-self: initial;
+    }
+
+    /* & > :is(p, span) {align-self: baseline;} */
 }

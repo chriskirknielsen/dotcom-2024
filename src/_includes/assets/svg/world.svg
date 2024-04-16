@@ -1,0 +1,24 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+>
+    <circle
+        cx="12"
+        cy="12"
+        r="10"
+    />
+    <path d="M21.136 7.932c-2.53.648-5.698 1.034-9.136 1.034S5.394 8.58 2.864 7.932m.001 8.136c2.53-.648 5.697-1.034 9.135-1.034s6.607.386 9.137 1.035" />
+    <ellipse
+        cx="12"
+        cy="12"
+        rx="3.773"
+        ry="10"
+    />
+</svg>
