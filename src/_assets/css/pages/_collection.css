@@ -419,3 +419,15 @@
 
     accent-color: var(--C-accent);
 }
+
+[data-sub-game-completed] {
+    padding-inline-start: 0.5em;
+}
+
+[data-sub-game-completed='false']::marker {
+    content: '⬜️';
+}
+
+[data-sub-game-completed='true']::marker {
+    content: '☑️';
+}

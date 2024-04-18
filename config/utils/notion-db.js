@@ -2,6 +2,17 @@ import 'dotenv/config';
 import { AssetCache } from '@11ty/eleventy-fetch';
 import { Client as NotionClient } from '@notionhq/client';
 
+/**
+ *
+ * @param {object} queryConfig The configuration for the database call and data processing.
+ * @param {string} queryConfig.databaseId The unique ID for the database to query.
+ * @param {string} [queryConfig.label] Optional. Custom label to assign to the query, used for cache key generation and identification in logs. Defaults to the database ID.
+ * @param {string[]} [queryConfig.propsToUse] Optional. List of properties to retrieve for each item in the database. Defaults to `['Title']`.
+ * @param {object} [queryConfig.filter] Optional. Structured filtering to restrict which results are returned from the database. Defaults to an empty object to load all items. @see https://developers.notion.com/reference/post-database-query-filter
+ * @param {function} [queryConfig.entryPostProcess] Optional. Function to run on each item retrieved from the database. Defaults to unprocessed items by default.
+ * @param {function} [queryConfig.dataPostProcess] Optional. Function to run on all of the items at once after they have been run with `entryPostProcess` if provided. Defaults to unprocessed data by default.
+ * @returns {object[]} List of results.
+ */
 export default async function (queryConfig) {
 	const databaseId = queryConfig.databaseId;
 	const label = queryConfig.label || databaseId;

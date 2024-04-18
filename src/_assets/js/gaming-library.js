@@ -39,10 +39,16 @@ document.addEventListener('click', function (e) {
 		});
 
 		clone.querySelector('[data-slot-computed="format"]').innerText = !gameData.discs ? 'digital' : gameData.discs > 1 ? `${gameData.discs} discs` : 'disc';
-		clone.querySelector('[data-slot-checkbox="completed"]').checked = gameData.completed;
-		clone.querySelector('[data-slot-checkbox="completed"]').setAttribute('data-clean-value', gameData.completed.toString());
-		clone.querySelector('[data-slot-computed="completed"]').innerText = gameData.completed ? 'Yes' : 'No';
-		clone.querySelector('[data-slot-computed="subItems"]').innerText = gameData.subItems ? `${gameData.subItems.length} games` : '';
+		if (gameData.completed === null) {
+			clone.querySelector('[data-slot-checkbox="completed"]').indeterminate = true;
+			clone.querySelector('[data-slot-computed="completed"]').innerText = 'Partial';
+		} else {
+			clone.querySelector('[data-slot-checkbox="completed"]').checked = gameData.completed;
+			clone.querySelector('[data-slot-computed="completed"]').innerText = gameData.completed ? 'Yes' : 'No';
+		}
+		clone.querySelector('[data-slot-checkbox="completed"]').setAttribute('data-clean-value', String(gameData.completed));
+		clone.querySelector('[data-slot-computed="subItems"]').innerHTML =
+			gameData.subItems.length > 0 ? `<ul>${gameData.subItems.map((s) => `<li data-sub-game-completed="${s.completed.toString()}">${s.title}</li>`).join('')}</ul>` : '';
 
 		Array.from(dialog.childNodes).forEach((el) => el.remove());
 		dialog.append(clone);
