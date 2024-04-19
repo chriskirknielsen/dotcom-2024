@@ -205,7 +205,7 @@
 
             &[data-gaming-edition="essentials"] {
                 --game-spine-text: #f8f8f8;
-                --game-spine-bg: #d85454;
+                --game-spine-bg: #d73333;
             }
         }
     }
@@ -420,14 +420,13 @@
     accent-color: var(--C-accent);
 }
 
-[data-sub-game-completed] {
-    padding-inline-start: 0.5em;
-}
+[data-slot-computed="subItems"] {
+    & ul {
+        padding-inline-start: 0;
+        list-style-type: '';
+    }
 
-[data-sub-game-completed='false']::marker {
-    content: '⬜️';
-}
-
-[data-sub-game-completed='true']::marker {
-    content: '☑️';
+    & input[type="checkbox"] {
+        pointer-events: none;
+    }
 }

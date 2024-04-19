@@ -3,7 +3,7 @@ let cbox = 0;
 let msgs = [
 	`I'm sorry but that's not how that works.`,
 	`If I have time I'll finish it.`,
-	`Listen if it's that great you can let me know and I'll add it to my backlog.`,
+	`Listen, if it's that great, you can let me know and I'll add it to my backlog.`,
 	`Oh look, I'm literally about to beat the final level!`,
 	`Screw it. You win. I'm done.`,
 ];
@@ -27,6 +27,7 @@ document.addEventListener('click', function (e) {
 		const dialog = document.getElementById('gaming-details-dialog');
 		const template = document.getElementById('gaming-details-dialog-template');
 		const clone = template.content.cloneNode(true);
+		const dialogTitleRefId = 'gaming-details-dialog-title';
 
 		clone.querySelectorAll('[data-slot-show], [data-slot]:not([data-slot-show] *)').forEach((s) => {
 			const prop = s.getAttribute('data-slot-show') || s.getAttribute('data-slot');
@@ -38,6 +39,7 @@ document.addEventListener('click', function (e) {
 			clone.querySelector(`[data-slot="${p}"]`).innerText = gameData[p];
 		});
 
+		clone.querySelector('[data-slot="title"]').setAttribute('id', dialogTitleRefId);
 		clone.querySelector('[data-slot-computed="format"]').innerText = !gameData.discs ? 'digital' : gameData.discs > 1 ? `${gameData.discs} discs` : 'disc';
 		if (gameData.completed === null) {
 			clone.querySelector('[data-slot-checkbox="completed"]').indeterminate = true;
@@ -48,10 +50,21 @@ document.addEventListener('click', function (e) {
 		}
 		clone.querySelector('[data-slot-checkbox="completed"]').setAttribute('data-clean-value', String(gameData.completed));
 		clone.querySelector('[data-slot-computed="subItems"]').innerHTML =
-			gameData.subItems.length > 0 ? `<ul>${gameData.subItems.map((s) => `<li data-sub-game-completed="${s.completed.toString()}">${s.title}</li>`).join('')}</ul>` : '';
+			gameData.subItems.length > 0
+				? `<ul>${gameData.subItems
+						.map(
+							(s) => `<li>
+								<input type="checkbox" aria-hidden="true" ${s.completed ? 'checked' : ''} readonly>
+								${s.title}
+								<span class="visually-hidden">${s.completed ? '(completed)' : '(not completed)'}</span>
+							</li>`
+						)
+						.join('')}</ul>`
+				: '';
 
 		Array.from(dialog.childNodes).forEach((el) => el.remove());
 		dialog.append(clone);
+		dialog.setAttribute('aria-labelledby', dialogTitleRefId);
 
 		try {
 			dialog.showModal();
@@ -64,6 +77,9 @@ document.addEventListener('click', function (e) {
 		} catch (error) {
 			dialog.removeAttribute('open');
 		}
+	} else if ((target = e.target.closest('[type="checkbox"][readonly]'))) {
+		e.preventDefault();
+		return false;
 	} else if ((target = e.target.closest('[data-slot-checkbox="completed"]'))) {
 		// Big inspiration from henry.codes and their NYC checklist site
 		if (target.getAttribute('data-clean-value') === 'true') {
@@ -78,6 +94,7 @@ document.addEventListener('click', function (e) {
 
 		if (cbox >= msgs.length - 1) {
 			cbox++;
+			e.target.parentElement.querySelector('[data-slot-computed="completed"]').innerText = e.target.checked ? 'Yes' : 'No';
 			return;
 		}
 
