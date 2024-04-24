@@ -1,5 +1,8 @@
 <footer class="footer-wrap | container">
     <div class="footer | grouper grouper--vertical">
+        {% if metadata.nakedCss %}<p class="fontWeight-bold">🙅 No CSS for <a href="https://css-naked-day.github.io/">CSS Naked Day</a> (9th of April)!</p>{% endif %}
+        {% if metadata.nakedJs %}<p class="fontWeight-bold">🙅 No JavaScript for <a href="https://js-naked-day.org/">JS Naked Day</a> (24th of April)!</p>{% endif %}
+
         <div style="--GAP: 0.5rem;">
             {% for footerNav in [nav.navbar, nav.footerExtras, nav.footerMisc, nav.footerSocial, nav.slashPages] %}
                 <ul class="inline-list">

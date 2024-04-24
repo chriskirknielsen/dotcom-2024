@@ -18,10 +18,10 @@
 		</script>
 		{% endif %}
 
-
+		{% if not metadata.nakedCss %}
 		{# Inline CSS instead of <link href="/assets/css/style.css" rel="stylesheet"> #}
 		<style>{{ assets.inlineCssPlaceholder }}</style>
-
+		{% endif %}
 		
 		{# RSS feed #}
 		<link rel="alternate" type="application/rss+xml" title="{{ metadata.title }}" href="{{ (rssFeedOverride or nav.rss.path) | absoluteUrl(metadata.url) }}">
