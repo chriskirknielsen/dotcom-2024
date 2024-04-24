@@ -388,7 +388,9 @@ html[data-js='false'] .header-themepicker {
 		scrollbar-gutter: stable;
 	}
 
-	.header-wrap:has(.header-menu-toggle[aria-pressed='true']) {
+	html[data-js='false'] .header-wrap:has(.header-menu-toggle:focus + .header-menu),
+	html[data-js='false'] .header-wrap:has(.header-menu:focus-within),
+	html[data-js='true'] .header-wrap:has(.header-menu-toggle[aria-pressed='true']) {
 		box-shadow: 0 0 0 100vmax var(--C-canvas);
 	}
 }
