@@ -8,6 +8,7 @@ let msgs = [
 	`Screw it. You win. I'm done.`,
 ];
 document.addEventListener('DOMContentLoaded', function (e) {
+	document.querySelector('[data-gaming-toolbar]').hidden = false; // Reveal the toolbar now that JS is enabled
 	eachDom('.gaming-spine-label', (spine) => {
 		const button = document.createElement('button');
 		spine.getAttributeNames().forEach((attr) => button.setAttribute(attr, spine.getAttribute(attr)));
