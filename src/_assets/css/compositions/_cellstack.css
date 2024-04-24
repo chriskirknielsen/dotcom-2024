@@ -7,3 +7,7 @@
         grid-row: 1 / -1;
     }
 }
+
+.cellstack--center {
+    place-items: center;
+}

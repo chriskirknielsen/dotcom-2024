@@ -21,4 +21,6 @@ export default {
 		DesignByHumans: 'https://www.designbyhumans.com/shop/chriskirknielsen/',
 		CottonBureau: 'https://cottonbureau.com/people/state-of-js',
 	},
+	nakedCss: false,
+	nakedJs: true,
 };

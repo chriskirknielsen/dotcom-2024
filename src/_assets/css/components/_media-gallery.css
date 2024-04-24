@@ -55,6 +55,8 @@
 
 .image-gallery > :is(figure, picture, a, img, video),
 .single-media {
+    overflow: hidden;
+
     border-radius: var(--_corner);
     box-shadow: var(--_shadow);
 }

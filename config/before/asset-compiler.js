@@ -81,7 +81,7 @@ function assetCompiler(settings, config) {
 
 					// Return a promise that handles generating the target output file
 					return new Promise((success, failure) =>
-						// Create the folder structure if it doesn't exist, including subfolders thanks to `recursirve: true`
+						// Create the folder structure if it doesn't exist, including subfolders thanks to `recursive: true`
 						fs.mkdir('./' + folder, { recursive: true }, (dirErr, path) => {
 							if (dirErr) {
 								return failure(dirErr);

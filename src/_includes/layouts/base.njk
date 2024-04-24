@@ -5,6 +5,7 @@
 
 		{% block headInner %}
 		{# inline JS (instantly assigns the theme before any paint) #}
+		{% if not metadata.nakedJs %}
 		<script>
 		{% js "head" %}
 			let globalBreakpoint = `{{ tokens.settings.breakpoint }}`;
@@ -15,9 +16,12 @@
 		{% endjs %}
 		{% getBundle "js", "head" %}
 		</script>
+		{% endif %}
+
 
 		{# Inline CSS instead of <link href="/assets/css/style.css" rel="stylesheet"> #}
 		<style>{{ assets.inlineCssPlaceholder }}</style>
+
 		
 		{# RSS feed #}
 		<link rel="alternate" type="application/rss+xml" title="{{ metadata.title }}" href="{{ (rssFeedOverride or nav.rss.path) | absoluteUrl(metadata.url) }}">

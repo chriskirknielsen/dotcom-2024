@@ -88,6 +88,8 @@ summary: A collection of posters and shirt designs I've made, available across m
 	</template>
 </filtered-tiles>
 
+{% if not metadata.nakedJs %}
 <script>
 {% include "assets/js/components/filtered-tiles.js" %}
 </script>
+{% endif %}

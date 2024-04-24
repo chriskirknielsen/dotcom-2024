@@ -129,3 +129,8 @@ code-wrap {
 .token.italic {
     font-style: italic;
 }
+
+/* Throwing in CodePen stuff here as it's minor and I don't want to create a dedicate partial just for this */
+.codepen-thumbnail {
+    filter: brightness(0.75);
+}
