@@ -45,7 +45,7 @@ function assetCompiler(settings, config) {
 	// Create a promise so we can mark it as resolved when all the files are compiled
 	return new Promise((resolve, reject) => {
 		// Grab a list of all the files matching the folder and extension
-		const inputFolder = `${config.inputDir}/_assets/${settings.inFolder}`;
+		const inputFolder = `${config.dir.input}/_assets/${settings.inFolder}`;
 		return glob(`${inputFolder}/**/*.${settings.inExt}`, { root: './' })
 			.catch((globError) => {
 				console.error(globError);
@@ -71,7 +71,7 @@ function assetCompiler(settings, config) {
 
 					// Compute the final output folder, checking if the output folder has a value to append a slash if needed
 					const subfolder = outputFolder.length > 0 ? `${outputFolder}/` : '';
-					const folder = `${config.inputDir}/_includes/assets/${settings.outFolder}/${subfolder}`;
+					const folder = `${config.dir.input}/_includes/assets/${settings.outFolder}/${subfolder}`;
 
 					// Compute the final path with the file name
 					const outputPath = `${folder}${parsed.name}.${settings.outExt}`;
@@ -123,9 +123,9 @@ export default function (eleventyConfig, options) {
 	eleventyConfig.on('eleventy.before', function (config) {
 		let beforeStart = performance.now(); // Track execution time
 
-		const tokensFileInput = `${config.inputDir}/_data/tokens.json`;
-		const tokensFileOutput = `${config.inputDir}/_assets/css/global/_tokens.css`;
-		const fontFaceFileOutput = `${config.inputDir}/_assets/css/font-face.css`;
+		const tokensFileInput = `${config.dir.input}/_data/tokens.json`;
+		const tokensFileOutput = `${config.dir.input}/_assets/css/global/_tokens.css`;
+		const fontFaceFileOutput = `${config.dir.input}/_assets/css/font-face.css`;
 		const fontsDir = options.fontsDir || '../fonts'; // Can be relative via `./` or `../`, or root-based with `/`
 
 		// Precompile CSS and JS files with the asset compiler

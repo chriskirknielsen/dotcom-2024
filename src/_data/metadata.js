@@ -19,7 +19,7 @@ export default {
 		RedBubble: 'https://www.redbubble.com/people/ckirknielsen/shop',
 		Society6: 'https://society6.com/chriskirknielsen',
 		DesignByHumans: 'https://www.designbyhumans.com/shop/chriskirknielsen/',
-		CottonBureau: 'https://cottonbureau.com/people/state-of-js',
+		CottonBureau: 'https://cottonbureau.com/',
 	},
 	nakedCss: false,
 	nakedJs: true,
