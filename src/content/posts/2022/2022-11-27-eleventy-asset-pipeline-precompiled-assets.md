@@ -105,7 +105,7 @@ Okay so the scaffolding is in place, but that promise is still looking pretty sa
 
 return new Promise((resolve, reject) => {
     // Grab a list of all the files matching the folder and extension
-    const inputFolder = `${config.inputDir}/assets/${settings.inFolder}`;
+    const inputFolder = `${config.dir.input}/assets/${settings.inFolder}`;
     return glob(`${inputFolder}/**/*.${settings.inExt}`, './', (globError, inputFiles) => {
         if (globError) {
             return reject(globError);
@@ -141,7 +141,7 @@ const compiledFiles = filteredInputFiles.map(async (inputPath) => {
 
     // Compute the final output folder, checking if the output folder has a value to append a slash if needed
     const subfolder = outputFolder.length > 0 ? `${outputFolder}/` : '';
-    const folder = `${config.inputDir}/_includes/assets/${settings.outFolder}/${subfolder}`;
+    const folder = `${config.dir.input}/_includes/assets/${settings.outFolder}/${subfolder}`;
 
     // Compute the final path with the file name
     const outputPath = `${folder}${parsed.name}.${settings.outExt}`;
@@ -227,11 +227,11 @@ Not so fast! I still need that JSON-to-Sass step for my tokens, which can be add
 // Compile the JSON tokens file to a Sass file first
 const tokens = new Promise((resolve, reject) =>
     fs
-        .createReadStream(`${config.inputDir}/_data/tokens.json`)
+        .createReadStream(`${config.dir.input}/_data/tokens.json`)
         .pipe(jsonSass({ prefix: '$tokens: ' }))
         .pipe(
             fs
-                .createWriteStream(`${config.inputDir}/assets/scss/tools/_tokens.scss`)
+                .createWriteStream(`${config.dir.input}/assets/scss/tools/_tokens.scss`)
                 .on('finish', () => resolve())
                 .on('error', () => reject())
         )
@@ -309,7 +309,7 @@ module.exports = function (eleventyConfig) {
             // Create a promise so we can mark it as resolved when all the files are compiled
             return new Promise((resolve, reject) => {
                 // Grab a list of all the files matching the folder and extension
-                const inputFolder = `${config.inputDir}/assets/${settings.inFolder}`;
+                const inputFolder = `${config.dir.input}/assets/${settings.inFolder}`;
                 return glob(`${inputFolder}/**/*.${settings.inExt}`, './', (globError, inputFiles) => {
                     if (globError) {
                         return reject(globError);
@@ -333,7 +333,7 @@ module.exports = function (eleventyConfig) {
 
                         // Compute the final output folder, checking if the output folder has a value to append a slash if needed
                         const subfolder = outputFolder.length > 0 ? `${outputFolder}/` : '';
-                        const folder = `${config.inputDir}/_includes/assets/${settings.outFolder}/${subfolder}`;
+                        const folder = `${config.dir.input}/_includes/assets/${settings.outFolder}/${subfolder}`;
 
                         // Compute the final path with the file name
                         const outputPath = `${folder}${parsed.name}.${settings.outExt}`;
@@ -369,11 +369,11 @@ module.exports = function (eleventyConfig) {
         // Compile the JSON tokens file to a Sass file first
         const tokens = new Promise((resolve, reject) =>
             fs
-                .createReadStream(`${config.inputDir}/_data/tokens.json`)
+                .createReadStream(`${config.dir.input}/_data/tokens.json`)
                 .pipe(jsonSass({ prefix: '$tokens: ' }))
                 .pipe(
                     fs
-                        .createWriteStream(`${config.inputDir}/assets/scss/tools/_tokens.scss`)
+                        .createWriteStream(`${config.dir.input}/assets/scss/tools/_tokens.scss`)
                         .on('finish', () => resolve())
                         .on('error', () => reject())
                 )
