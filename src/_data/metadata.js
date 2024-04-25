@@ -22,5 +22,5 @@ export default {
 		CottonBureau: 'https://cottonbureau.com/',
 	},
 	nakedCss: false,
-	nakedJs: true,
+	nakedJs: false,
 };
