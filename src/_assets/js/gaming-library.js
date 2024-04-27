@@ -1,12 +1,39 @@
+// Helper functions
+/** Get the SVG icon in the document to re-use. */
+function getTrophySvg(svgId, lvl) {
+	return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24" data-trophy-level="${lvl}" class="gaming-details-trophies-icon | inline-icon">
+		<title>${lvl} trophies</title>
+		<use xlink:href="#${svgId}" width="24" height="24"></use>
+	</svg>`;
+}
+
+/** Convert an object of trophies to an HTML list with icon. */
+function toTrophyList(trophies, svgId) {
+	if (!trophies) {
+		return '';
+	}
+
+	return `<ul class="gaming-details-trophies | inline-list" data-flow="run-in">
+		${Object.keys(trophies)
+			.filter((lvl) => trophies[lvl] > 0)
+			.map((lvl) => `<li>${getTrophySvg(svgId, lvl)} ${trophies[lvl]}</li>`)
+			.join('')}
+	</ul>`;
+}
+
+/** Shortcut for running forEach on a set of DOM elements matching a selector. */
 const eachDom = (s, fn) => Array.from(document.querySelectorAll(s)).forEach(fn);
+
+// Funny little messages if you try to change the checkbox state
 let cbox = 0;
 let msgs = [
-	`I'm sorry but that's not how that works.`,
+	`I'm sorry, but that's not how that works.`,
 	`If I have time I'll finish it.`,
 	`Listen, if it's that great, you can let me know and I'll add it to my backlog.`,
 	`Oh look, I'm literally about to beat the final level!`,
 	`Screw it. You win. I'm done.`,
 ];
+
 document.addEventListener('DOMContentLoaded', function (e) {
 	document.querySelector('[data-gaming-toolbar]').hidden = false; // Reveal the toolbar now that JS is enabled
 	eachDom('.gaming-spine-label', (spine) => {
@@ -18,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
 		spine.replaceWith(button);
 	});
 });
+
 document.addEventListener('click', function (e) {
 	let target;
 	if ((target = e.target.closest('[data-games-toggled]'))) {
@@ -27,6 +55,7 @@ document.addEventListener('click', function (e) {
 		const gameData = JSON.parse(target.closest('[data-game]').getAttribute('data-game'));
 		const dialog = document.getElementById('gaming-details-dialog');
 		const template = document.getElementById('gaming-details-dialog-template');
+		const trophySvgId = template.getAttribute('data-trophy-svg-id');
 		const clone = template.content.cloneNode(true);
 		const dialogTitleRefId = 'gaming-details-dialog-title';
 
@@ -52,16 +81,31 @@ document.addEventListener('click', function (e) {
 		clone.querySelector('[data-slot-checkbox="completed"]').setAttribute('data-clean-value', String(gameData.completed));
 		clone.querySelector('[data-slot-computed="subItems"]').innerHTML =
 			gameData.subItems.length > 0
-				? `<ul>${gameData.subItems
+				? `<ul aria-label="Included games">${gameData.subItems
 						.map(
-							(s) => `<li>
-								<input type="checkbox" aria-hidden="true" ${s.completed ? 'checked' : ''} readonly>
-								${s.title}
-								<span class="visually-hidden">${s.completed ? '(completed)' : '(not completed)'}</span>
+							(s) => `<li class="gaming-details-subitem">
+								<p class="gaming-details-subitem-main">
+									<input type="checkbox" aria-hidden="true" ${s.completed ? 'checked' : ''} readonly class="gaming-details-subitem-checkbox">
+									<span class="gaming-details-subitem-label">
+										${s.title}
+										<span class="visually-hidden">${s.completed ? '(completed)' : '(not completed)'}</span>
+									</span>
+								</p>
+								${s.trophyEarned ? toTrophyList(s.trophyEarned, trophySvgId) : ''}
 							</li>`
 						)
 						.join('')}</ul>`
 				: '';
+		if (gameData.trophyIcon) {
+			const iconHeight = parseInt(clone.querySelector('[data-slot-img="trophyIcon"]').getAttribute('height'), 10);
+			clone.querySelector('[data-slot-img="trophyIcon"]').src = `https://res.cloudinary.com/chriskirknielsen/image/fetch/c_fit,h_${iconHeight}/${encodeURI(
+				gameData.trophyIcon
+			)}`;
+			clone.querySelector('[data-slot-img="trophyIcon"]').setAttribute('width', gameData.platform === 'PS5' ? iconHeight : iconHeight * (320 / 176)); // PS5 icons are square, PS3/Vita are 320x176
+		}
+		clone.querySelector('[data-slot-computed="trophyEarned"]').innerHTML = gameData.trophyEarned
+			? `${gameData.trophyProgress}%: ${toTrophyList(gameData.trophyEarned, trophySvgId)}`
+			: '';
 
 		Array.from(dialog.childNodes).forEach((el) => el.remove());
 		dialog.append(clone);
@@ -103,6 +147,7 @@ document.addEventListener('click', function (e) {
 		e.preventDefault();
 	}
 });
+
 document.addEventListener('change', function (e) {
 	let target;
 	if ((target = e.target.closest('[data-games-sizing]'))) {

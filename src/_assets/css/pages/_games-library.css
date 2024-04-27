@@ -420,13 +420,90 @@
     accent-color: var(--C-accent);
 }
 
+[data-slot-img="trophyIcon"] {
+    block-size: 4rem;
+    inline-size: auto;
+    max-inline-size: 100%;
+    margin-inline-end: var(--flow-space, 1rem);
+    float: inline-start;
+}
+
+.gaming-details-trophies {
+    line-height: 1.1;
+}
+
+.gaming-details-trophies-icon {
+    block-size: 0.9em;
+    inline-size: auto;
+    padding: 0.125em;
+
+    vertical-align: -0.0625em;
+    border-radius: 25%;
+
+    &[data-trophy-level="bronze"] {
+        color: #deae9b;
+        background-color: #6d2f3c;
+    }
+
+    &[data-trophy-level="silver"] {
+        color: #cfd8dd;
+        background-color: #4d6075;
+    }
+
+    &[data-trophy-level="gold"] {
+        color: #f1e04b;
+        background-color: #775d22;
+    }
+
+    &[data-trophy-level="platinum"] {
+        color: #88f0fc;
+        background-color: #1362be;
+    }
+}
+
 [data-slot-computed="subItems"] {
-    & ul {
+    & > ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
         padding-inline-start: 0;
         list-style-type: '';
     }
 
-    & input[type="checkbox"] {
+    & .gaming-details-subitem {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto;
+        gap: 0 0.25em;
+    }
+
+    & .gaming-details-subitem-main {
+        grid-row: 1;
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: subgrid;
+        justify-content: start;
+        align-items: center;
+    }
+
+    & .gaming-details-subitem-checkbox {
+        grid-row: 1;
+        grid-column: 1;
+
         pointer-events: none;
+    }
+
+    & .gaming-details-subitem-label {
+        grid-row: 1;
+        grid-column: 2;
+    }
+
+    & .gaming-details-trophies {
+        grid-row: 2;
+        grid-column: 2;
+
+        & > li {
+            font-size: 0.75em;
+        }
     }
 }
