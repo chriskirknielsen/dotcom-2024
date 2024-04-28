@@ -1,8 +1,8 @@
 import Module from 'node:module';
+const require = Module.createRequire(import.meta.url);
 import 'dotenv/config';
 import { AssetCache } from '@11ty/eleventy-fetch';
 import notionDatabaseQuery from '../../config/utils/notion-db.js';
-const require = Module.createRequire(import.meta.url);
 const { exchangeNpssoForCode, exchangeCodeForAccessToken, getUserTitles } = require('psn-api');
 
 const regions = {

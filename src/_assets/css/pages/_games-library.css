@@ -380,7 +380,7 @@
     position: fixed;
     inset: 0;
 
-    min-inline-size: 50vw;
+    inline-size: var(--layout-max-content);
     max-inline-size: min(99%, 90vw);
     margin: auto;
     padding: var(--size-m);
@@ -396,6 +396,21 @@
     }
 }
 
+.gaming-details-dialog-inner {
+    container: gamingDetailsDialog / inline-size;
+
+    @container gamingDetailsDialog (inline-size < 20rem) {
+        dl {
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        dd + dt {
+            margin-block-start: var(--size-s);
+        }
+    }
+}
+
 :root:has(dialog[open]) {
     scrollbar-gutter: stable;
     overflow: hidden;
@@ -406,8 +421,6 @@
 }
 
 .gaming-details-dialog-close {
-    position: sticky;
-    inset: 0 0 auto auto;
     z-index: 1;
 
     align-self: flex-start;
@@ -417,11 +430,13 @@
     block-size: 1em;
     inline-size: 1em;
 
+    font-size: 0.875em;
+
     accent-color: var(--C-accent);
 }
 
 [data-slot-img="trophyIcon"] {
-    block-size: 4rem;
+    block-size: 1em;
     inline-size: auto;
     max-inline-size: 100%;
     margin-inline-end: var(--flow-space, 1rem);
@@ -432,33 +447,39 @@
     line-height: 1.1;
 }
 
-.gaming-details-trophies-icon {
-    block-size: 0.9em;
-    inline-size: auto;
-    padding: 0.125em;
+.gaming-details-trophies-badge {
+    padding: 0.125em 0.25em;
 
-    vertical-align: -0.0625em;
-    border-radius: 25%;
+    white-space: nowrap;
+    border-radius: 0.25em;
 
     &[data-trophy-level="bronze"] {
-        color: #deae9b;
-        background-color: #6d2f3c;
+        color: #d7b9ac;
+        background-color: #591c29;
     }
 
     &[data-trophy-level="silver"] {
-        color: #cfd8dd;
-        background-color: #4d6075;
+        color: #d9e6ed;
+        background-color: #364b63;
     }
 
     &[data-trophy-level="gold"] {
-        color: #f1e04b;
-        background-color: #775d22;
+        color: #f5e23d;
+        background-color: #584419;
     }
 
     &[data-trophy-level="platinum"] {
-        color: #88f0fc;
-        background-color: #1362be;
+        color: #adf7ff;
+        background-color: #144d90;
     }
+
+}
+
+.gaming-details-trophies-icon {
+    block-size: 0.9em;
+    inline-size: auto;
+
+    vertical-align: -0.0625em;
 }
 
 [data-slot-computed="subItems"] {
@@ -483,7 +504,8 @@
         display: grid;
         grid-template-columns: subgrid;
         justify-content: start;
-        align-items: center;
+        align-items: baseline;
+        gap: inherit;
     }
 
     & .gaming-details-subitem-checkbox {
@@ -496,6 +518,8 @@
     & .gaming-details-subitem-label {
         grid-row: 1;
         grid-column: 2;
+
+        text-wrap: balance;
     }
 
     & .gaming-details-trophies {

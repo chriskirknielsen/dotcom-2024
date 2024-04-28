@@ -1,7 +1,7 @@
 // Helper functions
 /** Get the SVG icon in the document to re-use. */
 function getTrophySvg(svgId, lvl) {
-	return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24" data-trophy-level="${lvl}" class="gaming-details-trophies-icon | inline-icon">
+	return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24" class="gaming-details-trophies-icon | inline-icon">
 		<title>${lvl} trophies</title>
 		<use xlink:href="#${svgId}" width="24" height="24"></use>
 	</svg>`;
@@ -16,7 +16,7 @@ function toTrophyList(trophies, svgId) {
 	return `<ul class="gaming-details-trophies | inline-list" data-flow="run-in">
 		${Object.keys(trophies)
 			.filter((lvl) => trophies[lvl] > 0)
-			.map((lvl) => `<li>${getTrophySvg(svgId, lvl)} ${trophies[lvl]}</li>`)
+			.map((lvl) => `<li><span class="gaming-details-trophies-badge" data-trophy-level="${lvl}">${getTrophySvg(svgId, lvl)} ${trophies[lvl]}</span></li>`)
 			.join('')}
 	</ul>`;
 }

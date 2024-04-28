@@ -131,12 +131,12 @@ dl {
 }
 
 dt {
-	grid-column: 1;
+	/* grid-column: 1; */
 	align-self: baseline;
 
 	font-weight: bold;
 }
 
 dd {
-	grid-column: 2;
+	/* grid-column: 2; */
 }
