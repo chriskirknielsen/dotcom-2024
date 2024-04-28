@@ -383,21 +383,32 @@
     inline-size: var(--layout-max-content);
     max-inline-size: 90%;
     margin: auto;
-    padding: var(--size-m);
-    overflow: auto;
+    padding: 0;
 
     color: var(--C-text);
     border: 2px solid var(--C-text);
     border-radius: var(--_corner);
     background: var(--C-surface);
 
+    transform-origin: 50% 100%;
+    animation: fadeIn var(--anim-short) var(--easing-out) 1;
+
+    @media (--accept-motion) {
+        animation-name: fadeIn, scaleUp;
+    }
+
     &:not([open]) {
         display: none;
+
+        animation: none;
     }
 }
 
 .gaming-details-dialog-inner {
     container: gamingDetailsDialog / inline-size;
+
+    padding: var(--size-m);
+    overflow: auto;
 
     @container gamingDetailsDialog (inline-size < 20rem) {
         dl {
@@ -418,6 +429,8 @@
 
 ::backdrop {
     background: #000a;
+
+    animation: fadeIn var(--anim-short) var(--easing-out) 1;
 }
 
 .gaming-details-dialog-close {

@@ -116,13 +116,17 @@ document.addEventListener('click', function (e) {
 		} catch (error) {
 			dialog.setAttribute('open', '');
 		}
-	} else if ((target = e.target.closest('[data-hide-game-info]'))) {
+	} else if (e.target.closest('[data-hide-game-info]') || e.target.matches('.gaming-details-dialog')) {
+		const dialog = document.getElementById('gaming-details-dialog');
+		if (!dialog) {
+			return;
+		}
 		try {
-			target.closest('dialog').close();
+			dialog.close();
 		} catch (error) {
 			dialog.removeAttribute('open');
 		}
-	} else if ((target = e.target.closest('[type="checkbox"][readonly]'))) {
+	} else if (e.target.closest('[type="checkbox"][readonly]')) {
 		e.preventDefault();
 		return false;
 	} else if ((target = e.target.closest('[data-slot-checkbox="completed"]'))) {
