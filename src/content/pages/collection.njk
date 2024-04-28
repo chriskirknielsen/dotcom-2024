@@ -147,7 +147,6 @@ platformLabels: {
             <h2>
                 <img src="" alt="" data-slot="trophyIcon" data-slot-img="trophyIcon" aria-hidden="true" height="64" width="">
                 <span data-slot="title"></span>
-                <span data-slot-show="year" class="font-reset fontSize-small">(<span data-slot="year"></span>)</span>
             </h2>
 
             {% component "cta", {
@@ -157,7 +156,11 @@ platformLabels: {
                 ctaAttr: 'data-hide-game-info autofocus'
             } %}
         </div>
-        <p data-slot="edition" class="fontStyle-italic" style="--flow-space: var(--size-2xs);" hidden></p>
+        
+        <p style="--flow-space: 0px;">
+            <span data-slot="edition" class="fontStyle-italic" style="--flow-space: var(--size-2xs);" hidden></span>
+            <span data-slot-show="year" class="font-reset fontSize-small">(<span data-slot="year"></span>)</span>
+        </p>
 
         <dl>
             <dt class="grouper grouper--icon-text-pair">

@@ -381,7 +381,7 @@
     inset: 0;
 
     inline-size: var(--layout-max-content);
-    max-inline-size: min(99%, 90vw);
+    max-inline-size: 90%;
     margin: auto;
     padding: var(--size-m);
     overflow: auto;

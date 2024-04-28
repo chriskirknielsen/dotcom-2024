@@ -6,7 +6,7 @@
     }
 
     &[data-flow="run-in"] {
-        display: inline-block;
+        display: inline;
     }
 
     & > li {
