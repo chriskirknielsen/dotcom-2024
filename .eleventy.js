@@ -181,7 +181,7 @@ export default async function (eleventyConfig) {
 
 	//* Passthroughs
 	eleventyConfig.addPassthroughCopy({
-		[`${rootDir}/_includes/assets/css/style.css`]: '/assets/css/style.css',
+		[`${rootDir}/_includes/assets/css/`]: '/assets/css/',
 		[`${rootDir}/_assets/fonts/`]: '/assets/fonts/',
 		[`${rootDir}/_assets/img/`]: '/assets/img/',
 		// [`${rootDir}/_includes/assets/svg/footer-deco-*.svg`]: '/assets/svg/',

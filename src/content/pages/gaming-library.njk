@@ -37,7 +37,7 @@ platformLabels: {
 </div>
 
 {# {% set glyphList = '' %} #}
-{% for platform, games in gamescollection | groupby('platform') | dictsort | sortentries(platformLabels | keys) %}
+{% for platform, games in gameslibrary | groupby('platform') | dictsort | sortentries(platformLabels | keys) %}
     {% set platformSlug = platform | lower | replace(' ', '-') %}
     {% setAsync "expanderLabel" %}
         {% svg 'gaming-'+platformSlug, { class: 'gaming-logo inline-icon inline-icon--middle' } %}
@@ -209,4 +209,4 @@ platformLabels: {
 </template>
 <dialog id="gaming-details-dialog" class="gaming-details-dialog"></dialog>
 
-{% js "foot-gamescollection" %}{% include "assets/js/gaming-library.js" %}{% endjs %}
+{% js "foot-gameslibrary" %}{% include "assets/js/gaming-library.js" %}{% endjs %}

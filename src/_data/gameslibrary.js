@@ -1,9 +1,6 @@
-import Module from 'node:module';
-const require = Module.createRequire(import.meta.url);
 import 'dotenv/config';
-import { AssetCache } from '@11ty/eleventy-fetch';
+import getPsnTrophyData from '../../config/utils/psn-api.js';
 import notionDatabaseQuery from '../../config/utils/notion-db.js';
-const { exchangeNpssoForCode, exchangeCodeForAccessToken, getUserTitles } = require('psn-api');
 
 const regions = {
 	FR: 'France',
@@ -15,48 +12,12 @@ const regions = {
 	EU: 'Europe',
 };
 
-const getPsnTrophyData = async function () {
-	const psnTrophyCache = new AssetCache('psn_api_trophy_data');
-	let trophyTitles;
-
-	if (psnTrophyCache.cachedObject) {
-		console.log('PSN Trophy Data: Found and reused cached data.');
-		trophyTitles = await psnTrophyCache.getCachedContents('json');
-	} else {
-		console.log('PSN Trophy Data: No cached data, fetching latest data.');
-		const accessCode = await exchangeNpssoForCode(process.env.PLAYSTATION_NPSSO_TOKEN);
-		const authorization = await exchangeCodeForAccessToken(accessCode);
-		const trophyTitlesResponse = await getUserTitles({ accessToken: authorization.accessToken }, 'me', { limit: 500 });
-		trophyTitles = trophyTitlesResponse.trophyTitles.filter((t) => t.progress > 0 && !t.hiddenFlag);
-
-		psnTrophyCache.save(trophyTitles, 'json');
-	}
-
-	/* Sample of a title:
-	{
-		npServiceName: 'trophy',
-		npCommunicationId: 'NPWR12662_00',
-		trophySetVersion: '01.03',
-		trophyTitleName: 'WIPEOUT™ OMEGA COLLECTION',
-		trophyTitleDetail: 'Trophy Set for WipEout™ Omega Collection',
-		trophyTitleIconUrl: 'https://image.api.playstation.com/trophy/np/NPWR12662_00_00B7EA559F4B573528AD144F15C83E29F75FF728F7/1662FDC44BD6C0CE72C75642BDC07A84B0C0FC24.PNG',
-		trophyTitlePlatform: 'PS4',
-		hasTrophyGroups: false,
-		definedTrophies: [Object],
-		progress: 50,
-		earnedTrophies: {"bronze":22,"silver":17,"gold":2,"platinum":1},
-		hiddenFlag: false,
-		lastUpdatedDateTime: '2017-06-28T19:22:24Z'
-	} */
-	return trophyTitles;
-};
-
 export default async function () {
 	const psnTrophyData = await getPsnTrophyData();
 
 	return notionDatabaseQuery({
 		databaseId: process.env.NOTION_DATABASE_ID_LUDOTHEQUE,
-		label: 'gamescollection.js',
+		label: 'gameslibrary.js',
 		propsToUse: ['Title', 'Sort Title', 'PSN ID', 'Edition', 'Platform', 'Region', 'DLC', 'Completed', 'Discs', 'Year', 'Parent item', 'Sub-item'],
 		filter: {
 			and: [

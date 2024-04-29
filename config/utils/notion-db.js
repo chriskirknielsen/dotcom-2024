@@ -1,9 +1,9 @@
 import 'dotenv/config';
-import { AssetCache } from '@11ty/eleventy-fetch';
+import apiCache from './api-cache.js';
 import { Client as NotionClient } from '@notionhq/client';
 
 /**
- *
+ * Retrieve data from a Notion database.
  * @param {object} queryConfig The configuration for the database call and data processing.
  * @param {string} queryConfig.databaseId The unique ID for the database to query.
  * @param {string} [queryConfig.label] Optional. Custom label to assign to the query, used for cache key generation and identification in logs. Defaults to the database ID.
@@ -24,80 +24,47 @@ export default async function (queryConfig) {
 	// Set up Notion stuff
 	const notionClient = new NotionClient({ auth: process.env.NOTION_BEARER_TOKEN });
 
-	// Initialise the asset caches
-	const dbInfoCache = new AssetCache(label + '_database_last_edit');
-	const dbDataCache = new AssetCache(label + '_database_content');
+	// Get the cache data, and if missing or stale, provide the complete data query logic
+	const cachedData = apiCache({
+		label: label,
+		infoDateMarkers: ['last_edited_time', 'data.created_time'],
+		getInfo: async () => notionClient.databases.retrieve({ database_id: databaseId }),
+		getData: async function (dbInfo) {
+			// Based on the database info, build a list of the IDs for the properties needed for the Now page based on their name
+			const databaseProps = dbInfo.properties;
+			let propsById = [];
+			for (let p in databaseProps) {
+				if (propsToUse.includes(p)) {
+					propsById.push(databaseProps[p].id);
+				}
+			}
 
-	// Local dev: allow complete bypass
-	const LOCAL_DEV_SKIP_NOW_CACHE = process?.env?.LOCAL_DEV_SKIP_NOW_CACHE ? [true, 'true'].includes(process.env.LOCAL_DEV_SKIP_NOW_CACHE) : false;
-	if (LOCAL_DEV_SKIP_NOW_CACHE) {
-		console.log(label + ': Skipping data pull for local development.');
-	}
+			// Grab the results from the database
+			let dbData = [];
+			let data = { has_more: true, next_cursor: -1, results: [] };
+			let queryObject = {
+				database_id: databaseId,
+				filter_properties: propsById,
+				filter: filter,
+			};
 
-	// Grab the database's latest info (not the content, just metadata about it)
-	const dbInfo =
-		!LOCAL_DEV_SKIP_NOW_CACHE && dbInfoCache.cachedObject
-			? { last_edited_time: await dbInfoCache.getCachedContents('text') }
-			: await notionClient.databases.retrieve({
-					database_id: databaseId,
-			  });
+			// Loop as long as there are results
+			while (data.has_more) {
+				const queryCursor = data.next_cursor !== -1 ? { start_cursor: data.next_cursor } : {};
+				const query = Object.assign(queryCursor, queryObject);
+				data = await notionClient.databases.query(query);
 
-	// Determine when the DB was last edited, or created
-	const dbLastEdit = dbInfo.last_edited_time || dbInfo.created_time || '';
+				dbData = [...dbData, ...data.results];
+			}
 
-	// Check if there is a cache object for the value we're after
-	const isCachePresent = !LOCAL_DEV_SKIP_NOW_CACHE && dbInfoCache.cachedObject && dbDataCache.cachedObject;
+			// Only keep useful data
+			const dbDataCleaned = typeof entryPostProcess === 'function' ? dbData.map(entryPostProcess) : dbData;
+			const dbDataFinal = typeof dataPostProcess === 'function' ? dataPostProcess(dbDataCleaned) : dbDataCleaned;
 
-	if (isCachePresent) {
-		// Get the last cached value for the DB info
-		const cacheLastEdit = (await dbInfoCache.getCachedContents('text')) || null;
+			// Return that sweet, sweet data
+			return dbDataFinal;
+		},
+	});
 
-		// If the cached last edit matches the live last edit, return the cached DB contents and stop here
-		if (dbLastEdit === cacheLastEdit) {
-			const dbCache = await dbDataCache.getCachedContents('json');
-			console.log(label + ': Found and reused cached data.');
-			return dbCache;
-		}
-	}
-
-	console.log(label + ': No cached data, fetching latest data.');
-
-	// Based on the DB info, build a list of the IDs for the properties needed for the Now page based on their name
-	const databaseProps = dbInfo.properties;
-	let propsById = [];
-	for (let p in databaseProps) {
-		if (propsToUse.includes(p)) {
-			propsById.push(databaseProps[p].id);
-		}
-	}
-
-	// Grab the results from the database
-	let dbData = [];
-	let data = { has_more: true, next_cursor: -1, results: [] };
-	let queryObject = {
-		database_id: databaseId,
-		filter_properties: propsById,
-		filter: filter,
-	};
-
-	while (data.has_more) {
-		const queryCursor = data.next_cursor !== -1 ? { start_cursor: data.next_cursor } : {};
-		const query = Object.assign(queryCursor, queryObject);
-		data = await notionClient.databases.query(query);
-
-		dbData = [...dbData, ...data.results];
-	}
-
-	// Only keep useful data
-	const dbDataCleaned = typeof entryPostProcess === 'function' ? dbData.map(entryPostProcess) : dbData;
-	const dbDataFinal = typeof dataPostProcess === 'function' ? dataPostProcess(dbDataCleaned) : dbDataCleaned;
-
-	// If this did changed, save the new last edit date value after we know that the DB access was successful
-	dbInfoCache.save(dbLastEdit, 'text');
-
-	// Save the data in the cache
-	dbDataCache.save(dbDataFinal, 'json');
-
-	// And finally, return the data
-	return dbDataFinal;
+	return cachedData;
 }
