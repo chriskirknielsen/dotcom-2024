@@ -15,6 +15,11 @@ The hosting is provided by [Netlify](http://netlify.com/) and the domain is regi
 ### Synthesizer
 The synth on the [About page](/about/) is based on [Bret Cameron's tutorial](https://css-tricks.com/how-to-code-a-playable-synth-keyboard/), and extended with envelope shaping and lowpass filtering by peeking at [Daniel Schulz's code](https://iamschulz.com/building-a-synthesizer-in-javascript/).
 
+### Gaming Library
+The [Gaming Library page](/games/library/) is built with a couple of APIs: [Notion's API](https://developers.notion.com/), and [psn-api](https://psn-api.achievements.app/). I first referenced all the games I have in a Notion database, with (too many) columns, including a "Sort Title" to keep everything consistent. It was, at first, just for my own benefit, but given there's an API to query it, I figured I might as well use it (and maybe I like organising things). After going through that ordeal, I used the `psn-api` to get the list of every single game for which I have earned trophies (about 300).
+
+I then manually copied the internal ID for each game from the PSN to the matching row in my Notion database (it took a couple hours, automating it would have taken just as long and not have been 100% reliable as titles sometimes have extra symbols like a trademark sign), which now allows me at build time to query both APIs, and cross-reference the PSN data with the Notion data to populate the dialog that appears when you click a title. I query a tiny slice of data for both: if Notion or the PSN have updates (respectively checking the last update date and latest trophy date against their cached values), I can hit the APIs and store the results for future builds with [eleventy-fetch](https://www.11ty.dev/docs/plugins/fetch/).
+
 ## Themes
 My website has distinct themes with distinct typefaces (some paid, some free) and visuals, making it, in effect, my very own [CSS Zen Garden](https://csszengarden.com/). You'll find some more details below for each theme (the Dusk, Campfire and Cyberpunk themes are remixes of themes from my website's previous version, so they may look familiar), but if you still have questions, please feel free to ask!
 

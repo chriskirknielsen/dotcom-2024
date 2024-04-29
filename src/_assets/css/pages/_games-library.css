@@ -410,6 +410,11 @@
     padding: var(--size-m);
     overflow: auto;
 
+    dl {
+        padding-block-start: var(--flow-space);
+        border-block-start: 1px solid color-mix(in hsl, currentColor, transparent 75%);
+    }
+
     @container gamingDetailsDialog (inline-size < 20rem) {
         dl {
             grid-template-columns: 1fr;
