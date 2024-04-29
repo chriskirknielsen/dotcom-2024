@@ -16,11 +16,16 @@ export default async function (settings) {
 	const dataApiLabel = `${apiLabel}_data`;
 	const skipLocalCache = settings.skipLocalCache || false;
 	let infoDateMarkers = settings.infoDateMarkers;
-	if (!Array.isArray(infoDateMarkers) && typeof infoDateMarkers === 'string') {
+	if (infoDateMarkers.length === 0) {
+		throw new Error('The `infoDateMarkers` cannot be empty.');
+	} else if (!Array.isArray(infoDateMarkers) && typeof infoDateMarkers !== 'string') {
+		throw new Error('The `infoDateMarkers` must be a string or an array of strings.');
+	} else if (!Array.isArray(infoDateMarkers) && typeof infoDateMarkers === 'string') {
 		infoDateMarkers = [infoDateMarkers]; // We need this to be an array
 	}
 	const getInfo = settings.getInfo;
 	const getData = settings.getData;
+	const getInfoMarker = (info) => info[infoDateMarkers.find((m) => info.hasOwnProperty(m) && info[m])] || '';
 
 	// Initialise the asset caches
 	const dbInfoCache = new AssetCache(infoApiLabel);
@@ -35,7 +40,7 @@ export default async function (settings) {
 	const dbInfo = await (!skipLocalCache && dbInfoCache.cachedObject ? dbInfoCache.getCachedContents('json') : getInfo());
 
 	// Determine when the database was updated by looking for the first available property
-	const dbLastEdit = dbInfo[infoDateMarkers.find((m) => dbInfo.hasOwnProperty(m) && dbInfo[m])] || '';
+	const dbLastEdit = getInfoMarker(dbInfo);
 
 	// Check if there is a cache object for the value we're after
 	const isCachePresent = !skipLocalCache && dbInfoCache.cachedObject && dbDataCache.cachedObject;
@@ -44,7 +49,7 @@ export default async function (settings) {
 	if (isCachePresent) {
 		// Get the last cached value for the database info
 		const cacheLastEditInfo = (await dbInfoCache.getCachedContents('json')) || {};
-		const cacheLastEdit = cacheLastEditInfo[infoDateMarkers.find((m) => dbInfo.hasOwnProperty(m) && dbInfo[m])] || '';
+		const cacheLastEdit = getInfoMarker(cacheLastEditInfo);
 
 		// If the cached last edit matches the live last edit, return the cached database contents and stop here
 		if (dbLastEdit === cacheLastEdit) {
