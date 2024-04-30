@@ -1,5 +1,7 @@
 ---
 permalink: '/rss.xml'
+eleventyImport:
+    collections: ["_posts"]
 ---
 {%- set collectionPostsLocale = collections['_posts'] -%}
 <?xml version="1.0" encoding="utf-8"?>

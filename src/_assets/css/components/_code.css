@@ -47,6 +47,7 @@ code-wrap {
     padding: var(--CODEBLOCK-padding);
     overflow: auto;
 
+    font-size: var(--typeScale-n1);
     border: var(--CODEBLOCK-border-width) solid var(--CODEBLOCK-border-color);
     border-block-start-width: 0;
     background-color: var(--CODE-bg, var(--C-surface));

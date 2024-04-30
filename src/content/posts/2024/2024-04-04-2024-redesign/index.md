@@ -185,7 +185,7 @@ I also found a little rendering issue with `box-shadow` where the inset colour w
 
 ## Performance?
 
-I’ve tried to reduce the amount of filters in my configuration, and be a little more strategic, but generally speaking, I’m still using a lot of the same code, so Eleventy-wise, it’s pretty close to the previous build (but converted to ESM!). A couple of post-build transforms and the internationalisation pieces are gone, so I think this version is slightly faster, but not dramatically (10–20%, at best). My `before` script of the build is 3 to 4 times faster though (from 240ms–300ms to 60–100ms), which might be telling me my Sass files were slow to compile.
+I’ve tried to reduce the amount of filters in my configuration, and be a little more strategic, but generally speaking, I’m still using a lot of the same code, so Eleventy-wise, it’s pretty close to the previous build (but converted to ESM!). A couple of post-build transforms and the internationalisation pieces are gone, so I think this version is slightly faster, but not dramatically (10–20%, at best). My `before` script of the build is 3 to 4 times faster though (from 240–300ms to 60–100ms), which might be telling me my Sass files were slow to compile.
 
 As far as the files that are spit out, I end up with slightly heavier files due to the themes being pretty different, but the homepage “intro” section is no longer a complex SVG animation (as cool as it was!) so I don’t have as many FPS drops.
 

@@ -27,10 +27,10 @@ export default async function (queryConfig) {
 	// Get the cache data, and if missing or stale, provide the complete data query logic
 	const cachedData = apiCache({
 		label: label,
-		infoDateMarkers: ['last_edited_time', 'data.created_time'],
+		infoDateMarkers: ['last_edited_time', 'created_time'],
 		getInfo: async () => notionClient.databases.retrieve({ database_id: databaseId }),
 		getData: async function (dbInfo) {
-			// Based on the database info, build a list of the IDs for the properties needed for the Now page based on their name
+			// Based on the database info, build a list of the IDs for the properties needed based on their name
 			const databaseProps = dbInfo.properties;
 			let propsById = [];
 			for (let p in databaseProps) {
@@ -42,7 +42,7 @@ export default async function (queryConfig) {
 			// Grab the results from the database
 			let dbData = [];
 			let data = { has_more: true, next_cursor: -1, results: [] };
-			let queryObject = {
+			const queryObject = {
 				database_id: databaseId,
 				filter_properties: propsById,
 				filter: filter,

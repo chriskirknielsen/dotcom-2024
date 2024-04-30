@@ -144,7 +144,6 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 
         border-radius: var(--corner);
         background: linear-gradient(180deg, #0000, #0002), var(--texture-bg)var(--palette-02);
-        background-blend-mode: color-burn, normal;
 
         filter: contrast(130%) saturate(200%) brightness(70%) var(--filter-rough);
     }
