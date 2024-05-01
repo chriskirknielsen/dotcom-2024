@@ -40,7 +40,7 @@ code-wrap {
     }
 }
 
-.codeblock-pre {
+.codeblock pre {
     position: relative;
 
     inline-size: 100%;
