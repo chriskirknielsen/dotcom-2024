@@ -7,7 +7,7 @@ import { AssetCache } from '@11ty/eleventy-fetch';
  * @param {boolean} [settings.skipLocalCache] Optional. Whether the cache will be skipped (this should be read from a dot-env value and passed here). Defaults to `false`.
  * @param {string[]} settings.infoDateMarkers List of possible properties from the database info query that will hold useful date information, in order of usefulness.
  * @param {() => Promise<object>} settings.getInfo The async function which queries and processes data from the API to check for cache staleness. Should return an object with at least one property date-marker.
- * @param {(dbInfo) => Promise<any>} settings.getData The async function which queries and processes data from the API when the cache is unusable. Receives the `getInfo` result as the sole argument.
+ * @param {(dbInfo: object) => Promise<any>} settings.getData The async function which queries and processes data from the API when the cache is unusable. Receives the `getInfo` result as the sole argument.
  * @returns {any} Data retrived from the API of from the cache.
  */
 export default async function (settings) {

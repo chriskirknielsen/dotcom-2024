@@ -69,17 +69,20 @@ export default notionDatabaseQuery({
 			},
 		],
 	},
-	entryPostProcess: (entry) => {
-		const props = entry.properties;
+	dataPostProcess: (data) => {
+		const normalizedData = data.map((entry) => {
+			const props = entry.properties;
 
-		return {
-			title: props.title.title.pop().plain_text,
-			detail: props.detail.rich_text.map((textBlock) => textBlock.plain_text).join(''),
-			blurb: props.blurb.rich_text.map((textBlock) => richTextBlockToMd(textBlock)).join(''),
-			category: props.category.select?.name,
-			link: props.link.url,
-			image: props.image.files.length > 0 ? (props.image.files[0].type === 'external' ? props.image.files[0].external.url : props.image.files[0].file.url) : null,
-		};
+			return {
+				title: props.title.title.pop().plain_text,
+				detail: props.detail.rich_text.map((textBlock) => textBlock.plain_text).join(''),
+				blurb: props.blurb.rich_text.map((textBlock) => richTextBlockToMd(textBlock)).join(''),
+				category: props.category.select?.name,
+				link: props.link.url,
+				image: props.image.files.length > 0 ? (props.image.files[0].type === 'external' ? props.image.files[0].external.url : props.image.files[0].file.url) : null,
+			};
+		});
+		const groupedData = groupBy(normalizedData, 'category');
+		return groupedData;
 	},
-	dataPostProcess: (data) => groupBy(data, 'category'),
 });
