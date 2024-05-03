@@ -11,7 +11,7 @@ time: '03:00:00'
 featured: true
 ---
 
-I recently added a [Gaming Library page](https://www.notion.so/games/library/), which involved a bunch of API calls via Notion, as well as the PlayStation Network for that extra nerd factor. I initially only used [Notion’s API](https://developers.notion.com/docs/getting-started) for my [Now page](https://www.notion.so/now), but as I was reusing a lot of code, I ended up consolidating everything into helper functions on multiple levels, leveraging [eleventy-fetch](https://www.11ty.dev/docs/plugins/fetch/)'s `AssetCache` feature along the way (which you can use without Eleventy). Maybe you'll find some of this stuff useful, though, note that this article assumes you are at least a little familiar working with APIs and JavaScript.
+I recently added a [Gaming Library page](/games/library/), which involved a bunch of API calls via Notion, as well as the PlayStation Network for that extra nerd factor. I initially only used [Notion’s API](https://developers.notion.com/docs/getting-started) for my [Now page](/now), but as I was reusing a lot of code, I ended up consolidating everything into helper functions on multiple levels, leveraging [eleventy-fetch](https://www.11ty.dev/docs/plugins/fetch/)'s `AssetCache` feature along the way (which you can use without Eleventy). Maybe you'll find some of this stuff useful, though, note that this article assumes you are at least a little familiar working with APIs and JavaScript.
 
 ## The Setup
 
