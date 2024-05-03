@@ -1,3 +1,7 @@
+ol > li > ol {
+    list-style-type: lower-alpha;
+}
+
 .inline-list {
     text-wrap: balance;
 

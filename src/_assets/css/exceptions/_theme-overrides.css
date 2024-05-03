@@ -347,9 +347,14 @@ html[data-theme='vintage'] {
 		--LINK-underline-color: var(--C-heading);
 	}
 
-	.signoff :any-link:is(:hover, :focus-visible) {
-		--LINK-color: var(--C-canvas);
-		--LINK-underline-color: var(--C-heading);
+	.signoff :any-link {
+		--LINK-color: var(--C-surface-alt);
+		--LINK-underline-color: var(--C-canvas);
+
+		&:is(:hover, :focus-visible) {
+			--LINK-color: var(--C-canvas);
+			--LINK-underline-color: var(--C-heading);
+		}
 	}
 }
 
@@ -381,6 +386,7 @@ html[data-theme='campfire'] {
 	}
 
 	.callout {
+		--flow-space: var(--size-xl);
 		--CALLOUT-nail: #56482d 2px, transparent 3px;
 		--CALLOUT-post: max(var(--size-l), var(--flow-space) * 0.8);
 

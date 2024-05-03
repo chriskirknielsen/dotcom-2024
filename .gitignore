@@ -6,6 +6,5 @@ package-lock.json
 *.code-workspace
 .netlify
 .cache
-src/_includes/assets/css/style.css
-src/_includes/assets/css/font-face.css
+src/_includes/assets/css/*.css
 styleguide.njk
