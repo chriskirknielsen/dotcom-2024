@@ -33,7 +33,7 @@ export default async function (settings) {
 
 	// Local dev: allow complete bypass
 	if (skipLocalCache) {
-		console.log(apiLabel + ': Skipping data pull for local development.');
+		console.log(apiLabel + ': Skipping data cache for local development.');
 	}
 
 	// Grab the database's latest info (not the content, just metadata about it)

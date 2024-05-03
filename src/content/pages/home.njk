@@ -188,8 +188,7 @@ summary:  "Welcome to the personal website of the one they call Christopher Kirk
 
 {% set hasFeatured = (collections['_posts.featured'] | length) > 0 %}
 {% set latestFeatured = collections['_posts.featured'] | reverse %}
-{% set nonFeaturedCount = 1 if hasFeatured else 
-	2 %}
+{% set nonFeaturedCount = 1 if hasFeatured else 2 %}
 {% set nonFeaturedItems = collections['_posts.not_featured'] | reverse %}
 {% set frontpagePosts = {
 	featured: latestFeatured.slice(0, 1),
