@@ -97,13 +97,16 @@
             text-align: start;
         }
 
+        [data-theme-condition],
         .header-menu,
         .header-menu-toggle,
         .footer > :not(p),
         .footer-decorator,
         .signoff-photo,
+        [data-about="facts"],
         .synth,
         .synth-instructions,
+        .filtering,
         [data-codewrap-copy] {
             display: none !important;
         }
