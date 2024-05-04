@@ -20,7 +20,7 @@ package = "netlify-plugin-debug-cache"
   [headers.values]
     cache-control = '''
     public,
-    max-age=1209600'''
+    max-age=31536000'''
 
 ## Special page redirects
 [[redirects]]
