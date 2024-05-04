@@ -14,6 +14,15 @@ document.addEventListener('click', function (e) {
 	}
 });
 
+document.addEventListener('keyup', function (e) {
+	const pressedToggle = document.querySelector('[data-toggle-pressed][aria-pressed="true"]');
+	if (pressedToggle && (e.key === 'Escape' || e.keyCode === 27)) {
+		pressedToggle.setAttribute('aria-pressed', 'false');
+		toggleInertForMenu(false);
+		pressedToggle.focus();
+	}
+});
+
 window.matchMedia(`(min-width:${globalBreakpoint})`).addEventListener('change', function (e) {
 	Array.from(document.body.querySelectorAll('.header-menu-toggle, .header-themepicker-toggle')).forEach((el) => el.setAttribute('aria-pressed', 'false'));
 	toggleInertForMenu(false);
