@@ -435,7 +435,7 @@
 ::backdrop {
     background: #000a;
 
-    animation: fadeIn var(--anim-short) var(--easing-out) 1;
+    animation: fadeIn var(--anim-short, 200ms) var(--easing-out, ease-out) 1;
 }
 
 .gaming-details-dialog-close {

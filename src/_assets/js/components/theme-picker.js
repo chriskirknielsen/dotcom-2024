@@ -18,7 +18,7 @@ class ThemePicker extends HTMLElement {
 		this.addEventListener('keyup', this);
 	}
 
-	setTheme = function (theme) {
+	setTheme(theme) {
 		if (!theme || this.keys.includes(theme) === false) {
 			theme = ''; // System default is an empty string
 		}
@@ -42,9 +42,9 @@ class ThemePicker extends HTMLElement {
 		document.querySelectorAll('[data-theme-set]').forEach(function (btn) {
 			btn.setAttribute('aria-pressed', (btn.getAttribute('data-theme-set') === theme).toString());
 		});
-	};
+	}
 
-	getTheme = function () {
+	getTheme() {
 		let activeTheme = localStorage.getItem(this.store);
 		if (!activeTheme) {
 			return false; // If the user hasn't set an override, respect the `prefers-color-scheme` setting
@@ -54,7 +54,7 @@ class ThemePicker extends HTMLElement {
 			return this.defaults[preferredScheme];
 		}
 		return activeTheme;
-	};
+	}
 
 	// Don't really need this
 	// connectedCallback() {}
@@ -77,11 +77,10 @@ class ThemePicker extends HTMLElement {
 		if (e.type === 'keyup') {
 			if (e.key === 'Escape') {
 				const themePickerToggleButton = document.querySelector(`[aria-controls=${this.id}]`);
-				if (!themePickerToggleButton) {
-					return;
+				if (themePickerToggleButton) {
+					themePickerToggleButton.setAttribute('aria-pressed', 'false');
+					themePickerToggleButton.focus(); // Restore focus to the toggler
 				}
-				themePickerToggleButton.setAttribute('aria-pressed', 'false');
-				themePickerToggleButton.focus(); // Restore focus to the toggler
 			}
 		}
 	}
