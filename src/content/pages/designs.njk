@@ -38,7 +38,7 @@ summary: A collection of posters and shirt designs I've made, available across m
 			{% setAsync "designVariant" -%}
 				{% if design.variant %}
 					<div class="grouper">
-						{% svg "arrow-bidir", { class: "inline-icon" } %}
+						{% svg "arrow-bidir", { class: "inline-icon linecap-auto" } %}
 						<span>Variant available</span>
 					</div>
 				{% endif %}

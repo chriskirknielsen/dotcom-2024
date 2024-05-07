@@ -468,6 +468,7 @@
 .gaming-details-trophies-badge {
     padding: 0.125em 0.25em;
 
+    font-variant-numeric: tabular-nums;
     white-space: nowrap;
     border-radius: 0.25em;
 

@@ -23,6 +23,8 @@ My website has distinct themes with distinct typefaces (some paid, some free) an
 
 First off, the homepage wordmark for my name is a custom edit of the [Sprat typeface](https://www.collletttivo.it/typefaces/sprat) with everything tightened up and minor corrections. When I first saw it, I knew I had to use it: it's got a vibe reminiscent of Stephen King books and other designs using ITC Benguiat (you know, the Stranger Things logo!). The reveal animation is very simple but does the trick and is pretty performant compared to the [last version](/archives/)!
 
+Also, I did use a handful of SVG icons from [Lucide](https://lucide.dev/icons/), listed here: `arrow-right-left`, `folder-tree`, `gamepad-2`, `globe`, `package-plus`, `square-check-big`, `star`, `trophy`.
+
 ### Dawn
 The default Light Mode theme is set in [Canela Bold](https://type.today/en/canela) for headings and overall is aiming for some vintage print design, hence the off-white background and sharp red contrasting headings, going for an old book that's sat in the sun too long kind of feel. (ironically enough, I sampled some colours from a gorgeous [OmniChord OM84](http://www.suzukimusic.co.uk/omnichord-heaven/models/om36-84.html) electronic instrument)
 
