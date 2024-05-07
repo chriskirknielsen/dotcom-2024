@@ -11,7 +11,7 @@ time: '16:04:24'
 It seems I’ve been doing a site refresh every even year, and started getting the itch for it in late 2023. A few months have passed, and here we are! I changed up ~~my CSS Zen Garden~~ *the themes* a little bit (even purchased some typefaces! I spent *money*!) and upgraded to Eleventy v3 (canary). If you’ve been here before, it will be feel pretty familiar (plus some new looks), as the content is globally the same, and I didn’t refactor anything that already worked well. This is especially true as [my website is a worry stone](https://ethanmarcotte.com/wrote/let-a-website-be-a-worry-stone/), so I’m always making changes between “versions” anyways. With that, I’d like to go over some of those updates, in case they should be useful for other people.
 
 ## Eleventy stuff
-### 11ty v3 canary
+### Eleventy v3 canary
 
 The third version of Eleventy fully supports ESM ([EcmaScript Modules](https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/)). That’s cool! And also, what the heck is ESM? I didn’t know, but now I do! It’s a different syntax if you’re used to the CJS (CommonJS, a.k.a. how it was before) `const thingimabob = require('thingimabob')` in your NodeJS scripts, which is now `import thingimabob from 'thingimabob'` — you just need to remember to change your Node `package.json` file accordingly.
 
@@ -32,9 +32,9 @@ eleventyConfig.importPlugin('./config/filters/strings.js', { ...options });
 
 Overall, the upgrade was very easy: after converting a bunch of `module.exports = ...` to `export default ...` (and searching the web for a few ESM syntax pointers 👀), all was well. I continue to be impressed by the capability, simplicity, and flexibility offered by Eleventy, so I recently put my money where my… uh… heart was?… and became a recurring contributor instead of a couple one-off (two-offs?) donations on [OpenCollective](https://opencollective.com/11ty). You should too, if you have the means, and if you love using Eleventy. Yay, open source!
 
-### 11ty bundle plugin
+### Eleventy bundle plugin
 
-I inline the crap out of my styles and scripts, minified and “tree-shaken” (though not programmatically so I’m misusing that term), so for this update I decided to look into the [11ty bundle plugin](https://github.com/11ty/eleventy-plugin-bundle/), which allows me to define a “bucket” for CSS or JS, and define where the contents of those buckets should go. It feels a little cleaner to work this way, compared to my previous approach of capturing a file into a variable, passing it into a minifier, and dumping it right then and there in a style/script tag.
+I inline the crap out of my styles and scripts, minified and “tree-shaken” (though not programmatically so I’m misusing that term), so for this update I decided to look into the [Eleventy bundle plugin](https://github.com/11ty/eleventy-plugin-bundle/), which allows me to define a “bucket” for CSS or JS, and define where the contents of those buckets should go. It feels a little cleaner to work this way, compared to my previous approach of capturing a file into a variable, passing it into a minifier, and dumping it right then and there in a style/script tag.
 
 With the bundle plugin, I can collect all my scripts into the appropriate bucket, and inject it somewhere else that makes more sense. For instance, instead of injecting a web component script right below the custom element, I can bucket it, and have it all live at the bottom, right before `</body>`. My site is likely not very impacted by the change in terms of performance, but every bit helps.
 
