@@ -268,7 +268,7 @@ I’m not usually too busy so this page doesn’t change very often. It’s also
 
 ## Gaming Library
 
-My Gaming Library is an old spreadsheet that I moved into Notion last year (though you could do all of this with Google Sheets or Airtable as well), adding a bunch of metadata that nobody cares about (but me!). I manually entered the PSN API's game IDs into my Notion entries, one by one, to make sure they were accurate (matching by title could fail due to things like apostrophes, trademark symbols, etc.). Setting this up was a real pain, but it’s now quite easy to maintain!
+My Gaming Library is an old spreadsheet that I moved into Notion last year (though you could do all of this with [Google Sheets](https://www.bobmonsour.com/posts/scratch-that-use-google-sheets-api/) or [Airtable](https://www.cassey.dev/11ty-airtable-fetch/) as well), adding a bunch of metadata that nobody cares about (but me!). I manually entered the PSN API's game IDs into my Notion entries, one by one, to make sure they were accurate (matching by title could fail due to things like apostrophes, trademark symbols, etc.). Setting this up was a real pain, but it’s now quite easy to maintain!
 
 {% image "./notion-grid.png" | toRoot, "A few rows in a Grid in Notion with a lot of columns, such as Sort Title, Platform, Format, Number of discs…", "Quite a handful of columns!", { width: 1280, height: 192 } %}
 
