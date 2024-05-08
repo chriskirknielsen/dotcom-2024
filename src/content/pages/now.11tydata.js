@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import notionDatabaseQuery from '../../config/utils/notion-db.js';
+import notionDatabaseQuery from '../../../config/utils/notion-db.js';
 
 /**
  * Group an array of objects by a property.
@@ -53,7 +53,7 @@ function richTextBlockToMd(block) {
 	return mdString;
 }
 
-export default notionDatabaseQuery({
+const now = await notionDatabaseQuery({
 	databaseId: process.env.NOTION_DATABASE_ID_NOW,
 	label: 'now.js',
 	propsToUse: ['title', 'detail', 'blurb', 'category', 'link', 'image'],
@@ -86,3 +86,5 @@ export default notionDatabaseQuery({
 		return groupedData;
 	},
 });
+
+export { now };
