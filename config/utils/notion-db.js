@@ -9,7 +9,7 @@ import { Client as NotionClient } from '@notionhq/client';
  * @param {string} [queryConfig.label] Optional. Custom label to assign to the query, used for cache key generation and identification in logs. Defaults to the database ID.
  * @param {string[]} [queryConfig.propsToUse] Optional. List of properties to retrieve for each item in the database. Defaults to `['Title']`.
  * @param {object} [queryConfig.filter] Optional. Structured filtering to restrict which results are returned from the database. Defaults to an empty object to load all items. @see https://developers.notion.com/reference/post-database-query-filter
- * @param {(data: any) => any} [queryConfig.dataPostProcess] Optional. Processing function to run on the fetched data before it is cached. Defaults to unprocessed data by default.
+ * @param {(data: any) => any} [queryConfig.dataPostProcess] Optional. Processing function to run on the fetched data before it is cached. Async-friendly. Defaults to unprocessed data by default.
  * @returns {object[]} List of results.
  */
 export default async function (queryConfig) {

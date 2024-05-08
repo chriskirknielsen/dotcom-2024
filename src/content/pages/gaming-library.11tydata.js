@@ -12,7 +12,6 @@ const regions = {
 	EU: 'Europe',
 };
 
-const psnTrophyData = await getPsnTrophyData();
 const gameslibrary = await notionDatabaseQuery({
 	databaseId: process.env.NOTION_DATABASE_ID_LUDOTHEQUE,
 	label: 'gameslibrary.js',
@@ -49,7 +48,9 @@ const gameslibrary = await notionDatabaseQuery({
 			// },
 		],
 	},
-	dataPostProcess: (data) => {
+	dataPostProcess: async (data) => {
+		const psnTrophyData = await getPsnTrophyData();
+
 		const normalizedData = data.map((entry) => {
 			const props = entry.properties;
 
