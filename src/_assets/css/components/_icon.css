@@ -1,5 +1,7 @@
 .inline-icon {
     display: inline-block;
+    block-size: 0.9em;
+    inline-size: auto;
 }
 
 .inline-icon--middle {
