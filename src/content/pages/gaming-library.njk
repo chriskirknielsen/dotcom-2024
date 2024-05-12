@@ -16,7 +16,7 @@ platformLabels: {
 }
 ---
 
-{% renderTemplate "md" %}Drawing _a little_ inspiration from [Robb Knight's list](https://rknight.me/collections/games/) (although I took the easy route with the spines instead of cover art…), here's my (mostly accurate) collection of video games (many of which are collecting something of their own: dust!). [Want to know how I made this?](/colophon/#gaming-library){% endrenderTemplate %}
+{% renderTemplate 'md' %}Drawing _a little_ inspiration from [Robb Knight's list](https://rknight.me/collections/games/) (although I took the easy route with the spines instead of cover art…), here's my (mostly accurate) collection of video games (many of which are collecting something of their own: dust!). [Want to know how I made this?](/colophon/#gaming-library){% endrenderTemplate %}
 
 <hr>
 
@@ -39,7 +39,7 @@ platformLabels: {
 {# {% set glyphList = '' %} #}
 {% for platform, games in gameslibrary | groupby('platform') | dictsort | sortentries(platformLabels | keys) %}
     {% set platformSlug = platform | lower | replace(' ', '-') %}
-    {% setAsync "expanderLabel" %}
+    {% setAsync 'expanderLabel' %}
         {% svg 'gaming-'+platformSlug, { class: 'gaming-logo inline-icon inline-icon--middle' } %}
         {{ platformLabels[platform] }} ({{ games | length }})
     {% endsetAsync %}
@@ -149,7 +149,7 @@ platformLabels: {
                 <span data-slot="title"></span>
             </h2>
 
-            {% component "cta", {
+            {% component 'cta', {
                 icon: 'close',
                 label: { aria: 'Close' },
                 ctaClass: 'gaming-details-dialog-close',
@@ -209,4 +209,4 @@ platformLabels: {
 </template>
 <dialog id="gaming-details-dialog" class="gaming-details-dialog"></dialog>
 
-{% js "foot-gameslibrary" %}{% include "assets/js/gaming-library.js" %}{% endjs %}
+{% js 'foot-gameslibrary' %}{% include 'assets/js/gaming-library.js' %}{% endjs %}

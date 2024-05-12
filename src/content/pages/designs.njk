@@ -26,19 +26,19 @@ summary: A collection of posters and shirt designs I've made, available across m
 
 <hr>
 
-<filtered-tiles class="flow" filters="{{ activeDesigns | pluck('tags') | flatten | unique | sort | join(",") }}">
-	<ul data-filtered-tiles-group class="cards" style="--spaced-items-gap:var(--size-m);">
+<filtered-tiles class="flow" filters="{{ activeDesigns | pluck('tags') | flatten | unique | sort | join(',') }}">
+	<ul data-filtered-tiles-group class="cards" style="--spaced-items-gap: var(--size-m);">
 		{% for design in activeDesigns %}
 			<li class="card-wrapper" id="{{ design.slug }}"
-				data-tags="{{ design.tags | join(",") }}"
+				data-tags="{{ design.tags | join(',') }}"
 				aria-hidden="false"
 				{% if enableViewTransitions %}style="view-transition-name:{{ design.slug }}"{% endif %}
 			>
 			{% set designPermalink = '/designs/' + design.slug + '/' %}
-			{% setAsync "designVariant" -%}
+			{% setAsync 'designVariant' -%}
 				{% if design.variant %}
 					<div class="grouper grouper--icon-text-pair" style="--GAP: var(--size-s);">
-						{% svg "arrow-bidir", { class: 'inline-icon linecap-auto' } %}
+						{% svg 'arrow-bidir', { class: 'inline-icon linecap-auto' } %}
 						<span>Variant available</span>
 					</div>
 				{% endif %}
@@ -90,6 +90,6 @@ summary: A collection of posters and shirt designs I've made, available across m
 
 {% if not metadata.nakedJs %}
 <script>
-{% include "assets/js/components/filtered-tiles.js" %}
+{% include 'assets/js/components/filtered-tiles.js' %}
 </script>
 {% endif %}

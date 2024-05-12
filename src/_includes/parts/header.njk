@@ -1,13 +1,13 @@
 <header class="header-wrap | container">
     <div class="header">
         <a href="/" class="header-logo" {{ '/' | current(page) | safe }} aria-label="Home">
-            {% svg "logo", {
-                class: "logo",
-                title: "Home"
+            {% svg 'logo', {
+                class: 'logo',
+                title: 'Home'
             } %}
         </a>
 
-        {% component "cta", {
+        {% component 'cta', {
             iconStack: {
                 'idle': 'menu-icon',
                 'pressed': 'close'
@@ -35,7 +35,7 @@
                     {% svg 'palette', { class: 'inline-icon' } %}
                     <span>Theme Picker</span>
                 </div>
-                {% component "cta", {
+                {% component 'cta', {
                     iconStack: {
                         'idle': 'palette',
                         'pressed': 'close'
@@ -46,8 +46,8 @@
                     ctaAttr: 'data-toggle-pressed aria-controls="themepicker"',
                     ctaClass: 'header-themepicker-toggle linecap-auto hide-when-viewport--small'
                 } %}
-                {% webcomponent "theme-picker", { id: 'themepicker', 'light': 'dawn', 'dark': 'dusk', 'aria-labelledby': 'header-themepicker-heading' } %}
-                {% js "foot" %}{%- include "assets/js/components/theme-picker.js" -%}{% endjs %}
+                {% webcomponent 'theme-picker', { id: 'themepicker', 'light': 'dawn', 'dark': 'dusk', 'aria-labelledby': 'header-themepicker-heading' } %}
+                {% js 'foot' %}{%- include 'assets/js/components/theme-picker.js' -%}{% endjs %}
             </div>
         </div>
     </div>

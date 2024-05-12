@@ -23,7 +23,7 @@
 <meta property="og:title" content="{{ title }} | {{ metadata.title }}">
 <meta property="og:site_name" content="{{ metadata.title }}">
 <meta property="og:locale" content="{{ metadata.lang }}">
-<meta property="og:type" content="{% if section == "post" %}article{% else %}website{% endif %}">
+<meta property="og:type" content="{% if section == 'post' %}article{% else %}website{% endif %}">
 <meta property="og:url" content="{{ (page.url or '/') | absoluteUrl(metadata.url) }}">
 
 {% set meta_image_url %}{{ customMetaImage or ([assets.images, 'metaimage.jpg'] | toPath) }}{% endset %}

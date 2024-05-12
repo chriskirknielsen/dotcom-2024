@@ -1,13 +1,13 @@
 {% set iconBefore = iconBefore or false %}
 {% set iconClass = iconClass or 'inline-icon' %}
 {% set ctaType = 'a' if url else 'button' %}
-{% setAsync "iconRender" %}
+{% setAsync 'iconRender' %}
     {% if icon %}
         {% svg icon, { class: iconClass + ' linecap-auto', ariaHidden: true } %}
     {% elseif iconStack %}
         <div class="cellstack">
-            {% svg iconStack.idle, { class: "button-content button-content--idle", ariaHidden: true } %}
-            {% svg iconStack.pressed, { class: "button-content button-content--pressed", ariaHidden: true } %}
+            {% svg iconStack.idle, { class: 'button-content button-content--idle', ariaHidden: true } %}
+            {% svg iconStack.pressed, { class: 'button-content button-content--pressed', ariaHidden: true } %}
         </div>
     {% endif %}
 {% endsetAsync %}

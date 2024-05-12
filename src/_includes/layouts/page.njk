@@ -1,9 +1,9 @@
-{% extends "layouts/content.njk" %}
+{% extends 'layouts/content.njk' %}
 
 {% block theContent %}
 
     {% block pageContent %}
-        {% component "hero", {
+        {% component 'hero', {
             heroTitle: heroTitle or title,
             heroSub: summary if not heroHideSummary else null,
             heroSup: heroSup or null,

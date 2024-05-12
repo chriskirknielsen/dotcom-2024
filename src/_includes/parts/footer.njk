@@ -8,7 +8,7 @@
                 <ul class="inline-list">
                     {% for navItem in footerNav %}
                         <li><a
-                            href="{{ navItem.path if (not navItem.isRepoFileLink) else (metadata.repo + "/blob/main/" + page.inputPath) }}"
+                            href="{{ navItem.path if (not navItem.isRepoFileLink) else (metadata.repo + '/blob/main/' + page.inputPath) }}"
                             {{ navItem.path | current(page) | safe }}
                         >{{ navItem.label }}</a></li>
                     {% endfor %}

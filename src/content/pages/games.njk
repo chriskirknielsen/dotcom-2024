@@ -223,10 +223,10 @@ heroCta: [{ label: "Gaming Library", url: "/games/library/" }]
 
 <hr>
 
-{% for category, gamesByCategory in games | groupby("category") %}
+{% for category, gamesByCategory in games | groupby('category') %}
     <h2>{{ category }}</h2>
     <ul data-list="long">
-        {% for entry in gamesByCategory | sort | sort(false, false, "year") %}
+        {% for entry in gamesByCategory | sort | sort(false, false, 'year') %}
             <li>
                 {% if entry.goat %}{{ goatIndicator | safe }}
                 {% endif %}
@@ -234,7 +234,7 @@ heroCta: [{ label: "Gaming Library", url: "/games/library/" }]
             {% if entry.blurb %}<br>{{ entry.blurb | markdown(true) | safe }}
                 {% endif %}
                 {% if entry.similar %}<br>
-                    <span class="fontStyle-italic fontSize-smaller">(similar choice{% if (entry.similar | length) > 1 %}s{% endif %}: {{ entry.similar | join(", ") }})</span>{% endif %}
+                    <span class="fontStyle-italic fontSize-smaller">(similar choice{% if (entry.similar | length) > 1 %}s{% endif %}: {{ entry.similar | join(', ') }})</span>{% endif %}
             </li>
         {% endfor %}
     </ul>

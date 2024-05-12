@@ -1,20 +1,20 @@
 <!doctype html>
 <html {% if section %}data-section="{{ section }}"{% endif %} lang="{{ metadata.lang }}" data-js="false">
 	<head>
-		{% include "parts/head.njk" %}
+		{% include 'parts/head.njk' %}
 
 		{% block headInner %}
 		{# inline JS (instantly assigns the theme before any paint) #}
 		{% if not metadata.nakedJs %}
 		<script>
-		{% js "head" %}
+		{% js 'head' %}
 			let globalBreakpoint = `{{ tokens.settings.breakpoint }}`;
 			let docEl = document.documentElement; // For minification purposes only
 			docEl.setAttribute('data-js', 'true');
 			window.themeKeys = {{ themes | pluck('key') | dump | safe }};
-			{% include "assets/js/theme-set.js" %}
+			{% include 'assets/js/theme-set.js' %}
 		{% endjs %}
-		{% getBundle "js", "head" %}
+		{% getBundle 'js', 'head' %}
 		</script>
 		{% endif %}
 
@@ -34,7 +34,7 @@
 	<body>
 		<a class="skip-link" href="#content">Skip to content</a>
 
-		{% include "parts/header.njk" %}
+		{% include 'parts/header.njk' %}
 
 		<main class="main | container flow" id="content" {% if lang %}lang="{{ lang }}"{% endif %}tabindex="-1">
 			{% block baseContent %}
@@ -42,7 +42,7 @@
 			{% endblock %}
 		</main>
 
-		{% include "parts/footer.njk" %}
-		{% include "parts/foot.njk" %}
+		{% include 'parts/footer.njk' %}
+		{% include 'parts/foot.njk' %}
 	</body>
 </html>

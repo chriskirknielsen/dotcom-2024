@@ -9,7 +9,7 @@ eleventyExcludeFromCollections: true
             <input type="hidden" name="sites" value="https://chriskirknielsen.com"/>
             <label for="q" class="fontWeight-bold">Keyword:</label>
             <input type="text" value="" name="q" id="q" enterkeyhint="search">
-            {% component "cta", {
+            {% component 'cta', {
                 type: 'submit',
                 label: 'Search',
                 ctaAttr: 'id="searchsubmit"',
@@ -45,6 +45,6 @@ eleventyExcludeFromCollections: true
 
 {% if not metadata.nakedJs %}
 <script>
-{% include "assets/js/components/instant-search.js" %}
+{% include 'assets/js/components/instant-search.js' %}
 </script>
 {% endif %}

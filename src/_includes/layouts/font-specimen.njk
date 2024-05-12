@@ -65,16 +65,16 @@
         </form>
     </font-preview>
 
-    {% js miniSiteSlug %}{% include "assets/js/components/font-preview.js" %}{% endjs %}
+    {% js miniSiteSlug %}{% include 'assets/js/components/font-preview.js' %}{% endjs %}
 {% endmacro %}
 
 <!doctype html>
 <html lang="en" class="no-js" data-slug="{{miniSiteSlug}}">
     <head>
-		{% include "parts/head.njk" %}
+		{% include 'parts/head.njk' %}
 		{% block headInner %}
             {{ fontPreload }}
-            <style>{% getBundle "css", miniSiteSlug %}</style>
+            <style>{% getBundle 'css', miniSiteSlug %}</style>
             <script>document.documentElement.classList.remove('no-js')</script>
 		{% endblock %}
 	</head>
@@ -154,7 +154,7 @@
                 })
             });
         {% endjs %}
-        {% getBundle "js", miniSiteSlug %}
+        {% getBundle 'js', miniSiteSlug %}
         </script>
         <script src="../download-preview.js" defer></script>
     </body>

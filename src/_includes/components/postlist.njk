@@ -2,7 +2,7 @@
     {% if groupByYear == false %}
         <div class="postlist-group-list | flow">
         {% endif %}
-        {% for year, posts in postlist | groupby("data.year") | dictsort | reverse %}
+        {% for year, posts in postlist | groupby('data.year') | dictsort | reverse %}
             {% if groupByYear != false %}
                 <details class="postlist-group" open>
                     <summary class="postlist-group-label | u-fontSize-larger">
@@ -29,7 +29,7 @@
                                     <span class="color-text fontSize-smaller">({{post.data.lang}})</span>
                                 {% endif %}
                                 <a href="{{ post.url }}" class="heading-anchor">
-                                    {{- post.data.title or "(oops, untitled post)" -}}
+                                    {{- post.data.title or '(oops, untitled post)' -}}
                                 </a>
                             </h2>
 

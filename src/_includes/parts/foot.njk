@@ -1,16 +1,16 @@
-{% css "foot" %}{% include "assets/css/font-face.css" %}{% endcss %}
-{% js "foot" %}{% include "assets/js/site.js" %}{% endjs %}
+{% css 'foot' %}{% include 'assets/css/font-face.css' %}{% endcss %}
+{% js 'foot' %}{% include 'assets/js/site.js' %}{% endjs %}
 
 {% if not metadata.nakedCss %}
 <style>
-	{%- getBundle "css", "foot" -%}
+	{%- getBundle 'css', 'foot' -%}
 </style>
 {% endif %}
 {% if not metadata.nakedJs %}
 <script>
-	{% getBundle "js", "foot" %}
-	{% getBundle "js", "foot-codewrap" %}
-	{% getBundle "js", "foot-about" %}
-	{% getBundle "js", "foot-gameslibrary" %}
+	{% getBundle 'js', 'foot' %}
+	{% getBundle 'js', 'foot-codewrap' %}
+	{% getBundle 'js', 'foot-about' %}
+	{% getBundle 'js', 'foot-gameslibrary' %}
 </script>
 {% endif %}

@@ -7,14 +7,14 @@ backlink: { url: "/projects/", label: "Back to Projects" }
 
 {% if externalUrl %}
 <p class="post-external | spaced-items inlined-items">
-	{% component "cta", {
+	{% component 'cta', {
 		url: externalUrl,
 		label: projectButtonLabel or "View Project",
 		icon: 'arrow-right'
 	} %}
 	{% if extraCta %}
 		{% for extraCtaItem in extraCta %}
-		{% component "cta", {
+		{% component 'cta', {
 			url: extraCtaItem.url,
 			label: extraCtaItem.label,
 			icon: extraCtaItem.icon or 'arrow-right'

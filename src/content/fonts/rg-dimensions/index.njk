@@ -29,7 +29,7 @@ fontSpecimenNav: {
 }
 ---
 
-{% extends "layouts/font-specimen.njk" %}
+{% extends 'layouts/font-specimen.njk' %}
 
 {% block content %}
     <div class="main-heading-block fullbleed">
@@ -130,14 +130,14 @@ fontSpecimenNav: {
 
             <h2>Numbers</h2>
             <p class="demo-grid-multi specimen-set-demo demo-grid specimen">
-                {% for char in "1 2 3 4 5 6 7 8 9 0".split(' ') %}
+                {% for char in '1 2 3 4 5 6 7 8 9 0'.split(' ') %}
                     <span class="glyph">{{ char }}</span>
                 {% endfor %}
             </p>
 
             <h2>Symbols</h2>
             <p class="demo-grid-multi specimen-set-demo demo-grid specimen">
-                {% for char in "_ - &".split(' ') %}
+                {% for char in '_ - &'.split(' ') %}
                     <span class="glyph">{{ char }}</span>
                 {% endfor %}
             </p>
