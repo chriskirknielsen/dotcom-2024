@@ -35,6 +35,13 @@
 
 .now-item:has(.now-item-image) :is(.now-section-heading, .now-item-content) {
     text-shadow: 0 1px 0 var(--C-canvas), 0 0 4px var(--C-canvas);
+
+    @supports (-webkit-text-stroke: 1px var(--a)) and (paint-order: stroke) {
+        --_font-heading-shadow: none;
+        text-shadow: none;
+        -webkit-text-stroke: 2px var(--C-canvas);
+        paint-order: stroke;
+    }
 }
 
 .now-section-heading,
