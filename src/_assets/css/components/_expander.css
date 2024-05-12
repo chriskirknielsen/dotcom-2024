@@ -28,7 +28,8 @@
 
     transition: transform var(--anim-short) var(--easing-in-out);
 
-    .expander[open] & {
+    .expander[open] &,
+    .expander-button[aria-pressed='true'] & {
         transform: rotate(90deg);
     }
 }

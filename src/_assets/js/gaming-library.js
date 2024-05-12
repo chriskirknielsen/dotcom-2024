@@ -49,8 +49,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
 document.addEventListener('click', function (e) {
 	let target;
 	if ((target = e.target.closest('[data-games-toggled]'))) {
-		target.dataset.gamesToggled = String(target.dataset.gamesToggled !== 'true');
-		eachDom('details', (d) => (d.open = target.dataset.gamesToggled === 'true'));
+		const newPressed = target.getAttribute('aria-pressed') !== 'true';
+		target.setAttribute('aria-pressed', String(newPressed));
+		eachDom('details', (d) => (d.open = newPressed));
 	} else if ((target = e.target.closest('.gaming-spine-label'))) {
 		const gameData = JSON.parse(target.closest('[data-game]').getAttribute('data-game'));
 		const dialog = document.getElementById('gaming-details-dialog');

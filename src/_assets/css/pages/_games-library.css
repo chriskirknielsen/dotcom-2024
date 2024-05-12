@@ -1,18 +1,3 @@
-[data-games-toggled] {
-    & > span {
-        display: inline-block;
-        inline-size: 1em;
-    }
-
-    &:not([data-games-toggled="true"]) > span::before {
-        content: '►';
-    }
-
-    &[data-games-toggled="true"] > span::before {
-        content: '▼';
-    }
-}
-
 .gaming-platform-toggle {
     --CTA-display: flex;
 }
