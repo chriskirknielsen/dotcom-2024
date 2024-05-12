@@ -33,6 +33,7 @@ let msgs = [
 	`Oh look, I'm literally about to beat the final level!`,
 	`Screw it. You win. I'm done.`,
 ];
+let openGame = null;
 
 document.addEventListener('DOMContentLoaded', function (e) {
 	document.querySelector('[data-gaming-toolbar]').hidden = false; // Reveal the toolbar now that JS is enabled
@@ -55,6 +56,7 @@ document.addEventListener('click', function (e) {
 			d.open = newPressed;
 		});
 	} else if ((target = e.target.closest('.gaming-spine-label'))) {
+		openGame = target.closest('.gaming-spine'); // Update to the currently open game's list item
 		const gameData = JSON.parse(target.closest('[data-game]').getAttribute('data-game'));
 		const dialog = document.getElementById('gaming-details-dialog');
 		const template = document.getElementById('gaming-details-dialog-template');
@@ -76,7 +78,7 @@ document.addEventListener('click', function (e) {
 		clone.querySelector('[data-slot-computed="format"]').innerText = !gameData.discs ? 'digital' : gameData.discs > 1 ? `${gameData.discs} discs` : 'disc';
 		if (gameData.completed === null) {
 			clone.querySelector('[data-slot-checkbox="completed"]').indeterminate = true;
-			clone.querySelector('[data-slot-computed="completed"]').innerText = 'Partial';
+			clone.querySelector('[data-slot-computed="completed"]').innerText = 'Partially';
 		} else {
 			clone.querySelector('[data-slot-checkbox="completed"]').checked = gameData.completed;
 			clone.querySelector('[data-slot-computed="completed"]').innerText = gameData.completed ? 'Yes' : 'No';
@@ -121,6 +123,7 @@ document.addEventListener('click', function (e) {
 		}
 	} else if (e.target.closest('[data-hide-game-info]') || e.target.matches('.gaming-details-dialog')) {
 		const dialog = document.getElementById('gaming-details-dialog');
+		openGame = null;
 		if (!dialog) {
 			return;
 		}
@@ -161,5 +164,33 @@ document.addEventListener('change', function (e) {
 		const selectedValue = target.value || 'md';
 		const sizeMap = { sm: '0.75em', md: '1em', lg: '1.25em' };
 		eachDom('[data-gaming-platform]', (g) => (g.style.fontSize = sizeMap[selectedValue]));
+	}
+});
+
+document.addEventListener('keyup', function (e) {
+	let target;
+	if ((target = document.querySelector('.gaming-details-dialog'))) {
+		// If the dialog was closed via native means (e.g. Esc key), the openGame variable won't be up to date: let's fix that
+		if (!target.matches('[open]')) {
+			openGame = null;
+		}
+		// If there is no open game, or the user had a modifier key pressed, ignore this event
+		if (!openGame || e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) {
+			return;
+		}
+
+		// Look for the previous or next game of the same group; if the bounds have been reached, loop back around
+		let targetGame = null;
+		if (e.key === 'ArrowLeft') {
+			targetGame = openGame.previousElementSibling || openGame.parentElement.lastElementChild;
+		} else if (e.key === 'ArrowRight') {
+			targetGame = openGame.nextElementSibling || openGame.parentElement.firstElementChild;
+		}
+		if (targetGame) {
+			let targetSpine = targetGame.querySelector('.gaming-spine-label');
+			if (targetSpine) {
+				targetSpine.click();
+			}
+		}
 	}
 });

@@ -49,17 +49,25 @@
 
     will-change: transform;
     transform-origin: 50% 100%;
-    transition: transform var(--anim-short) var(--easing-in-out);
+
+    @media (--accept-motion) {
+        transition: var(--anim-short) var(--easing-in-out);
+        transition-property: opacity, transform;
+    }
 
     /* Scale up the hovered item */
-    &:hover {
+    &:has(.gaming-spine-label:hover) {
         transform: scale(1.025);
     }
 
     /* Previous and next games slightly scale up */
-    &:has(+ &:hover),
-    &:hover + & {
+    &:has(+ & .gaming-spine-label:hover),
+    &:has(.gaming-spine-label:hover) + & {
         transform: scale(1.0125);
+    }
+
+    .gaming-platform-group:has(.gaming-spine-label:hover) > &:not(:has(.gaming-spine-label:hover)) {
+        opacity: 0.8;
     }
 }
 
@@ -458,7 +466,7 @@
     border-radius: 0.25em;
 
     &[data-trophy-level="bronze"] {
-        color: #d7b9ac;
+        color: #f4cebd;
         background-color: #591c29;
     }
 

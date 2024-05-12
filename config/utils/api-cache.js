@@ -60,7 +60,7 @@ export default async function (settings) {
 	}
 
 	// We don't have data we can use, call the full APIs and cache the data
-	console.log(apiLabel + ': No cached data, fetching latest data.');
+	console.log(apiLabel + ': Empty or stale cache, fetching latest data.');
 	const dbData = await getData(dbInfo);
 
 	// If this did change, save the new last edit date value after we know that the database access was successful

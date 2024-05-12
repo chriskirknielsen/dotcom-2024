@@ -164,12 +164,6 @@ platformLabels: {
 
         <dl>
             <dt class="grouper grouper--icon-text-pair">
-                {% svg 'world', { class: 'inline-icon' } %}
-                <span>Region:</span>
-            </dt>
-            <dd data-slot="region"></dd>
-            
-            <dt class="grouper grouper--icon-text-pair">
                 {% svg 'controller', { class: 'inline-icon' } %}
                 <span>Platform:</span>
             </dt>
@@ -177,6 +171,12 @@ platformLabels: {
                 <span data-slot="platform"></span>
                 (<span data-slot-computed="format"></span>)
             </dd>
+
+            <dt class="grouper grouper--icon-text-pair">
+                {% svg 'world', { class: 'inline-icon' } %}
+                <span>Region:</span>
+            </dt>
+            <dd data-slot="region"></dd>
 
             <dt data-slot-show="dlc" class="grouper grouper--icon-text-pair">
                 {% svg 'added', { class: 'inline-icon' } %}
