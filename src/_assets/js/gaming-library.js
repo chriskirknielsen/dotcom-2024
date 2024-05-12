@@ -51,7 +51,9 @@ document.addEventListener('click', function (e) {
 	if ((target = e.target.closest('[data-games-toggled]'))) {
 		const newPressed = target.getAttribute('aria-pressed') !== 'true';
 		target.setAttribute('aria-pressed', String(newPressed));
-		eachDom('details', (d) => (d.open = newPressed));
+		eachDom('details', (d) => {
+			d.open = newPressed;
+		});
 	} else if ((target = e.target.closest('.gaming-spine-label'))) {
 		const gameData = JSON.parse(target.closest('[data-game]').getAttribute('data-game'));
 		const dialog = document.getElementById('gaming-details-dialog');
@@ -60,7 +62,7 @@ document.addEventListener('click', function (e) {
 		const clone = template.content.cloneNode(true);
 		const dialogTitleRefId = 'gaming-details-dialog-title';
 
-		clone.querySelectorAll('[data-slot-show], [data-slot]:not([data-slot-show] *)').forEach((s) => {
+		Array.from(clone.querySelectorAll('[data-slot-show], [data-slot]:not([data-slot-show] *)')).forEach((s) => {
 			const prop = s.getAttribute('data-slot-show') || s.getAttribute('data-slot');
 			const dataToTest = gameData[prop];
 			s.hidden = Array.isArray(dataToTest) ? dataToTest.length === 0 : !Boolean(dataToTest);
