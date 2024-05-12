@@ -103,7 +103,7 @@ document.addEventListener('click', function (e) {
 				: '';
 		if (gameData.trophyIcon) {
 			const iconHeight = parseInt(clone.querySelector('[data-slot-img="trophyIcon"]').getAttribute('height'), 10);
-			clone.querySelector('[data-slot-img="trophyIcon"]').src = `https://res.cloudinary.com/chriskirknielsen/image/fetch/c_fit,h_${iconHeight}/${encodeURI(
+			clone.querySelector('[data-slot-img="trophyIcon"]').src = `https://res.cloudinary.com/chriskirknielsen/image/fetch/c_fit,h_${iconHeight}/q_80/f_auto/${encodeURI(
 				gameData.trophyIcon
 			)}`;
 			clone.querySelector('[data-slot-img="trophyIcon"]').setAttribute('width', gameData.platform === 'PS5' ? iconHeight : iconHeight * (320 / 176)); // PS5 icons are square, PS3/Vita are 320x176

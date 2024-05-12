@@ -67,7 +67,7 @@
     }
 
     .gaming-platform-group:has(.gaming-spine-label:hover) > &:not(:has(.gaming-spine-label:hover)) {
-        opacity: 0.8;
+        opacity: 0.6;
     }
 }
 
