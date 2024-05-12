@@ -21,7 +21,14 @@ function toCloudinary(url, options) {
 	if (!url) {
 		throw new Error('Cannot convert to Cloudinary CDN: `url` value missing!');
 	}
-	const prefixStr = 'https://res.cloudinary.com/chriskirknielsen/image/fetch';
+
+	const cloudinaryAccountUrl = `https://res.cloudinary.com/chriskirknielsen`;
+
+	if (url.startsWith(cloudinaryAccountUrl)) {
+		return url;
+	}
+
+	const prefixStr = `${cloudinaryAccountUrl}/image/fetch`;
 	const optionsStr = String(options || '');
 	const encodedUrl = encodeURI(url);
 	const parts = [prefixStr, optionsStr, encodedUrl].filter(Boolean); // Remove empty parts (it can only be the options, or someting is very wrong)
