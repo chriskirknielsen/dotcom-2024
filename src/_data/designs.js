@@ -381,6 +381,19 @@ const designs = [
 		date: '2022-03-01',
 	},
 	{
+		slug: 'html-retro-vhs',
+		name: 'State of HTML',
+		description: 'Celebrate your love of HTML with an original design inspired by retro VHS tape covers',
+		note: 'Designed for the State of HTML survey',
+		img: 'html-retro-vhs.jpg',
+		links: {
+			CottonBureau: 'https://cottonbureau.com/p/8U4SGF/shirt/html-retro-vhs#/20217871/tee-men-standard-tee-vintage-black-tri-blend-m',
+		},
+		tags: ['dev', 'html', 'vhs', 'retro'],
+		similar: ['css-retro-vhs', 'js-retro-vhs'],
+		date: '2024-05-14',
+	},
+	{
 		slug: 'kevin-powell-grid',
 		name: 'Grid Layout',
 		description: 'Let the world know that you love CSS Grid!',
