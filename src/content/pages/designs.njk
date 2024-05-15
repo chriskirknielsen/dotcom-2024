@@ -27,7 +27,7 @@ summary: A collection of posters and shirt designs I've made, available across m
 <hr>
 
 <filtered-tiles class="flow" filters="{{ activeDesigns | pluck('tags') | flatten | unique | sort | join(',') }}">
-	<ul data-filtered-tiles-group class="cards" style="--spaced-items-gap: var(--size-m);">
+	<ul data-filtered-tiles-group class="cards">
 		{% for design in activeDesigns %}
 			<li class="card-wrapper" id="{{ design.slug }}"
 				data-tags="{{ design.tags | join(',') }}"

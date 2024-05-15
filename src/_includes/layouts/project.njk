@@ -6,7 +6,7 @@ backlink: { url: "/projects/", label: "Back to Projects" }
 {{ content | safe }}
 
 {% if externalUrl %}
-<p class="post-external | spaced-items inlined-items">
+<p class="post-external | grouper grouper--wrap">
 	{% component 'cta', {
 		url: externalUrl,
 		label: projectButtonLabel or "View Project",
