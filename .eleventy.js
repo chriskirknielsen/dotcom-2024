@@ -107,7 +107,7 @@ export default async function (eleventyConfig) {
 	eleventyConfig.addPlugin(markdownLibrary, {
 		anchorClass: 'heading-anchor',
 		outerCustomElement: 'code-wrap',
-		outerCustomElementAttrs: { class: 'codeblock', 'copy-label': '📋 Copy', 'copy-class': 'button' },
+		outerCustomElementAttrs: { class: 'codeblock', 'copy-label': '📋 Copy', 'copy-class': 'button', 'copy-done-label': '✅ Done' },
 		codeWrapTag: 'figure',
 		codeWrapToolbar: true,
 		hasCopyButton: false,
