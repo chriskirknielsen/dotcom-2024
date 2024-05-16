@@ -435,14 +435,27 @@ html[data-theme='director'] {
 
 	.homepage-photo {
 		/* Photo frame, kinda */
-		--frame-color: #2f1913;
+		--frame-color: #341b14;
+		--frame-size: 8px;
 
-		border: 8px ridge var(--frame-color);
+		border: var(--frame-size) solid var(--frame-color);
 		border-radius: 0;
 		background-color: #000;
 
-		transform: translateY(-4px);
+		transform: translateY(calc(-0.5 * var(--frame-size)));
 
+		/* Fix for Chrome and Safari rendering a very different ridge border color */
+		&::before {
+			content: '';
+			position: absolute;
+			inset: calc(-1 * var(--frame-size));
+
+			border: var(--frame-size) ridge #696969;
+
+			mix-blend-mode: overlay;
+		}
+
+		/* Glass reflection effect */
 		&::after {
 			content: '';
 
