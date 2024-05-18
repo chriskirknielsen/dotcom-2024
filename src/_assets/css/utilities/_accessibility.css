@@ -11,7 +11,7 @@
 
 	@keyframes targetHighlight {
 		from {
-			box-shadow: 0 0 67vmax 33vmax rgba(0, 0, 0, 0.5);
+			box-shadow: 0 0 33vmax 67vmax rgba(0, 0, 0, 0.5);
 			outline-width: 0.5em;
 			outline-offset: calc(var(--_focus-outline-offset) * 4);
 		}
