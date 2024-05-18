@@ -1,6 +1,21 @@
-:focus-visible {
+:focus-visible,
+:focus:target {
 	outline: var(--_focus-outline);
 	outline-offset: var(--_focus-outline-offset);
+}
+
+@media (--accept-motion) {
+	:target {
+		animation: targetHighlight var(--anim-eternity) var(--easing-out) var(--anim-eternity) backwards 1;
+	}
+
+	@keyframes targetHighlight {
+		from {
+			box-shadow: 0 0 67vmax 33vmax rgba(0, 0, 0, 0.5);
+			outline-width: 0.5em;
+			outline-offset: calc(var(--_focus-outline-offset) * 4);
+		}
+	}
 }
 
 .visually-hidden,

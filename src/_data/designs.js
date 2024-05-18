@@ -358,7 +358,7 @@ const designs = [
 		slug: 'css-retro-vhs',
 		name: 'State of CSS',
 		description: "Show your appreciation for everybody's favourite way to style the web with this retro shirt inspired by '90s blank VHS tapes",
-		note: 'Designed for the State of CSS survey',
+		note: 'Commission for the State of CSS survey',
 		img: 'css-retro-vhs.jpg',
 		links: {
 			CottonBureau: 'https://cottonbureau.com/products/css-retro-vhs#/13046404/tee-men-standard-tee-vintage-black-tri-blend-m',
@@ -371,7 +371,7 @@ const designs = [
 		slug: 'js-retro-vhs',
 		name: 'State of JS',
 		description: "Wear your JS colours from the perspective of a '90s VHS tape",
-		note: 'Designed for the State of JS survey',
+		note: 'Commission for the State of JS survey',
 		img: 'js-retro-vhs.jpg',
 		links: {
 			CottonBureau: 'https://cottonbureau.com/products/javascript-retro-vhs#/13799357/tee-men-standard-tee-vintage-black-tri-blend-m',
@@ -384,7 +384,7 @@ const designs = [
 		slug: 'html-retro-vhs',
 		name: 'State of HTML',
 		description: 'Celebrate your love of HTML with an original design inspired by retro VHS tape covers',
-		note: 'Designed for the State of HTML survey',
+		note: 'Commission for the State of HTML survey',
 		img: 'html-retro-vhs.jpg',
 		links: {
 			CottonBureau: 'https://cottonbureau.com/p/8U4SGF/shirt/html-retro-vhs#/20217871/tee-men-standard-tee-vintage-black-tri-blend-m',
@@ -397,7 +397,7 @@ const designs = [
 		slug: 'kevin-powell-grid',
 		name: 'Grid Layout',
 		description: 'Let the world know that you love CSS Grid!',
-		note: 'Designed for and sold by Kevin Powell',
+		note: 'Commission for Kevin Powell',
 		img: 'kevin-powell-grid.jpg',
 		links: {
 			CottonBureau: 'https://cottonbureau.com/p/Y55DSU/shirt/front-end-friends-css-grid#/19399708/tee-men-standard-tee-vintage-black-tri-blend-m',
@@ -410,7 +410,7 @@ const designs = [
 		slug: 'kevin-powell-css',
 		name: 'Cascading Stylesheets',
 		description: 'Embrace the cascade, and show others your love for CSS.',
-		note: 'Designed for and sold by Kevin Powell',
+		note: 'Commission for Kevin Powell',
 		img: 'kevin-powell-css.jpg',
 		links: {
 			CottonBureau: 'https://cottonbureau.com/p/URUZFW/shirt/front-end-friends-cascading-style-sheets#/19399691/tee-men-standard-tee-natural-100percent-cotton-m',
@@ -423,7 +423,7 @@ const designs = [
 		slug: 'kevin-powell-color-space',
 		name: 'Explore Color Space',
 		description: "Color spaces have really taken off in CSS (pun intended), and we think that's worth celebrating!",
-		note: 'Designed for and sold by Kevin Powell',
+		note: 'Commission for Kevin Powell',
 		img: 'kevin-powell-color-space.jpg',
 		links: {
 			CottonBureau: 'https://cottonbureau.com/p/B56YTR/shirt/front-end-friends-explore-color-space#/19399781/tee-men-standard-tee-vintage-black-tri-blend-m',

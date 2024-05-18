@@ -152,7 +152,6 @@
 }
 
 @media (--accept-motion) {
-
 	[data-name-part] {
 		transform: scale(0.9) translateY(10%);
 		will-change: transform;

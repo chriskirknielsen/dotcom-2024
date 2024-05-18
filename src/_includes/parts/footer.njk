@@ -7,9 +7,11 @@
             {% for footerNav in [nav.navbar, nav.footerExtras, nav.footerMisc, nav.footerSocial, nav.slashPages] %}
                 <ul class="inline-list">
                     {% for navItem in footerNav %}
+                        {% set linkHref = navItem.path if (not navItem.isRepoFileLink) else (metadata.repo + '/blob/main/' + page.inputPath) %}
                         <li><a
-                            href="{{ navItem.path if (not navItem.isRepoFileLink) else (metadata.repo + '/blob/main/' + page.inputPath) }}"
+                            href="{{ linkHref }}"
                             {{ navItem.path | current(page) | safe }}
+                            {% if 'mailto:' in navItem.path %}id="footer-email-link"{% endif %}
                         >{{ navItem.label }}</a></li>
                     {% endfor %}
                 </ul>
@@ -19,7 +21,7 @@
         <p>
             <strong>{{ metadata.author.name }}</strong>
             <br>
-			&copy; {{ metadata.currentYear | toRomanNumeral }}
+			&copy; <span aria-label="{{ metadata.currentYear }}">{{ metadata.currentYear | toRomanNumeral }}</span>
         </p>
     </div>
 
