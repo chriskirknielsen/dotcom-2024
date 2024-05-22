@@ -7,6 +7,7 @@
 	"scripts": {
 		"dev": "npx @11ty/eleventy --serve --quiet --incremental --port=2024",
 		"netlify": "netlify dev",
+		"debug": "DEBUG=Eleventy* npx @11ty/eleventy --dryrun",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],

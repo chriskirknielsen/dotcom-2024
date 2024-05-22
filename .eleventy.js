@@ -29,9 +29,6 @@ import pluginRss from '@11ty/eleventy-plugin-rss';
 import pageAssetsPluginMxbckFix from 'eleventy-plugin-page-assets';
 import pluginSyntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
 
-//* Helpers
-// const importInline = async (path, name = 'default') => (await import(path))[name]; // Allows eleventyConfig.addPlugin(await importInline('./config/shortcodes/codepen.js'));
-
 //* Constants
 const rootDir = 'src'; // Root folder
 const outputDir = '_site'; // Build destination folder
@@ -47,6 +44,7 @@ const purgeCssList = {
 	about: { safe: ['data-section=about'], block: ['data-section=home'] },
 };
 
+/** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default async function (eleventyConfig) {
 	//* Plugins
 	eleventyConfig.addPlugin(EleventyRenderPlugin);
