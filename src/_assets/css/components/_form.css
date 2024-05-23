@@ -15,7 +15,8 @@
     }
 }
 
-:is(form, [data-formlike]) :is(input, select, textarea, select) {
+:is(form, [data-formlike]) :is(input:where([type="text"], [type="number"], [type="search"]), select, textarea, select),
+[data-inputlike] {
     padding: var(--size-2xs) var(--size-s);
 
     color: var(--_cta-text-color);
@@ -30,4 +31,17 @@
     &:disabled {
         cursor: not-allowed;
     }
+}
+
+[data-inputlike="wrap"] {
+    display: flex;
+    align-items: center;
+}
+
+:is(form, [data-formlike]) :is(input, select, select) {
+    line-height: 1;
+}
+
+fieldset {
+    border: none;
 }
