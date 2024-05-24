@@ -15,7 +15,7 @@
 </p>
 
 <div class="fifty-fifty">
-    <div class="single-media" style="align-self: flex-start;">
+    <div class="single-media">
         <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" class="css-logo">
             <title>An unofficial CSS logo made with love by chriskirknielsen :)</title>
             <polygon id="css-logo-frame" points="433.798 464.1438 17.5099 464.1438 17.5099 47.8557 433.798 47.8557 433.798 206.1613 401.798 206.1613 401.798 79.8557 49.5099 79.8557 49.5099 432.1438 401.798 432.1438 401.798 404.465 433.798 404.465 433.798 464.1438"/>
@@ -23,7 +23,7 @@
             <path id="css-logo-s1" d="M266.1149,330.3928c0,19.8555,15.4658,27.5879,33.0215,27.5879,11.4951,0,29.0508-3.3438,29.0508-18.6006,0-16.0928-22.3623-18.8096-44.3076-24.6621-22.1538-5.8516-44.5166-14.4209-44.5166-42.4268,0-30.5137,28.8418-45.1436,55.8027-45.1436,31.1406,0,59.7734,13.585,59.7734,48.0693h-31.7676c-1.0449-17.9736-13.7939-22.5723-29.4688-22.5723-10.4502,0-22.5723,4.3896-22.5723,16.9297,0,11.4951,7.1064,12.958,44.5166,22.5713,10.8682,2.7178,44.3086,9.6143,44.3086,43.4727,0,27.3789-21.5273,47.8604-62.0732,47.8604-33.022,0-63.9536-16.3018-63.5356-53.0859h31.7681Z"/>
             <path id="css-logo-s2" d="M405.4313,330.3928c0,19.8555,15.4658,27.5879,33.0215,27.5879,11.4951,0,29.0508-3.3438,29.0508-18.6006,0-16.0928-22.3623-18.8096-44.3076-24.6621-22.1543-5.8516-44.5166-14.4209-44.5166-42.4268,0-30.5137,28.8418-45.1436,55.8027-45.1436,31.1406,0,59.7734,13.585,59.7734,48.0693h-31.7676c-1.0449-17.9736-13.7939-22.5723-29.4688-22.5723-10.4502,0-22.5723,4.3896-22.5723,16.9297,0,11.4951,7.1064,12.958,44.5166,22.5713,10.8682,2.7178,44.3086,9.6143,44.3086,43.4727,0,27.3789-21.5273,47.8604-62.0732,47.8604-33.0215,0-63.9541-16.3018-63.5361-53.0859h31.7686Z"/>
             {# <path id="css-logo-number" d="M383.4767,164.302v20.1592h-12.7402v21.7002h-23.7998v-21.7002h-42.7002v-22.2598l43.6797-53.6191h22.8203v55.7197h12.7402ZM347.6369,164.302v-31.5h-.2803l-24.6396,31.5h24.9199Z"/> #}
-            <text id="css-logo-number" font-family="HelveticaNeueLTStd-Hv, 'Helvetica Neue LT Std', Helvetica Neue, Helvetica, Roboto, sans-serif" font-size="140" letter-spacing="-0.025em" x="385" y="206.16" text-anchor="end">4</text>
+            <text id="css-logo-number" font-size="140" letter-spacing="-0.025em" x="385" y="206.16" text-anchor="end">4</text>
         </svg>
     </div>
 
@@ -33,25 +33,29 @@
         <form class="flow" data-csslogo-controls hidden>
             <h2>Customiser</h2>
 
-            <fieldset class="grouper grouper--wrap">
-                <legend class="visually-hidden">Number</legend>
-                <p><strong aria-hidden="true">Number</strong></p>
+            <div class="css-logo-control-groups | flow">
+                <fieldset class="css-logo-control-group | grouper grouper--wrap">
+                    <legend class="visually-hidden">Number</legend>
+                    <strong data-csslogo-control-area style="--control-area: --num-legend;" aria-hidden="true">Number</strong>
 
-                <label for="css-logo-value-control" class="visually-hidden">Version Number</label>
-                <input id="css-logo-value-control" type="number" min="1" max="999" step="1" value="4" size="5" data-csslogo-control="numberValue">
+                    <label for="css-logo-value-control" class="visually-hidden">Version Number</label>
+                    <input id="css-logo-value-control" type="number" min="1" max="999" step="1" value="4" size="5" data-csslogo-control="numberValue" data-csslogo-control-area style="--control-area: --num-input;">
 
-                {% component 'cta', { ctaType: 'button', iconBefore: true, icon: 'visibility', label: 'Toggle', ctaAttr: 'data-csslogo-control="toggleNumberVisibility" aria-pressed="false"' } %}
-            </fieldset>
+                    {% component 'cta', { ctaType: 'button', iconBefore: true, icon: 'visibility', label: 'Toggle', ctaAttr: 'data-csslogo-control="toggleNumberVisibility" aria-pressed="false" data-csslogo-control-area style="--control-area: --num-toggle;"' } %}
+                </fieldset>
 
-            <fieldset class="grouper grouper--wrap">
-                <legend class="visually-hidden">Color</legend>
-                <p><strong aria-hidden="true">Color</strong></p>
+                <fieldset class="css-logo-control-group | grouper grouper--wrap">
+                    <legend class="visually-hidden">Color</legend>
+                    <strong data-csslogo-control-area style="--control-area: --col-legend;" aria-hidden="true">Color</strong>
 
-                {% component 'cta', { ctaType: 'button', iconBefore: true, icon: 'arrow-bidir', label: 'Invert', ctaAttr: 'data-csslogo-control="toggleColorSwap" aria-pressed="false"' } %}
+                    <label for="css-logo-hue-control" class="visually-hidden">Logo Hue</label>
+                    <div data-inputlike="wrap" data-csslogo-control-area="colorHue" style="--control-area: --col-slider;">
+                        <input id="css-logo-hue-control" type="range" min="0" max="360" value="278" step="10" data-csslogo-control="colorHue">
+                    </div>
 
-                <label for="css-logo-hue-control" class="visually-hidden">Logo Hue</label>
-                <div data-inputlike="wrap"><input id="css-logo-hue-control" type="range" min="0" max="360" value="278" step="10" data-csslogo-control="colorHue"></div>
-            </fieldset>
+                    {% component 'cta', { ctaType: 'button', iconBefore: true, icon: 'arrow-bidir', label: 'Invert', ctaAttr: 'data-csslogo-control="toggleColorSwap" aria-pressed="false" data-csslogo-control-area style="--control-area: --col-toggle;"' } %}
+                </fieldset>
+            </div>
         </form>
 
         <script>
@@ -87,6 +91,7 @@
                         let newNum = parseInt(control.value, 10);
                         if (newNum && !isNaN(newNum)) {
                             cssLogoNum.classList.add('css-logo-number-shown');
+                            form.querySelector('[data-csslogo-control="toggleNumberVisibility"]').setAttribute('aria-pressed', 'true');
                         } else {
                             newNum = 4; // Reset to 4 on failure
                             if (control.value.trim() !== '') {
@@ -126,6 +131,9 @@
                 --css-omega: hsl(var(--css-hue, 278.1), 68.4%, 29.8%);
                 --css-alpha: hsl(278.1, 100%, 97.8%);
 
+                block-size: auto;
+                inline-size: 100%;
+
                 fill: var(--css-omega);
                 background: var(--css-alpha);
             }
@@ -143,6 +151,7 @@
             }
 
             #css-logo-number {
+                font-family: HelveticaNeueLTStd-Hv, 'Helvetica Neue LT Std', SF Pro Text, Helvetica Neue, Helvetica, Roboto, sans-serif;
                 font-weight: 800;
 
                 /*
@@ -165,6 +174,38 @@
             }
 
             [data-csslogo-controls][hidden] ~ .css-logo-usage { --flow-space: 0px; }
+            
+            [data-csslogo-controls] {
+                container: csslogo / inline-size;
+                inline-size: 100%;
+            }
+
+            @container csslogo (inline-size >= 20rem) {
+                .css-logo-control-groups {
+                    display: grid;
+                    grid-template-rows: auto auto;
+                    grid-template-columns: auto auto min-content max-content;
+                    grid-template-areas:
+                        "--num-legend --num-legend --num-input --num-toggle"
+                        "--col-legend --col-slider --col-slider --col-toggle";
+                    gap: var(--GAP,var(--size-m));
+                    inline-size: fit-content;
+                    max-inline-size: 100%;
+                }
+
+                .css-logo-control-group {
+                    display: contents;
+                }
+
+                [data-csslogo-control-area] {
+                    grid-area: var(--control-area);
+                }
+
+                [data-csslogo-control-area="colorHue"] {
+                    inline-size: 0;
+                    min-inline-size: 100%;
+                }
+            }
 
             #css-logo-hue-control {
                 --slider-track-height: 12px;
@@ -176,8 +217,9 @@
                 --slider-thumb-radius: clamp(0px, var(--_corner) * 999, var(--slider-thumb-size) / 2);
                 --slider-thumb-bg: var(--_cta-bg-color);
 
-                width: 10rem;
-                max-width: 100%;
+                block-size: var(--slider-track-height);
+                inline-size: 10rem;
+                max-inline-size: 100%;
 
                 -webkit-appearance: none;
                 appearance: none;
@@ -249,4 +291,4 @@
     </div>
 </div>
 
-<p class="fontStyle-italic fontSize-small">For type nerds: this uses a modified Helvetica Neue LT Std (I opened the C more to match the S), at weight 75 (Bold). The number is set in the same font at weight 85 (Heavy).</p>
+<p class="fontStyle-italic fontSize-small">For type nerds: this uses a modified Helvetica Neue LT Std (I opened the C more to match the S), at weight 75 (Bold). The number is set in the same font at weight 85 (Heavy) in the original design — the editable version uses sans-serif fonts from your computer.</p>

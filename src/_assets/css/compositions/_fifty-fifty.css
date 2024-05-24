@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--size-xl);
+    align-items: flex-start;
 
     & > * {
         flex-grow: 1;
