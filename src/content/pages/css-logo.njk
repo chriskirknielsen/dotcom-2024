@@ -34,7 +34,7 @@
             <h2>Customiser</h2>
 
             <div class="css-logo-control-groups | flow">
-                <fieldset class="css-logo-control-group | grouper grouper--wrap">
+                <fieldset class="css-logo-control-group | grouper grouper--vertical">
                     <legend class="visually-hidden">Number</legend>
                     <strong data-csslogo-control-area style="--control-area: --num-legend;" aria-hidden="true">Number</strong>
 
@@ -44,7 +44,7 @@
                     {% component 'cta', { ctaType: 'button', iconBefore: true, icon: 'visibility', label: 'Toggle', ctaAttr: 'data-csslogo-control="toggleNumberVisibility" aria-pressed="false" data-csslogo-control-area style="--control-area: --num-toggle;"' } %}
                 </fieldset>
 
-                <fieldset class="css-logo-control-group | grouper grouper--wrap">
+                <fieldset class="css-logo-control-group | grouper grouper--vertical">
                     <legend class="visually-hidden">Color</legend>
                     <strong data-csslogo-control-area style="--control-area: --col-legend;" aria-hidden="true">Color</strong>
 
@@ -218,8 +218,8 @@
                 --slider-thumb-bg: var(--_cta-bg-color);
 
                 block-size: var(--slider-track-height);
-                inline-size: 10rem;
-                max-inline-size: 100%;
+                inline-size: 100%;
+                min-inline-size: 5rem;
 
                 -webkit-appearance: none;
                 appearance: none;
