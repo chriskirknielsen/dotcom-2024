@@ -60,7 +60,7 @@ class TableOfContents {
 
 	/** Creates a list with all the hierarchy represented. */
 	populateList(levelItems) {
-		const list = this.$('<ul>');
+		const list = this.$('<ol>');
 
 		for (let heading in levelItems) {
 			const headingData = levelItems[heading];
@@ -90,7 +90,7 @@ class TableOfContents {
 			this.parseHeading(h, this.hierachy);
 		});
 
-		const list = this.populateList(this.hierachy, true);
+		const list = this.populateList(this.hierachy);
 		list.addClass(this.listClass);
 		if (this.listLabelledBy) list.attr('aria-labelledby', this.listLabelledBy);
 		return list.prop('outerHTML');

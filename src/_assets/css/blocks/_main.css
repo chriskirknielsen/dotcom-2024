@@ -17,13 +17,38 @@ main:focus-visible {
 
 .post-content {
 	& > .toc {
-		& > ul {
+		& > ol {
 			columns: 150px 2;
 			column-gap: var(--layout-gutter);
 		}
 
+		ol {
+			counter-reset: tocList;
+
+			ol {
+				--toc-marker-type: upper-alpha;
+
+				ol {
+					--toc-marker-type: lower-alpha;
+				}
+			}
+
+		}
+
 		li {
+			counter-increment: tocList;
+
 			page-break-inside: avoid;
+
+			&::marker {
+				content: counter(tocList, var(--toc-marker-type, decimal-leading-zero)) "  ";
+
+				font-size: 0.5em;
+			}
+
+			&:not(:has(> a:is(:hover, :focus-visible)))::marker {
+				color: color-mix(in hsl, var(--C-text), transparent 30%);
+			}
 		}
 	}
 
