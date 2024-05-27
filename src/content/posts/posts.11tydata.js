@@ -19,5 +19,8 @@ export default {
 		permalink: function (data) {
 			return `blog/${this.slug(data.slug || data.page.fileSlug)}/index.html`;
 		},
+		customMetaImage: function (data) {
+			return this.toPath([data.assets.images, 'metaimage-blog.jpg']);
+		},
 	},
 };

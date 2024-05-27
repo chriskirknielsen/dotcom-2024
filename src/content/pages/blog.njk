@@ -2,6 +2,8 @@
 permalink: /blog/
 title: Bloggy Corner
 summary: I like to write once in a while. Enjoy!
+eleventyComputed:
+    customMetaImage: "{{ ([assets.images, 'metaimage-blog.jpg'] | toPath) }}"
 ---
 
 {% component 'postlist', {postlist: collections['_posts']} %}
