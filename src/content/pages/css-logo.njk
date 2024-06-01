@@ -210,11 +210,11 @@
             [data-csslogo-controls][hidden] ~ .css-logo-usage { --flow-space: 0px; }
             
             [data-csslogo-controls] {
-                container: csslogo / inline-size;
+                container: cssLogoControls / inline-size;
                 inline-size: 100%;
             }
 
-            @container csslogo (inline-size >= 20rem) {
+            @container cssLogoControls (inline-size >= 20rem) {
                 .css-logo-control-groups {
                     display: grid;
                     grid-template-rows: auto auto;
@@ -241,6 +241,12 @@
                 }
             }
 
+            #css-logo-value-control {
+                min-inline-size: 4rem;
+
+                text-align: end;
+            }
+
             #css-logo-hue-control {
                 --slider-track-height: 12px;
                 --slider-track-bg:
@@ -253,7 +259,6 @@
 
                 block-size: var(--slider-track-height);
                 inline-size: 100%;
-                min-inline-size: 5rem;
 
                 -webkit-appearance: none;
                 appearance: none;
