@@ -23,8 +23,7 @@ import markdownLibrary from './config/libraries/markdown.js';
 import cssTransforms from './config/transforms/css.js';
 
 import markdownIt from 'markdown-it';
-import { EleventyRenderPlugin } from '@11ty/eleventy';
-import bundlerPlugin from '@11ty/eleventy-plugin-bundle';
+import { EleventyRenderPlugin, BundlePlugin } from '@11ty/eleventy';
 import pluginRss from '@11ty/eleventy-plugin-rss';
 import pageAssetsPluginMxbckFix from 'eleventy-plugin-page-assets';
 import pluginSyntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
@@ -48,7 +47,7 @@ const purgeCssList = {
 export default async function (eleventyConfig) {
 	//* Plugins
 	eleventyConfig.addPlugin(EleventyRenderPlugin);
-	eleventyConfig.addPlugin(bundlerPlugin, {
+	eleventyConfig.addPlugin(BundlePlugin, {
 		toFileDirectory: 'assets',
 		transforms: [
 			async function (content) {
