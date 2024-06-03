@@ -1,7 +1,8 @@
 {
 	"name": "2024",
 	"version": "1.0.0",
-	"description": "",
+	"author": "chriskirknielsen",
+	"description": "Personal website for Christopher Kirk-Nielsen.",
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
@@ -10,8 +11,11 @@
 		"debug": "DEBUG=Eleventy* npx @11ty/eleventy --dryrun",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
+	"repository": {
+		"type": "git",
+		"url": "http://github.com/chriskirknielsen/dotcom-2024"
+	},
 	"keywords": [],
-	"author": "",
 	"license": "ISC",
 	"devDependencies": {
 		"@11ty/eleventy": "^3.0.0-alpha.10",
