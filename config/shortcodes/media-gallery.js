@@ -6,7 +6,7 @@ function imageGalleryShortcode(pictures, addClass = []) {
 	let galleryClasses = [];
 	if (addClass) {
 		if (typeof addClass === 'string') {
-			addClass = addClass.split(' ').filter((str) => str.length > 0);
+			addClass = addClass.split(' ').filter((str) => str.trim().length > 0);
 		}
 		galleryClasses = galleryClasses.concat(addClass);
 	}
@@ -121,24 +121,18 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 	return output;
 }
 
-const imageShortcode = (src, alt, caption = '', options = {}) => mediaShortcode('image', src, alt, caption, options);
-const videoShortcode = (src, alt, caption = '', options = {}) => mediaShortcode('video', src, alt, caption, options);
-
 export default function (eleventyConfig, options = {}) {
 	const galleryClasses = options.galleryClasses || null;
+	const mediaHandler = (type = 'image') => {
+		return (src, alt, caption = '', options = {}) => mediaShortcode(type, src, alt, caption, Object.assign({ _galleryClasses: galleryClasses }, options)); // Returns a function used by the shortcode
+	};
 
-	function mediaHandler(shortcodeHandler) {
-		return function (src, alt = '', caption = '', opts = {}) {
-			return shortcodeHandler(src, alt, caption, Object.assign({ _galleryClasses: galleryClasses }, opts));
-		};
-	}
-
-	eleventyConfig.addShortcode('image', mediaHandler(imageShortcode));
-	eleventyConfig.addShortcode('video', mediaHandler(videoShortcode));
+	eleventyConfig.addShortcode('image', mediaHandler('image'));
+	eleventyConfig.addShortcode('video', mediaHandler('video'));
 	eleventyConfig.addPairedShortcode('gallery', (pictures) => imageGalleryShortcode(pictures, galleryClasses));
 
 	eleventyConfig.addShortcode('footersvg', async function (src, attrs = {}) {
-		let metadata = await pluginImage(`src/_includes/assets/svg/${src}`, {
+		return pluginImage(`src/_includes/assets/svg/${src}`, {
 			urlPath: `/assets/svg`,
 			outputDir: `./_site/assets/svg/`,
 			widths: [1200],
@@ -148,8 +142,8 @@ export default function (eleventyConfig, options = {}) {
 				const filename = src.split('/').at(-1).replace('.svg', ''); // Last part of the path, minus the extension (hardcoded because "footersvg" innit)
 				return `${filename}.${format}`;
 			},
+		}).then((metadata) => {
+			return pluginImage.generateHTML(metadata, { ...attrs, alt: '', loading: 'lazy', decoding: 'async' }, { pictureAttributes: attrs });
 		});
-
-		return await pluginImage.generateHTML(metadata, { ...attrs, alt: '', loading: 'lazy', decoding: 'async' }, { pictureAttributes: attrs });
 	});
 }
