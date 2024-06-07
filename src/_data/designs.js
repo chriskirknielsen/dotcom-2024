@@ -75,7 +75,7 @@ const designs = [
 		slug: 'vhs-a11y',
 		name: 'Blank VHS A11Y',
 		description: 'In a world where the web runs on VHS tapes…',
-		note: 'For posters, RedBubble or Society6 are recommended',
+		note: 'For posters, RedBubble or Society6 are recommended<br>Thanks to <a href="https://benmyers.dev/">Ben Myers</a> for the idea!',
 		img: 'vhs-a11y.jpg',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-Blank-VHS-A11Y-by-ckirknielsen/161318764.CW2C9?asc=u',
