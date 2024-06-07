@@ -28,7 +28,7 @@
 
 {% set meta_image_url %}{{ customMetaImage or ([assets.images, 'metaimage.jpg'] | toPath) }}{% endset %}
 <meta name="twitter:image" property="og:image" content="{{ meta_image_url | trim | absoluteUrl(metadata.url) }}">
-<meta name="twitter:image:alt" property="og:image:alt" content="{{ title  }}"/>
+<meta name="twitter:image:alt" property="og:image:alt" content="{{ title }}">
 
 <link href="{{ social.mastodon.url }}" rel="me">
 
