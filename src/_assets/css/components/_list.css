@@ -47,6 +47,10 @@ ol > li > ol {
     }
 }
 
+.flex-list--center {
+    justify-content: center;
+}
+
 [data-list] > li + li {
     margin-block-start: 1em;
 }

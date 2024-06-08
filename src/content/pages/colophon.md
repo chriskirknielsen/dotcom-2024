@@ -50,3 +50,12 @@ I want to be more outdoorsy, but living in a city, this will have to do for now,
 If you've every played Control, this one will seem familiar. It draws from the game's look and feel (brutalist with hints of colour), and the inverted pyramids. The headings are set in [TeX Gyre Adventor](https://www.fontsquirrel.com/fonts/tex-gyre-adventor), a close match to the original ITC Avant-Garde Gothic used in the game.
 
 Thank you so much for stopping by!
+
+{% renderTemplate 'njk' %}
+<ul class="flex-list flex-list--center">
+    <li>
+        <!-- Made by leap123: https://front-end.social/@leap123@wetdry.world/111641069489695533 -->
+        <a href="https://11ty.dev"><img src="/assets/img/made-with-11ty.gif" alt="Made with Eleventy"></a>
+    </li>
+</ul>
+{% endrenderTemplate %}
