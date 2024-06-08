@@ -2,7 +2,7 @@
     <div class="header">
         <a href="/" class="header-logo" {{ '/' | current(page) | safe }} aria-label="Home">
             {% svg 'logo', {
-                class: 'logo',
+                class: 'logo | u-logo',
                 title: 'Home'
             } %}
         </a>

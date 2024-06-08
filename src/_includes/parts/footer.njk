@@ -11,7 +11,7 @@
                         <li><a
                             href="{{ linkHref }}"
                             {{ navItem.path | current(page) | safe }}
-                            {% if 'mailto:' in navItem.path %}id="footer-email-link"{% endif %}
+                            {% if 'mailto:' in navItem.path %}id="footer-email-link" class="u-email"{% endif %}
                         >{{ navItem.label }}</a></li>
                     {% endfor %}
                 </ul>
@@ -19,7 +19,7 @@
         </div>
 
         <p>
-            <strong>{{ metadata.author.name }}</strong>
+            <strong class="p-name">{{ metadata.author.name }}</strong>
             <br>
 			&copy; <span aria-label="{{ metadata.currentYear }}">{{ metadata.currentYear | toRomanNumeral }}</span>
         </p>

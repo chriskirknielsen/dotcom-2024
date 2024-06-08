@@ -127,8 +127,11 @@ summary:  "Welcome to the personal website of the one they call Christopher Kirk
 		</span>
 	</span>
 
-	{% svg 'name-wide', { class: 'homepage-logo-name homepage-logo-name--wide', title: metadata.author.name } %}
-	{% svg 'name-stack', { class: 'homepage-logo-name homepage-logo-name--stack', title: metadata.author.name } %}
+	<span class="visually-hidden | p-name">{{ metadata.author.name }}</span>
+
+	{% svg 'name-wide', { class: 'homepage-logo-name homepage-logo-name--wide' } %}
+	{% svg 'name-stack', { class: 'homepage-logo-name homepage-logo-name--stack' } %}
+	
 
 	<span class="homepage-logo-text homepage-logo-text--below">
 		<span>
@@ -142,7 +145,7 @@ summary:  "Welcome to the personal website of the one they call Christopher Kirk
 	<h2>The Human Behind the Website</h2>
 
 	<p>
-		Hey there, my name’s Chris! I’m a <strong>front-end developer</strong> with a designer background who loves building for the web. I currently work at <a href="https://mojopsg.com">MOJO</a> and still <a href="/designs/">design</a> on occasion. I enjoy languages, movies, and <strong>any kind of pun</strong>. Oh, and I’m bald thanks to my DNA. Still curious?
+		Hey there, my name’s Chris! I’m a <strong class="p-job-title">front-end developer</strong> with a designer background who loves building for the web. I currently work at <a href="https://mojopsg.com">MOJO</a> and still <a href="/designs/">design</a> on occasion. I enjoy languages, movies, and <strong>any kind of pun</strong>. Oh, and I’m bald thanks to my DNA. Still curious?
 		{% component 'cta', {
 			url: '/about/',
 			label: 'More about me',
@@ -159,6 +162,7 @@ summary:  "Welcome to the personal website of the one they call Christopher Kirk
 			alt="A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head."
 			width="256"
 			height="256"
+			class="u-photo"
 		>
 	</div>
 
