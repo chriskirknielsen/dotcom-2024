@@ -52,10 +52,23 @@ If you've every played Control, this one will seem familiar. It draws from the g
 Thank you so much for stopping by!
 
 {% renderTemplate 'njk' %}
-<ul class="flex-list flex-list--center">
-    <li>
-        <!-- Made by leap123: https://front-end.social/@leap123@wetdry.world/111641069489695533 -->
-        <a href="https://11ty.dev"><img src="/assets/img/made-with-11ty.gif" alt="Made with Eleventy"></a>
-    </li>
-</ul>
+<div>
+    <ul class="flex-list flex-list--center">
+        <li>
+            <img src="/assets/img/ckn-88x31.gif" alt="chriskirknielsen dot com">
+        </li>
+        <li>
+            <a href="https://11ty.dev" class="display-block"><img src="/assets/img/made-with-11ty.gif" alt="Made with Eleventy"></a>
+        </li>
+        <li>
+            <img src="/assets/img/always-under-construction.png" alt="Always under constructiton.">
+        </li>
+        <li>
+            <img src="/assets/img/tested-on-firefox.gif" alt="Tested on Firefox">
+        </li>
+        <li>
+            <img src="/assets/img/no-to-web3.gif" alt="Keep the web free: say no to Web 3.">
+        </li>
+    </ul>
+</div>
 {% endrenderTemplate %}
