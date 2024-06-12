@@ -53,7 +53,7 @@ Thank you so much for stopping by!
 
 {% renderTemplate 'njk' %}
 <div>
-    <ul class="flex-list flex-list--center">
+    <ul class="flex-list flex-list--center | img-88x31-list">
         <li>
             <img src="/assets/img/ckn-88x31.gif" alt="chriskirknielsen dot com">
         </li>
