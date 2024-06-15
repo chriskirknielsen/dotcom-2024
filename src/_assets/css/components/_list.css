@@ -1,56 +1,55 @@
 ol > li > ol {
-    list-style-type: lower-alpha;
+	list-style-type: lower-alpha;
 }
 
 .inline-list {
-    text-wrap: balance;
+	--item-gap: max(var(--GAP, 0px), 12px, 0.75em); /* Ensure there is at least 8px between items */
 
-    &:is(:not([data-flow]), [data-flow="block"]) {
-        display: block;
-    }
+	text-wrap: balance;
 
-    &[data-flow="run-in"] {
-        display: inline;
-    }
+	&:is(:not([data-flow]), [data-flow='block']) {
+		display: block;
+	}
 
-    & > li {
-        --item-gap: max(var(--GAP, 0px), 12px, 0.75em);
+	&[data-flow='run-in'] {
+		display: inline;
+	}
 
-        display: inline;
+	& > li {
+		display: inline;
 
-        & > a {
-            display: inline-block;
-            padding-block: var(--GAP, 0px);
-        }
-    }
+		& > a {
+			display: inline-block;
+			padding-block: var(--GAP, 0px);
+		}
+	}
 
-    & > li:not(:last-child) {
-        &::after {
-            content: ' ';
+	& > li:not(:last-child) {
+		&::after {
+			content: ' ';
 
-            letter-spacing: var(--item-gap);
-            /* Ensure there is at least 8px between items */
-            background: var(--separator, radial-gradient(circle at center, currentColor 2px, transparent 0));
-            opacity: 0.75;
-        }
-    }
+			letter-spacing: var(--item-gap);
+			background: var(--separator, radial-gradient(circle at center, currentColor 2px, transparent 0));
+			opacity: 0.75;
+		}
+	}
 }
 
 .flex-list {
-    list-style-type: "";
-    display: flex;
-    flex-wrap: wrap;
-    gap: max(8px, var(--list-gap, var(--size-xs)));
+	list-style-type: '';
+	display: flex;
+	flex-wrap: wrap;
+	gap: max(8px, var(--list-gap, var(--size-xs)));
 
-    & .button {
-        --CTA-display: flex;
-    }
+	& .button {
+		--CTA-display: flex;
+	}
 }
 
 .flex-list--center {
-    justify-content: center;
+	justify-content: center;
 }
 
 [data-list] > li + li {
-    margin-block-start: 1em;
+	margin-block-start: 1em;
 }

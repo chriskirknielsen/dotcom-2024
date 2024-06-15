@@ -21,8 +21,7 @@
 .card-wrapper {
 	container: cardWrap / inline-size;
 
-	display: flex;
-	/* Stretch by default */
+	display: flex; /* Stretch by default */
 }
 
 .card {
@@ -36,8 +35,7 @@
 
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
-	/* Hide image corners if they poke out of the container */
+	overflow: hidden; /* Hide image corners if they poke out of the container */
 	inline-size: 100%;
 
 	text-decoration: none;
@@ -116,7 +114,6 @@
 }
 
 .card-heading {
-
 	&,
 	& > a {
 		--LINK-color: var(--_card-heading-color);

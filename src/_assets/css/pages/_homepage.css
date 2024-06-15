@@ -12,14 +12,23 @@
 
 	grid-column: 1 / -1;
 	display: grid;
-	grid-template-columns: [--edge-start] 1fr [--center-start] auto [--center-end] 1fr [--edge-end];
+	grid-template-columns:
+		[--edge-start] 1fr
+		[--center-start] auto
+		[--center-end] 1fr
+		[--edge-end];
 	grid-template-rows:
-		[--deco-start] var(--deco-sizing, 0.9fr) [--text-start --text-above-start] auto [--text-above-end --name-start] 1fr [--name-end --text-below-start] auto [--text-below-end --text-end] var(--deco-sizing, 0.9fr) [--deco-end];
+		[--deco-start] var(--deco-sizing, 0.9fr)
+		[--text-start --text-above-start] auto
+		[--text-above-end --name-start] 1fr
+		[--name-end --text-below-start] auto
+		[--text-below-end --text-end] var(--deco-sizing, 0.9fr)
+		[--deco-end];
 	place-content: center;
 	gap: 0;
-	overflow: hidden;
-	/* Constrain the graphic to the allocated grid columns */
 
+	/* Constrain the graphic to the allocated grid columns */
+	overflow: hidden;
 	contain: paint;
 	isolation: isolate;
 
@@ -31,7 +40,8 @@
 	text-shadow: none;
 
 	/* Fade the lines out if the viewport is large */
-	mask: linear-gradient(90deg, transparent 0, red calc((100% - var(--layout-max-content)) / 2), red calc(100% - (100% - var(--layout-max-content)) / 2), transparent 100%) repeat-y 50% 50% / max(100%, var(--layout-max-content)) 100%;
+	mask: linear-gradient(90deg, transparent 0, red calc((100% - var(--layout-max-content)) / 2), red calc(100% - (100% - var(--layout-max-content)) / 2), transparent 100%)
+		repeat-y 50% 50% / max(100%, var(--layout-max-content)) 100%;
 
 	&::before,
 	&::after {
@@ -66,8 +76,7 @@
 	align-items: center;
 	aspect-ratio: 1;
 	block-size: 100%;
-	justify-self: center;
-	/* Fix for Firefox not properly handling aspect-ratio in an auto grid track */
+	justify-self: center; /* Fix for Firefox not properly handling aspect-ratio in an auto grid track */
 
 	svg {
 		inline-size: auto;
@@ -97,8 +106,8 @@
 		animation-delay: calc(300ms + var(--CTX-delay, 0) * 100ms);
 	}
 
-	[data-deco-anim]:not([data-deco-anim="path"]),
-	[data-deco-anim="transform"] {
+	[data-deco-anim]:not([data-deco-anim='path']),
+	[data-deco-anim='transform'] {
 		transform: var(--CTX-from, none);
 		transform-origin: 50% 50%;
 
@@ -106,7 +115,7 @@
 		animation-name: resetTransform;
 	}
 
-	[data-deco-anim="path"] {
+	[data-deco-anim='path'] {
 		/*!
 			pathLength is 1 but vector-effect:non-scaling-stroke causes the ratio
 			between initial size and final size to affect the dasharray/offset, so
@@ -163,7 +172,7 @@
 		animation-delay: calc(var(--anim-short) + var(--d, 0) * var(--anim-delay) * var(--f, 2));
 	}
 
-	[data-name-part="last"] {
+	[data-name-part='last'] {
 		--f: 4;
 	}
 }
@@ -271,10 +280,8 @@
 	}
 
 	.homepage-logo-circles {
-		max-block-size: 133vw;
-		/*! Magic number, to avoid oversized circles on Safari, looks decent */
-		overflow: hidden;
-		/* Prevent the graphic from taking up more than the necessary size on Safari, causing the rest of the grid to be oversized */
+		max-block-size: 133vw; /*! Magic number, to avoid oversized circles on Safari, looks decent */
+		overflow: hidden; /* Prevent the graphic from taking up more than the necessary size on Safari, causing the rest of the grid to be oversized */
 	}
 
 	.homepage-logo-name--stack {

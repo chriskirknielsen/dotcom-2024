@@ -1,61 +1,65 @@
 .expander-button:not(#\#) {
-    position: sticky;
-    inset-block-start: 0;
-    z-index: 2;
+	position: sticky;
+	inset-block-start: 0;
+	z-index: 2;
 
-    --CTA-display: flex;
+	--CTA-display: flex;
 
-    &::-webkit-details-marker {
-        display: none;
-    }
+	&::-webkit-details-marker {
+		display: none;
+	}
 }
 
 .expander-button-arrow {
-    display: inline-block;
-    block-size: 0;
-    inline-size: 0;
+	display: inline-block;
+	block-size: 0;
+	inline-size: 0;
 
-    --SQRT3: 1.7321;
-    --arrow-side-size: 0.5em;
-    border-width: calc(var(--arrow-side-size) / 2) 0 calc(var(--arrow-side-size) / 2) calc(var(--SQRT3) * var(--arrow-side-size) / 2);
-    /* Equilateral triangle has h = √3 * a / 2, where a is the side */
-    border-style: solid;
-    border-color: transparent transparent transparent var(--EXPANDER-button-arrow-color, currentColor);
+	--SQRT3: 1.7321;
+	--arrow-side-size: 0.5em;
 
-    transform-origin: 42.5% 50%;
-    transform-origin: calc(100% - var(--SQRT3) * 100% / 3) 50%;
-    /* Center of mass for a triangle, for side a, is C = (a√3)/3 */
+	/**
+     * 1: Equilateral triangle has h = √3 * a / 2, where a is the side
+     * 2: Center of mass for a triangle, for side a, is C = (a√3)/3
+     */
 
-    transition: transform var(--anim-short) var(--easing-in-out);
+	border-width: calc(var(--arrow-side-size) / 2) 0 calc(var(--arrow-side-size) / 2) calc(var(--SQRT3) * var(--arrow-side-size) / 2); /* 1 */
+	border-style: solid;
+	border-color: transparent transparent transparent var(--EXPANDER-button-arrow-color, currentColor);
 
-    .expander[open] &,
-    .expander-button[aria-pressed='true'] & {
-        transform: rotate(90deg);
-    }
+	transform-origin: 42.5% 50%;
+	transform-origin: calc(100% - var(--SQRT3) * 100% / 3) 50%; /* 2 */
+
+	transition: transform var(--anim-short) var(--easing-in-out);
+
+	.expander[open] &,
+	.expander-button[aria-pressed='true'] & {
+		transform: rotate(90deg);
+	}
 }
 
 .expander-content {
-    --CODE-bg: var(--C-surface-alt, var(--C-canvas));
-    padding: var(--size-m) var(--layout-gutter);
-    margin-inline: var(--size-s);
+	--CODE-bg: var(--C-surface-alt, var(--C-canvas));
+	padding: var(--size-m) var(--layout-gutter);
+	margin-inline: var(--size-s);
 
-    background: var(--C-surface);
-    box-shadow: var(--_shadow);
+	background: var(--C-surface);
+	box-shadow: var(--_shadow);
 }
 
 cycling-expander {
-    isolation: isolate;
+	isolation: isolate;
 }
 
-cycling-expander .expander[data-open="true"] .expander-content {
-    will-change: opacity, transform, margin-block-end;
-    animation: cyclingExpanderReveal var(--anim-long) var(--easing-circ-in) 1 backwards;
+cycling-expander .expander[data-open='true'] .expander-content {
+	will-change: opacity, transform, margin-block-end;
+	animation: cyclingExpanderReveal var(--anim-long) var(--easing-circ-in) 1 backwards;
 }
 
 @keyframes cyclingExpanderReveal {
-    from {
-        opacity: 0;
-        transform: translateY(-2em);
-        margin-block-end: -2em;
-    }
+	from {
+		opacity: 0;
+		transform: translateY(-2em);
+		margin-block-end: -2em;
+	}
 }

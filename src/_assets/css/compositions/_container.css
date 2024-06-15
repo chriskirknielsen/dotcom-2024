@@ -37,7 +37,16 @@
 		*/
 	--content-cols: 3;
 	grid-template-columns:
-		[--fullbleed-start --start2center-start] minmax(0, 1fr) [--wide-start] var(--layout-gutter) [--container-start --body-start] var(--content-subcol-minmax) var(--layout-gutter) var(--content-subcol-minmax--minus-gutter-half) [--start2center-end] var(--layout-gutter) [--center2end-start] var(--content-subcol-minmax--minus-gutter-half) [--body-end] var(--layout-gutter) [--side-start] var(--content-subcol-minmax) [--side-end --container-end] var(--layout-gutter) [--wide-end] minmax(0, 1fr) [--center2end-end --fullbleed-end];
+		[--fullbleed-start --start2center-start] minmax(0, 1fr)
+		[--wide-start] var(--layout-gutter)
+		[--container-start --body-start] var(--content-subcol-minmax) var(--layout-gutter) var(--content-subcol-minmax--minus-gutter-half)
+		[--start2center-end] var(--layout-gutter)
+		[--center2end-start] var(--content-subcol-minmax--minus-gutter-half)
+		[--body-end] var(--layout-gutter)
+		[--side-start] var(--content-subcol-minmax)
+		[--side-end --container-end] var(--layout-gutter)
+		[--wide-end] minmax(0, 1fr)
+		[--center2end-end --fullbleed-end];
 }
 
 :where(.container > *),

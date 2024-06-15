@@ -70,7 +70,6 @@ theme-picker button {
 }
 
 .header-menu-toggle {
-
 	[data-js='false'] &:not(:focus),
 	[data-js='true'] &:not([aria-pressed='true']) {
 		[data-show-when='idle'] {
@@ -178,6 +177,10 @@ html[data-js='false'] .header-themepicker {
 	}
 
 	theme-picker {
+		/**
+		 * 1: padding on both sides + 2x CTA width (parent is the toggle button, 1x CTA) + gap between items + border size.
+		 * 2: CTA-radius-aware picker corner rounding.
+		 */
 		position: absolute;
 		inset-block-start: 50%;
 		inset-inline-end: 50%;
@@ -187,14 +190,11 @@ html[data-js='false'] .header-themepicker {
 		align-items: center;
 		gap: var(--size-m);
 		padding: var(--size-m);
-		min-inline-size: calc(var(--size-m) * 2 + 200% + var(--size-xs) + var(--_cta-border-width) * 2);
-		/* padding on both sides + 2x CTA width (parent is the toggle button, 1x CTA) + gap between items + border size */
+		min-inline-size: calc(var(--size-m) * 2 + 200% + var(--size-xs) + var(--_cta-border-width) * 2); /* 1 */
 
 		color: var(--C-text);
-		border-radius: clamp(0px, var(--_corner) * 999, var(--_cta-border-radius) + var(--size-m));
-		/* CTA-radius-aware picker corner rounding */
-		border-start-end-radius: 0;
-		/* Top-right corner*/
+		border-radius: clamp(0px, var(--_corner) * 999, var(--_cta-border-radius) + var(--size-m)); /* 2 */
+		border-start-end-radius: 0; /* Top-right corner*/
 		border: 1px solid var(--C-text);
 		background-color: var(--C-surface);
 		box-shadow: var(--_shadow-active);
@@ -246,7 +246,7 @@ html[data-js='false'] .header-themepicker {
 	}
 
 	.header-menu {
-		html[data-js="true"] &::before {
+		html[data-js='true'] &::before {
 			content: '';
 
 			block-size: var(--theme-group-rule);
@@ -383,9 +383,8 @@ html[data-js='false'] .header-themepicker {
 	html[data-js='false']:has(.header-menu-toggle:focus + .header-menu),
 	html[data-js='false']:has(.header-menu:focus-within),
 	html[data-js='true']:has(.header-menu-toggle[aria-pressed='true'] + .header-menu) {
-		overflow: hidden;
-		/* Prevent scrolling */
-		scrollbar-gutter: stable;
+		overflow: hidden; /* Prevent scrolling */
+		scrollbar-gutter: stable; /* Preserve space occupied by scrollbar */
 	}
 
 	html[data-js='false'] .header-wrap:has(.header-menu-toggle:focus + .header-menu),
