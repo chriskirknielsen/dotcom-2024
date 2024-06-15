@@ -27,6 +27,7 @@ import { EleventyRenderPlugin, BundlePlugin } from '@11ty/eleventy';
 import pluginRss from '@11ty/eleventy-plugin-rss';
 import pageAssetsPluginMxbckFix from 'eleventy-plugin-page-assets';
 import pluginSyntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
+import EleventyPluginRobotsTxt from 'eleventy-plugin-robotstxt';
 
 //* Constants
 const rootDir = 'src'; // Root folder
@@ -146,6 +147,7 @@ export default async function (eleventyConfig) {
 			return `<span class="codeblock-toolbar-label">${toolbarLabel}</span>`;
 		},
 	});
+	eleventyConfig.addPlugin(EleventyPluginRobotsTxt, { shouldBlockAIRobots: 'true' });
 
 	//* Collections
 	eleventyConfig.addCollection('_posts.en', (collectionApi) => collectionApi.getFilteredByTag('_posts').filter((item) => ['en', undefined].includes(item.data.lang)));
@@ -183,6 +185,7 @@ export default async function (eleventyConfig) {
 		[`${rootDir}/_assets/img/`]: '/assets/img/',
 		// [`${rootDir}/_includes/assets/svg/footer-deco-*.svg`]: '/assets/svg/',
 		[`${rootDir}/favicon.ico`]: '/favicon.ico',
+		[`${rootDir}/ai.txt`]: '/ai.txt',
 	});
 
 	//* Options for development

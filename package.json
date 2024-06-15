@@ -29,6 +29,7 @@
 		"colorjs.io": "^0.5.0",
 		"dotenv": "^16.4.5",
 		"eleventy-plugin-page-assets": "github:chriskirknielsen/eleventy-plugin-page-assets#patch-1",
+		"eleventy-plugin-robotstxt": "^0.0.4",
 		"esbuild": "^0.20.0",
 		"fast-glob": "^3.3.2",
 		"glob": "^10.3.10",
