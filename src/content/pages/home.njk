@@ -181,13 +181,13 @@ summary:  "Welcome to the personal website of the one they call Christopher Kirk
 		</li>
 	</ul>
 
-	<ul class="flex-list justifyContent-center">
+	{# <ul class="flex-list justifyContent-center">
 		{% for slashPage in nav.slashPages %}
 			<li>
 				<a href="{{ slashPage.path }}" class="button">{{ slashPage.label }}</a>
 			</li>
 		{% endfor %}
-	</ul>
+	</ul> #}
 </aside>
 
 {% set hasFeatured = (collections['_posts.featured'] | length) > 0 %}
