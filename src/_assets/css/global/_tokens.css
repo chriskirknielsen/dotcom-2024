@@ -261,7 +261,7 @@ html[data-theme="quill"] {
 --C-heading: #3c3b52;
 --C-accent: #6d3c3c;
 --C-surface-alt: #BCBBB4;
-				--font-heading-family: Gambarino, Apple Garamond,AppleGaramond,Garamond, Georgia,Constantia,Lucida Bright,Lucidabright,Lucida Serif,Lucida,DejaVu Serif,Bitstream Vera Serif,Liberation Serif,serif;--font-heading-weight: 400;--font-heading-style: normal;
+				--font-heading-family: InstrumentSerif, Apple Garamond,AppleGaramond,Garamond, Georgia,Constantia,Lucida Bright,Lucidabright,Lucida Serif,Lucida,DejaVu Serif,Bitstream Vera Serif,Liberation Serif,serif;--font-heading-weight: 400;--font-heading-style: normal;
 --font-body-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
 			}
 html[data-theme="cyberpunk"] {
