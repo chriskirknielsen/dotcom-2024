@@ -31,7 +31,7 @@ const RomanNumeral = (function () {
 			returnVal = nvms['5'][padLength < 0 ? 'padStart' : 'padEnd'](Math.abs(padLength) + 1, nvms['1']);
 		} else {
 			// Get the numeral for 1 and the next group's 1, to get the "A before B" syntax, e.g. "IX"
-			returnVal = ''.concat(nvms['1'], nvmsNext['1']); // JavaScript's `+` concatenator is confusing since we are technically using numbers, so let's use .concat()
+			returnVal = `${nvms['1']}${nvmsNext['1']}`;
 		}
 
 		// Add an overline on numbers equal to or over 4000
@@ -54,7 +54,7 @@ const RomanNumeral = (function () {
 		let nvm = ''; // Initialise the string of numbers
 		digits.forEach((n, i) => {
 			// The index is used to find the digit group (1, 10, 100, etc.) by padding a 1 by the length of the group (so index 2 gives us '1' + 2x'0')
-			let digitGroup = '1'.padEnd(i + 1, '0');
+			let digitGroup = `1${'0'.repeat(i)}`;
 			let digit = nvmFormat(n, digitGroup);
 			nvm = digit + nvm; // Each group is processed in reverse so the numerals are prepended, not appended
 		});
