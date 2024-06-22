@@ -249,7 +249,7 @@ html[data-theme="quill"] {
 				--color-scheme: light;
 				--corner: var(--size-2xs);
 --shadow-color: 60deg 6% 43%;
---font-heading-tracking: -0.025em;
+--font-heading-tracking: -0.0125em;
 --font-heading-size-adjust: 0.555;
 --footer-special-char: '❧';
 --cta-border-color: var(--C-surface-alt);
