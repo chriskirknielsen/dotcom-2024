@@ -143,7 +143,7 @@ html:not([data-theme]), html[data-theme="dawn"], [data-theme="dusk"] {
 --stroke-linecap: var(--T-dawn, square) var(--T-dusk, initial);
 --font-heading-tracking: var(--T-dawn, -0.00625em) var(--T-dusk, 0.025em);
 --font-heading-size-adjust: var(--T-dawn, 0.5) var(--T-dusk, 0.495);
---font-heading-features: var(--T-dawn, normal) var(--T-dusk, 'cv06' on,'cv09' on,'cv03' on,'ss02' on,'calt' off);
+--font-heading-features: var(--T-dawn, 'liga' on) var(--T-dusk, 'cv06' on,'cv09' on,'cv03' on,'ss02' on,'calt' off);
 --font-heading-shadow: var(--T-dawn, none) var(--T-dusk, 0 0.03125em 0.0625em color-mix(in hsl, var(--C-heading) 33%, black));
 --link-underline-color: var(--T-dawn, var(--C-heading)) var(--T-dusk, initial);
 --cta-text-color: var(--T-dawn, var(--C-text)) var(--T-dusk, var(--C-text));
@@ -249,8 +249,9 @@ html[data-theme="quill"] {
 				--color-scheme: light;
 				--corner: var(--size-2xs);
 --shadow-color: 60deg 6% 43%;
---font-heading-tracking: -0.0125em;
+--font-heading-tracking: -0.00625em;
 --font-heading-size-adjust: 0.555;
+--font-heading-features: 'liga' on;
 --footer-special-char: '❧';
 --cta-border-color: var(--C-surface-alt);
 --cta-text-color: var(--C-text);

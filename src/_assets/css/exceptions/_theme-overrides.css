@@ -194,6 +194,10 @@ html[data-theme='quill'] {
 		--HOME-logo-name-color: var(--C-accent);
 	}
 
+	.expander-content {
+		--CODE-bg: var(--C-canvas);
+	}
+
 	hr {
 		position: relative;
 		overflow: visible;
