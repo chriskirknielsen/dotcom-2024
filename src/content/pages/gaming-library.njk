@@ -44,7 +44,7 @@ platformLabels: {
         {% svg 'gaming-'+platformSlug, { class: 'gaming-logo inline-icon inline-icon--middle' } %}
         {{ platformLabels[platform] }} ({{ games | length }})
     {% endsetAsync %}
-    {% expander expanderLabel %}
+    {% expander expanderLabel, true, loop.first %}
         <ul class="gaming-platform-group" data-gaming-platform="{{ platformSlug }}">
             {% for game in games | sort(false, false, 'sortTitle') %}
                 <li
@@ -164,7 +164,7 @@ platformLabels: {
         <dl>
             <dt class="grouper grouper--icon-text-pair">
                 {% svg 'controller', { class: 'inline-icon' } %}
-                <span>Platform:</span>
+                <span>Platform</span>
             </dt>
             <dd>
                 <span data-slot="platform"></span>
@@ -173,19 +173,19 @@ platformLabels: {
 
             <dt class="grouper grouper--icon-text-pair">
                 {% svg 'world', { class: 'inline-icon' } %}
-                <span>Region:</span>
+                <span>Region</span>
             </dt>
             <dd data-slot="region"></dd>
 
             <dt data-slot-show="dlc" class="grouper grouper--icon-text-pair">
                 {% svg 'added', { class: 'inline-icon' } %}
-                <span>DLC:</span>
+                <span>DLC</span>
             </dt>
             <dd data-slot="dlc"></dd>
 
             <dt class="grouper grouper--icon-text-pair">
                 {% svg 'checkbox', { class: 'inline-icon linecap-auto' } %}
-                <span>Completed:</span>
+                <span>Completed</span>
             </dt>
             <dd>
                 <input type="checkbox" aria-hidden="true" data-slot-checkbox="completed">
@@ -194,13 +194,13 @@ platformLabels: {
 
             <dt data-slot-show="trophyEarned" class="grouper grouper--icon-text-pair">
                 {% svg 'trophy', { class: 'inline-icon linecap-auto' } %}
-                <span>Trophies:</span>
+                <span>Trophies</span>
             </dt>
             <dd data-slot-show="trophyEarned" data-slot-computed="trophyEarned"></dd>
 
             <dt data-slot-show="subItems" class="grouper grouper--icon-text-pair">
                 {% svg 'subfolders', { class: 'inline-icon linecap-auto' } %}
-                <span>Includes:</span>
+                <span>Includes</span>
             </dt>
             <dd data-slot-show="subItems" data-slot-computed="subItems"></dd>
         </dl>

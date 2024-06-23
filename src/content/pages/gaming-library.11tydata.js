@@ -15,7 +15,7 @@ const regions = {
 const gameslibrary = await notionDatabaseQuery({
 	databaseId: process.env.NOTION_DATABASE_ID_LUDOTHEQUE,
 	label: 'gameslibrary.js',
-	propsToUse: ['Title', 'Sort Title', 'PSN ID', 'Edition', 'Platform', 'Region', 'DLC', 'Completed', 'Discs', 'Year', 'Parent item', 'Sub-item'],
+	propsToUse: ['Title', 'Sort Title', 'PSN ID', 'Edition', 'Platform', 'Region', 'DLC', 'Completed', 'Discs', 'Year', 'Parent item', 'Sub-item', 'Thumbnail'],
 	filter: {
 		and: [
 			{
@@ -71,6 +71,12 @@ const gameslibrary = await notionDatabaseQuery({
 					.map((textBlock) => textBlock.plain_text)
 					.join('')
 					.trim(),
+				trophyIcon:
+					props.Thumbnail.files.length > 0
+						? props.Thumbnail.files[0].type === 'external'
+							? props.Thumbnail.files[0].external.url
+							: props.Thumbnail.files[0].file.url
+						: null,
 			};
 
 			const matchedPsnTrophyData = psnTrophyData.find((game) => game.npCommunicationId === processedEntry.psnId);
@@ -78,6 +84,9 @@ const gameslibrary = await notionDatabaseQuery({
 				processedEntry.trophyIcon = matchedPsnTrophyData.trophyTitleIconUrl;
 				processedEntry.trophyProgress = matchedPsnTrophyData.progress;
 				processedEntry.trophyEarned = matchedPsnTrophyData.earnedTrophies;
+			}
+			if (!processedEntry.trophyIcon) {
+				delete processedEntry.trophyIcon;
 			}
 			delete processedEntry.psnId; // Once we have trophy data, we can discard the PSN's reference code to it
 

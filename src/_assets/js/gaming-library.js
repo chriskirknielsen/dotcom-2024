@@ -1,3 +1,5 @@
+import { toCloudinary } from '../../../config/utils/image-transforms.js';
+
 // Helper functions
 /** Get the SVG icon in the document to re-use. */
 function getTrophySvg(svgId, lvl) {
@@ -103,13 +105,15 @@ document.addEventListener('click', function (e) {
 				: '';
 		if (gameData.trophyIcon) {
 			const iconHeight = parseInt(clone.querySelector('[data-slot-img="trophyIcon"]').getAttribute('height'), 10);
-			clone.querySelector('[data-slot-img="trophyIcon"]').src = `https://res.cloudinary.com/chriskirknielsen/image/fetch/c_fit,h_${iconHeight}/q_80/f_auto/${encodeURI(
-				gameData.trophyIcon
-			)}`;
-			clone.querySelector('[data-slot-img="trophyIcon"]').setAttribute('width', gameData.platform === 'PS5' ? iconHeight : iconHeight * (320 / 176)); // PS5 icons are square, PS3/Vita are 320x176
+			const iconWidth = ['PS3', 'PS4', 'PSV'].includes(gameData.platform) ? iconHeight * (320 / 176) : iconHeight; // PS5 icons are square, PS3/PS4/Vita are 320x176
+			clone.querySelector('[data-slot-img="trophyIcon"]').src = toCloudinary(gameData.trophyIcon, `c_fit,h_${iconHeight}/q_80/f_auto`);
+			clone.querySelector('[data-slot-img="trophyIcon"]').setAttribute('width', iconWidth);
 		}
 		clone.querySelector('[data-slot-computed="trophyEarned"]').innerHTML = gameData.trophyEarned
-			? `${gameData.trophyProgress}%: ${toTrophyList(gameData.trophyEarned, trophySvgId)}`
+			? `<span class="gaming-details-trophies-percentage ${gameData.trophyProgress === 100 ? 'fontWeight-bold' : ''}">${gameData.trophyProgress}%:</span> ${toTrophyList(
+					gameData.trophyEarned,
+					trophySvgId
+			  )}`
 			: '';
 
 		Array.from(dialog.childNodes).forEach((el) => el.remove());
