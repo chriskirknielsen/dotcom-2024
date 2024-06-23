@@ -35,7 +35,7 @@ This vaporwave theme tries to stay minimal while being loud with colours. The he
 Who doesn't love some gold-and-burgundy colours? Old school computers and gaming consoles had those vibes going, and the Nintendo Famicom especially… which inspired most of this theme. Using a very Swiss-like typeface for headings aptly named [Switzer](https://www.fontshare.com/fonts/switzer) as the Nintendo font is a little chonky and perhaps copyrighted!
 
 ### Quill
-This is my peace-and-quiet theme. It uses [Gambarino](https://www.fontshare.com/fonts/gambarino) for headings, reminiscent of Apple's Garamond Condensed, and is very desaturated, nearly black-on-white-but-not-fully. The footer illustrations are from [Hamonshū](https://archive.org/search.php?query=creator%3A%22Mori%2C+Yu%CC%84zan%2C+-1917%22), that I only know of thanks to [Eric Meyer](https://meyerweb.com/), who uses those exquisitely well on his website. I also took a page out of Sara Soueidan's book with the `<hr>` element, so I guess this theme is for homages!
+This is my peace-and-quiet theme. It uses [Instrument Serif](https://fonts.google.com/specimen/Instrument+Serif) (previously [Gambarino](https://www.fontshare.com/fonts/gambarino)) for headings, reminiscent of Apple's Garamond Condensed, and is very desaturated, nearly black-on-white-but-not-fully. The footer illustrations are from [Hamonshū](https://archive.org/search.php?query=creator%3A%22Mori%2C+Yu%CC%84zan%2C+-1917%22), that I only know of thanks to [Eric Meyer](https://meyerweb.com/), who uses those exquisitely well on his website. I also took a page out of Sara Soueidan's book with the `<hr>` element, so I guess this theme is for homages!
 
 ### Dusk
 The default Dark Mode theme is set in [MD Nichrome Bold](https://mass-driver.com/typefaces/md-nichrome), which has that sci-fi look I'm after (it look me a while to settle on it after testing several matches!). The neon glow from buttons and the synthwave-y `<hr>` (horizontal rule, horizon… get it?) elements are pretty cool, and the footer just… belongs.
@@ -55,19 +55,16 @@ Thank you so much for stopping by!
 <div>
     <ul class="flex-list flex-list--center | img-88x31-list">
         <li>
-            <img src="/assets/img/ckn-88x31.gif" alt="chriskirknielsen dot com">
+            <a href="https://11ty.dev" class="display-block"><img src="/assets/img/made-with-11ty.gif" alt="Made with Eleventy." loading="lazy"></a>
         </li>
         <li>
-            <a href="https://11ty.dev" class="display-block"><img src="/assets/img/made-with-11ty.gif" alt="Made with Eleventy"></a>
+            <img src="/assets/img/always-under-construction.png" alt="Always under constructiton." loading="lazy">
         </li>
         <li>
-            <img src="/assets/img/always-under-construction.png" alt="Always under constructiton.">
+            <img src="/assets/img/tested-on-firefox.gif" alt="Tested on Firefox." loading="lazy">
         </li>
         <li>
-            <img src="/assets/img/tested-on-firefox.gif" alt="Tested on Firefox">
-        </li>
-        <li>
-            <img src="/assets/img/no-to-web3.gif" alt="Keep the web free: say no to Web 3.">
+            <img src="/assets/img/no-to-web3.gif" alt="Keep the web free: say no to Web 3." loading="lazy">
         </li>
     </ul>
 </div>
