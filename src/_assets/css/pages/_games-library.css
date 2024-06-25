@@ -450,11 +450,9 @@
 }
 
 [data-slot-img='trophyIcon'] {
-	block-size: 1em;
+	block-size: calc(var(--typeScale-2) * 1.1 + 1em * 1.3); /* h2 size * h2 line-height + line of text below (edition + year) * line-height (but only one half, not the total) */
 	inline-size: auto;
-	max-inline-size: 100%;
-	margin-inline-end: var(--flow-space, 1rem);
-	float: inline-start;
+	max-inline-size: min(100%, 20vi);
 }
 
 .gaming-details-trophies {

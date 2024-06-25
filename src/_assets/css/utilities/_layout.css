@@ -1,15 +1,19 @@
 .inline-size-100pc {
-    inline-size: 100%;
+	inline-size: 100%;
 }
 
 .display-block {
-    display: block;
+	display: block;
+}
+
+.flexGrow-1 {
+	flex-grow: 1;
 }
 
 .marginBlockStart-auto {
-    margin-block-start: auto;
+	margin-block-start: auto;
 }
 
 .justifyContent-center {
-    justify-content: center;
+	justify-content: center;
 }
