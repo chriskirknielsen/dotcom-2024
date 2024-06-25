@@ -20,7 +20,7 @@ platformLabels: {
 
 <hr>
 
-<p class="textAlign-center fontSize-smaller">Click the title on a spine to view more details, then use the <kbd>Left</kbd>/<kbd>Right</kbd> arrow keys to cycle through games on the same platform. To close the modal, press <kbd>Escape</kbd> or click outside the box.</p>
+<p class="fontSize-smaller">Click the title on a spine to view more details, then use the <kbd>Left</kbd>/<kbd>Right</kbd> arrow keys to cycle through games on the same platform. To close the modal, press <kbd>Escape</kbd> or click outside the box.</p>
 
 <div class="grouper grouper--wrap grouper--toolbar" data-formlike data-gaming-toolbar hidden>
     <button type="button" class="expander-button button" data-games-toggled aria-pressed="false">
@@ -142,24 +142,27 @@ platformLabels: {
 
 <template id="gaming-details-dialog-template" data-trophy-svg-id="icon-psn-trophy">
     <div class="gaming-details-dialog-inner flow" style="--flow-space: var(--size-s);">
-        <div class="grouper grouper--toolbar">
-            <h2>
-                <img src="" alt="" data-slot="trophyIcon" data-slot-img="trophyIcon" aria-hidden="true" height="64" width="">
-                <span data-slot="title"></span>
-            </h2>
+        <div class="grouper">
+            <img src="" alt="" data-slot="trophyIcon" data-slot-img="trophyIcon" aria-hidden="true" height="128" width="">
+            
+            <div class="flexGrow-1">
+                <div class="grouper grouper--toolbar">
+                    <h2><span data-slot="title"></span></h2>
 
-            {% component 'cta', {
-                icon: 'close',
-                label: { aria: 'Close' },
-                ctaClass: 'gaming-details-dialog-close',
-                ctaAttr: 'data-hide-game-info autofocus'
-            } %}
+                    {% component 'cta', {
+                        icon: 'close',
+                        label: { aria: 'Close' },
+                        ctaClass: 'gaming-details-dialog-close',
+                        ctaAttr: 'data-hide-game-info autofocus'
+                    } %}
+                </div>
+            
+                <p style="--flow-space: 0px;">
+                    <span data-slot="edition" class="fontStyle-italic" style="--flow-space: var(--size-2xs);" hidden></span>
+                    <span data-slot-show="year" class="font-reset fontSize-small">(<span data-slot="year"></span>)</span>
+                </p>
+            </div>
         </div>
-        
-        <p style="--flow-space: 0px;">
-            <span data-slot="edition" class="fontStyle-italic" style="--flow-space: var(--size-2xs);" hidden></span>
-            <span data-slot-show="year" class="font-reset fontSize-small">(<span data-slot="year"></span>)</span>
-        </p>
 
         <dl>
             <dt class="grouper grouper--icon-text-pair">
