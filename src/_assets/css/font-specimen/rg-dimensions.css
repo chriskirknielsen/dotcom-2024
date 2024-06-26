@@ -2,26 +2,31 @@
 @import url('./_rg.css');
 
 :root {
-    /* Title fills exactly the entire viewport width at this size, scaled 80% to avoid surprises */
-    --main-heading-magic-number: calc(10.5vw * 0.8);
-    --single-glyph-magic-number: 25vw;
-    --palette-01: #fff8fc;
-    --palette-02: #6dfefb;
-    --palette-03: #071a42;
-    --palette-04: #32255b;
-    --palette-05: #c84823;
-    --palette-06: #ffa22e;
-    --palette-07: #ffcf3f;
-    --palette-08: #424eaa;
-    --body-font: Roboto, Helvetica, Arial, sans-serif;
-    --color-main: var(--palette-01);
-    --color-alt: var(--palette-07);
-    --bg-main: var(--palette-04);
-    --bg-alt: var(--palette-03);
-    --link: var(--palette-07);
-    --link-active: var(--palette-06);
+	/* Title fills exactly the entire viewport width at this size, scaled 80% to avoid surprises */
+	--main-heading-magic-number: calc(10.5vw * 0.8);
+	--single-glyph-magic-number: 25vw;
+	--palette-01: #fff8fc;
+	--palette-02: #6dfefb;
+	--palette-03: #071a42;
+	--palette-04: #32255b;
+	--palette-05: #c84823;
+	--palette-06: #ffa22e;
+	--palette-07: #ffcf3f;
+	--palette-08: #424eaa;
+	--body-font: Roboto, Helvetica, Arial, sans-serif;
+	--color-main: var(--palette-01);
+	--color-alt: var(--palette-07);
+	--bg-main: var(--palette-04);
+	--bg-alt: var(--palette-03);
+	--link: var(--palette-07);
+	--link-active: var(--palette-06);
 }
 
 h2::before {
-    color: var(--palette-02);
+	color: var(--palette-02);
+}
+
+.sentence-sample {
+	font-size: 2.5rem;
+	font-size: clamp(2.25rem, calc(2.25rem + ((1vw - 0.2rem) * 6.875)), 5rem);
 }
