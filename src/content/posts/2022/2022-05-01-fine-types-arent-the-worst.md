@@ -1,6 +1,6 @@
 ---
 slug: fine-types-arent-the-worst
-title: "Fine, types in JS aren't the worst"
+title: "Fine, types in JS aren’t the worst"
 summary: I'm not on the TypeScript train, but I like a couple of things…
 date: 2022-05-01
 tags:
