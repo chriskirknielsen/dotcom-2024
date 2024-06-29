@@ -6,6 +6,8 @@
 		{% block theContent %}
 			{{ content | safe }}
 		{% endblock %}
+
+		{% include 'parts/poison.njk' %}
 	</{{tag}}>
 {% endblock %}
 
