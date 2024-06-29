@@ -2,17 +2,18 @@
 
 {% block pageContent %}
     {% set dateInfo %}
-    <time datetime="{{ date | dateFormat({ format: 'iso' }) }}" title="{{ date | dateFormat({ format: 'iso' }) }}">{{ date | dateFormat({ format: 'nice', lang: lang }) }}</time>
-    {% if updated %}
-        <br>
-        <span class="fontSize-tiny">(Updated
-            {%- if (updated | dateFormat) != (date | dateFormat) -%}
-                <time datetime="{{ updated | dateFormat({ format: 'iso' }) }}" title="{{ updated | dateFormat({ format: 'iso' }) }}">
-                    {{ updated | dateFormat({ format: 'nice', lang: lang }) }}</time>
-            {%- endif %})
-        </span>
-    {% endif %}
+        <time datetime="{{ date | dateFormat({ format: 'iso' }) }}" title="{{ date | dateFormat({ format: 'iso' }) }}">{{ date | dateFormat({ format: 'nice', lang: lang }) }}</time>
+        {% if updated %}
+            <br>
+            <span class="fontSize-tiny">(Updated
+                {%- if (updated | dateFormat) != (date | dateFormat) -%}
+                    <time datetime="{{ updated | dateFormat({ format: 'iso' }) }}" title="{{ updated | dateFormat({ format: 'iso' }) }}">
+                        {{ updated | dateFormat({ format: 'nice', lang: lang }) }}</time>
+                {%- endif %})
+            </span>
+        {% endif %}
     {% endset %}
+
     {% component 'hero', {
         heroTags: tags,
         heroTitle: title,
@@ -40,7 +41,7 @@
 
         {{ content | safe }}
 
-        {% if externalUrl%}
+        {% if externalUrl %}
             <hr>
             <div>
             {% if externalHost %}

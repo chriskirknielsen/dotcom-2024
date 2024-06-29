@@ -1,7 +1,6 @@
 {% extends 'layouts/content.njk' %}
 
 {% block theContent %}
-
     {% block pageContent %}
         {% component 'hero', {
             heroTitle: heroTitle or title,
@@ -16,4 +15,5 @@
         {% endif %}
     {% endblock %}
 
+    {% include 'parts/poison.njk' %}
 {% endblock %}

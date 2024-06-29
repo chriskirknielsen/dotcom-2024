@@ -1,11 +1,12 @@
 {% extends 'layouts/base.njk' %}
 
 {% block baseContent %}
-	<div class="page-content | container{% if useFlow != false %} flow{% endif %}"{% if gridBlockGutter %} style="--grid-block-gutter: {{ gridBlockGutter }};"{% endif %}>
+	{% set tag %}{% if section == 'post' %}article{% else %}div{% endif %}{% endset %}
+	<{{tag}} class="page-content | container{% if useFlow != false %} flow{% endif %}"{% if gridBlockGutter %} style="--grid-block-gutter: {{ gridBlockGutter }};"{% endif %}>
 		{% block theContent %}
 			{{ content | safe }}
 		{% endblock %}
-	</div>
+	</{{tag}}>
 {% endblock %}
 
 {% if ('</code-wrap>' in content) %}
