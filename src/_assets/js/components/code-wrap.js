@@ -17,11 +17,8 @@ class CodeWrap extends HTMLElement {
 		this.addEventListener('click', this);
 	}
 
-	connectedCallback() {
-		document.addEventListener('DOMContentLoaded', () => {
-			Array.from(document.querySelectorAll('.codeblock-copy')).forEach((btn) => (btn.hidden = !this.clipboard));
-		});
-	}
+	// connectedCallback() {
+	// }
 
 	disconnectedCallback() {
 		this.removeEventListener('click', this);
@@ -54,7 +51,7 @@ class CodeWrap extends HTMLElement {
 					})
 					.finally(() => {
 						this.copyButtonTimeout = setTimeout(() => {
-							this.copyButton.innerText = this.copyLabel; // After a time, rever to original label
+							this.copyButton.innerText = this.copyLabel; // After a time, revert to original label
 						}, 2000);
 					});
 			}

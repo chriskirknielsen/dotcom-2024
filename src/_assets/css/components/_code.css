@@ -1,78 +1,69 @@
 code-wrap {
-    display: block;
+	display: block;
 }
 
 .codeblock {
-    --CODEBLOCK-border-width: 1px;
-    --CODEBLOCK-padding: calc(var(--layout-gutter) - var(--CODEBLOCK-border-width));
-    --CODEBLOCK-border-color: var(--C-accent);
-    --CODEBLOCK-toolbar-color: var(--C-surface);
+	--CODEBLOCK-border-width: 1px;
+	--CODEBLOCK-padding: calc(var(--layout-gutter) - var(--CODEBLOCK-border-width));
+	--CODEBLOCK-border-color: var(--C-accent);
+	--CODEBLOCK-toolbar-color: var(--C-surface);
 }
 
 .codeblock-toolbar {
-    position: relative;
-    z-index: 1;
+	position: relative;
+	z-index: 1;
 
-    display: flex;
-    gap: 1em;
+	display: flex;
+	gap: 1em;
 
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.25em 0.25em 0.25em var(--layout-gutter);
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.25em 0.25em 0.25em var(--layout-gutter);
 
-    color: var(--CODEBLOCK-toolbar-color);
-    border-radius: var(--_corner) var(--_corner) 0 0;
-    background: var(--CODEBLOCK-border-color);
+	color: var(--CODEBLOCK-toolbar-color);
+	border-radius: var(--_corner) var(--_corner) 0 0;
+	background: var(--CODEBLOCK-border-color);
 }
 
 .codeblock-toolbar-label {
-    font-family: var(--fontStack-monospace);
-    font-size: 0.875em;
-    letter-spacing: 0.01em;
-}
-
-.codeblock-copy {
-    margin-inline-start: auto;
-
-    &.is-copied .codeblock-copy__idle,
-    &:not(.is-copied) .codeblock-copy__copied {
-        display: none !important;
-    }
+	font-family: var(--fontStack-monospace);
+	font-size: 0.875em;
+	letter-spacing: 0.01em;
 }
 
 .codeblock pre {
-    position: relative;
+	position: relative;
 
-    inline-size: 100%;
-    padding: var(--CODEBLOCK-padding);
-    overflow: auto;
+	inline-size: 100%;
+	padding: var(--CODEBLOCK-padding);
+	overflow: auto;
 
-    font-size: var(--typeScale-n1);
-    border: var(--CODEBLOCK-border-width) solid var(--CODEBLOCK-border-color);
-    border-block-start-width: 0;
-    background-color: var(--CODE-bg, var(--C-surface));
+	font-size: var(--typeScale-n1);
+	border: var(--CODEBLOCK-border-width) solid var(--CODEBLOCK-border-color);
+	border-block-start-width: 0;
+	background-color: var(--CODE-bg, var(--C-surface));
 }
 
 :not(pre) > code {
-    padding: 0.0625em 0.125em;
+	padding: 0.0625em 0.125em;
 
-    white-space: pre-wrap;
-    word-break: break-word;
+	white-space: pre-wrap;
+	word-break: break-word;
 
-    color: var(--C-heading);
-    background: var(--CODE-bg, var(--C-surface));
-    border-radius: var(--_corner);
+	color: var(--C-heading);
+	background: var(--CODE-bg, var(--C-surface));
+	border-radius: var(--_corner);
 }
 
 .token.namespace {
-    opacity: 0.7;
+	opacity: 0.7;
 }
 
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-    color: var(--C-inactive, #808080);
+	color: var(--C-inactive, #808080);
 }
 
 .token.boolean,
@@ -84,12 +75,12 @@ code-wrap {
 .token.property,
 .token.deleted,
 .token.tag {
-    color: var(--C-heading);
+	color: var(--C-heading);
 }
 
 .token.selector,
 .token.inserted {
-    color: var(--C-heading);
+	color: var(--C-heading);
 }
 
 .token.attr-name,
@@ -99,7 +90,7 @@ code-wrap {
 .token.string,
 .style .token.string,
 .token.attr-value {
-    color: var(--C-accent-alt, var(--C-accent));
+	color: var(--C-accent-alt, var(--C-accent));
 }
 
 .token.regex,
@@ -109,29 +100,29 @@ code-wrap {
 .token.script,
 .token.punctuation,
 .token.script .token.keyword {
-    color: var(--C-accent);
+	color: var(--C-accent);
 }
 
 .token.placeholder,
 .token.variable {
-    color: var(--C-text);
+	color: var(--C-text);
 }
 
 .token.important,
 .token.statement,
 .token.bold {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .token.entity {
-    cursor: help;
+	cursor: help;
 }
 
 .token.italic {
-    font-style: italic;
+	font-style: italic;
 }
 
 /* Throwing in CodePen stuff here as it's minor and I don't want to create a dedicate partial just for this */
 .codepen-thumbnail {
-    filter: brightness(0.75);
+	filter: brightness(0.75);
 }
