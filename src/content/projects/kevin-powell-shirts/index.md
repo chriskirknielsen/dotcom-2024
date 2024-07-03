@@ -11,7 +11,7 @@ status: draft
 {% set shirtData1 = designs | find('slug', 'kevin-powell-grid') %}
 {% set shirtData2 = designs | find('slug', 'kevin-powell-css') %}
 {% set shirtData3 = designs | find('slug', 'kevin-powell-color-space') %}
-Kevin Powell, a brilliant CSS educator on YouTube needed to refresh his merchandise, and I was very happy to help! CSS is a subject that is very dear to me, and having the opportunity to work on designs on the topic was a lot of fun! Kevin wanted to celebrate CSS, with a retro feeling — to avoid monotone designs, I opted for a different style for each: neon, Swiss (ish?), and retrofuturism.
+Kevin Powell, a brilliant CSS educator on YouTube, needed to refresh his merchandise, and I was very happy to help! CSS is a subject that is very dear to me, and having the opportunity to work on designs on the topic was a lot of fun. Kevin wanted to celebrate CSS, with a retro feeling — to avoid monotone designs, I opted for a different style for each: neon, Swiss (ish?), and retrofuturism.
 
 {% gallery %}
 {% image '/' + assets.images + '/designs/' + shirtData1.slug + '.jpg', "A TRON-inspired design on a black shirt with a cyan blue grid and a large GRID logo above, and some abstract shapes in some of the grid cells.", '<a href="'+shirtData1.links.CottonBureau+'">Grid Layout design on CottonBureau</a>', { ratio: "600/600", group: true } %}
