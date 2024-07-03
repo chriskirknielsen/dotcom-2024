@@ -29,7 +29,7 @@ class InstantSearch extends HTMLElement {
 	}
 
 	connectedCallback() {
-		const searchInputId = this.getAttribute('search-input');
+		const searchInputId = this.dataset.searchInput;
 		// https://daily-dev-tips.com/posts/eleventy-creating-a-static-javascript-search/
 		const formEl = this.querySelector('form');
 		const inputEl = this.querySelector(`[name="${searchInputId}"]`);

@@ -6,8 +6,8 @@ class ThemePicker extends HTMLElement {
 		this.store = window.themeStore;
 		this.keys = window.themeKeys;
 		this.defaults = {
-			light: this.getAttribute('light'),
-			dark: this.getAttribute('dark'),
+			light: this.dataset.light,
+			dark: this.dataset.dark,
 		};
 
 		// Trigger as soon as possible to give the current theme's trigger the appropriate aria-pressed value

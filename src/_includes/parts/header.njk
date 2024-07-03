@@ -46,7 +46,7 @@
                     ctaAttr: 'data-toggle-pressed aria-controls="themepicker"',
                     ctaClass: 'header-themepicker-toggle linecap-auto hide-when-viewport--small'
                 } %}
-                {% webcomponent 'theme-picker', { id: 'themepicker', 'light': 'dawn', 'dark': 'dusk', 'aria-labelledby': 'header-themepicker-heading' } %}
+                {% webcomponent 'theme-picker', { id: 'themepicker', 'data-light': 'dawn', 'data-dark': 'dusk', 'aria-labelledby': 'header-themepicker-heading' } %}
                 {% js 'foot' %}{%- include 'assets/js/components/theme-picker.js' -%}{% endjs %}
             </div>
         </div>

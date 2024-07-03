@@ -24,7 +24,7 @@
 {%- endfor -%}
 
 {% macro fontPreviewer(previewOptions = '', defaultText = 'Type Anything', warningMessages = '') %}
-    <font-preview class="full-content" default-sample="{{ fontSpecimenSampleDefault }}">
+    <font-preview class="full-content" data-default-sample="{{ fontSpecimenSampleDefault }}">
         <form class="preview">
             <div class="preview-fallback">
                 <label for="font-preview-fallback">Custom preview:</label>

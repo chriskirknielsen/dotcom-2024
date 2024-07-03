@@ -180,9 +180,7 @@ class FilteredTiles extends HTMLElement {
 		Array.from(tilesGroup.children).forEach((c) => c.setAttribute('data-filtered-item', ''));
 
 		// Grab all the relevant attributes
-		const filters = this.getAttribute('filters')
-			.split(',')
-			.map((f) => f.trim().toLowerCase());
+		const filters = this.dataset.filters.split(',').map((f) => f.trim().toLowerCase());
 		const filterClass = this.getAttribute('filter-class') || '';
 		const fieldsetLegend = this.getAttribute('filter-legend') || 'Filter';
 		const filterAllLabel = this.getAttribute('filter-all-label') || 'All';

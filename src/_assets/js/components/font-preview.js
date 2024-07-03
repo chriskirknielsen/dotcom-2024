@@ -6,7 +6,7 @@ class FontPreview extends HTMLElement {
 		this.fontPreviewInput = this.querySelector('[data-fontpreview="preview-input"]');
 		this.fontPreviewOutputWrap = this.querySelector('[data-fontpreview="preview-output-wrap"]');
 		this.fontPreviewOutput = this.querySelector('[data-fontpreview="preview-output"]');
-		this.fontSpecimenSampleDefault = this.getAttribute('default-sample') || 'Sample Text';
+		this.fontSpecimenSampleDefault = this.dataset.defaultSample || 'Sample Text';
 
 		// Listen for events
 		this.addEventListener('click', this);
