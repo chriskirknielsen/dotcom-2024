@@ -75,6 +75,7 @@ h2 {
 .list {
 	& > li::marker {
 		content: '◆ \0020';
+		content: '◆ \0020'/ '';
 	}
 }
 

@@ -17,6 +17,7 @@ h2 {
 
 	&::before {
 		content: '⬡';
+		content: '⬡' / '';
 
 		position: absolute;
 		inset-block-start: 0.5em;
@@ -33,6 +34,7 @@ h2 {
 .list {
 	& > li::marker {
 		content: '⬢ \0020';
+		content: '⬢ \0020'/ '';
 	}
 }
 
@@ -272,6 +274,7 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 	&::before,
 	&::after {
 		content: '⬢';
+		content: '⬢' / '';
 
 		display: inline-block;
 

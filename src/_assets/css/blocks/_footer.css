@@ -4,6 +4,7 @@
 
 	&::before {
 		content: '— ' var(--_footer-special-char) ' —';
+		content: '— ' var(--_footer-special-char) ' —' / '';
 		pointer-events: none;
 
 		position: absolute;
