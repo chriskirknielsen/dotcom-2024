@@ -24,7 +24,7 @@ function toTrophyList(trophies, svgId) {
 }
 
 /** Shortcut for running forEach on a set of DOM elements matching a selector. */
-const eachDom = (s, fn) => Array.from(document.querySelectorAll(s)).forEach(fn);
+const eachDom = (s, fn, scope = document) => Array.from(scope.querySelectorAll(s)).forEach(fn);
 
 // Funny little messages if you try to change the checkbox state
 let cbox = 0;
@@ -66,11 +66,15 @@ document.addEventListener('click', function (e) {
 		const clone = template.content.cloneNode(true);
 		const dialogTitleRefId = 'gaming-details-dialog-title';
 
-		Array.from(clone.querySelectorAll('[data-slot-show], [data-slot]:not([data-slot-show] *)')).forEach((s) => {
-			const prop = s.getAttribute('data-slot-show') || s.getAttribute('data-slot');
-			const dataToTest = gameData[prop];
-			s.hidden = Array.isArray(dataToTest) ? dataToTest.length === 0 : !Boolean(dataToTest);
-		});
+		eachDom(
+			'[data-slot-show], [data-slot]:not([data-slot-show] *)',
+			(s) => {
+				const prop = s.getAttribute('data-slot-show') || s.getAttribute('data-slot');
+				const dataToTest = gameData[prop];
+				s.hidden = Array.isArray(dataToTest) ? dataToTest.length === 0 : !Boolean(dataToTest);
+			},
+			clone
+		);
 
 		['title', 'edition', 'region', 'platform', 'dlc', 'year'].forEach((p) => {
 			clone.querySelector(`[data-slot="${p}"]`).innerText = gameData[p];
