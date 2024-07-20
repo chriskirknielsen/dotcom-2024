@@ -376,7 +376,7 @@ const designs = [
 			CottonBureau: 'https://cottonbureau.com/products/css-retro-vhs#/13046404/tee-men-standard-tee-vintage-black-tri-blend-m',
 		},
 		tags: ['dev', 'css', 'vhs', 'retro'],
-		similar: ['js-retro-vhs', 'html-retro-vhs'],
+		similar: ['js-retro-vhs', 'html-retro-vhs', 'react-retro-vhs'],
 		date: '2021-12-24',
 	},
 	{
@@ -389,7 +389,7 @@ const designs = [
 			CottonBureau: 'https://cottonbureau.com/products/javascript-retro-vhs#/13799357/tee-men-standard-tee-vintage-black-tri-blend-m',
 		},
 		tags: ['dev', 'js', 'vhs', 'retro'],
-		similar: ['css-retro-vhs', 'html-retro-vhs'],
+		similar: ['css-retro-vhs', 'html-retro-vhs', 'react-retro-vhs'],
 		date: '2022-03-01',
 	},
 	{
@@ -402,8 +402,22 @@ const designs = [
 			CottonBureau: 'https://cottonbureau.com/p/8U4SGF/shirt/html-retro-vhs#/20217871/tee-men-standard-tee-vintage-black-tri-blend-m',
 		},
 		tags: ['dev', 'html', 'vhs', 'retro'],
-		similar: ['css-retro-vhs', 'js-retro-vhs'],
+		similar: ['css-retro-vhs', 'js-retro-vhs', 'react-retro-vhs'],
 		date: '2024-05-14',
+	},
+	{
+		slug: 'react-retro-vhs',
+		name: 'State of React',
+		description:
+			'Is it a library? A framework? An unknown element on the verge of mutating into a dangerous, unstable entity? Whatever your feelings about React, you will find them reflected in this design that echoes anime and science-fiction.',
+		note: 'Commission for the State of React survey',
+		img: 'react-retro-vhs.jpg',
+		links: {
+			CottonBureau: 'https://cottonbureau.com/p/NV42G5/shirt/react-atom#/20741664/tee-men-standard-tee-vintage-navy-tri-blend-m',
+		},
+		tags: ['dev', 'js', 'vhs', 'retro'],
+		similar: ['html-retro-vhs', 'css-retro-vhs', 'js-retro-vhs'],
+		date: '2024-07-19',
 	},
 	{
 		slug: 'kevin-powell-grid',

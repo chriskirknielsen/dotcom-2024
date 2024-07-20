@@ -54,6 +54,18 @@ package = "netlify-plugin-debug-cache"
 
 ## Legacy URL redirects
 [[redirects]]
+  from = "/projects/state-of-html-2023/"
+  to = "/projects/devographics-surveys/"
+  status = 301
+[[redirects]]
+  from = "/projects/state-of-js-2021/"
+  to = "/projects/devographics-surveys/"
+  status = 301
+[[redirects]]
+  from = "/projects/state-of-css-2021/"
+  to = "/projects/devographics-surveys/"
+  status = 301
+[[redirects]]
   from = "/acknowledgements/"
   to = "/colophon/"
   status = 301
