@@ -40,7 +40,7 @@ export default function (eleventyConfig, options = {}) {
 		}
 		const filePath = `${svgAssetFolder}/${filename}.svg${isNjk ? '.njk' : ''}`;
 		const engine = svgOptions.hasOwnProperty('engine') ? svgOptions.engine : isNjk ? 'njk' : 'html'; // HTML for vanilla SVG
-		const output = eleventyConfig.nunjucksAsyncShortcodes
+		const output = eleventyConfig.nunjucks.asyncShortcodes
 			.renderFile(filePath, svgOptions, engine)
 			.catch((err) => {
 				console.error(err);
@@ -90,14 +90,14 @@ export default function (eleventyConfig, options = {}) {
 	/** Render a component from the component folder. */
 	eleventyConfig.addAsyncShortcode('webcomponent', async function (filename, attributes = {}, componentData = {}) {
 		const filePath = `${componentsFolder}/web/${filename}.njk`;
-		const content = eleventyConfig.nunjucksAsyncShortcodes.renderFile(filePath, { ...this.ctx, componentData, componentAttrs: attributes }, 'njk'); // Pass in the global context for web components
+		const content = eleventyConfig.nunjucks.asyncShortcodes.renderFile(filePath, { ...this.ctx, componentData, componentAttrs: attributes }, 'njk'); // Pass in the global context for web components
 		return content;
 	});
 
 	/** Render a web component from the component/web folder. */
 	eleventyConfig.addAsyncShortcode('component', async function (filename, componentOptions = {}) {
 		const filePath = `${componentsFolder}/${filename}.njk`;
-		const content = eleventyConfig.nunjucksAsyncShortcodes.renderFile(filePath, componentOptions, 'njk'); // Only pass in the provided data object
+		const content = eleventyConfig.nunjucks.asyncShortcodes.renderFile(filePath, componentOptions, 'njk'); // Only pass in the provided data object
 		return content;
 	});
 }
