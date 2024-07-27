@@ -14,6 +14,8 @@
 {# Meta, SEO, etc. #}
 <meta name="author" content="{{ metadata.author.name }}">
 <meta name="generator" content="{{ eleventy.generator }}">
+<meta property="fediverse:creator" content="{{ social.mastodon.handle }}">
+<link href="{{ social.mastodon.url }}" rel="me">
 
 {% if summary %}
     <meta name="description" content="{{ metaDescriptionOverride or summary }}">
@@ -29,7 +31,5 @@
 {% set meta_image_url %}{{ customMetaImage or ([assets.images, 'metaimage.jpg'] | toPath) }}{% endset %}
 <meta name="twitter:image" property="og:image" content="{{ meta_image_url | trim | absoluteUrl(metadata.url) }}">
 <meta name="twitter:image:alt" property="og:image:alt" content="{{ title }}">
-
-<link href="{{ social.mastodon.url }}" rel="me">
 
 {% block headEnd %}{% endblock %}

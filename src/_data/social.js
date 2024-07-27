@@ -1,7 +1,11 @@
+const mastodonServer = 'front-end.social';
+const mastodonUsername = 'chriskirknielsen';
+
 export default {
 	mastodon: {
 		label: 'Mastodon',
-		url: 'https://front-end.social/@chriskirknielsen',
+		url: `https://${mastodonServer}/@${mastodonUsername}`,
+		handle: `@${mastodonUsername}@${mastodonServer}`,
 	},
 	codepen: {
 		label: 'CodePen',
