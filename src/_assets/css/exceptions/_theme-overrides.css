@@ -198,6 +198,10 @@ html[data-theme='quill'] {
 		--CODE-bg: var(--C-canvas);
 	}
 
+	.image-gallery > figure > figcaption {
+		background-color: var(--C-surface);
+	}
+
 	hr {
 		position: relative;
 		overflow: visible;
