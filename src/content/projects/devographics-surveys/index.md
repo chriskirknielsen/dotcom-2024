@@ -15,7 +15,7 @@ For each of these designs, while Sacha reached out for my design skills, he is h
 ## State of CSS
 
 {% set cssShirtData = designs | find('slug', 'css-retro-vhs') %}
-After seeing my WWW design series, Sacha Greif, maintainer of the State of CSS and JS surveys, reached out to me to design the logo and t-shirt design for the 2021 edition. It took a few weeks but we landed on a pretty solid design, if I do say so myself!
+After seeing my WWW design series, Sacha Greif, maintainer of the State of CSS and JS surveys, reached out to me to design the logo and t-shirt design for the [2021 edition](https://2021.stateofcss.com/en-US/). It took a few weeks but we landed on a pretty solid design, if I do say so myself!
 
 {% gallery %}
 {% image './soc2021-cover.jpg' | toRoot, "A logo for the State of CSS, with CSS written in quarter-circles on top of a triple-layered yellow-to-hot pink gradient diamond.", "", { ratio: "600/600", group: true } %}
@@ -37,7 +37,7 @@ We were wrong. So I adjusted the logo, but for your entertainment, here is the l
 ## State of JS
 
 {% set jsShirtData = designs | find('slug', 'js-retro-vhs') %}
-Following a pretty successful collaboration on the CSS shirt, Sacha asked me once more if I'd be up to design a VHS-styled logo and shirt, but for the State of JS this time around. This one was a little more tricky to nail down as balancing "simple" with "massive ecosystem" is a tall order.
+Following a pretty successful collaboration on the CSS shirt, Sacha asked me once more if I'd be up to design a VHS-styled logo and shirt, but for the [State of JS](https://2021.stateofjs.com/en-US/) this time around. This one was a little more tricky to nail down as balancing "simple" with "massive ecosystem" is a tall order.
 
 We went through quite a few iterations, especially for the background shape that ended up being this tesseract-looking thing with multiple light sources.
 
@@ -57,7 +57,7 @@ I was also quite happy with this detail for the t-shirt, coming up with a symbol
 ## State of HTML
 
 {% set htmlShirtData = designs | find('slug', 'html-retro-vhs') %}
-Sacha Greif reached out to me for a new project: the State of HTML survey. The work for both the State of CSS and State of JS surveys was, in my eyes, a great collaboration, so we kept it going!
+Sacha Greif reached out to me for a new project: the [State of HTML survey](https://2023.stateofhtml.com/en-US/). The work for both the State of CSS and State of JS surveys was, in my eyes, a great collaboration, so we kept it going!
 
 This took a while to nail down, with the chevron-and-slash combo going through a lot of changes, as well as the HTML logo, but I think the final result works nicely.
 
@@ -73,7 +73,7 @@ This logo is also animated, as a treat. Click to restart the animation.
 ## State of React
 
 {% set reactShirtData = designs | find('slug', 'react-retro-vhs') %}
-We had tried to find time previous years to collaborate on a design for the React survey, and finally got around to it for the 2023 survey. Sacha was more hands-on since I am not knowledgeable at all in React-land. He suggested a different style, this time taking inspiration from anime and science-fiction user interfaces.
+We had tried to find time previous years to collaborate on a design for the React survey, and finally got around to it for the [2023 survey](https://2023.stateofreact.com/en-US/). Sacha was more hands-on since I am not knowledgeable at all in React-land. He suggested a different style, this time taking inspiration from anime and science-fiction user interfaces.
 
 While React is not my area of expertise, I think this looks pretty cool! Sacha set up most of the ideas (and with my limited Japanese knowledge, the kanji as well!), and after I drew custom katakana, he made even cooler ones and created the final survey logo, which just goes to show how this kind of collaboration can be fruitful!
 
