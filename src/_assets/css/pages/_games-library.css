@@ -358,6 +358,20 @@
 	--spine-font-family: var(--spine-font-stack);
 }
 
+/* Fix text alignment in Firefox only */
+@-moz-document url-prefix() {
+	[data-gaming-platform='ps2'],
+	[data-gaming-platform='ps3'],
+	[data-gaming-platform='ps4'],
+	[data-gaming-platform='ps5'],
+	[data-gaming-platform='psp'],
+	[data-gaming-platform='psv'] {
+		& .gaming-spine-label > span {
+			padding-block-start: 0.2em; /* Magic number, looks just right to my eyes */
+		}
+	}
+}
+
 @font-face {
 	font-family: LibreFranklin;
 	font-weight: 800;
