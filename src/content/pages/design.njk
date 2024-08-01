@@ -12,7 +12,7 @@
 		}
 	},
 	eleventyComputed: {
-		permalink: "designs/{{ design.slug | slug }}/",
+		permalink: "designs/{{ design.slug | slugify }}/",
 		pageTitle: "{{ design.name | safe }}",
 		title: "{{ design.name | safe }}",
 		summary: "{{ design.description | safe }}",
@@ -51,7 +51,7 @@
 		<ul class="flow">
 			{%- for variantSlug in design.variant %}
 			{% set variantDesign = designs | find('slug', variantSlug) %}
-			<li><a href="{{ ['designs', (variantDesign.slug | slug)] | toPath }}/">{{ variantDesign.name | safe }}</a></li>
+			<li><a href="{{ ['designs', (variantDesign.slug | slugify)] | toPath }}/">{{ variantDesign.name | safe }}</a></li>
 			{% endfor -%}
 		</ul>
 	{% endif %}
@@ -61,7 +61,7 @@
 		<ul class="flow">
 			{%- for otherDesignSlug in design.similar %}
 			{% set otherDesign = designs | find('slug', otherDesignSlug) %}
-			<li><a href="{{ ['designs', (otherDesign.slug | slug)] | toPath }}/">{{ otherDesign.name | safe }}</a></li>
+			<li><a href="{{ ['designs', (otherDesign.slug | slugify)] | toPath }}/">{{ otherDesign.name | safe }}</a></li>
 			{% endfor -%}
 		</ul>
 	{% endif %}

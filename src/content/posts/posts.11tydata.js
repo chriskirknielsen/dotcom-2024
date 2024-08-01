@@ -17,7 +17,7 @@ export default {
 			return new Date(data.date || data.page.date).getFullYear();
 		},
 		permalink: function (data) {
-			return `blog/${this.slug(data.slug || data.page.fileSlug)}/index.html`;
+			return `blog/${this.slugify(data.slug || data.page.fileSlug)}/index.html`;
 		},
 		customMetaImage: function (data) {
 			return this.toPath([data.assets.images, 'metaimage-blog.jpg']);

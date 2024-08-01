@@ -119,7 +119,7 @@
             const fontPreviewData = {
                 saveButton: document.getElementById('save-preview'),
                 previewSvg: document.getElementById('preview-svg'),
-                nameSlug: `{{ title | slug }}`
+                nameSlug: `{{ title | slugify }}`
             };
 
             document.addEventListener('DOMContentLoaded', function() {

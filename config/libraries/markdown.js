@@ -102,15 +102,7 @@ export default function (eleventyConfig, options = {}) {
 		throw new Error('The `anchorClass` property must be provided on the options argument.');
 	}
 
-	const slugify = (s) =>
-		encodeURIComponent(
-			String(s)
-				.trim()
-				.normalize('NFD')
-				.replace(/([\u0300-\u036f]|[,;:.…’'"?!&\/])/g, '')
-				.toLowerCase()
-				.replace(/\s+/g, '-')
-		);
+	const slugify = eleventyConfig.universal.filters.slugify;
 	const { anchorClass } = options;
 
 	let markdownItOptions = {
