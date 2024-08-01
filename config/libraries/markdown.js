@@ -102,7 +102,7 @@ export default function (eleventyConfig, options = {}) {
 		throw new Error('The `anchorClass` property must be provided on the options argument.');
 	}
 
-	const slugify = eleventyConfig.universal.filters.slugify;
+	const slugify = eleventyConfig.getFilter('slugify');
 	const { anchorClass } = options;
 
 	let markdownItOptions = {
@@ -191,7 +191,7 @@ export default function (eleventyConfig, options = {}) {
 
 			const text = h.text(); // Get the heading content
 			const slug = slugify(text); // Create a slug from the content
-			const inner = `<a class="${anchorClass}" href="#${slug}">${text}</a>`; //
+			const inner = `<a class="${anchorClass}" href="#${slug}">${text}</a>`;
 			h.attr('id', slug);
 			h.attr('tabindex', '-1');
 			h.html(inner);
@@ -199,15 +199,6 @@ export default function (eleventyConfig, options = {}) {
 		});
 
 		return $.html();
-	});
-
-	eleventyConfig.addFilter('slugify', function (str) {
-		// If this isn't a string, there isn't anything we can do!
-		if (typeof str !== 'string') {
-			return str;
-		}
-
-		return slugify(str);
 	});
 
 	/** Create a table of content list from markup */
