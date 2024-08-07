@@ -237,6 +237,23 @@ html[data-theme='cyberpunk'] {
 		--HOME-logo-text-scaling: 0.8;
 	}
 
+	.homepage-photo::before {
+		--i: 18px; /* Inset amount */
+		--s: 2px; /* Pattern size */
+		--f: 3; /* Pattern scaling factor */
+
+		content: '';
+
+		position: absolute;
+		inset: var(--i);
+		z-index: -1;
+
+		border: var(--HOME-photo-border-width) solid var(--C-heading);
+		background: conic-gradient(from -90deg, var(--C-heading) 90deg, transparent 0) repeat calc(50% + var(--s) / var(--f)) calc(50% + var(--s) / var(--f)) / var(--s) var(--s);
+
+		mask: radial-gradient(circle at 50% 50%, transparent calc(100% - var(--i) * 2), #0008 0) no-repeat center / calc(100% + 2 * var(--i)) calc(100% + 2 * var(--i));
+	}
+
 	& .button:not(.button--tag) {
 		&:is(:hover, :focus-visible) {
 			filter: drop-shadow(0 0 0.5em color-mix(in hsl, var(--C-heading), transparent));
