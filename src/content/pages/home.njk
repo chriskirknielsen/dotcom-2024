@@ -180,14 +180,6 @@ summary: "Welcome to the personal website of the one they call Christopher Kirk-
 			<a href="{{ social.github.url }}" class="button button--icon" aria-label="Find me on {{ social.github.label }}">{% svg 'github', {title: social.github.label} %}</a>
 		</li>
 	</ul>
-
-	{# <ul class="flex-list justifyContent-center">
-		{% for slashPage in nav.slashPages %}
-			<li>
-				<a href="{{ slashPage.path }}" class="button">{{ slashPage.label }}</a>
-			</li>
-		{% endfor %}
-	</ul> #}
 </aside>
 
 {% set hasFeatured = (collections['_posts.featured'] | length) > 0 %}

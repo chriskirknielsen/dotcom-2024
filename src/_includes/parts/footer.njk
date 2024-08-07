@@ -4,7 +4,7 @@
         {% if metadata.nakedJs %}<p class="fontWeight-bold">🙅 No JavaScript for <a href="https://js-naked-day.org/">JS Naked Day</a> (24th of April)!</p>{% endif %}
 
         <nav>
-            {% for footerNav in [nav.navbar, nav.footerExtras, nav.footerMisc, nav.footerSocial, nav.slashPages] %}
+            {% for footerNav in nav.footerGroups %}
                 <ul class="inline-list">
                     {% for navItem in footerNav %}
                         {% set linkHref = navItem.path if (not navItem.isRepoFileLink) else (metadata.repo + '/blob/main/' + page.inputPath) %}
