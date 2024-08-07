@@ -1,4 +1,6 @@
+import metadata from './metadata.js';
 import social from './social.js';
+
 const rss = { path: '/rss.xml', label: 'RSS Feed' };
 const navbar = [
 	{ path: '/blog/', label: 'Blog' },
@@ -24,7 +26,7 @@ export default {
 			{ path: '/colophon/', label: 'Colophon' },
 			{ path: '/search/', label: 'Search' },
 			{ path: '/archives/', label: 'Archives' },
-			{ path: 'https://tweets.chriskirknielsen.com', label: 'Tweet Archive' },
+			{ path: metadata.tweetArchiveUrl, label: 'Tweet Archive' },
 		],
 		[
 			{ path: '/css-logo/', label: 'CSS Logo' },
