@@ -42,7 +42,6 @@
 	color: var(--CARD-text-color);
 	border: var(--CARD-border-width) solid var(--CARD-border-color);
 	border-radius: clamp(0px, var(--_corner) * 999, var(--_card-corner));
-	/* background: var(--CARD-bg-color); */
 	box-shadow: var(--CARD-shadow);
 
 	@media (--accept-motion) {
@@ -51,15 +50,12 @@
 		will-change: transform;
 	}
 
-	&:any-link:is(:hover, :focus-visible) {
-		--CARD-text-color: var(--_card-text-color-active);
-	}
-
-	&:any-link:is(:hover, :focus-visible),
 	&:has(:is(.card-image, .card-heading) > a:is(:hover, :focus-visible)) {
+		--CARD-text-color: var(--_card-text-color-active);
 		--CARD-border-color: var(--_card-border-color-active);
 		--CARD-bg-color: var(--_card-bg-color-active);
 		--CARD-shadow: var(--_shadow-active);
+
 		transform: scale(1.01);
 
 		& .card-image img {
@@ -103,6 +99,8 @@
 }
 
 .card-content {
+	position: relative;
+
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
@@ -113,18 +111,22 @@
 	background: var(--CARD-bg-color);
 }
 
-.card-heading {
-	&,
-	& > a {
-		--LINK-color: var(--_card-heading-color);
-		color: var(--LINK-color);
-		transition: color var(--CARD-transition-base);
-	}
+.card-heading > a {
+	--LINK-color: var(--_card-heading-color);
 
-	.card:any-link:is(:hover, :focus-visible) &,
-	& > a:is(:hover, :focus-visible) {
+	color: var(--LINK-color);
+	transition: color var(--CARD-transition-base);
+
+	&:is(:hover, :focus-visible) {
 		--LINK-color: var(--_card-heading-color-active);
 	}
+}
+
+.card-link--cover::before {
+	content: '';
+
+	position: absolute;
+	inset: 0;
 }
 
 /* Horizontal card layout */

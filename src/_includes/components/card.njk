@@ -1,21 +1,18 @@
 {% set attrs %}class="{{ ('card ' + (classes or '')) | trim }}" {% if cardAttrs %}{{ cardAttrs | safe }}{% endif %}{% endset %}
-{% if containsLinks %}
-<div {{ attrs | trim | safe }}>
-{% else %}
-<a href="{{ link }}" {{ attrs | trim | safe }}>
-{% endif %}
+{% set imageLink = image.link or link %}
+<article {{ attrs | trim | safe }}>
 	{% if image %}
 		<div class="card-image">
-			{% if image.link %}<a href="{{ image.link }}">{% endif %}
+			<a href="{{ imageLink }}">
 				<img
 					src="{{ image.src }}"
-					alt="{{ image.alt or (heading if image.link else '') }}"
+					alt="{{ image.alt or (heading if imageLink else '') }}"
 					width="{{ image.width }}"
 					height="{{ image.height }}"
 					{% if image.lazy %}loading="lazy"{% endif %}
 					{% if image.focusPoint %}style="--CARD-image-focus-point: {{ image.focusPoint }};"{% endif %}
 				>
-			{% if image.link %}</a>{% endif %}
+			</a>
 			{% if image.decorator %}
 				<div class="card-decorator | fontSize-tiny">{{ image.decorator | safe }}</div>
 			{% endif %}
@@ -27,9 +24,9 @@
 		{% endif %}
 		{% if heading %}
 			<{{ headingTag or 'h2' }} class="h3 | card-heading">
-			{% if headingLink %}<a href="{{ headingLink }}">{% endif %}
+			<a href="{{ link }}" {% if not containsLinks %}class="card-link--cover"{% endif %}>
 				{{ heading | safe }}
-			{% if headingLink %}</a>{% endif %}
+			</a>
 			</{{ headingTag or 'h2' }}>
 		{% endif %}
 		
@@ -39,8 +36,4 @@
 			<p>{{ description | safe }}</p>
 		{% endif %}
 	</div>
-{% if not containsLinks %}
-</a>
-{% else %}
-</div>
-{% endif %}
+</article>
