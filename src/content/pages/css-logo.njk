@@ -34,11 +34,11 @@
 
             <div class="css-logo-control-groups | flow">
                 <fieldset class="css-logo-control-group | grouper grouper--vertical">
-                    <legend class="visually-hidden">Number</legend>
-                    <strong data-csslogo-control-area style="--control-area: --num-legend;" aria-hidden="true">Number</strong>
+                    <legend class="visually-hidden">Version Info</legend>
+                    <strong data-csslogo-control-area style="--control-area: --num-legend;" aria-hidden="true">Version</strong>
 
-                    <label for="css-logo-value-control" class="visually-hidden">Version Number</label>
-                    <input id="css-logo-value-control" type="number" min="1" max="999" step="1" value="{{ CSS_VER_NUM }}" size="5" data-csslogo-control="numberValue" data-csslogo-control-area style="--control-area: --num-input;">
+                    <label for="css-logo-value-control" class="visually-hidden">Version</label>
+                    <input id="css-logo-value-control" type="text" value="{{ CSS_VER_NUM }}" size="5" data-csslogo-control="numberValue" data-csslogo-control-area style="--control-area: --num-input;">
 
                     {% component 'cta', {
                         ctaType: 'button',
@@ -76,6 +76,8 @@
             const isNaNorExp = (str) => String(str).trim() === '' || isNaN(str) || String(str).indexOf('e') > -1; // Is not a number or is an exponent
             const form = document.querySelector('[data-csslogo-controls]');
             const cssLogoNum = document.getElementById('css-logo-number');
+            const cssLogoNumBaseFontSize = cssLogoNum.getAttribute('font-size');
+            
             form.hidden = false;
             Array.from(document.querySelectorAll('[data-csslogo-control="numberValue"], [data-csslogo-control="colorHue"]')).forEach((input) => { input.value = input.defaultValue; }); // Reset on page reload
             
@@ -110,17 +112,19 @@
                 if (!control) { return }
                 switch (control.getAttribute('data-csslogo-control')) {
                     case 'numberValue': {
-                        let newNum = parseInt(control.value, 10);
-                        if (newNum && !isNaNorExp(newNum)) { // Zero is not allowed, so newNum is naively check for truthiness
+                        let newNum = control.value.trim();
+                        if (newNum) {
                             cssLogoNum.classList.add('css-logo-number-shown');
                             form.querySelector('[data-csslogo-control="toggleNumberVisibility"]').setAttribute('aria-pressed', 'true');
                         } else {
                             newNum = CSS_VER_NUM; // Reset to CSS_VER_NUM on failure
                         }
-                        if (control.value.trim() !== '') {
-                            control.value = newNum;
-                        }
                         cssLogoNum.textContent = newNum;
+                        if (newNum.length > 2) {
+                            cssLogoNum.setAttribute('font-size', cssLogoNumBaseFontSize * Math.pow(0.9, Math.min(newNum.length - 2, 7)));
+                        } else {
+                            cssLogoNum.setAttribute('font-size', cssLogoNumBaseFontSize); // Reset to initial font size
+                        }
                         break;
                     }
                     case 'colorHue': {
@@ -142,8 +146,8 @@
                 if (!control) { return }
                 switch (control.getAttribute('data-csslogo-control')) {
                     case 'numberValue': {
-                        if (isNaNorExp(control.value)) {
-                            control.value = 4;
+                        if (control.value.trim() === '') {
+                            control.value = CSS_VER_NUM;
                         }
                         break;
                     }
@@ -332,4 +336,4 @@
     </div>
 </div>
 
-<p class="fontStyle-italic fontSize-small">For type nerds: this uses a modified Helvetica Neue LT Std (I opened the C more to match the S), at weight 75 (Bold). The number is set in the same font at weight 85 (Heavy) in the original design — the editable version uses Switzer from the "Vintage" theme, or a sans-serif typeface from your device.</p>
+<p class="fontStyle-italic fontSize-small">For type nerds: this uses a modified Helvetica Neue LT Std (I opened the C more to match the S), at weight 75 (Bold). The version number is set in the same font at weight 85 (Heavy) in the original design — the editable version uses Switzer from my "Vintage" theme, or a sans-serif typeface from your device.</p>

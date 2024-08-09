@@ -1,47 +1,56 @@
 .inline-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--size-s);
-    justify-content: center;
-    align-items: stretch;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--size-s);
+	justify-content: center;
+	align-items: stretch;
 
-    & > label {
-        align-self: center;
-    }
+	& > label {
+		align-self: center;
+	}
 
-    & > input {
-        flex: 1 1 auto;
-        min-inline-size: 12ch;
-    }
+	& > input {
+		flex: 1 1 auto;
+		min-inline-size: 12ch;
+	}
 }
 
-:is(form, [data-formlike]) :is(input:where([type="text"], [type="number"], [type="search"]), select, textarea, select),
+:is(form, [data-formlike]) :is(input:where([type='text'], [type='number'], [type='search']), select, textarea, select),
 [data-inputlike] {
-    padding: var(--size-2xs) var(--size-s);
+	padding: var(--size-2xs) var(--size-s);
 
-    color: var(--_cta-text-color);
-    border: 1px solid var(--_cta-border-color);
-    border-radius: var(--_corner);
-    background: var(--_cta-bg-color);
+	color: var(--_cta-text-color);
+	border: 1px solid var(--_cta-border-color);
+	border-radius: var(--_corner);
+	background: var(--_cta-bg-color);
 
-    &:focus {
-        border-color: var(--_cta-border-color-active);
-    }
+	&:focus {
+		border-color: var(--_cta-border-color-active);
+	}
 
-    &:disabled {
-        cursor: not-allowed;
-    }
+	&:disabled {
+		cursor: not-allowed;
+	}
 }
 
-[data-inputlike="wrap"] {
-    display: flex;
-    align-items: center;
+[data-inputlike='wrap'] {
+	display: flex;
+	align-items: center;
+
+	&:focus-within {
+		outline: var(--_focus-outline);
+		outline-offset: var(--_focus-outline-offset);
+
+		& > :focus {
+			outline: none;
+		}
+	}
 }
 
 :is(form, [data-formlike]) :is(input, select, select) {
-    line-height: 1;
+	line-height: 1;
 }
 
 fieldset {
-    border: none;
+	border: none;
 }
