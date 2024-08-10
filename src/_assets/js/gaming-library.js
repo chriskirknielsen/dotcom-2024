@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
 		spine.getAttributeNames().forEach((attr) => button.setAttribute(attr, spine.getAttribute(attr)));
 		button.type = 'button';
 		button.classList.add('button-reset');
-		button.innerHTML = spine.innerHTML;
+		Array.from(spine.childNodes).forEach((n) => button.appendChild(n)); // Move all contents to the new element
 		spine.replaceWith(button);
 
 		button.addEventListener('mouseover', (e) => unhide(button.querySelector('.gaming-front-art')), { once: true });
