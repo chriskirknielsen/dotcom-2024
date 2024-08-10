@@ -48,15 +48,51 @@ platformLabels: {
         <ul class="gaming-platform-group" data-gaming-platform="{{ platformSlug }}">
             {% for game in games | sort(false, false, 'sortTitle') %}
                 <li
-                    class="gaming-spine"
+                    class="gaming-box-wrap"
                     {% if game.edition in ['Essentials', 'Platinum'] %}data-gaming-edition="{{ game.edition | lower | replace(' ', '-') }}"{% endif %}
                     {% if platformSlug == 'ps3' %}data-gaming-branding="{{ 'old' if game.year < 2009 else 'new' }}"{% endif %}
                     data-game="{{ game | dump | escape }}"
                 >
-                    <div class="gaming-spine-paper">
-                        <div class="gaming-spine-top">
-                            {% if platformSlug == 'ps3' %}
-                                {% if game.year < 2009 %}
+                    <div class="gaming-box">
+                        <span class="visually-hidden">{{ game.title }}</span>
+                        
+                        <div class="gaming-spine-paper" aria-hidden="true">
+                            <div class="gaming-spine-top">
+                                {% if platformSlug == 'ps3' %}
+                                    {% if game.year < 2009 %}
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="32"
+                                            height="32"
+                                            viewBox="0 0 32 32"
+                                            class="gaming-spine-logo"
+                                            aria-hidden="true"
+                                        ><use xlink:href="#gaming-old-{{ platformSlug }}-logo" width="32" height="32"></use></svg>
+                                    {% else %}
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="32"
+                                            height="64"
+                                            viewBox="0 0 32 64"
+                                            class="gaming-spine-logo"
+                                            aria-hidden="true"
+                                        ><use xlink:href="#gaming-new-{{ platformSlug }}-logo" width="32" height="64"></use></svg>
+                                    {% endif %}
+                                {% elseif platformSlug == 'psv' %}
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="32"
+                                        height="80"
+                                        viewBox="0 0 32 80"
+                                        class="gaming-spine-logo-extra"
+                                        aria-hidden="true"
+                                    ><use xlink:href="#gaming-vertical-{{ platformSlug }}-logo"></use></svg>
+                                {% else %}
+                                    {% set displayLogo = 'ps1' if (platformSlug in ['ps2', 'psp']) else platformSlug %}
+                                    {% if platformSlug in ['ps4', 'ps5'] %}{% set displayLogo = 'solid-ps1' %}{% endif %}
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -65,67 +101,32 @@ platformLabels: {
                                         viewBox="0 0 32 32"
                                         class="gaming-spine-logo"
                                         aria-hidden="true"
-                                    ><use xlink:href="#gaming-old-{{ platformSlug }}-logo" width="32" height="32"></use></svg>
-                                {% else %}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="32"
-                                        height="64"
-                                        viewBox="0 0 32 64"
-                                        class="gaming-spine-logo"
-                                        aria-hidden="true"
-                                    ><use xlink:href="#gaming-new-{{ platformSlug }}-logo" width="32" height="64"></use></svg>
+                                    ><use xlink:href="#gaming-{{ displayLogo }}-logo" width="32" height="32"></use></svg>
+                                    {% if platformSlug in ['ps2'] %}
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="32"
+                                            height="154.4"
+                                            viewBox="0 0 32 154.4"
+                                            class="gaming-spine-logo-extra"
+                                            aria-hidden="true"
+                                        ><use xlink:href="#gaming-vertical-{{ platformSlug }}-logo"></use></svg>
+                                    {% elseif platformSlug in ['ps4', 'ps5', 'psp'] %}
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="32"
+                                            height="64"
+                                            viewBox="0 0 32 64"
+                                            class="gaming-spine-logo-extra"
+                                            aria-hidden="true"
+                                        ><use xlink:href="#gaming-vertical-{{ platformSlug }}-logo"></use></svg>
+                                    {% endif %}
                                 {% endif %}
-                            {% elseif platformSlug == 'psv' %}
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                    width="32"
-                                    height="80"
-                                    viewBox="0 0 32 80"
-                                    class="gaming-spine-logo-extra"
-                                    aria-hidden="true"
-                                ><use xlink:href="#gaming-vertical-{{ platformSlug }}-logo"></use></svg>
-                            {% else %}
-                                {% set displayLogo = 'ps1' if (platformSlug in ['ps2', 'psp']) else platformSlug %}
-                                {% if platformSlug in ['ps4', 'ps5'] %}{% set displayLogo = 'solid-ps1' %}{% endif %}
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                    width="32"
-                                    height="32"
-                                    viewBox="0 0 32 32"
-                                    class="gaming-spine-logo"
-                                    aria-hidden="true"
-                                ><use xlink:href="#gaming-{{ displayLogo }}-logo" width="32" height="32"></use></svg>
-                                {% if platformSlug in ['ps2'] %}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="32"
-                                        height="154.4"
-                                        viewBox="0 0 32 154.4"
-                                        class="gaming-spine-logo-extra"
-                                        aria-hidden="true"
-                                    ><use xlink:href="#gaming-vertical-{{ platformSlug }}-logo"></use></svg>
-                                {% elseif platformSlug in ['ps4', 'ps5', 'psp'] %}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="32"
-                                        height="64"
-                                        viewBox="0 0 32 64"
-                                        class="gaming-spine-logo-extra"
-                                        aria-hidden="true"
-                                    ><use xlink:href="#gaming-vertical-{{ platformSlug }}-logo"></use></svg>
-                                {% endif %}
-                            {% endif %}
+                            </div>
+                            <div class="gaming-spine-label" style="--spine-title-scale: {{ game.title | sizeFactor }}"><span>{{ game.title | replace("'", '’') }}</span></div>
                         </div>
-                        <div class="gaming-spine-label" style="--spine-title-scale: {{ game.title | sizeFactor }}"><span>{{ game.title | replace("'", '’') }}</span></div>
-                        {# {% if game.year %} ({{ game.year }}){% endif %} #}
-                        {# {% if game.edition and game.edition != game.title %}— {{ game.edition }}{% endif %} #}
-                        {# {% if (game.subItems | length) > 0 %} (includes {{ game.subItems | length }} games){% endif %} #}
                     </div>
                 </li>
             {% endfor %}

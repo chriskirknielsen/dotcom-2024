@@ -39,7 +39,7 @@ let openGame = null;
 
 document.addEventListener('DOMContentLoaded', function (e) {
 	document.querySelector('[data-gaming-toolbar]').hidden = false; // Reveal the toolbar now that JS is enabled
-	eachDom('.gaming-spine-label', (spine) => {
+	eachDom('.gaming-box', (spine) => {
 		const button = document.createElement('button');
 		spine.getAttributeNames().forEach((attr) => button.setAttribute(attr, spine.getAttribute(attr)));
 		button.type = 'button';
@@ -57,8 +57,8 @@ document.addEventListener('click', function (e) {
 		eachDom('details', (d) => {
 			d.open = newPressed;
 		});
-	} else if ((target = e.target.closest('.gaming-spine-label'))) {
-		openGame = target.closest('.gaming-spine'); // Update to the currently open game's list item
+	} else if ((target = e.target.closest('.gaming-box'))) {
+		openGame = target.closest('.gaming-box-wrap'); // Update to the currently open game's list item
 		const gameData = JSON.parse(target.closest('[data-game]').getAttribute('data-game'));
 		const dialog = document.getElementById('gaming-details-dialog');
 		const template = document.getElementById('gaming-details-dialog-template');

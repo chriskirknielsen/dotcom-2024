@@ -7,10 +7,10 @@
 	--game-spine-text: #333639;
 	--game-spine-bg: #f8f8f8;
 	--game-spine-radius: 0.125em;
-	--spine-ratio: calc(var(--spine-depth) / var(--spine-height)); /* From mm measurements */
+	--spine-ratio: calc(var(--box-depth) / var(--box-height)); /* From mm measurements */
 	--spine-mm-to-px-factor: 0.125;
-	--spine-block-size: calc(var(--spine-height) * var(--spine-mm-to-px-factor) * 1em);
-	--spine-inline-size: calc(var(--spine-depth) * var(--spine-mm-to-px-factor) * 1em);
+	--spine-block-size: calc(var(--box-height) * var(--spine-mm-to-px-factor) * 1em);
+	--spine-inline-size: calc(var(--box-depth) * var(--spine-mm-to-px-factor) * 1em);
 	--spine-font-weight: 700;
 	--spine-font-stack: sans-serif-condensed, sans-serif;
 	--spine-font-family: var(--spine-font-stack);
@@ -30,7 +30,7 @@
 	inline-size: auto;
 }
 
-.gaming-spine {
+.gaming-box-wrap {
 	position: relative;
 	isolation: isolate;
 
@@ -39,6 +39,9 @@
 	inline-size: var(--spine-inline-size);
 
 	color: var(--game-spine-text);
+	border: 0 solid transparent;
+	border-block-width: var(--box-border-size-block, 0);
+	border-inline-width: var(--box-border-size-inline, 0);
 	border-radius: var(--game-spine-radius);
 	background: var(--game-case-plastic);
 	box-shadow: 0px 0.5px 0.4px hsl(0deg 0% 0% / 0.33), 0px 0.9px 0.7px -1.7px hsl(0deg 0% 0% / 0.25), 0px 3.9px 2.9px -3.3px hsl(0deg 0% 0% / 0.16),
@@ -53,19 +56,42 @@
 	}
 
 	/* Scale up the hovered item */
-	&:has(.gaming-spine-label:hover) {
+	&:has(.gaming-box:hover) {
 		transform: scale(1.025);
 	}
 
 	/* Previous and next games slightly scale up */
-	&:has(+ & .gaming-spine-label:hover),
-	&:has(.gaming-spine-label:hover) + & {
+	&:has(+ & .gaming-box:hover),
+	&:has(.gaming-box:hover) + & {
 		transform: scale(1.0125);
 	}
 
-	.gaming-platform-group:has(.gaming-spine-label:hover) > &:not(:has(.gaming-spine-label:hover)) {
+	.gaming-platform-group:has(.gaming-box:hover) > &:not(:has(.gaming-box:hover)) {
 		opacity: 0.8;
 	}
+}
+
+.gaming-box {
+	flex: 1 1 auto;
+	display: flex;
+}
+
+.gaming-front-art {
+	position: absolute;
+	inset-block: calc(-1 * 0.1875em); /* TODO Make border width a custom prop */
+	inset-inline-start: 100%;
+
+	width: auto;
+	max-width: unset;
+	height: calc(100% + 2 * 0.1875em); /* TODO Make border width a custom prop */
+	aspect-ratio: 267/357; /* TODO Make cover ratio a custoim prop per console */
+
+	border: inherit; /* TODO Make border width a custom prop */
+	border-color: var(--game-case-plastic);
+	border-radius: inherit;
+
+	transform-origin: 0% 50%;
+	transform: rotateY(90deg);
 }
 
 .gaming-spine-paper {
@@ -142,10 +168,8 @@
 [data-gaming-platform='ps5'],
 [data-gaming-platform='ps4'] {
 	--game-case-plastic: #504de5e6;
-
-	& .gaming-spine {
-		border-block: 0.1875em solid transparent;
-	}
+	--box-border-size-block: 0.1875em;
+	--box-border-size-inline: 0;
 
 	& .gaming-spine-top {
 		gap: 0.25em;
@@ -159,17 +183,20 @@
 }
 
 [data-gaming-platform='ps4'] {
-	& .gaming-spine {
+	& .gaming-box-wrap {
 		--game-spine-top-text: #f8f8f8;
 		--game-spine-top-bg: #0054a5;
 	}
 }
 
 [data-gaming-platform='ps3'] {
-	& .gaming-spine {
-		border-block: 0.1875em solid transparent;
-		border-block-start-width: 2em;
+	--box-border-size-block-start: 2em;
+	--box-border-size-block-end: 0.1875em;
+	--box-border-size-block: var(--box-border-size-block-start) var(--box-border-size-block-end);
+	--box-border-size-inline: 0;
+	--box-cover-padding: 0.125em;
 
+	& .gaming-box-wrap {
 		&[data-gaming-branding='old'] {
 			--game-spine-top-text: #2c2e31;
 			--game-spine-top-bg: #d85454;
@@ -204,21 +231,23 @@
 [data-gaming-platform='ps5'],
 [data-gaming-platform='ps4'],
 [data-gaming-platform='ps3'] {
-	--spine-height: 170;
-	--spine-depth: 15;
+	--box-width: 136;
+	--box-height: 170;
+	--box-depth: 15;
 }
 
 [data-gaming-platform='ps2'] {
 	--game-case-plastic: #2e60c1;
 	--game-spine-top-text: #f8f8f8;
 	--game-spine-top-bg: #464a4f;
-	--spine-height: 190;
-	--spine-depth: 14;
+	--box-width: 135;
+	--box-height: 190;
+	--box-depth: 14;
 	--spine-paper-padding: 0.25em 0.25em 0.5em;
+	--box-border-size-block: 0.1875em;
+	--box-border-size-inline: 0;
 
-	& .gaming-spine {
-		border-block: 0.1875em solid transparent;
-
+	& .gaming-box-wrap {
 		&[data-gaming-edition='platinum'] {
 			--game-case-plastic: #c2dae8;
 			--game-spine-text: #bfd0d9;
@@ -246,12 +275,14 @@
 [data-gaming-platform='ps1'] {
 	--game-spine-text: #ffffff;
 	--game-spine-bg: #333639;
-	--spine-height: 142;
-	--spine-depth: 15;
+	--box-width: 125;
+	--box-height: 142;
+	--box-depth: 15;
+	--box-cover-padding: 0.125em;
+	--box-border-size-block: 0.25em;
+	--box-border-size-inline: 0;
 
-	& .gaming-spine {
-		border-block: 0.25em solid transparent;
-
+	& .gaming-box-wrap {
 		&[data-gaming-edition='platinum'] {
 			--game-spine-text: #333639;
 			--game-spine-bg: #b4b8be;
@@ -270,15 +301,25 @@
 	}
 }
 
+[data-gaming-platform='psv'] {
+	--game-case-plastic: #504de5e6;
+	--box-width: 105;
+	--box-height: 135;
+	--box-depth: 12;
+	--game-spine-top-text: #f8f8f8;
+	--game-spine-top-bg: #0054a5;
+	--box-border-size-block: 0.125em;
+	--box-border-size-inline: 0;
+}
+
 [data-gaming-platform='psp'] {
-	--spine-height: 168;
-	--spine-depth: 14;
+	--box-width: 97;
+	--box-height: 168;
+	--box-depth: 14;
 	--game-spine-top-text: #f8f8f8;
 	--game-spine-top-bg: #464a4f;
-
-	& .gaming-spine {
-		border-block: 0.125em solid transparent;
-	}
+	--box-border-size-block: 0.125em;
+	--box-border-size-inline: 0;
 
 	& .gaming-spine-logo {
 		background: #f8f8f8;
@@ -294,33 +335,23 @@
 	}
 }
 
-[data-gaming-platform='psv'] {
-	--game-case-plastic: #504de5e6;
-	--spine-height: 135;
-	--spine-depth: 12;
-	--game-spine-top-text: #f8f8f8;
-	--game-spine-top-bg: #0054a5;
-
-	& .gaming-spine {
-		border-block: 0.125em solid transparent;
-	}
-}
-
 [data-gaming-platform='dreamcast'] {
 	--game-spine-bg: #3b6fc4;
 	--game-spine-text: #edfcff;
-	--spine-height: 142;
-	--spine-depth: 14;
+	--box-width: 144;
+	--box-height: 142;
+	--box-depth: 14;
+	--box-cover-padding: 0.125em;
+	--box-border-size-block: 0.125em;
+	--box-border-size-inline: 0.125em;
 
-	& .gaming-spine {
-		border: 0.125em solid transparent;
-
+	& .gaming-box-wrap {
 		&::before {
 			content: '';
 
 			position: absolute;
-			inset-block: -0.125em;
-			inset-inline-end: -0.125em;
+			inset-block: calc(-1 * var(--box-border-size-block));
+			inset-inline-end: calc(-1 * var(--box-border-size-inline));
 			inline-size: 80%;
 			z-index: -1;
 
@@ -330,14 +361,14 @@
 	}
 
 	& .gaming-spine-paper {
-		border-radius: 0.0625em;
+		border-radius: calc(var(--box-border-size) / 2);
 	}
 }
 
 [data-gaming-platform='gameboy'],
 [data-gaming-platform='gameboy-advance'] {
-	--spine-height: 142;
-	--spine-depth: 20;
+	--box-height: 142;
+	--box-depth: 20;
 }
 
 /* Font overrides */
