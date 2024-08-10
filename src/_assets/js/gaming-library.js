@@ -38,6 +38,9 @@ let msgs = [
 let openGame = null;
 
 document.addEventListener('DOMContentLoaded', function (e) {
+	const unhide = (el) => {
+		el.hidden = false;
+	};
 	document.querySelector('[data-gaming-toolbar]').hidden = false; // Reveal the toolbar now that JS is enabled
 	eachDom('.gaming-box', (spine) => {
 		const button = document.createElement('button');
@@ -46,6 +49,11 @@ document.addEventListener('DOMContentLoaded', function (e) {
 		button.classList.add('button-reset');
 		button.innerHTML = spine.innerHTML;
 		spine.replaceWith(button);
+
+		button.addEventListener('mouseover', (e) => unhide(button.querySelector('.gaming-front-art')), { once: true });
+		button.addEventListener('touchstart', (e) => unhide(button.querySelector('.gaming-front-art')), { once: true });
+		button.addEventListener('focus', (e) => unhide(button.querySelector('.gaming-front-art')), { once: true });
+		button.addEventListener('click', (e) => unhide(button.querySelector('.gaming-front-art')), { once: true });
 	});
 });
 

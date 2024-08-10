@@ -15,7 +15,7 @@ const regions = {
 const gameslibrary = await notionDatabaseQuery({
 	databaseId: process.env.NOTION_DATABASE_ID_LUDOTHEQUE,
 	label: 'gameslibrary.js',
-	propsToUse: ['Title', 'Sort Title', 'PSN ID', 'Edition', 'Platform', 'Region', 'DLC', 'Completed', 'Discs', 'Year', 'Parent item', 'Sub-item', 'Thumbnail'],
+	propsToUse: ['Title', 'Sort Title', 'PSN ID', 'Edition', 'Platform', 'Region', 'DLC', 'Completed', 'Discs', 'Year', 'Parent item', 'Sub-item', 'Thumbnail', 'Boxart'],
 	filter: {
 		and: [
 			{
@@ -71,6 +71,14 @@ const gameslibrary = await notionDatabaseQuery({
 					.map((textBlock) => textBlock.plain_text)
 					.join('')
 					.trim(),
+				boxart:
+					props.Boxart.files.length > 0
+						? {
+								url: props.Boxart.files[0].type === 'external' ? props.Boxart.files[0].external.url : props.Boxart.files[0].file.url,
+								width: props.Boxart.files[0].name.split('x')[0],
+								height: props.Boxart.files[0].name.split('x')[1],
+						  }
+						: null,
 				trophyIcon:
 					props.Thumbnail.files.length > 0
 						? props.Thumbnail.files[0].type === 'external'

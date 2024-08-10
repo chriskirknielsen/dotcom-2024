@@ -55,7 +55,19 @@ platformLabels: {
                 >
                     <div class="gaming-box">
                         <span class="visually-hidden">{{ game.title }}</span>
-                        
+                        {% if game.boxart %}
+                        <div class="gaming-front">
+                            <img
+                                src="{{ game.boxart.url | toCloudinary('c_fill,h_500/q_auto:eco') }}" 
+                                class="gaming-front-art"
+                                width="{{ game.boxart.width }}"
+                                height="{{ game.boxart.height }}"
+                                alt=""
+                                loading="lazy"
+                                hidden
+                            >
+                        </div>
+                        {% endif %}
                         <div class="gaming-spine-paper" aria-hidden="true">
                             <div class="gaming-spine-top">
                                 {% if platformSlug == 'ps3' %}

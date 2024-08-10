@@ -38,60 +38,86 @@
 	block-size: var(--spine-block-size);
 	inline-size: var(--spine-inline-size);
 
-	color: var(--game-spine-text);
-	border: 0 solid transparent;
-	border-block-width: var(--box-border-size-block, 0);
-	border-inline-width: var(--box-border-size-inline, 0);
-	border-radius: var(--game-spine-radius);
-	background: var(--game-case-plastic);
-	box-shadow: 0px 0.5px 0.4px hsl(0deg 0% 0% / 0.33), 0px 0.9px 0.7px -1.7px hsl(0deg 0% 0% / 0.25), 0px 3.9px 2.9px -3.3px hsl(0deg 0% 0% / 0.16),
-		0px 12px 9px -5px hsl(0deg 0% 0% / 0.08);
-
-	will-change: transform;
-	transform-origin: 50% 100%;
-
+	/* Scale up the hovered item, but only buttons with a cover art */
 	@media (--accept-motion) {
-		transition: var(--anim-short) var(--easing-in-out);
-		transition-property: opacity, transform;
-	}
+		/* z-index: 0; */
 
-	/* Scale up the hovered item */
-	&:has(.gaming-box:hover) {
-		transform: scale(1.025);
-	}
+		perspective: 356rem;
+		/* transition: z-index var(--anim-short) var(--easing-in-out); */
 
-	/* Previous and next games slightly scale up */
-	&:has(+ & .gaming-box:hover),
-	&:has(.gaming-box:hover) + & {
-		transform: scale(1.0125);
-	}
-
-	.gaming-platform-group:has(.gaming-box:hover) > &:not(:has(.gaming-box:hover)) {
-		opacity: 0.8;
+		&:has(button.gaming-box:is(:hover, :focus-visible) .gaming-front-art) {
+			/* z-index: 10; */
+		}
 	}
 }
 
 .gaming-box {
 	flex: 1 1 auto;
 	display: flex;
+	align-items: stretch;
+	block-size: inherit;
+	inline-size: inherit;
+
+	color: var(--game-spine-text);
+	border: 0 solid transparent;
+	border-block-width: var(--box-border-size-block, 0);
+	border-inline-width: var(--box-border-size-inline, 0);
+	border-radius: var(--game-spine-radius);
+	background: var(--game-case-plastic);
+	/* box-shadow: 0px 0.5px 0.4px hsl(0deg 0% 0% / 0.33), 0px 0.9px 0.7px -1.7px hsl(0deg 0% 0% / 0.25), 0px 3.9px 2.9px -3.3px hsl(0deg 0% 0% / 0.16),
+		0px 12px 9px -5px hsl(0deg 0% 0% / 0.08); */
+
+	will-change: transform;
+	transform-origin: 50% 100%;
+	transform-style: preserve-3d;
+	transform: rotateY(0deg);
+
+	/* Scale up the hovered item, but only buttons with a cover art */
+	@media (--accept-motion) {
+		transition: transform var(--anim-short) var(--easing-in-out);
+
+		&:is(button):is(:hover, :focus-visible) {
+			transform: scale(1.05);
+
+			&:has(.gaming-front-art) {
+				transform: translateZ(24rem) translateX(-67%) rotateY(-10deg);
+			}
+		}
+	}
+}
+
+.gaming-front {
+	position: absolute;
+	inset-block: calc(-1 * (var(--box-border-size-block) + var(--box-cover-padding-block-start, 0px)));
+	inset-inline-start: 100%;
+
+	display: flex;
+	width: auto;
+	max-width: unset;
+	height: calc(100% + 2 * var(--box-border-size-block) + var(--box-cover-padding-block-start, 0px));
+	aspect-ratio: var(--box-width) / var(--box-height);
+
+	border-block-style: solid;
+	border-block-width: var(--box-border-size-block);
+	border-color: var(--game-case-plastic);
+	border-radius: var(--box-radius-top-left, var(--game-spine-radius)) var(--box-radius-top-right, var(--game-spine-radius))
+		var(--box-radius-bottom-right, var(--game-spine-radius)) var(--box-radius-bottom-left, var(--game-spine-radius));
+	background: linear-gradient(to bottom, var(--game-case-plastic) var(--box-cover-padding-block-start, 0px), #fff 0);
+	background-clip: padding-box;
+
+	transform-origin: 0% 50%;
+	transform: rotateY(90deg) translateZ(-1px);
+	filter: blur(0.1px); /* Pseudo-anti-aliasing on box edges */
 }
 
 .gaming-front-art {
-	position: absolute;
-	inset-block: calc(-1 * 0.1875em); /* TODO Make border width a custom prop */
-	inset-inline-start: 100%;
-
-	width: auto;
+	width: 100%;
 	max-width: unset;
-	height: calc(100% + 2 * 0.1875em); /* TODO Make border width a custom prop */
-	aspect-ratio: 267/357; /* TODO Make cover ratio a custoim prop per console */
+	height: 100%;
+	padding: var(--box-cover-padding, 0);
+	/* object-fit: cover; */
 
-	border: inherit; /* TODO Make border width a custom prop */
-	border-color: var(--game-case-plastic);
-	border-radius: inherit;
-
-	transform-origin: 0% 50%;
-	transform: rotateY(90deg);
+	mask-image: linear-gradient(to bottom right, #0008, #000 25%, #000 75%, #0008);
 }
 
 .gaming-spine-paper {
@@ -190,11 +216,11 @@
 }
 
 [data-gaming-platform='ps3'] {
-	--box-border-size-block-start: 2em;
-	--box-border-size-block-end: 0.1875em;
-	--box-border-size-block: var(--box-border-size-block-start) var(--box-border-size-block-end);
+	--box-border-size-block: 0.1875em;
 	--box-border-size-inline: 0;
-	--box-cover-padding: 0.125em;
+	--box-radius-top-right: 1em;
+	--box-cover-padding-block-start: 2em;
+	--box-cover-padding: var(--box-cover-padding-block-start, 0) 0 0;
 
 	& .gaming-box-wrap {
 		&[data-gaming-branding='old'] {
@@ -225,6 +251,10 @@
 				--game-spine-bg: #d73333;
 			}
 		}
+	}
+
+	& .gaming-box {
+		border-block-start-width: calc(var(--box-cover-padding-block-start) + var(--box-border-size-block));
 	}
 }
 
@@ -278,7 +308,6 @@
 	--box-width: 125;
 	--box-height: 142;
 	--box-depth: 15;
-	--box-cover-padding: 0.125em;
 	--box-border-size-block: 0.25em;
 	--box-border-size-inline: 0;
 
@@ -341,11 +370,10 @@
 	--box-width: 144;
 	--box-height: 142;
 	--box-depth: 14;
-	--box-cover-padding: 0.125em;
 	--box-border-size-block: 0.125em;
 	--box-border-size-inline: 0.125em;
 
-	& .gaming-box-wrap {
+	& .gaming-box {
 		&::before {
 			content: '';
 
@@ -358,6 +386,10 @@
 			border-radius: inherit;
 			background-color: #5581c4;
 		}
+	}
+
+	& .gaming-front {
+		--game-case-plastic: #5581c4;
 	}
 
 	& .gaming-spine-paper {
