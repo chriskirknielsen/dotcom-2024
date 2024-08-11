@@ -1,5 +1,3 @@
-import { toCloudinary } from '../../../config/utils/image-transforms.js';
-
 // Helper functions
 /** Get the SVG icon in the document to re-use. */
 function getTrophySvg(svgId, lvl) {
@@ -38,10 +36,8 @@ let msgs = [
 let openGame = null;
 
 document.addEventListener('DOMContentLoaded', function (e) {
-	const unhide = (el) => {
-		el.hidden = false;
-	};
 	document.querySelector('[data-gaming-toolbar]').hidden = false; // Reveal the toolbar now that JS is enabled
+
 	eachDom('.gaming-box', (spine) => {
 		const button = document.createElement('button');
 		spine.getAttributeNames().forEach((attr) => button.setAttribute(attr, spine.getAttribute(attr)));
@@ -49,11 +45,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
 		button.classList.add('button-reset');
 		Array.from(spine.childNodes).forEach((n) => button.appendChild(n)); // Move all contents to the new element
 		spine.replaceWith(button);
-
-		button.addEventListener('mouseover', (e) => unhide(button.querySelector('.gaming-front-art')), { once: true });
-		button.addEventListener('touchstart', (e) => unhide(button.querySelector('.gaming-front-art')), { once: true });
-		button.addEventListener('focus', (e) => unhide(button.querySelector('.gaming-front-art')), { once: true });
-		button.addEventListener('click', (e) => unhide(button.querySelector('.gaming-front-art')), { once: true });
 	});
 });
 
@@ -118,7 +109,7 @@ document.addEventListener('click', function (e) {
 		if (gameData.trophyIcon) {
 			const iconHeight = parseInt(clone.querySelector('[data-slot-img="trophyIcon"]').getAttribute('height'), 10);
 			const iconWidth = ['PS3', 'PS4', 'PSV'].includes(gameData.platform) ? iconHeight * (320 / 176) : iconHeight; // PS5 icons are square, PS3/PS4/Vita are 320x176
-			clone.querySelector('[data-slot-img="trophyIcon"]').src = toCloudinary(gameData.trophyIcon, `c_fit,h_${iconHeight}/q_80/f_auto`);
+			clone.querySelector('[data-slot-img="trophyIcon"]').src = gameData.trophyIcon;
 			clone.querySelector('[data-slot-img="trophyIcon"]').setAttribute('width', iconWidth);
 		}
 		clone.querySelector('[data-slot-computed="trophyEarned"]').innerHTML = gameData.trophyEarned

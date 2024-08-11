@@ -38,20 +38,12 @@
 	block-size: var(--spine-block-size);
 	inline-size: var(--spine-inline-size);
 
-	/* Scale up the hovered item, but only buttons with a cover art */
-	@media (--accept-motion) {
-		/* z-index: 0; */
-
-		perspective: 356rem;
-		/* transition: z-index var(--anim-short) var(--easing-in-out); */
-
-		&:has(button.gaming-box:is(:hover, :focus-visible) .gaming-front-art) {
-			/* z-index: 10; */
-		}
-	}
+	perspective: 356rem;
 }
 
 .gaming-box {
+	--GAME-box-shadow: 0px 0.5px 0.4px hsl(0deg 0% 0% / 0.33), 0px 0.9px 0.7px -1.7px hsl(0deg 0% 0% / 0.25), 0px 3.9px 2.9px -3.3px hsl(0deg 0% 0% / 0.16),
+		0px 12px 9px -5px hsl(0deg 0% 0% / 0.08);
 	flex: 1 1 auto;
 	display: flex;
 	align-items: stretch;
@@ -64,24 +56,30 @@
 	border-inline-width: var(--box-border-size-inline, 0);
 	border-radius: var(--game-spine-radius);
 	background: var(--game-case-plastic);
-	/* box-shadow: 0px 0.5px 0.4px hsl(0deg 0% 0% / 0.33), 0px 0.9px 0.7px -1.7px hsl(0deg 0% 0% / 0.25), 0px 3.9px 2.9px -3.3px hsl(0deg 0% 0% / 0.16),
-		0px 12px 9px -5px hsl(0deg 0% 0% / 0.08); */
+	box-shadow: var(--GAME-box-shadow),
+		calc(var(--GAME-hover-shadow-size, 0px) * -1) 0 var(--GAME-hover-shadow-size, 0px) calc(var(--GAME-hover-shadow-size, 0px) * -0.5) hsl(0deg 0% 0% / 0.25);
 
 	will-change: transform;
 	transform-origin: 50% 100%;
 	transform-style: preserve-3d;
-	transform: rotateY(0deg);
 
-	/* Scale up the hovered item, but only buttons with a cover art */
+	transition: box-shadow var(--anim-short) var(--easing-in-out);
+
 	@media (--accept-motion) {
-		transition: transform var(--anim-short) var(--easing-in-out);
+		transition-property: box-shadow, transform;
+	}
 
-		&:is(button):is(:hover, :focus-visible) {
+	&:is(:hover, :focus-visible) {
+		/* By default, if there is no cover art, but there is a button, there should be some stateful styling */
+		&:where(button) {
 			transform: scale(1.05);
+		}
 
-			&:has(.gaming-front-art) {
-				transform: translateZ(24rem) translateX(-67%) rotateY(-10deg);
-			}
+		/* Always transform the active item, and add a shadow to cover the previous sibling */
+		&:has(> .gaming-front) {
+			--GAME-hover-shadow-size: var(--size-2xs);
+
+			transform: translateZ(24rem) translateX(-67%) rotateY(-10deg);
 		}
 	}
 }
@@ -104,10 +102,32 @@
 		var(--box-radius-bottom-right, var(--game-spine-radius)) var(--box-radius-bottom-left, var(--game-spine-radius));
 	background: linear-gradient(to bottom, var(--game-case-plastic) var(--box-cover-padding-block-start, 0px), #fff 0);
 	background-clip: padding-box;
+	box-shadow: var(--GAME-box-shadow);
 
 	transform-origin: 0% 50%;
 	transform: rotateY(90deg) translateZ(-1px);
 	filter: blur(0.1px); /* Pseudo-anti-aliasing on box edges */
+
+	/* Use a discrete animation to animate the display property */
+	@media (--accept-motion) {
+		transition: display var(--anim-short) var(--easing-in-out);
+		transition-behavior: allow-discrete;
+	}
+
+	/* To avoid loading all the images at once, hiden them when the parent box item is not active */
+	.gaming-box:not(:hover, :focus-visible) & {
+		display: none;
+	}
+
+	/* Fake corner (top-left) highlight, and a shadow for the part furthest away */
+	&::after {
+		content: '';
+
+		position: absolute;
+		inset: var(--box-cover-padding-block-start, 0px) 0 0;
+
+		background-image: linear-gradient(to bottom right, #fff2, #fff8, #fff3, #fff0 33%), linear-gradient(90deg, transparent, #0004 67%);
+	}
 }
 
 .gaming-front-art {
@@ -116,8 +136,6 @@
 	height: 100%;
 	padding: var(--box-cover-padding, 0);
 	/* object-fit: cover; */
-
-	mask-image: linear-gradient(to bottom right, #0008, #000 25%, #000 75%, #0008);
 }
 
 .gaming-spine-paper {

@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import getPsnTrophyData from '../../../config/utils/psn-api.js';
 import notionDatabaseQuery from '../../../config/utils/notion-db.js';
+import { toCloudinary } from '../../../config/utils/image-transforms.js';
 
 const regions = {
 	FR: 'France',
@@ -93,7 +94,11 @@ const gameslibrary = await notionDatabaseQuery({
 				processedEntry.trophyProgress = matchedPsnTrophyData.progress;
 				processedEntry.trophyEarned = matchedPsnTrophyData.earnedTrophies;
 			}
-			if (!processedEntry.trophyIcon) {
+
+			// If there's an icon, make sure it's resized appropriately
+			if (processedEntry.trophyIcon) {
+				processedEntry.trophyIcon = toCloudinary(processedEntry.trophyIcon, `c_fit,h_128/q_80/f_auto`);
+			} else {
 				delete processedEntry.trophyIcon;
 			}
 			delete processedEntry.psnId; // Once we have trophy data, we can discard the PSN's reference code to it
