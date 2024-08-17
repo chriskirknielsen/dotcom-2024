@@ -4,7 +4,7 @@ const designs = [
 		name: 'Blank VHS CSS',
 		description: 'In a world where the web runs on VHS tapes…',
 		note: 'For posters, RedBubble or Society6 are recommended',
-		img: 'vhs-css.jpg',
+		img: 'vhs-css.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-Blank-VHS-CSS-by-ckirknielsen/72710420.6VDG0',
 			TeePublic: 'https://www.teepublic.com/t-shirt/19996533-retro-blank-vhs-css?store_id=49603',
@@ -18,7 +18,7 @@ const designs = [
 		name: 'Blank VHS HTML',
 		description: 'In a world where the web runs on VHS tapes…',
 		note: 'For posters, RedBubble or Society6 are recommended',
-		img: 'vhs-html.jpg',
+		img: 'vhs-html.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-Blank-VHS-HTML-by-ckirknielsen/73662806.CW2C9.XYZ',
 			TeePublic: 'https://www.teepublic.com/t-shirt/20289562-retro-blank-vhs-html?store_id=49603',
@@ -32,7 +32,7 @@ const designs = [
 		name: 'Blank VHS SVG',
 		description: 'In a world where the web runs on VHS tapes…',
 		note: 'For posters, RedBubble or Society6 are recommended',
-		img: 'vhs-svg.jpg',
+		img: 'vhs-svg.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-Blank-VHS-SVG-by-ckirknielsen/80893683.DYMRA',
 			TeePublic: 'https://www.teepublic.com/t-shirt/22687532-retro-blank-vhs-svg?store_id=49603',
@@ -46,7 +46,7 @@ const designs = [
 		name: 'Blank VHS JS',
 		description: 'In a world where the web runs on VHS tapes…',
 		note: 'For posters, RedBubble or Society6 are recommended',
-		img: 'vhs-js.jpg',
+		img: 'vhs-js.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-Blank-VHS-JavaScript-ECMAScript-by-ckirknielsen/85189202.CW2C9.XYZ',
 			TeePublic: 'https://www.teepublic.com/t-shirt/23606086-retro-blank-vhs-javascript-ecmascript?store_id=49603',
@@ -62,7 +62,7 @@ const designs = [
 		name: 'Blank VHS JS (Dark)',
 		description: 'In a world where the web runs on VHS tapes…',
 		note: 'For posters, RedBubble or Society6 are recommended',
-		img: 'vhs-js-dark.jpg',
+		img: 'vhs-js-dark.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-Blank-VHS-JavaScript-ECMAScript-Dark-Variant-by-ckirknielsen/132703092.FB110.XYZ',
 			TeePublic: 'https://www.teepublic.com/t-shirt/36698589-retro-blank-vhs-javascript-ecmascript-dark-variant',
@@ -76,7 +76,7 @@ const designs = [
 		name: 'Blank VHS A11Y',
 		description: 'In a world where the web runs on VHS tapes…',
 		note: 'For posters, RedBubble or Society6 are recommended<br>Thanks to <a href="https://benmyers.dev/">Ben Myers</a> for the idea!',
-		img: 'vhs-a11y.jpg',
+		img: 'vhs-a11y.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-Blank-VHS-A11Y-by-ckirknielsen/161318764.CW2C9?asc=u',
 			TeePublic: 'https://www.teepublic.com/t-shirt/60553454-retro-blank-vhs-a11y',
@@ -90,7 +90,7 @@ const designs = [
 		name: 'Blank VHS WWW',
 		description: 'In a world where the web runs on VHS tapes…',
 		note: 'For posters, RedBubble or Society6 are recommended',
-		img: 'vhs-www.jpg',
+		img: 'vhs-www.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-Blank-VHS-WWW-by-ckirknielsen/105322869.DYMRA?asc=u',
 			TeePublic: 'https://www.teepublic.com/t-shirt/28723641-retro-blank-vhs-www',
@@ -102,7 +102,7 @@ const designs = [
 		slug: 'retro-css',
 		name: 'Retro CSS',
 		description: 'A totally tubular t-shirt to show off how rad CSS is!',
-		img: 'retro-css.jpg',
+		img: 'retro-css.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-CSS-by-ckirknielsen/58081555.DYMRA',
 			TeePublic: 'https://www.teepublic.com/t-shirt/14125152-retro-css?store_id=49603',
@@ -155,7 +155,7 @@ const designs = [
 		name: 'World Wide Web Explorer',
 		description: 'Explore the spaces between what connects us all: the World Wide Web!',
 		note: 'For a mug with the design on both sides, use RedBubble or Society6.',
-		img: 'www-explorer.jpg',
+		img: 'www-explorer.png',
 		links: {
 			TeePublic: 'https://www.teepublic.com/t-shirt/28541207-world-wide-web-explorer',
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/World-Wide-Web-Explorer-by-ckirknielsen/104638901.SWO0S?asc=u',
@@ -168,7 +168,7 @@ const designs = [
 		slug: 'vaporwave-css',
 		name: 'Vaporwave CSS',
 		description: 'Trying my hand at some aestheticss…',
-		img: 'vaporwave-css.jpg',
+		img: 'vaporwave-css.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Vaporwave-CSS-by-ckirknielsen/110853198.Y4WIZ',
 			TeePublic: 'https://www.teepublic.com/t-shirt/30315700-vaporwave-css',
@@ -182,7 +182,7 @@ const designs = [
 		name: 'The Oldest House',
 		description:
 			'The Oldest House has many dangers/risks. Be sure to alert the sitting/standing Director. Objects of Power are dangerous/aggressive and interacting/talking with one may result in termination/death/punishment.',
-		img: 'gameart-control.jpg',
+		img: 'gameart-control.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/art-print/Control-by-ckirknielsen/106874139.1G4ZT',
 		},
@@ -194,7 +194,7 @@ const designs = [
 		slug: 'god-of-war',
 		name: 'Lake of Nine',
 		description: 'A peaceful moment on the Lake of Nine.',
-		img: 'gameart-gow.jpg',
+		img: 'gameart-gow.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/art-print/God-of-War-by-ckirknielsen/106870471.1G4ZT',
 		},
@@ -206,7 +206,7 @@ const designs = [
 		slug: 'deathloop',
 		name: 'Blackreef',
 		description: 'Kill all Visionaries. Break the loop. Easy.',
-		img: 'gameart-deathloop.jpg',
+		img: 'gameart-deathloop.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/art-print/DEATHLOOP-by-ckirknielsen/106881338.1G4ZT',
 		},
@@ -218,7 +218,7 @@ const designs = [
 		slug: 'dead-space',
 		name: 'USG Ishimura',
 		description: 'In space, only Necromorphs can hear you scream.',
-		img: 'gameart-deadspace.jpg',
+		img: 'gameart-deadspace.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/art-print/Dead-Space-by-ckirknielsen/106878842.1G4ZT',
 		},
@@ -230,7 +230,7 @@ const designs = [
 		slug: 'jak-daxter-powercell-hunters',
 		name: 'Powercell Hunters',
 		description: 'A design inspired by one of my favourite video games: Jak And Daxter.',
-		img: 'powercell-hunters.jpg',
+		img: 'powercell-hunters.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Powercell-Hunters-by-ckirknielsen/84952593.2EZFS',
 			TeePublic: 'https://www.teepublic.com/t-shirt/23558909-powercell-hunters',
@@ -244,7 +244,7 @@ const designs = [
 		slug: 'crash-bandicoot-wumpa-hoarder',
 		name: 'Wumpa Hoarder',
 		description: 'A design inspired by the wild, Wumpa-loving bandicoot: Crash Bandicoot!',
-		img: 'wumpa-hoarder.jpg',
+		img: 'wumpa-hoarder.png',
 		links: {
 			// RedBubble: 'https://www.redbubble.com/i/t-shirt/Wumpa-Hoarder-by-ckirknielsen/94462053.4AE2Y',
 			TeePublic: 'https://www.teepublic.com/t-shirt/25571868-wumpa-hoarder',
@@ -259,7 +259,7 @@ const designs = [
 		slug: 'sly-cooper-gentleman-thief',
 		name: 'Gentleman Thief',
 		description: 'A design inspired by the charismatic thief, who also happens to be a raccoon… Sly Cooper.',
-		img: 'gentleman-thief.jpg',
+		img: 'gentleman-thief.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Gentleman-Thief-by-ckirknielsen/107478068.ADAKE.XYZ',
 			TeePublic: 'https://www.teepublic.com/t-shirt/29290455-gentleman-thief',
@@ -273,7 +273,7 @@ const designs = [
 		slug: 'synth-element',
 		name: 'The Synth Element',
 		description: 'A cross-over between The Fifth Element and synth waveforms.',
-		img: 'synth-element.jpg',
+		img: 'synth-element.png',
 		links: {
 			TeePublic: 'https://www.teepublic.com/t-shirt/19884473-the-synth-element-symbols',
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/The-Synth-Element-Symbols-by-ckirknielsen/108913348.DYMRA',
@@ -289,7 +289,7 @@ const designs = [
 		slug: 'synth-element-stone',
 		name: 'The Synth Element (Stones)',
 		description: 'A cross-over between The Fifth Element and synth waveforms.',
-		img: 'synth-element-stones.jpg',
+		img: 'synth-element-stones.png',
 		links: {
 			TeePublic: 'https://www.teepublic.com/t-shirt/19884472-the-synth-element-stones',
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/The-Synth-Element-Stones-by-ckirknielsen/108914203.UHLBD',
@@ -345,7 +345,7 @@ const designs = [
 		slug: 'it-crowd-four-five-fire',
 		name: 'Four, I mean Five, I mean Fire!',
 		description: 'One of my favourite quotes from Maurice Moss in the I.T. Crowd…',
-		img: 'it-crowd-four-five-fire.jpg',
+		img: 'it-crowd-four-five-fire.png',
 		links: {
 			TeePublic: 'https://www.teepublic.com/t-shirt/30106971-four-i-mean-five-i-mean-fire',
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Four-I-mean-Five-I-mean-Fire-by-ckirknielsen/110315180.1482B.XYZ',
@@ -371,7 +371,7 @@ const designs = [
 		name: 'State of CSS',
 		description: "Show your appreciation for everybody's favourite way to style the web with this retro shirt inspired by '90s blank VHS tapes",
 		note: 'Commission for the State of CSS survey',
-		img: 'css-retro-vhs.jpg',
+		img: 'css-retro-vhs.png',
 		links: {
 			CottonBureau: 'https://cottonbureau.com/products/css-retro-vhs#/13046404/tee-men-standard-tee-vintage-black-tri-blend-m',
 		},
@@ -384,7 +384,7 @@ const designs = [
 		name: 'State of JS',
 		description: "Wear your JS colours from the perspective of a '90s VHS tape",
 		note: 'Commission for the State of JS survey',
-		img: 'js-retro-vhs.jpg',
+		img: 'js-retro-vhs.png',
 		links: {
 			CottonBureau: 'https://cottonbureau.com/products/javascript-retro-vhs#/13799357/tee-men-standard-tee-vintage-black-tri-blend-m',
 		},
@@ -397,7 +397,7 @@ const designs = [
 		name: 'State of HTML',
 		description: 'Celebrate your love of HTML with an original design inspired by retro VHS tape covers',
 		note: 'Commission for the State of HTML survey',
-		img: 'html-retro-vhs.jpg',
+		img: 'html-retro-vhs.png',
 		links: {
 			CottonBureau: 'https://cottonbureau.com/p/8U4SGF/shirt/html-retro-vhs#/20217871/tee-men-standard-tee-vintage-black-tri-blend-m',
 		},
@@ -411,7 +411,7 @@ const designs = [
 		description:
 			'Is it a library? A framework? An unknown element on the verge of mutating into a dangerous, unstable entity? Whatever your feelings about React, you will find them reflected in this design that echoes anime and science-fiction.',
 		note: 'Commission for the State of React survey',
-		img: 'react-retro-vhs.jpg',
+		img: 'react-retro-vhs.png',
 		links: {
 			CottonBureau: 'https://cottonbureau.com/p/NV42G5/shirt/react-atom#/20741664/tee-men-standard-tee-vintage-navy-tri-blend-m',
 		},
@@ -424,7 +424,7 @@ const designs = [
 		name: 'Grid Layout',
 		description: 'Let the world know that you love CSS Grid!',
 		note: 'Commission for Kevin Powell',
-		img: 'kevin-powell-grid.jpg',
+		img: 'kevin-powell-grid.png',
 		links: {
 			CottonBureau: 'https://cottonbureau.com/p/Y55DSU/shirt/front-end-friends-css-grid#/19399708/tee-men-standard-tee-vintage-black-tri-blend-m',
 		},
@@ -437,7 +437,7 @@ const designs = [
 		name: 'Cascading Stylesheets',
 		description: 'Embrace the cascade, and show others your love for CSS.',
 		note: 'Commission for Kevin Powell',
-		img: 'kevin-powell-css.jpg',
+		img: 'kevin-powell-css.png',
 		links: {
 			CottonBureau: 'https://cottonbureau.com/p/URUZFW/shirt/front-end-friends-cascading-style-sheets#/19399691/tee-men-standard-tee-natural-100percent-cotton-m',
 		},
@@ -450,7 +450,7 @@ const designs = [
 		name: 'Explore Color Space',
 		description: "Color spaces have really taken off in CSS (pun intended), and we think that's worth celebrating!",
 		note: 'Commission for Kevin Powell',
-		img: 'kevin-powell-color-space.jpg',
+		img: 'kevin-powell-color-space.png',
 		links: {
 			CottonBureau: 'https://cottonbureau.com/p/B56YTR/shirt/front-end-friends-explore-color-space#/19399781/tee-men-standard-tee-vintage-black-tri-blend-m',
 		},

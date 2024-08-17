@@ -1,10 +1,46 @@
 .designs-stores {
-    a {
+	a {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+		flex-direction: column;
+	}
+}
 
-        flex-direction: column;
-    }
+.card--design {
+	& .card-image {
+		background: #fff;
+
+		@media (--accept-motion) {
+			& > a:has(> img[src*='.png']) {
+				&::before {
+					--CARD-img-bg-color: var(--_card-text-color);
+
+					content: '';
+
+					position: absolute;
+					inset: 0;
+
+					background-image: conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 50%) 0 0),
+						conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 60%) 0 0), conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 70%) 0 0),
+						conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 80%) 0 0), conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 90%) 0 0);
+					background-repeat: no-repeat;
+					background-position: 50% 50%;
+					background-size: 30%, 40%, 50%, 60%, 70%;
+
+					transform: skewX(-30deg) scaleX(0);
+					transition: transform var(--CARD-transition-base);
+				}
+
+				&:is(:hover, :focus-visible)::before {
+					transform: skewX(-30deg) scaleX(1.5);
+				}
+			}
+		}
+	}
+}
+
+.design-single {
+	background: #fff;
 }

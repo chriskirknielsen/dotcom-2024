@@ -31,7 +31,7 @@
 	--CARD-border-radius: clamp(0px, var(--_corner) * 999, var(--_card-corner));
 	--CARD-bg-color: var(--_card-bg-color);
 	--CARD-shadow: var(--_shadow);
-	--CARD-transition-base: var(--anim-short) var(--easing-out);
+	--CARD-transition-base: var(--anim-medium) var(--easing-out);
 
 	display: flex;
 	flex-direction: column;
@@ -70,7 +70,13 @@
 	align-self: stretch;
 	overflow: clip;
 
+	a {
+		display: block;
+	}
+
 	img {
+		position: relative;
+
 		max-block-size: 300px;
 		inline-size: 100%;
 		object-fit: cover;
