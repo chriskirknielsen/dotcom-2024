@@ -115,7 +115,7 @@ const designs = [
 		slug: 'css-fact-sheet',
 		name: 'CSS Fact Sheet',
 		description: "A compact fact sheet for CSS that wouldn't be out of place on a crate in a cyberpunk world…",
-		img: 'css-fact-sheet.jpg',
+		img: 'css-fact-sheet.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/sticker/CSS-Fact-Sheet-by-ckirknielsen/58082119.EJUG5',
 			TeePublic: 'https://www.teepublic.com/t-shirt/14123881-css-fact-sheet?store_id=49603',
@@ -128,7 +128,7 @@ const designs = [
 		slug: 'duotype-css',
 		name: 'Radical Duotype CSS',
 		description: 'Represent CSS with radical double-typography style!',
-		img: 'duotype-css.jpg',
+		img: 'duotype-css.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/sticker/Radical-Duotype-Cascading-Stylesheets-by-ckirknielsen/130796947.QK27K',
 			TeePublic: 'https://www.teepublic.com/sticker/36307529-radical-duotype-cascading-stylesheets',
@@ -141,7 +141,7 @@ const designs = [
 		slug: 'duotype-semantic-markup',
 		name: 'Radical Duotype HTML',
 		description: 'Represent HTML (not just divs) with radical double-typography style!',
-		img: 'duotype-semantic-markup.jpg',
+		img: 'duotype-semantic-markup.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/sticker/Radical-Duotype-Semantic-Markup-by-ckirknielsen/130797216.QK27K',
 			TeePublic: 'https://www.teepublic.com/sticker/36307530-radical-duotype-semantic-markup',
@@ -304,7 +304,7 @@ const designs = [
 		slug: 'outatime-trilogy',
 		name: 'OUTATIME Trilogy',
 		description: 'Taking a few elements from the movies to form this little sticker-appropriate design for one of my favourite franchises…',
-		img: 'outatime-trilogy.jpg',
+		img: 'outatime-trilogy.png',
 		links: {
 			TeePublic: 'https://www.teepublic.com/sticker/29680717-outatime-trilogy',
 			Society6: 'https://society6.com/product/outatime-trilogy6857092_sticker',
@@ -316,7 +316,7 @@ const designs = [
 		slug: 'twin-pines-mall',
 		name: 'Twin Pines Mall',
 		description: 'Typographically accurate sign for the Twin Pines Mall sign in Hill Valley, California!',
-		img: 'twin-pines-mall.jpg',
+		img: 'twin-pines-mall.png',
 		links: {
 			// RedBubble: 'https://www.redbubble.com/i/sticker/Twin-Pines-Mall-Hill-Valley-CA-by-ckirknielsen/132619127.QK27K',
 			TeePublic: 'https://www.teepublic.com/sticker/36675377-twin-pines-mall-hill-valley-ca',
@@ -331,7 +331,7 @@ const designs = [
 		slug: 'lone-pine-mall',
 		name: 'Lone Pine Mall',
 		description: 'Typographically accurate sign for the Lone Pine Mall sign in Hill Valley, California!',
-		img: 'lone-pine-mall.jpg',
+		img: 'lone-pine-mall.png',
 		links: {
 			// RedBubble: 'https://www.redbubble.com/i/sticker/Lone-Pine-Mall-Hill-Valley-CA-by-ckirknielsen/132619380.QK27K',
 			TeePublic: 'https://www.teepublic.com/sticker/36675620-lone-pine-mall-hill-valley-ca',
@@ -358,7 +358,7 @@ const designs = [
 		slug: 'cartridge-world',
 		name: 'Cartridge World',
 		description: 'Memories of the thousands of worlds we held in our hands.',
-		img: 'cartridge-world.jpg',
+		img: 'cartridge-world.png',
 		links: {
 			TeePublic: 'https://www.teepublic.com/t-shirt/45538405-raised-in-a-cartridge-world',
 			// RedBubble: 'https://www.redbubble.com/i/sticker/Raised-in-a-Cartridge-World-by-ckirknielsen/145765578.EJUG5,
