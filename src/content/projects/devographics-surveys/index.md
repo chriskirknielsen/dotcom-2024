@@ -6,6 +6,7 @@ externalUrl: https://www.devographics.com/
 date: 2024-07-19
 projectButtonLabel: Visit site
 extraCta: [{ label: 'Get shirts', url: 'https://cottonbureau.com/people/state-of-js' }]
+toc: true
 ---
 
 This project is an ongoing collaboration between myself and Sacha Greif, the maintainer of the various _State of `{web tech}`_ surveys, which is collected under the Devographics project.

@@ -67,6 +67,6 @@
 	gap: calc(var(--layout-gutter) * var(--grid-block-gutter, 1)) 0;
 }
 
-.container > :is(.callout, .image-gallery, .codeblock) {
+.container > :is(.callout, .image-gallery, .codeblock, .cp_embed_wrapper) {
 	grid-column: --wide;
 }

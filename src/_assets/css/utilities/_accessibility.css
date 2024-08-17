@@ -5,7 +5,8 @@
 }
 
 @media (--accept-motion) {
-	:target {
+	:where(:target) {
+		position: relative;
 		animation: targetHighlight var(--anim-eternity) var(--easing-out) var(--anim-eternity) backwards 1;
 	}
 

@@ -61,4 +61,8 @@
 	background: var(--media-bg, #fff);
 	border-radius: var(--_corner);
 	box-shadow: var(--_shadow);
+
+	a {
+		color: inherit;
+	}
 }

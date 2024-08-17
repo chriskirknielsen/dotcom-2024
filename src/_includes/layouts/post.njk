@@ -1,6 +1,6 @@
 {% extends 'layouts/page.njk' %}
 
-{% block pageContent %}
+{% block pageHero %}
     {% set dateInfo %}
         <time datetime="{{ date | dateFormat({ format: 'iso' }) }}" title="{{ date | dateFormat({ format: 'iso' }) }}">{{ date | dateFormat({ format: 'nice', lang: lang }) }}</time>
         {% if updated %}
@@ -19,40 +19,36 @@
         heroTitle: title,
         heroSup: dateInfo
     } %}
+{% endblock %}
 
-    <section class="post-content | container | flow">
-        {% if toc %}
-            <div class="toc | flow">
-                <p class="toc-title | h3" id="toc-title">Table of Contents</p>
-                {{ content | autoToc('toc-list | fontSize-small', 'toc-title') | safe }}
-            </div>
+
+{% block pageContent %}
+    {% if originalUrl %}
+        <div>
+        {% if originalTitle %}
+            {% component 'cta', { url: originalUrl, label: originalTitle, icon: 'arrow-right' } %}
+        {% else %}
+            View original post: <a href="{{ originalUrl }}">{{ originalUrl }}</a>
         {% endif %}
+        </div>
+        <hr>
+    {% endif %}
 
-        {% if originalUrl %}
-            <div>
-            {% if originalTitle %}
-                {% component 'cta', { url: originalUrl, label: originalTitle, icon: 'arrow-right' } %}
-            {% else %}
-                View original post: <a href="{{ originalUrl }}">{{ originalUrl }}</a>
-            {% endif %}
-            </div>
-            <hr>
+    {{ content | safe }}
+
+    {% if externalUrl %}
+        <hr>
+        <div>
+        {% if externalHost %}
+            {% component 'cta', { url: externalUrl, label: 'View original post on '+externalHost, icon: 'arrow-right' } %}
+        {% else %}
+            View original post: <a href="{{ externalUrl }}">{{ externalUrl }}</a>
         {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}
 
-        {{ content | safe }}
-
-        {% if externalUrl %}
-            <hr>
-            <div>
-            {% if externalHost %}
-                {% component 'cta', { url: externalUrl, label: 'View original post on '+externalHost, icon: 'arrow-right' } %}
-            {% else %}
-                View original post: <a href="{{ externalUrl }}">{{ externalUrl }}</a>
-            {% endif %}
-            </div>
-        {% endif %}
-    </section>
-
+{% block pageFooter %}
     <footer class="signoff">
         <div class="signoff-photo">
             <img
