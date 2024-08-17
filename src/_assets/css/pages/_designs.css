@@ -15,7 +15,7 @@
 		@media (--accept-motion) {
 			& > a:has(> img[src*='.png']) {
 				&::before {
-					--CARD-img-bg-color: var(--_card-text-color);
+					--CARD-img-bg-color: var(--C-accent);
 
 					content: '';
 
@@ -39,8 +39,4 @@
 			}
 		}
 	}
-}
-
-.design-single {
-	background: #fff;
 }

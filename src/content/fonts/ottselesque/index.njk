@@ -262,7 +262,8 @@ fontSpecimenNav: {
         </p>
         <p>
             <a href="/designs/jak-daxter-powercell-hunters/" class="powercell-hunters-shirt">
-                <img src="{{ [assets.images, 'designs/powercell-hunters.jpg'] | toPath | toNetlifyImage({ w: 128 }) }}" alt="A Jak and Daxter inspired shirt with the silhouette of the two main characters in front of a Precursor gate." width="600" height="600">
+                {% set shirtData = designs | find('slug', 'jak-daxter-powercell-hunters') %}
+                <img src="{{ [assets.images, 'designs', shirtData.img] | toPath | toNetlifyImage({ w: 128 }) }}" alt="A Jak and Daxter inspired shirt with the silhouette of the two main characters in front of a Precursor gate." width="600" height="600">
             </a>
             This is a font made totally <em>free of charge</em>, but if you'd like to get a <a href="/designs/jak-daxter-powercell-hunters/">J&amp;D t-shirt design of mine</a>, I'd truly appreciate it! (also, psst, if you know where to snag that anniversary Precursor Orb, message me…)
         </p>

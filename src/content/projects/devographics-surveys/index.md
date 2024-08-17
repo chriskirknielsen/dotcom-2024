@@ -19,7 +19,7 @@ After seeing my WWW design series, Sacha Greif, maintainer of the State of CSS a
 
 {% gallery %}
 {% image './soc2021-cover.jpg' | toRoot, "A logo for the State of CSS, with CSS written in quarter-circles on top of a triple-layered yellow-to-hot pink gradient diamond.", "", { ratio: "600/600", group: true } %}
-{% image '/' + assets.images + '/designs/' + cssShirtData.slug + '.jpg', "A rework of the logo for the survey rearranged to look like an old blank VHS tape, on a black t-shirt.", 'Get yours at <a href="'+cssShirtData.links.CottonBureau+'">CottonBureau</a>', { ratio: "600/600", group: true } %}
+{% image '/' + assets.images + '/designs/' + cssShirtData.img, "A rework of the logo for the survey rearranged to look like an old blank VHS tape, on a black t-shirt.", 'Get yours at <a href="'+cssShirtData.links.CottonBureau+'">CottonBureau</a>', { ratio: "600/600", group: true } %}
 {% endgallery %}
 
 I also animated it for the survey landing page, because animations are fun! Click to restart the animation.
@@ -43,7 +43,7 @@ We went through quite a few iterations, especially for the background shape that
 
 {% gallery %}
 {% image './soj2021-cover.jpg' | toRoot, "A logo for the State of JS, with JS written in stacked lines on top of a multi-faceted hexagon with blue, cyan, and pink highlights. Inside of it is another hexagon with three colours covering it fully: yellow, red, and blue.", "", { ratio: "600/600", group: true } %}
-{% image '/' + assets.images + '/designs/' + jsShirtData.slug + '.jpg', "A rework of the logo for the survey rearranged to look like an old blank VHS tape, on a black t-shirt.", 'Get yours at <a href="'+jsShirtData.links.CottonBureau+'">CottonBureau</a>', { ratio: "600/600", group: true } %}
+{% image '/' + assets.images + '/designs/' + jsShirtData.img, "A rework of the logo for the survey rearranged to look like an old blank VHS tape, on a black t-shirt.", 'Get yours at <a href="'+jsShirtData.links.CottonBureau+'">CottonBureau</a>', { ratio: "600/600", group: true } %}
 {% endgallery %}
 
 Just like the CSS design, I animated this one for extra fun. Click to restart the animation.
@@ -63,7 +63,7 @@ This took a while to nail down, with the chevron-and-slash combo going through a
 
 {% gallery %}
 {% image './soh2023-cover.jpg' | toRoot, "A logo for the State of HTML, with HTML written in bright blocky letters, slanted, contained inside a pair of colourful chevrons that go from yellow to orange to midnight purple. In the background, some stylised slashes extend past the chevrons and are filled with a progressive electric green to indigo gradient.", "", { ratio: "600/600", group: true } %}
-{% image '/' + assets.images + '/designs/' + htmlShirtData.slug + '.jpg', "A rework of the logo for the survey rearranged to look like an old blank VHS tape, on a black t-shirt.", 'Get yours at <a href="'+htmlShirtData.links.CottonBureau+'">CottonBureau</a>', { ratio: "600/600", group: true } %}
+{% image '/' + assets.images + '/designs/' + htmlShirtData.img, "A rework of the logo for the survey rearranged to look like an old blank VHS tape, on a black t-shirt.", 'Get yours at <a href="'+htmlShirtData.links.CottonBureau+'">CottonBureau</a>', { ratio: "600/600", group: true } %}
 {% endgallery %}
 
 This logo is also animated, as a treat. Click to restart the animation.
@@ -79,5 +79,5 @@ While React is not my area of expertise, I think this looks pretty cool! Sacha s
 
 {% gallery %}
 {% image './sor2023-cover.jpg' | toRoot, "A logo for the State of React, with an atom depicted with three rings in the center, framed by a hexagon. Below, the word “React” is written in Japanese katakana, and below that, in smaller text, “State of React” is written.", "", { ratio: "600/600", group: true } %}
-{% image '/' + assets.images + '/designs/' + reactShirtData.slug + '.jpg', "A rework of the logo for the survey rearranged to look like a science-fiction and/or anime interface, on a midnight blue t-shirt.", 'Get yours at <a href="'+reactShirtData.links.CottonBureau+'">CottonBureau</a>', { ratio: "600/600", group: true } %}
+{% image '/' + assets.images + '/designs/' + reactShirtData.img, "A rework of the logo for the survey rearranged to look like a science-fiction and/or anime interface, on a midnight blue t-shirt.", 'Get yours at <a href="'+reactShirtData.links.CottonBureau+'">CottonBureau</a>', { ratio: "600/600", group: true } %}
 {% endgallery %}
