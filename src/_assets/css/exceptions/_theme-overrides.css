@@ -563,7 +563,8 @@ html[data-theme='director'] {
 	}
 
 	:not(pre) > code {
-		--CODE-bg: linear-gradient(94deg, transparent 2px, var(--C-surface) 3px, var(--C-surface) calc(100% - 3px), transparent calc(100% - 2px));
+		/* Kind of a black marker "redacted" type of thing, hence the slight angle */
+		--CODE-bg: linear-gradient(94deg, transparent 2px, var(--C-surface-alt) 3px, var(--C-surface-alt) calc(100% - 3px), transparent calc(100% - 2px));
 
 		padding-inline: 0.25em;
 	}

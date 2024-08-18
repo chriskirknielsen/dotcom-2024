@@ -10,21 +10,22 @@
         } %}
     {% endblock %}
 
-        <section class="container flow">
-            {% if toc %}
-                <div class="toc | flow">
-                    <p class="toc-title | h3" id="toc-title">Table of Contents</p>
-                    {{ content | autoToc('toc-list | fontSize-small', 'toc-title') | safe }}
-                </div>
-            {% endif %}
+    <section class="container flow">
+        {% if toc %}
+            <div class="toc | flow">
+                <p class="toc-title | h3" id="toc-title">Table of Contents</p>
+                {{ content | autoToc('toc-list | fontSize-small', 'toc-title') | safe }}
+            </div>
+        {% endif %}
 
-            {% block pageContent %}
-                {% if autoToc or autoHeadingAnchors %}
-                    {{ content | autoHeadingAnchors(true) | safe }}
-                {% else %}
-                    {{ content | safe }}
-                {% endif %}
-            {% endblock %}
-        </section>
+        {% block pageContent %}
+            {% if autoToc or autoHeadingAnchors %}
+                {{ content | autoHeadingAnchors(true) | safe }}
+            {% else %}
+                {{ content | safe }}
+            {% endif %}
+        {% endblock %}
+    </section>
+    
     {% block pageFooter %}{% endblock %}
 {% endblock %}
