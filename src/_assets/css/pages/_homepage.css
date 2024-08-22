@@ -78,11 +78,11 @@
 	block-size: 100%;
 	justify-self: center; /* Fix for Firefox not properly handling aspect-ratio in an auto grid track */
 
-	svg {
+	& > svg {
 		inline-size: auto;
 		block-size: 100%;
 
-		* {
+		:is(path, circle) {
 			vector-effect: non-scaling-stroke;
 		}
 
@@ -153,7 +153,7 @@
 	margin: auto;
 	overflow: visible;
 
-	& path {
+	& > path {
 		fill: var(--HOME-logo-name-color);
 
 		transform-origin: 50% 50%;
