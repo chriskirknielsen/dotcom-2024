@@ -9,15 +9,14 @@
 		margin-block-start: var(--flow-space);
 	}
 
-	/* Make sure headings stick close to associated content */
-	& > :where(p) + :where(ul, ol),
-	& > :where(h1, h2, h3, h4) + *,
-	& > :where(h1 + h2, h2 + h3, h3 + h4) {
+	/* Make sure headings/lists stick close to associated content */
+	& > :where(p + :is(ul, ol)),
+	& > :where(:is(h1, h2, h3, h4) + *) {
 		--flow-space: var(--size-xs);
 	}
 
-
-	& > :where(:not(h1, h2, h3, h4)) + :where(h1, h2, h3, h4) {
+	/* Add a big ol' gap above new headings */
+	& > :where(:not(h1, h2, h3, h4) + :is(h1, h2, h3, h4)) {
 		--flow-space: var(--size-2xl);
 	}
 }

@@ -1,11 +1,15 @@
 @media (--small-viewport) {
-    .hide-when-viewport--small {
-        display: none !important;
-    }
+	.hide-when-viewport--small {
+		display: none !important;
+	}
 }
 
 @media (--large-viewport) {
-    .hide-when-viewport--large {
-        display: none !important;
-    }
+	.hide-when-viewport--large {
+		display: none !important;
+	}
+}
+
+[data-js='false'] .hide-when-nojs {
+	display: none !important;
 }

@@ -92,7 +92,7 @@ select {
 	font: inherit;
 }
 
-/* Retire toutes les animations et transition pour les personnes qui préfèrent ne pas les voir */
+/* Retire toutes les animations et transitions pour les personnes qui préfèrent ne pas les voir */
 @media (prefers-reduced-motion: reduce) {
 	* {
 		animation-duration: 0.01ms !important;

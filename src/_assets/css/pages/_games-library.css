@@ -38,7 +38,7 @@
 	block-size: var(--spine-block-size);
 	inline-size: var(--spine-inline-size);
 
-	perspective: 356rem;
+	perspective: 360rem;
 }
 
 .gaming-box {
