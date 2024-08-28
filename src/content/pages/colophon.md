@@ -26,36 +26,28 @@ First off, the homepage wordmark for my name is a custom edit of the [Sprat type
 Also, I did use a handful of SVG icons from [Lucide](https://lucide.dev/icons/), listed here: `arrow-right-left`, `eye`, `folder-tree`, `gamepad-2`, `globe`, `package-plus`, `square-check-big`, `star`, and `trophy`.
 
 ### Dawn
-<button type="button" class="button hide-when-nojs" data-theme-set="dawn">Toggle Dawn theme</button>
-The default Light Mode theme is set in [Canela Bold](https://type.today/en/canela) for headings and overall is aiming for some vintage print design, hence the off-white background and sharp red contrasting headings, going for an old book that's sat in the sun too long kind of feel. (ironically enough, I sampled some colours from a gorgeous [OmniChord OM84](http://www.suzukimusic.co.uk/omnichord-heaven/models/om36-84.html) electronic instrument)
+<button type="button" class="button hide-when-nojs" data-theme-set="dawn">Toggle Dawn theme</button> The default Light Mode theme is set in [Canela Bold](https://type.today/en/canela) for headings and overall is aiming for some vintage print design, hence the off-white background and sharp red contrasting headings, going for an old book that's sat in the sun too long kind of feel. (ironically enough, I sampled some colours from a gorgeous [OmniChord OM84](http://www.suzukimusic.co.uk/omnichord-heaven/models/om36-84.html) electronic instrument)
 
 ### Vapor
-<button type="button" class="button hide-when-nojs" data-theme-set="vapor">Toggle Vapor theme</button>
-This vaporwave theme tries to stay minimal while being loud with colours. The headings are set in [Xahn Mono Italic](https://fonts.google.com/specimen/Xanh+Mono) with exaggerated tracking, a serif-monospace hybrid that looks lovely.
+<button type="button" class="button hide-when-nojs" data-theme-set="vapor">Toggle Vapor theme</button> This vaporwave theme tries to stay minimal while being loud with colours. The headings are set in [Xahn Mono Italic](https://fonts.google.com/specimen/Xanh+Mono) with exaggerated tracking, a serif-monospace hybrid that looks lovely.
 
 ### Vintage
-<button type="button" class="button hide-when-nojs" data-theme-set="vintage">Toggle Vintage theme</button>
-Who doesn't love some gold-and-burgundy colours? Old school computers and gaming consoles had those vibes going, and the Nintendo Famicom especially… which inspired most of this theme. Using a very Swiss-like typeface for headings aptly named [Switzer](https://www.fontshare.com/fonts/switzer) as the Nintendo font is a little chonky and perhaps copyrighted!
+<button type="button" class="button hide-when-nojs" data-theme-set="vintage">Toggle Vintage theme</button> Who doesn't love some gold-and-burgundy colours? Old school computers and gaming consoles had those vibes going, and the Nintendo Famicom especially… which inspired most of this theme. Using a very Swiss-like typeface for headings aptly named [Switzer](https://www.fontshare.com/fonts/switzer) as the Nintendo font is a little chonky and perhaps copyrighted!
 
 ### Quill
-<button type="button" class="button hide-when-nojs" data-theme-set="quill">Toggle Quill theme</button>
-This is my peace-and-quiet theme. It uses [Instrument Serif](https://fonts.google.com/specimen/Instrument+Serif) (previously [Gambarino](https://www.fontshare.com/fonts/gambarino)) for headings, reminiscent of Apple's Garamond Condensed, and is very desaturated, nearly black-on-white-but-not-fully. The footer illustrations are from [Hamonshū](https://archive.org/search.php?query=creator%3A%22Mori%2C+Yu%CC%84zan%2C+-1917%22), that I only know of thanks to [Eric Meyer](https://meyerweb.com/), who uses those exquisitely well on his website. I also took a page out of Sara Soueidan's book with the `<hr>` element, so I guess this theme is for homages!
+<button type="button" class="button hide-when-nojs" data-theme-set="quill">Toggle Quill theme</button> This is my peace-and-quiet theme. It uses [Instrument Serif](https://fonts.google.com/specimen/Instrument+Serif) (previously [Gambarino](https://www.fontshare.com/fonts/gambarino)) for headings, reminiscent of Apple's Garamond Condensed, and is very desaturated, nearly black-on-white-but-not-fully. The footer illustrations are from [Hamonshū](https://archive.org/search.php?query=creator%3A%22Mori%2C+Yu%CC%84zan%2C+-1917%22), that I only know of thanks to [Eric Meyer](https://meyerweb.com/), who uses those exquisitely well on his website. I also took a page out of Sara Soueidan's book with the `<hr>` element, so I guess this theme is for homages!
 
 ### Dusk
-<button type="button" class="button hide-when-nojs" data-theme-set="dusk">Toggle Dusk theme</button>
-The default Dark Mode theme is set in [MD Nichrome Bold](https://mass-driver.com/typefaces/md-nichrome), which has that sci-fi look I'm after (it look me a while to settle on it after testing several matches!). The neon glow from buttons and the synthwave-y `<hr>` (horizontal rule, horizon… get it?) elements are pretty cool, and the footer just… belongs.
+<button type="button" class="button hide-when-nojs" data-theme-set="dusk">Toggle Dusk theme</button> The default Dark Mode theme is set in [MD Nichrome Bold](https://mass-driver.com/typefaces/md-nichrome), which has that sci-fi look I'm after (it look me a while to settle on it after testing several matches!). The neon glow from buttons and the synthwave-y `<hr>` (horizontal rule, horizon… get it?) elements are pretty cool, and the footer just… belongs.
 
 ### Cyberpunk
-<button type="button" class="button hide-when-nojs" data-theme-set="cyberpunk">Toggle Cyberpunk theme</button>
-The cyberpunk aesthetic is pretty fascinating, and the game Cyberpunk 2077 made great use of that. So I made great use of that game's interface, reusing the same [Rajdhani](https://fonts.google.com/specimen/Rajdhani) typeface and other visual cues. I drew a little nonsensical circuitboard for the footer, it looks right at home.
+<button type="button" class="button hide-when-nojs" data-theme-set="cyberpunk">Toggle Cyberpunk theme</button> The cyberpunk aesthetic is pretty fascinating, and the game Cyberpunk 2077 made great use of that. So I made great use of that game's interface, reusing the same [Rajdhani](https://fonts.google.com/specimen/Rajdhani) typeface and other visual cues. I drew a little nonsensical circuitboard for the footer, it looks right at home.
 
 ### Campfire
-<button type="button" class="button hide-when-nojs" data-theme-set="campfire">Toggle Campfire theme</button>
-I want to be more outdoorsy, but living in a city, this will have to do for now, with a theme heavily inspired by US national parks and more specifically, the art for the Firewatch video game by [Olly Moss](http://ollymoss.com/#/firewatch/). I used the [Chinook](https://fontesk.com/chinook-font/) typeface to get the retro vibe I was after, and made a vector landscape of Mont Blanc, the mountain peak close to my hometown of Lyon, in France. ([Alistair](https://alistairshepherd.uk/) did this too, but like, way better)
+<button type="button" class="button hide-when-nojs" data-theme-set="campfire">Toggle Campfire theme</button> I want to be more outdoorsy, but living in a city, this will have to do for now, with a theme heavily inspired by US national parks and more specifically, the art for the Firewatch video game by [Olly Moss](http://ollymoss.com/#/firewatch/). I used the [Chinook](https://fontesk.com/chinook-font/) typeface to get the retro vibe I was after, and made a vector landscape of Mont Blanc, the mountain peak close to my hometown of Lyon, in France. ([Alistair](https://alistairshepherd.uk/) did this too, but like, way better)
 
 ### Director
-<button type="button" class="button hide-when-nojs" data-theme-set="director">Toggle Director theme</button>
-If you've every played Control, this one will seem familiar. It draws from the game's look and feel (brutalist with hints of colour), and the inverted pyramids. The headings are set in [TeX Gyre Adventor](https://www.fontsquirrel.com/fonts/tex-gyre-adventor), a close match to the original ITC Avant-Garde Gothic used in the game.
+<button type="button" class="button hide-when-nojs" data-theme-set="director">Toggle Director theme</button> If you've every played Control, this one will seem familiar. It draws from the game's look and feel (brutalist with hints of colour), and the inverted pyramids. The headings are set in [TeX Gyre Adventor](https://www.fontsquirrel.com/fonts/tex-gyre-adventor), a close match to the original ITC Avant-Garde Gothic used in the game.
 
 <hr>
 
