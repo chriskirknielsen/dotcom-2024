@@ -3,6 +3,7 @@ title: "A Future of Themes with CSS Container Style Queries"
 summary: 'One way to implement themes on a website with style queries'
 tags:
     - css
+    - themes
 toc: true
 ---
 
@@ -418,7 +419,7 @@ We’ve created our stylesheet and are now ready to use our themes! I’ve added
 
 {% codepen "https://codepen.io/chriskirknielsen/details/xxQjWYo" %}
 
-There are good articles on how to build a theme switcher ([Lea Rosema](https://codepen.io/learosema/pen/zYmvQJV), [Max Böck](https://mxb.dev/blog/color-theme-switcher/), and [Jason Lengstorf](https://www.learnwithjason.dev/blog/css-color-theme-switcher-no-flash#1-start-with-a-basic-html-and-css-site) have great examples) so the main behaviour is to add a `data-theme` attribute to the `<html>` with a value matching the theme key. I didn’t add a `localStorage` feature for this demo but you’d definitely want that so the same theme applies across page navigations and repeat visits! The data-attribute has a higher specificity than our default `html` selector (not to mention `:root`!), so it will always override it — just what we’re after!
+There are good articles on how to build a theme switcher ([Lea Rosema](https://codepen.io/learosema/pen/zYmvQJV), [Max Böck](https://mxb.dev/blog/color-theme-switcher/), and [Jason Lengstorf](https://www.learnwithjason.dev/blog/css-color-theme-switcher-no-flash#1-start-with-a-basic-html-and-css-site) have great examples) so the main behaviour is to add a `data-theme` attribute to the `<html>` with a value matching the theme key. I didn’t add a `localStorage` feature for this demo but you’d definitely want that so the same theme applies across page navigations and repeat visits! The data-attribute has a higher specificity than our default `html` selector, so it will always override it — just what we’re after!
 
 ## Caveats and issues
 
