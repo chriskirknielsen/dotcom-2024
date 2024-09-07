@@ -52,59 +52,63 @@ const gameslibrary = await notionDatabaseQuery({
 	dataPostProcess: async (data) => {
 		const psnTrophyData = await getPsnTrophyData();
 
-		const normalizedData = data.map((entry) => {
-			const props = entry.properties;
+		const normalizedData = data
+			.filter((entry) => {
+				return entry.properties.Title.title.length > 0; // Remove Untitled entries
+			})
+			.map((entry) => {
+				const props = entry.properties;
 
-			const processedEntry = {
-				id: entry.id,
-				title: props.Title.title.pop().plain_text,
-				sortTitle: props['Sort Title'].rich_text.map((textBlock) => textBlock.plain_text).join(''),
-				edition: props.Edition.rich_text.map((textBlock) => textBlock.plain_text).join(''),
-				platform: props.Platform.select?.name,
-				region: regions[props.Region.select?.name] || null,
-				dlc: props.DLC.rich_text.map((textBlock) => textBlock.plain_text).join(''),
-				discs: props.Discs.number || null,
-				year: props.Year.number || null,
-				completed: props.Completed.checkbox || false,
-				parentItem: props['Parent item'].relation || [],
-				subItems: props['Sub-item'].relation || [],
-				psnId: props['PSN ID'].rich_text
-					.map((textBlock) => textBlock.plain_text)
-					.join('')
-					.trim(),
-				boxart:
-					props.Boxart.files.length > 0
-						? {
-								url: props.Boxart.files[0].type === 'external' ? props.Boxart.files[0].external.url : props.Boxart.files[0].file.url,
-								width: props.Boxart.files[0].name.split('x')[0],
-								height: props.Boxart.files[0].name.split('x')[1],
-						  }
-						: null,
-				trophyIcon:
-					props.Thumbnail.files.length > 0
-						? props.Thumbnail.files[0].type === 'external'
-							? props.Thumbnail.files[0].external.url
-							: props.Thumbnail.files[0].file.url
-						: null,
-			};
+				const processedEntry = {
+					id: entry.id,
+					title: props.Title.title.pop().plain_text,
+					sortTitle: props['Sort Title'].rich_text.map((textBlock) => textBlock.plain_text).join(''),
+					edition: props.Edition.rich_text.map((textBlock) => textBlock.plain_text).join(''),
+					platform: props.Platform.select?.name,
+					region: regions[props.Region.select?.name] || null,
+					dlc: props.DLC.rich_text.map((textBlock) => textBlock.plain_text).join(''),
+					discs: props.Discs.number || null,
+					year: props.Year.number || null,
+					completed: props.Completed.checkbox || false,
+					parentItem: props['Parent item'].relation || [],
+					subItems: props['Sub-item'].relation || [],
+					psnId: props['PSN ID'].rich_text
+						.map((textBlock) => textBlock.plain_text)
+						.join('')
+						.trim(),
+					boxart:
+						props.Boxart.files.length > 0
+							? {
+									url: props.Boxart.files[0].type === 'external' ? props.Boxart.files[0].external.url : props.Boxart.files[0].file.url,
+									width: props.Boxart.files[0].name.split('x')[0],
+									height: props.Boxart.files[0].name.split('x')[1],
+							  }
+							: null,
+					trophyIcon:
+						props.Thumbnail.files.length > 0
+							? props.Thumbnail.files[0].type === 'external'
+								? props.Thumbnail.files[0].external.url
+								: props.Thumbnail.files[0].file.url
+							: null,
+				};
 
-			const matchedPsnTrophyData = psnTrophyData.find((game) => game.npCommunicationId === processedEntry.psnId);
-			if (matchedPsnTrophyData) {
-				processedEntry.trophyIcon = matchedPsnTrophyData.trophyTitleIconUrl;
-				processedEntry.trophyProgress = matchedPsnTrophyData.progress;
-				processedEntry.trophyEarned = matchedPsnTrophyData.earnedTrophies;
-			}
+				const matchedPsnTrophyData = psnTrophyData.find((game) => game.npCommunicationId === processedEntry.psnId);
+				if (matchedPsnTrophyData) {
+					processedEntry.trophyIcon = matchedPsnTrophyData.trophyTitleIconUrl;
+					processedEntry.trophyProgress = matchedPsnTrophyData.progress;
+					processedEntry.trophyEarned = matchedPsnTrophyData.earnedTrophies;
+				}
 
-			// If there's an icon, make sure it's resized appropriately
-			if (processedEntry.trophyIcon) {
-				processedEntry.trophyIcon = toCloudinary(processedEntry.trophyIcon, `c_fit,h_128/q_80/f_auto`);
-			} else {
-				delete processedEntry.trophyIcon;
-			}
-			delete processedEntry.psnId; // Once we have trophy data, we can discard the PSN's reference code to it
+				// If there's an icon, make sure it's resized appropriately
+				if (processedEntry.trophyIcon) {
+					processedEntry.trophyIcon = toCloudinary(processedEntry.trophyIcon, `c_fit,h_128/q_80/f_auto`);
+				} else {
+					delete processedEntry.trophyIcon;
+				}
+				delete processedEntry.psnId; // Once we have trophy data, we can discard the PSN's reference code to it
 
-			return processedEntry;
-		});
+				return processedEntry;
+			});
 
 		// Here's a dirty trick… JavaScript provides each item in a loop by reference, which means that it is mutable,
 		// so to avoid a .map() directly followed by a .filter(), we can instead use a filter to exclude results we don't want
