@@ -59,6 +59,12 @@ Thank you so much for stopping by!
         <li>
             <a href="https://11ty.dev" class="display-block"><img src="/assets/img/made-with-11ty.gif" alt="Made with Eleventy." loading="lazy"></a>
         </li>
+        <li>
+            <img src="/assets/img/ckn-html5-lgtm.gif" alt="Chris's Seal of Approval: HTML5 looks good to me" loading="lazy">
+        </li>
+        <li>
+            <img src="/assets/img/ckn-css-lgtm.gif" alt="Chris's Seal of Approval: CSS looks good to me" loading="lazy">
+        </li>
     </ul>
 </div>
 {% endrenderTemplate %}
