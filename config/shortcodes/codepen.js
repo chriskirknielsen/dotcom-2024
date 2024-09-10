@@ -4,7 +4,7 @@ export default function (eleventyConfig) {
 		const id = path.split('/')[3];
 		let markup = `<div class="codepen | cellstack cellstack--center" data-height="${height}" data-theme-id="${theme}" data-default-tab="${tabs}" data-slug-hash="${id}">
 			<div class="single-media">
-				<img src="https://shots.codepen.io/username/pen/${id}-512.webp?version=${Date.now()}" alt="" class="codepen-thumbnail" width="512" height="288" loading="lazy" decoding="async">
+				<img src="https://shots.codepen.io/username/pen/${id}-512.webp?version=${Date.now()}" alt="" class="codepen-thumbnail" width="512" height="288" loading="lazy" decoding="async" style="height: ${height}px;">
 			</div>
 			<a href="${url}" class="button">View on CodePen</a>
 		</div>`;
