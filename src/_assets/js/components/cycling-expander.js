@@ -33,7 +33,11 @@ class CyclingExpander extends HTMLElement {
 
 		// Find the fallbck
 		const contentWrap = this.querySelector('[data-expander="content"]');
-		this.outputContainer = this.spawn('p', { className: contentWrap.className, hidden: true });
+		this.outputContainer = this.spawn('p', {
+			className: contentWrap.className,
+			hidden: true,
+			innerHTML: `<span data-item="emoji" aria-hidden="true">&nbsp;</span>&ensp;<span data-item="content">&nbsp;</span>`,
+		});
 
 		// Populate the newly created elements
 		if (ctaChildren.length > 0) {
@@ -50,18 +54,48 @@ class CyclingExpander extends HTMLElement {
 		// Keep track of which item is currently displayed
 		this.currentItemIndex = -1;
 
+		// Disable root view transition
+		if (document.startViewTransition) {
+			const noAnimRootStyle = this.spawn('style', {
+				textContent:
+					// Disable view transition for root element
+					`html { view-transition-name: none; }` +
+					// Ensure the button stays clickable by disabling pointer events on transition snapshots
+					`::view-transition, ::view-transition-group(root) { pointer-events: none !important; }` +
+					// Simple trick to keep aspect ratio acceptable from https://jakearchibald.com/2024/view-transitions-handling-aspect-ratio-changes/
+					`::view-transition-old(content), ::view-transition-new(content) { height: 100%; object-fit: none; overflow: clip; }`,
+			});
+			document.head.append(noAnimRootStyle);
+		}
+
 		this.ctaButton.addEventListener('click', () => {
+			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 			const newItemIndex = (this.currentItemIndex + 1) % this.itemsList.length;
 			const newItemData = this.itemsList[newItemIndex];
+
 			if (this.outputContainer.hidden || this.currentItemIndex === -1) {
-				this.outputContainer.innerHTML = `<span data-item="emoji" aria-hidden="true">&nbsp;</span>&ensp;<span data-item="content">&nbsp;</span>`;
 				this.outputContainer.hidden = false;
 				this.blockDiv.setAttribute('data-open', 'true');
 			}
+			const emojiEl = this.outputContainer.querySelector('[data-item="emoji"]');
+			const contentEl = this.outputContainer.querySelector('[data-item="content"]');
 
-			this.outputContainer.querySelector('[data-item="emoji"]').innerText = newItemData[0];
-			this.outputContainer.querySelector('[data-item="content"]').innerText = newItemData[1];
-			this.currentItemIndex = newItemIndex; // Using modulo above, we cycle between all values and fall back to zero, so users can't click a bazillion times and exceed the MAX_INTEGER value (better safe than sorry I guess!)
+			if (document.startViewTransition) {
+				emojiEl.style.viewTransitionName = 'emoji';
+				contentEl.style.viewTransitionName = 'content';
+			}
+
+			const setContent = () => {
+				emojiEl.innerText = newItemData[0];
+				contentEl.innerText = newItemData[1];
+				this.currentItemIndex = newItemIndex; // Using modulo above, we cycle between all values and fall back to zero, so users can't click a bazillion times and exceed the MAX_INTEGER value (better safe than sorry I guess!)
+			};
+
+			if (!prefersReducedMotion && document.startViewTransition && this.currentItemIndex > -1) {
+				document.startViewTransition(() => setContent());
+			} else {
+				setContent();
+			}
 		});
 	}
 }
