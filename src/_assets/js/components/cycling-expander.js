@@ -16,11 +16,9 @@ class CyclingExpander extends HTMLElement {
 	constructor() {
 		super();
 
-		// Randomise the list after grabbing each item and extracting the contents into an HTML string
+		// Randomise the list after grabbing each item and extracting the contents into a emoji-text pair
 		this.itemsList = this.shuffle(
-			Array.from(this.querySelectorAll('[data-expander="content-items"] > li')).map(
-				(itemEl) => `<span aria-hidden="true">${itemEl.getAttribute('data-item-emoji')}</span>&ensp;${itemEl.textContent}`
-			)
+			Array.from(this.querySelectorAll('[data-expander="content-items"] > li')).map((itemEl) => [itemEl.getAttribute('data-item-emoji'), itemEl.textContent])
 		);
 
 		// Find the fallback details block and create its equivalent div (yuck, I know!)
@@ -54,13 +52,15 @@ class CyclingExpander extends HTMLElement {
 
 		this.ctaButton.addEventListener('click', () => {
 			const newItemIndex = (this.currentItemIndex + 1) % this.itemsList.length;
-
+			const newItemData = this.itemsList[newItemIndex];
 			if (this.outputContainer.hidden || this.currentItemIndex === -1) {
+				this.outputContainer.innerHTML = `<span data-item="emoji" aria-hidden="true">&nbsp;</span>&ensp;<span data-item="content">&nbsp;</span>`;
 				this.outputContainer.hidden = false;
 				this.blockDiv.setAttribute('data-open', 'true');
 			}
 
-			this.outputContainer.innerHTML = this.itemsList[newItemIndex];
+			this.outputContainer.querySelector('[data-item="emoji"]').innerText = newItemData[0];
+			this.outputContainer.querySelector('[data-item="content"]').innerText = newItemData[1];
 			this.currentItemIndex = newItemIndex; // Using modulo above, we cycle between all values and fall back to zero, so users can't click a bazillion times and exceed the MAX_INTEGER value (better safe than sorry I guess!)
 		});
 	}

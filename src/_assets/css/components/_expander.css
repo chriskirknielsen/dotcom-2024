@@ -3,6 +3,8 @@
 	inset-block-start: 0;
 	z-index: 2;
 
+	user-select: none;
+
 	--CTA-display: flex;
 
 	&::-webkit-details-marker {
@@ -52,14 +54,21 @@ cycling-expander {
 }
 
 cycling-expander .expander[data-open='true'] .expander-content {
-	will-change: opacity, transform, margin-block-end;
+	--ANIM-start-opacity: 0;
+}
+
+cycling-expander .expander[data-open='true'] .expander-content,
+cycling-expander:has(.expander[data-open='true']) + *,
+cycling-expander:has(.expander[data-open='true']) + * + *,
+cycling-expander:has(.expander[data-open='true']) + * + * + *,
+cycling-expander:has(.expander[data-open='true']) + * + * + * + * {
+	/* Animating the next 4 elements should make the illusion relatively effective */
 	animation: cyclingExpanderReveal var(--anim-long) var(--easing-circ-in) 1 backwards;
 }
 
 @keyframes cyclingExpanderReveal {
 	from {
-		opacity: 0;
-		transform: translateY(-2em);
-		margin-block-end: -2em;
+		opacity: var(--ANIM-start-opacity, 1);
+		transform: translateY(-2rem);
 	}
 }
