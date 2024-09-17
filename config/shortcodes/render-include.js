@@ -35,9 +35,6 @@ export default function (eleventyConfig, options = {}) {
 		}
 
 		const isNjk = svgOptions.isNjk || false; // Expect a simple SVG file by default
-		if (!svgOptions.hasOwnProperty('title') && !svgOptions.hasOwnProperty('ariaLabel')) {
-			svgOptions.ariaHidden = true; // Ensure SVGs are hidden from the a11y tree if no title or label is provided
-		}
 		const filePath = `${svgAssetFolder}/${filename}.svg${isNjk ? '.njk' : ''}`;
 		const engine = svgOptions.hasOwnProperty('engine') ? svgOptions.engine : isNjk ? 'njk' : 'html'; // HTML for vanilla SVG
 		const output = eleventyConfig.nunjucks.asyncShortcodes
@@ -56,8 +53,17 @@ export default function (eleventyConfig, options = {}) {
 						svg.addClass(svgOptions.class);
 					}
 
+					if (svgOptions.title) {
+						const titleEl = svg.find('title').length > 0 ? svg.find('title') : $(`<title></title>`).prependTo(svg);
+						titleEl.text(svgOptions.title);
+					}
+
 					if (svgOptions.ariaLabel) {
 						svg.attr('aria-label', svgOptions.ariaLabel);
+					}
+
+					if (!svgOptions.hasOwnProperty('title') && !svgOptions.hasOwnProperty('ariaLabel') && svg.find('title').length === 0) {
+						svgOptions.ariaHidden = true; // Ensure SVGs are hidden from the a11y tree if no title or label is provided
 					}
 
 					if (svgOptions.ariaHidden) {
@@ -66,11 +72,6 @@ export default function (eleventyConfig, options = {}) {
 
 					if (svgOptions.preserveAspectRatio) {
 						svg.attr('preserveAspectRatio', svgOptions.preserveAspectRatio);
-					}
-
-					if (svgOptions.title) {
-						const titleEl = svg.find('title').length > 0 ? svg.find('title') : $(`<title></title>`).prependTo(svg);
-						titleEl.text(svgOptions.title);
 					}
 
 					return $.root().html();
