@@ -10,7 +10,7 @@ blogroll: [
     {
         "label": "Adrian Roselli",
         "url": "https://adrianroselli.com",
-        "blurb": "Accessibility wizard"
+        "blurb": "Accessibility nerd"
     },
     {
         "label": "Ahmad Shadeed",
@@ -43,7 +43,8 @@ blogroll: [
     },
     {
         "label": "Harry Roberts",
-        "url": "https://csswizardry.com/"
+        "url": "https://csswizardry.com/",
+        "blurb": "Performance wizard"
     },
     {
         "label": "Dave Rupert",
@@ -63,7 +64,8 @@ blogroll: [
     },
     {
         "label": "Heydon Pickering",
-        "url": "http://www.heydonworks.com"
+        "url": "http://www.heydonworks.com",
+        "blurb": "Don't miss the Webbed Briefs!"
     },
     {
         "label": "Hidde deVries",
@@ -71,8 +73,7 @@ blogroll: [
     },
     {
         "label": "Henry Desroches",
-        "url": "https://henry.codes",
-        "blurb": "Needs RSS!"
+        "url": "https://henry.codes"
     },
     {
         "label": "Jake Archibald",
@@ -81,6 +82,10 @@ blogroll: [
     {
         "label": "Jim Nielsen",
         "url": "https://blog.jim-nielsen.com"
+    },
+    {
+        "label": "Katherine Yang",
+        "url": "https://kayserifserif.place/"
     },
     {
         "label": "Lene Saile",
@@ -115,6 +120,10 @@ blogroll: [
         "url": "https://knowler.dev/"
     },
     {
+        "label": "Nic Chan",
+        "url": "https://www.nicchan.me/"
+    },
+    {
         "label": "Remy Sharp",
         "url": "https://remysharp.com"
     },
@@ -132,7 +141,8 @@ blogroll: [
     },
     {
         "label": "Roman Komarov",
-        "url": "https://kizu.dev"
+        "url": "https://kizu.dev",
+        "blurb": "CSS tinkerer"
     },
     {
         "label": "Sara Joy",
@@ -140,7 +150,8 @@ blogroll: [
     },
     {
         "label": "Sara Soueidan",
-        "url": "https://sarasoueidan.com/"
+        "url": "https://sarasoueidan.com/",
+        "blurb": "SVG expert, accessibility expert"
     },
     {
         "label": "Scott Jehl",
@@ -155,6 +166,14 @@ blogroll: [
         "url": "https://thinkdobecreate.com"
     },
     {
+        "label": "Stephanie Stimac",
+        "url": "https://stephaniestimac.com/"
+    },
+    {
+        "label": "Tyler Sticka",
+        "url": "https://tylersticka.com/"
+    },
+    {
         "label": "Eric Meyer",
         "url": "https://meyerweb.com/eric/thoughts"
     },
@@ -162,6 +181,9 @@ blogroll: [
         "label": "Zach Leatherman",
         "url": "https://www.zachleat.com/web/"
     },
+
+    
+
     {
         "label": "Cloud Four",
         "url": "https://cloudfour.com",
@@ -206,7 +228,7 @@ blogroll: [
     <h2>{% if isPub == 'true' %}Publications{% else %}Individuals{% endif %}</h2>
     <ul>
         {% for blog in blogs | sort(false, false, 'label') %}
-            <li><a href="{{ blog.url }}">{{ blog.label }}</a>{% if blog.blurb %} ({{ blog.blurb }}){% endif %}</li>
+            <li><a href="{{ blog.url }}">{{ blog.label }}</a>{% if blog.blurb %}: <em>{{ blog.blurb }}</em>{% endif %}</li>
         {% endfor %}
     </ul>
 {% endfor %}
