@@ -1,0 +1,204 @@
+---
+title: Blogrool
+summary: Some blogs worth reading
+permalink: /blogroll/
+blogroll: [
+    {
+        "label": "Jeremy Keith",
+        "url": "https://adactio.com/articles/"
+    },
+    {
+        "label": "Adrian Roselli",
+        "url": "https://adrianroselli.com",
+        "blurb": "Accessibility wizard"
+    },
+    {
+        "label": "Ahmad Shadeed",
+        "url": "http://ishadeed.com/",
+        "blurb": "CSS wizard"
+    },
+    {
+        "label": "Axel Leroy",
+        "url": "https://axel.leroy.sh"
+    },
+    {
+        "label": "Ben Myers",
+        "url": "https://www.benmyers.dev/"
+    },
+    {
+        "label": "Bramus Van Damme",
+        "url": "https://www.bram.us"
+    },
+    {
+        "label": "Cassidy Williams",
+        "url": "https://cassidoo.co/"
+    },
+    {
+        "label": "Chris Coyier",
+        "url": "https://chriscoyier.net"
+    },
+    {
+        "label": "Michelle Barker",
+        "url": "https://css-irl.info"
+    },
+    {
+        "label": "Harry Roberts",
+        "url": "https://csswizardry.com/"
+    },
+    {
+        "label": "Dave Rupert",
+        "url": "http://daverupert.com"
+    },
+    {
+        "label": "David Darnes",
+        "url": "https://darn.es"
+    },
+    {
+        "label": "Eric Bailey",
+        "url": "https://ericwbailey.website"
+    },
+    {
+        "label": "Ethan Marcotte",
+        "url": "https://ethanmarcotte.com"
+    },
+    {
+        "label": "Heydon Pickering",
+        "url": "http://www.heydonworks.com"
+    },
+    {
+        "label": "Hidde deVries",
+        "url": "https://hidde.blog"
+    },
+    {
+        "label": "Henry Desroches",
+        "url": "https://henry.codes",
+        "blurb": "Needs RSS!"
+    },
+    {
+        "label": "Jake Archibald",
+        "url": "http://jakearchibald.com/"
+    },
+    {
+        "label": "Jim Nielsen",
+        "url": "https://blog.jim-nielsen.com"
+    },
+    {
+        "label": "Sophie Koonin",
+        "url": "https://localghost.dev/"
+    },
+    {
+        "label": "Lynn Fisher",
+        "url": "https://lynnandtonic.com"
+    },
+    {
+        "label": "Manuel Matuzović",
+        "url": "https://matuzo.at"
+    },
+    {
+        "label": "Max Böck",
+        "url": "https://mxb.dev"
+    },
+    {
+        "label": "Mayank",
+        "url": "https://www.mayank.co/"
+    },
+    {
+        "label": "Miriam Eric Suzanne",
+        "url": "https://www.miriamsuzanne.com/"
+    },
+    {
+        "label": "Nathan Knowler",
+        "url": "https://knowler.dev/"
+    },
+    {
+        "label": "Remy Sharp",
+        "url": "https://remysharp.com"
+    },
+    {
+        "label": "Robb Knight",
+        "url": "https://rknight.me"
+    },
+    {
+        "label": "Robb Owen",
+        "url": "http://robbowen.digital/"
+    },
+    {
+        "label": "Robin Rendle",
+        "url": "https://robinrendle.com"
+    },
+    {
+        "label": "Sara Joy",
+        "url": "https://sarajoy.dev/"
+    },
+    {
+        "label": "Sara Soueidan",
+        "url": "https://sarasoueidan.com/"
+    },
+    {
+        "label": "Scott Jehl",
+        "url": "https://scottjehl.com/"
+    },
+    {
+        "label": "Stefan Judis",
+        "url": "https://www.stefanjudis.com"
+    },
+    {
+        "label": "Stephanie Eckles",
+        "url": "https://thinkdobecreate.com"
+    },
+    {
+        "label": "Eric Meyer",
+        "url": "https://meyerweb.com/eric/thoughts"
+    },
+    {
+        "label": "Zach Leatherman",
+        "url": "https://www.zachleat.com/web/"
+    },
+    {
+        "label": "Cloud Four",
+        "url": "https://cloudfour.com",
+        "publisher": true
+    },
+    {
+        "label": "CSS-Tricks",
+        "url": "https://css-tricks.com",
+        "publisher": true
+    },
+    {
+        "label": "Frontend Masters Boost",
+        "url": "https://frontendmasters.com/blog",
+        "publisher": true
+    },
+    {
+        "label": "OddBird",
+        "url": "https://us19.campaign-archive.com/feed?u=80219aa68d7bad77b9fd2eb93&id=7c27f7fb9a",
+        "publisher": true
+    },
+    {
+        "label": "Piccalilli",
+        "url": "https://piccalil.li/",
+        "publisher": true
+    },
+    {
+        "label": "Smashing Magazine",
+        "url": "https://www.smashingmagazine.com",
+        "publisher": true
+    },
+    {
+        "label": "The Cascade",
+        "url": "https://csscade.com/",
+        "publisher": true
+    }
+]
+---
+
+<p>I follow a bunch of blogs (RSS, babyyy), you'll definitely find interesting stuff in here. And if you've got suggestions, please do send them my way.</p>
+
+{% for isPub, blogs in blogroll | groupby('publisher') %}
+    <h2>{% if isPub == 'true' %}Publications{% else %}Individuals{% endif %}</h2>
+    <ul>
+        {% for blog in blogs | sort(false, false, 'label') %}
+            <li><a href="{{ blog.url }}">{{ blog.label }}</a>{% if blog.blurb %} ({{ blog.blurb }}){% endif %}</li>
+        {% endfor %}
+    </ul>
+{% endfor %}

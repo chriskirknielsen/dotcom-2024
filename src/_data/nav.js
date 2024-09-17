@@ -25,12 +25,13 @@ export default {
 		[
 			{ path: '/colophon/', label: 'Colophon' },
 			{ path: '/search/', label: 'Search' },
-			{ path: '/archives/', label: 'Archives' },
+			{ path: '/archives/', label: 'Digital Archives' },
 			{ path: metadata.tweetArchiveUrl, label: 'Tweet Archive' },
 		],
 		[
 			{ path: '/css-logo/', label: 'CSS Logo' },
 			{ path: '/fonts/', label: 'Custom Fonts' },
+			{ path: '/blogroll/', label: 'Blogroll' },
 			{ path: '/webring/', label: 'Webring' },
 			{ path: '', label: 'Report Issue', isRepoFileLink: true },
 		],
