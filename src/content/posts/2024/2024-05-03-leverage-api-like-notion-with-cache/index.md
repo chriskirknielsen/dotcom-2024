@@ -317,3 +317,7 @@ const myText = row.properties.myText.rich_text.map((text) => richTextBlockToMd(t
 ```
 
 I almost considered writing some kind of Eleventy plugin, but this all feels pretty custom and opinionated, so I held off. In any case, I hope you found this interesting! I certainly learned a lot playing with these two APIs, and consolidating my code into reusable chunks was a great exercise.
+
+## Update, 2024-09-18
+
+Would you look at that, somebody made a plugin! It's [notion2eleventy](https://github.com/stebrech/notion2eleventy) by Stefan Brechbühl. I still need my post-process-and-data-blend-before-caching setup so I'll stick with my custom implementation, but if you thought my blog post was too long, this might just be perfect for your Notion-to-Eleventy needs.
