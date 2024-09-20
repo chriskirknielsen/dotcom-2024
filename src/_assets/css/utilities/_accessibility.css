@@ -56,7 +56,7 @@
 
 .tooltip {
 	--TOOLTIP-arrow-size: var(--size-xs);
-	--TOOLTIP-offset-block: var(--size-2xs);
+	--TOOLTIP-offset-block: var(--_tooltip-offset-block, var(--size-2xs));
 	--TOOLTIP-inset-block: calc(100% + var(--TOOLTIP-arrow-size) + var(--TOOLTIP-offset-block));
 
 	position: relative;
