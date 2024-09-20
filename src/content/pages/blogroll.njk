@@ -463,14 +463,14 @@ blogroll: {
                     {% endif %}
                     <span>{{ blog.title }}</span>
                 </a>
-                {% if blog.blurb %}({{blog.blurb}}){% endif %}
+                {% if blog.blurb %}<span>({{ blog.blurb }})</span>{% endif %}
             </li>
         {% endfor %}
     </ul>
 {% endfor %}
 <style>
     .blogroll { list-style-type: ''; }
-    .blogroll-item a { display: inline-flex; gap: 0.5em; align-items: center; }
+    .blogroll-item a { display: inline-flex; gap: 0.5em; align-items: center; vertical-align: bottom; }
     .blogroll-item img { display: inline-block; width: auto; height: 0.9em; }
 </style>
 <script>
