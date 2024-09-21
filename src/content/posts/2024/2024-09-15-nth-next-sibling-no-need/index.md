@@ -1,6 +1,6 @@
 ---
 title: ":nth-next-sibling? No need."
-summary: "Target elements after an arbitrary element in CSS"
+summary: "Target N elements after an arbitrary element in CSS."
 time: '19:00:00'
 tags:
     - css

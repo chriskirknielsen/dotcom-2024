@@ -1,6 +1,6 @@
 ---
 slug: eleventy-within-eleventy-precompiling-reused-assets
-title: 'Eleventy within Eleventy to compile when you compile: precompiling reused assets'
+title: 'Eleventy within Eleventy to compile when you compile: precompiling reused assets.'
 summary: Pre-compile some reused assets to avoid repeating the same operation.
 date: 2022-08-25
 updated: 2022-08-25

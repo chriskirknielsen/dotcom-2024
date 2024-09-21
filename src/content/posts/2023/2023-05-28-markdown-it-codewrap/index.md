@@ -1,6 +1,6 @@
 ---
 title: "My plugin for Markdown-It: CodeWrap"
-summary: 'My solution to adding "Copy" to markdown code blocks (and other things)'
+summary: 'My solution to adding "Copy" to markdown code blocks (and other things).'
 tags:
     - markdown
     - plugin

@@ -1,7 +1,7 @@
 ---
 slug: le-petit-guide-sur-var-let-et-const
 title: Le petit guide sur var, let et const
-summary: Comment distinguer ces mots-clés JavaScript
+summary: Comment distinguer ces mots-clés JavaScript.
 date: 2021-08-07
 lang: fr
 tags:

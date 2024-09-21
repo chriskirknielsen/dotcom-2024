@@ -1,6 +1,6 @@
 ---
 title: CSS Wishlist 2024
-summary: My Wishlist for CSS in 2024
+summary: My Wishlist for CSS in 2024.
 tags: ['css']
 featured: true
 ---

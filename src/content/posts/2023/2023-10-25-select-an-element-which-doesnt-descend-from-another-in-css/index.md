@@ -1,6 +1,6 @@
 ---
 title: "Select an element which doesn’t descend from another in CSS"
-summary: 'Avoid false positives when using :not() to exclude ancestors from a scope'
+summary: 'Avoid false positives when using :not() to exclude ancestors from a scope.'
 tags:
     - css
     - quick-tip

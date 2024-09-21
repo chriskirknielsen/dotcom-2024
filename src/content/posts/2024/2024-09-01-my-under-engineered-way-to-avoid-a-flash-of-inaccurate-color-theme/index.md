@@ -1,6 +1,6 @@
 ---
 title: "My under-engineered way to avoid a Flash of inAccurate coloR Theme (FART)"
-summary: "It all boils down to a single line of JS"
+summary: "It all boils down to a single line of JS."
 time: '20:55:00'
 tags:
     - javascript

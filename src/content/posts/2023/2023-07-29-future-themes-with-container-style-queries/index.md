@@ -1,6 +1,6 @@
 ---
 title: "A Future of Themes with CSS Container Style Queries"
-summary: 'One way to implement themes on a website with style queries'
+summary: 'One way to implement themes on a website with style queries.'
 tags:
     - css
     - themes

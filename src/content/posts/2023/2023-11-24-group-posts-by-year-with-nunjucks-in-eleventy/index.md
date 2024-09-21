@@ -1,6 +1,6 @@
 ---
 title: "Grouping posts by year with Nunjucks in Eleventy"
-summary: "Group by year in a clear and readable manner"
+summary: "Group by year in a clear and readable manner."
 tags:
     - eleventy
     - nunjucks
