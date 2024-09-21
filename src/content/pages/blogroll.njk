@@ -290,7 +290,7 @@ blogroll: {
             "type": "rss",
             "xmlUrl": "https://sarajoy.dev/rss.xml",
             "htmlUrl": "https://sarajoy.dev/",
-            "rssfr-favicon": "https://icons.feedercdn.com/sarajoy.dev"
+            "rssfr-favicon": "https://res.cloudinary.com/chriskirknielsen/image/fetch/v1726836210/https://v1.indieweb-avatar.11ty.dev/https%253A%252F%252Fsarajoy.dev%252F/"
         },
         {
             "title": "Sara Soueidan",
@@ -474,9 +474,22 @@ blogroll: {
     </ul>
 {% endfor %}
 <style>
-    .blogroll { columns: auto 12em; column-gap: 1em; list-style-type: ''; }
-    .blogroll-item a { display: inline-flex; gap: 0.5em; align-items: center; }
-    .blogroll-item img { display: inline-block; width: auto; height: 0.9em; }
+    .blogroll {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 12em), 1fr));
+        gap: 0.25em 1em;
+        list-style-type: '';
+    }
+    .blogroll-item a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+    .blogroll-item img {
+        display: inline-block;
+        width: auto;
+        height: 0.9em;
+    }
 </style>
 <script>(function(){
     const blogroll = {{ blogroll | dump | safe }};
