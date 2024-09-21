@@ -13,6 +13,7 @@ import urlFilters from './config/filters/urls.js';
 import { default as minifierFilters, cachedJsmin, cachedCssmin } from './config/filters/minifiers.js';
 
 import callout from './config/shortcodes/callout.js';
+import codeview from './config/shortcodes/codeview.js';
 import codepen from './config/shortcodes/codepen.js';
 import expander from './config/shortcodes/expander.js';
 import renderInclude from './config/shortcodes/render-include.js';
@@ -100,6 +101,7 @@ export default async function (eleventyConfig) {
 	eleventyConfig.addPlugin(assetCompiler, { fontsDir: '/assets/fonts' });
 	eleventyConfig.addPlugin(mediaGallery, { galleryClasses: ['image-gallery'] });
 	eleventyConfig.addPlugin(callout, { markdownEngine: md });
+	eleventyConfig.addPlugin(codeview);
 	eleventyConfig.addPlugin(codepen);
 	eleventyConfig.addPlugin(expander);
 	eleventyConfig.addPlugin(markdownLibrary, {

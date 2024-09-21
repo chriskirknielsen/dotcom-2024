@@ -2,14 +2,16 @@ code-wrap {
 	display: block;
 }
 
-.codeblock {
+.codeblock,
+.codeview {
 	--CODEBLOCK-border-width: 1px;
 	--CODEBLOCK-padding: calc(var(--layout-gutter) - var(--CODEBLOCK-border-width));
 	--CODEBLOCK-border-color: var(--C-accent);
 	--CODEBLOCK-toolbar-color: var(--C-surface);
 }
 
-.codeblock-toolbar {
+.codeblock-toolbar,
+.codeview-toolbar {
 	position: relative;
 	z-index: 1;
 
@@ -25,13 +27,15 @@ code-wrap {
 	background: var(--CODEBLOCK-border-color);
 }
 
-.codeblock-toolbar-label {
+.codeblock-toolbar-label,
+.codeview-toolbar {
 	font-family: var(--fontStack-monospace);
 	font-size: 0.875em;
 	letter-spacing: 0.01em;
 }
 
-.codeblock pre {
+.codeblock pre,
+.codeview-render {
 	position: relative;
 
 	inline-size: 100%;
@@ -42,6 +46,10 @@ code-wrap {
 	border: var(--CODEBLOCK-border-width) solid var(--CODEBLOCK-border-color);
 	border-block-start-width: 0;
 	background-color: var(--CODE-bg, var(--C-surface));
+}
+
+.codeview-render {
+	max-height: 80vh;
 }
 
 :not(pre) > code {
