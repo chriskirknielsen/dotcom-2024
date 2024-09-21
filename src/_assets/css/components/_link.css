@@ -2,14 +2,8 @@
 	--LINK-color: var(--_link-color);
 	--LINK-underline-color: var(--_link-underline-color);
 	--LINK-skip-ink: var(--_link-skip-ink);
-	--LINK-underline-offset: var(--_link-underline-offset);
 	--LINK-decoration-thickness: var(--_link-decoration-thickness);
-
-	color: var(--LINK-color);
-	text-decoration-color: var(--LINK-underline-color);
-	text-decoration-skip-ink: var(--LINK-skip-ink);
-	text-underline-offset: var(--LINK-underline-offset);
-	text-decoration-thickness: var(--LINK-decoration-thickness);
+	--LINK-underline-offset: var(--_link-underline-offset);
 
 	&:is(:hover, :focus-visible) {
 		--LINK-color: var(--_link-color-active);
@@ -20,19 +14,20 @@
 	}
 }
 
+:any-link,
+.link-label-anchor .link-label-text {
+	color: var(--LINK-color);
+	text-decoration: underline;
+	text-decoration-color: var(--LINK-underline-color);
+	text-decoration-skip-ink: var(--LINK-skip-ink);
+	text-decoration-thickness: var(--LINK-decoration-thickness);
+	text-underline-offset: var(--LINK-underline-offset);
+}
+
 /* A link whose contents shouldn't all get underlined, only the specified label */
-.link-label-anchor:any-link {
+.link-label-anchor {
 	color: inherit;
 	text-decoration: none;
-
-	& .link-label-text {
-		text-decoration: underline;
-		color: var(--LINK-color);
-		text-decoration-color: var(--LINK-underline-color);
-		text-decoration-skip-ink: var(--LINK-skip-ink);
-		text-underline-offset: var(--LINK-underline-offset);
-		text-decoration-thickness: var(--LINK-decoration-thickness);
-	}
 }
 
 :is(h1, h2, h3, h4) > a {
