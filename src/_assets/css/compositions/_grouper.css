@@ -1,28 +1,28 @@
 .grouper {
-    display: flex;
-    gap: var(--GAP, var(--size-m));
+	display: flex;
+	gap: var(--GAP, var(--size-m));
 }
 
 .grouper--wrap {
-    flex-wrap: wrap;
+	flex-wrap: wrap;
 }
 
 .grouper--vertical {
-    flex-direction: column;
+	flex-direction: column;
 }
 
 .grouper--toolbar {
-    justify-content: space-between;
-    align-items: baseline;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .grouper--icon-text-pair {
-    align-items: center;
+	align-items: center;
 
-    & > svg {
-        flex: 0 0 auto;
-        align-self: initial;
-    }
+	& > svg {
+		flex: 0 0 auto;
+		align-self: initial;
+	}
 
-    /* & > :is(p, span) {align-self: baseline;} */
+	/* & > :is(p, span) {align-self: baseline;} */
 }

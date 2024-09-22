@@ -22,7 +22,7 @@ platformLabels: {
 
 <p class="fontSize-smaller">Click the title on a spine to view more details, then use the <kbd>Left</kbd>/<kbd>Right</kbd> arrow keys to cycle through games on the same platform. To close the modal, press <kbd>Escape</kbd> or click outside the box.</p>
 
-<div class="grouper grouper--wrap grouper--toolbar" data-formlike data-gaming-toolbar hidden>
+<form class="grouper grouper--wrap grouper--toolbar" data-gaming-toolbar hidden>
     <button type="button" class="expander-button button" data-games-toggled aria-pressed="false">
         <span class="expander-button-arrow" aria-hidden="true"></span>
         Toggle All
@@ -36,7 +36,7 @@ platformLabels: {
             <option value="lg">Larger</option>
         </select>
     </div>
-</div>
+</form>
 
 {% for platform, games in gameslibrary | groupby('platform') | dictsort | sortentries(platformLabels | keys) %}
     {% set platformSlug = platform | lower | replace(' ', '-') %}

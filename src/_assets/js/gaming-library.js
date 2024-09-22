@@ -165,6 +165,14 @@ document.addEventListener('click', function (e) {
 	}
 });
 
+document.addEventListener('submit', function (e) {
+	let target = e.target.closest('[data-gaming-toolbar]');
+	if (target) {
+		e.preventDefault();
+		return false;
+	}
+});
+
 document.addEventListener('change', function (e) {
 	let target;
 	if ((target = e.target.closest('[data-games-sizing]'))) {

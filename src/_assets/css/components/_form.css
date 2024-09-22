@@ -36,6 +36,7 @@
 [data-inputlike='wrap'] {
 	display: flex;
 	align-items: center;
+	gap: 0.5em;
 
 	&:focus-within {
 		outline: var(--_focus-outline);
@@ -49,6 +50,7 @@
 
 :is(form, [data-formlike]) :is(input, select, select) {
 	line-height: 1;
+	accent-color: var(--C-accent);
 }
 
 fieldset {
