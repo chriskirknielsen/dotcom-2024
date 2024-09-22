@@ -105,7 +105,7 @@
 	box-shadow: var(--GAME-box-shadow);
 
 	transform-origin: 0% 50%;
-	transform: rotateY(90deg) translateZ(-1px);
+	transform: rotateY(90deg) translateZ(-0.5px);
 	filter: blur(0.1px); /* Pseudo-anti-aliasing on box edges */
 
 	/* Use a discrete animation to animate the display property */
@@ -382,6 +382,29 @@
 	}
 }
 
+[data-gaming-platform='switch'] {
+	--box-width: 104;
+	--box-height: 169;
+	--box-depth: 10;
+	--game-spine-bg: #e60012;
+	--game-spine-text: #f8f8f8;
+	--spine-font-family: Metropolis, 'Gotham', 'Century Gothic', var(--spine-font-stack);
+	--spine-font-weight: 600;
+	--spine-letter-spacing: 0.0125em;
+	--spine-paper-gap: 0px;
+	--box-border-size-block: 0.125em;
+	--box-border-size-inline: 0;
+
+	& .gaming-spine-label {
+		font-size: calc(0.625em * var(--spine-title-scale)); /* Font needs to be slightly smaller for Switch spines, and needs less downscaling */
+		text-transform: uppercase;
+	}
+
+	& .gaming-spine-label > span {
+		padding-block-start: 0.1em; /* Magic number, looks just right to my eyes */
+	}
+}
+
 [data-gaming-platform='dreamcast'] {
 	--game-spine-bg: #3b6fc4;
 	--game-spine-text: #edfcff;
@@ -451,6 +474,14 @@
 			padding-block-start: 0.2em; /* Magic number, looks just right to my eyes */
 		}
 	}
+}
+
+@font-face {
+	font-family: Metropolis;
+	font-weight: 600;
+	font-style: normal;
+	src: local(Metropolis), local('Metropolis'), url(/assets/fonts/Metropolis-SemiBold.woff2);
+	font-display: swap;
 }
 
 @font-face {

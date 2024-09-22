@@ -64,6 +64,14 @@ document.addEventListener('click', function (e) {
 		const trophySvgId = template.getAttribute('data-trophy-svg-id');
 		const clone = template.content.cloneNode(true);
 		const dialogTitleRefId = 'gaming-details-dialog-title';
+		let physicalType = 'disc';
+		switch (gameData.platform) {
+			case 'PSV':
+			case 'Switch': {
+				physicalType = 'cartridge';
+				break;
+			}
+		}
 
 		eachDom(
 			'[data-slot-show], [data-slot]:not([data-slot-show] *)',
@@ -80,7 +88,7 @@ document.addEventListener('click', function (e) {
 		});
 
 		clone.querySelector('[data-slot="title"]').setAttribute('id', dialogTitleRefId);
-		clone.querySelector('[data-slot-computed="format"]').innerText = !gameData.discs ? 'digital' : gameData.discs > 1 ? `${gameData.discs} discs` : 'disc';
+		clone.querySelector('[data-slot-computed="format"]').innerText = !gameData.discs ? 'digital' : gameData.discs > 1 ? `${gameData.discs} ${physicalType}s` : physicalType;
 		if (gameData.completed === null) {
 			clone.querySelector('[data-slot-checkbox="completed"]').indeterminate = true;
 			clone.querySelector('[data-slot-computed="completed"]').innerText = 'Partially';
