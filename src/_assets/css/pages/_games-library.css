@@ -388,9 +388,9 @@
 	--box-depth: 10;
 	--game-spine-bg: #e60012;
 	--game-spine-text: #f8f8f8;
-	--spine-font-family: Metropolis, 'Gotham', 'Century Gothic', var(--spine-font-stack);
-	--spine-font-weight: 600;
-	--spine-letter-spacing: 0.0125em;
+	--spine-font-family: Outfit, 'Gotham', 'Century Gothic', var(--spine-font-stack);
+	--spine-font-weight: 500;
+	--spine-letter-spacing: 0.025em;
 	--spine-paper-gap: 0px;
 	--box-border-size-block: 0.125em;
 	--box-border-size-inline: 0;
