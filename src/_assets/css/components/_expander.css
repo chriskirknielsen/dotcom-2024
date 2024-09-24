@@ -69,3 +69,23 @@ cycling-expander .expander[data-open='true'] .expander-content,
 		transform: translateY(-2rem);
 	}
 }
+
+@supports (interpolate-size: allow-keywords) {
+	/* Adapted from https://developer.chrome.com/docs/css-ui/animate-to-height-auto/#animate_the_details_element */
+	details {
+		interpolate-size: allow-keywords;
+
+		& > summary ~ * {
+			transition: height var(--anim-short) var(--easing-in-out);
+		}
+
+		&[open] > summary ~ * {
+			@starting-style {
+				height: 0px;
+			}
+
+			height: auto;
+			overflow: clip; /* Clip off contents while animating */
+		}
+	}
+}
