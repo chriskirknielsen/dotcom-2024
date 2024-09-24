@@ -2,6 +2,7 @@
 title: ":nth-next-sibling? No need."
 summary: "Target N elements after an arbitrary element in CSS."
 time: '19:00:00'
+updated: 2024-09-23
 tags:
     - css
     - quick-tip
@@ -16,7 +17,7 @@ The selector is more complex to understand at a glance, and is probably slightly
 li:nth-child(-n + 3 of .el ~ *) { background: hotpink; }
 ```
 
-{% codepen "https://codepen.io/chriskirknielsen/pen/yLdWpvY/", "css,result", 400 %}
+{% codepen "https://codepen.io/chriskirknielsen/pen/yLdWpvY/", "css,result", 480 %}
 
 For my specific use-case on my [About](/about/) page, the selector is a bit more… *exotic*, but It Just Works™:
 
@@ -25,3 +26,10 @@ For my specific use-case on my [About](/about/) page, the selector is a bit more
 ```
 
 I really need to stop discovering [star-selector solutions](/blog/select-an-element-which-doesnt-descend-from-another-in-css/) to all my problems.
+
+## Update: and :nth-previous-sibling?
+By the way, if we wanted to do the same for the previous siblings of `.el`, the counting happens the other way around, so we can use `:nth-last-child` with the same principle:
+
+```css
+li:nth-last-child(-n + 2 of *:has(~ .el)) { background: yellow; }
+```
