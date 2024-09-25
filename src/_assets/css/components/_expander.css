@@ -76,15 +76,15 @@ cycling-expander .expander[data-open='true'] .expander-content,
 		interpolate-size: allow-keywords;
 
 		& > summary ~ * {
-			transition: height var(--anim-short) var(--easing-in-out);
+			transition: block-size var(--anim-short) var(--easing-in-out);
 		}
 
 		&[open] > summary ~ * {
 			@starting-style {
-				height: 0px;
+				block-size: 0px;
 			}
 
-			height: auto;
+			block-size: auto;
 			overflow: clip; /* Clip off contents while animating */
 		}
 	}
