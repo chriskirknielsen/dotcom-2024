@@ -4,7 +4,7 @@
     {% block pageHero %}
         {% component 'hero', {
             heroTitle: heroTitle or title,
-            heroSub: summary if not heroHideSummary else null,
+            heroSub: heroSub or (summary if not heroHideSummary else null),
             heroSup: heroSup or null,
             heroCta: heroCta or null
         } %}
