@@ -477,10 +477,10 @@
 }
 
 @font-face {
-	font-family: Metropolis;
-	font-weight: 600;
+	font-family: Outfit;
+	font-weight: 500;
 	font-style: normal;
-	src: local(Metropolis), local('Metropolis'), url(/assets/fonts/Metropolis-SemiBold.woff2);
+	src: local(Outfit), local('Outfit'), url(/assets/fonts/Outfit-Medium.woff2);
 	font-display: swap;
 }
 
