@@ -70,22 +70,25 @@ cycling-expander .expander[data-open='true'] .expander-content,
 	}
 }
 
+/* Adapted from https://nerdy.dev/open-and-close-transitions-for-the-details-element */
 @supports (interpolate-size: allow-keywords) {
-	/* Adapted from https://developer.chrome.com/docs/css-ui/animate-to-height-auto/#animate_the_details_element */
-	details {
-		interpolate-size: allow-keywords;
+	@media (prefers-reduced-motion: no-preference) {
+		details {
+			interpolate-size: allow-keywords;
 
-		& > summary ~ * {
-			transition: block-size var(--anim-short) var(--easing-in-out);
-		}
+			&::details-content {
+				block-size: 0;
+				overflow-y: clip;
 
-		&[open] > summary ~ * {
-			@starting-style {
-				block-size: 0px;
+				transition-property: content-visibility, opacity, block-size;
+				transition-behavior: allow-discrete;
+				transition-duration: var(--anim-short);
+				transition-timing-function: var(--easing-out);
 			}
 
-			block-size: auto;
-			overflow: clip; /* Clip off contents while animating */
+			&[open]::details-content {
+				block-size: auto;
+			}
 		}
 	}
 }
