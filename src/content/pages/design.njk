@@ -24,7 +24,7 @@
 }
 ---
 
-<article class="fifty-fifty">
+<div class="fifty-fifty">
 	{% if design.img %}
 	<div>
 		<img src="{{ [assets.images, 'designs', design.img] | toPath | toNetlifyImage }}" alt="" width="600" height="600" class="design-single single-media | inline-size-100pc">
@@ -32,38 +32,37 @@
 	{% endif %}
 
 	<div class="flow">
+		{% if design.links %}
+			<h2>Available on</h2>
+			<ul class="flow">
+				{%- for site, url in design.links %}
+				<li><a href="{{ url }}">{{ site }}</a></li>
+				{% endfor -%}
+			</ul>
+		{% endif %}
 
-	{% if design.links %}
-		<h2>Available on</h2>
-		<ul class="flow">
-			{%- for site, url in design.links %}
-			<li><a href="{{ url }}">{{ site }}</a></li>
-			{% endfor -%}
-		</ul>
-	{% endif %}
-
-	{% if design.note %}
-		<p class="fontStyle-italic fontSize-smaller">{{ design.note | safe }}</p>
-	{% endif %}
-	
-	{% if design.variant %}
-		<h2 class="h3">Variant{% if (design.variant | length) != 1 %}s{% endif %}</h2>
-		<ul class="flow">
-			{%- for variantSlug in design.variant %}
-			{% set variantDesign = designs | find('slug', variantSlug) %}
-			<li><a href="{{ ['designs', (variantDesign.slug | slugify)] | toPath }}/">{{ variantDesign.name | safe }}</a></li>
-			{% endfor -%}
-		</ul>
-	{% endif %}
-	
-	{% if design.similar %}
-		<h2 class="h3">Similar designs</h2>
-		<ul class="flow">
-			{%- for otherDesignSlug in design.similar %}
-			{% set otherDesign = designs | find('slug', otherDesignSlug) %}
-			<li><a href="{{ ['designs', (otherDesign.slug | slugify)] | toPath }}/">{{ otherDesign.name | safe }}</a></li>
-			{% endfor -%}
-		</ul>
-	{% endif %}
+		{% if design.note %}
+			<p class="fontStyle-italic fontSize-smaller">{{ design.note | safe }}</p>
+		{% endif %}
+		
+		{% if design.variant %}
+			<h2 class="h3">Variant{% if (design.variant | length) != 1 %}s{% endif %}</h2>
+			<ul class="flow">
+				{%- for variantSlug in design.variant %}
+				{% set variantDesign = designs | find('slug', variantSlug) %}
+				<li><a href="{{ ['designs', (variantDesign.slug | slugify)] | toPath }}/">{{ variantDesign.name | safe }}</a></li>
+				{% endfor -%}
+			</ul>
+		{% endif %}
+		
+		{% if design.similar %}
+			<h2 class="h3">Similar designs</h2>
+			<ul class="flow">
+				{%- for otherDesignSlug in design.similar %}
+				{% set otherDesign = designs | find('slug', otherDesignSlug) %}
+				<li><a href="{{ ['designs', (otherDesign.slug | slugify)] | toPath }}/">{{ otherDesign.name | safe }}</a></li>
+				{% endfor -%}
+			</ul>
+		{% endif %}
 	</div>
-</article>
+</div>
