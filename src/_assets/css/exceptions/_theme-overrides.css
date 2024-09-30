@@ -39,7 +39,7 @@ html[data-theme='dawn'] {
 			background-color: var(--C-canvas);
 		}
 
-		.codeblock {
+		:is(.codeblock, .codeview) {
 			--CODEBLOCK-border-color: var(--C-heading);
 		}
 
@@ -101,7 +101,7 @@ html[data-theme='dusk'] {
 		background-color: var(--C-canvas);
 	}
 
-	.codeblock {
+	:is(.codeblock, .codeview) {
 		--CODEBLOCK-border-color: var(--C-heading);
 	}
 
@@ -177,7 +177,7 @@ html[data-theme='vapor'] {
 		--CODE-bg: var(--C-surface-alt);
 	}
 
-	.codeblock-toolbar-label {
+	:is(.codeblock-toolbar-label, .codeview-toolbar) {
 		color: var(--C-surface-alt);
 	}
 
@@ -467,7 +467,7 @@ html[data-theme='campfire'] {
 		text-shadow: none;
 	}
 
-	.codeblock {
+	:is(.codeblock, .codeview) {
 		--CODEBLOCK-border-color: var(--C-accent-alt);
 	}
 
