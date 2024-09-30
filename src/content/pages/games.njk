@@ -231,7 +231,7 @@ heroCta: [{ label: "Gaming Library", url: "/games/library/" }]
 ---
 
 {% set goatIndicator %}
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="inline-icon | color-accent">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="inline-icon inline-icon--center | color-accent">
     <use xlink:href="#goat-indicator"></use>
 </svg>
 {% endset %}
@@ -270,7 +270,7 @@ heroCta: [{ label: "Gaming Library", url: "/games/library/" }]
                     
                     {% if entry.similar %}
                         <br>
-                        <span class="fontStyle-italic fontSize-smaller">(similar choice{% if (entry.similar | length) > 1 %}s{% endif %}: {{ entry.similar | join(', ') }})</span>
+                        <span class="fontStyle-italic fontSize-smaller">(also check out: {{ entry.similar | join(', ') }})</span>
                     {% endif %}
                 </p>
             </li>

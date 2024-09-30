@@ -62,7 +62,11 @@
         <div class="signoff-message">
             <p class="signoff-title | h4">Hey, I'm <span class="p-given-name">{{ metadata.author.shortname }}</span>, a front-end developer, CSS nerd, and designer.</p>
             <p class="signoff-body">
-                You can find me on <a href="{{ social.mastodon.url }}">{% svg 'mastodon', { class: 'inline-icon inline-icon--middle', ariaHidden: true } %} Mastodon</a>. I've <a href="/designs/">designed some cool apparel</a> if you'd like to check that out. Thanks a ton!
+                You can find me on
+                <a href="{{ social.mastodon.url }}" class="link-label-anchor">
+                    {% svg 'mastodon', { class: 'inline-icon inline-icon--center', ariaHidden: true } %}
+                    <span class="link-label-text">Mastodon</span></a>.
+                I've <a href="/designs/">designed some cool apparel</a> if you'd like to check that out. Thanks a ton!
             </p>
         </div>
     </footer>

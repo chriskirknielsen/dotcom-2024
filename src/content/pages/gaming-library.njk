@@ -42,7 +42,7 @@ platformLabels: {
 {% for platform, games in gameslibrary | groupby('platform') | dictsort | sortentries(platformLabels | keys) %}
     {% set platformSlug = platform | lower | replace(' ', '-') %}
     {% setAsync 'expanderLabel' %}
-        {% svg 'gaming-'+platformSlug, { class: 'gaming-logo inline-icon inline-icon--middle' } %}
+        {% svg 'gaming-'+platformSlug, { class: 'gaming-logo inline-icon' } %}
         {{ platformLabels[platform] }} ({{ games | length }})
     {% endsetAsync %}
     {% expander expanderLabel, true, loop.first %}

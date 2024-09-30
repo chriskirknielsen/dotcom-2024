@@ -1,9 +1,15 @@
 .inline-icon {
-    display: inline-block;
-    block-size: 0.9em;
-    inline-size: auto;
+	--ICON-size: 0.9em;
+	display: inline-block;
+	block-size: var(--ICON-size);
+	inline-size: auto;
 }
 
 .inline-icon--middle {
-    vertical-align: middle;
+	vertical-align: middle;
+}
+.inline-icon--center {
+	vertical-align: calc(0.375em - 0.5 * var(--ICON-size)); /* Fallback */
+	/* Thanks to Roman Komarov: https://blog.kizu.dev/cap-height-align/#known-size-just-vertical-align */
+	vertical-align: calc(0.5cap - 0.5 * var(--ICON-size));
 }
