@@ -15,7 +15,7 @@ class ThemePicker extends HTMLElement {
 
 		// Events handlers
 		this.addEventListener('click', this);
-		this.addEventListener('keyup', this);
+		document.addEventListener('keyup', this);
 	}
 
 	setTheme(theme) {
@@ -77,10 +77,13 @@ class ThemePicker extends HTMLElement {
 		if (e.type === 'keyup') {
 			if (e.key === 'Escape') {
 				const themePickerToggleButton = document.querySelector(`[aria-controls=${this.id}]`);
-				if (themePickerToggleButton) {
+				if (themePickerToggleButton && themePickerToggleButton.getAttribute('aria-pressed') === 'true') {
 					themePickerToggleButton.setAttribute('aria-pressed', 'false');
 					themePickerToggleButton.focus(); // Restore focus to the toggler
 				}
+			} else if (e.key >= 0 && e.key <= this.keys.length) {
+				const pressedDigit = parseInt(e.key, 10);
+				this.querySelectorAll('[data-theme-set]')[pressedDigit]?.click();
 			}
 		}
 	}
