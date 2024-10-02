@@ -500,9 +500,10 @@ html[data-theme='director'] {
 			position: absolute;
 			inset: calc(-1 * var(--frame-size));
 
-			border: var(--frame-size) ridge #696969;
+			border: var(--frame-size) ridge #888888;
 
 			mix-blend-mode: overlay;
+			filter: brightness(0.7);
 		}
 
 		/* Glass reflection effect */
