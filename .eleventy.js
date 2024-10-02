@@ -57,13 +57,12 @@ export default async function (eleventyConfig) {
 				if ((content || '').trim().length === 0) {
 					return content;
 				}
-
 				switch (this.type) {
 					case 'js': {
-						return cachedJsmin(content, `BUCKET:${this.buckets.join('_')}`);
+						return cachedJsmin(content, `BUCKET:${String(this.buckets)}`);
 					}
 					case 'css': {
-						return cachedCssmin(content, `BUCKET:${this.buckets.join('_')}`);
+						return cachedCssmin(content, `BUCKET:${String(this.buckets)}`);
 					}
 					default: {
 						return content;
