@@ -64,3 +64,11 @@ font-style: normal;
 ascent-override: 105%;
             font-display: swap;
         }
+
+        @font-face {
+            font-family: "LibreFranklin";
+            src: local("LibreFranklin"), local("Libre Franklin Extra Bold"), local("Libre Franklin"), url("/assets/fonts/LibreFranklin-ExtraBold.woff2") format("woff2");
+            font-weight: 800;
+font-style: normal;
+            font-display: swap;
+        }
