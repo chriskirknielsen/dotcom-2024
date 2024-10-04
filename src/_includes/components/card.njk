@@ -33,7 +33,7 @@
 		{% if descriptionMarkup %}
 			{{ descriptionMarkup | safe }}
 		{% elseif description %}
-			<p>{{ description | safe }}</p>
+			<p class="textWrap-balance">{{ description | safe }}</p>
 		{% endif %}
 	</div>
 </article>
