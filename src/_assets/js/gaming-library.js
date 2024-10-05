@@ -34,6 +34,10 @@ let msgs = [
 	`Screw it. You win. I'm done.`,
 ];
 let openGame = null;
+const hideOpenGame = () => {
+	openGame = null;
+	document.getElementById('gaming-details-dialog').style.removeProperty('--cover-url');
+};
 
 document.addEventListener('DOMContentLoaded', function (e) {
 	document.querySelector('[data-gaming-toolbar]').hidden = false; // Reveal the toolbar now that JS is enabled
@@ -130,6 +134,7 @@ document.addEventListener('click', function (e) {
 		Array.from(dialog.childNodes).forEach((el) => el.remove());
 		dialog.append(clone);
 		dialog.setAttribute('aria-labelledby', dialogTitleRefId);
+		dialog.style.setProperty('--cover-url', `url(${gameData.boxart.url})`);
 
 		try {
 			dialog.showModal();
@@ -138,10 +143,12 @@ document.addEventListener('click', function (e) {
 		}
 	} else if (e.target.closest('[data-hide-game-info]') || e.target.matches('.gaming-details-dialog')) {
 		const dialog = document.getElementById('gaming-details-dialog');
-		openGame = null;
+		hideOpenGame();
+
 		if (!dialog) {
 			return;
 		}
+
 		try {
 			dialog.close();
 		} catch (error) {
@@ -195,8 +202,9 @@ document.addEventListener('keyup', function (e) {
 	if ((target = document.querySelector('.gaming-details-dialog'))) {
 		// If the dialog was closed via native means (e.g. Esc key), the openGame variable won't be up to date: let's fix that
 		if (!target.matches('[open]')) {
-			openGame = null;
+			hideOpenGame();
 		}
+
 		// If there is no open game, or the user had a modifier key pressed, ignore this event
 		if (!openGame || e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) {
 			return;

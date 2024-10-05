@@ -518,6 +518,15 @@
 
 		animation: none;
 	}
+
+	&::backdrop {
+		padding: 33vh var(--size-xl) var(--size-xl);
+
+		background: conic-gradient(#000a 0 0) border-box, var(--cover-url) no-repeat 50% 100% / contain content-box;
+
+		animation: fadeIn var(--anim-short, 200ms) var(--easing-out, ease-out) 1;
+		animation-name: fadeIn, backdropImage;
+	}
 }
 
 .gaming-details-dialog-inner {
@@ -552,12 +561,6 @@
 :root:has(dialog[open]) {
 	scrollbar-gutter: stable;
 	overflow: hidden;
-}
-
-::backdrop {
-	background: #000a;
-
-	animation: fadeIn var(--anim-short, 200ms) var(--easing-out, ease-out) 1;
 }
 
 .gaming-details-dialog-close {
@@ -678,5 +681,11 @@
 		& > li {
 			font-size: 0.75em;
 		}
+	}
+}
+
+@keyframes backdropImage {
+	from {
+		padding: 0 50% 50%;
 	}
 }
