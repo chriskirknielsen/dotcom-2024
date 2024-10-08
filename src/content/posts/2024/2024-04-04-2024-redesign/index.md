@@ -62,7 +62,7 @@ Oh! Another thing that was missing was the option to revert to the system theme 
 
 I set up the foundation for each design in Figma using variables. Super handy to prototype with, but I didn’t set up a plugin to check contrasts, as I might tweak values in my JSON file, so instead, when I process those tokens, each theme, which has a strictly defined list of either “foreground” or “background” colours, is checked for contrast. Using the excellent [Color.js](https://colorjs.io/) library at built-time, I can check that all the colour tokens have a contrast ratio of at least `4.5`.
 
-If a pair fails, I emit a warning in the console, specifying the associated theme, and build a link to [oddcontrast.com](http://oddcontrast.com) (also excellent, also uses Color.js!) pre-populated with my colours, so that I can quickly make a couple changes and get back on the 4.5+ track, update my tokens file, and look at my update theme to verify it doesn’t look too crappy. That’s a very tight iteration loop for me that I can appreciate. I know this won’t catch 100% of the contrast issues, but it certainly reduces them!
+If a pair fails, I emit a warning in the console, specifying the associated theme, and build a link to [oddcontrast.com](http://oddcontrast.com) (also excellent, also uses Color.js!) pre-populated with my colours, so that I can quickly make a couple changes and get back on the 4.5+ track, update my tokens file, and look at my updated theme to verify it doesn’t look too crappy. That’s a very tight iteration loop for me that I can appreciate. I know this won’t catch 100% of the contrast issues, but it certainly reduces them!
 
 ```txt
 [11ty] Warning: "dusk" theme colors have low contrast: canvas vs text = 1.11 — fix this at https://www.oddcontrast.com/#hsl__hsl(264_45.45~_12.94~)__hsl(240_100~_25.1~)
@@ -130,7 +130,7 @@ eleventyConfig.addFilter('sizeFactor', function (string) {
 
 ### Code-Wrap updates
 
-I wanted to wrap my code blocks in a custom element instead of some hardcoded mess, so this made me update my plugin to allow for this. That way I could use some JS to add the button and all the event handling instead of some weird half-baked stuff that is modified during a post-build Eleventy transform (which works, but is expensive to run on every page!). I can then be a little smart about it and in my main template, add this bit of code to detect a code-wrap closing tag, and if so, I inject the code for the custom element:
+I wanted to wrap my code blocks in a custom element instead of some hardcoded mess, so this made me update my plugin to allow this. That way I could use some JS to add the button and all the event handling instead of some weird half-baked stuff that is modified during a post-build Eleventy transform (which works, but is expensive to run on every page!). I can then be a little smart about it and in my main template, add this bit of code to detect a code-wrap closing tag, and if so, I inject the code for the custom element:
 
 ```njk
 {% raw %}{% if ("</code-wrap>" in content) %}
