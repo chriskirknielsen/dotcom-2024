@@ -81,7 +81,7 @@ class ThemePicker extends HTMLElement {
 					themePickerToggleButton.setAttribute('aria-pressed', 'false');
 					themePickerToggleButton.focus(); // Restore focus to the toggler
 				}
-			} else if (e.key >= 0 && e.key <= this.keys.length) {
+			} else if (e.key >= 0 && e.key <= this.keys.length && !e.target?.closest('input')) {
 				const pressedDigit = parseInt(e.key, 10);
 				this.querySelectorAll('[data-theme-set]')[pressedDigit]?.click();
 			}
