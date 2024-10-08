@@ -6,6 +6,7 @@ tags:
     - javascript
     - css
     - themes
+featured: true
 ---
 
 I’m still seeing some folks use ways to restore a user’s selected theme on websites that are, in my eyes, too complex. Cookies and headers? Delayed render? *Edge functions?* Nah, I’m too lazy for that. One line of JavaScript in the `<head>`:

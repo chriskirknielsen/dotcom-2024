@@ -168,7 +168,7 @@ html[data-js='false'] .header-themepicker {
 			transition-duration: var(--anim-short);
 			transition-timing-function: var(--easing-out);
 
-			/* Fallback above, linear()-anim support below (long animation duration for the bounce to look bouncy */
+			/* Fallback above, linear()-anim support below (long animation duration for the bounce to look bouncy) */
 			@supports (transition: all linear(0, 0.5 1%)) {
 				transition-duration: var(--anim-long);
 				transition-timing-function: var(--easing-bounce);
