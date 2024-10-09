@@ -1,9 +1,27 @@
----
-permalink: /blog/
-title: Bloggy Corner
-summary: I like to write once in a while. Enjoy!
-eleventyComputed:
-    customMetaImage: "{{ ([assets.images, 'metaimage-blog.jpg'] | toPath) }}"
+---js
+{
+    permalink: "/blog/",
+    title: "Bloggy Corner",
+    eleventyComputed: {
+        summary: async function (data) {
+            const hasPostsData = Array.isArray(data?.collections?._posts) && data.collections._posts.length > 0;
+            let textInsert = '';
+
+            if (hasPostsData) {
+                const postsByDate = data.collections._posts.map(p => new Date(p.date)).sort((a, b) => a.getTime() - b.getTime());
+                const firstPostDate = postsByDate[0];
+                const lastPostDate = postsByDate[postsByDate.length - 1];
+                const postDateDelta = lastPostDate.getTime() - firstPostDate.getTime();
+                const msToMonth = postDateDelta / 1000 / 3600 / 24 / (365.25/12);
+                const monthDelta = Math.round(msToMonth / postsByDate.length);
+                textInsert = ` (every ${monthDelta} months on average, it seems)`;
+            }
+
+            return `I like to write once in a while${textInsert}. Enjoy!`;
+        },
+        customMetaImage: "{{ ([assets.images, 'metaimage-blog.jpg'] | toPath) }}"
+    }
+}
 ---
 
 {% component 'postlist', { postlist: collections['_posts'] } %}
