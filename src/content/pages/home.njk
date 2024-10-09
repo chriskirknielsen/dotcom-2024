@@ -215,3 +215,11 @@ summary: "Welcome to the personal website of the one they call Christopher Kirk-
 		{% endif %}
 	{% endfor %}
 </div>
+
+<p>
+	If you want to see all I've written, I have
+	{% component 'cta', {
+		url: '/blog/',
+		label: (collections['_posts'] | length) + ' blogposts'
+	} %} available in the Bloggy Corner!
+</p>
