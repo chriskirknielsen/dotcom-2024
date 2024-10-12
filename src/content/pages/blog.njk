@@ -12,9 +12,24 @@
                 const firstPostDate = postsByDate[0];
                 const lastPostDate = postsByDate[postsByDate.length - 1];
                 const postDateDelta = lastPostDate.getTime() - firstPostDate.getTime();
-                const msToMonth = postDateDelta / 1000 / 3600 / 24 / (365.25/12);
-                const monthDelta = Math.round(msToMonth / postsByDate.length);
-                textInsert = ` (every ${monthDelta} months on average, it seems)`;
+                const monthDelta = postDateDelta / 1000 / 3600 / 24 / (365.25/12); // ms by second / second by hour / hour by day / days by month (on average taking into account leap years)
+                const averagePerMonth = monthDelta / postsByDate.length;
+                const averageInteger = Math.floor(averagePerMonth);
+                const averageDecimal = averagePerMonth - averageInteger;
+                const averageDecimalRounded = parseFloat((Math.round(averageDecimal * 8) / 8).toPrecision(3));
+                let averageDecimalFraction = '';
+                let averageDecimalLabel = '';
+                switch (averageDecimalRounded) {
+                    case 0.125: averageDecimalFraction = '1/8'; averageDecimalLabel = 'an eighth'; break;
+                    case 0.250: averageDecimalFraction = '1/4'; averageDecimalLabel = 'a quarter'; break;
+                    case 0.375: averageDecimalFraction = '3/8'; averageDecimalLabel = 'three eighths'; break;
+                    case 0.500: averageDecimalFraction = '1/2'; averageDecimalLabel = 'a half'; break;
+                    case 0.625: averageDecimalFraction = '5/8'; averageDecimalLabel = 'five eighths'; break;
+                    case 0.750: averageDecimalFraction = '3/4'; averageDecimalLabel = 'three quarters'; break;
+                    case 0.875: averageDecimalFraction = '7/8'; averageDecimalLabel = 'seven eighths'; break;
+                }
+                const averageDecimalFractionMarkup = averageDecimalFraction ? `<span class="visually-hidden">and ${averageDecimalLabel}</span><span aria-hidden="true" style="font-family: system-ui; font-variant-numeric: diagonal-fractions;">${averageDecimalFraction}</span>` : '';
+                textInsert = ` (every ${averageInteger}&thinsp;${averageDecimalFractionMarkup} months on average, it seems)`;
             }
 
             return `I like to write once in a while${textInsert}. Enjoy!`;
