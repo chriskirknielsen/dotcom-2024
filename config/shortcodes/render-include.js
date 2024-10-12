@@ -31,7 +31,7 @@ export default function (eleventyConfig, options = {}) {
 		const cacheKey = filename + '_' + quickHash(JSON.stringify(svgOptions));
 
 		if (cacheSvg && svgCache.hasOwnProperty(cacheKey)) {
-			return Promise.resolve(svgCache[cacheKey]); // Wait for the data, wrapped in a resolved promise in case the original value already was resolved
+			return svgCache[cacheKey]; // Wait for the data
 		}
 
 		const isNjk = svgOptions.isNjk || false; // Expect a simple SVG file by default
