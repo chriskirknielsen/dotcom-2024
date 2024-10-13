@@ -28,7 +28,7 @@
 
     <div class="footer-decorator">
         {% for theme in themes %}
-            {% if not theme.hiddenFooterIllustration %}{% footersvg 'footer-deco-'+theme.key+'.svg', { 'data-theme-condition': theme.key } %}{% endif %}
+            {% footersvg 'footer-deco-'+theme.key+'.svg', { 'data-theme-condition': theme.key } %}
         {% endfor %}
     </div>
 </footer>

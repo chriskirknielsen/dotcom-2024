@@ -1,3 +1,5 @@
+import fs from 'fs';
+import pluginImage from '@11ty/eleventy-img';
 import * as cheerio from 'cheerio';
 
 /**
@@ -86,6 +88,37 @@ export default function (eleventyConfig, options = {}) {
 		}
 
 		return output;
+	});
+
+	/** Render an SVG specially built for the footer section from the SVG assets folder. */
+	eleventyConfig.addAsyncShortcode('footersvg', async function (filename, attrs = {}) {
+		if (svgCache.hasOwnProperty(filename)) {
+			return svgCache[filename]; // Memoize those results
+		}
+
+		const svgSrc = `src/_includes/assets/svg/${filename}`;
+
+		// If the source SVG doesn't exist, return an empty string to bypass errors
+		if (!fs.existsSync(svgSrc)) {
+			const returnValue = '';
+			svgCache[filename] = returnValue;
+			return returnValue;
+		}
+
+		const returnValue = pluginImage(svgSrc, {
+			urlPath: `/assets/svg`,
+			outputDir: `./_site/assets/svg/`,
+			widths: [1200],
+			formats: ['svg'],
+			svgShortCircuit: true,
+			filenameFormat: function (id, src, width, format, options) {
+				return `${filename}.${format}`;
+			},
+		}).then((metadata) => {
+			return pluginImage.generateHTML(metadata, { ...attrs, alt: '', loading: 'lazy', decoding: 'async' }, { pictureAttributes: attrs });
+		});
+		svgCache[filename] = returnValue;
+		return returnValue;
 	});
 
 	/** Render a component from the component folder. */

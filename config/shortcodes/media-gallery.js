@@ -1,5 +1,4 @@
 //* Imports
-import pluginImage from '@11ty/eleventy-img';
 import { toNetlifyImage } from '../utils/image-transforms.js';
 
 function imageGalleryShortcode(pictures, addClass = []) {
@@ -130,20 +129,4 @@ export default function (eleventyConfig, options = {}) {
 	eleventyConfig.addShortcode('image', mediaHandler('image'));
 	eleventyConfig.addShortcode('video', mediaHandler('video'));
 	eleventyConfig.addPairedShortcode('gallery', (pictures) => imageGalleryShortcode(pictures, galleryClasses));
-
-	eleventyConfig.addShortcode('footersvg', async function (src, attrs = {}) {
-		return pluginImage(`src/_includes/assets/svg/${src}`, {
-			urlPath: `/assets/svg`,
-			outputDir: `./_site/assets/svg/`,
-			widths: [1200],
-			formats: ['svg'],
-			svgShortCircuit: true,
-			filenameFormat: function (id, src, width, format, options) {
-				const filename = src.split('/').at(-1).replace('.svg', ''); // Last part of the path, minus the extension (hardcoded because "footersvg" innit)
-				return `${filename}.${format}`;
-			},
-		}).then((metadata) => {
-			return pluginImage.generateHTML(metadata, { ...attrs, alt: '', loading: 'lazy', decoding: 'async' }, { pictureAttributes: attrs });
-		});
-	});
 }
