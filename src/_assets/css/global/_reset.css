@@ -86,11 +86,6 @@ textarea:not([rows]) {
 	min-height: 10em;
 }
 
-/* Anything that has been anchored to should have extra scroll margin */
-:target {
-	scroll-margin-block: 5ex;
-}
-
 /* Interactive elements should look interactive */
 a,
 button,
