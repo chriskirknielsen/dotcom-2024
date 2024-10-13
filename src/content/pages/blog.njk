@@ -20,16 +20,16 @@
                 let averageDecimalFraction = '';
                 let averageDecimalLabel = '';
                 switch (averageDecimalRounded) {
-                    case 0.125: averageDecimalFraction = '1/8'; averageDecimalLabel = 'an eighth'; break;
-                    case 0.250: averageDecimalFraction = '1/4'; averageDecimalLabel = 'a quarter'; break;
-                    case 0.375: averageDecimalFraction = '3/8'; averageDecimalLabel = 'three eighths'; break;
-                    case 0.500: averageDecimalFraction = '1/2'; averageDecimalLabel = 'a half'; break;
-                    case 0.625: averageDecimalFraction = '5/8'; averageDecimalLabel = 'five eighths'; break;
-                    case 0.750: averageDecimalFraction = '3/4'; averageDecimalLabel = 'three quarters'; break;
-                    case 0.875: averageDecimalFraction = '7/8'; averageDecimalLabel = 'seven eighths'; break;
+                    case 0.125: averageDecimalFraction = '&frac18;'; averageDecimalLabel = 'an eighth'; break;
+                    case 0.250: averageDecimalFraction = '&frac14;'; averageDecimalLabel = 'a quarter'; break;
+                    case 0.375: averageDecimalFraction = '&frac38;'; averageDecimalLabel = 'three eighths'; break;
+                    case 0.500: averageDecimalFraction = '&frac12;'; averageDecimalLabel = 'a half'; break;
+                    case 0.625: averageDecimalFraction = '&frac58;'; averageDecimalLabel = 'five eighths'; break;
+                    case 0.750: averageDecimalFraction = '&frac34;'; averageDecimalLabel = 'three quarters'; break;
+                    case 0.875: averageDecimalFraction = '&frac78;'; averageDecimalLabel = 'seven eighths'; break;
                 }
-                const averageDecimalFractionMarkup = averageDecimalFraction ? `<span class="visually-hidden">and ${averageDecimalLabel}</span><span aria-hidden="true" style="font-family: system-ui; font-variant-numeric: diagonal-fractions;">${averageDecimalFraction}</span>` : '';
-                textInsert = ` (every ${averageInteger}&thinsp;${averageDecimalFractionMarkup} months on average, it seems)`;
+                const averageDecimalFractionMarkup = averageDecimalFraction ? `&thinsp;<span class="visually-hidden">and ${averageDecimalLabel}</span><span aria-hidden="true">${averageDecimalFraction}</span>` : '';
+                textInsert = ` (every ${averageInteger}${averageDecimalFractionMarkup} months on average, it seems)`;
             }
 
             return `I like to write once in a while${textInsert}. Enjoy!`;
