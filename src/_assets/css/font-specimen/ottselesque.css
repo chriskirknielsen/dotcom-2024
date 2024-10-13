@@ -23,6 +23,8 @@
 	--corner: 0.5rem;
 	--filter-rough: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='0' height='0'%3E%3Cdefs%3E%3Cfilter id='svgfm-filter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.075 0.15' numOctaves='2 1' stitchTiles='stitch' result='feTurbulence-b16342c6'%3E%3C/feTurbulence%3E%3CfeDisplacementMap in='SourceGraphic' in2='feTurbulence-b16342c6' scale='5' xChannelSelector='R' yChannelSelector='G'%3E%3C/feDisplacementMap%3E%3C/filter%3E%3C/defs%3E%3C/svg%3E#svgfm-filter");
 	--filter-bevel: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='0' height='0'%3E%3Cdefs%3E%3Cfilter id='bevelsoft' filterUnits='objectBoundingBox' x='-10%25' y='-10%25' width='120%25' height='120%25'%3E%3CfeGaussianBlur in='SourceAlpha' result='blur' stdDeviation='0.5'%3E%3C/feGaussianBlur%3E%3CfeSpecularLighting in='blur' specularConstant='1' specularExponent='10' result='specOut' lighting-color='%23ff8800' surfaceScale='20'%3E%3CfePointLight y='-5000' z='0' x='000'%3E%3C/fePointLight%3E%3C/feSpecularLighting%3E%3CfeComposite in='specOut' in2='SourceAlpha' operator='in' result='specOut2'%3E%3C/feComposite%3E%3CfeComposite in='SourceGraphic' in2='specOut2' operator='arithmetic' k1='0' k2='1' k3='1' k4='0' result='litPaint'%3E%3C/feComposite%3E%3C/filter%3E%3C/defs%3E%3C/svg%3E#bevelsoft");
+
+	scrollbar-color: var(--palette-02) color-mix(in hsl, var(--bg-main), var(--bg-alt));
 }
 
 @media screen and (min-width: calc(960px + 2rem * 4)) {

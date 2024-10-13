@@ -19,6 +19,8 @@
 	--bg-alt: var(--palette-03);
 	--link: var(--palette-07);
 	--link-active: var(--palette-06);
+
+	scrollbar-color: var(--palette-02) color-mix(in hsl, var(--bg-main), var(--bg-alt));
 }
 
 h2::before {
