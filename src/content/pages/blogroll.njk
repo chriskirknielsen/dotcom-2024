@@ -55,7 +55,8 @@ blogroll: {
             "type": "rss",
             "xmlUrl": "https://www.bram.us/feed/",
             "htmlUrl": "https://www.bram.us",
-            "rssfr-favicon": "https://icons.feedercdn.com/www.bram.us"
+            "rssfr-favicon": "https://icons.feedercdn.com/www.bram.us",
+            "favicon-dark": true
         },
         {
             "title": "Cassidy Williams",
@@ -127,6 +128,7 @@ blogroll: {
             "xmlUrl": "https://henry.codes/feed.xml",
             "htmlUrl": "https://henry.codes",
             "rssfr-favicon": "https://icons.feedercdn.com/henry.codes",
+            "favicon-dark": true,
             "blurb": "As cool kids say: goals"
         },
         {
@@ -135,6 +137,7 @@ blogroll: {
             "xmlUrl": "http://www.heydonworks.com/feed",
             "htmlUrl": "http://www.heydonworks.com",
             "rssfr-favicon": "https://icons.feedercdn.com/www.heydonworks.com",
+            "favicon-dark": true,
             "blurb": "Don't miss Webbed Briefs"
         },
         {
@@ -170,7 +173,8 @@ blogroll: {
             "type": "rss",
             "xmlUrl": "https://kayserifserif.place/feed.xml",
             "htmlUrl": "https://kayserifserif.place/",
-            "rssfr-favicon": "https://icons.feedercdn.com/kayserifserif.place"
+            "rssfr-favicon": "https://icons.feedercdn.com/kayserifserif.place",
+            "favicon-dark": true
         },
         {
             "title": "Keith J. Grant",
@@ -486,7 +490,8 @@ blogroll: {
                     {% if blog.blurb %}data-tooltip-pos="start center"{% endif %}
                 >
                     {%- if blog['rssfr-favicon'] %}
-                        <img src="{{ blog['rssfr-favicon'] | toCloudinary('c_fill,w_32,h_32/q_auto:eco') }}" width="32" height="32" alt="" {% if not isFirstLoop or loop.index > 24 %}loading="lazy"{% endif %}>
+                        {%- set faviconbg %}{% if blog['favicon-dark'] %},b_white{% endif %}{% endset -%}
+                        <img src="{{ blog['rssfr-favicon'] | toCloudinary('c_fill,w_32,h_32'+faviconbg+'/q_auto:eco') }}" width="32" height="32" alt="" {% if not isFirstLoop or loop.index > 24 %}loading="lazy"{% endif %}>
                     {% endif %}
                     <span class="link-label-text">{{ blog.title }}</span>
                     {%- if blog.blurb -%}<span class="tooltip-content">{{ blog.blurb }}</span>{%- endif -%}
