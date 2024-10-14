@@ -174,7 +174,7 @@ export default function (eleventyConfig, options) {
 			});
 
 		return Promise.all([tokens.then(styles), scripts(), fontFace]).then((pipelines) => {
-			console.log('\x1b[33m%s\x1b[0m', `[11ty] Ran eleventy.before in ${(performance.now() - beforeStart).toFixed(1)}ms`);
+			console.log(`\x1b[30m[11ty] \x1b[35mRan eleventy.before in ${(performance.now() - beforeStart).toFixed(1)}ms\x1b[0m`);
 			return pipelines;
 		});
 	});

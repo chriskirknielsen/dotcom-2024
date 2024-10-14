@@ -114,8 +114,7 @@ export default function (string) {
 						const fgToHsl = colorToHsl(themeColors[fg]);
 						const link = `https://www.oddcontrast.com/#hsl__hsl(${bgToHsl[0]}_${bgToHsl[1]}~_${bgToHsl[2]}~)__hsl(${fgToHsl[0]}_${fgToHsl[1]}~_${fgToHsl[2]}~)`;
 						console.log(
-							'\x1b[33m%s\x1b[0m',
-							`[11ty] Warning: "${themeKey}" theme colors have low contrast: ${bg} vs ${fg} = ${contrast.toFixed(2)} — fix this at ${link}`
+							`\x1b[30m[11ty] \x1b[33mWarning: "${themeKey}" theme colors have low contrast: ${bg} vs ${fg} = ${contrast.toFixed(2)} — fix this at ${link}\x1b[0m`
 						);
 					}
 				}

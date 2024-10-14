@@ -54,13 +54,13 @@ export default async function (settings) {
 		// If the cached last edit matches the live last edit, return the cached database contents and stop here
 		if (dbLastEdit === cacheLastEdit) {
 			const dbCache = await dbDataCache.getCachedContents('json');
-			console.log(apiLabel + ': Found and reused cached data.');
+			console.log(`\x1b[30m[11ty] \x1b[37mAPI Cache — \x1b[34m${apiLabel}: Found and reused cached data.\x1b[0m`);
 			return dbCache;
 		}
 	}
 
 	// We don't have data we can use, call the full APIs and cache the data
-	console.log(apiLabel + ': Empty or stale cache, fetching latest data.');
+	console.log(`\x1b[30m[11ty] \x1b[37mAPI Cache — \x1b[36m${apiLabel}: Empty or stale cache, fetching latest data.\x1b[0m`);
 	const dbData = await getData(dbInfo);
 
 	// If this did change, save the new last edit date value after we know that the database access was successful
