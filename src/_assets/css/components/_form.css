@@ -48,7 +48,7 @@
 	}
 }
 
-:is(form, [data-formlike]) :is(input, select, select) {
+:is(form, [data-formlike]) :is(input, select) {
 	line-height: 1;
 	accent-color: var(--C-accent);
 }
