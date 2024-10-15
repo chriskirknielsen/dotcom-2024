@@ -174,7 +174,7 @@ hr {
 
 /* Interactives and reusables styles */
 :target {
-	scroll-margin: 5rem;
+	scroll-margin-block: 5ex;
 }
 
 @media (prefers-reduced-motion: no-preference) {
