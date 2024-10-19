@@ -20,7 +20,9 @@
 
         <p>
             <strong class="p-name">{{ metadata.author.name }}</strong>
-            &copy; <span aria-label="{{ metadata.currentYear }}">{{ metadata.currentYear | toRomanNumeral }}</span>
+            &copy;
+            <span class="visually-hidden">{{ metadata.currentYear }}</span>
+            <span aria-hidden="true">{{ metadata.currentYear | toRomanNumeral }}</span>
             &mdash;
             100% human-made.
         </p>

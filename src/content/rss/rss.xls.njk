@@ -122,13 +122,28 @@ permalink: /rss.xsl
                         display: block;
                         font-size: 0.875em;
                     }
+
+                    .visually-hidden {
+                        position: absolute;
+                        inline-size: 1px;
+                        block-size: 0;
+                        margin: 0;
+                        padding: 0;
+                        overflow: hidden;
+
+                        white-space: nowrap;
+                        border: 0;
+
+                        clip: rect(0 0 0 0);
+                    }
                 </style>
             </head>
             <body>
                 <header>
                     <h1>
-                        <span class="chris" aria-label="Christopher">CH<span>R</span>I<span>S</span>TOPHER</span>
-                        <span class="kn" aria-label="Kirk-Nielsen">KIRK-NIEL<span>S</span>EN</span>
+                        <span class="visually-hidden">Christopher Kirk-Nielsen</span>
+                        <span class="chris" aria-hidden="true">CH<span>R</span>I<span>S</span>TOPHER</span>
+                        <span class="kn" aria-hidden="true">KIRK-NIEL<span>S</span>EN</span>
                     </h1>
 
                     <p>Thank you for checking out my RSS feed! Hope you’ll enjoy your stay.</p>

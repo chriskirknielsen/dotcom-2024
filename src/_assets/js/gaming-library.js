@@ -103,9 +103,10 @@ document.addEventListener('click', function (e) {
 		clone.querySelector('[data-slot-checkbox="completed"]').setAttribute('data-clean-value', String(gameData.completed));
 		clone.querySelector('[data-slot-computed="subItems"]').innerHTML =
 			gameData.subItems.length > 0
-				? `<ul aria-label="Included games">${gameData.subItems
-						.map(
-							(s) => `<li class="gaming-details-subitem">
+				? `<h3 class="visually-hidden" id="gaming-library-subitems-heading">Included games</h3>
+				<ul aria-labelledby="gaming-library-subitems-heading">${gameData.subItems
+					.map(
+						(s) => `<li class="gaming-details-subitem">
 								<p class="gaming-details-subitem-main">
 									<input type="checkbox" aria-hidden="true" ${s.completed ? 'checked' : ''} readonly class="gaming-details-subitem-checkbox">
 									<span class="gaming-details-subitem-label">
@@ -115,8 +116,8 @@ document.addEventListener('click', function (e) {
 								</p>
 								${s.trophyEarned ? toTrophyList(s.trophyEarned, trophySvgId) : ''}
 							</li>`
-						)
-						.join('')}</ul>`
+					)
+					.join('')}</ul>`
 				: '';
 		if (gameData.trophyIcon) {
 			const iconHeight = parseInt(clone.querySelector('[data-slot-img="trophyIcon"]').getAttribute('height'), 10);
