@@ -12,8 +12,8 @@ import { AssetCache } from '@11ty/eleventy-fetch';
  */
 export default async function (settings) {
 	const apiLabel = settings.label;
-	const infoApiLabel = `${apiLabel}_info`;
-	const dataApiLabel = `${apiLabel}_data`;
+	const infoApiLabel = `${apiLabel}-info`;
+	const dataApiLabel = `${apiLabel}-data`;
 	const skipLocalCache = settings.skipLocalCache || false;
 	let infoDateMarkers = settings.infoDateMarkers;
 	if (infoDateMarkers.length === 0) {
@@ -28,8 +28,12 @@ export default async function (settings) {
 	const getInfoMarker = (info) => info[infoDateMarkers.find((m) => info.hasOwnProperty(m) && info[m])] || '';
 
 	// Initialise the asset caches
-	const dbInfoCache = new AssetCache(infoApiLabel);
-	const dbDataCache = new AssetCache(dataApiLabel);
+	const cacheConfig = {
+		hashLength: 8,
+		filenameFormat: (key, hash) => `11tycache-${key}-${hash}`,
+	};
+	const dbInfoCache = new AssetCache(infoApiLabel, null, cacheConfig);
+	const dbDataCache = new AssetCache(dataApiLabel, null, cacheConfig);
 
 	// Local dev: allow complete bypass
 	if (skipLocalCache) {

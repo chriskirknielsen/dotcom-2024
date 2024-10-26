@@ -15,7 +15,7 @@ export default async function () {
 
 	// Get the cache data, and if missing or stale, provide the complete data query logic
 	const cachedData = apiCache({
-		label: 'psn-api.js',
+		label: 'psn-api',
 		infoDateMarkers: ['lastUpdatedDateTime'],
 		getInfo: async () => getUserTitles({ accessToken: authorization.accessToken }, 'me', { limit: 1 }).then((t) => t.trophyTitles[0]),
 		getData: async function (dbInfo) {

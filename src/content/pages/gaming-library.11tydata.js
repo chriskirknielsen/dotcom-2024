@@ -15,7 +15,7 @@ const regions = {
 
 const gameslibrary = await notionDatabaseQuery({
 	databaseId: process.env.NOTION_DATABASE_ID_LUDOTHEQUE,
-	label: 'gameslibrary.js',
+	label: 'games-library',
 	propsToUse: ['Title', 'Sort Title', 'PSN ID', 'Edition', 'Platform', 'Region', 'DLC', 'Completed', 'Discs', 'Year', 'Parent item', 'Sub-item', 'Thumbnail', 'Boxart'],
 	filter: {
 		and: [
@@ -151,7 +151,7 @@ const gameslibrary = await notionDatabaseQuery({
 					});
 				item.subItems = processedSubItem;
 				// If all items have the same checked value, we can use that as a parent-level completion indicator, or else use a null to indicate an indeterminate state
-				item.completed = totalCompletion.every((c) => c === totalCompletion.at(0)) ? totalCompletion.at(0) : null;
+				item.completed = new Set(totalCompletion).size === 1 ? totalCompletion.at(0) : null;
 			}
 
 			// We only want to show top-level items, so we can reject sub-items if their have a non-empty parentItem value

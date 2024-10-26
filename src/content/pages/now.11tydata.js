@@ -55,7 +55,7 @@ function richTextBlockToMd(block) {
 
 const now = await notionDatabaseQuery({
 	databaseId: process.env.NOTION_DATABASE_ID_NOW,
-	label: 'now.js',
+	label: 'slash-now',
 	propsToUse: ['title', 'detail', 'blurb', 'category', 'link', 'image'],
 	filter: {
 		and: [
