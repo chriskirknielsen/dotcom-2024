@@ -19,6 +19,7 @@ main {
 	font-feature-settings: var(--_font-heading-features);
 	font-size-adjust: var(--_font-heading-size-adjust);
 	text-shadow: var(--_font-heading-shadow);
+	text-wrap: balance;
 
 	&:has(a:hover) {
 		text-shadow: none;

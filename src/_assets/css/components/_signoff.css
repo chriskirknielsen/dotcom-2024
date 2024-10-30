@@ -40,3 +40,7 @@
 .signoff-title {
 	color: var(--_signoff-heading-color);
 }
+
+.signoff-body {
+	text-wrap: balance;
+}
