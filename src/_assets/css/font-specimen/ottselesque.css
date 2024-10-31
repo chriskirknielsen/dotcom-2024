@@ -154,13 +154,14 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 	text-decoration: none;
 }
 
-.sentence-sample {
+.styled-specimen {
+	--s: 0.008125em; /* Shadow offset */
 	background: linear-gradient(#fce164, #e18c47);
 	-webkit-text-fill-color: transparent;
 	-webkit-background-clip: text;
 	background-clip: text;
 
-	filter: drop-shadow(1px 1px 0 #300602) drop-shadow(1px 1px 0px #30060280);
+	filter: drop-shadow(var(--s) var(--s) 0 #300602) drop-shadow(var(--s) var(--s) 0 #30060280);
 }
 
 .sentence-sample {
