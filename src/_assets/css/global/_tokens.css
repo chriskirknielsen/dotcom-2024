@@ -116,7 +116,6 @@
 --T-cyberpunk: var(--OFF);
 --T-campfire: var(--OFF);
 --T-director: var(--OFF);
---T-secret: var(--OFF);
 
 	}
 	@media screen and (prefers-color-scheme: light) {
@@ -364,37 +363,6 @@ html[data-theme="director"] {
 				--font-heading-family: TeXGyreAdventor, ITC Avant-Garde Gothic,Avenir,Montserrat,Corbel,URW Gothic,source-sans-pro, system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
 --font-body-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
 			}
-html[data-theme="secret"] {
-				--T-secret: var(--ON);
-				--color-scheme: dark;
-				--corner: 0px;
---shadow-color: 350deg 60% 10%;
---stroke-linecap: square;
---main-background: linear-gradient(90deg, transparent, var(--C-heading), transparent) no-repeat 50% 0 / 100% 1px, radial-gradient(100% 100% at 50% -25%, #2e0f12, transparent) no-repeat 50% 0% / 100% min(100%, max(800px, min(50%, 50vh)));
---footer-special-char: '🔪';
---font-heading-size-adjust: 0.552;
---font-heading-transform: uppercase;
---cta-text-color: var(--C-text);
---cta-border-color: var(--C-accent);
---cta-bg-color: var(--C-surface-alt);
---cta-bg-color-active: var(--C-surface-alt);
---cta-text-color-active: var(--C-accent-alt);
---cta-text-color-pressed: var(--C-heading);
---cta-bg-color-pressed: var(--C-surface-alt);
---cta-border-color-pressed: var(--C-text);
---card-text-color: var(--C-text);
---card-border-color-active: var(--C-accent-alt);
-				--C-canvas: #0b0b0c;
---C-surface: #1f0c0e;
---C-text: #d6e2de;
---C-heading: #c12d02;
---C-accent: #e63600;
---C-inactive: #a96060;
---C-surface-alt: #202525;
---C-accent-alt: #f35820;
-				--font-heading-family: LibreFranklin, Franklin,source-sans-pro, system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;--font-heading-weight: 800;--font-heading-style: normal;
---font-body-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-			}
 	@custom-media --small-viewport (width <= 576px);
 	@custom-media --large-viewport (width > 576px);
 	@custom-media --toc-side (min-width: calc(960px + 2 * 300px)) and (min-height: 500px);
@@ -424,7 +392,5 @@ html[data-theme="secret"] {
 		}html[data-theme]:not([data-theme='campfire']) [data-theme-condition='campfire'] {
 			display: none !important;
 		}html[data-theme]:not([data-theme='director']) [data-theme-condition='director'] {
-			display: none !important;
-		}html[data-theme]:not([data-theme='secret']) [data-theme-condition='secret'] {
 			display: none !important;
 		}
