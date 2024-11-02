@@ -42,5 +42,7 @@
 }
 
 .signoff-body {
+	margin-block-start: 0.25em;
+
 	text-wrap: balance;
 }
