@@ -41,7 +41,7 @@
 		{% endif %}
 
 		{% if design.note %}
-			<p class="fontStyle-italic fontSize-smaller">{{ design.note | safe }}</p>
+			<p class="fontStyle-italic fontSize-smaller">{{ design.note | markdown(true) | safe }}</p>
 		{% endif %}
 		
 		{% if design.variant %}

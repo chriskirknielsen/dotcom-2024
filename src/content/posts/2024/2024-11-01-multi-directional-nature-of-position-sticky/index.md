@@ -13,4 +13,4 @@ So you can set `top` and `bottom`, or if there's horizontal scroll, `left` and `
 
 {% codepen "https://codepen.io/chriskirknielsen/pen/YzmvNbd" %}
 
-I knew you could set in each axis (`top` and `left` for example), but never tried both sides of the same axis. Cool stuff!
+I knew you could set one for each axis (`top` and `left` for example), but never tried both sides of the same axis. Cool stuff!

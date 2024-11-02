@@ -35,7 +35,12 @@ summary: A collection of posters and shirt designs I've made, available across m
 			<li class="card-wrapper" id="{{ design.slug }}"
 				data-tags="{{ design.tags | join(',') }}"
 				aria-hidden="false"
-				{% if enableViewTransitions %}style="view-transition-name:{{ design.slug }}"{% endif %}
+				{% if enableViewTransitions or design.accent -%}
+					style="
+						{%- if enableViewTransitions %}view-transition-name:{{ design.slug }};{% endif -%}
+						{%- if design.accent %}--CARD-accent:{{ design.accent }};{% endif -%}
+					"
+				{%- endif %}
 			>
 			{% set designPermalink = '/designs/' + design.slug + '/' %}
 			{% setAsync 'designVariant' -%}
@@ -89,6 +94,8 @@ summary: A collection of posters and shirt designs I've made, available across m
 		</div>
 	</template>
 </filtered-tiles>
+
+<p class="textAlign-center fontStyle-italic">Note: this is not an exhaustive list, more designs are available in each shop!</p>
 
 {% if not metadata.nakedJs %}
 <script>

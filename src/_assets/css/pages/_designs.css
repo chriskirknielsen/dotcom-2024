@@ -15,7 +15,7 @@
 		@media (--accept-motion) {
 			& > a:has(> img[src*='.png']) {
 				&::before {
-					--CARD-img-bg-color: var(--C-accent);
+					--CARD-img-bg-color: var(--CARD-accent, var(--C-accent));
 
 					content: '';
 

@@ -12,6 +12,7 @@ const designs = [
 		},
 		tags: ['dev', 'www', 'css', 'vhs', 'retro'],
 		date: '2021-03-17',
+		accent: '#dc313f',
 	},
 	{
 		slug: 'vhs-html',
@@ -26,6 +27,7 @@ const designs = [
 		},
 		tags: ['dev', 'www', 'html', 'vhs', 'retro'],
 		date: '2021-03-17',
+		accent: '#e46670',
 	},
 	{
 		slug: 'vhs-svg',
@@ -40,6 +42,7 @@ const designs = [
 		},
 		tags: ['dev', 'www', 'svg', 'vhs', 'retro'],
 		date: '2021-08-11',
+		accent: '#e4313e',
 	},
 	{
 		slug: 'vhs-js',
@@ -55,6 +58,7 @@ const designs = [
 		tags: ['dev', 'www', 'js', 'vhs', 'retro'],
 		date: '2021-08-11',
 		variant: ['vhs-js-dark'],
+		accent: '#9f4a7e',
 	},
 	{
 		showInGallery: false,
@@ -70,6 +74,7 @@ const designs = [
 		tags: ['dev', 'www', 'js', 'vhs', 'retro'],
 		date: '2022-11-20',
 		variant: ['vhs-js'],
+		accent: '#9f4a7e',
 	},
 	{
 		slug: 'vhs-a11y',
@@ -84,6 +89,7 @@ const designs = [
 		},
 		tags: ['dev', 'www', 'vhs', 'retro'],
 		date: '2024-05-18',
+		accent: '#9f6386',
 	},
 	{
 		slug: 'vhs-www',
@@ -97,6 +103,7 @@ const designs = [
 		},
 		tags: ['dev', 'www', 'vhs', 'retro'],
 		date: '2022-03-20',
+		accent: '#ee6366',
 	},
 	{
 		slug: 'retro-css',
@@ -110,6 +117,7 @@ const designs = [
 		},
 		tags: ['dev', 'css', 'retro'],
 		date: '2020-09-17',
+		accent: '#ca2186',
 	},
 	{
 		slug: 'css-fact-sheet',
@@ -125,6 +133,36 @@ const designs = [
 		date: '2020-09-17',
 	},
 	{
+		slug: 'css-logo-solid',
+		name: 'CSS Logo (solid)',
+		description: `CSS is awesome.`,
+		note: `For a mug with the design on both sides, use RedBubble. Note this uses [my custom CSS logo](/css-logo) that sadly didn't make the cut as a candidate for a [new official CSS logo](https://github.com/CSS-Next/css-next/issues/105)!`,
+		img: 'css-logo-solid.png',
+		links: {
+			TeePublic: 'https://www.teepublic.com/sticker/67983005-css-logo-solid',
+			RedBubble: 'https://www.redbubble.com/i/sticker/CSS-Logo-solid-by-ckirknielsen/166040147.EJUG5',
+		},
+		tags: ['dev', 'css'],
+		date: '2024-11-02',
+		variant: ['css-logo-transparent'],
+		accent: '#663399',
+	},
+	{
+		slug: 'css-logo-transparent',
+		name: 'CSS Logo (transparent)',
+		description: `CSS is awesome.`,
+		note: `For a mug with the design on both sides, use RedBubble. Note this uses [my custom CSS logo](/css-logo) that sadly didn't make the cut as a candidate for a [new official CSS logo](https://github.com/CSS-Next/css-next/issues/105)!`,
+		img: 'css-logo-transparent.png',
+		links: {
+			TeePublic: 'https://www.teepublic.com/sticker/67983004-css-logo-transparent',
+			RedBubble: 'https://www.redbubble.com/i/sticker/CSS-Logo-transparent-by-ckirknielsen/166040244.EJUG5',
+		},
+		tags: ['dev', 'css'],
+		date: '2024-11-02',
+		variant: ['css-logo-solid'],
+		showInGallery: false,
+	},
+	{
 		slug: 'duotype-css',
 		name: 'Radical Duotype CSS',
 		description: 'Represent CSS with radical double-typography style!',
@@ -136,6 +174,7 @@ const designs = [
 		},
 		tags: ['dev', 'css'],
 		date: '2022-11-06',
+		accent: '#3ec0b2',
 	},
 	{
 		slug: 'duotype-semantic-markup',
@@ -149,6 +188,7 @@ const designs = [
 		},
 		tags: ['dev', 'html'],
 		date: '2022-11-06',
+		accent: '#3ec0b2',
 	},
 	{
 		slug: 'clean-cache',
@@ -161,6 +201,7 @@ const designs = [
 		},
 		tags: ['dev', 'tv-movies'],
 		date: '2024-09-29',
+		accent: '#fb79c0',
 	},
 	{
 		slug: 'legacy-code',
@@ -173,6 +214,7 @@ const designs = [
 		},
 		tags: ['dev', 'tv-movies'],
 		date: '2024-09-29',
+		accent: '#ff2100',
 	},
 	{
 		slug: 'git-revert',
@@ -186,6 +228,7 @@ const designs = [
 		tags: ['dev', 'tv-movies'],
 		date: '2024-09-29',
 		variant: ['git-reset-hard'],
+		accent: '#fe5e19',
 	},
 	{
 		slug: 'git-reset-hard',
@@ -200,6 +243,7 @@ const designs = [
 		date: '2024-09-29',
 		variant: ['git-revert'],
 		showInGallery: false,
+		accent: '#fe5e19',
 	},
 	{
 		slug: 'www-explorer',
@@ -214,6 +258,7 @@ const designs = [
 		},
 		tags: ['dev', 'www', 'retro'],
 		date: '2022-03-14',
+		accent: '#361681',
 	},
 	{
 		slug: 'vaporwave-css',
@@ -227,6 +272,7 @@ const designs = [
 		},
 		tags: ['dev', 'css', 'retro'],
 		date: '2022-05-15',
+		accent: '#552eaf',
 	},
 	{
 		slug: 'control',
@@ -240,6 +286,7 @@ const designs = [
 		tags: ['games'],
 		date: '2021-10-23',
 		variant: ['control-service-weapon'],
+		accent: '#ed0703',
 	},
 	{
 		slug: 'god-of-war',
@@ -252,6 +299,7 @@ const designs = [
 		tags: ['games'],
 		date: '2021-10-23',
 		variant: ['god-of-war-leviathan-axe'],
+		accent: '#439c9c',
 	},
 	{
 		slug: 'deathloop',
@@ -264,6 +312,7 @@ const designs = [
 		tags: ['games'],
 		date: '2021-12-31',
 		variant: ['deathloop-fourpounder'],
+		accent: '#e9521d',
 	},
 	{
 		slug: 'dead-space',
@@ -276,6 +325,7 @@ const designs = [
 		tags: ['games'],
 		date: '2022-01-23',
 		variant: ['dead-space-plasma-cutter'],
+		accent: '#06e4d8',
 	},
 	{
 		slug: 'jak-daxter-powercell-hunters',
@@ -290,6 +340,7 @@ const designs = [
 		tags: ['games'],
 		date: '2021-08-09',
 		similar: ['crash-bandicoot-wumpa-hoarder', 'sly-cooper-gentleman-thief'],
+		accent: '#c59567',
 	},
 	{
 		slug: 'crash-bandicoot-wumpa-hoarder',
@@ -304,6 +355,7 @@ const designs = [
 		tags: ['games'],
 		date: '2021-11-14',
 		similar: ['jak-daxter-powercell-hunters', 'sly-cooper-gentleman-thief'],
+		accent: '#d09236',
 	},
 	{
 		showInGallery: false,
@@ -362,6 +414,7 @@ const designs = [
 		},
 		tags: ['tv-movies'],
 		date: '2022-04-24',
+		accent: '#f052b3',
 	},
 	{
 		slug: 'twin-pines-mall',
@@ -376,6 +429,7 @@ const designs = [
 		tags: ['tv-movies'],
 		date: '2022-11-19',
 		variant: ['lone-pine-mall'],
+		accent: '#019342',
 	},
 	{
 		showInGallery: false,
@@ -391,6 +445,7 @@ const designs = [
 		tags: ['tv-movies'],
 		date: '2022-11-19',
 		variant: ['twin-pines-mall'],
+		accent: '#019342',
 	},
 	{
 		slug: 'it-crowd-four-five-fire',
@@ -404,6 +459,7 @@ const designs = [
 		},
 		tags: ['tv-movies'],
 		date: '2022-05-09',
+		accent: '#e8c025',
 	},
 	{
 		slug: 'cartridge-world',
@@ -416,6 +472,7 @@ const designs = [
 		},
 		tags: ['games'],
 		date: '2023-05-20',
+		accent: '#824aad',
 	},
 	{
 		slug: 'css-retro-vhs',
@@ -429,6 +486,7 @@ const designs = [
 		tags: ['dev', 'css', 'vhs', 'retro'],
 		similar: ['js-retro-vhs', 'html-retro-vhs', 'react-retro-vhs'],
 		date: '2021-12-24',
+		accent: '#d6307f',
 	},
 	{
 		slug: 'js-retro-vhs',
@@ -442,6 +500,7 @@ const designs = [
 		tags: ['dev', 'js', 'vhs', 'retro'],
 		similar: ['css-retro-vhs', 'html-retro-vhs', 'react-retro-vhs'],
 		date: '2022-03-01',
+		accent: '#3c8ee0',
 	},
 	{
 		slug: 'html-retro-vhs',
@@ -455,6 +514,7 @@ const designs = [
 		tags: ['dev', 'html', 'vhs', 'retro'],
 		similar: ['css-retro-vhs', 'js-retro-vhs', 'react-retro-vhs'],
 		date: '2024-05-14',
+		accent: '#eba66f',
 	},
 	{
 		slug: 'react-retro-vhs',
@@ -469,6 +529,7 @@ const designs = [
 		tags: ['dev', 'js', 'vhs', 'retro'],
 		similar: ['html-retro-vhs', 'css-retro-vhs', 'js-retro-vhs'],
 		date: '2024-07-19',
+		accent: '#9bf4eb',
 	},
 	{
 		slug: 'kevin-powell-grid',
@@ -482,6 +543,7 @@ const designs = [
 		tags: ['dev', 'css', 'vhs', 'retro'],
 		similar: ['kevin-powell-css', 'kevin-powell-color-space'],
 		date: '2023-12-31',
+		accent: '#30b2b2',
 	},
 	{
 		slug: 'kevin-powell-css',
@@ -495,6 +557,7 @@ const designs = [
 		tags: ['dev', 'css', 'vhs', 'retro'],
 		similar: ['kevin-powell-grid', 'kevin-powell-color-space'],
 		date: '2023-12-31',
+		accent: '#f0a135',
 	},
 	{
 		slug: 'kevin-powell-color-space',
@@ -508,6 +571,7 @@ const designs = [
 		tags: ['dev', 'css', 'vhs', 'retro'],
 		similar: ['kevin-powell-color-space', 'kevin-powell-css'],
 		date: '2023-12-31',
+		accent: '#43b1a5',
 	},
 
 	// Below are designs that are hidden but still accessible via their unique URL
