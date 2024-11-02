@@ -12,10 +12,9 @@
 		}
 	},
 	eleventyComputed: {
-		permalink: "designs/{{ design.slug | slugify }}/",
-		pageTitle: "{{ design.name | safe }}",
-		title: "{{ design.name | safe }}",
-		summary: "{{ design.description | safe }}",
+		permalink: function (data) { return `designs/${this.slugify(data.design.slug)}/`; },
+		pageTitle: (data) => data.design.name,
+		title: (data) => data.design.name,
 		summary: (data) => data.design.description,
 		customMetaImage: (data) => `/${data.assets.images}/designs/${data.design.img}`,
 		date: (data) => new Date(data.design.date),

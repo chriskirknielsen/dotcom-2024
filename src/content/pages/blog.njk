@@ -2,6 +2,7 @@
 {
     permalink: "/blog/",
     title: "Bloggy Corner",
+    metaDescriptionOverride: "I like to write once in a while. Enjoy!",
     eleventyComputed: {
         summary: async function (data) {
             const hasPostsData = Array.isArray(data?.collections?._posts) && data.collections._posts.length > 0;
@@ -34,7 +35,7 @@
 
             return `I like to write once in a while${textInsert}. Enjoy!`;
         },
-        customMetaImage: "{{ ([assets.images, 'metaimage-blog.jpg'] | toPath) }}"
+        customMetaImage: function (data) { return this.toPath([data.assets.images, 'metaimage-blog.jpg']); }
     }
 }
 ---

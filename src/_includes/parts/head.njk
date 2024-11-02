@@ -20,8 +20,8 @@
 <meta property="og:title" content="{{ title }} | {{ metadata.title }}">
 <meta property="og:site_name" content="{{ metadata.title }}">
 {% if summary %}
-<meta name="description" content="{{ metaDescriptionOverride or summary }}">
-<meta name="og:description" content="{{ metaDescriptionOverride or summary }}">
+<meta name="description" content="{{ (metaDescriptionOverride or summary) | striptags }}">
+<meta name="og:description" content="{{ (metaDescriptionOverride or summary) | striptags }}">
 {% endif %}
 <meta property="og:locale" content="{{ metadata.lang }}">
 <meta property="og:type" content="{% if section == 'post' %}article{% else %}website{% endif %}">
