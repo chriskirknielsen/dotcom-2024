@@ -15,7 +15,7 @@
 	}
 }
 
-:is(form, [data-formlike]) :is(input:where([type='text'], [type='number'], [type='search']), select, textarea, select),
+:is(form, [data-formlike]) :is(input:where([type='text'], [type='number'], [type='search']), select, textarea),
 [data-inputlike] {
 	padding: var(--size-2xs) var(--size-s);
 
@@ -31,6 +31,51 @@
 	&:disabled {
 		cursor: not-allowed;
 	}
+}
+
+.button.button--select {
+	--SELECT-arrow-size: 0.75em;
+	--SELECT-arrow-gap: var(--size-xs);
+
+	pointer-events: none;
+
+	padding: 0;
+	padding-inline-end: 0;
+
+	&::after {
+		content: '';
+
+		position: absolute;
+		inset: 0 0 0 auto;
+
+		display: inline-block;
+		block-size: var(--SELECT-arrow-size);
+		inline-size: calc(var(--SELECT-arrow-size) + 2 * var(--SELECT-arrow-gap));
+		margin: auto 0 auto auto;
+
+		background-color: currentColor;
+		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+		mask-repeat: no-repeat;
+		mask-size: contain;
+		mask-position: center;
+	}
+}
+.button.button--select > select {
+	padding: var(--CTA-padding);
+	padding-inline-end: calc(var(--SELECT-arrow-size) + 2 * var(--SELECT-arrow-gap));
+
+	appearance: none;
+	pointer-events: auto;
+
+	color: inherit;
+	border: none;
+	background: transparent;
+}
+
+.form-label-wrap {
+	display: flex;
+	align-items: baseline;
+	gap: 0.25em;
 }
 
 [data-inputlike='wrap'] {

@@ -49,7 +49,7 @@
 		}
 	}
 
-	&:is(:hover, :focus-visible) {
+	&:is(:hover, :focus-visible, :has(:focus-visible)) {
 		--CTA-text-color: var(--_cta-text-color-active);
 		--CTA-bg-color: var(--_cta-bg-color-active);
 		--CTA-border-color: var(--_cta-border-color-active);
