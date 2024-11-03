@@ -8,11 +8,14 @@
         },
     },
     CSS_VER_NUM: 4,
+    CSS_HUE: 270,
+    CSS_OKLCH_HUE: 303.37,
 }
 ---
-
+{% set designSolid = designs | find('slug', 'css-logo-solid') %}
+{% set designTransparent = designs | find('slug', 'css-logo-transparent') %}
 <p>
-    I've had this idea for a new logo for CSS that would riff off of the famous "CSS is Awesome" meme. You could easily add a version number in the corner as well. It's not official by any means but maybe it's good enough to use? You tell me.
+    I've had this idea for a new logo for CSS that would riff off of the famous "CSS is Awesome" meme. There's room for add a version number in the corner as well. It's not official by any means (<a href="https://github.com/CSS-Next/css-next/issues/105">the CSS Working Group decided on a logo</a>) but maybe it's good enough to use? You tell me. I've made this available on my apparel stores (both <a href="/designs/{{ designSolid.slug }}/">solid</a> and <a href="/designs/{{ designTransparent.slug }}/">transparent</a> variants).
 </p>
 
 <div class="fifty-fifty">
@@ -55,7 +58,7 @@
 
                     <label for="css-logo-hue-control" class="visually-hidden">Logo Hue</label>
                     <div data-inputlike="wrap" data-csslogo-control-area="colorHue" style="--control-area: --col-slider;">
-                        <input id="css-logo-hue-control" type="range" min="0" max="360" value="278" step="5" data-csslogo-control="colorHue">
+                        <input id="css-logo-hue-control" type="range" min="0" max="360" value="{{ CSS_HUE }}" step="5" data-csslogo-control="colorHue">
                     </div>
 
                     {% component 'cta', {
@@ -167,9 +170,9 @@
         <style>
         {% set cssLogoFormStyle %}
             .css-logo {
-                --css-alpha: hsl(var(--css-hue, 278.1), 100%, 97.8%);
-                --css-omega: hsl(var(--css-hue, 278.1), 68.4%, 29.8%);
-                --css-alpha: hsl(278.1, 100%, 97.8%);
+                --css-alpha: hsl(var(--css-hue, {{ CSS_HUE }}), 100%, 97.8%);
+                --css-omega: hsl(var(--css-hue, {{ CSS_HUE }}), 68.4%, 29.8%);
+                --css-alpha: hsl({{ CSS_HUE }}, 100%, 97.8%);
 
                 block-size: auto;
                 inline-size: 100%;
@@ -180,8 +183,8 @@
 
             @supports (color: oklch(1% 0 0)) {
                 .css-logo {
-                    --css-alpha: oklch(97.52% 0.017 calc(309.2 - 278.1 + var(--css-hue, 278.1)));
-                    --css-omega: oklch(37.38% 0.164 calc(309.2 - 278.1 + var(--css-hue, 278.1)));
+                    --css-alpha: oklch(97.52% 0.017 calc({{ CSS_OKLCH_HUE }} - {{ CSS_HUE }} + var(--css-hue, {{ CSS_HUE }})));
+                    --css-omega: oklch(37.38% 0.164 calc({{ CSS_OKLCH_HUE }} - {{ CSS_HUE }} + var(--css-hue, {{ CSS_HUE }})));
                 }
             }
 
@@ -320,7 +323,7 @@
         </style>
 
         <h2 class="css-logo-usage">Want to use it?</h2>
-        <p>Although appreciated, you don't need to credit me to use this for anything non-commercial: just don't claim you made it, is all I ask. Thank you!</p>
+        <p>Although appreciated, you don't need to credit me to use this for anything non-commercial (as I am selling <a href="/designs/{{ designSolid.slug }}/">this design</a> on apparel) and non-AI: just don't claim you made it, is all I ask. Thank you!</p>
 
         <div class="tooltip" data-tooltip-pos="start center">
             <p class="grouper grouper--wrap">
