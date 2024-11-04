@@ -48,8 +48,18 @@
 			<h2 class="h3">Variant{% if (design.variant | length) != 1 %}s{% endif %}</h2>
 			<ul class="flow">
 				{%- for variantSlug in design.variant %}
-				{% set variantDesign = designs | find('slug', variantSlug) %}
-				<li><a href="{{ ['designs', (variantDesign.slug | slugify)] | toPath }}/">{{ variantDesign.name | safe }}</a></li>
+					{% set variantDesign = designs | find('slug', variantSlug) %}
+					<li>
+						<a href="{{ ['designs', (variantDesign.slug | slugify)] | toPath }}/">
+							<span class="tooltip" data-tooltip-flow="inline" data-tooltip-pos="start center">
+								{{ variantDesign.name | safe }}
+
+								<span class="tooltip-content">
+									<img src="{{ [assets.images, 'designs', variantDesign.img] | toPath | toNetlifyImage({ w: 150 }) }}" alt="" width="150" height="150">
+								</span>
+							</span>
+						</a>
+					</li>
 				{% endfor -%}
 			</ul>
 		{% endif %}
@@ -58,8 +68,18 @@
 			<h2 class="h3">Similar designs</h2>
 			<ul class="flow">
 				{%- for otherDesignSlug in design.similar %}
-				{% set otherDesign = designs | find('slug', otherDesignSlug) %}
-				<li><a href="{{ ['designs', (otherDesign.slug | slugify)] | toPath }}/">{{ otherDesign.name | safe }}</a></li>
+					{% set otherDesign = designs | find('slug', otherDesignSlug) %}
+					<li>
+						<a href="{{ ['designs', (otherDesign.slug | slugify)] | toPath }}/">
+							<span class="tooltip" data-tooltip-flow="inline" data-tooltip-pos="start center">
+								{{ otherDesign.name | safe }}
+
+								<span class="tooltip-content">
+									<img src="{{ [assets.images, 'designs', otherDesign.img] | toPath | toNetlifyImage({ w: 150 }) }}" alt="" width="150" height="150">
+								</span>
+							</span>
+						</a>
+					</li>
 				{% endfor -%}
 			</ul>
 		{% endif %}

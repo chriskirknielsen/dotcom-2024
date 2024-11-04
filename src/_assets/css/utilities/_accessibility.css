@@ -62,6 +62,10 @@
 	position: relative;
 	display: flex; /* We can't use display:contents as we need the position:relative effect, so flex will ensure the tooltip element wraps around its content nice and snug */
 
+	&[data-tooltip-flow='inline'] {
+		display: inline;
+	}
+
 	/* Position in the BLOCK then INLINE directions, or both at once (start center, end, center end…) */
 	&[data-tooltip-pos^='end'] {
 		--TOOLTIP-block-start: var(--TOOLTIP-inset-block);
