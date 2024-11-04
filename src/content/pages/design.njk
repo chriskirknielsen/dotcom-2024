@@ -55,7 +55,7 @@
 								{{ variantDesign.name | safe }}
 
 								<span class="tooltip-content">
-									<img src="{{ [assets.images, 'designs', variantDesign.img] | toPath | toNetlifyImage({ w: 150 }) }}" alt="" width="150" height="150">
+									<img src="{{ [assets.images, 'designs', variantDesign.img] | toPath | toNetlifyImage({ w: 150 }) }}" alt="" width="150" height="150" loading="lazy">
 								</span>
 							</span>
 						</a>
@@ -75,7 +75,7 @@
 								{{ otherDesign.name | safe }}
 
 								<span class="tooltip-content">
-									<img src="{{ [assets.images, 'designs', otherDesign.img] | toPath | toNetlifyImage({ w: 150 }) }}" alt="" width="150" height="150">
+									<img src="{{ [assets.images, 'designs', otherDesign.img] | toPath | toNetlifyImage({ w: 150 }) }}" alt="" width="150" height="150" loading="lazy">
 								</span>
 							</span>
 						</a>

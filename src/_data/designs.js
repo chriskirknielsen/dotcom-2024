@@ -174,6 +174,7 @@ const designs = [
 		},
 		tags: ['dev', 'css'],
 		date: '2022-11-06',
+		similar: ['duotype-semantic-markup'],
 		accent: '#3ec0b2',
 	},
 	{
@@ -188,6 +189,7 @@ const designs = [
 		},
 		tags: ['dev', 'html'],
 		date: '2022-11-06',
+		similar: ['duotype-css'],
 		accent: '#3ec0b2',
 	},
 	{
