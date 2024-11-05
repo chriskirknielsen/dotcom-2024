@@ -337,6 +337,10 @@ html[data-theme='cyberpunk'] {
 		block-size: 10px;
 		background: linear-gradient(135deg, var(--C-accent-alt) 50%, transparent 0), linear-gradient(180deg, var(--C-accent-alt) 50%, transparent 0);
 	}
+
+	.announcement :any-link {
+		--LINK-color: var(--C-canvas);
+	}
 }
 
 @keyframes cyberpunkCta {

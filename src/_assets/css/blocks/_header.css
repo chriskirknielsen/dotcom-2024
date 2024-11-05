@@ -393,3 +393,17 @@ html[data-js='false'] .header-themepicker {
 		box-shadow: 0 0 0 100vmax var(--C-canvas);
 	}
 }
+
+.announcement {
+	grid-column: --fullbleed;
+	padding: var(--size-2xs) var(--size-m);
+
+	font-size: var(--typeScale-n2);
+	color: var(--C-canvas);
+	background: var(--C-heading);
+
+	& :any-link:is(:hover, :focus-visible) {
+		--LINK-color: var(--C-surface);
+		--LINK-underline-color: var(--C-text);
+	}
+}
