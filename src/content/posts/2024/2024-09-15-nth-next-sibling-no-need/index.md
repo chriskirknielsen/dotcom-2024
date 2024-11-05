@@ -33,3 +33,5 @@ By the way, if we wanted to do the same for the previous siblings of `.el`, the 
 ```css
 li:nth-last-child(-n + 2 of *:has(~ .el)) { background: yellow; }
 ```
+
+PS: As [CSS magician Roman points out](https://blog.kizu.dev/recent-css-bookmarks-018/#:~:text=I%C2%A0disagree%20with%20the%20title), we could benefit from a true `:nth-sibling` selector (there's a [CSSWG issue](https://github.com/w3c/csswg-drafts/issues/3813)); my post title would be better worded as "No need… for my specific use-case!" but I always welcome more superpowers in CSS!
