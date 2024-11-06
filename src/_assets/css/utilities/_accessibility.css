@@ -21,7 +21,7 @@
 
 .visually-hidden,
 .skip-link:not(:focus),
-.tooltip:not(:hover, :focus-within) > .tooltip-content {
+.tooltip:not(:hover, :focus-visible, :has(:focus-visible)) > .tooltip-content {
 	position: absolute;
 	width: 1px;
 	height: 0;
@@ -56,83 +56,102 @@
 
 .tooltip {
 	--TOOLTIP-arrow-size: var(--size-xs);
-	--TOOLTIP-offset-block: var(--_tooltip-offset-block, var(--size-2xs));
-	--TOOLTIP-inset-block: calc(100% + var(--TOOLTIP-arrow-size) + var(--TOOLTIP-offset-block));
+	--TOOLTIP-offset: var(--_tooltip-offset, var(--size-2xs));
+	--TOOLTIP-inset-block: calc(100% + var(--TOOLTIP-arrow-size) + var(--TOOLTIP-offset));
 
 	position: relative;
 	display: flex; /* We can't use display:contents as we need the position:relative effect, so flex will ensure the tooltip element wraps around its content nice and snug */
 
 	&[data-tooltip-flow='inline'] {
-		display: inline;
+		display: inline-flex;
 	}
 
 	/* Position in the BLOCK then INLINE directions, or both at once (start center, end, center end…) */
-	&[data-tooltip-pos^='end'] {
-		--TOOLTIP-block-start: var(--TOOLTIP-inset-block);
-		--TOOLTIP-block-end: auto;
-		--TOOLTIP-arrow-y: -50%;
-	}
+	&[data-tooltip-pos*='start center'] {
+		--TOOLTIP-block: auto var(--TOOLTIP-inset-block);
+		--TOOLTIP-arrow-y: 50%;
+		--TOOLTIP-arrow-margin-block: auto 0;
 
+		--TOOLTIP-inline: 50%;
+		--TOOLTIP-translate-x: -50%;
+		--TOOLTIP-arrow-margin-inline: auto;
+	}
+	&[data-tooltip-pos*='start end'] {
+		--TOOLTIP-block: auto var(--TOOLTIP-inset-block);
+		--TOOLTIP-arrow-y: 50%;
+		--TOOLTIP-arrow-margin-block: auto 0;
+
+		--TOOLTIP-inline: auto 0;
+		--TOOLTIP-arrow-x: -100%;
+		--TOOLTIP-arrow-margin-inline: auto 0;
+	}
+	/* &[data-tooltip-pos^='start'] {
+		--TOOLTIP-block: auto var(--TOOLTIP-inset-block);
+		--TOOLTIP-arrow-y: 50%;
+		--TOOLTIP-arrow-margin-block: auto 0;
+	}
+	&[data-tooltip-pos^='end'] {
+		--TOOLTIP-block: var(--TOOLTIP-inset-block) auto;
+		--TOOLTIP-arrow-y: -50%;
+		--TOOLTIP-arrow-margin-block: 0 auto;
+	}
 	&[data-tooltip-pos^='center'] {
 		--TOOLTIP-block: 50%;
+		--TOOLTIP-translate-y: -50%;
+		--TOOLTIP-arrow-margin-block: auto;
 	}
 
+	&[data-tooltip-pos$='start'] {
+		--TOOLTIP-inline: 0 auto;
+		--TOOLTIP-arrow-x: 100%;
+		--TOOLTIP-arrow-margin-inline: 0 auto;
+	}
 	&[data-tooltip-pos$='end'] {
 		--TOOLTIP-inline: auto 0;
+		--TOOLTIP-arrow-x: -100%;
+		--TOOLTIP-arrow-margin-inline: auto 0;
 	}
-
 	&[data-tooltip-pos$='center'] {
 		--TOOLTIP-inline: 50%;
 		--TOOLTIP-translate-x: -50%;
-	}
+		--TOOLTIP-arrow-margin-inline: auto;
+	} */
 
-	&::before,
 	& > .tooltip-content {
-		pointer-events: none; /* Prevents hiding other content below the tooltip */
+		&,
+		&::before {
+			pointer-events: none; /* Prevents hiding other content below the tooltip */
 
-		position: absolute;
-		inset-block: var(--TOOLTIP-block-start, auto) var(--TOOLTIP-block-end, var(--TOOLTIP-inset-block));
+			position: absolute;
 
-		display: block;
-		margin: auto;
+			display: block;
+			margin: auto;
 
-		color: var(--C-surface);
-		background-color: var(--C-text);
-	}
-
-	@media (--accept-motion) {
-		&:is(:hover, :focus-within)::before,
-		&:is(:hover, :focus-within) > .tooltip-content {
-			transition: transform var(--easing-in-out) 200ms;
-			animation: fadeIn var(--easing-in-out) 200ms;
+			color: var(--C-surface);
+			background-color: var(--C-text);
 		}
 	}
 
-	&::before {
-		content: '';
-		z-index: 1;
+	@media (--accept-motion) {
+		&:is(:hover, :focus-visible, :has(:focus-visible)) > .tooltip-content {
+			animation: fadeIn var(--easing-in-out) 200ms;
 
-		inset-inline: 0;
-
-		width: var(--TOOLTIP-arrow-size);
-		height: var(--TOOLTIP-arrow-size);
-
-		transform: scale(0) translateY(var(--TOOLTIP-arrow-y, 50%)) rotate(45deg);
-	}
-
-	&:is(:hover, :focus-within)::before {
-		transform: scale(1) translateY(var(--TOOLTIP-arrow-y, 50%)) rotate(45deg);
+			&,
+			&::before {
+				transition: transform var(--easing-in-out) 200ms;
+			}
+		}
 	}
 
 	& > .tooltip-content {
 		z-index: 2;
+		inset-block: var(--TOOLTIP-block);
 		inset-inline: var(--TOOLTIP-inline, 0 auto);
 
 		width: auto;
 		width: max-content;
 		max-width: 20ch;
 		height: auto;
-		padding: 0 var(--size-2xs);
 
 		font-size: 0.75rem;
 		font-family: var(--_font-body-family);
@@ -140,6 +159,77 @@
 		text-align: center;
 		border-radius: var(--_corner);
 
-		transform: translateX(var(--TOOLTIP-translate-x, 0%));
+		transform: translate(var(--TOOLTIP-translate-x, 0%), var(--TOOLTIP-translate-y, 0%));
+
+		&:not(:has(img:only-child)) {
+			padding-inline: var(--size-2xs);
+		}
+
+		&::before {
+			content: '';
+
+			inset: 0;
+			z-index: -1;
+
+			width: var(--TOOLTIP-arrow-size);
+			height: var(--TOOLTIP-arrow-size);
+			margin-block: var(--TOOLTIP-arrow-margin-block, auto);
+			margin-inline: var(--TOOLTIP-arrow-margin-inline, auto);
+
+			transform: scale(var(--TOOLTIP-arrow-scale, 0)) translate(var(--TOOLTIP-arrow-x, 0%), var(--TOOLTIP-arrow-y, 0%)) rotate(45deg);
+		}
+	}
+
+	&:is(:hover, :focus-visible, :has(:focus-visible)) > .tooltip-content::before {
+		--TOOLTIP-arrow-scale: 1;
 	}
 }
+
+/* @supports (anchor-name: --a) and (position-anchor: --a) and (top: anchor(top)) {
+	.tooltip {
+		&:is(:hover, :focus-visible, :has(:focus-visible)) {
+			anchor-name: --tooltip;
+		}
+
+		&[data-tooltip-pos] {
+			--TOOLTIP-translate-x: 0%;
+			--TOOLTIP-translate-y: 0%;
+		}
+
+		\/&[data-tooltip-pos*='start center'] {
+			--TOOLTIP-block: auto calc(anchor(start) + var(--TOOLTIP-offset));
+			--TOOLTIP-inline: anchor(center);
+			--TOOLTIP-translate-x: -50%;
+		}
+		\/&[data-tooltip-pos*='start end'] {
+			--TOOLTIP-block: auto calc(anchor(start) + var(--TOOLTIP-offset));
+			--TOOLTIP-inline: auto anchor(end);
+			position-try-fallbacks: inline-flip;
+		}
+		&[data-tooltip-pos^='start'] {
+			--TOOLTIP-block: auto calc(anchor(start) - var(--TOOLTIP-offset));
+		}
+		&[data-tooltip-pos^='end'] {
+			--TOOLTIP-block: calc(anchor(end) + var(--TOOLTIP-offset)) auto;
+		}
+		&[data-tooltip-pos^='center'] {
+			--TOOLTIP-block: auto;
+		}
+		&[data-tooltip-pos$='start'] {
+			--TOOLTIP-inline: auto calc(anchor(start) - var(--TOOLTIP-offset));
+		}
+		&[data-tooltip-pos$='end'] {
+			--TOOLTIP-inline: calc(anchor(end) + var(--TOOLTIP-offset)) auto;
+		}
+		&[data-tooltip-pos$='center'] {
+			--TOOLTIP-inline: auto;
+		}
+
+		& > .tooltip-content {
+			position: fixed;
+			position-anchor: --tooltip;
+
+			margin: 0;
+		}
+	}
+} */

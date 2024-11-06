@@ -10,7 +10,7 @@ blogroll: {
             "xmlUrl": "https://adrianroselli.com/feed",
             "htmlUrl": "https://adrianroselli.com",
             "rssfr-favicon": "https://icons.feedercdn.com/adrianroselli.com",
-            "blurb": "Accessibility nerd"
+            "blurb": "Nerds out on accessibility"
         },
         {
             "title": "Ahmad Shadeed",
@@ -480,7 +480,7 @@ blogroll: {
 {% for group, blogs in blogroll %}
     {% set isFirstLoop = loop.first %}
     <h2 data-blogroll="{{ group }}">{{ group }} &times;{{ blogs | length }}</h2>
-    <ul class="blogroll" style="--_tooltip-offset-block: -0.5rem;">
+    <ul class="blogroll" style="--_tooltip-offset: 0px;">
         {% for blog in blogs | sort(false, false, 'title') %}
             <li class="blogroll-item">
                 <a
