@@ -37,7 +37,7 @@
 		{% include 'parts/header.njk' %}
 
 		<main class="main | container flow" id="content" {% if lang %}lang="{{ lang }}"{% endif %}tabindex="-1">
-			{% set announcement = "🇺🇸 [Vote for Democracy](https://vote.org) 🇺🇸" %}
+			{% set announcement = false %}
 			{% if announcement %}
 				<div class="announcement"><p class="textWrap-balance textAlign-center">{{ announcement | markdown(true) | safe }}</p></div>
 			{% endif %}
