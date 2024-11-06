@@ -168,8 +168,8 @@
 		animation-name: fadeIn, resetTransform, unblur;
 		animation-timing-function: var(--easing-out);
 		animation-duration: var(--anim-eternity);
-		animation-fill-mode: both, forwards;
-		animation-delay: calc(var(--anim-short) + var(--d, 0) * var(--anim-delay) * var(--f, 2));
+		animation-fill-mode: both;
+		animation-delay: calc(200ms + var(--anim-short) + var(--d, 0) * var(--anim-delay) * var(--f, 2));
 	}
 
 	[data-name-part='last'] {
