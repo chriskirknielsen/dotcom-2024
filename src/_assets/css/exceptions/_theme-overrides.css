@@ -446,7 +446,9 @@ html[data-theme='campfire'] {
 		position: relative;
 
 		border-color: transparent;
-		background-image: radial-gradient(circle at 50% calc(10px), var(--CALLOUT-nail)), radial-gradient(circle at 50% calc(100% - 10px), var(--CALLOUT-nail));
+		background-image: radial-gradient(circle at 50% calc((var(--CALLOUT-padding) * 0.75)), var(--CALLOUT-nail)),
+			radial-gradient(circle at 50% calc(100% - (var(--CALLOUT-padding) * 0.75)), var(--CALLOUT-nail)),
+			linear-gradient(var(--C-heading) calc(var(--CALLOUT-padding) * 0.25), transparent 0);
 		background-repeat: no-repeat;
 		box-shadow: var(--_shadow);
 
