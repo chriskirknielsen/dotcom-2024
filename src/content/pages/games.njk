@@ -231,7 +231,7 @@ heroCta: [{ label: "Gaming Library", url: "/games/library/" }]
 ---
 
 {% set goatIndicator %}
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="inline-icon inline-icon--center | color-accent">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="inline-icon inline-icon--center | color-accent | goat-indicator-instance">
     <use xlink:href="#goat-indicator"></use>
 </svg>
 {% endset %}
@@ -280,7 +280,24 @@ heroCta: [{ label: "Gaming Library", url: "/games/library/" }]
 
 <svg xmlns="http://www.w3.org/2000/svg" class="visually-hidden" width="0" height="0">
     <defs>
+        <style>
+        @media (prefers-reduced-motion: reduce) {
+            #goat-indicator-outline { display: none; }
+        }
+        #goat-indicator,
+        .goat-indicator-instance {
+            overflow: visible;
+        }
+        #goat-indicator-outline {
+            transform-origin: 50% 50%;
+            animation: goatPulse 3s ease-out infinite;
+        }
+        @keyframes goatPulse {
+            50%, 100% { transform: scale(1.75); opacity: 0; }
+        }
+        </style>
         <symbol id="goat-indicator" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" id="goat-indicator-outline" fill="transparent" />
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
         </symbol>
     </defs>
