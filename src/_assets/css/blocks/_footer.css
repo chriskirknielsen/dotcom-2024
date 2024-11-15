@@ -29,28 +29,26 @@
 	z-index: 3;
 
 	margin-block: var(--size-2xl);
+}
 
-	/* text-align: center; */
+.footer-nav {
+	--RULE: 3px;
+	--GAP: 0.5rem;
 
-	& > nav {
-		--RULE: 3px;
-		--GAP: 0.5rem;
+	position: relative;
 
-		position: relative;
+	padding-inline-start: calc(var(--RULE) + var(--size-m));
 
-		padding-inline-start: calc(var(--RULE) + var(--size-m));
+	&::before {
+		content: '';
+		position: absolute;
+		inset-block: var(--GAP);
+		inset-inline-start: 0;
 
-		&::before {
-			content: '';
-			position: absolute;
-			inset-block: var(--GAP);
-			inset-inline-start: 0;
+		inline-size: var(--RULE);
 
-			inline-size: var(--RULE);
-
-			border-radius: calc(var(--_corner));
-			background: currentColor;
-		}
+		border-radius: calc(var(--_corner));
+		background: currentColor;
 	}
 }
 
@@ -66,5 +64,27 @@
 
 	img[width='1'][height='1'] {
 		display: none;
+	}
+}
+
+@media (--large-viewport) {
+	.footer:has(.footer-message) {
+		display: grid;
+		grid-template-columns: auto minmax(6em, 33%); /* The left side should take up most of the space, while the right, only about 33%*/
+		grid-template-areas:
+			'--navig --badge'
+			'--metap --badge';
+		align-items: center;
+		gap: var(--size-m);
+	}
+
+	.footer-nav {
+		grid-area: --navig;
+	}
+	.footer-meta {
+		grid-area: --metap;
+	}
+	.footer-message {
+		grid-area: --badge;
 	}
 }
