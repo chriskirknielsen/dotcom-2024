@@ -33,10 +33,10 @@ class CyclingExpander extends HTMLElement {
 
 		// Find the fallbck
 		const contentWrap = this.querySelector('[data-expander="content"]');
-		this.outputContainer = this.spawn('p', {
+		this.outputContainer = this.spawn('div', {
 			className: contentWrap.className,
 			hidden: true,
-			innerHTML: `<span data-item="emoji" aria-hidden="true">&nbsp;</span>&ensp;<span data-item="content">&nbsp;</span>`,
+			innerHTML: `<p data-item="wrap"><span data-item="emoji" aria-hidden="true">&nbsp;</span>&ensp;<span data-item="content">&nbsp;</span></p>`,
 		});
 
 		// Populate the newly created elements
@@ -77,6 +77,7 @@ class CyclingExpander extends HTMLElement {
 				this.outputContainer.hidden = false;
 				this.blockDiv.setAttribute('data-open', 'true');
 			}
+			const wrapEl = this.outputContainer.querySelector('[data-item="wrap"]');
 			const emojiEl = this.outputContainer.querySelector('[data-item="emoji"]');
 			const contentEl = this.outputContainer.querySelector('[data-item="content"]');
 
@@ -94,7 +95,16 @@ class CyclingExpander extends HTMLElement {
 			if (!prefersReducedMotion && document.startViewTransition && this.currentItemIndex > -1) {
 				document.startViewTransition(() => setContent());
 			} else {
-				setContent();
+				if (contentEl.innerText.length <= 1 || prefersReducedMotion) {
+					setContent();
+				} else {
+					// Fallback animation
+					const time = 150;
+					const anims = wrapEl.animate({ opacity: [1, 0], translate: ['0 0', '0 0.25em'] }, { duration: time, iterations: 1, easing: 'ease-in' }).finished;
+					anims
+						.then(() => setContent())
+						.then(() => wrapEl.animate({ opacity: [0, 1], translate: ['0 -0.25em', '0 0'] }, { duration: time, iterations: 1, easing: 'ease-out' }).finished);
+				}
 			}
 		});
 	}
