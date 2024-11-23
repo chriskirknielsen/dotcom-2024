@@ -54,6 +54,9 @@ class CyclingExpander extends HTMLElement {
 		// Keep track of which item is currently displayed
 		this.currentItemIndex = -1;
 
+		// Change the duration of the transition animation
+		this.transitionTime = 200;
+
 		// Disable root view transition
 		if (document.startViewTransition) {
 			const noAnimRootStyle = this.spawn('style', {
@@ -63,7 +66,9 @@ class CyclingExpander extends HTMLElement {
 					// Ensure the button stays clickable by disabling pointer events on transition snapshots
 					`::view-transition, ::view-transition-group(root) { pointer-events: none !important; }` +
 					// Simple trick to keep aspect ratio acceptable from https://jakearchibald.com/2024/view-transitions-handling-aspect-ratio-changes/
-					`::view-transition-old(content), ::view-transition-new(content) { height: 100%; object-fit: none; overflow: clip; }`,
+					`::view-transition-old(content), ::view-transition-new(content) { height: 100%; object-fit: none; overflow: clip; }` +
+					// Set the transition duration
+					`::view-transition-group(emoji), ::view-transition-group(content) { animation-duration: ${this.transitionTime}ms; }`,
 			});
 			document.head.append(noAnimRootStyle);
 		}
@@ -89,7 +94,6 @@ class CyclingExpander extends HTMLElement {
 			const setContent = () => {
 				emojiEl.innerText = newItemData[0];
 				contentEl.innerText = newItemData[1];
-				this.currentItemIndex = newItemIndex; // Using modulo above, we cycle between all values and fall back to zero, so users can't click a bazillion times and exceed the MAX_INTEGER value (better safe than sorry I guess!)
 			};
 
 			if (!prefersReducedMotion && document.startViewTransition && this.currentItemIndex > -1) {
@@ -99,13 +103,20 @@ class CyclingExpander extends HTMLElement {
 					setContent();
 				} else {
 					// Fallback animation
-					const time = 150;
-					const anims = wrapEl.animate({ opacity: [1, 0], translate: ['0 0', '0 0.25em'] }, { duration: time, iterations: 1, easing: 'ease-in' }).finished;
-					anims
-						.then(() => setContent())
-						.then(() => wrapEl.animate({ opacity: [0, 1], translate: ['0 -0.25em', '0 0'] }, { duration: time, iterations: 1, easing: 'ease-out' }).finished);
+					wrapEl.getAnimations().forEach((a) => a.finish());
+					const animOut = wrapEl.animate(
+						{ opacity: [1, 0], translate: ['0 0', '0 0.25em'] },
+						{ duration: this.transitionTime, iterations: 1, easing: 'ease-in' }
+					).finished;
+					const animIn = wrapEl.animate(
+						{ opacity: [0, 1], translate: ['0 -0.25em', '0 0'] },
+						{ delay: this.transitionTime, duration: this.transitionTime, iterations: 1, easing: 'ease-out' }
+					).finished;
+
+					animOut.then(() => setContent());
 				}
 			}
+			this.currentItemIndex = newItemIndex; // Using modulo above, we cycle between all values and fall back to zero, so users can't click a bazillion times and exceed the MAX_INTEGER value (better safe than sorry I guess!)
 		});
 	}
 }
