@@ -29,13 +29,13 @@
 	}
 
 	& > figure {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 
 		& > :is(picture, img, a) {
 			flex-grow: 1;
 		}
-
 		& > figcaption {
 			padding: var(--size-xs) var(--size-s);
 
@@ -44,12 +44,24 @@
 			color: var(--C-text);
 			background-color: var(--C-surface-alt, var(--C-surface));
 		}
+
+		/* Keep all the figures at a 1:1 aspect ratio by absolutely positioning the caption at the end */
+		&:not(:only-child) > figcaption {
+			position: absolute;
+			inset-block-end: 0;
+			inset-inline: 0;
+		}
 	}
 
 	& > :is(figure, picture, a, img, video) {
 		inline-size: 100%;
 		max-inline-size: calc(var(--layout-max-content) * 0.8);
 		overflow: hidden;
+	}
+
+	/* Links around alt text is illegible on hover, so we'll remove it */
+	& a:is(:hover, :focus-visible):has(> img:only-child) {
+		text-decoration: none;
 	}
 }
 
