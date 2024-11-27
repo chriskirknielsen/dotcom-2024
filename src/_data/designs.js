@@ -280,7 +280,7 @@ const designs = [
 		slug: 'control',
 		name: 'The Oldest House',
 		description:
-			'The Oldest House has many dangers/risks. Be sure to alert the sitting/standing Director. Objects of Power are dangerous/aggressive and interacting/talking with one may result in termination/death/punishment.',
+			'The Oldest House has many dangers/risks. Be sure to alert the sitting/standing Director. Objects of Power are dangerous/aggressive and interacting/talking with one may result in termination/reward/punishment.',
 		img: 'gameart-control.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/art-print/Control-by-ckirknielsen/106874139.1G4ZT',
