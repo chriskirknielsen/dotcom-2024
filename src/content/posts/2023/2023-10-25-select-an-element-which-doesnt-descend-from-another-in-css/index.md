@@ -71,7 +71,7 @@ Both of these will technically "scope" the selector, however `@scope` has a few 
 
 **Minor update:** I realise Lea Verou thought of this years ago already… because of course Lea did!
 
-{% socialpost "@LeaVerou", "https://twitter.com/LeaVerou/status/1354760561087676416", "2021-01-28T11:57:42.000Z" %}
+{% remotequote "@LeaVerou", "https://twitter.com/LeaVerou/status/1354760561087676416", "2021-01-28T11:57:42.000Z" %}
 TIL that all modern browsers now support complex selectors in :not()! 😍
 
 Test: [https://dabblet.com/gist/e7769cbe23d3670665e97a03fe0622d3](https://dabblet.com/gist/e7769cbe23d3670665e97a03fe0622d3)
@@ -79,4 +79,4 @@ Test: [https://dabblet.com/gist/e7769cbe23d3670665e97a03fe0622d3](https://dabble
 So you can do things like:
 - .foo :not(.foo .foo *) to match things inside one .foo wrapper but not two 
 - .container :not(.content *) to get simple (shallow) “donut scope”
-{% endsocialpost %}
+{% endremotequote %}
