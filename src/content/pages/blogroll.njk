@@ -491,7 +491,7 @@ blogroll: {
                 >
                     {%- if blog['rssfr-favicon'] %}
                         {%- set faviconbg %}{% if blog['favicon-dark'] %},b_white{% endif %}{% endset -%}
-                        <img src="{{ blog['rssfr-favicon'] | toCloudinary('c_fill,w_32,h_32'+faviconbg+'/q_auto:eco') }}" width="32" height="32" alt="" {% if not isFirstLoop or loop.index > 24 %}loading="lazy"{% endif %}>
+                        <img src="{{ blog['rssfr-favicon'] | toCloudinary('c_fill,w_32,h_32'+faviconbg+'/q_auto:eco') }}" width="32" height="32" class="inline-icon" alt="" {% if not isFirstLoop or loop.index > 24 %}loading="lazy"{% endif %}>
                     {% endif %}
                     <span class="link-label-text">{{ blog.title }}</span>
                     {%- if blog.blurb -%}<span class="tooltip-content">{{ blog.blurb }}</span>{%- endif -%}
@@ -511,11 +511,6 @@ blogroll: {
         display: inline-flex;
         align-items: center;
         gap: 0.5em;
-    }
-    .blogroll-item img {
-        display: inline-block;
-        width: auto;
-        height: 0.9em;
     }
 </style>
 <script>(function(){
