@@ -40,7 +40,7 @@ export default function (eleventyConfig, options = {}) {
 					citePrefix = `<img src="https://v1.indieweb-avatar.11ty.dev/https%3A%2F%2F${domain}%2F/" alt="" class="inline-icon inline-icon--center" loading="lazy" width="16" height="16">`;
 				}
 			} catch (e) {
-				console.warn('Failed to parse URL provided to remotequote shortcode.');
+				console.warn('Failed to parse URL provided to remotequote shortcode.', e);
 			}
 		}
 
