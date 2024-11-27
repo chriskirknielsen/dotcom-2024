@@ -27,6 +27,7 @@ export default function (eleventyConfig, options = {}) {
 	eleventyConfig.addPairedShortcode('socialpost', function (content, author, url, date) {
 		let authorLine = author;
 		let domain;
+		let citePrefix = '—';
 		if (date && !isNaN(Date.parse(date))) {
 			authorLine += `, ${eleventyConfig.getFilter('dateFormat')(new Date(date), { format: 'nice' })}`;
 		}
@@ -36,6 +37,7 @@ export default function (eleventyConfig, options = {}) {
 				domain = new URL(url).hostname.replace(/^www\./, ''); // Get the domain (drop www if provided) // TODO Use URL.parse when using Node 22+
 				if (domain) {
 					authorLine += ` (on ${domain})`;
+					citePrefix = `<img src="https://v1.indieweb-avatar.11ty.dev/https%3A%2F%2F${domain}%2F/" alt="" class="inline-icon inline-icon--center" loading="lazy" width="16" height="16">`;
 				}
 			} catch (e) {
 				console.warn('Failed to parse URL provided to socialpost shortcode ');
@@ -43,6 +45,6 @@ export default function (eleventyConfig, options = {}) {
 		}
 
 		// Return as one line so the Markdown parser doesn't kick in — ugly as sin but it works!
-		return `<blockquote class="social-post | flow">${markdownEngine.render(content.trim())}<footer><cite>— ${authorLine}</cite></footer></blockquote>`;
+		return `<blockquote class="social-post | flow">${markdownEngine.render(content.trim())}<footer><cite>${citePrefix} ${authorLine}</cite></footer></blockquote>`;
 	});
 }
