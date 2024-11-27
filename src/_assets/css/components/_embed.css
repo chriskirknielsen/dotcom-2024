@@ -4,14 +4,14 @@
 	filter: brightness(0.75);
 }
 
-blockquote.social-post {
-	--social-post-border-width: 1px;
-	padding: calc(var(--layout-gutter) - var(--social-post-border-width));
+blockquote.remote-quote {
+	--remote-quote-border-width: 1px;
+	padding: calc(var(--layout-gutter) - var(--remote-quote-border-width));
 
-	border: var(--social-post-border-width) solid var(--C-text, currentColor);
+	border: var(--remote-quote-border-width) solid var(--C-text, currentColor);
 	border-radius: var(--_corner);
 	background: var(--C-surface);
-	box-shadow: inset calc(var(--layout-side-border) - var(--social-post-border-width)) 0 0 var(--C-text, currentColor);
+	box-shadow: inset calc(var(--layout-side-border) - var(--remote-quote-border-width)) 0 0 var(--C-text, currentColor);
 
 	/* Undo the blockquote styles */
 	& > p:first-of-type::before,

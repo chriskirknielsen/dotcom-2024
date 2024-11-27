@@ -45,6 +45,6 @@ export default function (eleventyConfig, options = {}) {
 		}
 
 		// Return as one line so the Markdown parser doesn't kick in — ugly as sin but it works!
-		return `<blockquote class="social-post | flow">${markdownEngine.render(content.trim())}<footer><cite>${citePrefix} ${authorLine}</cite></footer></blockquote>`;
+		return `<blockquote class="remote-quote | flow">${markdownEngine.render(content.trim())}<footer><cite>${citePrefix} ${authorLine}</cite></footer></blockquote>`;
 	});
 }
