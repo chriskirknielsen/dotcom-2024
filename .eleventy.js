@@ -14,7 +14,7 @@ import { default as minifierFilters, cachedJsmin, cachedCssmin } from './config/
 
 import callout from './config/shortcodes/callout.js';
 import codeview from './config/shortcodes/codeview.js';
-import codepen from './config/shortcodes/codepen.js';
+import embed from './config/shortcodes/embed.js';
 import expander from './config/shortcodes/expander.js';
 import renderInclude from './config/shortcodes/render-include.js';
 import mediaGallery from './config/shortcodes/media-gallery.js';
@@ -101,7 +101,7 @@ export default async function (eleventyConfig) {
 	eleventyConfig.addPlugin(mediaGallery, { galleryClasses: ['image-gallery'] });
 	eleventyConfig.addPlugin(callout, { markdownEngine: md });
 	eleventyConfig.addPlugin(codeview);
-	eleventyConfig.addPlugin(codepen);
+	eleventyConfig.addPlugin(embed, { markdownEngine: md });
 	eleventyConfig.addPlugin(expander);
 	eleventyConfig.addPlugin(markdownLibrary, {
 		anchorClass: 'heading-anchor',
