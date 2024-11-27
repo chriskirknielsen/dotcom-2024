@@ -161,7 +161,7 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 	-webkit-background-clip: text;
 	background-clip: text;
 
-	filter: drop-shadow(var(--s) var(--s) 0 #300602) drop-shadow(var(--s) var(--s) 0 #30060280);
+	filter: drop-shadow(0 calc(min(1.5px, var(--s)) * -1) 0 var(--palette-01)) drop-shadow(var(--s) var(--s) 0 #300602) drop-shadow(var(--s) var(--s) 0 #30060280);
 }
 
 .sentence-sample {
