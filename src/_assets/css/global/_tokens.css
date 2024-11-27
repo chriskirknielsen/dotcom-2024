@@ -1,5 +1,5 @@
 :root {
-		--ON: initial;
+--ON: initial;
 --OFF:  ;
 --layout-breakpoint: 576px;
 --layout-max-content: 960px;
@@ -117,8 +117,8 @@
 --T-campfire: var(--OFF);
 --T-director: var(--OFF);
 
-	}
-	@media screen and (prefers-color-scheme: light) {
+}
+@media screen and (prefers-color-scheme: light) {
 		html:not([data-theme]) {
 			--T-dawn: var(--ON);
 		}
@@ -172,7 +172,7 @@ html:not([data-theme]), html[data-theme="dawn"], [data-theme="dusk"] {
 --font-heading-family: var(--T-dawn, Canela, Didot,Bodoni MT, var(--fontStack-serif)) var(--T-dusk, MDNichrome, Bahnschrift,DIN Alternate,Franklin Gothic Medium,Nimbus Sans Narrow,sans-serif-condensed, var(--fontStack-sans-serif));--font-heading-weight: var(--T-dawn, 700) var(--T-dusk, 700);--font-heading-style: var(--T-dawn, normal) var(--T-dusk, normal);
 --font-body-family: var(--T-dawn, var(--fontStack-serif)) var(--T-dusk, var(--fontStack-sans-serif));
 		}
-	html[data-theme="vapor"] {
+html[data-theme="vapor"] {
 				--T-vapor: var(--ON);
 				--color-scheme: light;
 				--corner: 0px;
@@ -363,9 +363,9 @@ html[data-theme="director"] {
 				--font-heading-family: TeXGyreAdventor, ITC Avant-Garde Gothic,Avenir,Montserrat,Corbel,URW Gothic,source-sans-pro, system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
 --font-body-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
 			}
-	@custom-media --small-viewport (width <= 576px);
-	@custom-media --large-viewport (width > 576px);
-	@custom-media --toc-side (min-width: calc(960px + 2 * 300px)) and (min-height: 500px);
+@custom-media --small-viewport (width <= 576px);
+@custom-media --large-viewport (width > 576px);
+@custom-media --toc-side (min-width: calc(960px + 2 * 300px)) and (min-height: 500px);
 	
 	@media (--prefers-light) {
 		html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='dawn']) {
@@ -379,18 +379,25 @@ html[data-theme="director"] {
 		}
 	}html[data-theme]:not([data-theme='dawn']) [data-theme-condition='dawn'] {
 			display: none !important;
-		}html[data-theme]:not([data-theme='dusk']) [data-theme-condition='dusk'] {
+		}
+html[data-theme]:not([data-theme='dusk']) [data-theme-condition='dusk'] {
 			display: none !important;
-		}html[data-theme]:not([data-theme='vapor']) [data-theme-condition='vapor'] {
+		}
+html[data-theme]:not([data-theme='vapor']) [data-theme-condition='vapor'] {
 			display: none !important;
-		}html[data-theme]:not([data-theme='vintage']) [data-theme-condition='vintage'] {
+		}
+html[data-theme]:not([data-theme='vintage']) [data-theme-condition='vintage'] {
 			display: none !important;
-		}html[data-theme]:not([data-theme='quill']) [data-theme-condition='quill'] {
+		}
+html[data-theme]:not([data-theme='quill']) [data-theme-condition='quill'] {
 			display: none !important;
-		}html[data-theme]:not([data-theme='cyberpunk']) [data-theme-condition='cyberpunk'] {
+		}
+html[data-theme]:not([data-theme='cyberpunk']) [data-theme-condition='cyberpunk'] {
 			display: none !important;
-		}html[data-theme]:not([data-theme='campfire']) [data-theme-condition='campfire'] {
+		}
+html[data-theme]:not([data-theme='campfire']) [data-theme-condition='campfire'] {
 			display: none !important;
-		}html[data-theme]:not([data-theme='director']) [data-theme-condition='director'] {
+		}
+html[data-theme]:not([data-theme='director']) [data-theme-condition='director'] {
 			display: none !important;
 		}

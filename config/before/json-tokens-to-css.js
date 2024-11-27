@@ -67,9 +67,14 @@ export default function (string) {
 	const breakpoint = json.settings.breakpoint;
 	const tocMinWidth = json.settings['toc-min-width'];
 	const tocMinHeight = json.settings['toc-min-height'];
-	let toolsOutput = `@custom-media --small-viewport (width <= ${breakpoint});
-	@custom-media --large-viewport (width > ${breakpoint});
-	@custom-media --toc-side (min-width: calc(${maxContent} + 2 * ${tocMinWidth})) and (min-height: ${tocMinHeight});
+	const customMedias = {
+		'small-viewport': `(width <= ${breakpoint})`,
+		'large-viewport': `(width > ${breakpoint})`,
+		'toc-side': `(min-width: calc(${maxContent} + 2 * ${tocMinWidth})) and (min-height: ${tocMinHeight})`,
+	};
+	let toolsOutput = `${Object.entries(customMedias)
+		.map(([key, cond]) => `@custom-media --${key} ${cond};`)
+		.join('\n')}
 	
 	@media (--prefers-light) {
 		html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='${lightThemeKey}']) {
@@ -88,7 +93,7 @@ export default function (string) {
 		outputInRoot += `--T-${themeKey}: var(--OFF);\n`;
 		toolsOutput += `html[data-theme]:not([data-theme='${themeKey}']) [data-theme-condition='${themeKey}'] {
 			display: none !important;
-		}`;
+		}\n`;
 
 		// Skip color contrast checks outside of development
 		if (BUILD_CONTEXT !== 'DEV') {
@@ -121,6 +126,8 @@ export default function (string) {
 			}
 		}
 	}
+
+	const rootOutput = `:root {\n${outputInRoot}\n}`;
 
 	// A little repetition for system-level preferences to be respected
 	let defaultOutput = `@media screen and (prefers-color-scheme: light) {
@@ -211,10 +218,6 @@ export default function (string) {
 		})
 		.join('\n');
 
-	return `:root {
-		${outputInRoot}
-	}
-	${defaultOutput}
-	${extrasOutput}
-	${toolsOutput}`;
+	// Join all the outputs together
+	return [rootOutput, defaultOutput, extrasOutput, toolsOutput].join('\n');
 }

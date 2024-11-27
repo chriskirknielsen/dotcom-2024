@@ -88,6 +88,8 @@ cycling-expander .expander[data-open='true'] .expander-content,
 
 			&[open]::details-content {
 				block-size: auto;
+
+				transition-duration: var(--anim-medium);
 			}
 		}
 	}
