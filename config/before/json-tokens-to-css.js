@@ -148,8 +148,7 @@ export default function (string) {
 		--T-${darkThemeKey}: var(--ON);
 	}\n`;
 
-	// Loop over one of the default themes, since chirality (fancy word for symmetry I'm using because I played
-	// Death Stranding, I am very smart!) can be expected from the default themes and their respective tokens
+	// Loop over one of the default themes, since symmetry can be expected from the default themes and their respective tokens
 	(function (lightTheme, darkTheme) {
 		const uniqueTokenList = Array.from(new Set([].concat(Object.keys(lightTheme.tokens), Object.keys(darkTheme.tokens))));
 		const regularTokens = uniqueTokenList.map((defKey) => lightDarkVar(defKey, lightTheme.tokens[defKey], darkTheme.tokens[defKey])).join('\n');

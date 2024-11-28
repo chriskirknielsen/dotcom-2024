@@ -1,5 +1,3 @@
-const tokenVal = (val) => (Array.isArray(val) ? val.join(', ') : val);
-
 export default function (string, fontsDir) {
 	let outputRoot = ''; // Compose a CSS string from the JSON tokens
 	const json = JSON.parse(string);

@@ -3,7 +3,7 @@
 @custom-media --prefers-light (prefers-color-scheme: light);
 @custom-media --prefers-dark (prefers-color-scheme: dark);
 /*! viewport-based rules and theme conditions are pulled into _tokens.css in the re-compilation step */
-/* @custom-media --small-viewport (width <=36rem);
+/* @custom-media --small-viewport (width <= 36rem);
 @custom-media --large-viewport (width > 36rem); */
 
 /* Theme-based element visibility */
