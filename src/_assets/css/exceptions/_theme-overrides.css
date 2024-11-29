@@ -639,6 +639,14 @@ html[data-theme='secret'] {
 
 		background: repeating-linear-gradient(-45deg, var(--THEME-candycane-grad)) repeat-x 50% 50%;
 	}
+	@media (--accept-motion) {
+		.footer-decorator {
+			overflow: hidden;
+		}
+		.footer-decorator > img {
+			animation: moveUp 20s ease-in-out 5s 1 backwards;
+		}
+	}
 }
 
 .linecap-auto {

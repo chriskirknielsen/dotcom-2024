@@ -1,19 +1,25 @@
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
+	0% {
+		opacity: 0;
+	}
 
-    100% {
-        opacity: 1;
-    }
+	100% {
+		opacity: 1;
+	}
 }
 
 @keyframes scaleUp {
-    0% {
-        transform: scale(0);
-    }
+	0% {
+		transform: scale(0);
+	}
 
-    100% {
-        transform: scale(1);
-    }
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes moveUp {
+	from {
+		transform: translateY(100%);
+	}
 }
