@@ -610,6 +610,9 @@ html[data-theme='director'] {
 html[data-theme='secret'] {
 	--THEME-candycane-grad: white 0, white 4px, red 4px, red 8px;
 
+	background-image: url(/assets/img/knit.jpg);
+	background-blend-mode: soft-light;
+
 	.card-heading a {
 		--_link-underline-color-active: #0b304d;
 	}
@@ -631,7 +634,7 @@ html[data-theme='secret'] {
 		mask: repeating-linear-gradient(90deg, red 0, red 4px, transparent 4px, transparent 8px) repeat-x 50% 50%;
 	}
 	.homepage-photo {
-		background: var(--C-surface);
+		background: var(--C-accent-alt);
 	}
 
 	hr {
