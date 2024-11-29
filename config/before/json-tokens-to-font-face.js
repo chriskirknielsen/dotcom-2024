@@ -5,6 +5,9 @@ export default function (string, fontsDir) {
 
 	for (let themeKey in themes) {
 		const themeHeadingFont = themes[themeKey].font.heading;
+		if (!themeHeadingFont.filename) {
+			continue; // No filename means we're expecting to use a local font
+		}
 		const localFontNames = themeHeadingFont.local || [];
 		const localFontList = Array.from(new Set([themeHeadingFont.family].concat(localFontNames))).map((localName) => `local("${localName}")`);
 		const filename = themeHeadingFont.filename || themeHeadingFont.family;

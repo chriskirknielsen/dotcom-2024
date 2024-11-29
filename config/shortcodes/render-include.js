@@ -112,6 +112,9 @@ export default function (eleventyConfig, options = {}) {
 			formats: ['svg'],
 			svgShortCircuit: true,
 			filenameFormat: function (id, src, width, format, options) {
+				if (filename.endsWith(`.${format}`)) {
+					return filename;
+				}
 				return `${filename}.${format}`;
 			},
 		}).then((metadata) => {

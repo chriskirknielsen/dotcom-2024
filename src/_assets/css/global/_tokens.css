@@ -22,6 +22,7 @@
 --fontStack-emoji: Twemoji Mozilla, Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, EmojiOne Color;
 --fontStack-serif: Georgia, Constantia, Lucida Bright, Lucidabright, Lucida Serif, Lucida, DejaVu Serif, Bitstream Vera Serif, Liberation Serif, serif;
 --fontStack-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+--fontStack-fantasy: Papyrus, fantasy;
 --fontStack-monospace: Monaco, Consolas, Andale Mono, Courier New, monospace;
 --anim-f: 1;
 --anim-delay: 50ms;
@@ -116,6 +117,7 @@
 --T-cyberpunk: var(--OFF);
 --T-campfire: var(--OFF);
 --T-director: var(--OFF);
+--T-secret: var(--OFF);
 
 }
 @media screen and (prefers-color-scheme: light) {
@@ -363,6 +365,32 @@ html[data-theme="director"] {
 				--font-heading-family: TeXGyreAdventor, ITC Avant-Garde Gothic,Avenir,Montserrat,Corbel,URW Gothic,source-sans-pro, system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
 --font-body-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
 			}
+html[data-theme="secret"] {
+				--T-secret: var(--ON);
+				--color-scheme: dark;
+				--corner: var(--size-xs);
+--shadow-color: 10 50% 20%;
+--main-background: repeating-linear-gradient(-45deg, white 0, white 4px, red 4px, red 8px) repeat-x 50% 0 / 100% 4px;
+--font-heading-size-adjust: 0.458;
+--font-heading-tracking: -0.025em;
+--header-bg-color: #610517;
+--footer-special-char: '❄️';
+--cta-text-color-active: #f0f5f9;
+--cta-bg-color-active: #1d5b8a;
+--cta-border-color-active: var(--C-accent-alt);
+--cta-box-shadow-active: 0 0 0 1.5px #f0f5f9;
+--card-heading-color: #ffe4e3;
+--card-heading-color-active: #f0f5f9;
+--signoff-background: radial-gradient(farthest-side at 0 0, #771025, #4A000F);
+				--C-canvas: #002712;
+--C-surface: #4a000f;
+--C-text: #d6ece0;
+--C-heading: #ff334f;
+--C-accent: #73ba9c;
+--C-accent-alt: #afcbe3;
+				--font-heading-family: Comic Sans MS, Comic Sans,ComicSans, system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
+--font-body-family: Papyrus,fantasy;
+			}
 @custom-media --small-viewport (width <= 576px);
 @custom-media --large-viewport (width > 576px);
 @custom-media --toc-side (min-width: calc(960px + 2 * 300px)) and (min-height: 500px);
@@ -399,5 +427,8 @@ html[data-theme]:not([data-theme='campfire']) [data-theme-condition='campfire'] 
 			display: none !important;
 		}
 html[data-theme]:not([data-theme='director']) [data-theme-condition='director'] {
+			display: none !important;
+		}
+html[data-theme]:not([data-theme='secret']) [data-theme-condition='secret'] {
 			display: none !important;
 		}

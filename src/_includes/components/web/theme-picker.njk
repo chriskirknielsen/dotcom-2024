@@ -25,7 +25,7 @@
 				{{ scheme | capitalize }}
 			</span>
 			{% for theme in groupedthemes %}
-				<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}">
+				<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}"{% if theme.key == 'secret' %} data-theme-condition="{{ theme.key }}"{% endif %}>
 					<button class="button button--icon" data-theme-set="{{ theme.key }}" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-{{ theme.key }}-description">
 						{% svg 'theme-'+theme.key %}
 					</button>

@@ -607,6 +607,32 @@ html[data-theme='director'] {
 	}
 }
 
+html[data-theme='secret'] {
+	.card-heading a {
+		--_link-underline-color-active: #0b304d;
+	}
+
+	.callout {
+		border-image: repeating-linear-gradient(-45deg, white 0, white 4px, red 4px, red 8px) 4;
+	}
+
+	.homepage-logo {
+		--HOME-logo-text-transform: uppercase;
+		--HOME-logo-text-scaling: 0.8;
+	}
+
+	.homepage-logo-circle--inner {
+		stroke-dasharray: 4 4;
+	}
+	.homepage-logo-text::before,
+	.homepage-logo-text::after {
+		mask: repeating-linear-gradient(90deg, red 0, red 4px, transparent 4px, transparent 8px) repeat-x 50% 50%;
+	}
+	.homepage-photo {
+		background: var(--C-surface);
+	}
+}
+
 .linecap-auto {
 	stroke-linecap: var(--_stroke-linecap, square);
 }
