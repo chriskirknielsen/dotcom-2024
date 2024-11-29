@@ -22,7 +22,7 @@
 --fontStack-emoji: Twemoji Mozilla, Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, EmojiOne Color;
 --fontStack-serif: Georgia, Constantia, Lucida Bright, Lucidabright, Lucida Serif, Lucida, DejaVu Serif, Bitstream Vera Serif, Liberation Serif, serif;
 --fontStack-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
---fontStack-fantasy: Papyrus, fantasy;
+--fontStack-fantasy: Papyrus, fantasy, casual, cursive;
 --fontStack-monospace: Monaco, Consolas, Andale Mono, Courier New, monospace;
 --anim-f: 1;
 --anim-delay: 50ms;
@@ -388,8 +388,8 @@ html[data-theme="secret"] {
 --C-heading: #ff334f;
 --C-accent: #73ba9c;
 --C-accent-alt: #afcbe3;
-				--font-heading-family: Comic Sans MS, Comic Sans,ComicSans, system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
---font-body-family: Papyrus,fantasy;
+				--font-heading-family: Comic Sans MS, Comic Sans,ComicSans,casual,cursive, system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
+--font-body-family: Papyrus,fantasy,casual,cursive;
 			}
 @custom-media --small-viewport (width <= 576px);
 @custom-media --large-viewport (width > 576px);

@@ -635,6 +635,29 @@ html[data-theme='secret'] {
 	}
 	.homepage-photo {
 		background: var(--C-accent-alt);
+
+		&::before {
+			content: '';
+			position: absolute;
+			inset-block-end: -15px;
+			inset-inline: 10%;
+
+			block-size: 30px;
+
+			border-radius: 50% 50% 50% 50% / 100% 100% 4px 4px;
+			background: linear-gradient(#24435f, #020e18);
+			box-shadow: inset -4px 4px 10px 2px #fff8;
+		}
+
+		&::after {
+			content: '';
+
+			position: absolute;
+			inset: 0;
+
+			border-radius: inherit;
+			background: radial-gradient(circle at 32.5% 60.5%, #fff0 50%, #fff5 67%, #fff0 80%);
+		}
 	}
 
 	hr {
