@@ -608,12 +608,14 @@ html[data-theme='director'] {
 }
 
 html[data-theme='secret'] {
+	--THEME-candycane-grad: white 0, white 4px, red 4px, red 8px;
+
 	.card-heading a {
 		--_link-underline-color-active: #0b304d;
 	}
 
 	.callout {
-		border-image: repeating-linear-gradient(-45deg, white 0, white 4px, red 4px, red 8px) 4;
+		border-image: repeating-linear-gradient(-45deg, var(--THEME-candycane-grad)) 4;
 	}
 
 	.homepage-logo {
@@ -630,6 +632,12 @@ html[data-theme='secret'] {
 	}
 	.homepage-photo {
 		background: var(--C-surface);
+	}
+
+	hr {
+		block-size: 4px;
+
+		background: repeating-linear-gradient(-45deg, var(--THEME-candycane-grad)) repeat-x 50% 50%;
 	}
 }
 
