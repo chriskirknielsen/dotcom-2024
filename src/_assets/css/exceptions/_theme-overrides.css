@@ -651,12 +651,19 @@ html[data-theme='secret'] {
 
 		&::after {
 			content: '';
+			pointer-events: none;
 
 			position: absolute;
 			inset: 0;
 
+			overflow: hidden;
+			border-width: 0 12px 0 8px;
+			border-style: solid;
+			border-color: transparent #d5fdff transparent #041a4a;
 			border-radius: inherit;
-			background: radial-gradient(circle at 32.5% 60.5%, #fff0 50%, #fff5 67%, #fff0 80%);
+
+			transform: rotate(-35deg) scale(0.9);
+			filter: blur(4px);
 		}
 	}
 
