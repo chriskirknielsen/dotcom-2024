@@ -629,10 +629,12 @@ html[data-theme='secret'] {
 	.homepage-logo-circle--inner {
 		stroke-dasharray: 4 4;
 	}
+
 	.homepage-logo-text::before,
 	.homepage-logo-text::after {
 		mask: repeating-linear-gradient(90deg, red 0, red 4px, transparent 4px, transparent 8px) repeat-x 50% 50%;
 	}
+
 	.homepage-photo {
 		background: var(--C-accent-alt);
 
@@ -672,6 +674,7 @@ html[data-theme='secret'] {
 
 		background: repeating-linear-gradient(-45deg, var(--THEME-candycane-grad)) repeat-x 50% 50%;
 	}
+
 	@media (--accept-motion) {
 		.footer-decorator {
 			overflow: hidden;
