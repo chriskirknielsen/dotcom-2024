@@ -93,6 +93,38 @@ document.addEventListener('click', function (e) {
 
 		clone.querySelector('[data-slot="title"]').setAttribute('id', dialogTitleRefId);
 		clone.querySelector('[data-slot-computed="format"]').innerText = !gameData.discs ? 'digital' : gameData.discs > 1 ? `${gameData.discs} ${physicalType}s` : physicalType;
+		if (gameData.rating) {
+			const starRef = clone.querySelector('#svg-star-icon');
+			const svgW = parseInt(starRef.getAttribute('width'), 10);
+			const svgH = parseInt(starRef.getAttribute('height'), 10);
+			const svgViewBox = starRef
+				.getAttribute('viewBox')
+				.split(' ')
+				.map((v) => parseFloat(v));
+			const ratingTitle = `${gameData.rating} / 5`;
+			const ratingLabel = `<span class="visually-hidden">${ratingTitle}</span>`;
+			const ratingImage = `<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="${svgW * 5}"
+				height="${svgH}"
+				viewBox="${svgViewBox.map((vb, i) => (i === 2 ? vb * 5 : vb)).join(' ')}"
+				class="inline-icon linecap-auto"
+				aria-hidden="true"
+			>
+				<title>${ratingTitle}</title>
+				<defs>
+					<pattern id="star-pattern-stroke" x="0" y="0" width="20%" height="100%" fill="none" stroke="currentColor">
+						${starRef.innerHTML}
+					</pattern>
+					<pattern id="star-pattern-fill" x="0" y="0" width="20%" height="100%" fill="currentColor" patternUnits="userSpaceOnUse">
+						${starRef.innerHTML}
+					</pattern>
+				</defs>
+				<rect fill="url(#star-pattern-stroke)" width="${svgViewBox[2] * 5}" height="${svgViewBox[3]}" />
+				<rect fill="url(#star-pattern-fill)" width="${svgViewBox[2] * gameData.rating}" height="${svgViewBox[3]}" />
+			</svg>`;
+			clone.querySelector('[data-slot-computed="rating"]').innerHTML = `${ratingLabel}${ratingImage}`;
+		}
 		if (gameData.completed === null) {
 			clone.querySelector('[data-slot-checkbox="completed"]').indeterminate = true;
 			clone.querySelector('[data-slot-computed="completed"]').innerText = 'Partially';

@@ -216,6 +216,12 @@ platformLabels: {
             </dt>
             <dd data-slot-show="trophyEarned" data-slot-computed="trophyEarned"></dd>
 
+            <dt data-slot-show="rating" class="grouper grouper--icon-text-pair">
+                {% svg 'star', { id: 'svg-star-icon', class: 'inline-icon linecap-auto' } %}
+                <span>Rating</span>
+            </dt>
+            <dd data-slot-show="rating" data-slot-computed="rating"></dd>
+
             <dt data-slot-show="subItems" class="grouper grouper--icon-text-pair">
                 {% svg 'subfolders', { class: 'inline-icon linecap-auto' } %}
                 <span>Includes</span>

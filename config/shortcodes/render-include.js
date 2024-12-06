@@ -51,6 +51,10 @@ export default function (eleventyConfig, options = {}) {
 					const $ = cheerio.load(content, null, false);
 					const svg = $('svg');
 
+					if (svgOptions.id) {
+						svg.attr('id', svgOptions.id);
+					}
+
 					if (svgOptions.class) {
 						svg.addClass(svgOptions.class);
 					}

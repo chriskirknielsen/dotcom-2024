@@ -16,7 +16,7 @@ const regions = {
 const gameslibrary = await notionDatabaseQuery({
 	databaseId: process.env.NOTION_DATABASE_ID_LUDOTHEQUE,
 	label: 'games-library',
-	propsToUse: ['Title', 'Sort Title', 'PSN ID', 'Edition', 'Platform', 'Region', 'DLC', 'Completed', 'Discs', 'Year', 'Parent item', 'Sub-item', 'Thumbnail', 'Boxart'],
+	propsToUse: ['Title', 'Sort Title', 'PSN ID', 'Edition', 'Platform', 'Region', 'DLC', 'Completed', 'Discs', 'Year', 'Parent item', 'Sub-item', 'Thumbnail', 'Boxart', 'Rating'],
 	filter: {
 		and: [
 			{
@@ -77,6 +77,7 @@ const gameslibrary = await notionDatabaseQuery({
 					dlc: props.DLC.rich_text.map((textBlock) => textBlock.plain_text).join(''),
 					discs: props.Discs.number || null,
 					year: props.Year.number || null,
+					rating: props.Rating.number || null,
 					completed: props.Completed.checkbox || false,
 					parentItem: props['Parent item'].relation || [],
 					subItems: props['Sub-item'].relation || [],
