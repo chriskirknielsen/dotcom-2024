@@ -8,7 +8,7 @@
 				width="${n*5}"
 				height="${s}"
 				viewBox="${d.map((u,x)=>x===2?u*5:u).join(" ")}"
-				class="inline-icon linecap-auto"
+				class="inline-icon inline-icon--center linecap-auto"
 				aria-hidden="true"
 			>
 				<title>${b}</title>

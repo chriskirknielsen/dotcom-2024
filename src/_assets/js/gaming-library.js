@@ -108,7 +108,7 @@ document.addEventListener('click', function (e) {
 				width="${svgW * 5}"
 				height="${svgH}"
 				viewBox="${svgViewBox.map((vb, i) => (i === 2 ? vb * 5 : vb)).join(' ')}"
-				class="inline-icon linecap-auto"
+				class="inline-icon inline-icon--center linecap-auto"
 				aria-hidden="true"
 			>
 				<title>${ratingTitle}</title>
