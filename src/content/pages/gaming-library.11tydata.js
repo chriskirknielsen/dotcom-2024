@@ -124,6 +124,7 @@ const gameslibrary = await notionDatabaseQuery({
 		// while also looking for the data we want to update, since we have access to the entire array even as we discard items,
 		// because .filter() creates a shallow copy and doesn't mutate `data` itself. Nasty trick, but if you're looping over
 		// a lot of data, doing a single loop instead of two can be practical to shave off some processing time! (probably about 3ms lol)
+		// Basically I've discovered .reduce() I guess?
 		const filteredData = normalizedData.filter((item) => {
 			// If there are sub-items, let's find them in the list, grab their title + completion status, and use that as their value
 			if (item.subItems.length > 0) {
@@ -158,6 +159,9 @@ const gameslibrary = await notionDatabaseQuery({
 			// We only want to show top-level items, so we can reject sub-items if their have a non-empty parentItem value
 			return item.parentItem.length === 0;
 		});
+
+		// Attach a custom property onto the array
+		filteredData._totalTrophyData = psnTrophyData.map((t) => t.earnedTrophies).reduce((p, c) => Object.fromEntries(Object.keys(p).map((k) => [k, p[k] + c[k]])));
 
 		return filteredData;
 	},

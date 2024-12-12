@@ -70,4 +70,7 @@ const toRomanNumeral = RomanNumeral.toRomanNumeral;
 export default function (eleventyConfig) {
 	/** Converts an integer to its modern Roman numeral counterpart. */
 	eleventyConfig.addFilter('toRomanNumeral', (num) => toRomanNumeral(num));
+
+	/** Formats a number into */
+	eleventyConfig.addFilter('formatNumber', (num) => new Intl.NumberFormat('en-US').format(num));
 }

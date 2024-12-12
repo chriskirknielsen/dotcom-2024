@@ -14,6 +14,9 @@ export default function (eleventyConfig) {
 	/** Flattens an array to a single level. */
 	eleventyConfig.addFilter('flatten', (array) => array.flat(Infinity));
 
+	/** Runs Object.values() on an array of objects. */
+	eleventyConfig.addFilter('toValues', (arr) => arr.map((obj) => Object.values(obj)));
+
 	/** Removes values from a list that don't begin with the provided string. Can be reverse with a boolean argument */
 	eleventyConfig.addFilter('startsWith', (list, str, flip = false) => list.filter((value) => String(value).startsWith(str) ^ flip)); // Bitwise XOR, wild stuff
 
