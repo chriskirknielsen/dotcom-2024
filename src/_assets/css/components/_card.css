@@ -27,7 +27,7 @@
 .card {
 	--CARD-text-color: var(--_card-text-color);
 	--CARD-border-width: var(--_card-border-width, 1px);
-	--CARD-border-color: var(--_card-border-color);
+	--CARD-border-color: var(--_card-border-color, currentColor);
 	--CARD-border-radius: clamp(0px, var(--_corner) * 999, var(--_card-corner));
 	--CARD-bg-color: var(--_card-bg-color);
 	--CARD-shadow: var(--_shadow);
@@ -40,7 +40,9 @@
 
 	text-decoration: none;
 	color: var(--CARD-text-color);
-	border: var(--CARD-border-width) solid var(--CARD-border-color);
+	border-width: var(--CARD-border-width);
+	border-style: solid;
+	border-color: var(--CARD-border-color);
 	border-radius: clamp(0px, var(--_corner) * 999, var(--_card-corner));
 	box-shadow: var(--CARD-shadow);
 
