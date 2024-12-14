@@ -78,8 +78,8 @@ package = "netlify-plugin-debug-cache"
   to = "/da/index.html"
   status = 303
 [[redirects]]
-  from = "/blog/slider-fitting-the-tallest-element-in-pure-css/index.html"
-  to = "/blog/vertical-slider-fitting-the-tallest-element-in-pure-css/index.html"
+  from = "/blog/slider-fitting-the-tallest-element-in-pure-css/*"
+  to = "/blog/vertical-slider-fitting-the-tallest-element-in-pure-css/:splat"
   status = 301
 
 ## Error 404 redirect
