@@ -77,6 +77,8 @@ package = "netlify-plugin-debug-cache"
   from = "/da/*"
   to = "/da/index.html"
   status = 303
+
+## Miscellaneous
 [[redirects]]
   from = "/blog/slider-fitting-the-tallest-element-in-pure-css/*"
   to = "/blog/vertical-slider-fitting-the-tallest-element-in-pure-css/:splat"
