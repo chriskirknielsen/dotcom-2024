@@ -1,5 +1,5 @@
 ---
-title: "Slider fitting the tallest element in pure CSS"
+title: "Vertical slider fitting the tallest element in pure CSS"
 summary: "Using transforms to create overflow."
 time: '00:25:00'
 tags:
@@ -7,7 +7,7 @@ tags:
     - quick-tip
 ---
 
-I was working on a project requiring this kind of slider. Each slide needed to have the same height so it wouldn't look jarring as your scrolled, and I just knew I was going to use the trusty `grid-area: 1 / 1 / -1 / -1;` solution to make all the slides fit the same space in the slider. I suspect a column-oriented flexbox solution with `flex: 1 0 0` is equally viable.
+I was working on a project requiring this kind of vertical slider. Each slide needed to have the same height so it wouldn't look jarring as your scrolled, and I just knew I was going to use the trusty `grid-area: 1 / 1 / -1 / -1;` solution to make all the slides fit the same space in the slider. I suspect a column-oriented flexbox solution with `flex: 1 0 0` is equally viable.
 
 If you want all elements to take up the same height but don't need a slider , `grid-auto-rows: 1fr;` will do. But if you want them to all take up the same space and be scrollable one by one, a little trickery is be needed…
 
