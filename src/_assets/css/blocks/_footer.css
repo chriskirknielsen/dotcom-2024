@@ -13,11 +13,14 @@
 		display: inline-block;
 
 		color: transparent;
-		text-shadow: 0 0 0 var(--C-heading);
-		line-height: 1;
+		/* text-shadow: 0 0 0 var(--C-heading); */
+		/* line-height: 1; */
 		letter-spacing: 0.5em;
 		text-indent: 0.5em; /* Counter-balance the offset from letter-spacing */
 		text-align: center;
+		background: var(--C-heading);
+		-webkit-background-clip: text;
+		background-clip: text;
 
 		transform: translateY(-50%);
 	}
