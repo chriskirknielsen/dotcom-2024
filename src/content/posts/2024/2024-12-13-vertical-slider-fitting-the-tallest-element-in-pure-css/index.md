@@ -15,9 +15,9 @@ I did not want any JS to handle which slide was visible — I wanted a pure CSS 
 
 {% codepen "https://codepen.io/chriskirknielsen/pen/zxOowyy" %}
 
-A couple of caveats: the slide index needs to be provided one way or another. I went with an inline `style` attribute providing a `--i` custom property, but you could use a list of `:nth-child(1) { --i: 0; }` and so one and so forth (until we get `sibling-index()` that is) if you wanted to handle it in CSS only.
+A couple of caveats: the slide index needs to be provided one way or another. I went with an inline `style` attribute providing a `--i` custom property, but you could use a list of `:nth-child(1) { --i: 0; }` and so on and so forth (until we get `sibling-index()` that is) if you wanted to handle it in CSS only.
 
-And a second caveat: if the content is taller than `100vh`, then, well, it's going to have an unpleasant result for users requiring scrolling the body _and_ the slider independently to read everything, so use with caution (or if it contains only images, `max-block-size`/`max-height` is probably a good idea).
+And a second caveat: if the content is taller than the viewport, then, well, it's going to have an unpleasant result for users requiring scrolling the body _and_ the slider independently to read everything, so use with caution (or if it contains only images, `max-block-size`/`max-height` is probably a good idea).
 
 Setting up the horizontal variation in my demo, I think I've done this before with less complexity… but the width is usually easier to account for than the height, so maybe this isn't useless? If this is over-engineered and can be simplified, I'm all ears!
 
