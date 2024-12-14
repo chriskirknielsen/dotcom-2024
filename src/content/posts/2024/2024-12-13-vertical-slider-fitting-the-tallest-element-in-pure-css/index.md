@@ -21,4 +21,4 @@ And a second caveat: if the content is taller than the viewport, then, well, it'
 
 Setting up the horizontal variation in my demo, I think I've done this before with less complexity… but the width is usually easier to account for than the height, so maybe this isn't useless? If this is over-engineered and can be simplified, I'm all ears!
 
-Anyways, just another "tales from work" that seemed cool to share!
+Anyways, just another episode of "tales from work" that seemed worth sharing!
