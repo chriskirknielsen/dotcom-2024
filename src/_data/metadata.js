@@ -21,6 +21,6 @@ export default {
 		DesignByHumans: 'https://www.designbyhumans.com/shop/chriskirknielsen/',
 		CottonBureau: 'https://cottonbureau.com/',
 	},
-	nakedCss: false,
-	nakedJs: false,
+	nakedCss: new Date().toISOString().split('T')[0].endsWith('04-09'),
+	nakedJs: new Date().toISOString().split('T')[0].endsWith('04-24'),
 };
