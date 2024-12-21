@@ -13,10 +13,10 @@ export default function (eleventyConfig, options = {}) {
 
 		// Little trick to avoid additional whitespace
 		return ''.concat(
-			`<div class="callout" aria-labelledby="${uniqueId}">`,
+			`<section class="callout" aria-labelledby="${uniqueId}">`,
 			`<p id="${uniqueId}" class="callout-label | h4" ${emojiStyleAttr}>${heading}</p>`,
 			render.trim(),
-			`</div>`
+			`</section>`
 		);
 	});
 }
