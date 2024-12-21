@@ -1,6 +1,11 @@
----
-title: Designs
-summary: A collection of posters and shirt designs I've made, available across multiple print-on-demand shops
+---js
+{
+	title: "Designs",
+	summary: "A collection of posters and shirt designs I've made, available across multiple print-on-demand shops",
+	eleventyComputed: {
+		customMetaImage: function (data) { return this.toPath([data.assets.images, 'metaimage-designs.jpg']); }
+	}
+}
 ---
 
 {% set activeDesigns = designs | selectattr('showInGallery') %}
