@@ -19,11 +19,11 @@
 			{% set storeIconName %}store-icon-{{ merchStore | lower }}{% endset %}
 			{% if merchStore == 'CottonBureau' %}
 				{# I don't actually have a CottonBureau store but some of my designs are sold there by other people, so I want to have the icon available, just not listed as a link #}
-				<li hidden>{% svg storeIconName, { class: 'store-icon', id: storeIconName } %}</li>
+				<li hidden>{% svg storeIconName, { class: 'store-icon' } %}</li>
 			{% else %}
 			<li>
 				<a href="{{ merchUrl }}">
-					{% svg storeIconName, { class: 'store-icon', id: storeIconName } %}
+					{% svg storeIconName, { class: 'store-icon' } %}
 					{{ merchStore }}
 				</a>
 			</li>
