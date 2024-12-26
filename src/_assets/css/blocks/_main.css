@@ -6,8 +6,8 @@ main {
 	background: var(--_main-background, transparent);
 }
 
-/* Due to tabindex for the skip-link, we don't want an outline here as it isn't a truly focusable element */
-main:focus-visible {
+/* Hide focus outline on programmatically-only focusable elements */
+[tabindex='-1']:focus-visible {
 	outline: 0;
 }
 
