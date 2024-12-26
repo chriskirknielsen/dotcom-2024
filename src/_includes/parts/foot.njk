@@ -1,28 +1,6 @@
 {% css 'foot' %}{% include 'assets/css/font-face.css' %}{% endcss %}
 {% js 'foot' %}{% include 'assets/js/site.js' %}{% endjs %}
 
-{# Holiday season! #}
-{% if themes | find('label', 'Holidays') %}
-	<snow-fall data-theme-condition="secret" style="z-index:3"></snow-fall>
-	{% js 'foot' %}
-		let secretToggleCount = 0;
-		document.addEventListener('click', (e) => {
-			if (e.target && e.target.closest('.header-themepicker-toggle, .header-menu-toggle')) {
-				secretToggleCount++;
-
-				const hiddenThemeButton = document.querySelector('theme-picker [data-theme-condition="secret"]');
-				if ((secretToggleCount >= 17 && hiddenThemeButton) || document.documentElement.getAttribute('data-theme') === 'secret') {
-					console.log('Secret theme unlocked! 🎉')
-					hiddenThemeButton.removeAttribute('data-theme-condition');
-				}
-			} else {
-				secretToggleCount = 0;
-			}
-		});
-		{% include 'assets/js/components/snow-fall.js' %}
-	{% endjs %}
-{% endif %}
-
 {% if toc %}
 	{% js 'foot-toc' %}{% include 'assets/js/toc.js' %}{% endjs %}
 {% endif %}
