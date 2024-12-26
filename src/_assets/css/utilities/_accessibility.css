@@ -1,11 +1,15 @@
-:focus-visible,
-:focus:target {
+:is(:focus-visible, :focus:target):not([tabindex='-1']) {
 	outline: var(--_focus-outline);
 	outline-offset: var(--_focus-outline-offset);
 }
 
+/* Hide focus outline on programmatically-only focusable elements */
+[tabindex='-1']:focus-visible {
+	outline: 0;
+}
+
 @media (--accept-motion) {
-	:where(:target) {
+	:where(:target:not([tabindex='-1'])) {
 		position: relative;
 		animation: targetHighlight var(--anim-eternity) var(--easing-out) var(--anim-eternity) backwards 1;
 	}

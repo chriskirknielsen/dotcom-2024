@@ -6,11 +6,6 @@ main {
 	background: var(--_main-background, transparent);
 }
 
-/* Hide focus outline on programmatically-only focusable elements */
-[tabindex='-1']:focus-visible {
-	outline: 0;
-}
-
 .page-content {
 	padding-block: var(--PAGE-block-padding-start, var(--size-2xl)) var(--PAGE-block-padding-end, var(--size-2xl));
 }
