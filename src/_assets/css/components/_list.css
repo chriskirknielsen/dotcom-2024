@@ -40,10 +40,6 @@ ol > li > ol {
 	display: flex;
 	flex-wrap: wrap;
 	gap: max(8px, var(--list-gap, var(--size-xs)));
-
-	& .button {
-		--CTA-display: flex;
-	}
 }
 
 .flex-list--center {
