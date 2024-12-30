@@ -98,6 +98,6 @@ I splurged a little bit here and there but definitely needed these things, and i
 ## That’s about it
 And those are all the bullet points to sum up my media diet and a little bit of personal stuff this year. I don't mention my job as nothing really changed there, but on the side, I created some more [Designs](/designs/), including a CSS logo that wasn't selected for the new official rebrand (though I did help find a font, so I'm super happy I could contribute a tiny bit to it!). While I don't make much from those, I can't tell you how lovely it is for me every time I get an email letting me know somebody bought something I designed!
 
-That's it… happy new year to y'all!
+That's all I got… happy new year to y'all!
 
 <style>main li { text-wrap: pretty; }</style>
