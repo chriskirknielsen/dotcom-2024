@@ -86,7 +86,7 @@ I played a total of 14 video games this year, though if it weren't for _FFVII Re
 - **Neva**: Same developer as _Gris_, same vibes, too. Also a one-and-done, it was quite beautiful and the relationship between the protagonist and her wolf was sweet.
 - **Jak and Daxter: The Precursor Legacy**: I replayed this for the heck of it. One of my favourites, it still hold up, though the controls (especially for the camera) are a bit dated.
 - **Jusant**: This was a relaxing little climbing adventure. The music was particularly pleasant, and the environmental storytelling was very neat!
-- **Viewfinder**: Currently playing this puzzle game (love a good puzzle!). This one is like _Superliminal_ but with polaroids and I'm enjoying it so far!
+- **Viewfinder**: Currently playing this puzzle game (love a good puzzle!). This one is like _Superliminal_ but with polaroids and I'm enjoying it so far! (same-day edit: finished it! I want more of this game, it's really good!)
 
 ## Totally justified expenses
 I splurged a little bit here and there but definitely needed these things, and it wasn't just to fill a CPU-shaped hole in my heart.
