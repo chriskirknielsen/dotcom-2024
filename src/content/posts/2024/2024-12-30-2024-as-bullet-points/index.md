@@ -62,7 +62,7 @@ Not a lot of stuff going on here for me this year. _Bring Me the Horizon_ releas
 - **Tool**: While Tool is likely the most listened to of the three projects by Maynard James Keenan, I also dedicated a fair chunk of time to _A Perfect Circle_ and _Puscifer_. It can be trippy, but mostly it's great music.
 
 ## Books
-I really wanted to try to read one book a month this year (a lofty goal for me!) but after a couple of books I lost steam. I read before going to sleep, and get sleepy very fast, so the 26th letter of the alphabet is what I catch most of.
+I really wanted to try to read one book a month this year (a lofty goal for me!) but after a couple of books I lost steam. I read before going to sleep, and get sleepy very fast, so I end up reading the 26th letter of the alphabet the most: zzZzzZzz…
 - **The Invincible** (Stanisław Lem): I played the game of the same name then read the book. I enjoyed both, great atompunk vibes.
 - **In Truth and Claw** (Ari Marmell): I haven't read the previous books and will likely not read the rest. This was okay but I didn't get hooked on the universe.
 - **Early Riser** (Jasper Fforde): Sara Joy talked about this — perhaps on Mastodon? — and I got intrigued. It was good! Worldbuilding was on point even when it sounded ludicrous.
