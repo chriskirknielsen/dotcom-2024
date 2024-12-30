@@ -38,13 +38,13 @@ I saw a total of 28 movies this year, a few are rewatches (old comforts and all 
 - **Hit Man**: An overhyped Netflix movie, why not… The premise is fun but halfway through the tone shifts to not-fun and I didn't vibe with that.
 - **Doctor Strange in the Multiverse of Madness**: Honestly it could have been worse but I thought it was supposed to be kinda horror-ish and felt like yet another Marvel movie instead with a couple of darker tones. Also can we be done with all this multiverse stuff?
 - **Thor: Love and Thunder**: Another Marvel, I know… This movie has its moments, but sometimes you get these quips in the middle of serious scenes and it ruins it. Christian Bale did a fantastic job at being creepy though!
-- **Black Widow**: This is your typical spy-against-previous-agency action movie, with a triple-shot of that Marvel formula. Scarlett Johansson's character deserved better than this to close Black Widow's storyline, but it was okay otherwise. David Harbour is a lot of fun, and it's even made me consider watching that _Thunderbolts_ spin-off (one day. maybe).
+- **Black Widow**: This is your typical spy-against-previous-agency action movie, with a triple-shot of that Marvel formula. Scarlett Johansson's character deserved better than this to close Black Widow's storyline, but it was okay otherwise. David Harbour is a lot of fun, and it's even made me consider watching that _Thunderbolts_ spin-off (one day… maybe).
 - **Ghostbusters: Afterlife**: Some of the characters were a little annoying but overall this was a decent reboot-sequel with some nice throwbacks. And Paul Rudd playing Paul Rudd is always a treat.
 - **The Nightmare Before Christmas**: This movie is shorter than I remembered, and a little more all over the place, but I still enjoyed it.
 - **Deadpool & Wolverine**: Some highs and lows. Could have done without Wesley Snipe and other (cliché) things, but also had a few good laughs.
 - **National Lampoon's Christmas Vacation**: A classic! It makes very little sense after rewatching it so many times and being more analytical, but it was good to have in the background while preparing the Christmas dinner (Danish frikadeller with brown sauce, and red cabbage: easy to make, easy to enjoy, especially as leftovers).
 - **Jingle All the Way**: This movie has so much going on. Nothing is really addressed, and Schwarzenegger's character just lucks out in making his family not hate him. Also reindeer shouldn't drink beer… right?
-- **Despicable Me**: I didn't see the full movie but I'd already seen it before. I should watch the sequels…
+- **Despicable Me**: I didn't see the full movie but I'd already seen it before. I should watch the sequels… I really like this kind of animated movie.
 
 ## TV shows
 Shows are obviously a bigger time investment than movies, so I didn't get through a lot, especially since I'm catching up on existing shows with many seasons readily available…
@@ -89,6 +89,7 @@ I played a total of 14 video games this year, though if it weren't for _FFVII Re
 - **Viewfinder**: Currently playing this puzzle game (love a good puzzle!). This one is like _Superliminal_ but with polaroids and I'm enjoying it so far!
 
 ## Totally justified expenses
+I splurged a little bit here and there but definitely needed these things, and it wasn't just to fill a CPU-shaped hole in my heart.
 - **8bitdo Retro Mechanical Keyboard** (SNES version): I bought this because it looked cool.
 - **Retro DualSense Controller** (PS1 anniversary colourway): I treated myself to a PS5 controller because it looked cool.
 - **MacBook Pro M4** (14"): I replaced my 2019 16-inch MacBook Pro because it wasn't working well any more (done via Apple trade-in, so hopefully it gets a good second life). I thought I'd miss the larger form factor, but not at all: it's light to move around, big win.
@@ -97,6 +98,6 @@ I played a total of 14 video games this year, though if it weren't for _FFVII Re
 ## That’s about it
 And those are all the bullet points to sum up my media diet and a little bit of personal stuff this year. I don't mention my job as nothing really changed there, but on the side, I created some more [Designs](/designs/), including a CSS logo that wasn't selected for the new official rebrand (though I did help find a font, so I'm super happy I could contribute a tiny bit to it!). While I don't make much from those, I can't tell you how lovely it is for me every time I get an email letting me know somebody bought something I designed!
 
-That's all… happy new year to y'all!
+That's it… happy new year to y'all!
 
 <style>main li { text-wrap: pretty; }</style>
