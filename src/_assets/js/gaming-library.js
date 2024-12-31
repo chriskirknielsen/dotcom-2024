@@ -1,4 +1,8 @@
-// Helper functions
+// Helpers
+const navAnimOffset = 100; // How far to move the dialog when navigating between games (in px)
+const navAnimOpacity = 0.5; // How opaque to show the dialog when navigating between games (within [0;1])
+const navAnimDuration = 200; // How fast to transition states for the dialog box (in ms)
+
 /** Get the SVG icon in the document to re-use. */
 function getTrophySvg(svgId, lvl) {
 	return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24" class="gaming-details-trophies-icon | inline-icon">
@@ -22,7 +26,148 @@ function toTrophyList(trophies, svgId) {
 }
 
 /** Shortcut for running forEach on a set of DOM elements matching a selector. */
-const eachDom = (s, fn, scope = document) => Array.from(scope.querySelectorAll(s)).forEach(fn);
+function eachDom(s, fn, scope = document) {
+	return Array.from(scope.querySelectorAll(s)).forEach(fn);
+}
+
+/** Creates the dialog markup for the game details to display. */
+function loadAndPopulateGameDetailDialog(target, navAnimSign = 0) {
+	openGame = target.closest('.gaming-box-wrap'); // Update to the currently open game's list item
+	const gameData = JSON.parse(target.closest('[data-game]').getAttribute('data-game'));
+	const dialog = document.getElementById('gaming-details-dialog');
+	const template = document.getElementById('gaming-details-dialog-template');
+	const trophySvgId = template.getAttribute('data-trophy-svg-id');
+	const clone = template.content.cloneNode(true);
+	const dialogTitleRefId = 'gaming-details-dialog-title';
+	let physicalType = 'disc';
+	switch (gameData.platform) {
+		case 'PSV':
+		case 'Switch': {
+			physicalType = 'cartridge';
+			break;
+		}
+	}
+
+	eachDom(
+		'[data-slot-show], [data-slot]:not([data-slot-show] *)',
+		(s) => {
+			const prop = s.getAttribute('data-slot-show') || s.getAttribute('data-slot');
+			const dataToTest = gameData[prop];
+			s.hidden = Array.isArray(dataToTest) ? dataToTest.length === 0 : !Boolean(dataToTest);
+		},
+		clone
+	);
+
+	['title', 'edition', 'region', 'platform', 'dlc', 'year'].forEach((p) => {
+		clone.querySelector(`[data-slot="${p}"]`).innerText = gameData[p];
+	});
+
+	clone.querySelector('[data-slot="title"]').setAttribute('id', dialogTitleRefId);
+	clone.querySelector('[data-slot-computed="format"]').innerText = !gameData.discs ? 'digital' : gameData.discs > 1 ? `${gameData.discs} ${physicalType}s` : physicalType;
+	if (gameData.rating) {
+		const starRef = clone.querySelector('#svg-star-icon');
+		const svgW = parseInt(starRef.getAttribute('width'), 10);
+		const svgH = parseInt(starRef.getAttribute('height'), 10);
+		const svgViewBox = starRef
+			.getAttribute('viewBox')
+			.split(' ')
+			.map((v) => parseFloat(v));
+		const ratingTitle = `${gameData.rating} / 5`;
+		const ratingLabel = `<span class="visually-hidden">${ratingTitle}</span>`;
+		const ratingImage = `<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="${svgW * 5}"
+				height="${svgH}"
+				viewBox="${svgViewBox.map((vb, i) => (i === 2 ? vb * 5 : vb)).join(' ')}"
+				class="inline-icon inline-icon--center linecap-auto"
+				aria-hidden="true"
+			>
+				<title>${ratingTitle}</title>
+				<defs>
+					<pattern id="star-pattern-stroke" x="0" y="0" width="20%" height="100%" fill="none" stroke="currentColor">
+						${starRef.innerHTML}
+					</pattern>
+					<pattern id="star-pattern-fill" x="0" y="0" width="20%" height="100%" fill="currentColor" patternUnits="userSpaceOnUse">
+						${starRef.innerHTML}
+					</pattern>
+				</defs>
+				<rect fill="url(#star-pattern-stroke)" width="${svgViewBox[2] * 5}" height="${svgViewBox[3]}" />
+				<rect fill="url(#star-pattern-fill)" width="${svgViewBox[2] * gameData.rating}" height="${svgViewBox[3]}" />
+			</svg>`;
+		clone.querySelector('[data-slot-computed="rating"]').innerHTML = `${ratingLabel}${ratingImage}`;
+	}
+	if (gameData.completed === null) {
+		clone.querySelector('[data-slot-checkbox="completed"]').indeterminate = true;
+		clone.querySelector('[data-slot-computed="completed"]').innerText = 'Partially';
+	} else {
+		clone.querySelector('[data-slot-checkbox="completed"]').checked = gameData.completed;
+		clone.querySelector('[data-slot-computed="completed"]').innerText = gameData.completed ? 'Yes' : 'No';
+	}
+	clone.querySelector('[data-slot-checkbox="completed"]').setAttribute('data-clean-value', String(gameData.completed));
+	clone.querySelector('[data-slot-computed="subItems"]').innerHTML =
+		gameData.subItems.length > 0
+			? `<h3 class="visually-hidden" id="gaming-library-subitems-heading">Included games</h3>
+				<ul aria-labelledby="gaming-library-subitems-heading">${gameData.subItems
+					.map(
+						(s) => `<li class="gaming-details-subitem">
+								<p class="gaming-details-subitem-main">
+									<input type="checkbox" aria-hidden="true" ${s.completed ? 'checked' : ''} readonly class="gaming-details-subitem-checkbox">
+									<span class="gaming-details-subitem-label">
+										${s.title}
+										<span class="visually-hidden">${s.completed ? '(completed)' : '(not completed)'}</span>
+									</span>
+								</p>
+								${s.trophyEarned ? toTrophyList(s.trophyEarned, trophySvgId) : ''}
+							</li>`
+					)
+					.join('')}</ul>`
+			: '';
+	if (gameData.trophyIcon) {
+		const iconHeight = parseInt(clone.querySelector('[data-slot-img="trophyIcon"]').getAttribute('height'), 10);
+		const iconWidth = ['PS3', 'PS4', 'PSV'].includes(gameData.platform) ? iconHeight * (320 / 176) : iconHeight; // PS5 icons are square, PS3/PS4/Vita are 320x176
+		clone.querySelector('[data-slot-img="trophyIcon"]').src = gameData.trophyIcon;
+		clone.querySelector('[data-slot-img="trophyIcon"]').setAttribute('width', iconWidth);
+	}
+	clone.querySelector('[data-slot-computed="trophyEarned"]').innerHTML = gameData.trophyEarned
+		? `<span class="gaming-details-trophies-percentage ${gameData.trophyProgress === 100 ? 'fontWeight-bold' : ''}">${gameData.trophyProgress}%:</span> ${toTrophyList(
+				gameData.trophyEarned,
+				trophySvgId
+		  )}`
+		: '';
+
+	Array.from(dialog.childNodes).forEach((el) => el.remove());
+	dialog.append(clone);
+	dialog.setAttribute('aria-labelledby', dialogTitleRefId);
+	dialog.style.setProperty('--cover-url', `url(${gameData.boxart.url})`);
+
+	try {
+		dialog.showModal();
+	} catch (error) {
+		dialog.setAttribute('open', '');
+	}
+
+	// Reset the "move" effect
+	const resetMoveEffect = () => {
+		dialog.style.opacity = '';
+		dialog.style.translate = '';
+	};
+
+	// Animate if using a navigation shortcut
+	if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches && navAnimSign !== 0) {
+		dialog.getAnimations().forEach((a) => a.finish());
+		dialog
+			.animate(
+				[
+					{ translate: `${navAnimSign * navAnimOffset}px 0`, opacity: navAnimOpacity },
+					{ translate: '0 0', opacity: 1 },
+				],
+				{ duration: navAnimDuration, ease: 'ease-out' }
+			)
+			.finished.then(resetMoveEffect);
+	} else {
+		resetMoveEffect();
+	}
+}
 
 // Funny little messages if you try to change the checkbox state
 let cbox = 0;
@@ -61,119 +206,7 @@ document.addEventListener('click', function (e) {
 			d.open = newPressed;
 		});
 	} else if ((target = e.target.closest('.gaming-box'))) {
-		openGame = target.closest('.gaming-box-wrap'); // Update to the currently open game's list item
-		const gameData = JSON.parse(target.closest('[data-game]').getAttribute('data-game'));
-		const dialog = document.getElementById('gaming-details-dialog');
-		const template = document.getElementById('gaming-details-dialog-template');
-		const trophySvgId = template.getAttribute('data-trophy-svg-id');
-		const clone = template.content.cloneNode(true);
-		const dialogTitleRefId = 'gaming-details-dialog-title';
-		let physicalType = 'disc';
-		switch (gameData.platform) {
-			case 'PSV':
-			case 'Switch': {
-				physicalType = 'cartridge';
-				break;
-			}
-		}
-
-		eachDom(
-			'[data-slot-show], [data-slot]:not([data-slot-show] *)',
-			(s) => {
-				const prop = s.getAttribute('data-slot-show') || s.getAttribute('data-slot');
-				const dataToTest = gameData[prop];
-				s.hidden = Array.isArray(dataToTest) ? dataToTest.length === 0 : !Boolean(dataToTest);
-			},
-			clone
-		);
-
-		['title', 'edition', 'region', 'platform', 'dlc', 'year'].forEach((p) => {
-			clone.querySelector(`[data-slot="${p}"]`).innerText = gameData[p];
-		});
-
-		clone.querySelector('[data-slot="title"]').setAttribute('id', dialogTitleRefId);
-		clone.querySelector('[data-slot-computed="format"]').innerText = !gameData.discs ? 'digital' : gameData.discs > 1 ? `${gameData.discs} ${physicalType}s` : physicalType;
-		if (gameData.rating) {
-			const starRef = clone.querySelector('#svg-star-icon');
-			const svgW = parseInt(starRef.getAttribute('width'), 10);
-			const svgH = parseInt(starRef.getAttribute('height'), 10);
-			const svgViewBox = starRef
-				.getAttribute('viewBox')
-				.split(' ')
-				.map((v) => parseFloat(v));
-			const ratingTitle = `${gameData.rating} / 5`;
-			const ratingLabel = `<span class="visually-hidden">${ratingTitle}</span>`;
-			const ratingImage = `<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="${svgW * 5}"
-				height="${svgH}"
-				viewBox="${svgViewBox.map((vb, i) => (i === 2 ? vb * 5 : vb)).join(' ')}"
-				class="inline-icon inline-icon--center linecap-auto"
-				aria-hidden="true"
-			>
-				<title>${ratingTitle}</title>
-				<defs>
-					<pattern id="star-pattern-stroke" x="0" y="0" width="20%" height="100%" fill="none" stroke="currentColor">
-						${starRef.innerHTML}
-					</pattern>
-					<pattern id="star-pattern-fill" x="0" y="0" width="20%" height="100%" fill="currentColor" patternUnits="userSpaceOnUse">
-						${starRef.innerHTML}
-					</pattern>
-				</defs>
-				<rect fill="url(#star-pattern-stroke)" width="${svgViewBox[2] * 5}" height="${svgViewBox[3]}" />
-				<rect fill="url(#star-pattern-fill)" width="${svgViewBox[2] * gameData.rating}" height="${svgViewBox[3]}" />
-			</svg>`;
-			clone.querySelector('[data-slot-computed="rating"]').innerHTML = `${ratingLabel}${ratingImage}`;
-		}
-		if (gameData.completed === null) {
-			clone.querySelector('[data-slot-checkbox="completed"]').indeterminate = true;
-			clone.querySelector('[data-slot-computed="completed"]').innerText = 'Partially';
-		} else {
-			clone.querySelector('[data-slot-checkbox="completed"]').checked = gameData.completed;
-			clone.querySelector('[data-slot-computed="completed"]').innerText = gameData.completed ? 'Yes' : 'No';
-		}
-		clone.querySelector('[data-slot-checkbox="completed"]').setAttribute('data-clean-value', String(gameData.completed));
-		clone.querySelector('[data-slot-computed="subItems"]').innerHTML =
-			gameData.subItems.length > 0
-				? `<h3 class="visually-hidden" id="gaming-library-subitems-heading">Included games</h3>
-				<ul aria-labelledby="gaming-library-subitems-heading">${gameData.subItems
-					.map(
-						(s) => `<li class="gaming-details-subitem">
-								<p class="gaming-details-subitem-main">
-									<input type="checkbox" aria-hidden="true" ${s.completed ? 'checked' : ''} readonly class="gaming-details-subitem-checkbox">
-									<span class="gaming-details-subitem-label">
-										${s.title}
-										<span class="visually-hidden">${s.completed ? '(completed)' : '(not completed)'}</span>
-									</span>
-								</p>
-								${s.trophyEarned ? toTrophyList(s.trophyEarned, trophySvgId) : ''}
-							</li>`
-					)
-					.join('')}</ul>`
-				: '';
-		if (gameData.trophyIcon) {
-			const iconHeight = parseInt(clone.querySelector('[data-slot-img="trophyIcon"]').getAttribute('height'), 10);
-			const iconWidth = ['PS3', 'PS4', 'PSV'].includes(gameData.platform) ? iconHeight * (320 / 176) : iconHeight; // PS5 icons are square, PS3/PS4/Vita are 320x176
-			clone.querySelector('[data-slot-img="trophyIcon"]').src = gameData.trophyIcon;
-			clone.querySelector('[data-slot-img="trophyIcon"]').setAttribute('width', iconWidth);
-		}
-		clone.querySelector('[data-slot-computed="trophyEarned"]').innerHTML = gameData.trophyEarned
-			? `<span class="gaming-details-trophies-percentage ${gameData.trophyProgress === 100 ? 'fontWeight-bold' : ''}">${gameData.trophyProgress}%:</span> ${toTrophyList(
-					gameData.trophyEarned,
-					trophySvgId
-			  )}`
-			: '';
-
-		Array.from(dialog.childNodes).forEach((el) => el.remove());
-		dialog.append(clone);
-		dialog.setAttribute('aria-labelledby', dialogTitleRefId);
-		dialog.style.setProperty('--cover-url', `url(${gameData.boxart.url})`);
-
-		try {
-			dialog.showModal();
-		} catch (error) {
-			dialog.setAttribute('open', '');
-		}
+		loadAndPopulateGameDetailDialog(target);
 	} else if (e.target.closest('[data-hide-game-info]') || e.target.matches('.gaming-details-dialog')) {
 		const dialog = document.getElementById('gaming-details-dialog');
 		hideOpenGame();
@@ -230,6 +263,31 @@ document.addEventListener('change', function (e) {
 	}
 });
 
+/**
+ * Reusable function to change the currently displayed game details in the dialog.
+ * @param {boolean} prevCondition Condition to satisfy to load the previous game.
+ * @param {boolean} nextCondition Condition to satisfy to load the next game
+ */
+function gameNavShortcut(prevCondition, nextCondition) {
+	let targetGame = null;
+	let direction;
+
+	if (prevCondition) {
+		direction = -1;
+		targetGame = openGame.previousElementSibling || openGame.parentElement.lastElementChild;
+	} else if (nextCondition) {
+		direction = 1;
+		targetGame = openGame.nextElementSibling || openGame.parentElement.firstElementChild;
+	}
+
+	if (targetGame) {
+		let targetSpine = targetGame.querySelector('.gaming-spine-label');
+		if (targetSpine) {
+			loadAndPopulateGameDetailDialog(targetSpine, direction);
+		}
+	}
+}
+
 document.addEventListener('keyup', function (e) {
 	let target;
 	if ((target = document.querySelector('.gaming-details-dialog'))) {
@@ -243,18 +301,116 @@ document.addEventListener('keyup', function (e) {
 			return;
 		}
 
-		// Look for the previous or next game of the same group; if the bounds have been reached, loop back around
-		let targetGame = null;
-		if (e.key === 'ArrowLeft') {
-			targetGame = openGame.previousElementSibling || openGame.parentElement.lastElementChild;
-		} else if (e.key === 'ArrowRight') {
-			targetGame = openGame.nextElementSibling || openGame.parentElement.firstElementChild;
-		}
-		if (targetGame) {
-			let targetSpine = targetGame.querySelector('.gaming-spine-label');
-			if (targetSpine) {
-				targetSpine.click();
-			}
+		const doNav = () => gameNavShortcut(e.key === 'ArrowLeft', e.key === 'ArrowRight');
+
+		if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+			let navAnimSign = e.key === 'ArrowLeft' ? 1 : e.key === 'ArrowRight' ? -1 : 0;
+			target.getAnimations().forEach((a) => a.finish());
+			target.animate([{ translate: `${navAnimSign * navAnimOffset}px 0`, opacity: navAnimOpacity }], { duration: navAnimDuration / 2, ease: 'ease-in' }).finished.then(doNav);
+		} else {
+			doNav();
 		}
 	}
 });
+
+document.addEventListener('ckn:swipe', function (e) {
+	if (e.target.closest('.gaming-details-dialog')) {
+		let swipeDirectionX = e.detail.swipeDirection.x;
+		gameNavShortcut(swipeDirectionX === 'right', swipeDirectionX === 'left');
+	}
+});
+
+(() => {
+	const swipeTargetSelector = '.gaming-details-dialog';
+	let touchstartX = 0;
+	let touchstartY = 0;
+	let touchendX = 0;
+	let touchendY = 0;
+
+	document.addEventListener(
+		'touchstart',
+		function (event) {
+			if (event.target.closest(swipeTargetSelector)) {
+				touchstartX = event.changedTouches[0].screenX;
+				touchstartY = event.changedTouches[0].screenY;
+			}
+		},
+		false
+	);
+	document.addEventListener(
+		'touchmove',
+		function (event) {
+			let target = event.target.closest(swipeTargetSelector);
+			if (target) {
+				let touchMoveX = event.changedTouches[0].screenX - touchstartX;
+				let touchMoveY = event.changedTouches[0].screenY - touchstartY;
+				let touchDeltaX = Math.abs(touchMoveX);
+				let touchDeltaY = Math.abs(touchMoveY);
+
+				if (touchDeltaX < touchDeltaY) {
+					return;
+				}
+
+				// Only start fading after the offset threshold (half) has been met
+				target.style.opacity = 1 - Math.min(Math.min(Math.max(0, touchDeltaX - navAnimOffset / 2), navAnimOffset) / navAnimOffset, navAnimOpacity);
+				if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+					target.style.translate = `${Math.max(-1 * navAnimOffset, Math.min(navAnimOffset, touchMoveX))}px 0`;
+				} else {
+					target.style.translate = '';
+				}
+			}
+		},
+		false
+	);
+	document.addEventListener(
+		'touchend',
+		function (event) {
+			const targetEl = event.target.closest(swipeTargetSelector);
+			if (targetEl) {
+				touchendX = event.changedTouches[0].screenX;
+				touchendY = event.changedTouches[0].screenY;
+
+				handleGesture(targetEl);
+			}
+		},
+		false
+	);
+
+	function handleGesture(targetEl) {
+		const moveX = touchendX - touchstartX;
+		const moveY = touchendY - touchstartY;
+		const deltaX = Math.abs(moveX);
+		const deltaY = Math.abs(moveY);
+		const thresholdX = navAnimOffset / 2;
+
+		// Reset swipe tracking effect
+		const resetSwipe = () => {
+			targetEl.style.opacity = '';
+			targetEl.style.translate = '';
+		};
+
+		// Only dispatch significant horizontal swipes, ignore all the rest
+		if (deltaX < deltaY || (moveX === 0 && moveY === 0) || deltaX < thresholdX) {
+			if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+				targetEl.getAnimations().forEach((a) => a.finish());
+				targetEl.animate([{ translate: '0 0', opacity: 1 }], { duration: navAnimDuration, ease: 'ease-out' }).finished.then(resetSwipe);
+			} else {
+				resetSwipe();
+			}
+			return;
+		}
+
+		const event = new CustomEvent('ckn:swipe', {
+			bubbles: true,
+			detail: {
+				swipeX: moveX,
+				swipeY: moveY,
+				swipeDirection: {
+					x: moveX > 0 ? 'right' : 'left',
+					y: moveY > 0 ? 'down' : 'up',
+				},
+			},
+		});
+		targetEl.dispatchEvent(event);
+	}
+})();
