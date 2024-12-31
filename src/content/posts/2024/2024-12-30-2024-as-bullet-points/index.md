@@ -17,7 +17,7 @@ A little look back at what I have consumed in media this year, and a few bonus "
 - I **gave blood** and nearly passed out. I should give blood more often. (a decent new year resolution)
 
 ## Movies
-I saw a total of 28 movies this year, a few are rewatches (old comforts and all that).
+I saw a total of 29 movies this year, a few are rewatches (old comforts and all that).
 - **Weird: The Al Yankovic Story**: Daniel Radcliffe is perfect, that's all.
 - **Oppenheimer**: Christopher Nolan knows how to keep you on the ege of your seat.
 - **M3GAN**: Partly creepy, partly funny, I enjoyed this one, maybe even more thanks to the GLaDOS-like voice they used for the titular android.
@@ -45,6 +45,7 @@ I saw a total of 28 movies this year, a few are rewatches (old comforts and all 
 - **National Lampoon's Christmas Vacation**: A classic! It makes very little sense after rewatching it so many times and being more analytical, but it was good to have in the background while preparing the Christmas dinner (Danish frikadeller with brown sauce, and red cabbage: easy to make, easy to enjoy, especially as leftovers).
 - **Jingle All the Way**: This movie has so much going on. Nothing is really addressed, and Schwarzenegger's character just lucks out in making his family not hate him. Also reindeer shouldn't drink beer… right?
 - **Despicable Me**: I didn't see the full movie but I'd already seen it before. I should watch the sequels… I really like this kind of animated movie.
+- **Despicable Me 2**: Edited to add this one. It was pretty fun! A few things were a little iffy (the sushi shack thing!) but I liked it. Steve Carell's way of saying "girls" is quite something.
 
 ## TV shows
 Shows are obviously a bigger time investment than movies, so I didn't get through a lot, especially since I'm catching up on existing shows with many seasons readily available…
