@@ -13,10 +13,10 @@ class TableOfContents {
 		this.$ = cheerio.load(this.markup, null, false);
 		this.headings = this.$(this.selectors); // Find semantic headings
 		this.levels = this.selectors.split(',').map((h) => h.trim()); // Get an array of the heading selectors
-		this.hierachy = {};
+		this.hierarchy = {};
 	}
 
-	/** Resolves the hierachy a heading belongs to. */
+	/** Resolves the hierarchy a heading belongs to. */
 	getHierarchy(h) {
 		let tree = [];
 
@@ -87,10 +87,10 @@ class TableOfContents {
 		// Loop over all the found headings
 		this.headings.each((i, el) => {
 			const h = this.$(el);
-			this.parseHeading(h, this.hierachy);
+			this.parseHeading(h, this.hierarchy);
 		});
 
-		const list = this.populateList(this.hierachy);
+		const list = this.populateList(this.hierarchy);
 		list.addClass(this.listClass);
 		if (this.listLabelledBy) list.attr('aria-labelledby', this.listLabelledBy);
 		return list.prop('outerHTML');
