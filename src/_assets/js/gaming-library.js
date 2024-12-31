@@ -296,8 +296,11 @@ document.addEventListener('keyup', function (e) {
 			hideOpenGame();
 		}
 
-		// If there is no open game, or the user had a modifier key pressed, ignore this event
-		if (!openGame || e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) {
+		const isModifierPressed = e.altKey || e.shiftKey || e.ctrlKey || e.metaKey;
+		const isLeftOrRightArrow = e.key === 'ArrowLeft' || e.key === 'ArrowRight';
+
+		// If there is no open game, or the user had a modifier key pressed, or didn't press the relevant arrow keys, ignore this event
+		if (!openGame || isModifierPressed || !isLeftOrRightArrow) {
 			return;
 		}
 
