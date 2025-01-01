@@ -160,10 +160,13 @@ const gameslibrary = await notionDatabaseQuery({
 			return item.parentItem.length === 0;
 		});
 
-		// Attach a custom property onto the array
-		filteredData._totalTrophyData = psnTrophyData.map((t) => t.earnedTrophies).reduce((p, c) => Object.fromEntries(Object.keys(p).map((k) => [k, p[k] + c[k]])));
+		// Provide a compiled list of all trophy levels
+		const totalTrophyData = psnTrophyData.map((t) => t.earnedTrophies).reduce((p, c) => Object.fromEntries(Object.keys(p).map((k) => [k, p[k] + c[k]])));
 
-		return filteredData;
+		return {
+			meta: { totalTrophyData },
+			data: filteredData,
+		};
 	},
 });
 

@@ -41,7 +41,7 @@ platformLabels: {
     </div>
 </form>
 
-{% for platform, games in gameslibrary | groupby('platform') | dictsort | sortentries(platformLabels | keys) %}
+{% for platform, games in gameslibrary.data | groupby('platform') | dictsort | sortentries(platformLabels | keys) %}
     {% set platformSlug = platform | lower | replace(' ', '-') %}
     {% setAsync 'expanderLabel' %}
         {% svg 'gaming-'+platformSlug, { class: 'gaming-logo inline-icon' } %}
@@ -149,12 +149,12 @@ platformLabels: {
 {% endfor %}
 
 <div class="textAlign-center textWrap-balance fontSize-smaller">
-    {% if gameslibrary._totalTrophyData %}
-        {% set trophiesByLevel = gameslibrary._totalTrophyData %}
+    {% if gameslibrary.meta.totalTrophyData %}
+        {% set trophiesByLevel = gameslibrary.meta.totalTrophyData %}
         {% set trophyTotal = trophiesByLevel | values | sum  %}
     {% else %}
-        {% set trophiesTop = gameslibrary | pluck('trophyEarned') | select %}
-        {% set trophiesSub = gameslibrary | pluck('subItems') | flatten | pluck('trophyEarned') | select %}
+        {% set trophiesTop = gameslibrary.data | pluck('trophyEarned') | select %}
+        {% set trophiesSub = gameslibrary.data | pluck('subItems') | flatten | pluck('trophyEarned') | select %}
         {% set trophies = trophiesTop.concat(trophiesSub) %}
         {% set trophiesByLevel = {
             bronze: trophies | pluck('bronze') | sum,
