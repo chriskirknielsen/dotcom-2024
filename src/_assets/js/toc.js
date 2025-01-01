@@ -1,4 +1,4 @@
-// Basic (bad) "highlighter" of the TOC link for the current section in view
+// Basic (bad?) "highlighter" of the TOC link for the current section in view
 document.addEventListener('DOMContentLoaded', () => {
 	// In this site's layout, the table of contents is an element that appears before any other content at the same hierarchy,
 	// and level 2 headings (or rather their anchor element within) are the only ones I want to target
@@ -8,11 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	const visibleHeadings = new Set();
-	const markActive = (h) => h.style.setProperty('--LINK-decoration-thickness', 'calc(var(--link-decoration-thickness, 1px) + 2px)');
-	const markInactive = (h) => h.style.removeProperty('--LINK-decoration-thickness');
+	const markTocLinkActive = (a) => a.style.setProperty('--LINK-decoration-thickness', 'calc(var(--link-decoration-thickness, 1px) + 2px)');
+	const markTocLinkInactive = (a) => a.style.removeProperty('--LINK-decoration-thickness');
+	const getTocLinkFromHeading = (h) => document.querySelector(`.toc-list a[href="${h.getAttribute('href')}"]`);
 
 	// On page load we'll mark the first item as active, even if the heading appears a bit further down
-	markActive(document.querySelector(`.toc-list a[href="${headings[0].getAttribute('href')}"]`));
+	markTocLinkActive(getTocLinkFromHeading(headings[0]));
 
 	const observer = new IntersectionObserver(
 		(entries) => {
@@ -32,20 +33,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				headings.forEach((h) => {
 					// Find the link in the TOC list matching the heading in this list of h2 elements
-					const tocLink = document.querySelector(`.toc-list a[href="${h.getAttribute('href')}"]`);
+					const tocLink = getTocLinkFromHeading(h);
 
 					// If it's the last visible item, change the underline to make it stand out, else, revert to th default style
 					if (h === lastVisible) {
-						markActive(tocLink);
+						markTocLinkActive(tocLink);
 					} else {
-						markInactive(tocLink);
+						markTocLinkInactive(tocLink);
 					}
 				});
 			});
 		},
 		{
-			// Extend the detection above the heading so it's always considered as intersecting if above the current scrollport window
-			rootMargin: `${document.body.clientHeight}px 0px -33% 0px`, // Must be _above_ the 33% line of the bottom of the scrollport
+			//? clientHeight: Extend the detection above the heading so it's always considered as intersecting if above the current scrollport window
+			//? -33%: The element won't be considered as intersecting until it has gone _above_ the 33% line of the bottom of the scrollport window
+			rootMargin: `${document.body.clientHeight}px 0px -33% 0px`,
 			threshold: 1,
 		}
 	);
