@@ -15,7 +15,7 @@ I recently added a [Gaming Library page](/games/library/), which involved a bunc
 
 ## The Setup
 
-My Notion setup is extremely manual for both Gaming Library and Now pages. I won’t go into details here but I had to create a “connection” in Notion, so I could call the API for my workspace, for which I received a secret token. And my PSN data is linked to my account, and is all automatic! (npm packages used: `@11ty/eleventy-fetch @notionhq/client psn-api`)
+My Notion setup is extremely manual for both Gaming Library and Now pages. I won’t go into details here but I had to create a “connection” in Notion, so I could call the API for my workspace, for which I received a secret token. And my PSN data is linked to my account, and is all automatic! (npm packages used: `@11ty/eleventy-fetch` `@notionhq/client` `psn-api`)
 
 {% callout "Ramble" %}I really appreciate Notion’s tooling and UI but golly gee, do I hate its sluggish speed. It spits out HTML with inline styles every step of the way and is just so dang slow (web or app on a very fast computer), and it’s near impossible to add custom styles. I almost gave up editing more than once due to the hellish non-responsive interface that would sometimes make me edit a completely different row… But sure let's prioritise adding ✨AI✨ garbage. Anyway, rant over. (and their API is nice and fast, to their credit){% endcallout %}
 
