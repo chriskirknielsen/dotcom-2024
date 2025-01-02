@@ -85,7 +85,7 @@ I played a total of 14 video games this year, though if it weren't for _FFVII Re
 - **Alan Wake II**: The first entry was good, but this one took it to a whole new level. While not perfect, I still think it's an amazing game, with some DLC that had me very hyped for _Control_'s sequel.
 - **NieR: Automata**: This was… interesting. The game was pretty good, with some decently fun gameplay and music, and the kind of mandatory "New Game Plus" to get the full story. Not sure why the protagonists need to run around in underwear, though…
 - **Neva**: Same developer as _Gris_, same vibes, too. Also a one-and-done, it was quite beautiful and the relationship between the protagonist and her wolf was sweet.
-- **Jak and Daxter: The Precursor Legacy**: I replayed this for the heck of it. One of my favourites, it still hold up, though the controls (especially for the camera) are a bit dated.
+- **Jak and Daxter: The Precursor Legacy**: I replayed this for the heck of it. One of my favourites, it still holds up, though the controls (especially for the camera) are a bit dated.
 - **Jusant**: This was a relaxing little climbing adventure. The music was particularly pleasant, and the environmental storytelling was very neat!
 - **Viewfinder**: Currently playing this puzzle game (love a good puzzle!). This one is like _Superliminal_ but with polaroids and I'm enjoying it so far! (same-day edit: finished it! I want more of this game, it's really good!)
 
