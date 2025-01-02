@@ -14,7 +14,7 @@ export default function (eleventyConfig, options = {}) {
 		// Little trick to avoid additional whitespace
 		return ''.concat(
 			`<section class="callout" aria-labelledby="${uniqueId}">`,
-			`<p id="${uniqueId}" class="callout-label | h4" ${emojiStyleAttr}>${heading}</p>`,
+			`<p id="${uniqueId}" class="callout-label | h3" ${emojiStyleAttr}>${heading}</p>`,
 			render.trim(),
 			`</section>`
 		);
