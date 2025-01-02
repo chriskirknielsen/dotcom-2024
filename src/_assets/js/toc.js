@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	const visibleHeadings = new Set();
-	const markTocLinkActive = (a) => a.style.setProperty('--LINK-decoration-thickness', 'calc(var(--link-decoration-thickness, 1px) + 2px)');
-	const markTocLinkInactive = (a) => a.style.removeProperty('--LINK-decoration-thickness');
+	const markTocLinkActive = (a) => a.closest('.toc-list > li').setAttribute('data-current', '');
+	const markTocLinkInactive = (a) => a.closest('.toc-list > li').removeAttribute('data-current');
 	const getTocLinkFromHeading = (h) => document.querySelector(`.toc-list a[href="${h.getAttribute('href')}"]`);
 
 	// On page load we'll mark the first item as active, even if the heading appears a bit further down

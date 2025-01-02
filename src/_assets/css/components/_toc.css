@@ -1,0 +1,70 @@
+.toc {
+	& > ol {
+		columns: 150px 2;
+		column-gap: var(--layout-gutter);
+	}
+
+	ol {
+		counter-reset: tocList;
+
+		ol {
+			--toc-marker-type: upper-alpha;
+
+			ol {
+				--toc-marker-type: lower-alpha;
+			}
+		}
+	}
+
+	li {
+		counter-increment: tocList;
+
+		page-break-inside: avoid;
+
+		&::marker {
+			content: counter(tocList, var(--toc-marker-type, decimal-leading-zero)) '  ';
+
+			font-size: 0.5em;
+		}
+
+		&:not(:has(> a:is(:hover, :focus-visible)))::marker {
+			color: color-mix(in hsl, var(--C-text), transparent 30%);
+		}
+	}
+}
+
+@media (--toc-side) {
+	.toc {
+		position: sticky;
+		inset-block-start: var(--layout-gutter);
+
+		/* Large-ish negative number (-9 should cover most cases since having a TOC means there's at least a moderate amount of content)
+			   fills up all the rows since `1 / -1` makes the first item in the main column take up as much space as just this TOC row… */
+		grid-row: 1 / -9;
+		grid-column: --fullbleed-start / --wide-start;
+		justify-self: end;
+		align-self: start;
+		max-block-size: 100dvh;
+		overflow: auto;
+		padding-inline: calc(var(--layout-gutter) * 2) var(--layout-gutter);
+
+		& + * {
+			--flow-space: 0px;
+		}
+	}
+
+	/* Using low specificity to ensure hover styles take priority */
+	:where(.toc-list li[data-current]) > :any-link {
+		--LINK-decoration-thickness: calc(var(--link-decoration-thickness, 1px) + 2px);
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.toc-list > li {
+			transition: opacity var(--anim-short) var(--easing-in-out);
+		}
+	}
+
+	.toc-list:not(:hover) > li:not([data-current]) {
+		opacity: 0.75;
+	}
+}
