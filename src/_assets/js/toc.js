@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		);
 
-		// And now… observe all the headings
 		headings.forEach((heading) => observer.observe(heading));
 
 		return observer;
