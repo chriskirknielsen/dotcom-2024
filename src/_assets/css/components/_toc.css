@@ -47,6 +47,7 @@
 		max-block-size: 100dvh;
 		overflow: auto;
 		padding-inline: calc(var(--layout-gutter) * 2) var(--layout-gutter);
+		padding-block-end: var(--size-xs);
 
 		& + * {
 			--flow-space: 0px;
@@ -64,7 +65,7 @@
 		}
 	}
 
-	.toc-list:not(:hover) li:not([data-current]) > a {
+	.toc-list:not(:hover, :focus-within) li:not([data-current]) > a {
 		opacity: 0.67;
 	}
 }
