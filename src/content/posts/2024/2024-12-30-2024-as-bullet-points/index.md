@@ -5,6 +5,7 @@ time: '00:04:04'
 tags:
     - personal
 toc: true
+featured: true
 ---
 
 A little look back at what I have consumed in media this year, and a few bonus "personal" ones for good measure. Warning, there are a lot of bullet points ahead…
