@@ -59,12 +59,12 @@
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
-		.toc-list > li {
+		.toc-list a {
 			transition: opacity var(--anim-short) var(--easing-in-out);
 		}
 	}
 
-	.toc-list:not(:hover) > li:not([data-current]) {
-		opacity: 0.75;
+	.toc-list:not(:hover) li:not([data-current]) > a {
+		opacity: 0.67;
 	}
 }
