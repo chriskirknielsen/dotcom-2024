@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 
 				headings.forEach((heading) => {
-					// Find the link in the TOC list matching the heading in this list of h2 elements
+					// Find the link in the TOC list matching the heading in this list of heading elements
 					const tocLink = getTocLinkFromHeading(heading);
 
 					// If it's the last visible item, mark it to make it stand out, else, revert to the default style

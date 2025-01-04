@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 
 				headings.forEach((heading) => {
-					// Find the link in the TOC list matching the heading in this list of h2 elements
+					// Find the link in the TOC list matching the heading in this list of hheding elements
 					const tocLink = getTocLinkFromHeading(heading);
 
 					// If it's the last visible item, mark it to make it stand out, else, revert to the default style
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				});
 			},
 			{
-				//? h: Extend the detection above the heading so it's always considered as intersecting if above the scrollport
+				//? docHeight: Extend the detection above the heading so it's always considered as intersecting if above the scrollport
 				//? -33%: The element won't be considered as intersecting until it has gone _above_ the bottom third of the scrollport
 				rootMargin: `${docHeight}px 0px -33% 0px`,
 				threshold: 1, // Only considered intersecting if all the pixels are inside the intersection area
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 Want some CSS, too? Let's do it (my actual styles are different but this gives you the idea):
 ```css
-.toc-list li[data-current] > :any-link {
+.toc-list li[data-current] > a {
 	text-decoration-thickness: calc(0.0625em + 2px);
 }
 
