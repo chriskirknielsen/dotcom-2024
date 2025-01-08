@@ -322,6 +322,9 @@ font-preview:not(.defined) > form > :not(.preview-fallback),
 
 		flex: 0 0 auto;
 		display: flex;
+		/* Reset the size so Safari on iOS follows the checkbox contents */
+		block-size: unset;
+		inline-size: unset;
 		margin: 0;
 		padding: var(--switch-padding);
 
