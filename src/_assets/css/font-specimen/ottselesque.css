@@ -226,7 +226,11 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 }
 
 .main-heading-title {
+	position: relative;
+	inset-block-end: -0.1em;
+
 	margin: 0 auto;
+	padding-block-end: 0.1em;
 
 	font-size: min(16rem, var(--main-heading-magic-number));
 }
