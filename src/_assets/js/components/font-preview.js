@@ -19,7 +19,7 @@ class FontPreview extends HTMLElement {
 	updateFontPreviewText = () => {
 		const text = this.fontPreviewInput.value.trim() || this.fontSpecimenSampleDefault;
 		this.fontPreviewOutputWrap.setAttribute('aria-label', text);
-		this.fontPreviewOutput.textContent = ` ${text} `;
+		this.fontPreviewOutput.textContent = text;
 	};
 
 	// When a user changes the font options
