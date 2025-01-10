@@ -15,7 +15,7 @@
 {% set designSolid = designs | find('slug', 'css-logo-solid') %}
 {% set designTransparent = designs | find('slug', 'css-logo-transparent') %}
 <p>
-    I've had this idea for a new logo for CSS that would riff off of the famous "CSS is Awesome" meme. There's room for add a version number in the corner as well. It's not official by any means (<a href="https://github.com/CSS-Next/css-next/issues/105">the CSS Working Group decided on a logo</a>) but maybe it's good enough to use? You tell me. I've made this available on my apparel stores (both <a href="/designs/{{ designSolid.slug }}/">solid</a> and <a href="/designs/{{ designTransparent.slug }}/">transparent</a> variants).
+    I've had this idea for a new logo for CSS that would riff off of the famous "CSS is Awesome" meme. There's room for add a version number in the corner as well. It's not official by any means (<a href="https://github.com/CSS-Next/logo.css">here is the new official CSS logo!</a>) but maybe it's good enough to use? You tell me. I've made this available on my apparel stores (both <a href="/designs/{{ designSolid.slug }}/">solid</a> and <a href="/designs/{{ designTransparent.slug }}/">transparent</a> variants).
 </p>
 
 <div class="fifty-fifty">
@@ -26,7 +26,6 @@
             <path id="css-logo-c" d="M186.2929,330.3929c-4.2822,15.3181-15.033,25.4979-32.2649,25.4979-29.4688,0-40.5459-25.0801-40.5459-49.9512,0-26.124,11.0771-51.2041,40.5459-51.2041,16.0762,0,30.1108,10.9769,32.5015,25.5121h31.7859c-4.2288-34.0958-31.6714-53.1-64.2874-53.1-46.189,0-73.3589,34.4844-73.3589,78.792,0,43.0547,27.1699,77.5391,73.3589,77.5391,33.8977,0,58.4456-20.4748,64.5223-53.0858h-32.2574Z"/>
             <path id="css-logo-s1" d="M266.1149,330.3928c0,19.8555,15.4658,27.5879,33.0215,27.5879,11.4951,0,29.0508-3.3438,29.0508-18.6006,0-16.0928-22.3623-18.8096-44.3076-24.6621-22.1538-5.8516-44.5166-14.4209-44.5166-42.4268,0-30.5137,28.8418-45.1436,55.8027-45.1436,31.1406,0,59.7734,13.585,59.7734,48.0693h-31.7676c-1.0449-17.9736-13.7939-22.5723-29.4688-22.5723-10.4502,0-22.5723,4.3896-22.5723,16.9297,0,11.4951,7.1064,12.958,44.5166,22.5713,10.8682,2.7178,44.3086,9.6143,44.3086,43.4727,0,27.3789-21.5273,47.8604-62.0732,47.8604-33.022,0-63.9536-16.3018-63.5356-53.0859h31.7681Z"/>
             <path id="css-logo-s2" d="M405.4313,330.3928c0,19.8555,15.4658,27.5879,33.0215,27.5879,11.4951,0,29.0508-3.3438,29.0508-18.6006,0-16.0928-22.3623-18.8096-44.3076-24.6621-22.1543-5.8516-44.5166-14.4209-44.5166-42.4268,0-30.5137,28.8418-45.1436,55.8027-45.1436,31.1406,0,59.7734,13.585,59.7734,48.0693h-31.7676c-1.0449-17.9736-13.7939-22.5723-29.4688-22.5723-10.4502,0-22.5723,4.3896-22.5723,16.9297,0,11.4951,7.1064,12.958,44.5166,22.5713,10.8682,2.7178,44.3086,9.6143,44.3086,43.4727,0,27.3789-21.5273,47.8604-62.0732,47.8604-33.0215,0-63.9541-16.3018-63.5361-53.0859h31.7686Z"/>
-            {# <path id="css-logo-number" d="M383.4767,164.302v20.1592h-12.7402v21.7002h-23.7998v-21.7002h-42.7002v-22.2598l43.6797-53.6191h22.8203v55.7197h12.7402ZM347.6369,164.302v-31.5h-.2803l-24.6396,31.5h24.9199Z"/> #}
             <text id="css-logo-number" class="css-logo-number-shown" opacity="0.001" font-size="156" letter-spacing="-0.025em" x="385" y="206.16" text-anchor="end">{{ CSS_VER_NUM }}</text>
         </svg>
     </div>
