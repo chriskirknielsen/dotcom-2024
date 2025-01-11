@@ -79,7 +79,7 @@ h2 {
 		box-shadow: 0 0 3px #ffffd9, 0 0 4px 1px #ffff5e;
 
 		@media (prefers-reduced-motion: no-preference) {
-			animation: float 2s ease-in-out infinite alternate, bgTile 8s linear infinite;
+			animation: float 2s ease-in-out infinite alternate, bgTile 10s linear infinite;
 			animation-delay: var(--parent-orb-delay, 0s);
 		}
 	}
