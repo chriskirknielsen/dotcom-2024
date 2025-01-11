@@ -139,8 +139,8 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 
 .styled-button {
 	--button-inner-shadow: inset 0 3px 1px var(--orb-1), inset 0 -3px 1px var(--orb-4);
-	--button-text-a: var(--palette-07);
-	--button-text-b: var(--palette-06);
+	--button-text-a: #eeece3;
+	--button-text-b: #a2aca4;
 
 	position: relative;
 	isolation: isolate;
@@ -178,8 +178,8 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 		}
 
 		&:is(:hover, :focus-visible) {
-			--button-text-a: #d1f4ee;
-			--button-text-b: #8ac3e1;
+			--button-text-a: var(--palette-07);
+			--button-text-b: var(--palette-06);
 		}
 	}
 }
