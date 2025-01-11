@@ -227,7 +227,7 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 
 .main-heading-title {
 	position: relative;
-	inset-block-end: -0.1em;
+	inset-block-end: -0.05em; /* Safari on macOS doesn't like this at -0.1em so much, but no negative inset looks weird everywhere else… splitting the difference */
 
 	margin: 0 auto;
 	padding-block-end: 0.1em;
