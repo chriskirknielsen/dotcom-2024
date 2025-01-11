@@ -157,8 +157,10 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 	background: #954514;
 	box-shadow: var(--button-inner-shadow), 0 1px 2px 1px var(--orb-4);
 
-	transition: var(--easing) 300ms;
-	transition-property: --button-text-a, --button-text-b, box-shadow;
+	@media (prefers-reduced-motion: no-preference) {
+		transition: var(--easing) 300ms;
+		transition-property: --button-text-a, --button-text-b, box-shadow;
+	}
 
 	&:is(:hover, :focus-visible) {
 		box-shadow: var(--button-inner-shadow), 0 0 4px 1px #ffff5e;
@@ -307,7 +309,9 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 		background: var(--color-alt);
 		box-shadow: var(--inner-glow);
 
-		transition: box-shadow var(--easing) 300ms;
+		@media (prefers-reduced-motion: no-preference) {
+			transition: box-shadow var(--easing) 300ms;
+		}
 
 		&:hover,
 		&:focus {
@@ -316,11 +320,6 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 
 		&:focus {
 			outline: 2px solid var(--color-alt);
-		}
-
-		&::placeholder {
-			color: inherit;
-			opacity: 0.42;
 		}
 	}
 

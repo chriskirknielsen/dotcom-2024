@@ -87,7 +87,9 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 	outline: 1px solid var(--bg-main);
 	outline-offset: -0.5px;
 
-	transition: box-shadow var(--easing) 300ms;
+	@media (prefers-reduced-motion: no-preference) {
+		transition: box-shadow var(--easing) 300ms;
+	}
 
 	&:is(:hover, :focus-visible) {
 		--inner-glow: inset 0 0 8px var(--bg-alt);

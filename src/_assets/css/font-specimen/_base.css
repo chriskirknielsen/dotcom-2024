@@ -246,13 +246,12 @@ hr {
 
 	& > input[type='text'] {
 		flex: 4 1 30ch;
+		&::placeholder {
+			color: inherit;
+
+			opacity: 0.42;
+		}
 	}
-}
-
-input.specimen::placeholder {
-	color: inherit;
-
-	opacity: 0.7;
 }
 
 font-preview.defined > form > .preview-fallback,
@@ -346,8 +345,11 @@ font-preview:not(.defined) > form > :not(.preview-fallback),
 
 			transform: translateX(0) scale(0.9);
 			filter: brightness(0.5);
-			transition: var(--easing) 300ms;
-			transition-property: filter, transform;
+
+			@media (prefers-reduced-motion: no-preference) {
+				transition: var(--easing) 300ms;
+				transition-property: filter, transform;
+			}
 		}
 
 		&:checked::before {
