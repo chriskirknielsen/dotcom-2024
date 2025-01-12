@@ -44,13 +44,6 @@
 			color: var(--C-text);
 			background-color: var(--C-surface-alt, var(--C-surface));
 		}
-
-		/* Keep all the figures at a 1:1 aspect ratio by absolutely positioning the caption at the end */
-		&:not(:only-child) > figcaption {
-			position: absolute;
-			inset-block-end: 0;
-			inset-inline: 0;
-		}
 	}
 
 	& > :is(figure, picture, a, img, video) {
