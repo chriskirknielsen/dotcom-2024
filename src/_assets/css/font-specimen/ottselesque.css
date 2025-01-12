@@ -15,6 +15,7 @@
 	--orb-2: #b15125;
 	--orb-3: #7c2d0f;
 	--orb-4: #461f0e;
+	--orb-ratio: 0.7452; /*! Magic number: Precursor Orb proportions */
 	--texture-bg: url('texture.jpg') 50% 50% / 64px 64px;
 	/* Texture taken from https://unsplash.com/photos/3bb9RUp86M0 */
 	--body-font: Georgia, Cambria, 'Times New Roman', Times, serif;
@@ -65,10 +66,10 @@ h2 {
 		inset-block-start: 0.125em;
 		inset-inline-start: calc(-1 * clamp(1em, (1rem + ((1vw - 0.6625rem) * 53.3333)), var(--layout-gutter) * 1.25));
 
-		aspect-ratio: 0.7452; /* Magic number: Precursor Orb proportions */
+		aspect-ratio: var(--orb-ratio);
 		block-size: 1em;
 
-		font-size: 1.325rem;
+		font-size: 1.325rem; /* Scale up the orb a tiny bit */
 
 		border-radius: 50% 50% 50% 50% / 54% 54% 46% 46%; /* Precursor Orb shape */
 		background-image: radial-gradient(ellipse farthest-side at top left, var(--orb-1) 50%, var(--orb-2) 75%, var(--orb-3) 87.5%, var(--orb-4)), url('orb.jpg');
@@ -79,7 +80,7 @@ h2 {
 		box-shadow: 0 0 3px #ffffd9, 0 0 4px 1px #ffff5e;
 
 		@media (prefers-reduced-motion: no-preference) {
-			animation: float 2s ease-in-out infinite alternate, bgTile 10s linear infinite;
+			animation: float 2s ease-in-out infinite alternate, bgTile 4s linear infinite;
 			animation-delay: var(--parent-orb-delay, 0s);
 		}
 	}
@@ -89,7 +90,7 @@ h2 {
 	}
 }
 :is(div, main):has(> h2):nth-child(even) {
-	--parent-orb-delay: -873ms;
+	--parent-orb-delay: -1873ms;
 }
 
 @keyframes float {
@@ -102,10 +103,10 @@ h2 {
 }
 @keyframes bgTile {
 	from {
-		background-position: center, calc(0% + 64px) 0;
+		background-position: center, 0 0;
 	}
 	to {
-		background-position: center, calc(0% - 64px) 0;
+		background-position: center, -42px 0; /*! Magic number! */
 	}
 }
 
@@ -192,10 +193,14 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 
 .styled-specimen {
 	--s: clamp(1px, 0.008125em, 4px); /* Shadow offset */
+	padding-inline: clamp(4px, 0.25em, 10px);
+	line-height: inherit;
 	background: linear-gradient(#fce164, #e18c47);
 	-webkit-text-fill-color: transparent;
 	-webkit-background-clip: text;
 	background-clip: text;
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
 
 	filter: drop-shadow(0 calc(min(1.5px, var(--s)) * -1) 0 var(--palette-01)) drop-shadow(var(--s) var(--s) 0 #300602) drop-shadow(var(--s) var(--s) 0 #30060280);
 }

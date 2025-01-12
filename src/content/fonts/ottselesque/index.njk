@@ -175,8 +175,8 @@ fontSpecimenNav: {
         </div>
     </div>
 
-    <p class="specimen specimen-dlig sentence-sample styled-specimen">
-        Powercell Hunters
+    <p class="specimen specimen-dlig sentence-sample">
+        <span class="styled-specimen">Powercell Hunters</span>
     </p>
 
     <h2 id="ligatures">Ligatures <span class="requires-js">(click code to copy)</span></h2>
@@ -217,7 +217,7 @@ fontSpecimenNav: {
         'ss',
         'tt'
     ] %}
-    <p class="specimen-set-demo specimen specimen-dlig ligature-set-demo">
+    <div class="specimen-set-demo specimen specimen-dlig ligature-set-demo">
         {% for liga in ligaList %}
             {% set ligaId = 'liga-' + loop.index + '-' + (liga | safe | trim | slugify) %}
             <label for="{{ligaId}}" class="ligature-sample" title="&quot;{{ liga | safe }}&quot;">
@@ -226,7 +226,7 @@ fontSpecimenNav: {
                 <input type="text" class="ligature-sample-code" value="{{ liga | safe }}" id="{{ligaId}}" readonly>
             </label>
         {% endfor %}
-    </p>
+    </div>
 
     <div class="full padding-block" id="info">
         <div class="full-content flow">
@@ -235,7 +235,7 @@ fontSpecimenNav: {
                 Some backstory: I've always been a huge Jak and Daxter fan (I still use the username JaKhris — very original, I know), as it was my first game on PlayStation 2, and I used to run a J&amp;D fansite called <strong>JAKPRO</strong> back in the day, which closed (I won't lie, that was a bitter experience). It got revived as "The Naughty Kennel", a fansite more broadly about Naughty Dog games, but then it closed as well as my available time dwindled once more. Maintaining a dying breed of websites is no small feat — hats off to my friends at <a href="https://ratchet-galaxy.com">Ratchet-Galaxy</a>!
             </p>
             <p>
-                I'm not sure why, but some time during July 2021, I had a nostalgic feeling for these games, thinking back to my webmastering days, and making J&amp;D-based fanart and whatnot. I always thought to myself "How come we never got some font based on this logo?" I wanted to make one myself all those years ago, but my graphic design skills were terrible, and my font-making skills were non-existent. Nowadays, I can handle it (well, you can be the judge of that), so I set out to make it! It's based on the logo and various promotional material or concept art I found, and then lots of creative liberty.
+                I'm not sure why, but some time during July 2021, I had a nostalgic feeling for these games, thinking back to my webmastering days, and making (bad) J&amp;D-based photoshops and whatnot. I always thought to myself "How come we never got some font based on this logo?" I wanted to make one myself all those years ago, but my graphic design skills were terrible, and my font-making skills were non-existent. Nowadays, I can handle it (well, you can be the judge of that), so I set out to make it! It's based on the logo and various promotional material or concept art I found, and then lots of creative liberty.
             </p>
             <p>
                 The joys of writing your username with the font of your favourite video game are real. I've always been a bit of a typeface nerd, so this was a really fun project! I hope you enjoy using this to make your own J&amp;D-themed creations, and please share them with me via e-mail or on <a href="{{ social.mastodon.url }}">Mastodon</a>!
