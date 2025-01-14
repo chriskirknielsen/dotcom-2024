@@ -89,8 +89,10 @@ h2 {
 		line-height: inherit;
 	}
 }
-:is(div, main):has(> h2):nth-child(even) {
-	--parent-orb-delay: -1873ms;
+
+:nth-child(2n of h2),
+:nth-child(2n of :has(> h2)) > h2 {
+	--parent-orb-delay: -1287ms;
 }
 
 @keyframes float {
