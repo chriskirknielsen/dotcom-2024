@@ -169,7 +169,11 @@ hr {
 .two-up {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
-	gap: var(--layout-gutter);
+	gap: calc(var(--layout-gutter) + 1em);
+
+	& :is(p, li) {
+		text-wrap: pretty;
+	}
 }
 
 /* Interactives and reusables styles */
