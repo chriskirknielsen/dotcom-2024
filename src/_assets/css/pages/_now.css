@@ -50,8 +50,11 @@
 }
 
 .now-item-content {
-	padding-block: var(--size-m) 0;
 	grid-row: 4 / -1;
+	padding-block: var(--size-m) 0;
+
+	text-wrap: balance;
+	text-wrap: pretty;
 }
 
 .now-item-image {
