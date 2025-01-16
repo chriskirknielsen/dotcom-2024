@@ -137,8 +137,9 @@ function filterTiles(context, inputName) {
 		footerElement.animate([{ transform: `translateY(${-1 * footerOffsetDelta}px)` }, { transform: 'translateY(0)' }], animateOptions);
 	}
 
+	let baseFilter = '';
 	if (initialHash.indexOf(hashIndicator) === 0) {
-		let baseFilter = initialHash.slice(hashIndicator.length);
+		baseFilter = initialHash.slice(hashIndicator.length);
 		let filterSelectBox = context.querySelector('#filter-' + (baseFilter || 'all'));
 
 		if (!filterSelectBox) {
@@ -146,8 +147,8 @@ function filterTiles(context, inputName) {
 			filterSelectBox = context.querySelector('#filter-all');
 		}
 		filterSelectBox.checked = true;
-		filterTo(baseFilter, true);
 	}
+	filterTo(baseFilter, true);
 
 	context.addEventListener('input', function (e) {
 		let radio = e.target.closest(`[name="${inputName}"]`);
