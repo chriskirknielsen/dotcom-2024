@@ -42,7 +42,12 @@
 		{% endif %}
 
 		{% if design.note %}
-			<p class="fontStyle-italic fontSize-smaller">{{ design.note | markdown(true) | safe }}</p>
+			<p class="fontStyle-italic fontSize-smaller">
+				{% if design.isCommission and "Commission" in design.note %}
+					{% svg 'handshake', { class: 'inline-icon inline-icon--center linecap-auto' } %}
+				{% endif %}
+				{{ design.note | markdown(true) | safe }}
+			</p>
 		{% endif %}
 		
 		{% if design.variant %}

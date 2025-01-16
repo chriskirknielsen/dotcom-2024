@@ -56,6 +56,14 @@
 					</div>
 				{% endif %}
 			{%- endsetAsync %}
+			{% setAsync 'designCommission' -%}
+				{% if design.isCommission %}
+					<div class="grouper grouper--icon-text-pair" style="--GAP: var(--size-s);">
+						{% svg 'handshake', { class: 'inline-icon linecap-auto' } %}
+						<span>Commissioned</span>
+					</div>
+				{% endif %}
+			{%- endsetAsync %}
 			{% set designLinks %}
 				<ul role="list" class="flex-list | marginBlockStart-auto" {% if enableViewTransitions %}style="view-transition-name:{{ design.slug }}-list;"{% endif %}>
 					{%- for site, url in design.links %}
@@ -75,7 +83,7 @@
 
 			{% component 'card', {
 				image: {
-					decorator: designVariant,
+					decorator: designVariant or designCommission,
 					src: [assets.images, 'designs', design.img] | toPath | toNetlifyImage({ w: 320 }),
 					alt: design.name,
 					width: 600,

@@ -489,6 +489,7 @@ const designs = [
 		similar: ['js-retro-vhs', 'html-retro-vhs', 'react-retro-vhs'],
 		date: '2021-12-24',
 		accent: '#d6307f',
+		isCommission: true,
 	},
 	{
 		slug: 'js-retro-vhs',
@@ -503,6 +504,7 @@ const designs = [
 		similar: ['css-retro-vhs', 'html-retro-vhs', 'react-retro-vhs'],
 		date: '2022-03-01',
 		accent: '#3c8ee0',
+		isCommission: true,
 	},
 	{
 		slug: 'html-retro-vhs',
@@ -517,6 +519,7 @@ const designs = [
 		similar: ['css-retro-vhs', 'js-retro-vhs', 'react-retro-vhs'],
 		date: '2024-05-14',
 		accent: '#eba66f',
+		isCommission: true,
 	},
 	{
 		slug: 'react-retro-vhs',
@@ -532,6 +535,7 @@ const designs = [
 		similar: ['html-retro-vhs', 'css-retro-vhs', 'js-retro-vhs'],
 		date: '2024-07-19',
 		accent: '#9bf4eb',
+		isCommission: true,
 	},
 	{
 		slug: 'kevin-powell-grid',
@@ -546,6 +550,7 @@ const designs = [
 		similar: ['kevin-powell-css', 'kevin-powell-color-space'],
 		date: '2023-12-31',
 		accent: '#30b2b2',
+		isCommission: true,
 	},
 	{
 		slug: 'kevin-powell-css',
@@ -560,6 +565,7 @@ const designs = [
 		similar: ['kevin-powell-grid', 'kevin-powell-color-space'],
 		date: '2023-12-31',
 		accent: '#f0a135',
+		isCommission: true,
 	},
 	{
 		slug: 'kevin-powell-color-space',
@@ -574,6 +580,7 @@ const designs = [
 		similar: ['kevin-powell-color-space', 'kevin-powell-css'],
 		date: '2023-12-31',
 		accent: '#43b1a5',
+		isCommission: true,
 	},
 
 	// Below are designs that are hidden but still accessible via their unique URL
