@@ -18,8 +18,9 @@
 		summary: (data) => data.design.description,
 		customMetaImage: (data) => `/${data.assets.images}/designs/${data.design.img}`,
 		date: (data) => new Date(data.design.date),
+		metaExtra: function(data) { return `<link rel="preload" as="image" href="${this.toNetlifyImage(this.toPath([data.assets.images, 'designs', data.design.img]))}">`; }
 	},
-	heroCta: [{ url: "/designs/#filter:__restore__", label: "Back to Designs", icon: "arrow-left", iconBefore: true }]
+	heroCta: [{ url: "/designs/", label: "Back to Designs", icon: "arrow-left", iconBefore: true }]
 }
 ---
 
@@ -68,13 +69,11 @@
 				{%- for otherDesignSlug in design.similar %}
 					{% set otherDesign = designs | find('slug', otherDesignSlug) %}
 					<li>
-						<a href="{{ ['designs', (otherDesign.slug | slugify)] | toPath }}/">
-							<span class="tooltip" data-tooltip-flow="inline" data-tooltip-pos="start center">
-								{{ otherDesign.name | safe }}
+						<a href="{{ ['designs', (otherDesign.slug | slugify)] | toPath }}/" class="tooltip" data-tooltip-flow="inline" data-tooltip-pos="start center">
+							<span>{{ otherDesign.name | safe }}</span>
 
-								<span class="tooltip-content">
-									<img src="{{ [assets.images, 'designs', otherDesign.img] | toPath | toNetlifyImage({ w: 150 }) }}" alt="" width="150" height="150" loading="lazy">
-								</span>
+							<span class="tooltip-content">
+								<img src="{{ [assets.images, 'designs', otherDesign.img] | toPath | toNetlifyImage({ w: 150 }) }}" alt="" width="150" height="150" loading="lazy">
 							</span>
 						</a>
 					</li>
@@ -83,3 +82,14 @@
 		{% endif %}
 	</div>
 </div>
+
+{% if not metadata.nakedJs %}
+<script>
+// If the hash value was a special keyword, restore whatever was in session storage
+const prevPageFilter = sessionStorage.getItem('designFilter') || '';
+const prevPageButton = document.querySelector('.hero a[href$="/designs/"]');
+if (prevPageFilter && prevPageButton) {
+	prevPageButton.href += `#filter:${prevPageFilter}`;
+}
+</script>
+{% endif %}

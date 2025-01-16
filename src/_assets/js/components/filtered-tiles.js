@@ -139,10 +139,6 @@ function filterTiles(context, inputName) {
 
 	if (initialHash.indexOf(hashIndicator) === 0) {
 		let baseFilter = initialHash.slice(hashIndicator.length);
-		// If the hash value was a special keyword, restore whatever was in session storage
-		if (baseFilter === '__restore__') {
-			baseFilter = sessionStorage.getItem(storageKey) || '';
-		}
 		let filterSelectBox = context.querySelector('#filter-' + (baseFilter || 'all'));
 
 		if (!filterSelectBox) {
