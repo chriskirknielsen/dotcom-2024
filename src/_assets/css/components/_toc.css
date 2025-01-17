@@ -65,7 +65,7 @@
 		}
 	}
 
-	.toc-list:not(:hover, :focus-within) li:not([data-current]) > a {
+	.toc-list:not(:hover, :focus-within) li:not([data-current]):not(:has(li[data-current])) > a {
 		opacity: 0.67;
 	}
 }
