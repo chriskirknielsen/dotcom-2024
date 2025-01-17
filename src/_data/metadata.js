@@ -15,8 +15,8 @@ export default {
 	currentYear: new Date().getFullYear(),
 	lang: 'en',
 	merch: {
-		TeePublic: 'https://www.teepublic.com/user/chriskirknielsen/',
 		RedBubble: 'https://www.redbubble.com/people/ckirknielsen/shop',
+		TeePublic: 'https://www.teepublic.com/user/chriskirknielsen/',
 		Society6: 'https://society6.com/chriskirknielsen',
 		DesignByHumans: 'https://www.designbyhumans.com/shop/chriskirknielsen/',
 		CottonBureau: 'https://cottonbureau.com/',
