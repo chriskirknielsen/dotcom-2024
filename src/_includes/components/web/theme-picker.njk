@@ -6,7 +6,7 @@
             System
         </span>
 		<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}">
-			<button class="button button--icon" data-theme-set="" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-system-description">
+			<button class="button button--icon-only" data-theme-set="" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-system-description">
 				{% svg 'device-desktop', { class: 'hide-when-viewport--small' } %}
 				{% svg 'device-phone', { class: 'hide-when-viewport--large' } %}
 			</button>
@@ -26,7 +26,7 @@
 			</span>
 			{% for theme in groupedthemes %}
 				<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}"{% if theme.key == 'secret' %} data-theme-condition="{{ theme.key }}"{% endif %}>
-					<button class="button button--icon" data-theme-set="{{ theme.key }}" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-{{ theme.key }}-description">
+					<button class="button button--icon-only" data-theme-set="{{ theme.key }}" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-{{ theme.key }}-description">
 						{% svg 'theme-'+theme.key %}
 					</button>
 					<span class="tooltip-content" id="theme-picker-{{ theme.key }}-description">

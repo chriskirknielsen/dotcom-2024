@@ -79,6 +79,7 @@
 --_link-decoration-thickness-active: var(--link-decoration-thickness-active, 0.5em);
 --_cta-padding-block: var(--cta-padding-block, var(--size-2xs));
 --_cta-padding-inline: var(--cta-padding-inline, var(--size-s));
+--_cta-icon-size: var(--cta-icon-size, 1.5em);
 --_cta-text-color: var(--cta-text-color, var(--C-text));
 --_cta-text-color-active: var(--cta-text-color-active, var(--C-text));
 --_cta-text-color-pressed: var(--cta-text-color-pressed, var(--C-surface));
@@ -149,6 +150,7 @@ html:not([data-theme]), html[data-theme="dawn"], [data-theme="dusk"] {
 --link-underline-color: var(--T-dawn, var(--C-heading)) var(--T-dusk, initial);
 --cta-text-color: var(--T-dawn, var(--C-text)) var(--T-dusk, var(--C-text));
 --cta-bg-color: var(--T-dawn, var(--C-surface-alt)) var(--T-dusk, var(--C-surface-alt));
+--cta-bg-color-active: var(--T-dawn, var(--C-surface)) var(--T-dusk, var(--C-surface));
 --cta-border-color: var(--T-dawn, var(--C-heading)) var(--T-dusk, var(--C-inactive));
 --cta-border-color-active: var(--T-dawn, var(--C-accent)) var(--T-dusk, white);
 --cta-border-color-pressed: var(--T-dawn, var(--C-text)) var(--T-dusk, var(--C-text));
@@ -162,7 +164,6 @@ html:not([data-theme]), html[data-theme="dawn"], [data-theme="dusk"] {
 --link-underline-offset-active: var(--T-dawn, initial) var(--T-dusk, -0.25em);
 --link-skip-ink-active: var(--T-dawn, initial) var(--T-dusk, none);
 --link-decoration-thickness-active: var(--T-dawn, initial) var(--T-dusk, 0.5em);
---cta-bg-color-active: var(--T-dawn, initial) var(--T-dusk, var(--C-surface));
 --card-heading-color-active: var(--T-dawn, initial) var(--T-dusk, var(--C-text));
 --C-canvas: var(--T-dawn, #dcdac8) var(--T-dusk, #1e1230);
 --C-surface: var(--T-dawn, #e2e2d5) var(--T-dusk, #2d0042);

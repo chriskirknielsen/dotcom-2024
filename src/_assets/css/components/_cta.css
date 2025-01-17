@@ -28,11 +28,11 @@
 		transition-timing-function: var(--easing-in-out);
 	}
 
-	&.button--icon {
+	&.button--icon-only {
 		--CTA-padding: var(--_cta-padding-block);
 	}
 
-	&.button--icon,
+	&.button--icon-only,
 	&.button--tag {
 		text-decoration: none;
 	}
@@ -91,4 +91,9 @@
 		transform: scale(0, 0.8);
 		opacity: 0;
 	}
+}
+
+.button-icon {
+	inline-size: auto;
+	block-size: var(--_cta-icon-size);
 }

@@ -15,6 +15,19 @@ export default function (string) {
 	const defaults = json.defaults;
 	const extraFontProps = ['weight', 'style']; // These are also consumed in @font-face so we cannot simply declare them as typical tokens
 
+	//! DEBUG
+	const CHECK_FOR_REDECLARED_DEFAULTS = false;
+	if (CHECK_FOR_REDECLARED_DEFAULTS) {
+		for (let theme in themes) {
+			const themeTokens = themes[theme].tokens;
+			for (let token in themeTokens) {
+				if (themeTokens[token] === defaults[token]) {
+					console.warn(`[Duplicate Token] Theme: ${theme}, Token: ${token}, Value: ${defaults[token]}`);
+				}
+			}
+		}
+	}
+
 	// Helpers
 	const tokenVal = (val) => {
 		if (typeof val === 'string' && val.indexOf('{{') === 0) {
