@@ -15,9 +15,9 @@
 {% set labelRender -%}
 {% if label.aria %}
     <span class="visually-hidden">{{ label.aria }}</span>
-    {% if label.plain %}
+    {% if label.text %}
         {% set emptyLabel = false %}
-        <span aria-hidden="true">{{ label.plain }}</span>
+        <span aria-hidden="true">{{ label.text }}</span>
     {% endif %}
 {% elseif label %}
     {% set emptyLabel = false %}
