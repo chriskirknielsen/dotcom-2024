@@ -180,7 +180,7 @@
 			margin-block: var(--TOOLTIP-arrow-margin-block, auto);
 			margin-inline: var(--TOOLTIP-arrow-margin-inline, auto);
 
-			transform: scale(var(--TOOLTIP-arrow-scale, 0)) translate(var(--TOOLTIP-arrow-x, 0%), var(--TOOLTIP-arrow-y, 0%)) rotate(45deg);
+			transform: translate(var(--TOOLTIP-arrow-x, 0%), var(--TOOLTIP-arrow-y, 0%)) rotate(45deg) scale(var(--TOOLTIP-arrow-scale, 0));
 		}
 	}
 
