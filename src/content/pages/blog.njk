@@ -30,7 +30,10 @@
                     case 0.875: averageDecimalFraction = '&frac78;'; averageDecimalLabel = 'seven eighths'; break;
                 }
                 const averageDecimalFractionMarkup = averageDecimalFraction ? `&thinsp;<span class="visually-hidden">and ${averageDecimalLabel}</span><span aria-hidden="true">${averageDecimalFraction}</span>` : '';
-                textInsert = ` (every ${averageInteger}${averageDecimalFractionMarkup} months on average, it seems)`;
+                const isSingleMonth = averageInteger === 1 && averageDecimalFraction === '';
+                const pluralMark = isSingleMonth ? '' : 's'; // Month pluralisation
+                const countString = isSingleMonth ? '' :  `${averageInteger}${averageDecimalFractionMarkup}`;
+                textInsert = ` (every ${countString} month${pluralMark} on average, it seems)`;
             }
 
             return `I like to write once in a while${textInsert}. Enjoy!`;
