@@ -57,10 +57,12 @@ cycling-expander .expander[data-open='true'] .expander-content {
 	--ANIM-start-opacity: 0;
 }
 
-cycling-expander .expander[data-open='true'] .expander-content,
-:nth-child(-n + 4 of cycling-expander:has(.expander[data-open='true']) ~ *) {
-	/* Animating the next 4 elements should make the illusion relatively effective */
-	animation: cyclingExpanderReveal var(--anim-long) var(--easing-circ-in) 1 backwards;
+@media (--accept-motion) {
+	cycling-expander .expander[data-open='true'] .expander-content,
+	:nth-child(-n + 4 of cycling-expander:has(.expander[data-open='true']) ~ *) {
+		/* Animating the next 4 elements should make the illusion relatively effective */
+		animation: cyclingExpanderReveal var(--anim-long) var(--easing-circ-in) 1 backwards;
+	}
 }
 
 @keyframes cyclingExpanderReveal {
@@ -71,8 +73,8 @@ cycling-expander .expander[data-open='true'] .expander-content,
 }
 
 /* Adapted from https://nerdy.dev/open-and-close-transitions-for-the-details-element */
-@supports (interpolate-size: allow-keywords) {
-	@media (prefers-reduced-motion: no-preference) {
+@media (--accept-motion) {
+	@supports (interpolate-size: allow-keywords) {
 		details {
 			interpolate-size: allow-keywords;
 

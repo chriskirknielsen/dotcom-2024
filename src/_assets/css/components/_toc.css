@@ -59,7 +59,7 @@
 		--LINK-decoration-thickness: calc(var(--link-decoration-thickness, 1px) + 2px);
 	}
 
-	@media (prefers-reduced-motion: no-preference) {
+	@media (--accept-motion) {
 		.toc-list a {
 			transition: opacity var(--anim-short) var(--easing-in-out);
 		}
