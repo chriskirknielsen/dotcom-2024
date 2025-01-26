@@ -38,16 +38,18 @@
 		/*! Magic number: in the context of the SVG for the logo, a 17 point border is just enough to cover the shape, plus some margin for subpixel rounding */
 		clip-path: var(--CLIP, none);
 
-		transition-timing-function: var(--easing-circ-in);
-		transition-duration: var(--anim-long);
-		transition-property: stroke-width;
+		@media (--accept-motion) {
+			transition-timing-function: var(--easing-circ-in);
+			transition-duration: var(--anim-long);
+			transition-property: stroke-width;
 
-		&[data-k] {
-			transition-delay: 100ms;
-		}
+			&[data-k] {
+				transition-delay: 100ms;
+			}
 
-		&[data-n] {
-			transition-delay: 200ms;
+			&[data-n] {
+				transition-delay: 200ms;
+			}
 		}
 	}
 
@@ -87,19 +89,8 @@ theme-picker button {
 	line {
 		transform-origin: 50% 50%;
 		transform-box: view-box;
-
-		/* @media (--accept-motion) {
-            transition: transform var(--easing-in-out) 200ms;
-        } */
 	}
 }
-
-/* .header-menu-toggle,
-.header-themepicker-toggle {
-	line {
-		stroke-linecap: var(--_stroke-linecap, square);
-	}
-} */
 
 .header-link {
 	--LINK-color: var(--_header-link-color, var(--_link-color));

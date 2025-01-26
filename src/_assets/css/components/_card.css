@@ -84,7 +84,9 @@
 		object-fit: cover;
 		object-position: var(--CARD-image-focus-point, 50% 50%);
 
-		transition: transform var(--CARD-transition-base);
+		@media (--accept-motion) {
+			transition: transform var(--CARD-transition-base);
+		}
 	}
 }
 

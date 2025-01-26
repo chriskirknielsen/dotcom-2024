@@ -63,9 +63,8 @@
 	transform-origin: 50% 100%;
 	transform-style: preserve-3d;
 
-	transition: box-shadow var(--anim-short) var(--easing-in-out);
-
 	@media (--accept-motion) {
+		transition: var(--anim-short) var(--easing-in-out);
 		transition-property: box-shadow, transform;
 	}
 

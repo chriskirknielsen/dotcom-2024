@@ -32,7 +32,9 @@
 	transform-origin: 42.5% 50%;
 	transform-origin: calc(100% - var(--SQRT3) * 100% / 3) 50%; /* 2 */
 
-	transition: transform var(--anim-short) var(--easing-in-out);
+	@media (--accept-motion) {
+		transition: transform var(--anim-short) var(--easing-in-out);
+	}
 
 	.expander[open] &,
 	.expander-button[aria-pressed='true'] & {
