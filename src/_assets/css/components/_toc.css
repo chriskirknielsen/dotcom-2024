@@ -4,8 +4,15 @@
 		column-gap: var(--layout-gutter);
 	}
 
+	/*
+	 * Because ::marker isn't interoperably stylable, I am using good old ::before to style it as I wish.
+	 * 1: Cancels out ::marker
+	 * 2: Makes the pseudo content overflow _away_ from the list item content
+	 * 3: Ensure it doesn't shift the list item content
+	 */
 	ol {
 		counter-reset: tocList;
+		list-style-type: ''; /* 1 */
 
 		ol {
 			--toc-marker-type: upper-alpha;
@@ -21,13 +28,18 @@
 
 		page-break-inside: avoid;
 
-		&::marker {
-			content: counter(tocList, var(--toc-marker-type, decimal-leading-zero)) '  ';
+		&::before {
+			content: counter(tocList, var(--toc-marker-type, decimal-leading-zero)) ' ';
+
+			display: inline-flex; /* 2 */
+			justify-content: flex-end; /* 2 */
+			inline-size: 0px; /* 3 */
 
 			font-size: 0.5em;
+			letter-spacing: 0.25em;
 		}
 
-		&:not(:has(> a:is(:hover, :focus-visible)))::marker {
+		&:not(:has(> a:is(:hover, :focus-visible)))::before {
 			color: color-mix(in hsl, var(--C-text), transparent 30%);
 		}
 	}
