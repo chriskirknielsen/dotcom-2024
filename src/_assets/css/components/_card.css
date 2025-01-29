@@ -97,7 +97,7 @@
 	inset: auto 0 var(--size-m) auto;
 	z-index: 1;
 
-	max-inline-size: 80%;
+	max-inline-size: calc(100% - 1em);
 	padding: 1px var(--size-xs);
 
 	line-height: 1.3;
