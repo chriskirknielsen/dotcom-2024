@@ -28,8 +28,8 @@
 <meta property="og:url" content="{{ (page.url or '/') | absoluteUrl(metadata.url) }}">
 
 {% set meta_image_url %}{{ customMetaImage or ([assets.images, 'metaimage.jpg'] | toPath) }}{% endset %}
-<meta name="twitter:image" property="og:image" content="{{ meta_image_url | trim | absoluteUrl(metadata.url) }}">
-<meta name="twitter:image:alt" property="og:image:alt" content="{{ title }}">
+<meta property="og:image" content="{{ meta_image_url | trim | absoluteUrl(metadata.url) }}">
+<meta property="og:image:alt" content="{{ title }}">
 
 {# One-off additions to the head content (psst, it's called meta but you can pass in <link>, too!) #}
 {% if metaExtra %}{{ metaExtra | safe }}{% endif %}
