@@ -51,7 +51,7 @@ Just like the CSS design, I animated this one for extra fun. Click to restart th
 
 {% codepen "https://codepen.io/chriskirknielsen/pen/wvPPWKq" %}
 
-I was also quite happy with this detail for the t-shirt, coming up with a symbol for optional chaining, which in JavaScript, lets you access a sub-property if it exists with the syntax `prop?.subprop`.
+I was also quite happy with this detail for the t-shirt, coming up with a symbol for optional chaining, which in JavaScript, lets you access a property if it exists on an object with the syntax, e.g. a `breed` property on a `dog` object: `dog?.breed`.
 
 {% image "./optional-chaining.jpg" | toRoot, "A close-up for the Optional Chaining section on the shirt, featuring a chain link, with one of them being a question mark", "", { width: 1280, height: 720 } %}
 
@@ -74,11 +74,15 @@ This logo is also animated, as a treat. Click to restart the animation.
 ## State of React
 
 {% set reactShirtData = designs | find('slug', 'react-retro-vhs') %}
-We had tried to find time previous years to collaborate on a design for the React survey, and finally got around to it for the [2023 survey](https://2023.stateofreact.com/en-US/). Sacha was more hands-on since I am not knowledgeable at all in React-land. He suggested a different style, this time taking inspiration from anime and science-fiction user interfaces.
+We had tried to find time previous years to collaborate on a design for the React survey, and finally got around to it for the [2023 survey](https://2023.stateofreact.com/en-US/). Sacha was more hands-on since I am not knowledgeable at all in React-land. He suggested a different style, this time taking inspiration from anime and science-fiction user interfaces. (below you'll see the 2024 version instead)
 
-While React is not my area of expertise, I think this looks pretty cool! Sacha set up most of the ideas (and with my limited Japanese knowledge, the kanji as well!), and after I drew custom katakana, he made even cooler ones and created the final survey logo, which just goes to show how this kind of collaboration can be fruitful!
+While React is not my area of expertise, I think this looks pretty cool! Sacha set up most of the ideas (and due to my limited Japanese knowledge, the kanji as well), and after I drew custom katakana, he made even cooler ones, which just goes to show how this kind of collaboration can be fruitful!
 
 {% gallery %}
-{% image './sor2023-cover.jpg' | toRoot, "A logo for the State of React, with an atom depicted with three rings in the center, framed by a hexagon. Below, the word “React” is written in Japanese katakana, and below that, in smaller text, “State of React” is written.", "", { ratio: "600/600", group: true } %}
+{% image './sor2024-cover.jpg' | toRoot, "A logo for the State of React, with an atom depicted with three rings in the center, framed by a hexagon. Above, the word “React” is written, and below, in Japanese katakana. In smaller text, “State of” appears at the top, and 2024” at the bottom.", "", { ratio: "600/600", group: true } %}
 {% image '/' + assets.images + '/designs/' + reactShirtData.img, "A rework of the logo for the survey rearranged to look like a science-fiction and/or anime interface, on a midnight blue t-shirt.", 'Get yours at <a href="'+reactShirtData.links.CottonBureau+'">CottonBureau</a>', { ratio: "600/600", group: true } %}
 {% endgallery %}
+
+Surprise! It's animated. Click to restart the animation.
+
+{% codepen "https://codepen.io/chriskirknielsen/pen/mdNNYKP" %}
