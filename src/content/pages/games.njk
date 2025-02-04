@@ -227,7 +227,7 @@ games: [
         blurb: "I've always been an aspiring skateboarder, though I am barely worthy of an ollie. Regardless, I love the sport, and while Tony Hawk games are super fun, skate. is one of those games that just made it feel real _and_ fun. I've sunk many hours in the three games, and I am definitely excited by the 4th entry, whenever it's ready!"
     },
 ]
-heroCta: [{ label: "Gaming Library", url: "/games/library/" }]
+tags: [_slash]
 ---
 
 {% set goatIndicator %}
@@ -237,7 +237,7 @@ heroCta: [{ label: "Gaming Library", url: "/games/library/" }]
 {% endset %}
 
 <p>
-    Inspired by <a href="https://localghost.dev/games/">Sophie Koonin</a>, <a href="https://alistairshepherd.uk/games/">Alistair Shepherd</a>, and <a href="https://tylersticka.com/journal/favorite-games/">Tyler Sticka</a>, here are some of my favourite games. (see also <a href="https://rknight.me/blog/my-favourite-games/">Robb Knight's</a>) The only reason I am anywhere near good enough with design and development is because I made a fan-site about video games back in the day, so this feels like a necessary page. If some of these resonate with you and you want to nerd out about it, <a href="{{'https://'+metadata.author.mastodonInstance+'/@'+metadata.author.mastodon}}">let me know on Mastodon</a>! (I have listed all <a href="/games/library/">the games in my library</a> here if that's of interest)
+    Inspired by <a href="https://localghost.dev/games/">Sophie Koonin</a>, <a href="https://alistairshepherd.uk/games/">Alistair Shepherd</a>, and <a href="https://tylersticka.com/journal/favorite-games/">Tyler Sticka</a>, here are some of my favourite games. (see also <a href="https://rknight.me/blog/my-favourite-games/">Robb Knight's</a>) The only reason I am anywhere near good enough with design and development is because I made a fan-site about video games back in the day, so this feels like a necessary page. If some of these resonate with you and you want to nerd out about it, <a href="{{'https://'+metadata.author.mastodonInstance+'/@'+metadata.author.mastodon}}">let me know on Mastodon</a>! (I have listed all {% component 'cta', { label: "the games in my library", url: "/games/library/" } %} here if that's of interest)
     <br>
     <span class="fontStyle-italic fontSize-smaller">
         {{ goatIndicator | safe }}

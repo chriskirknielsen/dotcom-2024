@@ -10,8 +10,9 @@ const navbar = [
 ];
 const socialFromEntry = Object.entries(social).map(([key, item]) => ({ path: item.url, label: item.label }));
 const slashPages = [
-	{ path: '/now/', label: '/now' },
 	{ path: '/uses/', label: '/uses' },
+	{ path: '/support/', label: '/support' },
+	{ path: '/now/', label: '/now' },
 	{ path: '/games/', label: '/games' },
 ];
 const gamesLibrary = { path: '/games/library/', label: 'Games Library' };
@@ -20,6 +21,7 @@ const email = { path: `mailto:${encodeURIComponent('chriskirknielsen+dot-com@gma
 export default {
 	rss, // Expose it via global data
 	navbar,
+	slashPages,
 	footerGroups: [
 		[...navbar, rss],
 		[

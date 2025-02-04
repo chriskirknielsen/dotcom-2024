@@ -3,7 +3,6 @@ title: Now
 summary: What am I doing these days?
 permalink: /now/
 section: now
-heroCta: [{ url: "https://nownownow.com/about", label: "What is this?" }]
 nowInfo: {
     home: { heading: "Living" },
     music: { heading: "Listening" },
@@ -12,6 +11,7 @@ nowInfo: {
     book: { heading: "Reading" },
     game: { heading: "Playing" },
 }
+tags: [_slash]
 ---
 
 {%- set lastKey = '' -%}
@@ -69,5 +69,7 @@ nowInfo: {
 <hr>
 
 <p class="textAlign-center fontSize-smaller fontStyle-italic">
+    <a href="https://nownownow.com/about">What's a Now page?</a>
+    | 
     Built using the <a href="/blog/leverage-api-like-notion-with-cache/">Notion API</a>.
 </p>

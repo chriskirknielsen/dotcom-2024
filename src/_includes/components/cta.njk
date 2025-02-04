@@ -1,3 +1,5 @@
+{# Normalise from the nav file #}
+{% if path and not url %}{% set url = path %}{% endif %}
 {% set iconBefore = iconBefore or false %}
 {% set iconClass = iconClass or 'inline-icon' %}{# Set to an empty space for no-scale behaviour #}
 {% set ctaType = 'a' if url else 'button' %}

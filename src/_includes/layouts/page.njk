@@ -1,6 +1,10 @@
 {% extends 'layouts/content.njk' %}
 
 {% block theContent %}
+    {% set slashPages = (collections._slash | pluck('page') | pluck('url')) %}
+    {% if page.url in slashPages or page.url == '/about/' %}
+        {% set heroCta = nav.slashPages %}
+    {% endif %}
     {% block pageHero %}
         {% component 'hero', {
             heroTitle: heroTitle or title,
