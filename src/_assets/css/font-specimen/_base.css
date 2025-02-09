@@ -96,7 +96,7 @@ hr {
 }
 
 .flow {
-	--flow: 4rem;
+	--flow: 2rem;
 
 	& > * {
 		margin-block: 0;
@@ -104,6 +104,10 @@ hr {
 
 	& > * + * {
 		margin-block-start: var(--flow);
+	}
+
+	& > :is(.main-heading-block, .fullbleed) + * {
+		--flow: 4rem;
 	}
 
 	& > h2 + :is(p, ul, ol) {
@@ -543,7 +547,7 @@ header {
 }
 
 footer {
-	margin-block-start: var(--layout-gutter);
+	margin-block-start: calc(var(--layout-gutter) * 2);
 	padding: var(--layout-gutter);
 }
 
