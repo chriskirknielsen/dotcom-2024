@@ -339,12 +339,25 @@ html[data-theme='cyberpunk'] {
 	}
 
 	hr {
-		block-size: 10px;
-		background: linear-gradient(135deg, var(--C-accent-alt) 50%, transparent 0), linear-gradient(180deg, var(--C-accent-alt) 50%, transparent 0);
+		--s: 12px;
+		--g1: var(--C-accent-alt) 50%, transparent 0;
+		--g2: transparent 25%, var(--C-accent-alt) calc(25% + 0.5px), var(--C-accent-alt) calc(75% - 0.5px), transparent 75%;
+
+		block-size: var(--s);
+
+		background: linear-gradient(180deg, var(--g1)) 0 0 / 33.3% 100%, linear-gradient(60deg, var(--g2)) 33.3% 0 / calc(var(--s) * 0.75) var(--s),
+			linear-gradient(0deg, var(--g1)) 50% 0 / calc(33.4% - var(--s) / 2) 100%, linear-gradient(-60deg, var(--g2)) 66.7% 0 / calc(var(--s) * 0.75) var(--s),
+			linear-gradient(180deg, var(--g1)) 100% 0 / 33.3% 100%;
+		background-repeat: no-repeat;
+		clip-path: polygon(0 50%, calc(var(--s) / 3) 0, calc(100% - (var(--s) / 3)) 0, 100% 50%, 100% 100%, 0 100%);
 	}
 
-	.announcement :any-link {
-		--LINK-color: var(--C-canvas);
+	.announcement {
+		clip-path: polygon(0 50%, 0 0, 100% 0, 100% 50%, calc(100% - 1em) 100%, 1em 100%);
+
+		& :any-link {
+			--LINK-color: var(--C-canvas);
+		}
 	}
 }
 
@@ -413,6 +426,11 @@ html[data-theme='vintage'] {
 			--LINK-color: var(--C-canvas);
 			--LINK-underline-color: var(--C-heading);
 		}
+	}
+
+	.announcement {
+		background-color: var(--C-text);
+		box-shadow: inset 0 1px 0 var(--C-surface-alt);
 	}
 }
 
