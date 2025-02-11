@@ -32,6 +32,8 @@
 	z-index: 3;
 
 	margin-block: var(--size-2xl);
+
+	text-align: center;
 }
 
 .footer-nav {
@@ -39,19 +41,51 @@
 	--GAP: 0.5rem;
 
 	position: relative;
+}
 
-	padding-inline-start: calc(var(--RULE) + var(--size-m));
+.footer-message {
+	position: relative;
 
-	&::before {
-		content: '';
+	margin-block-start: var(--size-l);
+
+	&:hover::before {
+		content: '💙   💜';
+	}
+	&:hover::after {
+		content: '🤍';
+		margin-block-start: -0.5em;
+	}
+	&:hover::before,
+	&:hover::after {
+		pointer-events: none;
+
 		position: absolute;
-		inset-block: var(--GAP);
-		inset-inline-start: 0;
+		inset: 0;
 
-		inline-size: var(--RULE);
+		display: inline-block;
 
-		border-radius: calc(var(--_corner));
-		background: currentColor;
+		text-align: center;
+		font-size: 4em;
+
+		animation: --footerMessage 3s ease-out 1 forwards;
+	}
+}
+
+@keyframes --footerMessage {
+	0% {
+		scale: 0;
+		opacity: 0;
+	}
+	10% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		scale: 1;
+		translate: 0 -2em;
 	}
 }
 
@@ -67,27 +101,5 @@
 
 	img[width='1'][height='1'] {
 		display: none;
-	}
-}
-
-@media (--large-viewport) {
-	.footer:has(.footer-message) {
-		display: grid;
-		grid-template-columns: auto minmax(6em, 33%); /* The left side should take up most of the space, while the right, only about 33%*/
-		grid-template-areas:
-			'--navig --badge'
-			'--metap --badge';
-		align-items: center;
-		gap: var(--size-m);
-	}
-
-	.footer-nav {
-		grid-area: --navig;
-	}
-	.footer-meta {
-		grid-area: --metap;
-	}
-	.footer-message {
-		grid-area: --badge;
 	}
 }

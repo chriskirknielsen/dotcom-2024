@@ -131,7 +131,7 @@ const designs = [
 		slug: 'css-logo-solid',
 		name: 'CSS Logo (solid)',
 		description: `CSS is awesome.`,
-		note: `For a mug with the design on both sides, use RedBubble. Note this uses [my custom CSS logo](/css-logo) that sadly didn't make the cut as a candidate for a [new official CSS logo](https://github.com/CSS-Next/css-next/issues/105)!`,
+		note: `For a mug with the design on both sides, use RedBubble. Note this uses [my custom CSS logo](/css-logo/) that sadly didn't make the cut as a candidate for a [new official CSS logo](https://github.com/CSS-Next/css-next/issues/105)!`,
 		img: 'css-logo-solid.png',
 		links: {
 			TeePublic: 'https://www.teepublic.com/sticker/67983005-css-logo-solid',
@@ -146,7 +146,7 @@ const designs = [
 		slug: 'css-logo-transparent',
 		name: 'CSS Logo (transparent)',
 		description: `CSS is awesome.`,
-		note: `For a mug with the design on both sides, use RedBubble. Note this uses [my custom CSS logo](/css-logo) that sadly didn't make the cut as a candidate for a [new official CSS logo](https://github.com/CSS-Next/css-next/issues/105)!`,
+		note: `For a mug with the design on both sides, use RedBubble. Note this uses [my custom CSS logo](/css-logo/) that sadly didn't make the cut as a candidate for a [new official CSS logo](https://github.com/CSS-Next/css-next/issues/105)!`,
 		img: 'css-logo-transparent.png',
 		links: {
 			TeePublic: 'https://www.teepublic.com/sticker/67983004-css-logo-transparent',

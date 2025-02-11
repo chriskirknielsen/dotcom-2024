@@ -23,21 +23,22 @@ export default {
 	navbar,
 	slashPages,
 	footerGroups: [
-		[...navbar, rss],
+		[{ path: '/', label: 'Home' }],
+		[...navbar],
+		[...slashPages, gamesLibrary],
 		[
 			{ path: '/colophon/', label: 'Colophon' },
 			{ path: '/search/', label: 'Search' },
-			{ path: '/archives/', label: 'Digital Archives' },
-			{ path: metadata.tweetArchiveUrl, label: 'Tweet Archive' },
-		],
-		[
-			{ path: '/css-logo/', label: 'CSS Logo' },
 			{ path: '/fonts/', label: 'Custom Fonts' },
 			{ path: '/blogroll/', label: 'Blogroll' },
 			{ path: '/webring/', label: 'Webring' },
-			{ path: '', label: 'Report Issue', isRepoFileLink: true },
 		],
-		[...slashPages, gamesLibrary],
-		[email, ...socialFromEntry],
+		[
+			{ path: '/archives/', label: 'Website Archives' },
+			{ path: metadata.tweetArchiveUrl, label: 'Tweet Archive' },
+			{ path: '', label: 'Report Issue', isRepoFileLink: true }, // Empty link that gets replaced on every page with the GitHub one
+		],
+		[{ ...rss, label: 'RSS' }, ...socialFromEntry],
+		[email],
 	],
 };
