@@ -20,7 +20,7 @@ html[data-theme='dawn'] {
 
 		.callout {
 			padding: 0 0 var(--CALLOUT-padding) var(--CALLOUT-padding);
-			border-width: 0 0 0 var(--CALLOUT-border);
+			border-width: 0 0 0 var(--CALLOUT-border-width);
 			background: linear-gradient(90deg, transparent, var(--C-canvas)) repeat-y 100% 0,
 				repeating-linear-gradient(var(--C-accent) 0, var(--C-accent) 2px, transparent 2px, transparent 6px) repeat-x 0 0 / 100% 1em,
 				linear-gradient(90deg, var(--C-accent), var(--C-canvas)) no-repeat 0 100% / 100% 0.11em;
@@ -40,6 +40,21 @@ html[data-theme='dawn'] {
 			color: var(--C-text);
 			text-shadow: 2px 2px 0 var(--C-canvas), 4px 4px 0 var(--C-accent);
 			background-color: var(--C-canvas);
+
+			&::before {
+				position: static;
+
+				display: inline;
+				aspect-ratio: initial;
+				padding: 0 0.5ch 0 0;
+
+				text-shadow: none;
+				vertical-align: middle;
+				border: 0;
+				background: none;
+
+				translate: 0;
+			}
 		}
 
 		:is(.codeblock, .codeview) {
@@ -84,10 +99,10 @@ html[data-theme='dusk'] {
 
 	.callout {
 		padding: 0 0 var(--CALLOUT-padding) var(--CALLOUT-padding);
-		border-width: 0 0 0 var(--CALLOUT-border);
+		border-width: 0 0 0 var(--CALLOUT-border-width);
 		background: linear-gradient(90deg, transparent, var(--C-canvas)) repeat-y 100% 0,
 			repeating-linear-gradient(var(--C-accent) 0, var(--C-accent) 2px, transparent 2px, transparent 6px) repeat-x 0 0 / 100% 1em,
-			linear-gradient(90deg, var(--C-accent), var(--C-canvas)) no-repeat 0 100% / 100% var(--CALLOUT-border);
+			linear-gradient(90deg, var(--C-accent), var(--C-canvas)) no-repeat 0 100% / 100% var(--CALLOUT-border-width);
 	}
 
 	.callout-label {
@@ -104,6 +119,21 @@ html[data-theme='dusk'] {
 		color: var(--C-text);
 		text-shadow: 2px 2px 0 var(--C-canvas), 4px 4px 0 var(--C-accent);
 		background-color: var(--C-canvas);
+
+		&::before {
+			position: static;
+
+			display: inline;
+			aspect-ratio: initial;
+			padding: 0 0.5ch 0 0;
+
+			text-shadow: none;
+			vertical-align: middle;
+			border: 0;
+			background: none;
+
+			translate: 0;
+		}
 	}
 
 	:is(.codeblock, .codeview) {
@@ -463,12 +493,12 @@ html[data-theme='campfire'] {
 
 	.callout {
 		--flow-space: var(--size-xl);
+		--callout-border-color: transparent;
 		--CALLOUT-nail: #56482d 2px, transparent 3px;
 		--CALLOUT-post: max(var(--size-l), var(--flow-space) * 0.8);
 
 		position: relative;
 
-		border-color: transparent;
 		background-image: radial-gradient(circle at 50% calc((var(--CALLOUT-padding) * 0.75)), var(--CALLOUT-nail)),
 			radial-gradient(circle at 50% calc(100% - (var(--CALLOUT-padding) * 0.75)), var(--CALLOUT-nail)),
 			linear-gradient(var(--C-heading) calc(var(--CALLOUT-padding) * 0.25), transparent 0);
@@ -489,6 +519,11 @@ html[data-theme='campfire'] {
 
 			clip-path: polygon(50% 0, 100% calc(var(--CALLOUT-post) / 2), 100% 100%, 0 100%, 0 calc(var(--CALLOUT-post) / 2));
 		}
+	}
+
+	.callout-label {
+		--CALLOUT-border-width: 3px;
+		--CALLOUT-border-color: var(--CALLOUT-background);
 	}
 
 	.signoff-title {
@@ -574,11 +609,20 @@ html[data-theme='director'] {
 		}
 	}
 
-	.callout,
+	.callout {
+		--callout-color: var(--C-surface-alt);
+		--callout-border-color: var(--C-text);
+		--callout-background: var(--C-text);
+	}
+
 	.signoff {
 		color: var(--C-surface-alt);
 		border-color: var(--C-text);
 		background: var(--C-text);
+	}
+
+	.callout,
+	.signoff {
 		box-shadow: var(--_shadow);
 	}
 

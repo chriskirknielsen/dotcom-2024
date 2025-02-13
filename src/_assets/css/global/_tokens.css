@@ -367,6 +367,7 @@ html[data-theme="director"] {
 			}
 @custom-media --small-viewport (width <= 576px);
 @custom-media --large-viewport (width > 576px);
+@custom-media --has-gutter-space (width > calc(960px + 4 * 24px));
 @custom-media --toc-side (min-width: calc(960px + 2 * 300px)) and (min-height: 500px);
 	
 	@media (--prefers-light) {

@@ -78,11 +78,13 @@ export default function (string) {
 	// Create tooling values
 	const maxContent = json.global.layout['max-content'];
 	const breakpoint = json.settings.breakpoint;
+	const gutter = json.settings.gutter;
 	const tocMinWidth = json.settings['toc-min-width'];
 	const tocMinHeight = json.settings['toc-min-height'];
 	const customMedias = {
 		'small-viewport': `(width <= ${breakpoint})`,
 		'large-viewport': `(width > ${breakpoint})`,
+		'has-gutter-space': `(width > calc(${maxContent} + 4 * ${gutter}))`,
 		'toc-side': `(min-width: calc(${maxContent} + 2 * ${tocMinWidth})) and (min-height: ${tocMinHeight})`,
 	};
 	let toolsOutput = `${Object.entries(customMedias)

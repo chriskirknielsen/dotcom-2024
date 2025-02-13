@@ -1,23 +1,65 @@
 .callout {
-	--CALLOUT-border: var(--layout-side-border);
-	--CALLOUT-padding: calc(var(--layout-gutter) - var(--CALLOUT-border));
+	--CALLOUT-color: var(--callout-color, var(--C-text));
+	--CALLOUT-border-width: var(--layout-side-border);
+	--CALLOUT-border-color: var(--callout-border-color, var(--C-accent));
+	--CALLOUT-background: var(--callout-background, var(--C-surface));
+	--CALLOUT-padding: calc(var(--layout-gutter) - var(--CALLOUT-border-width));
 
 	position: relative;
 
 	padding: var(--CALLOUT-padding);
 
-	border: var(--CALLOUT-border) solid var(--C-accent);
-	background-color: var(--C-surface);
+	color: var(--CALLOUT-color);
+	border: var(--CALLOUT-border-width) solid var(--CALLOUT-border-color);
+	background-color: var(--CALLOUT-background);
 }
 
 .callout-label {
+	/* Cyclic dependency toggle */
+	--content: var(--callout-emoji);
+	--callout-emoji: var(--content);
+
+	position: relative;
+
 	display: block;
 	margin-block-end: var(--size-xs);
 
 	color: var(--C-heading);
 
-	&[style*='--callout-emoji:']::before {
-		content: var(--callout-emoji) ' ';
-		font-style: normal;
+	&::before {
+		content: var(--content, none);
+		padding-inline-end: 0.5ch;
+	}
+
+	@media (--has-gutter-space) {
+		&::before {
+			content: var(--content, none);
+
+			position: absolute;
+			inset-block-start: calc(var(--CALLOUT-border-width) * -0.5);
+			inset-inline-start: calc(var(--CALLOUT-padding) * -1);
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-block-size: calc((1em / 0.625) * 1.2);
+			padding: calc((1em / 0.625) * 0.1875); /* Get back to the parent 1em font-size with 1em/0.625, and distribute the remaining 0.375em via * 0.1875 */
+
+			aspect-ratio: 1;
+
+			font-family: var(--fontStack-emoji);
+			text-align: center;
+			font-style: normal;
+			font-size: 0.625em;
+			line-height: 0;
+
+			border: var(--CALLOUT-border-width) solid transparent;
+			border-radius: max(2px, var(--_corner));
+			background: linear-gradient(90deg, var(--CALLOUT-background) calc(50% + var(--CALLOUT-border-width)), transparent 0) padding-box,
+				linear-gradient(90deg, var(--CALLOUT-border-color) calc(50% - var(--CALLOUT-border-width) / 2), transparent 0) border-box;
+			background-repeat: no-repeat;
+
+			translate: -50% 0;
+		}
 	}
 }
