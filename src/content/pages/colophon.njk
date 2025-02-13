@@ -30,8 +30,7 @@ My website has distinct themes with distinct typefaces (some paid, some free) an
 First off, the homepage wordmark for my name is a custom edit of the [Sprat typeface](https://www.collletttivo.it/typefaces/sprat) with everything tightened up and minor corrections. When I first saw it, I knew I had to use it: it's got a vibe reminiscent of Stephen King books and other designs using ITC Benguiat (you know, the Stranger Things logo!). The reveal animation is very simple but does the trick and is pretty performant compared to the [last version](/archives/)!
 {% endrenderTemplate %}
 
-<p>
-{{ "Also, I did use a handful of SVG icons from [Lucide](https://lucide.dev/icons/), listed here:" | markdown(true) | safe }}
+<p>Also, I did use a handful of SVG icons from <a href="https://lucide.dev/icons/">Lucide</a>, listed here:
 {% for name, icon in tokens._meta.icons.used %}
     {% if loop.last %}and{% endif %}
     {% svg name, { class: 'inline-icon inline-icon--center linecap-auto' } %} <code>{{ icon }}</code>
@@ -39,7 +38,7 @@ First off, the homepage wordmark for my name is a custom edit of the [Sprat type
 {% endfor %}
 </p>
 
-{% callout "Keyboard user?" %}If you are using a keyboard, you can press a number key to activate the corresponding theme based on the theme picker order. (the current theme index  and `0` revert to the system default).{% endcallout %}
+{% callout "Keyboard user?", "⌨️", { mode: 'markup' } %}If you are using a keyboard, you can press a number key to activate the corresponding theme based on the theme picker order. (the current theme index and <kbd>0</kbd> revert to the system default).{% endcallout %}
 
 {% renderTemplate 'md' %}
 ### Dawn
