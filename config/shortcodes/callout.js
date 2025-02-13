@@ -5,17 +5,32 @@ export default function (eleventyConfig, options = {}) {
 
 	const { markdownEngine } = options;
 
-	eleventyConfig.addPairedShortcode('callout', function (content, heading = '', emoji = '', isInline = true) {
+	eleventyConfig.addPairedShortcode('callout', function (content, heading = '', emoji = '', render = {}) {
 		const uniqueId = `co-${parseInt(String(Math.random()).split('.')[1], 10).toString(36)}`;
 		const emojiStyleAttr = emoji ? `style="--callout-emoji: '${emoji}'"` : '';
 		heading ||= 'Note';
-		let render = isInline ? `<p>${markdownEngine.renderInline(content.trim())}</p>` : markdownEngine.render(content.trim());
+		const renderMode = render.hasOwnProperty('mode') ? render.mode : 'inline';
+		let renderOutput;
+		switch (renderMode) {
+			case 'markup': {
+				renderOutput = content.trim();
+				break;
+			}
+			case 'block': {
+				renderOutput = markdownEngine.render(content.trim());
+				break;
+			}
+			default: {
+				renderOutput = `<p>${markdownEngine.renderInline(content.trim())}</p>`;
+				break;
+			}
+		}
 
 		// Little trick to avoid additional whitespace
 		return ''.concat(
 			`<section class="callout" aria-labelledby="${uniqueId}">`,
 			`<p id="${uniqueId}" class="callout-label | h3" ${emojiStyleAttr}>${heading}</p>`,
-			render.trim(),
+			renderOutput.trim(),
 			`</section>`
 		);
 	});

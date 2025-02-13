@@ -11,7 +11,7 @@ updated: 2023-11-16
 
 <hr>
 
-{% callout "TL;DR", "", false %}
+{% callout "TL;DR", "", { mode: "block" } %}
 **Situation:** we want to select all links that aren’t inside an `.archived` element.
 
 **Don't do this:** `:not(.archived) a`
