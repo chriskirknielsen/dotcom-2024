@@ -38,7 +38,9 @@ First off, the homepage wordmark for my name is a custom edit of the [Sprat type
 {% endfor %}
 </p>
 
-{% callout "Keyboard user?", "⌨️", { mode: 'markup' } %}If you are using a keyboard, you can press a number key to activate the corresponding theme based on the theme picker order. (the current theme index and <kbd>0</kbd> revert to the system default).{% endcallout %}
+{% callout "Keyboard user?", "⌨️", { mode: 'markup', class: 'hide-when-nojs' } %}
+<p>If you are using a keyboard, you can press a number key to activate the corresponding theme based on the theme picker order. (the <kbd>0</kbd> key and current theme index will revert to the system default).</p>
+{% endcallout %}
 
 {% renderTemplate 'md' %}
 ### Dawn

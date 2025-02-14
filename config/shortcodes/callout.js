@@ -5,11 +5,12 @@ export default function (eleventyConfig, options = {}) {
 
 	const { markdownEngine } = options;
 
-	eleventyConfig.addPairedShortcode('callout', function (content, heading = '', emoji = '', render = {}) {
+	eleventyConfig.addPairedShortcode('callout', function (content, heading = '', emoji = '', renderOptions = {}) {
 		const uniqueId = `co-${parseInt(String(Math.random()).split('.')[1], 10).toString(36)}`;
 		const emojiStyleAttr = emoji ? `style="--callout-emoji: '${emoji}'"` : '';
 		heading ||= 'Note';
-		const renderMode = render.hasOwnProperty('mode') ? render.mode : 'inline';
+		const renderMode = renderOptions.hasOwnProperty('mode') ? renderOptions.mode : 'inline';
+		const wrapperClass = renderOptions.hasOwnProperty('class') ? renderOptions.class : '';
 		let renderOutput;
 		switch (renderMode) {
 			case 'markup': {
@@ -28,7 +29,7 @@ export default function (eleventyConfig, options = {}) {
 
 		// Little trick to avoid additional whitespace
 		return ''.concat(
-			`<section class="callout" aria-labelledby="${uniqueId}">`,
+			`<section class="callout ${wrapperClass}" aria-labelledby="${uniqueId}">`,
 			`<p id="${uniqueId}" class="callout-label | h3" ${emojiStyleAttr}>${heading}</p>`,
 			renderOutput.trim(),
 			`</section>`
