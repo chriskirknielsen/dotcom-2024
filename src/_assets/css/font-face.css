@@ -8,14 +8,6 @@ font-style: normal;
         }
 
         @font-face {
-            font-family: "MDNichrome";
-            src: local("MDNichrome"), url("/assets/fonts/MDNichrome-Bold.woff2") format("woff2");
-            font-weight: 700;
-font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
             font-family: "XanhMono";
             src: local("XanhMono"), local("Xanh Mono"), url("/assets/fonts/XanhMono-Italic.woff2") format("woff2");
             font-weight: 400;
@@ -36,6 +28,14 @@ font-style: normal;
             font-family: "InstrumentSerif";
             src: local("InstrumentSerif"), local("Instrument Serif"), url("/assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");
             font-weight: 400;
+font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: "MDNichrome";
+            src: local("MDNichrome"), url("/assets/fonts/MDNichrome-Bold.woff2") format("woff2");
+            font-weight: 700;
 font-style: normal;
             font-display: swap;
         }

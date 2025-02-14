@@ -64,13 +64,13 @@ code-wrap {
 }
 
 kbd {
-	--d: 2px; /* d for Depth */
+	--d: 2.5px; /* d for Depth */
 	padding-inline: calc(var(--d) + 1px);
-	margin-inline-end: var(--d);
+	margin-inline: calc(var(--d) / 2);
 	color: black;
 	border-radius: max(var(--d), var(--_corner)); /* Always at least a little rounded */
 	background: white;
-	box-shadow: calc(var(--d) - 1px) calc(var(--d) - 1px) 0 var(--d) #808080;
+	box-shadow: 0 calc(var(--d) * 0.75) calc(var(--d) * 0.75) calc(-0.5px) #444, 0 calc(var(--d) - 1px) 0 var(--d) #888;
 }
 
 .token.namespace {

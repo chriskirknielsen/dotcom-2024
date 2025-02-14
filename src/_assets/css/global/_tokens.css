@@ -111,10 +111,10 @@
 --_signoff-background: var(--signoff-background, var(--_card-bg-color));
 --_signoff-border: var(--signoff-border, none);
 --T-dawn: var(--OFF);
---T-dusk: var(--OFF);
 --T-vapor: var(--OFF);
 --T-vintage: var(--OFF);
 --T-quill: var(--OFF);
+--T-dusk: var(--OFF);
 --T-cyberpunk: var(--OFF);
 --T-campfire: var(--OFF);
 --T-director: var(--OFF);
@@ -383,9 +383,6 @@ html[data-theme="director"] {
 	}html[data-theme]:not([data-theme='dawn']) [data-theme-condition='dawn'] {
 			display: none !important;
 		}
-html[data-theme]:not([data-theme='dusk']) [data-theme-condition='dusk'] {
-			display: none !important;
-		}
 html[data-theme]:not([data-theme='vapor']) [data-theme-condition='vapor'] {
 			display: none !important;
 		}
@@ -393,6 +390,9 @@ html[data-theme]:not([data-theme='vintage']) [data-theme-condition='vintage'] {
 			display: none !important;
 		}
 html[data-theme]:not([data-theme='quill']) [data-theme-condition='quill'] {
+			display: none !important;
+		}
+html[data-theme]:not([data-theme='dusk']) [data-theme-condition='dusk'] {
 			display: none !important;
 		}
 html[data-theme]:not([data-theme='cyberpunk']) [data-theme-condition='cyberpunk'] {

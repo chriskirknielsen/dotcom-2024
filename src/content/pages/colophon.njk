@@ -39,7 +39,7 @@ First off, the homepage wordmark for my name is a custom edit of the [Sprat type
 </p>
 
 {% callout "Keyboard user?", "⌨️", { mode: 'markup', class: 'hide-when-nojs' } %}
-<p>If you are using a keyboard, you can press a number key to activate the corresponding theme based on the theme picker order. (the <kbd>0</kbd> key and current theme index will revert to the system default).</p>
+<p>If you are using a keyboard, you can press a number key to activate the corresponding theme based on the theme picker order. (the <kbd>0</kbd> key and current theme index {% for t in themes %}<kbd data-theme-condition="{{t.key}}">{{loop.index}}</kbd>{% endfor %} will revert to the system light/dark default).</p>
 {% endcallout %}
 
 {% renderTemplate 'md' %}
