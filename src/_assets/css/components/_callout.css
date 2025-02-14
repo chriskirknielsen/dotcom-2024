@@ -15,10 +15,6 @@
 }
 
 .callout-label {
-	/* Cyclic dependency toggle */
-	--content: var(--callout-emoji);
-	--callout-emoji: var(--content);
-
 	position: relative;
 
 	display: block;
@@ -33,31 +29,35 @@
 
 	@media (--has-gutter-space) {
 		&::before {
-			content: var(--content, none);
+			--fs: 0.625; /* Font size */
+			--pad: calc(1 - var(--fs)); /* Available padding */
+			--pem: calc(1em / var(--fs)); /* Parent em */
+			--space: calc(var(--pad) / 2 * var(--pem));
+			--grad: var(--CALLOUT-background) calc(50% - var(--CALLOUT-border-width)), var(--CALLOUT-border-color) 0, var(--CALLOUT-border-color) 50%, transparent 0;
+
+			content: var(--callout-emoji, none);
 
 			position: absolute;
-			inset-block-start: calc(var(--CALLOUT-border-width) * -0.5);
+			inset-block-start: calc(-1 * var(--space));
 			inset-inline-start: calc(var(--CALLOUT-padding) * -1);
 
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			min-block-size: calc((1em / 0.625) * 1.2);
-			padding: calc((1em / 0.625) * 0.1875); /* Get back to the parent 1em font-size with 1em/0.625, and distribute the remaining 0.375em via * 0.1875 */
-
+			min-block-size: calc(var(--pem) * 1.2);
 			aspect-ratio: 1;
+			padding: calc(var(--space) + var(--space));
 
 			font-family: var(--fontStack-emoji);
 			text-align: center;
 			font-style: normal;
-			font-size: 0.625em;
+			font-size: calc(var(--fs) * 1em);
 			line-height: 0;
 
 			border: var(--CALLOUT-border-width) solid transparent;
-			border-radius: max(2px, var(--_corner));
-			background: linear-gradient(90deg, var(--CALLOUT-background) calc(50% + var(--CALLOUT-border-width)), transparent 0) padding-box,
-				linear-gradient(90deg, var(--CALLOUT-border-color) calc(50% - var(--CALLOUT-border-width) / 2), transparent 0) border-box;
-			background-repeat: no-repeat;
+			background: linear-gradient(-45deg, var(--grad)) no-repeat 0 0, linear-gradient(-135deg, var(--grad)) no-repeat 0 100%;
+			background-size: 50% 50%;
+			background-origin: border-box;
 
 			translate: -50% 0;
 		}
