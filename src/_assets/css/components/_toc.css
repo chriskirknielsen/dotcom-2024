@@ -71,11 +71,12 @@
 		--LINK-decoration-thickness: calc(var(--link-decoration-thickness, 1px) + 2px);
 	}
 
+	.toc-title,
 	.toc-list a {
 		transition: opacity var(--anim-short) var(--easing-in-out);
 	}
 
-	.toc-list:not(:hover, :focus-within) li:not([data-current]):not(:has(li[data-current])) > a {
+	.toc:not(:hover, :focus-within) :is(.toc-title, li:not([data-current]):not(:has(li[data-current])) > a) {
 		opacity: 0.67;
 	}
 }
