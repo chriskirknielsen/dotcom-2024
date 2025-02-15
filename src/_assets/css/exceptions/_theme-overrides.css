@@ -430,7 +430,7 @@ html[data-theme='vintage'] {
 		block-size: 1rem;
 
 		border-radius: 2px;
-		background: linear-gradient(90deg, goldenrod, gold 33%, goldenrod) no-repeat 50% 75% / 100% 0.125rem var(--C-heading);
+		background: linear-gradient(90deg, goldenrod, gold 33%, goldenrod) no-repeat 50% 75% / 100% 0.125rem, linear-gradient(var(--C-heading) 75%, var(--C-text) 0);
 	}
 
 	@media (--small-viewport) {

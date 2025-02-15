@@ -208,6 +208,8 @@
 }
 
 .synth-key-label {
+	all: initial;
+	font-family: var(--fontStack-monospace);
 	display: flex;
 	width: 1.5em;
 	height: 1.5em;
