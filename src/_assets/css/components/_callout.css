@@ -23,7 +23,7 @@
 	color: var(--C-heading);
 
 	&::before {
-		content: var(--content, none);
+		content: var(--callout-emoji, none);
 		padding-inline-end: 0.5ch;
 	}
 
@@ -35,8 +35,6 @@
 			--space: calc(var(--pad) / 2 * var(--pem));
 			--grad: var(--CALLOUT-background) calc(50% - var(--CALLOUT-border-width)), var(--CALLOUT-border-color) 0, var(--CALLOUT-border-color) 50%,
 				transparent calc(50% + 0.25px);
-
-			content: var(--callout-emoji, none);
 
 			position: absolute;
 			inset-block-start: calc(-1 * var(--space));
