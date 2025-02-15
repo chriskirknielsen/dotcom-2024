@@ -33,7 +33,8 @@
 			--pad: calc(1 - var(--fs)); /* Available padding */
 			--pem: calc(1em / var(--fs)); /* Parent em */
 			--space: calc(var(--pad) / 2 * var(--pem));
-			--grad: var(--CALLOUT-background) calc(50% - var(--CALLOUT-border-width)), var(--CALLOUT-border-color) 0, var(--CALLOUT-border-color) 50%, transparent 0;
+			--grad: var(--CALLOUT-background) calc(50% - var(--CALLOUT-border-width)), var(--CALLOUT-border-color) 0, var(--CALLOUT-border-color) 50%,
+				transparent calc(50% + 0.25px);
 
 			content: var(--callout-emoji, none);
 
