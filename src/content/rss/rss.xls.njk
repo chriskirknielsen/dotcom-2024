@@ -88,11 +88,16 @@ permalink: /rss.xsl
                         display: block;
                         margin: 0 auto;
                     }
-                    h1 > span > span {
+                    h1 > span > span:not([class]) {
                         color: var(--link-idle);
                     }
                     h1 span.chris {
-                        letter-spacing: calc(1ch / 11);
+                        letter-spacing: calc(1ch / 22);
+                    }
+                    h1 span.hyphen {
+                        position: relative;
+                        top: calc(1ch / 22 * -1);
+                        left: calc(1ch / 22 * -1);
                     }
 
                     h2 {
@@ -143,7 +148,7 @@ permalink: /rss.xsl
                     <h1>
                         <span class="visually-hidden">Christopher Kirk-Nielsen</span>
                         <span class="chris" aria-hidden="true">CH<span>R</span>I<span>S</span>TOPHER</span>
-                        <span class="kn" aria-hidden="true">KIRK-NIEL<span>S</span>EN</span>
+                        <span class="kn" aria-hidden="true">KIRK<span class="hyphen">‧</span>NIEL<span>S</span>EN</span>
                     </h1>
 
                     <p>Thank you for checking out my RSS feed! Hope you’ll enjoy your stay.</p>

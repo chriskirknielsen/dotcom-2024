@@ -18,7 +18,7 @@ eleventyImport:
         <email>{{ metadata.author.email }}</email>
     </author>
     {%- for post in collectionPostsLocale | reverse %}
-        {% set absolutePostUrl %}{{ post.url | absoluteUrl(metadata.url) }}{% endset %}
+        {% set absolutePostUrl = post.url | absoluteUrl(metadata.url) %}
         {% set postTemplateContent = post.templateContent %}
         {%- if stripScripts %}{% set postTemplateContent = postTemplateContent | stripScripts %}
         {% endif %}
@@ -31,9 +31,12 @@ eleventyImport:
             <updated>{{ postDate | dateFormat({ format: 'iso', lang: lang }) }}</updated>
             <id>{{ absolutePostUrl }}</id>
             <content type="html">
-                {%- if injectDescription %}{{ '<p>' | escape }}{{ post.data.summary }}{{ '</p>' | escape }}
+                {%- if injectDescription %}{{ '<p>' | escape }}{{ post.data.summary }}{{ '</p>' | escape }}{% endif %}
+                {% if loop.index0 < 10 %}
+                    {{- postTemplateContent | htmlToAbsoluteUrls(absolutePostUrl) -}}
+                {% else %}
+                    {{ ('<p>This is a relatively old article, read it here: <a href="'+absolutePostUrl+'">'+post.data.title+'</a>.</p>') | escape }}
                 {% endif %}
-                {{- postTemplateContent | htmlToAbsoluteUrls(absolutePostUrl) -}}
             </content>
         </entry>
     {%- endfor %}
