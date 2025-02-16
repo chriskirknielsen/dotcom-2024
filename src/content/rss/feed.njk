@@ -9,10 +9,10 @@ eleventyImport:
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
     <title>{{ metadata.title }}</title>
     <subtitle>{{ metadata.description }}</subtitle>
-    <link href="{{ metadata.url }}/{{ permalink }}" rel="self"/>
+    <link href="{{ metadata.url }}{{ permalink }}" rel="self"/>
     <link href="{{ metadata.url }}"/>
     <updated>{{ collectionPostsLocale | rssLastUpdatedDate }}</updated>
-    <id>{{ metadata.url }}</id>
+    <id>{{ metadata.url }}/</id>
     <author>
         <name>{{ metadata.author.name }}</name>
         <email>{{ metadata.author.email }}</email>
