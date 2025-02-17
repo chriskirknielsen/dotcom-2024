@@ -25,17 +25,18 @@ eleventyImport:
         <entry>
             <title>{{ post.data.title }}</title>
             <link href="{{ absolutePostUrl }}"/>
-            {% set postDate = post.date %}
-            {% if post.data and post.data.date %}{% set postDate = post.data.date %}
-            {% endif %}
+            {%- set postDate = post.date -%}
+            {%- if post.data and post.data.date %}{% set postDate = post.data.date %}{% endif %}
             <updated>{{ postDate | dateFormat({ format: 'iso', lang: lang }) }}</updated>
             <id>{{ absolutePostUrl }}</id>
             <content type="html">
-                {%- if injectDescription %}{{ '<p>' | escape }}{{ post.data.summary }}{{ '</p>' | escape }}{% endif %}
-                {% if loop.index0 < 10 %}
-                    {{- postTemplateContent | htmlToAbsoluteUrls(absolutePostUrl) -}}
+                {%- set showFullContent = (loop.index0 < 10 or post.data.externalUrl) -%}
+                {% if injectDescription or not showFullContent %}{{ '<p>' | escape }}{{ post.data.summary }}{{ '</p>' | escape }}{% endif %}
+                {% if showFullContent %}
+                    {{ postTemplateContent | htmlToAbsoluteUrls(absolutePostUrl) }}
+                    {% if post.data.externalUrl %}{{ ('<p><a href="'+post.data.externalUrl+'">Read full article on '+post.data.externalHost+'</a>.</p>') | escape }}{% endif %}
                 {% else %}
-                    {{ ('<p>This is a relatively old article, read it here: <a href="'+absolutePostUrl+'">'+post.data.title+'</a>.</p>') | escape }}
+                    {{ ('<p><a href="'+absolutePostUrl+'">Read full article: '+post.data.title+'</a>.</p>') | escape }}
                 {% endif %}
             </content>
         </entry>
