@@ -23,6 +23,7 @@ package = "netlify-plugin-debug-cache"
     max-age=31536000'''
 
 ## Special page redirects
+### Designs aliases
 [[redirects]]
   from = "/design/"
   to = "/designs/"
@@ -36,6 +37,10 @@ package = "netlify-plugin-debug-cache"
   from = "/art/"
   to = "/designs/"
 [[redirects]]
+  from = "/shop/"
+  to = "/designs/"
+### Other aliases
+[[redirects]]
   from = "/thanks/"
   to = "/colophon/"
 [[redirects]]
@@ -43,6 +48,7 @@ package = "netlify-plugin-debug-cache"
   to = "/rss.xml"
   status = 301
   force = true
+### Well-known
 [[redirects]]
   from = "/.well-known/avatar"
   to = "/assets/img/profile.jpg"
