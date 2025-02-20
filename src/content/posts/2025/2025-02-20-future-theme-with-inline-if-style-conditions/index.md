@@ -76,7 +76,7 @@ html {
 
 One very important distinction compared to my style queries approach is this: `:root` can query its own `--theme` value inside of `if()`, meaning we can get rid of the sinful practice of setting the background on the `body` (since a container cannot (yet?) query its own styles). This moves all the logic into the root element, and that is `*Borat voice*` _very nice_.
 
-The other aspect is that the fallback values with the public and private properties I was using for style queries can still be used here. Setting these up is only really necessary if you have more than just a light and a dark theme (Bramus's aforementioned article will cover everything you need for that case).
+The other aspect is that the fallback values with the public and private properties I was using for style queries can still be used here. Setting these up is only really necessary if you have more than just a light and a dark theme (Bramus's aforementioned article will cover everything you need for the two-scheme case).
 
 ## Handling fallbacks
 
