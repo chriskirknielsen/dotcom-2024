@@ -476,7 +476,7 @@ blogroll: {
 ---
 
 <p>Here's the list of blogs I follow (RSS never went away, <em>babeyyy</em>), from people I respect and admire — you'll definitely find interesting stuff! <span class="hide-when-nojs">You can download an OPML file for each category to import into your RSS reader.</span> And if you've got suggestions, please do send them my way via <a href="{{ social.mastodon.url }}">Mastodon</a>.</p>
-
+{% set blogIconSize = 32 %}
 {% for group, blogs in blogroll %}
     {% set isFirstLoop = loop.first %}
     <h2 data-blogroll="{{ group }}">{{ group }} &times;{{ blogs | length }}</h2>
@@ -491,7 +491,7 @@ blogroll: {
                 >
                     {%- if blog['rssfr-favicon'] %}
                         {%- set faviconbg %}{% if blog['favicon-dark'] %},b_white{% endif %}{% endset -%}
-                        <img src="{{ blog['rssfr-favicon'] | toCloudinary('c_fill,w_32,h_32'+faviconbg+'/q_auto:eco') }}" width="32" height="32" class="inline-icon" alt="" {% if not isFirstLoop or loop.index > 24 %}loading="lazy"{% endif %}>
+                        <img src="{{ blog['rssfr-favicon'] | toCloudinary('c_fill,w_'+blogIconSize+',h_'+blogIconSize+''+faviconbg+'/q_auto:eco') }}" width="{{blogIconSize}}" height="{{blogIconSize}}" class="inline-icon" alt="" {% if not isFirstLoop or loop.index > 24 %}loading="lazy"{% endif %}>
                     {% endif %}
                     <span class="link-label-text">{{ blog.title }}</span>
                     {%- if blog.blurb -%}<span class="tooltip-content">{{ blog.blurb }}</span>{%- endif -%}
