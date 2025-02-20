@@ -43,20 +43,37 @@
 	position: relative;
 }
 
+@property --fm {
+	syntax: '<number>';
+	initial-value: 0;
+	inherits: true;
+}
+
 .footer-message {
+	--fm: 0;
+	--fm-abs: max(-1 * (1 - var(--fm) * 2), (1 - var(--fm) * 2)); /* [0;1] range, creates a /\ shaped progression when used with calc(1 - var(--fm-abs)) */
+
 	position: relative;
 
 	margin-block-start: var(--size-l);
+	transition: --fm 0.5s var(--easing-in);
 
-	&:hover::before {
+	&:hover {
+		--fm: 1;
+
+		transition-duration: 3s;
+		transition-timing-function: var(--easing-out);
+	}
+
+	&::before {
 		content: '💙   💜';
 	}
-	&:hover::after {
+	&::after {
 		content: '🤍';
 		margin-block-start: -0.5em;
 	}
-	&:hover::before,
-	&:hover::after {
+	&::before,
+	&::after {
 		pointer-events: none;
 
 		position: absolute;
@@ -67,25 +84,9 @@
 		text-align: center;
 		font-size: 4em;
 
-		animation: --footerMessage 3s ease-out 1 forwards;
-	}
-}
-
-@keyframes --footerMessage {
-	0% {
-		scale: 0;
-		opacity: 0;
-	}
-	10% {
-		opacity: 0;
-	}
-	50% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-		scale: 1;
-		translate: 0 -2em;
+		opacity: calc(1 - var(--fm-abs));
+		scale: var(--fm);
+		translate: 0 calc(var(--fm) * -2em);
 	}
 }
 
