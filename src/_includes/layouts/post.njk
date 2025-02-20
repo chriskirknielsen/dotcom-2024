@@ -66,8 +66,16 @@
                 <a href="{{ social.mastodon.url }}" class="link-label-anchor">
                     {% svg 'mastodon', { class: 'inline-icon inline-icon--center', ariaHidden: true } %}
                     <span class="link-label-text">Mastodon</span></a>.
-                I've <a href="/designs/">designed some cool apparel</a> if you'd like to check that out. Thanks a ton!
+                I've <a href="/designs/">designed some cool apparel/stickers</a> if you'd like to check that out. Thanks a ton!
             </p>
         </div>
+        <a href="/designs/" class="signoff-decorators" aria-label="Designs">
+            {% set cssStickerData = designs | find('slug', 'css-logo-solid') %}
+            {% set htmlShirtData = designs | find('slug', 'vhs-html') %}
+            {% set jsShirtData = designs | find('slug', 'vhs-js-dark') %}
+            <img src="{{ [assets.images, 'designs', cssStickerData.img] | toPath | toNetlifyImage({ w: 64 }) }}" alt="A CSS logo on a purple background" width="64" height="64">
+            <img src="{{ [assets.images, 'designs', htmlShirtData.img] | toPath | toNetlifyImage({ w: 64 }) }}" alt="A light retro t-shirt design with references to HTML" width="64" height="64">
+            <img src="{{ [assets.images, 'designs', jsShirtData.img] | toPath | toNetlifyImage({ w: 64 }) }}" alt="A dark retro t-shirt design with references to JavaScript" width="64" height="64">
+        </a>
     </footer>
 {% endblock %}

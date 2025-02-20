@@ -1,114 +1,115 @@
 /* https://github.com/h5bp/main.css/blob/main/src/_print.css */
 @media print {
-    :root:not(#\#) {
-        --C-canvas: #fff;
-        --C-surface: #fff;
-        --C-surface-alt: #fff;
-        --C-text: #000;
-        --C-heading: #000;
-        --C-accent: #000;
-        --C-accent-alt: #000;
+	:root:not(#\#) {
+		--C-canvas: #fff;
+		--C-surface: #fff;
+		--C-surface-alt: #fff;
+		--C-text: #000;
+		--C-heading: #000;
+		--C-accent: #000;
+		--C-accent-alt: #000;
 
-        &,
-        *,
-        *::before,
-        *::after {
-            content: none;
-            background: #fff !important;
-            color: #000 !important;
-            /* Black prints faster */
-            box-shadow: none !important;
-            text-shadow: none !important;
-        }
+		&,
+		*,
+		*::before,
+		*::after {
+			content: none;
+			background: #fff !important;
+			color: #000 !important;
+			/* Black prints faster */
+			box-shadow: none !important;
+			text-shadow: none !important;
+		}
 
-        a:any-link {
-            text-decoration: underline;
-        }
+		a:any-link {
+			text-decoration: underline;
+		}
 
-        a:is([href^="#"], .header-logo, .button--tag) {
-            text-decoration: none;
-        }
+		a:is([href^='#'], .header-logo, .button--tag) {
+			text-decoration: none;
+		}
 
-        /* Don't show links that are fragment identifiers */
-        a:not([href^="#"], .header-logo, .button--tag)::after {
-            content: " (" attr(href) ")";
-        }
+		/* Don't show links that are fragment identifiers */
+		a:not([href^='#'], .header-logo, .button--tag)::after {
+			content: ' (' attr(href) ')';
+		}
 
-        a:has(> img)::after {
-            content: none !important;
-        }
+		a:has(> img)::after {
+			content: none !important;
+		}
 
-        abbr[title]::after {
-            content: " (" attr(title) ")";
-        }
+		abbr[title]::after {
+			content: ' (' attr(title) ')';
+		}
 
-        pre {
-            white-space: pre-wrap !important;
-        }
+		pre {
+			white-space: pre-wrap !important;
+		}
 
-        pre,
-        :not(pre) > code,
-        blockquote {
-            border: 1px solid #999;
-            page-break-inside: avoid;
-        }
+		pre,
+		:not(pre) > code,
+		blockquote {
+			border: 1px solid #999;
+			page-break-inside: avoid;
+		}
 
-        tr,
-        img {
-            page-break-inside: avoid;
-        }
+		tr,
+		img {
+			page-break-inside: avoid;
+		}
 
-        p,
-        h2,
-        h3 {
-            orphans: 3;
-            widows: 3;
-        }
+		p,
+		h2,
+		h3 {
+			orphans: 3;
+			widows: 3;
+		}
 
-        h2,
-        h3 {
-            page-break-after: avoid;
-        }
+		h2,
+		h3 {
+			page-break-after: avoid;
+		}
 
-        .header {
-            justify-content: center;
-        }
+		.header {
+			justify-content: center;
+		}
 
-        .header-logo {
-            flex: 1 0 0;
-        }
+		.header-logo {
+			flex: 1 0 0;
+		}
 
-        .header-logo > svg {
-            margin-inline: auto;
-        }
+		.header-logo > svg {
+			margin-inline: auto;
+		}
 
-        .header::before,
-        .header::after {
-            flex: 4 0 0;
-        }
+		.header::before,
+		.header::after {
+			flex: 4 0 0;
+		}
 
-        .header::before {
-            content: 'Christopher Kirk-Nielsen';
-            text-align: end;
-        }
+		.header::before {
+			content: 'Christopher Kirk-Nielsen';
+			text-align: end;
+		}
 
-        .header::after {
-            content: 'chriskirknielsen.com';
-            text-align: start;
-        }
+		.header::after {
+			content: 'chriskirknielsen.com';
+			text-align: start;
+		}
 
-        [data-theme-condition],
-        .header-menu,
-        .header-menu-toggle,
-        .footer > :not(p),
-        .footer-decorator,
-        .signoff-photo,
-        [data-about="facts"],
-        .synth,
-        .synth-instructions,
-        .filtering,
-        [data-codewrap-copy] {
-            display: none !important;
-        }
-    }
+		[data-theme-condition],
+		.header-menu,
+		.header-menu-toggle,
+		.footer > :not(p),
+		.footer-decorator,
+		.signoff-photo,
+		.signoff-decorators,
+		[data-about='facts'],
+		.synth,
+		.synth-instructions,
+		.filtering,
+		[data-codewrap-copy] {
+			display: none !important;
+		}
+	}
 }

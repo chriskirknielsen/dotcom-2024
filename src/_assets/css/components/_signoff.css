@@ -1,6 +1,7 @@
 .signoff {
-	grid-column: --wide;
+	position: relative;
 
+	grid-column: --wide;
 	display: flex;
 	flex-wrap: wrap;
 	gap: var(--_card-padding);
@@ -14,6 +15,14 @@
 
 	& > * {
 		flex-basis: calc((20rem - 100%) * 999);
+	}
+
+	&:has(.signoff-decorators) {
+		--signoff-deco-size: 3rem;
+
+		.signoff-body {
+			padding-inline-end: calc(var(--signoff-deco-size) * 1.5);
+		}
 	}
 }
 
@@ -45,4 +54,35 @@
 	margin-block-start: 0.25em;
 
 	text-wrap: balance;
+}
+
+.signoff-decorators {
+	position: absolute;
+	inset-block-end: 0;
+	inset-inline-end: calc(var(--signoff-deco-size) * 0.1);
+
+	& > img {
+		inline-size: calc(var(--signoff-deco-size) * 0.9);
+		aspect-ratio: 1;
+
+		filter: drop-shadow(0 2px 4px #0008);
+		transform-origin: 50% 100%;
+		transition: scale var(--anim-short) var(--easing-in-out);
+
+		&:nth-child(1) {
+			rotate: 7deg;
+			translate: 0 125%;
+		}
+		&:nth-child(2) {
+			rotate: -4deg;
+			translate: -75% 50%;
+		}
+		&:nth-child(3) {
+			translate: -33% 0;
+		}
+	}
+
+	&:is(:hover, :focus-visible) > img {
+		scale: 1.1;
+	}
 }
