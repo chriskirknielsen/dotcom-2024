@@ -184,6 +184,7 @@ export default async function (eleventyConfig) {
 		[`${rootDir}/_includes/assets/css/`]: '/assets/css/',
 		[`${rootDir}/_assets/fonts/`]: '/assets/fonts/',
 		[`${rootDir}/_assets/img/`]: '/assets/img/',
+		[`${rootDir}/_assets/vid/`]: '/assets/vid/',
 		// [`${rootDir}/_includes/assets/svg/footer-deco-*.svg`]: '/assets/svg/',
 		[`${rootDir}/favicon.ico`]: '/favicon.ico',
 		[`${rootDir}/ai.txt`]: '/ai.txt',
