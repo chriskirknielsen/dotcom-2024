@@ -67,7 +67,6 @@
 
 		filter: drop-shadow(0 2px 4px #0008);
 		transform-origin: 50% 100%;
-		transition: scale var(--anim-short) var(--easing-in-out);
 
 		&:nth-child(1) {
 			rotate: 7deg;
@@ -81,8 +80,14 @@
 			translate: -33% 0;
 		}
 	}
+}
 
-	&:is(:hover, :focus-visible) > img {
-		scale: 1.1;
-	}
+.signoff-body a > .inline-icon,
+a .signoff-decorators > img {
+	transition: scale var(--anim-short) var(--easing-in-out);
+}
+
+.signoff-body a:is(:hover, :focus-visible) > .inline-icon,
+a:is(:hover, :focus-visible) .signoff-decorators > img {
+	scale: 1.1;
 }

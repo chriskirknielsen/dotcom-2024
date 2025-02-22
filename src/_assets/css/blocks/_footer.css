@@ -51,7 +51,9 @@
 
 .footer-message {
 	--fm: 0;
-	--fm-abs: max(-1 * (1 - var(--fm) * 2), (1 - var(--fm) * 2)); /* [0;1] range, creates a /\ shaped progression when used with calc(1 - var(--fm-abs)) */
+	--fm-2: (1 - var(--fm) * 2); /* [-1;1] range */
+	--fm-abs: max(-1 * var(--fm-2), var(--fm-2)); /* Because abs() isn't available in Chrome at this time */
+	--fm-opacity: calc(1 - var(--fm-abs)); /* [0;1] range, creates a /\ shaped progression */
 
 	position: relative;
 
@@ -84,7 +86,7 @@
 		text-align: center;
 		font-size: 4em;
 
-		opacity: calc(1 - var(--fm-abs));
+		opacity: var(--fm-opacity);
 		scale: var(--fm);
 		translate: 0 calc(var(--fm) * -2em);
 	}
