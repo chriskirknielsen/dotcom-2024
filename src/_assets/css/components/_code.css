@@ -69,10 +69,13 @@ kbd {
 	margin-inline-start: calc(var(--d) + 1px);
 	margin-inline-end: calc(var(--d) + 2px);
 
-	color: black;
+	color: #111;
+	color: oklch(from var(--C-heading) 10% 100% h);
 	border-radius: max(var(--d), var(--_corner)); /* Always at least a little rounded */
-	background: white;
+	background: #eee;
+	background: oklch(from var(--C-heading) 100% 15% h);
 	box-shadow: calc(var(--d) - 1px) calc(var(--d) - 1px) 0 var(--d) #808080;
+	box-shadow: calc(var(--d) - 1px) calc(var(--d) - 1px) 0 var(--d) oklch(from var(--C-heading) 50% 20% h);
 }
 
 .token.namespace {
