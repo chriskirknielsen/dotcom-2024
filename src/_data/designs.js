@@ -115,19 +115,6 @@ const designs = [
 		accent: '#ca2186',
 	},
 	{
-		slug: 'css-fact-sheet',
-		name: 'CSS Fact Sheet',
-		description: "A compact fact sheet for CSS that wouldn't be out of place on a crate in a cyberpunk world…",
-		img: 'css-fact-sheet.png',
-		links: {
-			RedBubble: 'https://www.redbubble.com/i/sticker/CSS-Fact-Sheet-by-ckirknielsen/58082119.EJUG5',
-			TeePublic: 'https://www.teepublic.com/t-shirt/14123881-css-fact-sheet?store_id=49603',
-			DesignByHumans: 'https://www.designbyhumans.com/shop/t-shirt/men/css-fact-sheet/1831576/',
-		},
-		tags: ['dev', 'css'],
-		date: '2020-09-17',
-	},
-	{
 		slug: 'css-logo-solid',
 		name: 'CSS Logo (solid)',
 		description: `CSS is awesome.`,
@@ -156,6 +143,19 @@ const designs = [
 		date: '2024-11-02',
 		variant: ['css-logo-solid'],
 		showInGallery: false,
+	},
+	{
+		slug: 'css-fact-sheet',
+		name: 'CSS Fact Sheet',
+		description: "A compact fact sheet for CSS that wouldn't be out of place on a crate in a cyberpunk world…",
+		img: 'css-fact-sheet.png',
+		links: {
+			RedBubble: 'https://www.redbubble.com/i/sticker/CSS-Fact-Sheet-by-ckirknielsen/58082119.EJUG5',
+			TeePublic: 'https://www.teepublic.com/t-shirt/14123881-css-fact-sheet?store_id=49603',
+			DesignByHumans: 'https://www.designbyhumans.com/shop/t-shirt/men/css-fact-sheet/1831576/',
+		},
+		tags: ['dev', 'css'],
+		date: '2020-09-17',
 	},
 	{
 		slug: 'duotype-css',
