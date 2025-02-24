@@ -7,7 +7,7 @@ tags:
     - today-i-learned
 ---
 
-As a European living in the US, besides the incoming four-year shitshow, I've been getting accustomed to things like units. (though I _still_ don't know how many ounces are in a mile)
+As a European living in the US, besides the incoming four-year shitshow (or will it be longer?), I've been getting accustomed to things like units. (though I _still_ don't know how many ounces are in a mile)
 
 I'm comfortable converting between Celsius and Fahrenheit in my head: `F = 1.8×C + 32` (double it, remove one tenth, then add 32, done; in a pinch, `F ≈ 2×C + 30` is close) and `C = (F - 32) / 1.8` (which is granted a little tougher due to division, but you can get there using similar logic).
 
