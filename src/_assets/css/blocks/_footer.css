@@ -58,6 +58,7 @@
 	position: relative;
 
 	margin-block-start: var(--size-l);
+
 	transition: --fm 0.5s var(--easing-in);
 
 	&:hover {
@@ -72,6 +73,7 @@
 	}
 	&::after {
 		content: '🤍';
+
 		margin-block-start: -0.5em;
 	}
 	&::before,
