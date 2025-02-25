@@ -85,7 +85,6 @@
 				image: {
 					decorator: designVariant or designCommission,
 					src: [assets.images, 'designs', design.img] | toPath | toNetlifyImage({ w: 320 }),
-					alt: design.name,
 					width: 600,
 					height: 600,
 					lazy: loop.index >= 8

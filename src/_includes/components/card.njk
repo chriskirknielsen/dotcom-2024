@@ -1,12 +1,13 @@
 {% set attrs %}class="{{ ('card ' + (classes or '')) | trim }}" {% if cardAttrs %}{{ cardAttrs | safe }}{% endif %}{% endset %}
 {% set imageLink = image.link or link %}
+{% set isImageAriaHidden = image.isAriaHidden or (not image.alt and heading) or imageLink == link %}
 <article {{ attrs | trim | safe }}>
 	{% if image %}
 		<div class="card-image">
-			<a href="{{ imageLink }}">
+			<a href="{{ imageLink }}"{% if isImageAriaHidden %} tabindex="-1" aria-hidden="true"{% endif %}>
 				<img
 					src="{{ image.src }}"
-					alt="{{ image.alt or (heading if imageLink else '') }}"
+					alt="{{ image.alt or (heading if (imageLink and not isImageAriaHidden) else '') }}"
 					width="{{ image.width }}"
 					height="{{ image.height }}"
 					{% if image.lazy %}loading="lazy"{% endif %}
