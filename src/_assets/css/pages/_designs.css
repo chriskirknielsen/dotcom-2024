@@ -32,11 +32,11 @@
 					transform: skewX(-30deg) scaleX(0);
 					transition: transform var(--CARD-transition-base);
 				}
-
-				&:is(:hover, :focus-visible)::before {
-					transform: skewX(-30deg) scaleX(1.5);
-				}
 			}
 		}
+	}
+
+	&:has(a:is(.card-heading > a, .card-image > a):is(:hover, :focus-visible)) .card-image > a:has(> img[src*='.png'])::before {
+		transform: skewX(-30deg) scaleX(1.5);
 	}
 }
