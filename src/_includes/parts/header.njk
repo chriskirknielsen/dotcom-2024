@@ -21,10 +21,10 @@
         } %}
 
         <div class="header-menu">
-            <nav>
-                <ul>
+            <nav class="header-nav">
+                <ul class="header-list">
                     {% for menuItem in nav.navbar %}
-                        <li>
+                        <li class="header-item">
                             <a href="{{ menuItem.path }}" {{ menuItem.path | current(page) | safe }} class="header-link">{{ menuItem.label }}</a>
                         </li>
                     {% endfor %}
