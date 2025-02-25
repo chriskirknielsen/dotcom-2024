@@ -465,6 +465,18 @@ html[data-theme='vintage'] {
 }
 
 html[data-theme='campfire'] {
+	@supports (-webkit-text-fill-color: transparent) {
+		.hero-heading {
+			--bleed: 4px;
+			background: linear-gradient(135deg, var(--C-heading) 33%, var(--C-accent) 125%);
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+			color: transparent;
+			padding: var(--bleed);
+			margin: calc(var(--bleed) * -1);
+		}
+	}
+
 	.homepage-logo {
 		--HOME-logo-text-font: var(--_font-body-family);
 	}
