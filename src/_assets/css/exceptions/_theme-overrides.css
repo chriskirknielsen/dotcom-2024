@@ -476,6 +476,8 @@ html[data-theme='campfire'] {
 			background: linear-gradient(135deg, var(--C-heading) 33%, var(--C-accent) 125%);
 			-webkit-background-clip: text;
 			background-clip: text;
+
+			filter: drop-shadow(0 -1px 0 var(--C-text));
 		}
 	}
 
