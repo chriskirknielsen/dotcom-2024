@@ -107,15 +107,15 @@
 	transform: rotateY(90deg) translateZ(-0.5px);
 	filter: blur(0.1px); /* Pseudo-anti-aliasing on box edges */
 
-	/* Use a discrete animation to animate the display property */
+	/* Use a discrete animation to animate the visibility property */
 	@media (--accept-motion) {
-		transition: display var(--anim-short) var(--easing-in-out);
+		transition: visibility var(--anim-short) var(--easing-in-out);
 		transition-behavior: allow-discrete;
 	}
 
-	/* To avoid loading all the images at once, hiden them when the parent box item is not active */
+	/* To avoid loading all the images at once, hide them when the parent box item is not active */
 	.gaming-box:not(:hover, :focus-visible) & {
-		display: none;
+		visibility: hidden;
 	}
 
 	/* Fake corner (top-left) highlight, and a shadow for the part furthest away */
