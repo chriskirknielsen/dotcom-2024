@@ -465,15 +465,17 @@ html[data-theme='vintage'] {
 }
 
 html[data-theme='campfire'] {
-	@supports (-webkit-text-fill-color: transparent) {
+	@supports (background-clip: text) {
 		.hero-heading {
 			--bleed: 4px;
-			background: linear-gradient(135deg, var(--C-heading) 33%, var(--C-accent) 125%);
-			background-clip: text;
-			-webkit-text-fill-color: transparent;
-			color: transparent;
-			padding: var(--bleed);
+
 			margin: calc(var(--bleed) * -1);
+			padding: var(--bleed);
+
+			color: transparent;
+			background: linear-gradient(135deg, var(--C-heading) 33%, var(--C-accent) 125%);
+			-webkit-background-clip: text;
+			background-clip: text;
 		}
 	}
 

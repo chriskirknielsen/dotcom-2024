@@ -7,6 +7,12 @@ main {
 	font-size: var(--typeScale-0);
 }
 
+::selection {
+	color: var(--C-surface);
+	text-shadow: none;
+	background: color-mix(in hsl, var(--C-heading) 80%, transparent);
+}
+
 /* Headings */
 :is(h1, h2, h3, h4),
 :is(.h1, .h2, .h3, .h4) {
