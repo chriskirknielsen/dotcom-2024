@@ -3,6 +3,7 @@
 	inset-block-start: 0;
 	z-index: 2;
 
+	-webkit-user-select: none;
 	user-select: none;
 
 	--CTA-display: flex;

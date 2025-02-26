@@ -356,6 +356,7 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 
 /* Exceptions  */
 [xlink\:href='#sample-text'][stroke] {
+	-webkit-user-select: none;
 	user-select: none;
 }
 
