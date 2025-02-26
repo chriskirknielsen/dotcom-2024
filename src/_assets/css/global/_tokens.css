@@ -21,9 +21,9 @@
 --typeScale-n1: clamp(0.8511rem, 0.7471rem + 0.5043vw, 1.1253rem);
 --fontStack-emoji: Twemoji Mozilla, Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, EmojiOne Color;
 --fontStack-serif: Georgia, Constantia, Lucida Bright, Lucidabright, Lucida Serif, Lucida, DejaVu Serif, Bitstream Vera Serif, Liberation Serif, serif;
---fontStack-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
---fontStack-fantasy: Papyrus, casual, cursive;
---fontStack-monospace: Monaco, Consolas, Andale Mono, Courier New, monospace;
+--fontStack-sans-serif: system-ui, sans-serif;
+--fontStack-fantasy: Segoe Print, Bradley Hand, Chilanka, TSCu_Comic, casual, cursive;
+--fontStack-monospace: ui-monospace, Cascadia Code, Source Code Pro, Monaco, Menlo, Consolas, DejaVu Sans Mono, monospace;
 --anim-f: 1;
 --anim-delay: 50ms;
 --anim-short: calc(175ms * var(--anim-f));
@@ -197,8 +197,8 @@ html[data-theme="vapor"] {
 --C-heading: #286b81;
 --C-accent: #ac3d7e;
 --C-surface-alt: #bffffb;
-				--font-heading-family: XanhMono, Monaco,Consolas,Andale Mono,Courier New,monospace;--font-heading-weight: 400;--font-heading-style: italic;
---font-body-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+				--font-heading-family: XanhMono, ui-monospace,Cascadia Code,Source Code Pro,Monaco,Menlo,Consolas,DejaVu Sans Mono,monospace;--font-heading-weight: 400;--font-heading-style: italic;
+--font-body-family: system-ui,sans-serif;
 			}
 html[data-theme="vintage"] {
 				--T-vintage: var(--ON);
@@ -243,7 +243,7 @@ html[data-theme="vintage"] {
 --C-accent: #392103;
 --C-surface-alt: #ffbe33;
 --C-accent-alt: #632120;
-				--font-heading-family: Switzer, Helvetica Neue, system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
+				--font-heading-family: Switzer, Helvetica Neue, system-ui,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
 --font-body-family: Georgia,Constantia,Lucida Bright,Lucidabright,Lucida Serif,Lucida,DejaVu Serif,Bitstream Vera Serif,Liberation Serif,serif;
 			}
 html[data-theme="quill"] {
@@ -265,7 +265,7 @@ html[data-theme="quill"] {
 --C-accent: #6d3c3c;
 --C-surface-alt: #BCBBB4;
 				--font-heading-family: InstrumentSerif, Apple Garamond,AppleGaramond,Garamond, Georgia,Constantia,Lucida Bright,Lucidabright,Lucida Serif,Lucida,DejaVu Serif,Bitstream Vera Serif,Liberation Serif,serif;--font-heading-weight: 400;--font-heading-style: normal;
---font-body-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+--font-body-family: system-ui,sans-serif;
 			}
 html[data-theme="cyberpunk"] {
 				--T-cyberpunk: var(--ON);
@@ -308,8 +308,8 @@ html[data-theme="cyberpunk"] {
 --C-accent: #18ffe3;
 --C-accent-alt: #ffbc1f;
 --C-surface-alt: #321410;
-				--font-heading-family: Rajdhani, system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;--font-heading-weight: 500;--font-heading-style: normal;
---font-body-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+				--font-heading-family: Rajdhani, system-ui,sans-serif;--font-heading-weight: 500;--font-heading-style: normal;
+--font-body-family: system-ui,sans-serif;
 			}
 html[data-theme="campfire"] {
 				--T-campfire: var(--ON);
@@ -362,8 +362,8 @@ html[data-theme="director"] {
 --C-inactive: #9a7a7a;
 --C-surface-alt: #0d1d34;
 --C-accent-alt: #00dbb0;
-				--font-heading-family: TeXGyreAdventor, ITC Avant-Garde Gothic,Avenir,Montserrat,Corbel,URW Gothic,source-sans-pro, system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
---font-body-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+				--font-heading-family: TeXGyreAdventor, ITC Avant-Garde Gothic,Avenir,Montserrat,Corbel,URW Gothic,source-sans-pro, system-ui,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
+--font-body-family: system-ui,sans-serif;
 			}
 @custom-media --small-viewport (width <= 576px);
 @custom-media --large-viewport (width > 576px);
