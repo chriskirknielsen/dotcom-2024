@@ -28,7 +28,8 @@ window.matchMedia(`(min-width:${globalBreakpoint})`).addEventListener('change', 
 	toggleInertForMenu(false);
 });
 
-console.log(`
+console.log(
+	`%c
            Howdy fellow explorer of the Internet.
                  Thanks for stoppin' on by.
 
@@ -55,4 +56,6 @@ CCCCCCC          CCCCC  KKKKKKKK       NNNNNN         NNNNNN
 
 
 This place is not a place of honor...no highly esteemed deed
-       is commemorated here...nothing valued is here.`);
+       is commemorated here...nothing valued is here.`,
+	`font-family:monospace;`
+);
