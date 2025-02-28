@@ -43,10 +43,10 @@
 
 		{% if design.note %}
 			<p class="fontStyle-italic fontSize-smaller">
-				{% if design.isCommission and "Commission" in design.note %}
+				{% if design.isCommission and ("Commission" in design.note) %}
 					{% svg 'handshake', { class: 'inline-icon inline-icon--center linecap-auto' } %}
 				{% endif %}
-				{{ design.note | markdown(true) | safe }}
+				{{ design.note | markdown(true) | replace('\n','<br>') | safe }}
 			</p>
 		{% endif %}
 		
