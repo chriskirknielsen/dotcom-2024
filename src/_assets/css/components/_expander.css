@@ -26,13 +26,13 @@
 
 	--SQRT3: 1.7321;
 	--CENTER-MASS: calc(100% - var(--SQRT3) * 100% / 3) 50%; /* 2 */
+	--DELAY: calc(var(--anim-short) / 4);
 	--arrow-side-size: 0.5em;
 
 	border-width: calc(var(--arrow-side-size) / 2) 0 calc(var(--arrow-side-size) / 2) calc(var(--SQRT3) * var(--arrow-side-size) / 2); /* 1 */
 	border-style: solid;
 	border-color: transparent transparent transparent var(--EXPANDER-button-arrow-color, currentColor);
 
-	transform-origin: 42.5% 50%;
 	transform-origin: var(--CENTER-MASS);
 
 	@media (--accept-motion) {
@@ -48,11 +48,13 @@
 	.expander-button[data-indeterminate] > & {
 		--CLIP: 75%;
 		clip-path: circle(var(--CLIP) at var(--CENTER-MASS));
+		transition-delay: var(--DELAY), 0s, var(--DELAY);
 	}
 
 	.expander-button[data-indeterminate='true'] > & {
 		--CLIP: 25%;
 		scale: var(--SQRT3); /* 3 */
+		transition-delay: 0s, var(--DELAY), 0s;
 	}
 }
 
