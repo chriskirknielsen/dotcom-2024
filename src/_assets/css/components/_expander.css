@@ -14,7 +14,7 @@
 }
 
 .expander-button-arrow {
-	/**
+	/*
      * 1: Equilateral triangle has h = √3 * a / 2, where a is the side
      * 2: Center of mass for a triangle, for side a, is C = (a√3)/3
      * 3: Compensate to be optically sized similar to the original triangle
@@ -37,12 +37,12 @@
 
 	@media (--accept-motion) {
 		transition: all var(--anim-short) var(--easing-in-out);
-		transition-property: clip-path, transform;
+		transition-property: clip-path, scale, rotate;
 	}
 
 	.expander[open] &,
 	.expander-button[aria-pressed='true'] & {
-		transform: rotate(90deg);
+		rotate: 90deg;
 	}
 
 	.expander-button[data-indeterminate] > & {
@@ -52,7 +52,7 @@
 
 	.expander-button[data-indeterminate='true'] > & {
 		--CLIP: 25%;
-		transform: scale(var(--SQRT3)); /* 3 */
+		scale: var(--SQRT3); /* 3 */
 	}
 }
 
