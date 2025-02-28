@@ -14,32 +14,45 @@
 }
 
 .expander-button-arrow {
+	/**
+     * 1: Equilateral triangle has h = √3 * a / 2, where a is the side
+     * 2: Center of mass for a triangle, for side a, is C = (a√3)/3
+     * 3: Compensate to be optically sized similar to the original triangle
+     */
+
 	display: inline-block;
 	block-size: 0;
 	inline-size: 0;
 
 	--SQRT3: 1.7321;
+	--CENTER-MASS: calc(100% - var(--SQRT3) * 100% / 3) 50%; /* 2 */
 	--arrow-side-size: 0.5em;
-
-	/**
-     * 1: Equilateral triangle has h = √3 * a / 2, where a is the side
-     * 2: Center of mass for a triangle, for side a, is C = (a√3)/3
-     */
 
 	border-width: calc(var(--arrow-side-size) / 2) 0 calc(var(--arrow-side-size) / 2) calc(var(--SQRT3) * var(--arrow-side-size) / 2); /* 1 */
 	border-style: solid;
 	border-color: transparent transparent transparent var(--EXPANDER-button-arrow-color, currentColor);
 
 	transform-origin: 42.5% 50%;
-	transform-origin: calc(100% - var(--SQRT3) * 100% / 3) 50%; /* 2 */
+	transform-origin: var(--CENTER-MASS);
 
 	@media (--accept-motion) {
-		transition: transform var(--anim-short) var(--easing-in-out);
+		transition: all var(--anim-short) var(--easing-in-out);
+		transition-property: clip-path, transform;
 	}
 
 	.expander[open] &,
 	.expander-button[aria-pressed='true'] & {
 		transform: rotate(90deg);
+	}
+
+	.expander-button[data-indeterminate] > & {
+		--CLIP: 75%;
+		clip-path: circle(var(--CLIP) at var(--CENTER-MASS));
+	}
+
+	.expander-button[data-indeterminate='true'] > & {
+		--CLIP: 25%;
+		transform: scale(var(--SQRT3)); /* 3 */
 	}
 }
 
