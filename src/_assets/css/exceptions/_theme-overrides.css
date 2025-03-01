@@ -465,7 +465,7 @@ html[data-theme='vintage'] {
 }
 
 html[data-theme='campfire'] {
-	@supports (background-clip: text) {
+	@supports (-webkit-background-clip: text) or (background-clip: text) {
 		.hero-heading {
 			--bleed: 4px;
 
