@@ -109,13 +109,23 @@
 
 	/* Use a discrete animation to animate the visibility property */
 	@media (--accept-motion) {
-		transition: visibility var(--anim-short) var(--easing-in-out);
+		transition: var(--discrete-transition-property, visibility) var(--anim-short) var(--easing-in-out);
 		transition-behavior: allow-discrete;
 	}
 
 	/* To avoid loading all the images at once, hide them when the parent box item is not active */
 	.gaming-box:not(:hover, :focus-visible) & {
 		visibility: hidden;
+	}
+
+	/* If animating display is supported, guestimated with overlay:auto */
+	@supports (overlay: auto) {
+		--discrete-transition-property: display;
+
+		.gaming-box:not(:hover, :focus-visible) & {
+			visibility: visible;
+			display: none;
+		}
 	}
 
 	/* Fake corner (top-left) highlight, and a shadow for the part furthest away */
