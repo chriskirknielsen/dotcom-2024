@@ -477,7 +477,7 @@ html[data-theme='campfire'] {
 			-webkit-background-clip: text;
 			background-clip: text;
 
-			filter: drop-shadow(0 -1px 0 var(--C-text));
+			filter: drop-shadow(-0.5px -1px 0 var(--C-text));
 		}
 	}
 
