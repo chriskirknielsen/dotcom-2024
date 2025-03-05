@@ -195,19 +195,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
 		Array.from(spine.childNodes).forEach((n) => button.appendChild(n)); // Move all contents to the new element
 		spine.replaceWith(button);
 	});
-
-	eachDom('.expander', (expander) => {
-		expander.addEventListener('toggle', (e) => {
-			const event = new CustomEvent('ckn:toggle', {
-				bubbles: true,
-				detail: {
-					oldState: e.oldState,
-					newState: e.newState,
-				},
-			});
-			e.target.dispatchEvent(event);
-		});
-	});
 });
 
 document.addEventListener('click', function (e) {
@@ -260,23 +247,24 @@ document.addEventListener('click', function (e) {
 	}
 });
 
-document.addEventListener('ckn:toggle', function (e) {
-	let target;
-	console.log(e.target);
-	if ((target = e.target.closest('.expander-group .expander'))) {
-		console.log(target);
-		const group = target.closest('.expander-group');
-		if (!group.id) {
-			return;
+document.addEventListener(
+	'toggle',
+	function (e) {
+		let target;
+		if ((target = e.target.closest('.expander-group .expander'))) {
+			const group = target.closest('.expander-group');
+			if (!group || !group.id) {
+				return;
+			}
+			const toggleAllButton = document.querySelector(`[data-games-toggle-all="${group.id}"]`);
+			const expanders = Array.from(group.querySelectorAll('.expander'));
+			const allExpanderStates = new Set(expanders.map((exp) => exp.open));
+			const allStatesIdentical = allExpanderStates.size === 1;
+			toggleAllButton.setAttribute('data-indeterminate', Boolean(!allStatesIdentical).toString());
 		}
-		const toggleAllButton = document.querySelector(`[data-games-toggle-all="${group.id}"]`);
-		const expanders = Array.from(group.querySelectorAll('.expander'));
-		const allExpanderStates = new Set(expanders.map((exp) => exp.open));
-		const allStatesIdentical = allExpanderStates.size === 1;
-		console.log(allExpanderStates);
-		toggleAllButton.setAttribute('data-indeterminate', Boolean(!allStatesIdentical).toString());
-	}
-});
+	},
+	{ capture: true }
+);
 
 document.addEventListener('submit', function (e) {
 	let target = e.target.closest('[data-gaming-toolbar]');
