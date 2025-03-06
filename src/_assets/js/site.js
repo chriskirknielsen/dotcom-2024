@@ -11,6 +11,12 @@ document.addEventListener('click', function (e) {
 		if (target.matches('.header-menu-toggle')) {
 			toggleInertForMenu(newPressedValue);
 		}
+	} else {
+		target = e.target;
+		// Auto-close the theme picker if clicking outside of its container
+		if (!target.closest('.header-themepicker')) {
+			document.querySelector('.header-themepicker-toggle').setAttribute('aria-pressed', 'false');
+		}
 	}
 });
 
@@ -24,7 +30,7 @@ document.addEventListener('keyup', function (e) {
 });
 
 window.matchMedia(`(min-width:${globalBreakpoint})`).addEventListener('change', function (e) {
-	Array.from(document.body.querySelectorAll('.header-menu-toggle, .header-themepicker-toggle')).forEach((el) => el.setAttribute('aria-pressed', 'false'));
+	Array.from(document.querySelectorAll('.header-menu-toggle, .header-themepicker-toggle')).forEach((el) => el.setAttribute('aria-pressed', 'false'));
 	toggleInertForMenu(false);
 });
 
