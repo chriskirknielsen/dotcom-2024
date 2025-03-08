@@ -443,6 +443,10 @@ html[data-theme='vintage'] {
 		}
 	}
 
+	.button:is(:active) {
+		--CTA-box-shadow: 0 1px 1px #0003, inset 0 -2px 2px #954a4a, inset 0 2px 2px var(--C-accent);
+	}
+
 	.card a:is(:hover, :focus-visible) {
 		--LINK-color: var(--C-surface-alt);
 		--LINK-underline-color: var(--C-heading);
