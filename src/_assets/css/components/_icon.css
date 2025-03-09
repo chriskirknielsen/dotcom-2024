@@ -13,3 +13,13 @@
 	/* Thanks to Roman Komarov: https://blog.kizu.dev/cap-height-align/#known-size-just-vertical-align */
 	vertical-align: calc(0.5cap - 0.5 * var(--ICON-size));
 }
+
+/* ? Sticky icon trick: https://medienbaecker.com/articles/inline-links-with-sticky-icons */
+.icon-text-pair,
+.link-label-anchor:has(svg, .inline-icon) {
+	white-space: nowrap; /* Keep the icon stuck against the text */
+}
+.icon-text-pair > :not(.inline-icon),
+.link-label-anchor:has(svg, .inline-icon) .link-label-text {
+	white-space: normal; /* Allow line breaking for the actual text */
+}
