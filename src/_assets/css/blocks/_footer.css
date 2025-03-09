@@ -50,11 +50,13 @@
 
 	&::before {
 		content: '💙      💜';
+		content: '💙      💜' / '';
 	}
 
 	&::after {
 		--f: 0.9;
 		content: '🤍';
+		content: '🤍' / '';
 
 		margin-block-start: -0.5em;
 	}
