@@ -43,39 +43,22 @@
 	position: relative;
 }
 
-@property --fm {
-	syntax: '<number>';
-	initial-value: 0;
-	inherits: true;
-}
-
 .footer-message {
-	--fm: 0;
-	--fm-2: (1 - var(--fm) * 2); /* [-1;1] range */
-	--fm-abs: max(-1 * var(--fm-2), var(--fm-2)); /* Because abs() isn't available in Chrome at this time */
-	--fm-opacity: calc(1 - var(--fm-abs)); /* [0;1] range, creates a /\ shaped progression */
-
 	position: relative;
 
 	margin-block-start: var(--size-l);
 
-	transition: --fm 0.5s var(--easing-in);
-
-	&:hover {
-		--fm: 1;
-
-		transition-duration: 3s;
-		transition-timing-function: var(--easing-out);
-	}
-
 	&::before {
-		content: '💙   💜';
+		content: '💙      💜';
 	}
+
 	&::after {
+		--f: 0.9;
 		content: '🤍';
 
 		margin-block-start: -0.5em;
 	}
+
 	&::before,
 	&::after {
 		pointer-events: none;
@@ -88,9 +71,34 @@
 		text-align: center;
 		font-size: 4em;
 
-		opacity: var(--fm-opacity);
-		scale: var(--fm);
-		translate: 0 calc(var(--fm) * -2em);
+		scale: 0;
+		opacity: 0;
+	}
+
+	html:not([data-js='true']) &:hover,
+	html[data-js='true'] &.activated {
+		&::before,
+		&::after {
+			animation: --footerMessage 3s ease-out 1 both;
+		}
+	}
+}
+
+@keyframes --footerMessage {
+	0% {
+		scale: 0;
+		opacity: 0;
+	}
+	10% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		scale: 1;
+		translate: 0 calc(-2em * var(--f, 1));
 	}
 }
 

@@ -29,6 +29,18 @@ document.addEventListener('keyup', function (e) {
 	}
 });
 
+document.addEventListener(
+	'mouseenter',
+	function (e) {
+		let target = e.target.closest('.footer-message');
+		if (target) {
+			target.classList.add('activated');
+			target.addEventListener('animationend', (evt) => target.classList.remove('activated'), { once: true });
+		}
+	},
+	{ capture: true }
+);
+
 window.matchMedia(`(min-width:${globalBreakpoint})`).addEventListener('change', function (e) {
 	Array.from(document.querySelectorAll('.header-menu-toggle, .header-themepicker-toggle')).forEach((el) => el.setAttribute('aria-pressed', 'false'));
 	toggleInertForMenu(false);
