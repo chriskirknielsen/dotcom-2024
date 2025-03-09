@@ -1,7 +1,7 @@
 .inline-icon {
 	--ICON-size: 0.9em;
 	display: inline-block;
-	block-size: var(--ICON-size);
+	block-size: var(--ICON-size, 1em);
 	inline-size: auto;
 }
 
@@ -9,9 +9,9 @@
 	vertical-align: middle;
 }
 .inline-icon--center {
-	vertical-align: calc(0.375em - 0.5 * var(--ICON-size)); /* Fallback */
+	vertical-align: calc(0.375em - 0.5 * var(--ICON-size, 1em)); /* Fallback */
 	/* Thanks to Roman Komarov: https://blog.kizu.dev/cap-height-align/#known-size-just-vertical-align */
-	vertical-align: calc(0.5cap - 0.5 * var(--ICON-size));
+	vertical-align: calc(0.5cap - 0.5 * var(--ICON-size, 1em));
 }
 
 /* ? Sticky icon trick: https://medienbaecker.com/articles/inline-links-with-sticky-icons */
