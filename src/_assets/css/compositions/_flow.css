@@ -10,7 +10,7 @@
 	}
 
 	/* Make sure headings/lists stick close to associated content */
-	& > :where(p + :is(ul, ol)),
+	& > :where(p + :is(ul, ol):not(.unstuck-list)),
 	& > :where(:is(h1, h2, h3, h4) + *) {
 		--flow-space: var(--size-xs);
 	}

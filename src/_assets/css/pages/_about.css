@@ -431,3 +431,13 @@
 		flex-grow: 0.25;
 	}
 }
+
+.about-icons-list {
+	--s: var(--size-l); /* Size */
+	font-size: var(--s);
+	/* line-height: calc(1.6 * var(--s)); */
+}
+
+.about-icons-list-icon {
+	--ICON-size: var(--s);
+}

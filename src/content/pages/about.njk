@@ -66,7 +66,24 @@ I grew up in Lyon, France, born to **Danish** parents. Australia was my home fo
 ## Skills, a.k.a. The Professional Section
 {% endrenderTemplate %}
 
-<p>I’m a creative developer, or “design engineer”, meaning I can code and design, keeping an eye on details (including fonts!). Front-end fluency with <span class="icon-text-pair">{% svg 'html-icon', { class: 'inline-icon inline-icon--center' } %} <strong>HTML</strong></span> (the semantic kind), <span class="icon-text-pair">{% svg 'css-icon', { class: 'inline-icon inline-icon--center' } %} <strong>Cascading Stylesheets</strong></span> (I'm a CSS nerd), and <span class="icon-text-pair">{% svg 'js-icon', { class: 'inline-icon inline-icon--center' } %} <strong>JavaScript</strong></span> (not React!) is where I shine, but I don’t shy away from <strong>PHP and SQL</strong> (mainly for WordPress projects) or <span class="icon-text-pair">{% svg 'webflow-icon', { class: 'inline-icon inline-icon--center' } %} <strong>Webflow</strong></span>. I use <span class="icon-text-pair">{% svg 'git-icon', { class: 'inline-icon inline-icon--center' } %} <strong>git</strong></span> to keep my projects neatly tracked, and like to write squeaky-clean(ish) commented code. The <span class="icon-text-pair">{% svg 'adobecs-icon', { class: 'inline-icon inline-icon--center' } %} <strong>Adobe Creative Suite</strong></span> and I go <em>way</em> back (2005!), especially <strong>Photoshop, Illustrator, and After Effects</strong>, though I've also gotten on the <span class="icon-text-pair">{% svg 'figma-icon', { class: 'inline-icon inline-icon--center' } %} <strong>Figma</strong></span> train (sorry, Sketch!).</p>
+<p>I’m a creative developer, or “design engineer”, meaning I can code and design, keeping an eye on details (including fonts!). Front-end fluency with <strong>HTML</strong> (the semantic kind), <strong>Cascading Stylesheets</strong> (I'm a CSS nerd), and <strong>JavaScript</strong> (not React!) is where I shine, but I don’t shy away from <strong>PHP and SQL</strong> (mainly for WordPress projects) or <strong>Webflow</strong>. I use <strong>git</strong> (GitHub, GitLab, Bitbucket) to keep my projects neatly tracked, and like to write squeaky-clean(ish) commented code. The <strong>Adobe Creative Suite</strong> and I go <em>way</em> back (2005!), especially <strong>Photoshop, Illustrator, and After Effects</strong>, though I've also gotten on the <strong>Figma</strong> train (sorry, Sketch!).</p>
+
+{% set icons = {
+    html: 'HyperText Markup Language',
+    css: 'Cascading Stylesheets',
+    js: 'JavaScript',
+    git: 'git',
+    php: 'PHP',
+    wordpress: 'WordPress',
+    webflow: 'Webflow',
+    adobecs: 'Adobe Creative Suite',
+    figma: 'Figma'
+} %}
+<ul class="inline-list unstuck-list textAlign-center | about-icons-list" style="--c: {{ icons | keys | length }};">
+    {% for iconKey, iconLabel in icons %}
+        <li class="about-icons-list-item" style="--i: {{ loop.index0 }};">{% svg iconKey+'-icon', { title: iconLabel, class: 'about-icons-list-icon inline-icon inline-icon--center' } %}</li>
+    {% endfor %}
+</ul>
 
 <p>If you were looking for a résumé, you’ll find what you need on <a href="https://www.linkedin.com/in/chriskirknielsen" class="link-label-anchor"><span class="link-label-text">my</span> {% svg 'linkedin-icon', { class: 'inline-icon inline-icon--center' } %} <span class="link-label-text">LinkedIn profile</span></a>.</p>
 
