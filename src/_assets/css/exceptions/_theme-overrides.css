@@ -2,6 +2,7 @@
 	html:not([data-theme]) {
 		.homepage-photo {
 			--HOME-photo-border-width: 0px;
+			border-radius: var(--size-2xs);
 		}
 	}
 }
@@ -9,6 +10,7 @@
 html[data-theme='dawn'] {
 	.homepage-photo {
 		--HOME-photo-border-width: 0px;
+		border-radius: var(--size-2xs);
 	}
 }
 
@@ -423,6 +425,7 @@ html[data-theme='vintage'] {
 
 	.homepage-photo {
 		--HOME-photo-border-width: 0px;
+		border-radius: var(--size-m);
 		background: var(--C-heading);
 	}
 
@@ -491,6 +494,7 @@ html[data-theme='campfire'] {
 
 	.homepage-photo {
 		--HOME-photo-border-width: 0px;
+		border-radius: 100% / 30%;
 	}
 
 	hr {
