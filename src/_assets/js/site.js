@@ -32,7 +32,7 @@ document.addEventListener('keyup', function (e) {
 document.addEventListener(
 	'mouseenter',
 	function (e) {
-		let target = e.target ? e.target.closest('.footer-message') : null;
+		let target = e?.target?.closest('.footer-message');
 		if (target) {
 			target.classList.add('activated');
 			target.addEventListener('animationend', (evt) => target.classList.remove('activated'), { once: true });

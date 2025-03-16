@@ -251,7 +251,7 @@ document.addEventListener(
 	'toggle',
 	function (e) {
 		let target;
-		if ((target = e.target ? e.target.closest('.expander-group .expander') : null)) {
+		if ((target = e?.target?.closest('.expander-group .expander'))) {
 			const group = target.closest('.expander-group');
 			if (!group || !group.id) {
 				return;
