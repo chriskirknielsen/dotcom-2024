@@ -12,7 +12,10 @@ export default function (eleventyConfig) {
 	eleventyConfig.addFilter('unique', (arr) => [...new Set(arr)]);
 
 	/** Flattens an array to a single level. */
-	eleventyConfig.addFilter('flatten', (array) => array.flat(Infinity));
+	eleventyConfig.addFilter('flatten', (array, depth = Infinity) => array.flat(depth));
+
+	/** Merges two array together. */
+	// eleventyConfig.addFilter('arrayConcat', (array1 = [], array2 = []) => [].concat(array1, array2));
 
 	/** Runs Object.values() on an array of objects. */
 	eleventyConfig.addFilter('toValues', (arr) => arr.map((obj) => Object.values(obj)));

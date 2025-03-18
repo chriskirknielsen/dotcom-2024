@@ -1,15 +1,16 @@
 {# Normalise from the nav file #}
 {% if path and not url %}{% set url = path %}{% endif %}
 {% set iconBefore = iconBefore or false %}
+{% set iconSvgOpts = iconSvgOpts or {} %}
 {% set iconClass = iconClass or 'inline-icon' %}{# Set to an empty space for no-scale behaviour #}
 {% set ctaType = 'a' if url else 'button' %}
 {% set iconRender -%}
     {% if icon %}
-        {% svg icon, { class: iconClass + ' linecap-auto', ariaHidden: true } %}
+        {% svg icon, ({ class: iconClass + ' linecap-auto', ariaHidden: true } | objConcat(iconSvgOpts)) %}
     {% elseif iconStack %}
         <div class="cellstack">
-            {% svg iconStack.idle, { class: iconClass + ' button-content button-content--idle', ariaHidden: true } %}
-            {% svg iconStack.pressed, { class: iconClass + ' button-content button-content--pressed', ariaHidden: true } %}
+            {% svg iconStack.idle, ({ class: iconClass + ' button-content button-content--idle', ariaHidden: true } | objConcat(iconSvgOpts)) %}
+            {% svg iconStack.pressed, ({ class: iconClass + ' button-content button-content--pressed', ariaHidden: true } | objConcat(iconSvgOpts)) %}
         </div>
     {% endif %}
 {%- endset %}
