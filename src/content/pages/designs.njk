@@ -17,13 +17,11 @@
 	<ul class="designs-stores | flex-list justifyContent-center | fontWeight-bold fontSize-small" aria-labelledby="designs-shops-label" style="--list-gap: var(--size-m);">
 		{% for merchStore, merchUrl in metadata.merch %}
 			{% set storeIconName %}store-icon-{{ merchStore | lower }}{% endset %}
-			{% if merchStore == 'CottonBureau' %}
-				{# I don't actually have a CottonBureau store but some of my designs are sold there by other people, so I want to have the icon available, just not listed as a link #}
-				<li hidden>{% injectsvg storeIconName, { class: 'store-icon' } %}</li>
-			{% else %}
+			{# I don't actually have a CottonBureau store but some of my designs are sold there by other people #}
+			{% if merchStore != 'CottonBureau' %}
 			<li>
 				<a href="{{ merchUrl }}">
-					{% injectsvg storeIconName, { class: 'store-icon' } %}
+					{% svg storeIconName, { class: 'store-icon', width: 32, height: 32 } %}
 					{{ merchStore }}
 				</a>
 			</li>
@@ -71,10 +69,7 @@
 					<li>
 						<a href="{{ url }}" class="store-icon-linkwrap | display-block">
 							<span class="visually-hidden">Get on {{ site }}</span>
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1080 1080" class="store-icon-inline" aria-hidden="true">
-								<title>{{ site }}</title>
-								<use href="#{{ siteIconId }}" fill="currentColor" />
-							</svg>
+							{% svg siteIconId, { class: 'store-icon-inline', width: 24, height: 24 } %}
 						</a>
 					</li>
 					{% endfor -%}
