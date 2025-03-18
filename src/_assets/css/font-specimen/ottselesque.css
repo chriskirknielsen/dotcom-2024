@@ -354,8 +354,8 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 	--switch-border: 2px;
 }
 
-/* Exceptions  */
-[xlink\:href='#sample-text'][stroke] {
+/* Exceptions */
+#preview-svg > use[*|href='#sample-text'][stroke] {
 	-webkit-user-select: none;
 	user-select: none;
 }
