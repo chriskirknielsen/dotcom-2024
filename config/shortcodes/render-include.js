@@ -17,6 +17,41 @@ function quickHash(s) {
 	return Math.abs(h).toString(16); // Absolutely unnecessary, purely aesthetic, h would suffice, but the hash look more like a proper hash as a hex…
 }
 
+/**
+ * Replicates #Array.splice's behaviour but for strings.
+ * @param {string} content Initial string contents.
+ * @param {Number} index Splice start index.
+ * @param {string} add Contents to inject at the provided index.
+ * @param {Number} [skip] Number of characters after the index to skip. Leave empty to capture the entire remainder.
+ * @returns {string} Spliced string.
+ */
+function stringSplice(content, index, add, skip = 0) {
+	if (!content || typeof content !== 'string') {
+		return content;
+	}
+
+	// Negative index handling
+	if (index < 0) {
+		index += content.length;
+
+		if (index < 0) {
+			index = 0;
+		}
+	}
+
+	// Splice the string together
+	return content.slice(0, index) + (add || '') + content.slice(index + skip);
+}
+
+/**
+ * Get the ID for the SVG spritesheet.
+ * @param {string} [ref] Sprite ID to compose. Omit to retrieve the prefix by itself.
+ * @returns {string} Composed sprite ID.
+ */
+function getSpriteId(ref = '') {
+	return `svg__${ref}`;
+}
+
 export default function (eleventyConfig, options = {}) {
 	if (typeof options.svgAssetFolder !== 'string') {
 		throw new Error('The `options` argument expects a `svgAssetFolder` property to use as a folder path for the `svg` shortcode.');
@@ -28,63 +63,86 @@ export default function (eleventyConfig, options = {}) {
 	const { svgAssetFolder, componentsFolder, cacheSvg } = options;
 	const svgCache = {}; // If caching is enabled, this object will be used to store recurring SVGs
 
-	/** Render an SVG from the SVG assets folder. */
-	eleventyConfig.addAsyncShortcode('svg', async function (filename, svgOptions = {}) {
+	/** Fetch the raw contents of an SVG file. */
+	async function loadSvg(filename) {
+		return eleventyConfig.getShortcode('injectsvg')(filename);
+	}
+
+	/** Manipulate the contents */
+	function processSvg(content, svgOptions) {
+		try {
+			// If there are options that inject attributes, we can use cheerio to inject them
+			const $ = cheerio.load(content, null, false);
+			const svg = $('svg');
+
+			if (svgOptions.id) {
+				svg.attr('id', svgOptions.id);
+			}
+
+			if (svgOptions.class) {
+				svg.addClass(svgOptions.class);
+			}
+
+			if (svgOptions.title) {
+				const titleEl = svg.find('title').length > 0 ? svg.find('title') : $(`<title></title>`).prependTo(svg);
+				titleEl.text(svgOptions.title);
+			}
+
+			if (svgOptions.ariaLabel) {
+				svg.attr('aria-label', svgOptions.ariaLabel);
+			}
+
+			if (!svgOptions.hasOwnProperty('title') && !svgOptions.hasOwnProperty('ariaLabel') && svg.find('title').length === 0) {
+				svgOptions.ariaHidden = true; // Ensure SVGs are hidden from the a11y tree if no title or label is provided
+			}
+
+			if (svgOptions.ariaHidden) {
+				svg.attr('aria-hidden', 'true');
+			}
+
+			// By default, set the SVG to a 16x16 square
+			if (svgOptions.hasOwnProperty('width') === false && !svg.attr('width')) {
+				svgOptions.width = 16;
+			}
+			if (svgOptions.hasOwnProperty('width')) {
+				svg.attr('width', svgOptions.width);
+			}
+
+			if (svgOptions.hasOwnProperty('height') === false && !svg.attr('height')) {
+				svgOptions.height = 16;
+			}
+			if (svgOptions.hasOwnProperty('height')) {
+				svg.attr('height', svgOptions.height);
+			}
+
+			if (svgOptions.preserveAspectRatio) {
+				svg.attr('preserveAspectRatio', svgOptions.preserveAspectRatio);
+			}
+
+			return $.root().html();
+		} catch {
+			// Return the SVG content as-is
+			return content;
+		}
+	}
+
+	/** Render an SVG from the SVG assets folder (asynchronous!). */
+	eleventyConfig.addAsyncShortcode('injectsvg', async function (filename, svgOptions = {}) {
 		const cacheKey = filename + '_' + quickHash(JSON.stringify(svgOptions));
 
 		if (cacheSvg && svgCache.hasOwnProperty(cacheKey)) {
 			return svgCache[cacheKey]; // Wait for the data
 		}
 
-		const isNjk = svgOptions.isNjk || false; // Expect a simple SVG file by default
-		const filePath = `${svgAssetFolder}/${filename}.svg${isNjk ? '.njk' : ''}`;
-		const engine = svgOptions.hasOwnProperty('engine') ? svgOptions.engine : isNjk ? 'njk' : 'html'; // HTML for vanilla SVG
+		const filePath = `${svgAssetFolder}/${filename}.svg`;
 		const output = eleventyConfig.nunjucks.asyncShortcodes
-			.renderFile(filePath, svgOptions, engine)
+			.renderFile(filePath, svgOptions, 'html')
 			.catch((err) => {
 				console.error(err);
 				return `<!-- Unable to render ${filename}: ${err} -->`;
 			})
 			.then((content) => {
-				// If there are options that inject attributes (i.e., not isNjk or engine), we can use cheerio to inject them
-				if (Object.keys(svgOptions).some((k) => ['isNjk', 'engine'].includes(k) === false)) {
-					const $ = cheerio.load(content, null, false);
-					const svg = $('svg');
-
-					if (svgOptions.id) {
-						svg.attr('id', svgOptions.id);
-					}
-
-					if (svgOptions.class) {
-						svg.addClass(svgOptions.class);
-					}
-
-					if (svgOptions.title) {
-						const titleEl = svg.find('title').length > 0 ? svg.find('title') : $(`<title></title>`).prependTo(svg);
-						titleEl.text(svgOptions.title);
-					}
-
-					if (svgOptions.ariaLabel) {
-						svg.attr('aria-label', svgOptions.ariaLabel);
-					}
-
-					if (!svgOptions.hasOwnProperty('title') && !svgOptions.hasOwnProperty('ariaLabel') && svg.find('title').length === 0) {
-						svgOptions.ariaHidden = true; // Ensure SVGs are hidden from the a11y tree if no title or label is provided
-					}
-
-					if (svgOptions.ariaHidden) {
-						svg.attr('aria-hidden', 'true');
-					}
-
-					if (svgOptions.preserveAspectRatio) {
-						svg.attr('preserveAspectRatio', svgOptions.preserveAspectRatio);
-					}
-
-					return $.root().html();
-				} else {
-					// Return the SVG content as-is
-					return content;
-				}
+				return processSvg(content, svgOptions);
 			});
 
 		if (cacheSvg) {
@@ -92,6 +150,55 @@ export default function (eleventyConfig, options = {}) {
 		}
 
 		return output;
+	});
+
+	/** Insert a reference to an SVG "spritesheet" (sychronous!). */
+	eleventyConfig.addShortcode('svg', function (filename, svgOptions = {}) {
+		const content = `<svg xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="#${getSpriteId(filename)}" width="100%" height="100%"></use></svg>`;
+		const output = processSvg(content, svgOptions);
+
+		return output;
+	});
+
+	/** Inject an SVG spritesheet at the bottom of the content. */
+	eleventyConfig.addTransform('svg', async (content, outputPath) => {
+		// It's not HTML? Get outta here!
+		if (!outputPath || !outputPath.endsWith('.html')) {
+			return content;
+		}
+
+		// Get a deduplicated list of all SVG <use> references to inject
+		const useRegExp = new RegExp(`<use xlink:href="#${getSpriteId()}([^"]+)"+`, 'g');
+		const useReferences = [...new Set([...content.matchAll(useRegExp)].map((m) => m[1]))];
+
+		// No SVG sprite, no more processing
+		if (useReferences.length < 1) {
+			return content;
+		}
+
+		// Instantiate a new SVG element that will hold the "spritesheet"
+		const $ = cheerio.load('<svg xmlns:xlink="http://www.w3.org/1999/xlink" class="visually-hidden"></svg>', null, false);
+		const $svgSprite = $('svg');
+
+		// Loop through all the references, with an await since loading the SVGs is asynchronous
+		const symbols = useReferences.map(async (ref) => {
+			const cacheKey = ref; // No SVG options attached here, so it will be the original file contents
+			if (!cacheSvg || svgCache.hasOwnProperty(cacheKey) === false) {
+				svgCache[cacheKey] = loadSvg(ref); // Cache the raw SVG markup in a promise
+			}
+			const svg = await svgCache[cacheKey]; // Get the raw cache contents
+			const symbol = svg.replace('<svg', `<symbol`).replace('</svg>', '</symbol>'); // Convert SVGs to symbols (gross but it works)
+			const $symbol = $(symbol); // Make the symbol into a cheerio instance
+			$symbol.attr('id', getSpriteId(ref)); // Attach the unique ID
+			$symbol.appendTo($svgSprite);
+			return;
+		});
+		await Promise.all(symbols);
+
+		// Retrieve the final SVG spritesheet
+		const svgOutput = $.root().html();
+		const bodyCloseIndex = content.lastIndexOf('</body>');
+		return stringSplice(content, bodyCloseIndex, svgOutput);
 	});
 
 	/** Render an SVG specially built for the footer section from the SVG assets folder. */

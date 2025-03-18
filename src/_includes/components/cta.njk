@@ -3,7 +3,7 @@
 {% set iconBefore = iconBefore or false %}
 {% set iconClass = iconClass or 'inline-icon' %}{# Set to an empty space for no-scale behaviour #}
 {% set ctaType = 'a' if url else 'button' %}
-{% setAsync 'iconRender' %}
+{% set iconRender -%}
     {% if icon %}
         {% svg icon, { class: iconClass + ' linecap-auto', ariaHidden: true } %}
     {% elseif iconStack %}
@@ -12,7 +12,7 @@
             {% svg iconStack.pressed, { class: iconClass + ' button-content button-content--pressed', ariaHidden: true } %}
         </div>
     {% endif %}
-{% endsetAsync %}
+{%- endset %}
 {% set emptyLabel = true %}
 {% set labelRender -%}
     {% if label.aria %}

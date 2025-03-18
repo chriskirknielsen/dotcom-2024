@@ -44,10 +44,10 @@ platformLabels: {
 <div class="expander-group | flow" id="games-library-expander">
 {% for platform, games in gameslibrary.data | groupby('platform') | dictsort | sortentries(platformLabels | keys) %}
     {% set platformSlug = platform | lower | replace(' ', '-') %}
-    {% setAsync 'expanderLabel' %}
+    {% set expanderLabel %}
         {% svg 'gaming-'+platformSlug, { class: 'gaming-logo inline-icon' } %}
         {{ platformLabels[platform] }} ({{ games | length }})
-    {% endsetAsync %}
+    {% endset %}
     {% expander expanderLabel, true, loop.first %}
         <ul class="gaming-platform-group" data-gaming-platform="{{ platformSlug }}">
             {% for game in games | sort(false, false, 'sortTitle') %}

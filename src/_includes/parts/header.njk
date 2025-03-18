@@ -1,7 +1,7 @@
 <header class="header-wrap | container">
     <div class="header">
         <a href="/" class="header-logo | u-url" {{ '/' | current(page) | safe }}>
-            {% svg 'logo', {
+            {% injectsvg 'logo', {
                 class: 'logo | u-logo',
                 title: 'Christopher Kirk-Nielsen logo, to homepage'
             } %}

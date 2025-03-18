@@ -19,11 +19,11 @@
 			{% set storeIconName %}store-icon-{{ merchStore | lower }}{% endset %}
 			{% if merchStore == 'CottonBureau' %}
 				{# I don't actually have a CottonBureau store but some of my designs are sold there by other people, so I want to have the icon available, just not listed as a link #}
-				<li hidden>{% svg storeIconName, { class: 'store-icon' } %}</li>
+				<li hidden>{% injectsvg storeIconName, { class: 'store-icon' } %}</li>
 			{% else %}
 			<li>
 				<a href="{{ merchUrl }}">
-					{% svg storeIconName, { class: 'store-icon' } %}
+					{% injectsvg storeIconName, { class: 'store-icon' } %}
 					{{ merchStore }}
 				</a>
 			</li>
@@ -48,22 +48,22 @@
 				{%- endif %}
 			>
 			{% set designPermalink = '/designs/' + design.slug + '/' %}
-			{% setAsync 'designVariant' -%}
+			{% set designVariant -%}
 				{% if design.variant %}
 					<div class="grouper grouper--icon-text-pair" style="--GAP: var(--size-s);">
 						{% svg 'arrow-bidir', { class: 'inline-icon linecap-auto' } %}
 						<span>Variant available</span>
 					</div>
 				{% endif %}
-			{%- endsetAsync %}
-			{% setAsync 'designCommission' -%}
+			{%- endset %}
+			{% set designCommission -%}
 				{% if design.isCommission %}
 					<div class="grouper grouper--icon-text-pair" style="--GAP: var(--size-s);">
 						{% svg 'handshake', { class: 'inline-icon linecap-auto' } %}
 						<span>Commissioned</span>
 					</div>
 				{% endif %}
-			{%- endsetAsync %}
+			{%- endset %}
 			{% set designLinks %}
 				<ul role="list" class="flex-list | marginBlockStart-auto" {% if enableViewTransitions %}style="view-transition-name:{{ design.slug }}-list;"{% endif %}>
 					{%- for site, url in design.links %}
@@ -83,7 +83,7 @@
 
 			{% component 'card', {
 				image: {
-					decorator: designVariant or designCommission,
+					decorator: (designVariant | trim) or (designCommission | trim),
 					src: [assets.images, 'designs', design.img] | toPath | toNetlifyImage({ w: 320 }),
 					width: 600,
 					height: 600,

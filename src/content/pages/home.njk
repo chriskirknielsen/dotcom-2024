@@ -233,8 +233,8 @@ summary: "Welcome to the personal website of the one they call Christopher Kirk-
 
 	<h1 class="visually-hidden | p-name">{{ metadata.author.name }}</h1>
 
-	{% svg 'name-wide', { class: 'homepage-logo-name homepage-logo-name--wide' } %}
-	{% svg 'name-stack', { class: 'homepage-logo-name homepage-logo-name--stack' } %}
+	{% injectsvg 'name-wide', { class: 'homepage-logo-name homepage-logo-name--wide' } %}
+	{% injectsvg 'name-stack', { class: 'homepage-logo-name homepage-logo-name--stack' } %}
 
 	<p class="homepage-logo-text homepage-logo-text--below">
 		<span>
@@ -270,16 +270,16 @@ summary: "Welcome to the personal website of the one they call Christopher Kirk-
 
 	<ul class="homepage-social" aria-label="Find me around the web">
 		<li>
-			{% component 'cta', { url: nav.rss.path, label: { aria: nav.rss.label }, icon: 'rss', iconClass: ' ' } %}
+			{% component 'cta', { url: nav.rss.path, label: { aria: nav.rss.label }, icon: 'rss' } %}
 		</li>
 		<li>
-			{% component 'cta', { url: social.mastodon.url, label: { aria: social.mastodon.label }, icon: 'mastodon', iconClass: ' ' } %}
+			{% component 'cta', { url: social.mastodon.url, label: { aria: social.mastodon.label }, icon: 'mastodon' } %}
 		</li>
 		<li>
-			{% component 'cta', { url: social.codepen.url, label: { aria: social.codepen.label }, icon: 'codepen', iconClass: ' ' } %}
+			{% component 'cta', { url: social.codepen.url, label: { aria: social.codepen.label }, icon: 'codepen' } %}
 		</li>
 		<li>
-			{% component 'cta', { url: social.github.url, label: { aria: social.github.label }, icon: 'github', iconClass: ' ' } %}
+			{% component 'cta', { url: social.github.url, label: { aria: social.github.label }, icon: 'github' } %}
 		</li>
 	</ul>
 </aside>
