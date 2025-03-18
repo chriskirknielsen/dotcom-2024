@@ -33,7 +33,7 @@ First off, the homepage wordmark for my name is a custom edit of the [Sprat type
 <p>Also, I did use a handful of SVG icons from <a href="https://lucide.dev/icons/">Lucide</a>, listed here:
 {% for name, icon in tokens._meta.icons.used %}
     {% if loop.last %}and{% endif %}
-    {% svg name, { class: 'inline-icon inline-icon--center linecap-auto' } %} <code>{{ icon }}</code>
+    <span class="icon-text-pair">{% svg name, { class: 'inline-icon inline-icon--center linecap-auto' } %} <code>{{ icon }}</code></span>
     {%- if loop.last %}.{% else %},{% endif %}
 {% endfor %}
 </p>

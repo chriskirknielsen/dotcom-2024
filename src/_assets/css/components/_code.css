@@ -33,6 +33,9 @@ code-wrap {
 	font-size: 0.875em;
 	letter-spacing: 0.01em;
 }
+.codeblock-toolbar-label .inline-icon {
+	--ICON-size: 1.25em;
+}
 
 .codeblock pre,
 .codeview-render {
