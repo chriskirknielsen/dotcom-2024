@@ -122,6 +122,7 @@ export default async function (eleventyConfig) {
 			}
 
 			let toolbarLabel = '';
+			let toolbarIcon = '';
 			let syntaxType = tokens[idx].info;
 
 			if (!syntaxType || syntaxType === 'text') {
@@ -129,23 +130,38 @@ export default async function (eleventyConfig) {
 			} else if (tokens[idx]?._filename) {
 				toolbarLabel = tokens[idx]._filename.includes('.') ? tokens[idx]._filename : tokens[idx]._filename + '.' + syntaxType;
 			} else {
+				let toolbarIconRef = '';
+				toolbarLabel = syntaxType.toUpperCase();
 				switch (syntaxType) {
 					case 'js': {
 						toolbarLabel = 'JavaScript';
+						toolbarIconRef = 'js';
 						break;
 					}
 					case 'njk': {
 						toolbarLabel = 'Nunjucks';
 						break;
 					}
-					default: {
-						toolbarLabel = syntaxType.toUpperCase();
+					case 'html': {
+						toolbarIconRef = 'html';
+						break;
+					}
+					case 'css': {
+						toolbarIconRef = 'css';
+						break;
+					}
+					case 'php': {
+						toolbarIconRef = 'php';
 						break;
 					}
 				}
+
+				if (toolbarIconRef) {
+					toolbarIcon = eleventyConfig.getShortcode('svg')(`${toolbarIconRef}-icon`, { class: 'inline-icon inline-icon--center' });
+				}
 			}
 
-			return `<span class="codeblock-toolbar-label">${toolbarLabel}</span>`;
+			return `<span class="codeblock-toolbar-label">${[toolbarIcon, toolbarLabel].join(' ')}</span>`;
 		},
 	});
 	eleventyConfig.addPlugin(EleventyPluginRobotsTxt, { shouldBlockAIRobots: 'true' });

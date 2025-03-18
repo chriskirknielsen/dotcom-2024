@@ -126,7 +126,7 @@ export default function (eleventyConfig, options = {}) {
 		}
 	}
 
-	/** Render an SVG from the SVG assets folder (asynchronous!). */
+	/** Render an SVG from the SVG assets folder (asynchronous but does not require explicit dimensions as they are provided by the SVG). */
 	eleventyConfig.addAsyncShortcode('injectsvg', async function (filename, svgOptions = {}) {
 		const cacheKey = filename + '_' + quickHash(JSON.stringify(svgOptions));
 
