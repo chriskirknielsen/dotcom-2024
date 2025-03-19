@@ -68,7 +68,7 @@ export default function (eleventyConfig, options = {}) {
 		return eleventyConfig.getShortcode('injectsvg')(filename);
 	}
 
-	/** Manipulate the contents */
+	/** Manipulate the DOM for an SVG element. */
 	function processSvg(content, svgOptions) {
 		try {
 			// If there are options that inject attributes, we can use cheerio to inject them
@@ -177,7 +177,7 @@ export default function (eleventyConfig, options = {}) {
 		}
 
 		// Instantiate a new SVG element that will hold the "spritesheet"
-		const $ = cheerio.load('<svg xmlns:xlink="http://www.w3.org/1999/xlink" class="visually-hidden"></svg>', null, false);
+		const $ = cheerio.load('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="visually-hidden"></svg>', null, false);
 		const $svgSprite = $('svg');
 
 		// Loop through all the references, with an await since loading the SVGs is asynchronous
@@ -190,6 +190,7 @@ export default function (eleventyConfig, options = {}) {
 			const symbol = svg.replace('<svg', `<symbol`).replace('</svg>', '</symbol>'); // Convert SVGs to symbols (gross but it works)
 			const $symbol = $(symbol); // Make the symbol into a cheerio instance
 			$symbol.attr('id', getSpriteId(ref)); // Attach the unique ID
+			$symbol.removeAttr('xmlns'); // Remove unnecessary attribute
 			$symbol.appendTo($svgSprite);
 			return;
 		});
