@@ -494,7 +494,7 @@ html[data-theme='campfire'] {
 
 	.homepage-photo {
 		--HOME-photo-border-width: 0px;
-		border-radius: 100% / 30%;
+		border-radius: 100% 100% var(--size-xs) var(--size-xs) / 30% 30% var(--size-xs) var(--size-xs);
 	}
 
 	hr {

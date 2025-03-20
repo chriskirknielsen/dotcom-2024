@@ -152,7 +152,7 @@ export default function (eleventyConfig, options = {}) {
 		return output;
 	});
 
-	/** Insert a reference to an SVG "spritesheet" (sychronous!). */
+	/** Insert a reference to an SVG "spritesheet" (synchronous!). */
 	eleventyConfig.addShortcode('svg', function (filename, svgOptions = {}) {
 		const content = `<svg xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="#${getSpriteId(filename)}" width="100%" height="100%"></use></svg>`;
 		const output = processSvg(content, svgOptions);
