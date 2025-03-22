@@ -2,7 +2,6 @@ import markdownIt from 'markdown-it';
 import markdownItAnchor from 'markdown-it-anchor';
 import markdownItCodeWrap from 'markdown-it-codewrap';
 import * as cheerio from 'cheerio';
-const md = new markdownIt().disable('code');
 
 class TableOfContents {
 	constructor(options = {}) {
@@ -157,11 +156,11 @@ export default function (eleventyConfig, options = {}) {
 		inlineCopyHandler: options.inlineCopyHandler,
 	};
 
+	// Configure the MarkdownIt instance
+	const md = new markdownIt(markdownItOptions).disable('code').use(markdownItAnchor, markdownItAnchorOptions).use(markdownItCodeWrap, markdownItCodeWrapOptions);
+
 	/** Configure the markdown-it library to use. */
-	eleventyConfig.setLibrary(
-		'md',
-		markdownIt(markdownItOptions).disable('code').use(markdownItAnchor, markdownItAnchorOptions).use(markdownItCodeWrap, markdownItCodeWrapOptions)
-	);
+	eleventyConfig.setLibrary('md', md);
 
 	/** Take markup content and automatically create anchors for headings. Should only be used when content is not Markdown. */
 	eleventyConfig.addFilter('autoHeadingAnchors', (markup, includeH1 = false) => {
@@ -169,6 +168,7 @@ export default function (eleventyConfig, options = {}) {
 		if (typeof markup !== 'string') {
 			return markup;
 		}
+
 		const selector = `${includeH1 ? 'h1,' : ''} h2, h3, h4, h5, h6`;
 
 		const $ = cheerio.load(markup, null, false); // Load the contents into cheerio to get a DOM representation
