@@ -140,6 +140,7 @@ export default async function (eleventyConfig) {
 					}
 					case 'njk': {
 						toolbarLabel = 'Nunjucks';
+						toolbarIconRef = 'nunjucks';
 						break;
 					}
 					case 'html': {
