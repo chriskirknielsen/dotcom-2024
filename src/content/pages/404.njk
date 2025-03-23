@@ -2,7 +2,7 @@
 heroTitle: "Holy Shitballs, it's a 404!"
 title: "404 Not Found"
 permalink: '/404/'
-summary: "That link goes nowhere. It's probably not your fault. But if it is… How dare you‽"
+summary: "That link goes nowhere. It's probably not your fault."
 eleventyExcludeFromCollections: true
 ---
 
@@ -14,4 +14,7 @@ eleventyExcludeFromCollections: true
     {% component 'cta', { url: '/', label: 'Homepage', icon: 'arrow-left', iconBefore: true, ctaAttr: 'data-shape="flipped"' } %}
     {% component 'cta', { url: '/search/', label: 'Search', icon: 'search' } %}
 </p>
-<p>If you purposefully typed in this URL to get here, I hope you enjoyed what you got. Also, that's a weird hobby you have… we should be friends.</p>
+
+{% image "/" + assets.images + "/404-itysl-egg.jpg", "The ”I Think You Should Leave“ skit, ”Feed Eggs“, where the character sees a nude egg on his computer game for the first time, confused, and he says ”I've never gotten here before.“", "What the hell?", { width: 1536, height: 870 } %}
+
+<p>If you purposefully typed in this URL to get here, I hope you enjoyed what you got. Also, that's a weird hobby you have… wanna be friends?</p>
