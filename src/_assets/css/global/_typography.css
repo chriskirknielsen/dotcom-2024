@@ -88,6 +88,10 @@ time {
 }
 
 /* Block */
+p {
+	text-wrap: pretty;
+}
+
 pre {
 	line-height: 1.1;
 }
