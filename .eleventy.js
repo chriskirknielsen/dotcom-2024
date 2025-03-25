@@ -155,6 +155,11 @@ export default async function (eleventyConfig) {
 						toolbarIconRef = 'php';
 						break;
 					}
+					case 'sass':
+					case 'scss': {
+						toolbarIconRef = 'sass';
+						break;
+					}
 				}
 
 				if (toolbarIconRef) {
