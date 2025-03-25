@@ -79,16 +79,17 @@ First off, the homepage wordmark for my name is a custom edit of the [Sprat type
 <div>
     <ul class="flex-list flex-list--center | img-88x31-list">
         <li>
-            <a href="https://11ty.dev" class="display-block"><img src="/assets/img/made-with-11ty.gif" alt="Made with Eleventy." loading="lazy"></a>
+            <!-- Made by leap123: https://front-end.social/@leap123@wetdry.world/111641069489695533 -->
+            <a href="https://11ty.dev" class="display-block"><img src="{{ [assets.images, 'made-with-11ty.gif'] | toPath }}" alt="Made with Eleventy." loading="lazy"></a>
         </li>
         <li>
-            <img src="/assets/img/ckn-html5-lgtm.gif" alt="Chris's Seal of Approval: HTML5 looks good to me" loading="lazy">
+            <img src="{{ [assets.images, 'ckn-html5-lgtm.gif'] | toPath }}" alt="Chris's Seal of Approval: HTML5 looks good to me" loading="lazy">
         </li>
         <li>
-            <img src="/assets/img/ckn-css-lgtm.gif" alt="Chris's Seal of Approval: CSS looks good to me" loading="lazy">
+            <img src="{{ [assets.images, 'ckn-css-lgtm.gif'] | toPath }}" alt="Chris's Seal of Approval: CSS looks good to me" loading="lazy">
         </li>
         <li>
-            <a href="http://validator.w3.org/feed/check.cgi?url=https%3A//chriskirknielsen.com/rss.xml" class="display-block"><img src="/assets/img/rss-atom-valid.png" alt="Valid Atom 1.0" loading="lazy"></a>
+            <a href="http://validator.w3.org/feed/check.cgi?url=https%3A//chriskirknielsen.com/rss.xml" class="display-block"><img src="{{ [assets.images, 'rss-atom-valid.png'] | toPath }}" alt="Valid Atom 1.0" loading="lazy"></a>
         </li>
     </ul>
 </div>
