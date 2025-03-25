@@ -59,8 +59,8 @@ tags: [_slash]
 
 <div class="now-grid">
     {% for nowKey, nowData in nowInfo %}
-        <h2 class="visually-hidden">{{ nowInfo[nowKey].heading }}</h2>
         {%- if now[nowKey] -%}
+            <h2 class="visually-hidden">{{ nowInfo[nowKey].heading }}</h2>
             {{ nowList(nowKey, now[nowKey], nowData) -}}
         {%- endif -%}
     {%- endfor -%}
