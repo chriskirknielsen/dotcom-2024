@@ -261,7 +261,7 @@ summary: "Welcome to the personal website of the one they call Christopher Kirk-
 
 	<div class="homepage-photo">
 		<img
-			src="{{ [assets.images, 'profile-256.jpg'] | toPath }}"
+			src="{{ [assets.images, 'profile-256.jpg'] | toPath | toNetlifyImage({ w: 256 }) }}"
 			alt="A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head."
 			width="256"
 			height="256"
