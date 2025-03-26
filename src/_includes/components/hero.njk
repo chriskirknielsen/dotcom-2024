@@ -27,7 +27,7 @@
             <ul class="flex-list | fontSize-small">
                 {% for cta in heroCta %}
                     <li>
-                        {% component 'cta', cta %}
+                        {% component 'cta', cta | objConcat({ pageContext: pageContext }) %}
                     </li>
                 {% endfor %}
             </ul>

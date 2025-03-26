@@ -23,7 +23,7 @@
 	box-shadow: var(--CTA-box-shadow);
 
 	@media (--accept-motion) {
-		transition-property: color, text-decoration-color, background-color, border-color, box-shadow, filter;
+		transition-property: color, text-decoration-color, background-color, border-color, box-shadow, opacity, filter;
 		transition-duration: var(--anim-short);
 		transition-timing-function: var(--easing-in-out);
 	}
@@ -57,7 +57,8 @@
 	}
 
 	:checked + &.button--cbox,
-	&[data-persist-pressed-style][aria-pressed='true'] {
+	&[data-persist-pressed-style][aria-pressed='true'],
+	&[aria-current='page'] {
 		--CTA-text-color: var(--_cta-text-color-pressed);
 		--CTA-bg-color: var(--_cta-bg-color-pressed);
 		--CTA-border-color: var(--_cta-border-color-pressed);
