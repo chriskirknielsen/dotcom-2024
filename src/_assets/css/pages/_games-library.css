@@ -576,6 +576,11 @@
 	z-index: 1;
 
 	align-self: flex-start;
+
+	& svg {
+		block-size: 1em;
+		inline-size: 1em;
+	}
 }
 
 .gaming-details-dialog input[type='checkbox'] {
