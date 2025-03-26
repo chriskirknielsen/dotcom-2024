@@ -152,3 +152,18 @@ dt {
 dd {
 	/* grid-column: 2; */
 }
+
+/* Adjustments for alt text to be a little more usable */
+img[alt]:not([alt='']) {
+	align-content: center; /* Vertically centered in one line, holy shit, what will React developers meme about now??? */
+
+	font-size: 0.875rem;
+	line-height: 1.33;
+
+	&::before {
+		/* Only supported in Firefox, hoping Chrome will enable */
+		display: block;
+		inline-size: 100%;
+		padding: 1rem;
+	}
+}
