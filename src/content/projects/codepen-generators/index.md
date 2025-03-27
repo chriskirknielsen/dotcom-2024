@@ -5,6 +5,8 @@ customMetaImage: generators-cover.jpg
 externalUrl: https://codepen.io/collection/YyraBV
 date: 2019-02-26
 projectButtonLabel: View collection
+projectImportance: 1
+projectOrder: 5
 ---
 
 Over the years, I've build a few "generators" on CodePen that usually rely on randomness. Here are a few of my favourites:

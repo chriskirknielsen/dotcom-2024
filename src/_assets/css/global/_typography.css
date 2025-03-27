@@ -161,7 +161,7 @@ img[alt]:not([alt='']) {
 	line-height: 1.33;
 
 	&::before {
-		/* Only supported in Firefox, hoping Chrome will enable */
+		/* Only supported in Firefox, hoping Chrome will allow some styling hook */
 		display: block;
 		inline-size: 100%;
 		padding: 1rem;

@@ -5,7 +5,8 @@ customMetaImage: front-end-friends-shirts.jpg
 externalUrl: https://cottonbureau.com/people/kevin-powell
 date: 2023-12-31
 projectButtonLabel: View shirts
-status: draft
+projectImportance: 3
+projectOrder: 4
 ---
 
 {% set shirtData1 = designs | find('slug', 'kevin-powell-grid') %}

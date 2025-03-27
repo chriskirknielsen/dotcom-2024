@@ -3,9 +3,9 @@ title: Projects
 summary: Some of the things I've made, either passion projects or real-world work
 ---
 
-<ul class="cards" data-grid-cols="3">
-	{% for project in collections._projects | reverse %}
-		<li class="card-wrapper">
+<ul class="cards" data-grid-cols="3" data-grid-layout="importance">
+	{% for project in collections._projects | sort(true, false, 'data.projectOrder') %}
+		<li class="card-wrapper"{% if project.data.projectImportance %} data-importance="{{ project.data.projectImportance }}"{% endif %}>
 			{% set projectDesc %}<p class="fontSize-smaller">{{ project.data.summary }}</p>{% endset %}
 			{% component 'card', {
 				link: project.url,

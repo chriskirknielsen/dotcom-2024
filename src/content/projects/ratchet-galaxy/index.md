@@ -4,6 +4,8 @@ summary: A full redesign for a Ratchet & Clank fansite
 customMetaImage: ratchet-galaxy-cover.jpg
 externalUrl: https://ratchet-galaxy.com/
 date: 2017-08-25
+projectImportance: 2
+projectOrder: 1
 ---
 
 This is a bit dated by now (2017!) but I think this was the project that got me into "modern" web development. I had already been making websites for years, but despite being work with/for my friend Alan, with Ratchet-Galaxy's third version, I wanted to handle it as any other professional project (I was paid, after all!). At the time, I was living in New York City, while Alan was in Tokyo… now that's worldwide collaboration!

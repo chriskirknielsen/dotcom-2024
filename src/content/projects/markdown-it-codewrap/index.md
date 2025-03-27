@@ -5,6 +5,8 @@ customMetaImage: markdown-it-codewrap-cover.png
 externalUrl: https://github.com/chriskirknielsen/markdown-it-codewrap
 date: 2023-05-28
 projectButtonLabel: View plugin
+projectImportance: 1
+projectOrder: 6
 ---
 
 I looked around for a [Markdown-It plugin](https://mdit-plugins.github.io/) that would allow me to wrap my code blocks in custom markup so that I could add a "Copy code" button, and perhaps do a few more things. While there are some out there, they didn't do exactly what I needed them to. So of course, I wrote my own plugin.

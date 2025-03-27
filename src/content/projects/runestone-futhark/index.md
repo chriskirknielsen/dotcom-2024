@@ -4,6 +4,8 @@ summary: A microapp to help learn how to read and spell in Norse Runes
 customMetaImage: futhark-cover.jpg
 externalUrl: https://codepen.io/chriskirknielsen/full/OJwvQRe
 date: 2023-01-31
+projectImportance: 1
+projectOrder: 3
 ---
 
 When God of War (2018) came out, a game that draws from Norse mythology, I wrote down the Runes on a piece of paper to learn them, since I like different languages and writing systems. I did memorise them but ended up forgetting after a while.

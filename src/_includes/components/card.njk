@@ -34,7 +34,7 @@
 		{% if descriptionMarkup %}
 			{{ descriptionMarkup | safe }}
 		{% elseif description %}
-			<p class="textWrap-balance">{{ description | safe }}</p>
+			<p class="card-description | textWrap-balance">{{ description | safe }}</p>
 		{% endif %}
 	</div>
 </article>

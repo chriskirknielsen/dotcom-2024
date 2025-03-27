@@ -5,6 +5,8 @@ customMetaImage: visubezier-cover.png
 externalUrl: https://marketplace.visualstudio.com/items?itemName=chriskirknielsen.visubezier
 date: 2018-09-03
 projectButtonLabel: Get the extension
+projectImportance: 2
+projectOrder: 2
 ---
 
 After years of using Notepad++, I landed on using Brackets, a code editor by Adobe. It was pretty simple but had some nice things like an [easing curve editor](./brackets-curve-editor.png). When the VS Code wave hit me, I was left missing such a feature, so I made my own extension to preview what CSS timing functions look like.

@@ -15,6 +15,9 @@
 		&[data-grid-cols='2'] {
 			--gridlist-cell-size: 24rem;
 		}
+
+		&[data-grid-layout='importance'] {
+		}
 	}
 }
 
@@ -156,6 +159,67 @@
 		.card-image img {
 			block-size: 100%;
 			max-block-size: 100%;
+		}
+	}
+}
+
+/* Special irregular card layout: titles need room so only large viewports can benefit from it: smaller viewports get a standard card */
+@media (min-width: 60em) {
+	.cards[data-grid-layout='importance'] {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-auto-flow: dense;
+
+		& .card-wrapper {
+			&[data-importance='1'] {
+				--CARD-cols: 1;
+				--CARD-rows: 1;
+				aspect-ratio: 1;
+			}
+			&[data-importance='2'] {
+				--CARD-cols: 2;
+				--CARD-rows: 2;
+				aspect-ratio: 1.5;
+			}
+			&[data-importance='3'] {
+				--CARD-cols: 3;
+				--CARD-rows: 2;
+				block-size: 0;
+				min-block-size: 100%;
+				/* Using aspect-ratio: 3 / 2; is slightly off; this height:0/min-height:100% ensures the neighbouring 1/1 squares drives this large card's size */
+			}
+
+			grid-column: span var(--CARD-cols, 1);
+			grid-row: span var(--CARD-rows, 1);
+		}
+
+		& .card-content {
+			position: absolute;
+			inset-block-end: 0;
+			inset-inline: 0;
+
+			@media (--accept-motion) {
+				transition: transform var(--CARD-transition-base);
+			}
+		}
+
+		& .card:not(:has(a:is(:hover, :focus-within))) .card-content {
+			transform: translateY(100%);
+		}
+
+		& .card-image {
+			&,
+			& a {
+				block-size: 100%;
+			}
+
+			& img {
+				max-block-size: 100%;
+			}
+		}
+
+		& .card-wrapper[data-importance='1'] .card-description {
+			display: none;
 		}
 	}
 }
