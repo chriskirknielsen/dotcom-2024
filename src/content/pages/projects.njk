@@ -6,11 +6,12 @@ summary: Some of the things I've made, either passion projects or real-world wor
 <ul class="cards" data-grid-cols="3" data-grid-layout="importance">
 	{% for project in collections._projects | sort(true, false, 'data.projectOrder') %}
 		<li class="card-wrapper"{% if project.data.projectImportance %} data-importance="{{ project.data.projectImportance }}"{% endif %}>
-			{% set projectDesc %}<p class="fontSize-smaller">{{ project.data.summary }}</p>{% endset %}
 			{% component 'card', {
 				link: project.url,
 				image: {
 					src: project.data.customMetaImage | toNetlifyImage({ w: 400 }),
+					srcset: (project.data.customMetaImage | toNetlifyImage({ w: 800 }))+" 800w, "+(project.data.customMetaImage | toNetlifyImage({ w: 400 })),
+					sizes: "(min-width: 60em) 800px, 400px",
 					width: 600,
 					height: 600,
 					lazy: loop.index >= 8

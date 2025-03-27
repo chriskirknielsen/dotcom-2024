@@ -186,7 +186,7 @@
 				--CARD-rows: 2;
 				block-size: 0;
 				min-block-size: 100%;
-				/* Using aspect-ratio: 3 / 2; is slightly off; this height:0/min-height:100% ensures the neighbouring 1/1 squares drives this large card's size */
+				/* Using aspect-ratio: 3 / 2 is slightly off; this height:0/min-height:100% ensures the neighbouring 1/1 squares drives this large card's size */
 			}
 
 			grid-column: span var(--CARD-cols, 1);

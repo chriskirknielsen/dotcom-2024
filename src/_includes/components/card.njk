@@ -7,6 +7,8 @@
 			<a href="{{ imageLink }}"{% if isImageAriaHidden %} tabindex="-1" aria-hidden="true"{% endif %}>
 				<img
 					src="{{ image.src }}"
+					{% if image.srcset %}srcset="{{ image.srcset }}"{% endif %}
+					{% if image.sizes %}sizes="{{ image.sizes }}"{% endif %}
 					alt="{{ image.alt or (heading if (imageLink and not isImageAriaHidden) else '') }}"
 					width="{{ image.width }}"
 					height="{{ image.height }}"
