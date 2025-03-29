@@ -72,7 +72,7 @@ I think `item-direction` and `item-wrap` are great as-is: reusing existing conce
 ### The slack suffix
 `item-slack` is probably the weakest one, but [there's an issue dedicated to finding it a better name](https://github.com/w3c/csswg-drafts/issues/10884), which is nice. For non-native English speakers, "slack" is not clear, despite being a great candidate for this purpose, I will admit. I grew up in France and can't remember ever coming across that word in my English classes, I suspect many will be in a similar situation, perhaps more so thinking of the popular professional communications app for their team.
 
-The alternatives laid out such as "tolerance" seem like a better fit — that one really fits the bill, despite being a little longer. I do also like "threshold" (how very pleasant to say) but that's a five-dollar word some folks might struggle with. As for "strictness", "adjust", and "sensitivity", they all carry the right _concept_, but ironically enough, feel too loose to map directly onto that property's definition.
+The alternatives laid out seem like a better fit. Despite being a little longer, "tolerance" maps to a physical concept used in manufacturing, basically the margin for error, like you'd see for fitting two pieces together. I do also like "threshold" (how very pleasant to say) but that's a five-dollar word some folks might struggle with. As for "strictness", "adjust", and "sensitivity", they all carry the right _concept_, but ironically enough, feel too loose to map directly onto that property's definition.
 
 Do I have ideas? Yes, but given it's `item-flex` which would be extremely confusing, and `item-yield` which is not friendly either, I think I'd rather let smarter people think about this.
 
