@@ -8,6 +8,8 @@ toc: true
 
 There's a brand-new proposal to solve for masonry layout in CSS from Apple. If you haven't already, you should definitely read it: [Item Flow, Part 1: A new unified concept for layout](https://webkit.org/blog/16587/item-flow-part-1-a-new-unified-concept-for-layout/).
 
+I really like this idea! My thoughts were too long for a post on Mastodon so… to the blog it goes!
+
 ## Direction 
 
 ```css
