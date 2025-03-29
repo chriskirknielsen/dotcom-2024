@@ -67,7 +67,7 @@ With that said, let's take a look at the other side of the hyphen…
 I think `item-direction` and `item-wrap` are great as-is: reusing existing concepts, let's not mess with that.
 
 ### The pack suffix
-`item-pack` isn't too bad, though I would have been fine with `item-fill(-mode?)` (though I could see confusion with `animation-fill-mode`…). I thought of `item-distribution` but that's a mouthful, not quite as precise, and "collapsed distribution" (versus "collapsed packing") sounds more like a commentary on a post-apocalyptic economy than a layout method.
+`item-pack` isn't too bad, though I would have been fine with `item-fill(-mode?)` (though I could see confusion with `animation-fill-mode`…). I thought of `item-arrange` or maybe even `item-distribution` (or `distribute`) but that's a mouthful, not quite as precise (feels more like it describes `justify-content`), and "collapsed distribution" (versus "collapsed packing") sounds more like a commentary on a post-apocalyptic economy than a layout method.
 
 ### The slack suffix
 `item-slack` is probably the weakest one, but [there's an issue dedicated to finding it a better name](https://github.com/w3c/csswg-drafts/issues/10884), which is nice. For non-native English speakers, "slack" is not clear, despite being a great candidate for this purpose, I will admit. I grew up in France and can't remember ever coming across that word in my English classes, I suspect many will be in a similar situation, perhaps more so thinking of the popular professional communications app for their team.
