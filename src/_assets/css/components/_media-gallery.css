@@ -62,8 +62,8 @@
 .single-media {
 	overflow: hidden;
 
-	color: var(--media-text, #000);
-	background: var(--media-bg, #fff);
+	color: var(--media-text, var(--C-text));
+	background: var(--media-bg, var(--C-surface));
 	border-radius: var(--_corner);
 	box-shadow: var(--_shadow);
 
