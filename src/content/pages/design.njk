@@ -26,8 +26,8 @@
 
 <div class="fifty-fifty">
 	{% if design.img %}
-	<div>
-		<img src="{{ [assets.images, 'designs', design.img] | toPath | toNetlifyImage }}" alt="" width="600" height="600" class="design-single single-media | inline-size-100pc">
+	<div class="single-media">
+		<img src="{{ [assets.images, 'designs', design.img] | toPath | toNetlifyImage }}" alt="" width="600" height="600" class="inline-size-100pc">
 	</div>
 	{% endif %}
 

@@ -36,6 +36,7 @@
 		& > :is(picture, img, a) {
 			flex-grow: 1;
 		}
+
 		& > figcaption {
 			padding: var(--size-xs) var(--size-s);
 
@@ -49,7 +50,6 @@
 	& > :is(figure, picture, a, img, video) {
 		inline-size: 100%;
 		max-inline-size: calc(var(--layout-max-content) * 0.8);
-		overflow: hidden;
 	}
 
 	/* Links around alt text is illegible on hover, so we'll remove it */
@@ -62,12 +62,13 @@
 .single-media {
 	overflow: hidden;
 
-	color: var(--media-text, var(--C-text));
-	background: var(--media-bg, var(--C-surface));
 	border-radius: var(--_corner);
 	box-shadow: var(--_shadow);
+}
 
-	a {
-		color: inherit;
-	}
+.image-gallery :is(picture, img, video),
+.single-media > * {
+	color: var(--media-text, #222);
+	background: var(--media-bg, #eee);
+	transform: scale(1.005); /* Avoid sub-pixel issue due to border-radius and overflow on parent */
 }

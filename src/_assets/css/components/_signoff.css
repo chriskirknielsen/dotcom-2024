@@ -6,6 +6,7 @@
 	flex-wrap: wrap;
 	gap: var(--_card-padding);
 	padding: var(--_card-padding);
+	overflow: hidden;
 
 	color: var(--_signoff-text-color);
 	border: var(--_signoff-border);
