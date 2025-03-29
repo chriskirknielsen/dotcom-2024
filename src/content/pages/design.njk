@@ -25,9 +25,10 @@
 ---
 
 <div class="fifty-fifty">
+	{% set designImagePath = [assets.images, 'designs', design.img] | toPath | toNetlifyImage %}
 	{% if design.img %}
-	<div class="single-media">
-		<img src="{{ [assets.images, 'designs', design.img] | toPath | toNetlifyImage }}" alt="" width="600" height="600" class="inline-size-100pc">
+	<div class="single-media" {% if design.mockup %}data-mockup="{{ design.mockup }}" style="--MOCKUP-image: url({{ designImagePath }}); --MOCKUP-bg: url({{ [assets.images, 'mockup-'+design.mockup+'.jpg'] | toPath | toNetlifyImage }});"{% endif %}>
+		<img src="{{ designImagePath }}" alt="" width="600" height="600" class="inline-size-100pc">
 	</div>
 	{% endif %}
 

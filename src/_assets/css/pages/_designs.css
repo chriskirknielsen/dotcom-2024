@@ -40,3 +40,73 @@
 		transform: skewX(-30deg) scaleX(1.5);
 	}
 }
+
+[data-mockup] {
+	--IMG-transition: var(--anim-short) var(--easing-out);
+
+	position: relative;
+
+	&::before,
+	&::after {
+		content: '';
+
+		position: absolute;
+		inset: 0;
+
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+		background-size: cover;
+	}
+
+	&::before {
+		background-image: var(--MOCKUP-bg);
+	}
+
+	&::after {
+		background-image: var(--MOCKUP-image);
+
+		opacity: 0;
+	}
+
+	@media (--accept-motion) {
+		& > img,
+		&::before,
+		&::after {
+			transition: all var(--IMG-transition);
+			transition-property: background, opacity, transform;
+		}
+	}
+
+	&[data-mockup='sticker'] {
+		& > img,
+		&::after {
+			transform-origin: 50% 34.44915254%;
+			transform-origin: 50% 17.22457627%;
+			transform-origin: 50% 27.5%;
+		}
+	}
+
+	&::before {
+		z-index: -1;
+	}
+	&::after {
+		z-index: 1;
+
+		mix-blend-mode: multiply;
+	}
+	& > img {
+		z-index: 2;
+	}
+
+	&:hover {
+		& > img {
+			background: transparent;
+		}
+
+		& > img,
+		&::after {
+			opacity: 0.67;
+			transform: scale(0.25);
+		}
+	}
+}

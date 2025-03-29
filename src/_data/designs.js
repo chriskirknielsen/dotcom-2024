@@ -128,6 +128,7 @@ const designs = [
 		date: '2024-11-02',
 		variant: ['css-logo-transparent'],
 		accent: '#663399',
+		mockup: 'sticker',
 	},
 	{
 		slug: 'css-logo-transparent',
@@ -143,6 +144,7 @@ const designs = [
 		date: '2024-11-02',
 		variant: ['css-logo-solid'],
 		showInGallery: false,
+		mockup: 'sticker',
 	},
 	{
 		slug: 'css-fact-sheet',
@@ -156,6 +158,7 @@ const designs = [
 		},
 		tags: ['dev', 'css'],
 		date: '2020-09-17',
+		mockup: 'sticker',
 	},
 	{
 		slug: 'duotype-css',
@@ -171,6 +174,7 @@ const designs = [
 		date: '2022-11-06',
 		similar: ['duotype-semantic-markup'],
 		accent: '#3ec0b2',
+		mockup: 'sticker',
 	},
 	{
 		slug: 'duotype-semantic-markup',
@@ -186,6 +190,7 @@ const designs = [
 		date: '2022-11-06',
 		similar: ['duotype-css'],
 		accent: '#3ec0b2',
+		mockup: 'sticker',
 	},
 	{
 		slug: 'clean-cache',
@@ -199,6 +204,7 @@ const designs = [
 		tags: ['dev', 'tv-movies'],
 		date: '2024-09-29',
 		accent: '#fb79c0',
+		mockup: 'sticker',
 	},
 	{
 		slug: 'legacy-code',
@@ -212,6 +218,7 @@ const designs = [
 		tags: ['dev', 'tv-movies'],
 		date: '2024-09-29',
 		accent: '#ff2100',
+		mockup: 'sticker',
 	},
 	{
 		slug: 'git-revert',
@@ -226,6 +233,7 @@ const designs = [
 		date: '2024-09-29',
 		variant: ['git-reset-hard'],
 		accent: '#fe5e19',
+		mockup: 'sticker',
 	},
 	{
 		slug: 'git-reset-hard',
@@ -241,6 +249,7 @@ const designs = [
 		variant: ['git-revert'],
 		showInGallery: false,
 		accent: '#fe5e19',
+		mockup: 'sticker',
 	},
 	{
 		slug: 'www-explorer',
@@ -408,6 +417,7 @@ const designs = [
 		tags: ['tv-movies'],
 		date: '2022-04-24',
 		accent: '#f052b3',
+		mockup: 'sticker',
 	},
 	{
 		slug: 'twin-pines-mall',
@@ -423,6 +433,7 @@ const designs = [
 		date: '2022-11-19',
 		variant: ['lone-pine-mall'],
 		accent: '#019342',
+		mockup: 'sticker',
 	},
 	{
 		showInGallery: false,
@@ -439,6 +450,7 @@ const designs = [
 		date: '2022-11-19',
 		variant: ['twin-pines-mall'],
 		accent: '#019342',
+		mockup: 'sticker',
 	},
 	{
 		slug: 'it-crowd-four-five-fire',
@@ -466,6 +478,7 @@ const designs = [
 		tags: ['games'],
 		date: '2023-05-20',
 		accent: '#824aad',
+		mockup: 'sticker',
 	},
 	{
 		slug: 'css-retro-vhs',
