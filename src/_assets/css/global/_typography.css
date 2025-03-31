@@ -164,6 +164,11 @@ img[alt]:not([alt='']) {
 		/* Only supported in Firefox, hoping Chrome will allow some styling hook */
 		display: block;
 		inline-size: 100%;
+		block-size: 100%;
+		align-content: center;
 		padding: 1rem;
+
+		--ALT-line: transparent calc(50% - 0.5px), color-mix(in hsl, currentColor, transparent) 0 calc(50% + 0.5px), transparent 0;
+		background: linear-gradient(45deg, var(--ALT-line)), linear-gradient(-45deg, var(--ALT-line));
 	}
 }
