@@ -134,7 +134,7 @@ const designs = [
 		slug: 'css-logo-transparent',
 		name: 'CSS Logo (transparent)',
 		description: `CSS is awesome.`,
-		note: `For a mug with the design on both sides, use RedBubble. Note this uses [my custom CSS logo](/css-logo/) that sadly didn't make the cut as a candidate for a [new official CSS logo](https://github.com/CSS-Next/css-next/issues/105)!`,
+		note: `For a mug with the design on both sides, or actual transparent stickers, use RedBubble. Note this uses [my custom CSS logo](/css-logo/) that sadly didn't make the cut as a candidate for a [new official CSS logo](https://github.com/CSS-Next/css-next/issues/105)!`,
 		img: 'css-logo-transparent.png',
 		links: {
 			TeePublic: 'https://www.teepublic.com/sticker/67983004-css-logo-transparent',
@@ -606,7 +606,6 @@ const designs = [
 		tags: ['games', 'gaming-arsenal'],
 		date: '2021-10-23',
 		variant: ['control'],
-		mockup: 'poster',
 	},
 	{
 		showInGallery: false,
@@ -621,7 +620,6 @@ const designs = [
 		tags: ['games', 'gaming-arsenal'],
 		date: '2021-12-31',
 		variant: ['deathloop'],
-		mockup: 'poster',
 	},
 	{
 		showInGallery: false,
@@ -637,7 +635,6 @@ const designs = [
 		tags: ['games', 'gaming-arsenal'],
 		date: '2021-10-23',
 		variant: ['god-of-war'],
-		mockup: 'poster',
 	},
 	{
 		showInGallery: false,
@@ -651,7 +648,6 @@ const designs = [
 		},
 		tags: ['games', 'gaming-arsenal'],
 		date: '2022-03-27',
-		mockup: 'poster',
 	},
 	{
 		showInGallery: false,
@@ -665,7 +661,6 @@ const designs = [
 		},
 		tags: ['games', 'gaming-arsenal'],
 		date: '2022-04-03',
-		mockup: 'poster',
 	},
 	{
 		showInGallery: false,
@@ -680,7 +675,6 @@ const designs = [
 		tags: ['games', 'gaming-arsenal'],
 		date: '2022-01-23',
 		variant: ['dead-space'],
-		mockup: 'poster',
 	},
 ];
 
