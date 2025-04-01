@@ -42,8 +42,6 @@
 }
 
 [data-mockup] {
-	--MOCKUP-transition: var(--anim-short) var(--easing-out);
-
 	position: relative;
 
 	&::before,
@@ -69,17 +67,32 @@
 		opacity: 0;
 	}
 
+	& > img {
+		--MOCKUP-img-frame: var(--media-bg, transparent);
+		background: var(--MOCKUP-img-frame);
+		box-shadow: 0 0 0 50vw var(--MOCKUP-img-frame);
+	}
+
 	@media (--accept-motion) {
 		& > img,
 		&::before,
 		&::after {
-			transition: all var(--MOCKUP-transition);
-			transition-property: background, opacity, transform;
+			transition: all var(--anim-medium) var(--easing-out);
+			transition-property: box-shadow, background, opacity, transform;
 		}
 	}
 
 	&[data-mockup='sticker'] {
 		--MOCKUP-scale: 4;
+		& > img,
+		&::before,
+		&::after {
+			transform-origin: 50% 27.5%; /* Magic number matching the center of the laptop in the mockup photo */
+		}
+	}
+
+	&[data-mockup='poster'] {
+		--MOCKUP-scale: 2;
 		& > img,
 		&::before,
 		&::after {
@@ -103,6 +116,7 @@
 
 	&:hover {
 		& > img {
+			--MOCKUP-img-frame: transparent;
 			background: transparent;
 		}
 

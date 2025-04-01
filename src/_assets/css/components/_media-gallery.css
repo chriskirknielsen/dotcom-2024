@@ -60,6 +60,9 @@
 
 .image-gallery > :is(figure, picture, a, img, video),
 .single-media {
+	--media-text: #222;
+	--media-bg: #eee;
+
 	overflow: hidden;
 
 	border-radius: var(--_corner);
@@ -68,7 +71,7 @@
 
 .image-gallery :is(picture, img, video),
 .single-media > * {
-	color: var(--media-text, #222);
-	background: var(--media-bg, #eee);
+	color: var(--media-text, black);
+	background: var(--media-bg, white);
 	transform: scale(1.005); /* Avoid sub-pixel issue due to border-radius and overflow on parent */
 }

@@ -292,6 +292,7 @@ const designs = [
 		date: '2021-10-23',
 		variant: ['control-service-weapon'],
 		accent: '#ed0703',
+		mockup: 'poster',
 	},
 	{
 		slug: 'god-of-war',
@@ -305,6 +306,7 @@ const designs = [
 		date: '2021-10-23',
 		variant: ['god-of-war-leviathan-axe'],
 		accent: '#439c9c',
+		mockup: 'poster',
 	},
 	{
 		slug: 'deathloop',
@@ -318,6 +320,7 @@ const designs = [
 		date: '2021-12-31',
 		variant: ['deathloop-fourpounder'],
 		accent: '#e9521d',
+		mockup: 'poster',
 	},
 	{
 		slug: 'dead-space',
@@ -331,6 +334,7 @@ const designs = [
 		date: '2022-01-23',
 		variant: ['dead-space-plasma-cutter'],
 		accent: '#06e4d8',
+		mockup: 'poster',
 	},
 	{
 		slug: 'jak-daxter-powercell-hunters',
@@ -602,6 +606,7 @@ const designs = [
 		tags: ['games', 'gaming-arsenal'],
 		date: '2021-10-23',
 		variant: ['control'],
+		mockup: 'poster',
 	},
 	{
 		showInGallery: false,
@@ -616,6 +621,7 @@ const designs = [
 		tags: ['games', 'gaming-arsenal'],
 		date: '2021-12-31',
 		variant: ['deathloop'],
+		mockup: 'poster',
 	},
 	{
 		showInGallery: false,
@@ -631,6 +637,7 @@ const designs = [
 		tags: ['games', 'gaming-arsenal'],
 		date: '2021-10-23',
 		variant: ['god-of-war'],
+		mockup: 'poster',
 	},
 	{
 		showInGallery: false,
@@ -644,6 +651,7 @@ const designs = [
 		},
 		tags: ['games', 'gaming-arsenal'],
 		date: '2022-03-27',
+		mockup: 'poster',
 	},
 	{
 		showInGallery: false,
@@ -657,6 +665,7 @@ const designs = [
 		},
 		tags: ['games', 'gaming-arsenal'],
 		date: '2022-04-03',
+		mockup: 'poster',
 	},
 	{
 		showInGallery: false,
@@ -671,6 +680,7 @@ const designs = [
 		tags: ['games', 'gaming-arsenal'],
 		date: '2022-01-23',
 		variant: ['dead-space'],
+		mockup: 'poster',
 	},
 ];
 
