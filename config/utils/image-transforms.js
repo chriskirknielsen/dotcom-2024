@@ -31,7 +31,7 @@ function toCloudinary(url, options) {
 	const prefixStr = `${cloudinaryAccountUrl}/image/fetch`;
 	const optionsStr = String(options || '');
 	const encodedUrl = encodeURI(url);
-	const parts = [prefixStr, optionsStr, encodedUrl].filter(Boolean); // Remove empty parts (it can only be the options, or someting is very wrong)
+	const parts = [prefixStr, optionsStr, encodedUrl].filter(Boolean); // Remove empty parts (it can only be the options, or something is very wrong)
 	const joinedParts = parts.join('/');
 	return joinedParts;
 }
