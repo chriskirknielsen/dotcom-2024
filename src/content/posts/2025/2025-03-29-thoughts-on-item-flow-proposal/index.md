@@ -6,7 +6,7 @@ tags:
 toc: true
 ---
 
-There's a brand-new proposal to solve for masonry layout in CSS from Apple. If you haven't already, you should definitely read it: [Item Flow, Part 1: A new unified concept for layout](https://webkit.org/blog/16587/item-flow-part-1-a-new-unified-concept-for-layout/).
+There's a brand-new proposal to solve for masonry layout in CSS from Webkit. If you haven't already, you should definitely read it: [Item Flow, Part 1: A new unified concept for layout](https://webkit.org/blog/16587/item-flow-part-1-a-new-unified-concept-for-layout/).
 
 I really like this idea! My thoughts were too long for a post on Mastodon so… to the blog it goes!
 
@@ -86,3 +86,8 @@ I think this is an elegant way to unite all these concepts under a single term, 
 This helpful matrix from the original article is an image, so… _tadaaa_ (hopefully I didn't muck up semantics, but the `tfoot` is probably not super appropriate):
 
 {% codepen "https://codepen.io/chriskirknielsen/pen/YPzJLOx", "result", 610  %}
+
+## More reading
+- [Item Flow, Part 1: A new unified concept for layout](https://webkit.org/blog/16587/item-flow-part-1-a-new-unified-concept-for-layout/)
+- [Robin Rendle's thoughts on their blog](https://robinrendle.com/notes/item-flow/)
+- [Andy Bells's thoughts via Piccalilli](https://piccalil.li/links/item-flow-part-1-a-new-unified-concept-for-layout/)
