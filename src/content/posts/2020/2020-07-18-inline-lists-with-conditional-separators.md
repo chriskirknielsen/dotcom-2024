@@ -8,19 +8,19 @@ tags:
     - quick-tip
 ---
 
-Here's a quick tip that my manager shared with me (thanks Matthew! — and you can find a version of it on [StackOverflow](https://stackoverflow.com/questions/15306108/css-styling-for-horizontal-list-with-bullet-only-between-elements/40162380#40162380), by Tom Robinson from 2016!). I always keep coming back to it, looking in repositories for old projects: I figured it's about time I had an easy way to find it.
+Here’s a quick tip that my manager shared with me (thanks Matthew! — and you can find a version of it on [StackOverflow](https://stackoverflow.com/questions/15306108/css-styling-for-horizontal-list-with-bullet-only-between-elements/40162380#40162380), by Tom Robinson from 2016!). I always keep coming back to it, looking in repositories for old projects: I figured it’s about time I had an easy way to find it.
 
-Say you have an inline list of items that are next to each other, but the list is long or the container is narrow — whichever, as long as it's at risk of wrapping to a new line. And what if you wanted to have a separator between each item? Sounds easy, right? Add a pseudo-element on each `li` that has a sibling, like `li + li::after`, and you're done!
+Say you have an inline list of items that are next to each other, but the list is long or the container is narrow — whichever, as long as it’s at risk of wrapping to a new line. And what if you wanted to have a separator between each item? Sounds easy, right? Add a pseudo-element on each `li` that has a sibling, like `li + li::after`, and you’re done!
 
 Not quite.
 
-If your list wraps, you will see your separator at the end of a line (or in some cases, even at the start of the next one!), which doesn't look all that great. Let's try to fix that!
+If your list wraps, you will see your separator at the end of a line (or in some cases, even at the start of the next one!), which doesn't look all that great. Let’s try to fix that!
 
-The heart of this trick is the following idea, a very clever one: whitespace is collapsed between words if it's at a line break. However, if that pseudo-element has a `display` value other than `inline`, it won't collapse, so you can't use regular sizing properties like `width` or `padding`, but you can use text-related ones… like `letter-spacing`!
+The heart of this trick is the following idea, a very clever one: whitespace is collapsed between words if it’s at a line break. However, if that pseudo-element has a `display` value other than `inline`, it won’t collapse, so you can't use regular sizing properties like `width` or `padding`, but you can use text-related ones… like `letter-spacing`!
 
-By defining a rather high letter spacing, we can adjust the length of our whitespace so that there is enough room for our separator. We'll add that via a background-image, since we need the `content` to be a whitespace (`" "`) and nothing else.
+By defining a rather high letter spacing, we can adjust the length of our whitespace so that there is enough room for our separator. We’ll add that via a background-image, since we need the `content` to be a whitespace (`" "`) and nothing else.
 
-Here's the whole setup, using a pipe as a separator, similar to what I use on my website footer:
+Here’s the whole setup, using a pipe as a separator, similar to what I use on my website footer:
 
 ```css
 /*
@@ -49,14 +49,14 @@ Here's the whole setup, using a pipe as a separator, similar to what I use on my
 ```
 
 {% callout %}
-Setting a gradient stop of `0` will effectively make the colour startpoint the same as the previous colour's endpoint, removing the need to repeat the `calc()` declarations in this situation.
+Setting a gradient stop of `0` will effectively make the colour startpoint the same as the previous colour’s endpoint, removing the need to repeat the `calc()` declarations in this situation.
 {% endcallout %}
 
-Here I'm setting a very thin line at the centre of the space, but you could use any background, such as a `radial-gradient` to make a bullet, or load in an SVG or image… We don't need to ensure it isn't applied to the last item since the whitespace will collapse at the end of the text-block that is our list, but if you do happen to run into issues, you can add `:not(:last-child)` to prevent that behaviour.
+Here I’m setting a very thin line at the centre of the space, but you could use any background, such as a `radial-gradient` to make a bullet, or load in an SVG or image… We don’t need to ensure it isn’t applied to the last item since the whitespace will collapse at the end of the text-block that is our list, but if you do happen to run into issues, you can add `:not(:last-child)` to prevent that behaviour.
 
 ## Caveat
 
-If you try this and the effect doesn't work, you might want to check that your text content isn't surrounded by whitespace inside the list item — for example, here the links have whitespace around them due to indentation:
+If you try this and the effect doesn't work, you might want to check that your text content isn’t surrounded by whitespace inside the list item — for example, here the links have whitespace around them due to indentation:
 
 ```html
 <ul class="inline-list">
@@ -87,7 +87,7 @@ The line break and tab between `</a>` and `</li>` will be counted as whitespace 
 </ul>
 ```
 
-I'd recommend the first one.
+I’d recommend the first one.
 
 ## Demo
 

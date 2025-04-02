@@ -11,7 +11,7 @@ templateEngineOverride: njk,md
 toc: true
 ---
 
-{% callout "Update", "🚨" %}[Okay, so maybe don't do this? More info below!](#quick-update){% endcallout %}
+{% callout "Update", "🚨" %}[Okay, so maybe don’t do this? More info below!](#quick-update){% endcallout %}
 
 A bit of a weird title, but I’m sure Xzibit would approve. So let me explain what I’m on about: I have two components on my site that use inlined JS: once in the `<head>`, once before `</body>`. These two components are included on every page, and me being forever the optimist—I mean optimiser—I minify those bits of JS with a `jsmin` filter. This is an [approach recommended by Eleventy](https://www.11ty.dev/docs/quicktips/inline-js/). Totally valid, if you do this, don’t let me stop you!
 
@@ -35,7 +35,7 @@ Here’s how that particular section looks in that `head.njk` component of mine:
 <script>{{ headScript | jsmin | safe }}</script>
 {% endraw %}```
 
-Ultimately, this all works but here’s my “issue”: if, like me, you are seeing Eleventy warning you that the `jsmin` filter is taking up quite a bit of time by running in all the pages (once per page for every minified script), then read on: I have an idea! If not, your build is probably fast enough that you don't need to worry about this.
+Ultimately, this all works but here’s my “issue”: if, like me, you are seeing Eleventy warning you that the `jsmin` filter is taking up quite a bit of time by running in all the pages (once per page for every minified script), then read on: I have an idea! If not, your build is probably fast enough that you don’t need to worry about this.
 
 ## Eleventy’s before event
 
@@ -85,7 +85,7 @@ module.exports = function (eleventyConfig) {
 };
 ```
 
-I use a promise to ensure Eleventy waits for this to be done before the main build. The `exec` method takes a second argument, which is a callback function, so I’m using that as a signal that processing is done, meaning `before` has finished running. It provides an `error` argument, which will be `null` if all went well, letting me resolve or reject the promise accordingly. There is quite a bit going on despite being a short block of code, I'll admit!
+I use a promise to ensure Eleventy waits for this to be done before the main build. The `exec` method takes a second argument, which is a callback function, so I’m using that as a signal that processing is done, meaning `before` has finished running. It provides an `error` argument, which will be `null` if all went well, letting me resolve or reject the promise accordingly. There is quite a bit going on despite being a short block of code, I’ll admit!
 
 The `_before.eleventy.js` file is a bit weird, so let me explain what I need it to do before showing the code: I want to pull in the global data, but also I don’t want it to look over the whole project, only the folder with my script to pre-compile. To that end, I adjust the input and output paths, and I make use of `addGlobalData` to load in the tokens file. I also add in my `objectKeys` filter, and the star of the show: `jsmin` (along with the `terser` package). I need to ignore all other files, controlled by the `ignores` method which lets me define files to add or remove from the ignored list. I want my `*.js.njk` files and none of the real `.js` files. And then I return all that good stuff. Here’s how that looks:
 
@@ -129,7 +129,7 @@ And now, when the main Eleventy build runs, it’ll run this beforehand, creatin
 <script>{% include 'assets/js/head-script.js' %}</script>
 {% endraw %}```
 
-The `jsmin` filter now runs once on the same piece of code instead of running on every single page using this layout. It’s a minor optimisation, for sure, but it does make my build time non-trivially faster, so I’ll take it. Given I have 2 scripts and about 80 pages, that's running it twice instead of 160 times, so technically an improvement of 98.75%, I guess? Someone who is good at maths please help me calculate this. My statistic is dying.
+The `jsmin` filter now runs once on the same piece of code instead of running on every single page using this layout. It’s a minor optimisation, for sure, but it does make my build time non-trivially faster, so I’ll take it. Given I have 2 scripts and about 80 pages, that’s running it twice instead of 160 times, so technically an improvement of 98.75%, I guess? Someone who is good at maths please help me calculate this. My statistic is dying.
 
 ### Uh oh, it’s looping
 
@@ -162,11 +162,11 @@ permalink: head-script.js
 The file is rendered with the HTML engine since that effectively passes it as plaintext, as [noted in the docs](https://www.11ty.dev/docs/languages/), preventing any unnecessary transformations on the file.
 {% endcallout %}
 
-One caveat is that those files get rendered at the root of the main build due to the `permalink` in the frontmatter, but I'm sure that could be worked around. And that’s it. That’s my hacky solution. But then [on Twitter, I was asked about if I had tried a global data file](https://twitter.11ty.dev/1562480526396919808/)… here’s what I came up with.
+One caveat is that those files get rendered at the root of the main build due to the `permalink` in the frontmatter, but I’m sure that could be worked around. And that’s it. That’s my hacky solution. But then [on Twitter, I was asked about if I had tried a global data file](https://twitter.11ty.dev/1562480526396919808/)… here’s what I came up with.
 
 ## Using a global data file instead
 
-I couldn’t make it work. Maybe I need more caffeine but couldn't figure out where to start, sorry!
+I couldn’t make it work. Maybe I need more caffeine but couldn’t figure out where to start, sorry!
 
 <hr>
 
@@ -209,6 +209,6 @@ module.exports = function (eleventyConfig) {
 
 Given [the callback is always the last argument in an async Nunjucks filter](https://www.11ty.dev/docs/languages/nunjucks/#asynchronous-nunjucks-filters), I used rest parameters to get an array of the arguments. By using `.pop()`, I get the last value in the `rest` array, no matter the length, and it is removed from the array. Whatever is left is either the cache key, or if the filter was used without a second argument, the array will have no items, so I define the key as `null`.
 
-Running Eleventy in Eleventy is a fun challenge, but this caching solution is simple, elegant, and also quicker! I ran my build five times and the caching technique was significantly faster. On average, precompiling took 3.36 seconds, while caching took 2.15 seconds. It's not really surprising, but a 36% build-time decrease is definitely better.
+Running Eleventy in Eleventy is a fun challenge, but this caching solution is simple, elegant, and also quicker! I ran my build five times and the caching technique was significantly faster. On average, precompiling took 3.36 seconds, while caching took 2.15 seconds. It’s not really surprising, but a 36% build-time decrease is definitely better.
 
-So there you have it. My hacky solution is not a great idea for my use case. But if you have some, please let me know, I'd be super curious to hear what you come up with!
+So there you have it. My hacky solution is not a great idea for my use case. But if you have some, please let me know, I’d be super curious to hear what you come up with!

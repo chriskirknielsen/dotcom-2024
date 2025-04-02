@@ -97,7 +97,7 @@ On a similar note, I wish that shorthand properties like `margin` would resolve 
 
 **TL;DR:** Gimme a way to scale things based on an absolute value (e.g.: `transform: scale(4rem, 50px)`).
 
-I wrote [a proposal in 2020](https://github.com/w3c/csswg-drafts/issues/5273) but it didn't pick up, and granted it's a niche need, but I’d love to be able to run a transform on an element without knowing its original size while needing a specific final size. This is a little FLIP-like, I suppose, minus having to do any math, but the idea would be to define an element’s scaled size by absolute values, not relative to the base element:
+I wrote [a proposal in 2020](https://github.com/w3c/csswg-drafts/issues/5273) but it didn't pick up, and granted it’s a niche need, but I’d love to be able to run a transform on an element without knowing its original size while needing a specific final size. This is a little FLIP-like, I suppose, minus having to do any math, but the idea would be to define an element’s scaled size by absolute values, not relative to the base element:
 
 ```css
 .resized {
@@ -110,10 +110,10 @@ View transitions might alleviate the need for this kind of thing in most scenari
 
 To make it even more useful, if you could use `calc()`? Oh that’d be neat. Grow any element to be 10px bigger in each direction regardless of initial size? `scale: calc(100% + 10px);`, job done… now that’d be nice. Double-bonus if we can use `auto` for one of the two values so it scales proportionally…
 
-## Other things I'd like
+## Other things I’d like
 - `@scope`, really needing this in a current project.
 - View Transitions everywhere, and [View Transition Classes](https://github.com/w3c/csswg-drafts/issues/8319).
-- Transitions on discrete properties to animate to/from `display: none`, and I'd be happy with animating to/from `height: 0` to `auto`!
+- Transitions on discrete properties to animate to/from `display: none`, and I’d be happy with animating to/from `height: 0` to `auto`!
 - Regions to flow content in non-rectagular shapes
 
 ## Other wishlists around the web

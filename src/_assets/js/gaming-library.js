@@ -172,11 +172,11 @@ function loadAndPopulateGameDetailDialog(target, navAnimSign = 0) {
 // Funny little messages if you try to change the checkbox state
 let cbox = 0;
 let msgs = [
-	`I'm sorry, but that's not how that works.`,
-	`If I have time I'll finish it.`,
-	`Listen, if it's that great, you can let me know and I'll add it to my backlog.`,
-	`Oh look, I'm literally about to beat the final level!`,
-	`Screw it. You win. I'm done.`,
+	`I’m sorry, but that's not how that works.`,
+	`If I have time I’ll finish it.`,
+	`Listen, if it's that great, you can let me know and I’ll add it to my backlog.`,
+	`Oh look, I’m literally about to beat the final level!`,
+	`Screw it. You win. I’m done.`,
 ];
 let openGame = null;
 const hideOpenGame = () => {

@@ -66,7 +66,7 @@ Wait a tick… `html:not([data-theme])` has a score of `0,1,1`, which is still s
 Okay, you got me: there’s no specific (hah!) reason besides me wanting a low score that makes other overrides and exceptions easier to implement. You can omit the `:where()` wrapper and you’ll likely get the exact same result. And honestly, I had been waiting to use `:where()` for so long that I now use it very liberally, which is a “me” problem!
 
 {% callout %}
-We'll be checking for two scenarios: missing data-attribute and user preferences, or a defined data-attribute (the override), as the former combination allows the styles to be displayed without JavaScript while respecting user preferences!
+We’ll be checking for two scenarios: missing data-attribute and user preferences, or a defined data-attribute (the override), as the former combination allows the styles to be displayed without JavaScript while respecting user preferences!
 {% endcallout %}
 
 ## Current approach: write everything twice
@@ -299,7 +299,7 @@ function jsonTokensToCss(inputPath, outputPath) {
 	const outputPathParsed = path.parse(outputPath);
 	const outputFolder = outputPathParsed.dir.replace(/^(\/)+/, '').replace(/(\/)+$/, '').trim(); // Compute the output folder name, removing leading and trailing slashes
 	const outputFile = outputPathParsed.base;
-	const outputBlocks = { default: '', allThemes: [] }; // We'll be creating a block for each theme, and the default will be separate, but this is not a requirement
+	const outputBlocks = { default: '', allThemes: [] }; // We’ll be creating a block for each theme, and the default will be separate, but this is not a requirement
 	const publicPrefix = '--';
 	const privatePrefix = '--_';
 	const lightScheme = Object.keys(tokens).find((themeKey) => tokens[themeKey]._USER_SCHEME === 'light');
@@ -333,7 +333,7 @@ function jsonTokensToCss(inputPath, outputPath) {
 		`);
 	}
 	
-	/* … and here we'll set up each of the properties, in the section below */
+	/* … and here we’ll set up each of the properties, in the section below */
 }
 ```
 
@@ -386,7 +386,7 @@ function jsonTokensToCss(inputPath, outputPath) {
 	}
 	output = output.concat(outputBlocks.default); // Append the default block at the end: this is our CSS!
 
-	// Reusing the logic from my Eleventy Assets Pipeline, we'll save the file
+	// Reusing the logic from my Eleventy Assets Pipeline, we’ll save the file
 	return new Promise((success, failure) =>
 		// Create the folder structure if it doesn't exist, including subfolders thanks to `recursive: true`
 		fs.mkdir(outputFolder, { recursive: true }, (dirErr, path) => {
@@ -511,7 +511,7 @@ And update our (optional) JSON-to-CSS function:
 I suppose we could hardcode `light` and `dark` for the scheme ones, since we know what they are, up to you! We could also throw `background` in there (without omitting `--_background` among the other tokens as we might want to access the custom property inside another element!), but that’ll start to be a bit much in terms of repetition, so this is a small CSS sin for the greater good of unrepeated code.
 
 {% callout "Today I learned", "💡" %}
-While writing this, I discovered that the [`color-scheme` property](https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme), if set to a specific value (`light` or `dark`, instead of `normal`, `light dark`, or `dark light`), determines the actual colour used by those system colours we saw earlier. I thought it was only controlled by the media query! A `(prefers-color-scheme: dark)` media query around `html` using `color-scheme: light` will render in “light mode”! My website themes use `color-scheme`, so the CodePen demo for browsers without support will change based on the theme's dominant scheme! (well, only in Firefox, it seems) That’s so cool! But it also highlights why defining this property is important if we're overriding user preferences.
+While writing this, I discovered that the [`color-scheme` property](https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme), if set to a specific value (`light` or `dark`, instead of `normal`, `light dark`, or `dark light`), determines the actual colour used by those system colours we saw earlier. I thought it was only controlled by the media query! A `(prefers-color-scheme: dark)` media query around `html` using `color-scheme: light` will render in “light mode”! My website themes use `color-scheme`, so the CodePen demo for browsers without support will change based on the theme’s dominant scheme! (well, only in Firefox, it seems) That’s so cool! But it also highlights why defining this property is important if we’re overriding user preferences.
 {% endcallout %}
 
 ## Conclusion

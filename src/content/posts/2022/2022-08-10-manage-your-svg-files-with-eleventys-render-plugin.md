@@ -88,7 +88,7 @@ I hope this is helpful to more than just myself! I’m fairly certain there are 
 
 ## Updated method
 
-Turns out you can access the compiler within the Eleventy config file thanks to `eleventyConfig.nunjucksAsyncShortcodes.renderFile`. I now have a shorter (asynchronous!) shortcode that takes a filename and optional parameters. The `isNjk` parameter is folded into the SVG options to declutter things, so it's even easier to write!
+Turns out you can access the compiler within the Eleventy config file thanks to `eleventyConfig.nunjucksAsyncShortcodes.renderFile`. I now have a shorter (asynchronous!) shortcode that takes a filename and optional parameters. The `isNjk` parameter is folded into the SVG options to declutter things, so it’s even easier to write!
 
 ```js
 eleventyConfig.addAsyncShortcode('svg', async function (filename, svgOptions = {}) {
@@ -100,7 +100,7 @@ eleventyConfig.addAsyncShortcode('svg', async function (filename, svgOptions = {
 });
 ```
 
-And to call a file, you'd write the following:
+And to call a file, you’d write the following:
 
 ```njk{% raw %}
 {% svg "rss", { class: "icon", title: "RSS" } %}

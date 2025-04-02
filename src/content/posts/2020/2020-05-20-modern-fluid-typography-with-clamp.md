@@ -12,13 +12,13 @@ tags:
     - quick-tip
 ---
 
-Recently, CSS introduced `min()` and `max()` which are now available in every major browser. Along with those two came `clamp()`, which is basically a wrapper for the combination of the two aforementioned functions, but easier to read: `clamp(MIN, VAL, MAX)` (where `VAL` would usually be a responsive unit). Here's a quick tip to go along with its use!
+Recently, CSS introduced `min()` and `max()` which are now available in every major browser. Along with those two came `clamp()`, which is basically a wrapper for the combination of the two aforementioned functions, but easier to read: `clamp(MIN, VAL, MAX)` (where `VAL` would usually be a responsive unit). Here’s a quick tip to go along with its use!
 
-You can now define your font to scale with the viewport size with a single line, such as `clamp(1rem, 2.5vw, 2rem)`, which is nice and clean. However, the scaling will be inconsistent depending on the font-size you're ideally targeting, even with `clamp(1rem, 0.5rem + 2vw, 2rem)` (which is already a lot better, as the font will scale with the zoom level). You could try to find the sweet spot manually for each heading size, for example, but if you're a bit like me, I like to leave the computation bit to the machine.
+You can now define your font to scale with the viewport size with a single line, such as `clamp(1rem, 2.5vw, 2rem)`, which is nice and clean. However, the scaling will be inconsistent depending on the font-size you’re ideally targeting, even with `clamp(1rem, 0.5rem + 2vw, 2rem)` (which is already a lot better, as the font will scale with the zoom level). You could try to find the sweet spot manually for each heading size, for example, but if you’re a bit like me, I like to leave the computation bit to the machine.
 
-Before, we'd use a tool to calculate the ideal font-size based on the viewport, and add media queries to "lock" the size between minimum and maximum, which was great, but three declarations is a lot with something we can achieve rather easily nowadays.
+Before, we’d use a tool to calculate the ideal font-size based on the viewport, and add media queries to "lock" the size between minimum and maximum, which was great, but three declarations is a lot with something we can achieve rather easily nowadays.
 
-You'd probably be using a pre-processor to define these in the past, like so (stripped down bare; assumes all units are the same):
+You’d probably be using a pre-processor to define these in the past, like so (stripped down bare; assumes all units are the same):
 
 ```scss
 @mixin fluid-type($min-vw, $max-vw, $min-value, $max-value) {
@@ -52,10 +52,10 @@ What would you say about getting the best of both worlds? We can reuse our code 
 ```
 
 {% callout %}
-`clamp()` won't allow `MIN > MAX`, so we add a couple of `if()` inside the clamp function to flip the values if the small breakpoint font size is larger than its large breakpoint counterpart. Also, you don't need to wrap the middle expression in `calc()`, as `clamp()` will evaluate its contents just the same!
+`clamp()` won’t allow `MIN > MAX`, so we add a couple of `if()` inside the clamp function to flip the values if the small breakpoint font size is larger than its large breakpoint counterpart. Also, you don’t need to wrap the middle expression in `calc()`, as `clamp()` will evaluate its contents just the same!
 {% endcallout %}
 
-Here's an example using this mixin, and its result:
+Here’s an example using this mixin, and its result:
 
 ```scss
 p {

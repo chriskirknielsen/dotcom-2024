@@ -15,7 +15,7 @@
 {% set designSolid = designs | find('slug', 'css-logo-solid') %}
 {% set designTransparent = designs | find('slug', 'css-logo-transparent') %}
 <p>
-    I've had this idea for a new logo for CSS that would riff off of the famous "CSS is Awesome" meme. There's room for add a version number in the corner as well. It's not official by any means (<a href="https://github.com/CSS-Next/logo.css">here is the new official CSS logo!</a>) but maybe it's good enough to use? You tell me. I've made this available on my apparel stores (both <a href="/designs/{{ designSolid.slug }}/">solid</a> and <a href="/designs/{{ designTransparent.slug }}/">transparent</a> variants).
+    I’ve had this idea for a new logo for CSS that would riff off of the famous "CSS is Awesome" meme. There’s room for adding a version number in the corner as well. It’s not official by any means (<a href="https://github.com/CSS-Next/logo.css">here is the new official CSS logo!</a>) but maybe it’s good enough to use? You tell me. I’ve made this available on my apparel stores (both <a href="/designs/{{ designSolid.slug }}/">solid</a> and <a href="/designs/{{ designTransparent.slug }}/">transparent</a> variants).
 </p>
 
 <div class="fifty-fifty">
@@ -83,7 +83,7 @@
             form.hidden = false;
             Array.from(document.querySelectorAll('[data-csslogo-control="numberValue"], [data-csslogo-control="colorHue"]')).forEach((input) => { input.value = input.defaultValue; }); // Reset on page reload
             
-            // Safari doesn't like hidden transforms on page load, so it's visible by default (opacity of 0.001 so it's effectively invisible)
+            // Safari doesn't like hidden transforms on page load, so it’s visible by default (opacity of 0.001 so it’s effectively invisible)
             // and once it's "laid out", hide it for real by clicking the toggle button programmatically
             requestAnimationFrame(() => {
                 setTimeout(() => {
@@ -322,7 +322,7 @@
         </style>
 
         <h2 class="css-logo-usage">Want to use it?</h2>
-        <p>Although very appreciated, you may use this without needing to credit me under the condition it is non-AI and non-commercial (especially as I am selling <a href="/designs/{{ designSolid.slug }}/">this design</a>); just don't claim you made it, is all I ask. Thank you!</p>
+        <p>Although very appreciated, you may use this without needing to credit me under the condition it is non-AI and non-commercial (especially as I am selling <a href="/designs/{{ designSolid.slug }}/">this design</a>); just don’t claim you made it, is all I ask. Thank you!</p>
 
         <div class="tooltip" data-tooltip-pos="start center">
             <p class="grouper grouper--wrap">

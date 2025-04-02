@@ -131,7 +131,7 @@ Oh and if you’re thinking a step ahead: yes, you can definitely merge these ru
 ```
 
 {% callout "I can :has()?" %}
-If you want to use more modern CSS techniques, you can use `:any-link:has(.link-label-text)` instead of `.link-label-anchor`, or even `:any-link:has(:is(img, svg) ~ span)` (use `:any-link:has(:is(img, svg)):has(span)` to allow any order) if you wanted to avoid classes altogether: you'd only need to wrap the text in a `<span>` so it could be targeted for styling.
+If you want to use more modern CSS techniques, you can use `:any-link:has(.link-label-text)` instead of `.link-label-anchor`, or even `:any-link:has(:is(img, svg) ~ span)` (use `:any-link:has(:is(img, svg)):has(span)` to allow any order) if you wanted to avoid classes altogether: you’d only need to wrap the text in a `<span>` so it could be targeted for styling.
 {% endcallout %}
 
 I also threw it into a CodePen just for kicks:

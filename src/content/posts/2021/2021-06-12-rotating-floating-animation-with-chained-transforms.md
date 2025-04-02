@@ -8,7 +8,7 @@ tags:
     - quick-tip
 ---
 
-Okay, so this is an old trick. I've used it a few times over the years, but I keep forgetting about how it works. When I keep forgetting about a technique, I need to write about it.
+Okay, so this is an old trick. I’ve used it a few times over the years, but I keep forgetting about how it works. When I keep forgetting about a technique, I need to write about it.
 
 The idea is that you rotate an element clockwise, move it away from its anchor point, and rotate it counter-clockwise so that its "horizon" is stable. As they say, a stylised animated demo is worth a thousand words:
 
@@ -32,24 +32,24 @@ A perfect orbit that would make any celestial body jealous!
 }
 ```
 
-Let's break down each transform:
+Let’s break down each transform:
 
 -   element is rotated by an angle of `A` degrees
 -   element is moved by an arbitrary offset `X` (in this case, a `translateX`)
 -   element is rotated again by the opposite angle, so `-A`
 
-This chain only moves the element by `X`, but if you animate the `A` value in that chain to 360 and -360 respectively… magic happens. That's a little superpower that chained transforms have.
+This chain only moves the element by `X`, but if you animate the `A` value in that chain to 360 and -360 respectively… magic happens. That’s a little superpower that chained transforms have.
 
 ## Circles are boring? Well then, to infinity and beyond!\*
 
 _\*wherever custom property declarations are accepted._
 
-A circular orbit is fun but an infinity symbol? That's way more fun!
+A circular orbit is fun but an infinity symbol? That’s way more fun!
 
 We can set up some `--x` and `--y` properties to independently move our element in the shape of an infinity symbol, and register them with `@property`. I added a bit of trickery to make it easier for us:
 
--   horizontally, we're going from start to end to start, in a loop,
--   vertically, we're going up, down, up, down, and finally up.
+-   horizontally, we’re going from start to end to start, in a loop,
+-   vertically, we’re going up, down, up, down, and finally up.
 
 We can create two independent animations for this: `infX` and `infY`.
 
@@ -61,7 +61,7 @@ We can create two independent animations for this: `infX` and `infY`.
 .element {
 	transform: translate(
 		calc(var(--x) - var(--o)),
-		calc(var(--y) - var(--o) / 2) /* We'll only need to go half as high/low for this shape as it's *roughly** two circles side-by-side */
+		calc(var(--y) - var(--o) / 2) /* We’ll only need to go half as high/low for this shape as it’s *roughly** two circles side-by-side */
 	);
 	animation: var(--anim-dur, 2s) infinite;
 	animation-name: infX, infY;
@@ -100,4 +100,4 @@ We are using different easing values to better match the shape of our infinity s
 
 ## The future
 
-When `motion-path` becomes widely supported (we are getting there), we can build way more complex animations easily within CSS, which preserve the orientation if needed. Though if you cannot wait, [GSAP's MotionPath](https://greensock.com/motionpath/) has you covered!
+When `motion-path` becomes widely supported (we are getting there), we can build way more complex animations easily within CSS, which preserve the orientation if needed. Though if you cannot wait, [GSAP’s MotionPath](https://greensock.com/motionpath/) has you covered!

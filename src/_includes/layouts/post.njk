@@ -61,13 +61,13 @@
             >
         </div>
         <div class="signoff-message">
-            <p class="signoff-title | h4">Hey, I'm <span class="p-given-name">{{ metadata.author.shortname }}</span>, a front-end developer, CSS nerd, and designer.</p>
+            <p class="signoff-title | h4">Hey, I’m <span class="p-given-name">{{ metadata.author.shortname }}</span>, a front-end developer, CSS nerd, and designer.</p>
             <p class="signoff-body">
                 You can find me on
                 <a href="{{ social.mastodon.url }}" class="link-label-anchor">
                     {% svg 'mastodon', { class: 'inline-icon inline-icon--center', ariaHidden: true } %}
                     <span class="link-label-text">Mastodon</span></a>.
-                I've <a href="/designs/">designed some cool
+                I’ve <a href="/designs/">designed some cool
                 <span class="signoff-decorators" aria-hidden="true">
                     {% set cssStickerData = designs | find('slug', 'css-logo-solid') %}
                     {% set htmlShirtData = designs | find('slug', 'vhs-html') %}
@@ -76,7 +76,7 @@
                     <img src="{{ [assets.images, 'designs', htmlShirtData.img] | toPath | toNetlifyImage({ w: 64 }) }}" alt="A light retro t-shirt design with references to HTML" width="64" height="64">
                     <img src="{{ [assets.images, 'designs', jsShirtData.img] | toPath | toNetlifyImage({ w: 64 }) }}" alt="A dark retro t-shirt design with references to JavaScript" width="64" height="64">
                 </span>
-                apparel/stickers</a> if you'd like to check that out. Thanks a ton!
+                apparel/stickers</a> if you’d like to check that out. Thanks a ton!
             </p>
         </div>
     </footer>

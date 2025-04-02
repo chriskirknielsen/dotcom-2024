@@ -11,13 +11,13 @@ time: '03:00:00'
 featured: true
 ---
 
-I recently added a [Gaming Library page](/games/library/), which involved a bunch of API calls via Notion, as well as the PlayStation Network for that extra nerd factor. I initially only used [Notion’s API](https://developers.notion.com/docs/getting-started) for my [Now page](/now), but as I was reusing a lot of code, I ended up consolidating everything into helper functions on multiple levels, leveraging [eleventy-fetch](https://www.11ty.dev/docs/plugins/fetch/)'s `AssetCache` feature along the way (which you can use without Eleventy). Maybe you'll find some of this stuff useful, though, note that this article assumes you are at least a little familiar working with APIs and JavaScript.
+I recently added a [Gaming Library page](/games/library/), which involved a bunch of API calls via Notion, as well as the PlayStation Network for that extra nerd factor. I initially only used [Notion’s API](https://developers.notion.com/docs/getting-started) for my [Now page](/now), but as I was reusing a lot of code, I ended up consolidating everything into helper functions on multiple levels, leveraging [eleventy-fetch](https://www.11ty.dev/docs/plugins/fetch/)'s `AssetCache` feature along the way (which you can use without Eleventy). Maybe you’ll find some of this stuff useful, though, note that this article assumes you are at least a little familiar working with APIs and JavaScript.
 
 ## The Setup
 
 My Notion setup is extremely manual for both Gaming Library and Now pages. I won’t go into details here but I had to create a “connection” in Notion, so I could call the API for my workspace, for which I received a secret token. And my PSN data is linked to my account, and is all automatic! (npm packages used: `@11ty/eleventy-fetch` `@notionhq/client` `psn-api`)
 
-{% callout "Ramble" %}I really appreciate Notion’s tooling and UI but golly gee, do I hate its sluggish speed. It spits out HTML with inline styles every step of the way and is just so dang slow (web or app on a very fast computer), and it’s near impossible to add custom styles. I almost gave up editing more than once due to the hellish non-responsive interface that would sometimes make me edit a completely different row… But sure let's prioritise adding ✨AI✨ garbage. Anyway, rant over. (and their API is nice and fast, to their credit){% endcallout %}
+{% callout "Ramble" %}I really appreciate Notion’s tooling and UI but golly gee, do I hate its sluggish speed. It spits out HTML with inline styles every step of the way and is just so dang slow (web or app on a very fast computer), and it’s near impossible to add custom styles. I almost gave up editing more than once due to the hellish non-responsive interface that would sometimes make me edit a completely different row… But sure let’s prioritise adding ✨AI✨ garbage. Anyway, rant over. (and their API is nice and fast, to their credit){% endcallout %}
 
 ## The Flow
 
@@ -32,16 +32,16 @@ My Notion setup is extremely manual for both Gaming Library and Now pages. I won
 5. Cache both the initial `info` and processed `data` for future use.
 6. Return the requested `data`. Done!
 
-As you can see, this logic can be applied to more than just one API. Aside from the properties to check in the `info` response, and the data processing itself, it's generic. As such, I have created a helper function in my `api-cache` file that does all this — greatly reducing code duplication.
+As you can see, this logic can be applied to more than just one API. Aside from the properties to check in the `info` response, and the data processing itself, it’s generic. As such, I have created a helper function in my `api-cache` file that does all this — greatly reducing code duplication.
 
-By getting that `info` first, I can avoid querying 300 items from the PSN API if the `data` didn't change, for example. I don't think I'll be hitting a rate limit any time soon, but this "sampling" method makes it quick to check if the entire data is stale or not.
+By getting that `info` first, I can avoid querying 300 items from the PSN API if the `data` didn't change, for example. I don’t think I’ll be hitting a rate limit any time soon, but this "sampling" method makes it quick to check if the entire data is stale or not.
 
 ## The Abstractions
 
-Here's all my code split by file. This is fully commented but if something is unclear, let me know!
+Here’s all my code split by file. This is fully commented but if something is unclear, let me know!
 
 {% expander "api-cache.js" %}
-{% renderTemplate "md" %}This is the high-level abstraction described above which takes in methods to query the API (`info` + `data`), process `data`, and handle caching via `eleventy-fetch`'s `AssetCache` (I don't use the `EleventyFetch` function directly because I'm not requesting a specific URL, but using a package that does the fetching behind the scenes). This should be able to work with any standard API, though if there’s no endpoint to grab `info`, it’s not super useful and you should just use `eleventy-fetch` as-is with a short-ish cache duration!{% endrenderTemplate %}
+{% renderTemplate "md" %}This is the high-level abstraction described above which takes in methods to query the API (`info` + `data`), process `data`, and handle caching via `eleventy-fetch`'s `AssetCache` (I don’t use the `EleventyFetch` function directly because I’m not requesting a specific URL, but using a package that does the fetching behind the scenes). This should be able to work with any standard API, though if there’s no endpoint to grab `info`, it’s not super useful and you should just use `eleventy-fetch` as-is with a short-ish cache duration!{% endrenderTemplate %}
 
 ```js
 import { AssetCache } from '@11ty/eleventy-fetch';
@@ -88,7 +88,7 @@ export default async function (settings) {
 	// Determine when the database was updated by looking for the first available property
 	const dbLastEdit = getInfoMarker(dbInfo);
 
-	// Check if there is a cache object for the value we're after
+	// Check if there is a cache object for the value we’re after
 	const isCachePresent = !skipLocalCache && dbInfoCache.cachedObject && dbDataCache.cachedObject;
 
 	// If we have cached data, check if it's not outdated
@@ -119,11 +119,11 @@ export default async function (settings) {
 	return dbData;
 }
 ```
-{% renderTemplate "md" %}I don't check the `settings` object thoroughly but you might want to. Also, the `skipLocalCache` option is there in case you never want to cache the data on your local development build. This function should be reusable with most APIs that return data — if you use it, I'd be curious to hear how it worked out for you!{% endrenderTemplate %}
+{% renderTemplate "md" %}I don’t check the `settings` object thoroughly but you might want to. Also, the `skipLocalCache` option is there in case you never want to cache the data on your local development build. This function should be reusable with most APIs that return data — if you use it, I’d be curious to hear how it worked out for you!{% endrenderTemplate %}
 {% endexpander %}
 
 {% expander "notion-db.js" %}
-{% renderTemplate "md" %}This is my helper for Notion specifically, which requires a database to query as well as properties to retrieve and potential filters to pass in. It makes use of [Notion's `client` package](https://www.npmjs.com/package/@notionhq/client) to make the API calls easy. This also handles normalising the data from Notion, as it is full of metadata, via the optional `dataPostProcess` function, which can process the result before it gets cached.{% endrenderTemplate %}
+{% renderTemplate "md" %}This is my helper for Notion specifically, which requires a database to query as well as properties to retrieve and potential filters to pass in. It makes use of [Notion’s `client` package](https://www.npmjs.com/package/@notionhq/client) to make the API calls easy. This also handles normalising the data from Notion, as it is full of metadata, via the optional `dataPostProcess` function, which can process the result before it gets cached.{% endrenderTemplate %}
 
 ```js
 import 'dotenv/config';
@@ -250,7 +250,7 @@ export default async function () {
 }
 ```
 
-{% renderTemplate "md" %}I was pleasantly surprised to notice the `nextOffset` property was provided, making it very easy to grab every item. What's also nice is that this API returns an icon for the game, so I was able to "decorate" the dialog box you see when clicking a game title!{% endrenderTemplate %}
+{% renderTemplate "md" %}I was pleasantly surprised to notice the `nextOffset` property was provided, making it very easy to grab every item. What’s also nice is that this API returns an icon for the game, so I was able to "decorate" the dialog box you see when clicking a game title!{% endrenderTemplate %}
 {% endexpander %}
 
 And I keep all the tokens and database IDs secret in my `.env` file. 🤫
@@ -268,19 +268,19 @@ I’m not usually too busy so this page doesn’t change very often. It’s also
 
 ## Gaming Library
 
-My Gaming Library is an old spreadsheet that I moved into Notion last year (though you could do all of this with [Google Sheets](https://www.bobmonsour.com/posts/scratch-that-use-google-sheets-api/) or [Airtable](https://www.cassey.dev/11ty-airtable-fetch/) as well), adding a bunch of metadata that nobody cares about (but me!). I manually entered the PSN API's game IDs into my Notion entries, one by one, to make sure they were accurate (matching by title could fail due to things like apostrophes, trademark symbols, etc.). Setting this up was a real pain, but it’s now quite easy to maintain!
+My Gaming Library is an old spreadsheet that I moved into Notion last year (though you could do all of this with [Google Sheets](https://www.bobmonsour.com/posts/scratch-that-use-google-sheets-api/) or [Airtable](https://www.cassey.dev/11ty-airtable-fetch/) as well), adding a bunch of metadata that nobody cares about (but me!). I manually entered the PSN API’s game IDs into my Notion entries, one by one, to make sure they were accurate (matching by title could fail due to things like apostrophes, trademark symbols, etc.). Setting this up was a real pain, but it’s now quite easy to maintain!
 
 {% image "./notion-grid.png" | toRoot, "A few rows in a Grid in Notion with a lot of columns, such as Sort Title, Platform, Format, Number of discs…", "Quite a handful of columns!", { width: 1280, height: 192 } %}
 
 {% callout "Free idea" %}If you’re starting from scratch, you could invert this process and use the results from the PSN API to add new data to a database via the Notion API instead.{% endcallout %}
 
-This page collects PSN and Notion data in two steps: grab PSN titles first, then match them to Notion items. It skips some platforms like GameBoy and PC (but you best believe I played the shit out of _Pokémon Red_ and _RollerCoaster Tycoon_), filters out hidden rows and irrelevant properties, and includes data for each game within compilations, such as the _Mass Effect Trilogy_, to get a fuller picture. Then, cache and serve! (side note: I'm only including PSN stuff because I have always been in House PlayStation since the PS1 — if I had some Xbox consoles or played regularly on PC, I'd have loved to include those too)
+This page collects PSN and Notion data in two steps: grab PSN titles first, then match them to Notion items. It skips some platforms like GameBoy and PC (but you best believe I played the shit out of _Pokémon Red_ and _RollerCoaster Tycoon_), filters out hidden rows and irrelevant properties, and includes data for each game within compilations, such as the _Mass Effect Trilogy_, to get a fuller picture. Then, cache and serve! (side note: I’m only including PSN stuff because I have always been in House PlayStation since the PS1 — if I had some Xbox consoles or played regularly on PC, I’d have loved to include those too)
 
-All in all, it’s a very nerdy thing. Not many people care about this level of information, but it was a great opportunity to use some APIs. (also, I might as well have personal stuff on my personal website!) You'll note I didn't provide a full breakdown of how these abstractions are used in my `now.js` and `gameslibrary.js` data files as it's very specific to my setup and might not be useful to everybody, but [my website has a public repository](https://github.com/chriskirknielsen/dotcom-2024/), so you can go digging there (this post is long enough without two additional walls of code!).
+All in all, it’s a very nerdy thing. Not many people care about this level of information, but it was a great opportunity to use some APIs. (also, I might as well have personal stuff on my personal website!) You’ll note I didn't provide a full breakdown of how these abstractions are used in my `now.js` and `gameslibrary.js` data files as it’s very specific to my setup and might not be useful to everybody, but [my website has a public repository](https://github.com/chriskirknielsen/dotcom-2024/), so you can go digging there (this post is long enough without two additional walls of code!).
 
 ## Notion Markdown Converter
 
-Right, I almost forgot… another wall of code. Here's the function I wrote to convert a rich text value from Notion into a standard Markdown string. It is extremely naïve and can break very easily if your text includes any kind of Markdown character (`[(~_*)]`). If you want to build something extra robust, check out [Ryan Boone's article (Rich Text Formatting section)](https://www.falldowngoboone.com/blog/from-notion-to-eleventy-part-2-building-markdown-from-json/#rich-text-formatting).
+Right, I almost forgot… another wall of code. Here’s the function I wrote to convert a rich text value from Notion into a standard Markdown string. It is extremely naïve and can break very easily if your text includes any kind of Markdown character (`[(~_*)]`). If you want to build something extra robust, check out [Ryan Boone’s article (Rich Text Formatting section)](https://www.falldowngoboone.com/blog/from-notion-to-eleventy-part-2-building-markdown-from-json/#rich-text-formatting).
 
 ```js
 /** Converts a Notion rich text block to a Markdown string. */
@@ -320,4 +320,4 @@ I almost considered writing some kind of Eleventy plugin, but this all feels pre
 
 ## Update, 2024-09-18
 
-Would you look at that, somebody made a plugin! It's [notion2eleventy](https://github.com/stebrech/notion2eleventy) by Stefan Brechbühl. I still need my post-process-and-data-blend-before-caching setup so I'll stick with my custom implementation, but if you thought my blog post was too long, this might just be perfect for your Notion-to-Eleventy needs.
+Would you look at that, somebody made a plugin! It’s [notion2eleventy](https://github.com/stebrech/notion2eleventy) by Stefan Brechbühl. I still need my post-process-and-data-blend-before-caching setup so I’ll stick with my custom implementation, but if you thought my blog post was too long, this might just be perfect for your Notion-to-Eleventy needs.

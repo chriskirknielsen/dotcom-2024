@@ -11,15 +11,15 @@ toc: true
 
 ## Motivation
 
-I've just released a plugin for Markdown-It. I wanted to have tighter control over how my code blocks were displayed on my site, adding a "Copy" button as well.
+I’ve just released a plugin for Markdown-It. I wanted to have tighter control over how my code blocks were displayed on my site, adding a "Copy" button as well.
 
-Maybe it's over-engineered. Maybe it's a niche need. But I certainly don't want to have to loop over my compiled code and edit every block to add a button to it. And given the options I saw weren't sufficient for me in terms of customisation, well, here we are.
+Maybe it’s over-engineered. Maybe it’s a niche need. But I certainly don’t want to have to loop over my compiled code and edit every block to add a button to it. And given the options I saw weren’t sufficient for me in terms of customisation, well, here we are.
 
 ## Where to get it
 
 It is available as [an NPM package](https://www.npmjs.com/package/markdown-it-codewrap) and you can submit feedback in [the GitHub repository](https://github.com/chriskirknielsen/markdown-it-codewrap).
 
-To install it, you can run the following command (you'll need `markdown-it` as well):
+To install it, you can run the following command (you’ll need `markdown-it` as well):
 
 ```
 npm install markdown-it markdown-it-codewrap
@@ -97,9 +97,9 @@ module.exports = function(eleventyConfig, options = {}) {
 }
 ```
 
-Thanks to how `tokens[idx].info` is handled, I can actually type `` ```js:.eleventy.js`` and it will change the toolbar to `.eleventy.js` instead of simply "JS" (or JavaScript with that `switch` case). This is _not_ standard (which is also why the `info` property is reset after parsing the filename) and only a little nicety I'm adding for me, which is why it is not part of the plugin's code.
+Thanks to how `tokens[idx].info` is handled, I can actually type `` ```js:.eleventy.js`` and it will change the toolbar to `.eleventy.js` instead of simply "JS" (or JavaScript with that `switch` case). This is _not_ standard (which is also why the `info` property is reset after parsing the filename) and only a little nicety I’m adding for me, which is why it is not part of the plugin’s code.
 
-Given I set `inlineCopyHandler: false`, the `onclick` handler on the button is gone. So now I need to set up my own handler. In Eleventy, I do this with a transform that checks if a button exists, or rather, in this case, a specific data attribute, `data-codewrap-copy-button`. (there would be other ways to do this but this is the easiest) If that string exists (which I don't use anywhere else — the button gets its own CSS class name), I can assume there is a copy button in a code block, and inject a script in the `<head>`. Note that I actually use a slightly different approach, but the end result is pretty much the same:
+Given I set `inlineCopyHandler: false`, the `onclick` handler on the button is gone. So now I need to set up my own handler. In Eleventy, I do this with a transform that checks if a button exists, or rather, in this case, a specific data attribute, `data-codewrap-copy-button`. (there would be other ways to do this but this is the easiest) If that string exists (which I don’t use anywhere else — the button gets its own CSS class name), I can assume there is a copy button in a code block, and inject a script in the `<head>`. Note that I actually use a slightly different approach, but the end result is pretty much the same:
 
 ```js:.eleventy.js
 // Add this within the existing module.exports!

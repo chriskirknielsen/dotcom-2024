@@ -14,14 +14,14 @@ updated: 2023-11-16
 {% callout "TL;DR", "", { mode: "block" } %}
 **Situation:** we want to select all links that aren’t inside an `.archived` element.
 
-**Don't do this:** `:not(.archived) a`
+**Don’t do this:** `:not(.archived) a`
 
 **Instead, do:** `a:not(.archived *)`
 {% endcallout %}
 
-I ran into this issue the other day and was talking with my coworker Joel about this. He reminded me of a neat trick that can come in handy when you’re working with some HTML you don’t control (in our case, a library that loves wrappin’ in `<div>`s!). Since I am likely to forget, I am blogging for myself, and maybe you'll get something out of it too, dear reader!
+I ran into this issue the other day and was talking with my coworker Joel about this. He reminded me of a neat trick that can come in handy when you’re working with some HTML you don’t control (in our case, a library that loves wrappin’ in `<div>`s!). Since I am likely to forget, I am blogging for myself, and maybe you’ll get something out of it too, dear reader!
 
-If we want to select a link (`<a>` element) that is not a direct descendant of an element with the class `.archived`, our first instinct might be to do `:not(.archived) > a`. If our DOM looks like this, we'll be able to easily distinguish between archived and non-archived blocks:
+If we want to select a link (`<a>` element) that is not a direct descendant of an element with the class `.archived`, our first instinct might be to do `:not(.archived) > a`. If our DOM looks like this, we’ll be able to easily distinguish between archived and non-archived blocks:
 
 ```html
 <article class="archived">
@@ -67,7 +67,7 @@ It kind of looks like "doughnut/donut scoping" when I think about it. If we want
 }
 ```
 
-Both of these will technically "scope" the selector, however `@scope` has a few more advantages I'd say, namely specificity won't go out of control as much, the selector has way better legibility (<del>it's never good to repeat the target element in the same selector!</del> <ins>no longer an issue after Šime's suggestion</ins>), and [as Miriam points out](https://shoptalkshow.com/591/#t=41:30), nested scopes won't work correctly with the `:not()` hack, but it's still cool we can get to similar results for simpler setups with relatively old browser versions!
+Both of these will technically "scope" the selector, however `@scope` has a few more advantages I’d say, namely specificity won’t go out of control as much, the selector has way better legibility (<del>it’s never good to repeat the target element in the same selector!</del> <ins>no longer an issue after Šime’s suggestion</ins>), and [as Miriam points out](https://shoptalkshow.com/591/#t=41:30), nested scopes won’t work correctly with the `:not()` hack, but it’s still cool we can get to similar results for simpler setups with relatively old browser versions!
 
 **Minor update:** I realise Lea Verou thought of this years ago already… because of course Lea did!
 

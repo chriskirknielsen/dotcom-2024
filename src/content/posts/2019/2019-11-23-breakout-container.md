@@ -9,9 +9,9 @@ tags:
     - quick-tip
 ---
 
-Here's a quick tip if you have your content limited to a certain width but you want an element to "break out".
+Here’s a quick tip if you have your content limited to a certain width but you want an element to "break out".
 
-I've seen a few ways to do this, including one with `transform` which works great, but I ran into a case where I needed that `transform` for some animation. You can instead make use of relative positioning to achieve the same result.
+I’ve seen a few ways to do this, including one with `transform` which works great, but I ran into a case where I needed that `transform` for some animation. You can instead make use of relative positioning to achieve the same result.
 
 Say you have a `.container` class with a `max-width` value and `margin: 0 auto`:
 
@@ -22,7 +22,7 @@ Say you have a `.container` class with a `max-width` value and `margin: 0 auto`:
 }
 ```
 
-You can break an element out of this container by making it take up the whole screen's width (`100vw`), then move it left by `50%` of the container (which is the middle of the screen), minus half the screen's width (`50vw`), effectively placing it on the very first horizontal pixel of the viewport.
+You can break an element out of this container by making it take up the whole screen’s width (`100vw`), then move it left by `50%` of the container (which is the middle of the screen), minus half the screen’s width (`50vw`), effectively placing it on the very first horizontal pixel of the viewport.
 
 ```css
 .breakout {
@@ -32,7 +32,7 @@ You can break an element out of this container by making it take up the whole sc
 }
 ```
 
-**That's all you need for this trick to work.** However, you might want to improve this a bit, so let's go a bit further.
+**That’s all you need for this trick to work.** However, you might want to improve this a bit, so let’s go a bit further.
 
 ## Improvements
 
@@ -45,7 +45,7 @@ You should also add `overflow-x: hidden` to the `body` (or a main wrapper around
 }
 ```
 
-Note that if you want to really push the backward compatibility, in order to avoid a broken layout for the few browsers that support the `vw` unit but not `calc()`, you can use any variation of `calc(50vw * 2)` that results in `100vw`. This will ensure older browsers won't have content outside the viewport.
+Note that if you want to really push the backward compatibility, in order to avoid a broken layout for the few browsers that support the `vw` unit but not `calc()`, you can use any variation of `calc(50vw * 2)` that results in `100vw`. This will ensure older browsers won’t have content outside the viewport.
 
 As a bonus, if you want to avoid having an absurdly large content on an ultra-wide viewport, you can restrict the max-width with two methods.
 
@@ -70,7 +70,7 @@ This method involves wrapping the content in an element. Doing this will allow u
 
 ### Second method: Dynamic Padding
 
-This `calc` value will take the screen width (`100vw`) minus the maximum width of the content you give it (let's say `80em`) and divide the result by `2`. The block will still take up all the horizontal space but the content will remain at a reasonable width.
+This `calc` value will take the screen width (`100vw`) minus the maximum width of the content you give it (let’s say `80em`) and divide the result by `2`. The block will still take up all the horizontal space but the content will remain at a reasonable width.
 
 If the screen width is equal to `80em`, the padding will compute to `0`, but if `100vw` is worth `100em`, the padding will evaluate to `(100em - 80em) / 2 = 10em` on each side. Note that `box-sizing: border-box;` is necessary to ensure the padding is subtracted from the full viewport width instead of added to it.
 
@@ -89,7 +89,7 @@ If the screen width is equal to `80em`, the padding will compute to `0`, but if 
 A media query is not necessary since negative padding values are invalid. 👍
 {% endcallout %}
 
-Let's have a look at the complete code all together now:
+Let’s have a look at the complete code all together now:
 
 {% codepen "https://codepen.io/chriskirknielsen/pen/abzoJWr/", "html,css" %}
 

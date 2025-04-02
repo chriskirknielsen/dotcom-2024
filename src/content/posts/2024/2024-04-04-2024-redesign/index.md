@@ -54,7 +54,7 @@ If you do not cache your minification, this next part is irrelevant, but if you 
 
 I break down each theme in detail over on the [Colophon](/colophon/) page, but I initially wanted to just have two themes: light mode and dark mode. However, Figma being a good tool to iterate, I ended up adding one more, then two… then landed back to the six I previously had… and then two more! My final CSS file is of course a little massive, clocking in at `77 Kb`, but running PurgeCSS takes that number down significantly, around `45 Kb` depending on the page.
 
-A blank page clocks in at a grand total of `79 Kb`, which is still a lot for my little personal site, but given the importance of themes and they add around `2.7 Kb` of inlined JavaScript, I feel like it's a good compromise, especially since the site works fine without. (though I am planning to see how I can lower that number… feels like a _lot_ just for a theme picker!)
+A blank page clocks in at a grand total of `79 Kb`, which is still a lot for my little personal site, but given the importance of themes and they add around `2.7 Kb` of inlined JavaScript, I feel like it’s a good compromise, especially since the site works fine without. (though I am planning to see how I can lower that number… feels like a _lot_ just for a theme picker!)
 
 Oh! Another thing that was missing was the option to revert to the system theme — that oversight has been corrected!
 
@@ -104,9 +104,9 @@ For this version, I’ve removed the localised French and Danish parts of my sit
 
 ### Calculating hero heading scales
 
-My global Hero component can accept any title, and is used everywhere except the homepage, meaning titles can be vastly different. To ensure I don't hardcode it to a specific size, my component runs the title through a filter which returns a scale, passed on to CSS. If a title has only a couple words, the scale remains at `1`, but if it's basically a sentence, that number is lowered so the hero component doesn't take up the entire page.
+My global Hero component can accept any title, and is used everywhere except the homepage, meaning titles can be vastly different. To ensure I don’t hardcode it to a specific size, my component runs the title through a filter which returns a scale, passed on to CSS. If a title has only a couple words, the scale remains at `1`, but if it’s basically a sentence, that number is lowered so the hero component doesn't take up the entire page.
 
-The logic is rather simple as it takes in the number of letters and words, maps them both on separate min/max scales, then averages the results and returns a number between `0.75` (long titles) and `1` (short titles). It's running both because you can have a lot of short words, or very few long words — with this average, it's kind of safe either way. It's not scientific but it works! Here's the code if you're curious (or if you have a better algorithm to suggest):
+The logic is rather simple as it takes in the number of letters and words, maps them both on separate min/max scales, then averages the results and returns a number between `0.75` (long titles) and `1` (short titles). It’s running both because you can have a lot of short words, or very few long words — with this average, it’s kind of safe either way. It’s not scientific but it works! Here’s the code if you’re curious (or if you have a better algorithm to suggest):
 
 ```js
 const remapNum = (number, inMin, inMax, outMin, outMax) => ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
@@ -140,13 +140,13 @@ I wanted to wrap my code blocks in a custom element instead of some hardcoded me
 
 ### Smarter SVGs
 
-I went all in for this version to use the [Cheerio library](https://cheerio.js.org/). This allows me to write standard SVG files instead of NJK with conditionally injected attributes. It's a lot cleaner, and doesn't require any code edits after I'm done optimising the SVG. I can provide all the attributes I need to the bespoke `svg` shortcode I made (see [my article about SVGs in Eleventy](/blog/manage-your-svg-files-with-eleventys-render-plugin/), though note that Cheerio wasn't used at that time) and not worry about the right format and whatnot.
+I went all in for this version to use the [Cheerio library](https://cheerio.js.org/). This allows me to write standard SVG files instead of NJK with conditionally injected attributes. It’s a lot cleaner, and doesn't require any code edits after I’m done optimising the SVG. I can provide all the attributes I need to the bespoke `svg` shortcode I made (see [my article about SVGs in Eleventy](/blog/manage-your-svg-files-with-eleventys-render-plugin/), though note that Cheerio wasn’t used at that time) and not worry about the right format and whatnot.
 
-It is more costly to run Cheerio instead of inlining NJK instructions, but I don't use a lot of SVGs, and also, if the options are identical, I cache the processed result so that if two different pages use the same SVG, it only gets run once, saving a little bit of time.
+It is more costly to run Cheerio instead of inlining NJK instructions, but I don’t use a lot of SVGs, and also, if the options are identical, I cache the processed result so that if two different pages use the same SVG, it only gets run once, saving a little bit of time.
 
 ## Some CSS issues
 
-I ran into more than a few issues in CSS relating to different behaviour across browsers. Chrome came out on top of this one with no major issues to report, but I did elect to use an inherited grid instead of subgrid, as [support is still pretty fresh](https://caniuse.com/?search=subgrid), so I'll give it another year or two.
+I ran into more than a few issues in CSS relating to different behaviour across browsers. Chrome came out on top of this one with no major issues to report, but I did elect to use an inherited grid instead of subgrid, as [support is still pretty fresh](https://caniuse.com/?search=subgrid), so I’ll give it another year or two.
 
 ### Safari
 
@@ -161,9 +161,9 @@ p {
 
 I also noticed some issue with the homepage wordmark (or my "large" logo, if you will), notably the circles which would grow past the limit of the grid cell they were in. For this one, a little `max-block-size` with a magic number did the trick… I should file a bug, huh?
 
-And something comical: the "welcome" text around my name on the homepage? It's got responsive sizing, but Safari is doing something funky, so every time I refresh the page, the font size grows. Not present in Technology Preview but this one's weird. And funny!
+And something comical: the "welcome" text around my name on the homepage? It’s got responsive sizing, but Safari is doing something funky, so every time I refresh the page, the font size grows. Not present in Technology Preview but this one’s weird. And funny!
 
-{% video "./safari-font-size-refresh.mp4", "This website's homepage being refreshed many times, and each time a piece of text grows bigger until it takes up the entire screen.", "", { width: 1279, height: 782, loop: false, poster: "./safari-font-size-refresh.jpg" } %}
+{% video "./safari-font-size-refresh.mp4", "This website’s homepage being refreshed many times, and each time a piece of text grows bigger until it takes up the entire screen.", "", { width: 1279, height: 782, loop: false, poster: "./safari-font-size-refresh.jpg" } %}
 
 ### Firefox
 
@@ -193,6 +193,6 @@ As far as the files that are spit out, I end up with slightly heavier files due 
 
 ESM is pretty cool, custom elements are super cool, open source is amazing, and if you read through _all_ of this ramble, thank you, and congratulations: I am not good a trimming down content!
 
-If anything, I hope you have fun with the theme picker. It's my happy place.
+If anything, I hope you have fun with the theme picker. It’s my happy place.
 
-And if you notice anything strange, while I don't expect free labour, if you could let me know what's wrong, I would truly appreciate it. Thank you!
+And if you notice anything strange, while I don’t expect free labour, if you could let me know what’s wrong, I would truly appreciate it. Thank you!

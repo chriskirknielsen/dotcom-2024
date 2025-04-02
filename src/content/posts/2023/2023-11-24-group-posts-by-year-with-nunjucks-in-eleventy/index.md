@@ -94,4 +94,4 @@ If only we could sort objects… oh wait, we can using the [`dictsort` filter!](
 
 And just like that, we have our posts in reverse chronological order, grouped by year, also in reverse chronological order. The HTML in the loop feels easier to read and maintain, and while a nested for-loop is usually bad, I think this is a perfectly valid use-case.
 
-I know Nunjucks has its shortcomings but things like this just make me go "dang, that's neat".
+I know Nunjucks has its shortcomings but things like this just make me go "dang, that’s neat".

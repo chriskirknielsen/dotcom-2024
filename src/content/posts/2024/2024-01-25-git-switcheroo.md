@@ -6,7 +6,7 @@ tags:
     - git
 templateEngineOverride: njk,md
 originalUrl: https://tweets.chriskirknielsen.com/1573313737502515206/
-originalTitle: From chriskirknielsen's tweet archive
+originalTitle: From chriskirknielsen’s tweet archive
 ---
 
 I aliased a git command to move commits from one branch to another (usually `main` to `dev`). A bad idea? 🤷

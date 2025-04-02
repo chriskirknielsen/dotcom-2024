@@ -16,4 +16,4 @@ I wrote an article on CSS-Tricks about using a `--var: ;` [trick from Lea Verou]
 --color: var(--light, orchid) var(--dark, rebeccapurple);
 ```
 
-The article details the trick and how to set it up (because it _does_ look weird at first glance), maybe you'll find another use case for it!
+The article details the trick and how to set it up (because it _does_ look weird at first glance), maybe you’ll find another use case for it!

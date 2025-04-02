@@ -21,4 +21,4 @@ function whoIsAwesome() {
 }
 ```
 
-I wrote [an article about this implementation](/blog/markdown-it-codewrap) if you're interested!
+I wrote [an article about this implementation](/blog/markdown-it-codewrap) if you’re interested!

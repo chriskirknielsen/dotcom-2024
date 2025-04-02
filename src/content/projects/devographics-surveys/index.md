@@ -13,7 +13,7 @@ toc: true
 
 This project is an ongoing collaboration between myself and Sacha Greif, the maintainer of the various _State of `{web tech}`_ surveys, which is collected under the Devographics project.
 
-For each of these designs, while Sacha reached out for my design skills, he is himself capable and so these logos and shirt designs are collaborative, bouncing ideas of each other, and as such I can't take full credit but will say it is a fun process, from idea to final design. Below you'll find the various "branding" projects I've worked on for the Devographics surveys.
+For each of these designs, while Sacha reached out for my design skills, he is himself capable and so these logos and shirt designs are collaborative, bouncing ideas of each other, and as such I can't take full credit but will say it is a fun process, from idea to final design. Below you’ll find the various "branding" projects I’ve worked on for the Devographics surveys.
 
 ## State of CSS
 
@@ -40,7 +40,7 @@ We were wrong. So I adjusted the logo, but for your entertainment, here is the l
 ## State of JS
 
 {% set jsShirtData = designs | find('slug', 'js-retro-vhs') %}
-Following a pretty successful collaboration on the CSS shirt, Sacha asked me once more if I'd be up to design a VHS-styled logo and shirt, but for the [State of JS](https://2021.stateofjs.com/en-US/) this time around. This one was a little more tricky to nail down as balancing "simple" with "massive ecosystem" is a tall order.
+Following a pretty successful collaboration on the CSS shirt, Sacha asked me once more if I’d be up to design a VHS-styled logo and shirt, but for the [State of JS](https://2021.stateofjs.com/en-US/) this time around. This one was a little more tricky to nail down as balancing "simple" with "massive ecosystem" is a tall order.
 
 We went through quite a few iterations, especially for the background shape that ended up being this tesseract-looking thing with multiple light sources.
 
@@ -76,7 +76,7 @@ This logo is also animated, as a treat. Click to restart the animation.
 ## State of React
 
 {% set reactShirtData = designs | find('slug', 'react-retro-vhs') %}
-We had tried to find time previous years to collaborate on a design for the React survey, and finally got around to it for the [2023 survey](https://2023.stateofreact.com/en-US/). Sacha was more hands-on since I am not knowledgeable at all in React-land. He suggested a different style, this time taking inspiration from anime and science-fiction user interfaces. (below you'll see the 2024 version instead)
+We had tried to find time previous years to collaborate on a design for the React survey, and finally got around to it for the [2023 survey](https://2023.stateofreact.com/en-US/). Sacha was more hands-on since I am not knowledgeable at all in React-land. He suggested a different style, this time taking inspiration from anime and science-fiction user interfaces. (below you’ll see the 2024 version instead)
 
 While React is not my area of expertise, I think this looks pretty cool! Sacha set up most of the ideas (and due to my limited Japanese knowledge, the kanji as well), and after I drew custom katakana, he made even cooler ones, which just goes to show how this kind of collaboration can be fruitful!
 
@@ -85,6 +85,6 @@ While React is not my area of expertise, I think this looks pretty cool! Sacha s
 {% image '/' + assets.images + '/designs/' + reactShirtData.img, "A rework of the logo for the survey rearranged to look like a science-fiction and/or anime interface, on a midnight blue t-shirt.", 'Get yours at <a href="'+reactShirtData.links.CottonBureau+'">CottonBureau</a>', { ratio: "600/600", group: true } %}
 {% endgallery %}
 
-Surprise! It's animated. Click to restart the animation.
+Surprise! It’s animated. Click to restart the animation.
 
 {% codepen "https://codepen.io/chriskirknielsen/pen/mdNNYKP" %}

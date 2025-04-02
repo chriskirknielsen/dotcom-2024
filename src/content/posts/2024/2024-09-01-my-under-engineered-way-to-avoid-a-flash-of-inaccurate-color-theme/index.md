@@ -23,7 +23,7 @@ I like to put the background colour on the `html` element ([you probably shouldn
 
 This means the timeline looks like so: Page is requested and loads → Theme hook is applied to `<head>` from `localStorage` → CSS is loaded → Contents start loading and rendering begins.
 
-To make it more useful with CSS selectors, I'll only add the attribute if the local storage value exists:
+To make it more useful with CSS selectors, I’ll only add the attribute if the local storage value exists:
 
 ```html
 <script>
@@ -56,8 +56,8 @@ html[data-theme='pride'] {
 
 I leave it up to you to add some JavaScript to set the theme after clicking a button ([see Lea’s implementation](https://codepen.io/learosema/pen/zYmvQJV) or [Max’s article](https://mxb.dev/blog/color-theme-switcher/) which also happens to use this approach — if somebody talented like Max does this, you know it’s a good call). You could use cookies instead of `localStorage` but the latter has a nice browser API to get the value I want without any regular expressions or `.split()` sequences.
 
-I use this idea on my own site right here: it is a little more involved since it’s interwoven with the theme picker, but it’s the same principle. Under-engineering the theme “hook” means this is **super portable**, and that gives me more time to [over-engineer my CSS](https://www.youtube.com/watch?v=k_3pRxdv-cI). No edge-function vendor lock-in, no pre-request header manipulation or whatever: I’m not smart enough to pretend to know how it works… if you want to do it that way, though, that's neat!
+I use this idea on my own site right here: it is a little more involved since it’s interwoven with the theme picker, but it’s the same principle. Under-engineering the theme “hook” means this is **super portable**, and that gives me more time to [over-engineer my CSS](https://www.youtube.com/watch?v=k_3pRxdv-cI). No edge-function vendor lock-in, no pre-request header manipulation or whatever: I’m not smart enough to pretend to know how it works… if you want to do it that way, though, that’s neat!
 
 But this right here? **Now that’s a nice FART-stopper.** 💨
 
-**PS:** This is in no way a “I've found a new way to do things! I am very smart!” kind of article; however I've been using this for some years and I haven't found anything better. I guess it's a good reminder that you don't need a ton of JavaScript, maybe?
+**PS:** This is in no way a “I’ve found a new way to do things! I am very smart!” kind of article; however I’ve been using this for some years and I haven't found anything better. I guess it’s a good reminder that you don’t need a ton of JavaScript, maybe?
