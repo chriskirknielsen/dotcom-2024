@@ -17,15 +17,12 @@
 	<ul class="designs-stores | flex-list justifyContent-center | fontWeight-bold fontSize-small" aria-labelledby="designs-shops-label" style="--list-gap: var(--size-m);">
 		{% for merchStore, merchUrl in metadata.merch %}
 			{% set storeIconName %}store-icon-{{ merchStore | lower }}{% endset %}
-			{# I don't actually have a CottonBureau store but some of my designs are sold there by other people #}
-			{% if merchStore != 'CottonBureau' %}
 			<li>
 				<a href="{{ merchUrl }}">
 					{% svg storeIconName, { class: 'store-icon', width: 32, height: 32 } %}
 					{{ merchStore }}
 				</a>
 			</li>
-			{% endif %}
 		{% endfor %}
 	</ul>
 </div>

@@ -18,7 +18,6 @@ export default {
 		RedBubble: 'https://www.redbubble.com/people/ckirknielsen/shop',
 		TeePublic: 'https://www.teepublic.com/user/chriskirknielsen/',
 		DesignByHumans: 'https://www.designbyhumans.com/shop/chriskirknielsen/',
-		CottonBureau: 'https://cottonbureau.com/',
 	},
 	nakedCss: new Date().toISOString().split('T')[0].endsWith('04-09'),
 	nakedJs: new Date().toISOString().split('T')[0].endsWith('04-24'),
