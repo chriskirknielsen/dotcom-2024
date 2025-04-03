@@ -37,18 +37,27 @@
 
 .heading-anchor {
 	/* Only show the anchor position if an ID and a local anchor are provided */
-	[id] > &[href^='#']:is(:hover, :focus-visible)::before {
-		content: '§';
-		pointer-events: none;
+	[id] > &[href^='#'] {
+		&::before {
+			content: '§';
+			pointer-events: none;
 
-		position: absolute;
+			position: absolute;
 
-		padding-inline-end: 0.125em;
+			font-size: 0.625em;
+			color: var(--C-accent-alt, var(--C-accent));
 
-		font-size: 0.625em;
-		color: var(--C-accent-alt, var(--C-accent));
+			opacity: 0;
 
-		opacity: 0.8;
-		transform: translateX(-100%);
+			@media (--accept-motion) {
+				transition: var(--anim-short) var(--easing-out);
+				transition-property: opacity, transform;
+			}
+		}
+
+		&:is(:hover, :focus-visible)::before {
+			opacity: 0.8;
+			transform: translateX(calc(-100% - 0.125em));
+		}
 	}
 }
