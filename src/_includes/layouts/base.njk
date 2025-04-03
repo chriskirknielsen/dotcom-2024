@@ -37,10 +37,16 @@
 		{% include 'parts/header.njk' %}
 
 		<main class="main | container flow" id="content" {% if lang %}lang="{{ lang }}"{% endif %}tabindex="-1">
-			{% set announcement = false %}
+			{% if metadata.nakedCss %}
+				{% set announcement %}🙅 No CSS for <a href="https://css-naked-day.github.io/">CSS Naked Day</a> (9th of April)!{% endset %}
+			{% elseif metadata.nakedJs %}
+				{% set announcement %}🙅 No JavaScript for <a href="https://js-naked-day.org/">JS Naked Day</a> (24th of April)!{% endset %}
+			{# {% else %}{% set announcement = "" %} #}
+			{% endif %}
 			{% if announcement %}
 				<div class="announcement"><p class="textWrap-balance textAlign-center">{{ announcement | markdown(true) | safe }}</p></div>
 			{% endif %}
+
 			{% block baseContent %}
 				{{ content | safe }}
 			{% endblock %}

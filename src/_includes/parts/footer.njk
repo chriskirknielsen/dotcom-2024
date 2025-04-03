@@ -3,8 +3,6 @@
         <h2 class="visually-hidden" id="footer-descr">Footer</h2>
 
         <div class="footer-meta | flow" style="--flow-space: 1em;">
-            {% if metadata.nakedCss %}<p class="fontWeight-bold">🙅 No CSS for <a href="https://css-naked-day.github.io/">CSS Naked Day</a> (9th of April)!</p>{% endif %}
-            {% if metadata.nakedJs %}<p class="fontWeight-bold">🙅 No JavaScript for <a href="https://js-naked-day.org/">JS Naked Day</a> (24th of April)!</p>{% endif %}
             <p class="textWrap-balance">
                 <strong class="p-name">{{ metadata.author.name }}</strong>
                 &copy;&nbsp;<span aria-hidden="true">{{ metadata.currentYear | toRomanNumeral }}</span>
