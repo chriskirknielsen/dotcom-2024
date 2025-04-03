@@ -89,8 +89,8 @@ const gameslibrary = await notionDatabaseQuery({
 						props.Boxart.files.length > 0
 							? {
 									url: props.Boxart.files[0].type === 'external' ? props.Boxart.files[0].external.url : props.Boxart.files[0].file.url,
-									width: props.Boxart.files[0].name.split('x')[0],
-									height: props.Boxart.files[0].name.split('x')[1],
+									width: 375, // All games should use the IGDB image, which has a fixed size
+									height: 500,
 							  }
 							: null,
 					trophyIcon:
