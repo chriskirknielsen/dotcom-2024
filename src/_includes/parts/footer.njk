@@ -32,9 +32,11 @@
         </div>
     </div>
 
+    {% if (not metadata.nakedCss) %}
     <div class="footer-decorator">
         {% for theme in themes %}
             {% footersvg 'footer-deco-'+theme.key+'.svg', { 'data-theme-condition': theme.key } %}
         {% endfor %}
     </div>
+    {% endif %}
 </footer>

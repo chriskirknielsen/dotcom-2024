@@ -6,7 +6,8 @@
                 title: 'Christopher Kirk-Nielsen logo, to homepage'
             } %}
         </a>
-
+        
+        {% if (not metadata.nakedCss) and (not metadata.nakedJs) %}
         {% component 'cta', {
             iconStack: {
                 'idle': 'menu-icon',
@@ -19,6 +20,7 @@
             ctaClass: 'header-menu-toggle linecap-auto hide-when-viewport--large',
             ctaAttr: 'data-toggle-pressed'
         } %}
+        {% endif %}
 
         <div class="header-menu">
             <nav class="header-nav">
@@ -31,6 +33,7 @@
                 </ul>
             </nav>
 
+            {% if (not metadata.nakedCss) and (not metadata.nakedJs) %}
             <div class="header-themepicker">
                 <div id="header-themepicker-heading" class="header-themepicker-heading | h2 | hide-when-viewport--large">
                     {% svg 'palette', { class: 'inline-icon' } %}
@@ -52,6 +55,7 @@
                 {% webcomponent 'theme-picker', { id: 'themepicker', 'data-light': 'dawn', 'data-dark': 'dusk', 'aria-labelledby': 'header-themepicker-heading' } %}
                 {% js 'foot' %}{%- include 'assets/js/components/theme-picker.js' -%}{% endjs %}
             </div>
+            {% endif %}
         </div>
     </div>
 </header>
