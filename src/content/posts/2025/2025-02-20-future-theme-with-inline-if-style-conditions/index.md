@@ -5,6 +5,7 @@ tags:
     - css
     - themes
 toc: true
+featured: true
 ---
 
 Hey, so remember when I went down a CSS rabbit hole about using [style queries to create themes in 2023](/blog/future-themes-with-container-style-queries/)? Well I’m back on my bullshit.
