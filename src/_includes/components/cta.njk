@@ -20,11 +20,11 @@
         <span class="visually-hidden">{{ label.aria }}</span>
         {% if label.text %}
             {% set emptyLabel = false %}
-            <span aria-hidden="true">{{ label.text }}</span>
+            <span aria-hidden="true">{{ (label.text | safe) if safeLabel else label.text }}</span>
         {% endif %}
     {% elseif label %}
         {% set emptyLabel = false %}
-        <span>{{ label }}</span>
+        <span>{{ (label | safe) if safeLabel else label }}</span>
     {% endif %}
 {% endset %}
 {% set classList %}button {% if (icon or iconStack) and emptyLabel %}button--icon-only{% endif %} {% if ctaClass %} | {{ ctaClass }}{% endif %}{% endset %}

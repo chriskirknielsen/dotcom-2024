@@ -86,10 +86,10 @@
     {% set nextPost = collections["_posts.en"] | getNextCollectionItem %}
     <nav aria-label="More writing" class="grouper grouper--wrap justifyContent-center">
         {% if prevPost %}
-            {% component 'cta', { icon: 'arrow-left', iconBefore: true, url: prevPost.url, label: "Previous Blog Post: "+ prevPost.data.title } %}
+            {% component 'cta', { icon: 'arrow-left', iconBefore: true, url: prevPost.url, safeLabel: true, label: "<strong>Previously:</strong> "+ prevPost.data.title } %}
         {% endif %}
         {% if nextPost %}
-            {% component 'cta', { icon: 'arrow-right', url: nextPost.url, label: "Next Blog Post: "+ nextPost.data.title } %}
+            {% component 'cta', { icon: 'arrow-right', url: nextPost.url, safeLabel: true, label: "<strong>Up next:</strong> "+ nextPost.data.title } %}
         {% endif %}
     </nav>
     {% endif %}
