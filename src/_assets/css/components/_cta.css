@@ -13,6 +13,7 @@
 	align-items: center;
 	justify-content: center;
 	gap: var(--_cta-padding-inline);
+	max-inline-size: 100%;
 	padding: var(--CTA-padding);
 
 	line-height: 1;
