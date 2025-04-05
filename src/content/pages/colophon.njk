@@ -30,12 +30,19 @@ My website has distinct themes with distinct typefaces (some paid, some free) an
 First off, the homepage wordmark for my name is a custom edit of the [Sprat typeface](https://www.collletttivo.it/typefaces/sprat) with everything tightened up and minor corrections. When I first saw it, I knew I had to use it: it’s got a vibe reminiscent of Stephen King books and other designs using ITC Benguiat (you know, the Stranger Things logo!). The reveal animation is very simple but does the trick and is pretty performant compared to the [last version](/archives/)!
 {% endrenderTemplate %}
 
-<p>Also, I did use a handful of SVG icons from <a href="https://lucide.dev/icons/">Lucide</a>, listed here:
-{% for name, icon in tokens._meta.icons.used %}
-    {% if loop.last %}and{% endif %}
+<p>Also, I used a handful of SVG icons from <a href="https://lucide.dev/icons/">Lucide</a>, listed here:
+{% for name, icon in tokens._meta.icons.lucide.used %}
+    {% if loop.last %}and {% endif %}
     <span class="icon-text-pair">{% svg name, { class: 'inline-icon inline-icon--center linecap-auto' } %} <code>{{ icon }}</code></span>
     {%- if loop.last %}.{% else %},{% endif %}
 {% endfor %}
+I also took a few from <a href="https://iconsvg.xyz/">IconSVG.xyz</a>:
+{% for name, icon in tokens._meta.icons.iconsvgxyz.used %}
+    {% if loop.last %}and {% endif %}
+    <span class="icon-text-pair">{% svg name, { class: 'inline-icon inline-icon--center linecap-auto' } %} <code>{{ icon }}</code></span>
+    {%- if loop.last %}.{% else %},{% endif %}
+{% endfor %}
+(if an icon is not listed above, I likely made myself, such as themes)
 </p>
 
 {% callout "Keyboard user?", "⌨️", { mode: 'markup', class: 'hide-when-nojs' } %}
