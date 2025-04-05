@@ -88,6 +88,18 @@
         {% if prevPost %}
             {% component 'cta', { icon: 'arrow-left', iconBefore: true, url: prevPost.url, safeLabel: true, label: "<strong>Previously:</strong> "+ prevPost.data.title } %}
         {% endif %}
+        
+        {% if not metadata.nakedJs %}
+        {% component 'cta', { icon: 'arrow-shuffle', safeLabel: true, label: "<strong>Random</strong>", ctaClass: 'hide-when-nojs', ctaAttr: 'data-get-random-post' } %}
+        <script>
+        document.querySelector('[data-get-random-post]').onclick = () => fetch('/search.json').then((response) => response.json()).then(all => {
+            const enPosts = all.filter(p => p.type === '_posts' && (!p.lang || p.lang === 'en'));
+            const random = enPosts[ Math.floor(enPosts.length * Math.random()) ];
+            window.location.href = random.url;
+        });
+        </script>
+        {% endif %}
+        
         {% if nextPost %}
             {% component 'cta', { icon: 'arrow-right', url: nextPost.url, safeLabel: true, label: "<strong>Up next:</strong> "+ nextPost.data.title } %}
         {% endif %}
