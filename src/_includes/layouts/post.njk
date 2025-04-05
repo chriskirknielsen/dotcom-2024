@@ -90,9 +90,9 @@
         {% endif %}
         
         {% if not metadata.nakedJs %}
-        {% component 'cta', { icon: 'arrow-shuffle', safeLabel: true, label: { text: "Random", aria: "Random post" }, ctaClass: 'hide-when-nojs textDecoration-underline', ctaAttr: 'data-get-random-post' } %}
+        {% component 'cta', { icon: 'arrow-shuffle', safeLabel: true, label: { text: "Random", aria: "Random post" }, ctaClass: 'hide-when-nojs textDecoration-underline', ctaAttr: 'data-randompost' } %}
         {% js 'foot-randompost' %}
-        document.querySelector('[data-get-random-post]').onclick = () => fetch('/search.json').then((response) => response.json()).then((all) => {
+        document.querySelector('[data-randompost]').onclick = () => fetch('/search.json').then((response) => response.json()).then((all) => {
             const enPosts = all.filter(p => p.type === '_posts' && (!p.lang || p.lang === 'en') && !window.location.href.includes(p.url));
             const random = enPosts[ Math.floor(enPosts.length * Math.random()) ];
             window.location.href = random.url;

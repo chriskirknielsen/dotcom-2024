@@ -7,13 +7,13 @@ async function cachedMinify(code, cacheKey, type, transformer) {
 	try {
 		if (cacheKey && CACHE[type] && CACHE[type].hasOwnProperty(cacheKey)) {
 			const cacheValue = await Promise.resolve(CACHE[type][cacheKey]); // Wait for the data, wrapped in a resolved promise in case the original value already was resolved
-			return cacheValue.code; // Access the code property of the cached value
+			return cacheValue.code.trim(); // Access the code property of the cached value
 		} else {
 			const minified = transformer(code);
 			if (cacheKey) {
 				CACHE[type][cacheKey] = minified; // Store the promise which has the minified output (an object with a code property)
 			}
-			return (await minified).code; // Await and use the return value in the callback
+			return (await minified).code.trim(); // Await and use the return value in the callback
 		}
 	} catch (err) {
 		console.error(`${type.toUpperCase()} minify error:`, err);
