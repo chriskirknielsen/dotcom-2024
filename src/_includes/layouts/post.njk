@@ -84,9 +84,9 @@
     {% if lang == 'en' or not lang %}
     {% set prevPost = collections["_posts.en"] | getPreviousCollectionItem %}
     {% set nextPost = collections["_posts.en"] | getNextCollectionItem %}
-    <nav aria-label="More writing" class="grouper grouper--wrap justifyContent-center">
+    <nav aria-label="More posts" class="grouper grouper--wrap justifyContent-center">
         {% if prevPost %}
-            {% component 'cta', { icon: 'arrow-left', iconBefore: true, url: prevPost.url, safeLabel: true, label: "<strong>Previously:</strong> "+ prevPost.data.title } %}
+            {% component 'cta', { icon: 'arrow-left', iconBefore: true, url: prevPost.url, safeLabel: true, label: { text: "Previously", aria: "Previous post" } } %}
         {% endif %}
         
         {% if not metadata.nakedJs %}
@@ -101,7 +101,7 @@
         {% endif %}
         
         {% if nextPost %}
-            {% component 'cta', { icon: 'arrow-right', url: nextPost.url, safeLabel: true, label: "<strong>Up next:</strong> "+ nextPost.data.title } %}
+            {% component 'cta', { icon: 'arrow-right', url: nextPost.url, safeLabel: true, label: { text: "Up next", aria: "Next post" } } %}
         {% endif %}
     </nav>
     {% endif %}
