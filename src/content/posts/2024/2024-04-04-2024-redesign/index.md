@@ -134,7 +134,7 @@ I wanted to wrap my code blocks in a custom element instead of some hardcoded me
 
 ```njk
 {% raw %}{% if ("</code-wrap>" in content) %}
-	{% js "foot-codewrap" %}{%- include "assets/js/components/code-wrap.js" -%}{% endjs %}
+	{% js 'foot-codewrap' %}{%- include "assets/js/components/code-wrap.js" -%}{% endjs %}
 {% endif %}{% endraw %}
 ```
 

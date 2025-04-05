@@ -55,6 +55,9 @@
 .textTransform-uppercase {
 	text-transform: uppercase;
 }
+.textDecoration-underline {
+	text-decoration: underline;
+}
 
 .textWrap-balance {
 	text-wrap: balance;
