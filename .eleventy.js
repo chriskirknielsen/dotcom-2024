@@ -125,49 +125,60 @@ export default async function (eleventyConfig) {
 			let toolbarIcon = '';
 			let syntaxType = tokens[idx].info;
 
-			if (!syntaxType || syntaxType === 'text') {
-				toolbarLabel = tokens[idx]?._filename || '';
-			} else if (tokens[idx]?._filename) {
-				toolbarLabel = tokens[idx]._filename.includes('.') ? tokens[idx]._filename : tokens[idx]._filename + '.' + syntaxType;
-			} else {
-				let toolbarIconRef = '';
-				toolbarLabel = syntaxType.toUpperCase();
-				switch (syntaxType) {
-					case 'js': {
-						toolbarLabel = 'JavaScript';
-						toolbarIconRef = 'js';
-						break;
-					}
-					case 'njk': {
-						toolbarLabel = 'Nunjucks';
-						toolbarIconRef = 'nunjucks';
-						break;
-					}
-					case 'html': {
-						toolbarIconRef = 'html';
-						break;
-					}
-					case 'css': {
-						toolbarIconRef = 'css';
-						break;
-					}
-					case 'php': {
-						toolbarIconRef = 'php';
-						break;
-					}
-					case 'sass':
-					case 'scss': {
-						toolbarIconRef = 'sass';
-						break;
-					}
+			let toolbarIconRef = '';
+			toolbarLabel = syntaxType.toUpperCase();
+			switch (syntaxType) {
+				case 'js': {
+					toolbarLabel = 'JavaScript';
+					toolbarIconRef = 'js';
+					break;
 				}
-
-				if (toolbarIconRef) {
-					toolbarIcon = eleventyConfig.getShortcode('svg')(`${toolbarIconRef}-icon`, { class: 'inline-icon inline-icon--center' });
+				case 'njk': {
+					toolbarLabel = 'Nunjucks';
+					toolbarIconRef = 'nunjucks';
+					break;
+				}
+				case 'html': {
+					toolbarIconRef = 'html';
+					break;
+				}
+				case 'css': {
+					toolbarIconRef = 'css';
+					break;
+				}
+				case 'php': {
+					toolbarIconRef = 'php';
+					break;
+				}
+				case 'sass':
+				case 'scss': {
+					toolbarIconRef = 'sass';
+					break;
+				}
+				case 'text':
+				case '':
+				default: {
+					toolbarLabel = tokens[idx]?._filename || '';
+					toolbarIconRef = 'code';
 				}
 			}
 
-			return `<span class="codeblock-toolbar-label">${[toolbarIcon, toolbarLabel].join(' ')}</span>`;
+			if (toolbarIconRef) {
+				toolbarIcon = eleventyConfig.getShortcode('svg')(`${toolbarIconRef}-icon`, { class: 'inline-icon inline-icon--center' });
+			}
+
+			// If a filename was provided, use that as a label instead
+			if (tokens[idx]?._filename) {
+				// If it's a file without an extension, add it at the end
+				toolbarLabel = tokens[idx]._filename.includes('.') ? tokens[idx]._filename : tokens[idx]._filename + '.' + syntaxType;
+			}
+
+			// If no type or filename was given, add a visually hidden label
+			if (!toolbarLabel) {
+				toolbarLabel = `<span class="visually-hidden">Code block</span>`;
+			}
+
+			return `<span class="codeblock-toolbar-label">${[toolbarIcon, toolbarLabel].join(' ').trim()}</span>`;
 		},
 	});
 	eleventyConfig.addPlugin(EleventyPluginRobotsTxt, { shouldBlockAIRobots: 'true' });
