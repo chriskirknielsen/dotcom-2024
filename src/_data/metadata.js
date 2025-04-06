@@ -1,8 +1,8 @@
 import social from './social.js';
 
 const now = new Date().valueOf();
-const cssNakedDayStart = new Date(`${new Date().getFullYear()}-04-06 00:00:00 UTC+14:00`).valueOf();
-const cssNakedDayEnd = new Date(`${new Date().getFullYear()}-04-07 00:00:00 UTC-12:00`).valueOf();
+const cssNakedDayStart = new Date(`${new Date().getFullYear()}-04-09 00:00:00 UTC+14:00`).valueOf();
+const cssNakedDayEnd = new Date(`${new Date().getFullYear()}-04-10 00:00:00 UTC-12:00`).valueOf();
 const jsNakedDayStart = new Date(`${new Date().getFullYear()}-04-24 00:00:00 UTC+14:00`).valueOf();
 const jsNakedDayEnd = new Date(`${new Date().getFullYear()}-04-25 00:00:00 UTC-12:00`).valueOf();
 
