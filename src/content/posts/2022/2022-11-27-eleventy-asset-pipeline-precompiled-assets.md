@@ -254,6 +254,7 @@ eleventyConfig.watchIgnores.add(`./${rootDir}/assets/scss/tools/_tokens.scss`);
 eleventyConfig.watchIgnores.add(`./${rootDir}/_includes/assets/css/**/*`);
 eleventyConfig.watchIgnores.add(`./${rootDir}/_includes/assets/js/**/*`);
 ```
+
 ## All done
 
 And that’s that! I will mention one downside of this process instead of gulp is that JSON, Sass and JS all get recompiled every time, for any change, instead of just being changed as-needed, but I think with a little more Eleventinkering, it can be overcome. The upshot is that now my build starts exactly when it needs to! And it’s still blazingly fast, but that’s Eleventy for ya…

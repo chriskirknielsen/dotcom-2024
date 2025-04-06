@@ -119,6 +119,7 @@ export default async function (settings) {
 	return dbData;
 }
 ```
+
 {% renderTemplate "md" %}I don’t check the `settings` object thoroughly but you might want to. Also, the `skipLocalCache` option is there in case you never want to cache the data on your local development build. This function should be reusable with most APIs that return data — if you use it, I’d be curious to hear how it worked out for you!{% endrenderTemplate %}
 {% endexpander %}
 
