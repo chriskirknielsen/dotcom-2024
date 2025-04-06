@@ -1,4 +1,11 @@
 import social from './social.js';
+
+const now = new Date().valueOf();
+const cssNakedDayStart = new Date(`${new Date().getFullYear()}-04-06 00:00:00 UTC+14:00`).valueOf();
+const cssNakedDayEnd = new Date(`${new Date().getFullYear()}-04-07 00:00:00 UTC-12:00`).valueOf();
+const jsNakedDayStart = new Date(`${new Date().getFullYear()}-04-24 00:00:00 UTC+14:00`).valueOf();
+const jsNakedDayEnd = new Date(`${new Date().getFullYear()}-04-25 00:00:00 UTC-12:00`).valueOf();
+
 export default {
 	title: 'chriskirknielsen',
 	description: 'A creative developer',
@@ -19,6 +26,6 @@ export default {
 		TeePublic: 'https://www.teepublic.com/user/chriskirknielsen/',
 		DesignByHumans: 'https://www.designbyhumans.com/shop/chriskirknielsen/',
 	},
-	nakedCss: new Date().toISOString().split('T')[0].endsWith('04-09'),
-	nakedJs: new Date().toISOString().split('T')[0].endsWith('04-24'),
+	nakedCss: now >= cssNakedDayStart && now < cssNakedDayEnd,
+	nakedJs: now >= jsNakedDayStart && now < jsNakedDayEnd,
 };
