@@ -1,22 +1,32 @@
----js
-{
-  pagination: {
-    data: "collections",
-    size: 1,
-    alias: "tag",
-    before: function(paginationData, fullData) {
-      return paginationData.filter(function(t) {
-        // Exclude tags that are "system" tags (starting with an underscore)
-        return !t.startsWith('_')
-      });
-    }
-  },
-  eleventyExcludeFromCollections: true,
-  eleventyComputed: {
-    permalink: (data) => `/tags/${data.tag}/`,
-    title: (data) => `Posts tagged “${data.tag}”`
-  }
-}
+---
+title: Tags
+summary: A thrilling list of the tags I've used
 ---
 
-{% component 'postlist', { postlist: collections[ tag ] } %}
+{%- set tagList = collections | keys | startsWith('_', true) %}
+{% set countedTags = [] %}
+{% for t in tagList %}
+    {% if t != 'all' %}
+        {% set count = collections[t] | length %}
+        {% set selfObj = [t, count] %}
+        {{ countedTags.push(selfObj) | reject() }}
+    {% endif %}
+{% endfor %}
+
+{# Sort ascending by alpha first (on the tag, index=0), then descending by count (index=1) #}
+{%- set sortedTags = countedTags | sort(false, false, 0) | sort(true, false, 1) -%}
+{% set maxCount = sortedTags | pluck(1) | first %}
+
+<p id="tags-description" class="visually-hidden">All tags:</p>
+<ul class="flex-list flex-list--tags" aria-describedby="tags-description">
+    {% for tag, count in sortedTags %}
+        <li>
+            <a href="/tags/{{ tag }}" class="button button--tag | p-category" style="--r: {{ count / maxCount }}">{{ tag }}: {{ count }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<style>
+.flex-list--tags { --list-gap: var(--size-s); justify-content: center; align-items: flex-end; }
+.button--tag { font-size: calc((1 + var(--r)) * 1em); }
+</style>
