@@ -15,6 +15,7 @@
   eleventyComputed: {
     permalink: (data) => `/tags/${data.tag}/`,
     title: (data) => `Posts tagged “${data.tag}”`,
+    heroCta: [{ label: "All Tags", url: "/tags/" }],
   }
 }
 ---

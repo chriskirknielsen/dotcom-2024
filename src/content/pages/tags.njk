@@ -18,15 +18,14 @@ summary: A thrilling list of the tags I've used
 {% set maxCount = sortedTags | pluck(1) | first %}
 
 <p id="tags-description" class="visually-hidden">All tags:</p>
-<ul class="flex-list flex-list--tags" aria-describedby="tags-description">
+<ul class="inline-list inline-list--tags | textAlign-center textWrap-balance" aria-describedby="tags-description">
     {% for tag, count in sortedTags %}
-        <li>
-            <a href="/tags/{{ tag }}" class="button button--tag | p-category" style="--r: {{ count / maxCount }}">{{ tag }}: {{ count }}</a>
-        </li>
+        <li><span class="tooltip" data-tooltip-pos="start center"><a href="/tags/{{ tag }}" class="button button--tag | p-category" style="--r: {{ count / maxCount }}">{{ tag }}</a><span class="tooltip-content">{{ count }} post{{ 's' if count > 1 }}</span></li>
     {% endfor %}
 </ul>
 
 <style>
-.flex-list--tags { --list-gap: var(--size-s); justify-content: center; align-items: flex-end; }
+.inline-list--tags { max-inline-size: 32rem; margin-inline: auto; line-height: 2.5em; }
+.inline-list--tags .tooltip { display: inline-flex; }
 .button--tag { font-size: calc((1 + var(--r)) * 1em); }
 </style>

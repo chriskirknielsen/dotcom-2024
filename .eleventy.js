@@ -235,7 +235,7 @@ export default async function (eleventyConfig) {
 	eleventyConfig.watchIgnores.add(`./${rootDir}/${includesDir}/assets/js/**/*`);
 
 	eleventyConfig.setServerOptions({
-		domDiff: false, // Due to runtime JS (mainly themes), it is preferrable to get a fresh copy of the DOM
+		domDiff: false, // Due to runtime JS (mainly themes), it is preferable to get a fresh copy of the DOM
 	});
 
 	return {
