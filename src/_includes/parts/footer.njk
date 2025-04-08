@@ -1,7 +1,5 @@
 <footer class="footer-wrap | container">
     <div class="footer | grouper grouper--vertical">
-        <h2 class="visually-hidden" id="footer-descr">Footer</h2>
-
         <div class="footer-meta | flow" style="--flow-space: 1em;">
             <p class="textWrap-balance">
                 <strong class="p-name">{{ metadata.author.name }}</strong>
@@ -12,7 +10,7 @@
             </p>
         </div>
         
-        <nav class="footer-nav" aria-describedby="footer-descr">
+        <nav class="footer-nav" aria-label="Footer navigation">
             {% for footerNav in nav.footerGroups %}
                 <ul class="inline-list">
                     {% for navItem in footerNav %}
