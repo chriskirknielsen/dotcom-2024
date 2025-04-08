@@ -24,8 +24,20 @@ summary: A thrilling list of the tags I've used
     {% endfor %}
 </ul>
 
+{% if not metadata.nakedCss %}
 <style>
-.inline-list--tags { max-inline-size: 32rem; margin-inline: auto; line-height: 2.5em; }
-.inline-list--tags .tooltip { display: inline-flex; }
-.button--tag { font-size: calc((1 + var(--r)) * 1em); }
+.inline-list--tags {
+    max-inline-size: 32rem;
+    margin-inline: auto;
+    line-height: 2.5em;
+}
+
+.inline-list--tags .tooltip {
+    display: inline-flex;
+}
+
+.button--tag {
+    font-size: calc((1 + 1.5 * ((3 * var(--r) * var(--r)) - (2 * var(--r) * var(--r) * var(--r)))) * 1em); /* Smoothstep (3x^2-2x^3) from 2.5 to 1 */
+}
 </style>
+{% endif %}

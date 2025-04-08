@@ -31,6 +31,7 @@
     </div>
 
     <div class="flow">
+        {% if not metadata.nakedCss and not metadata.nakedJs %}
         <form class="flow" data-csslogo-controls hidden>
             <h2>Customiser</h2>
 
@@ -70,7 +71,9 @@
                 </fieldset>
             </div>
         </form>
+        {% endif %}
 
+        {% if not metadata.nakedJs %}
         <script>
         {% set cssLogoFormScript %}
         (function() {
@@ -165,7 +168,9 @@
         {% endset %}
         {{ cssLogoFormScript | jsmin | safe }}
         </script>
+        {% endif %}
 
+        {% if not metadata.nakedCss %}
         <style>
         {% set cssLogoFormStyle %}
             .css-logo {
@@ -320,6 +325,7 @@
         {% endset %}
         {{ cssLogoFormStyle | cssmin | safe }}
         </style>
+        {% endif %}
 
         <h2 class="css-logo-usage">Want to use it?</h2>
         <p>Although very appreciated, you may use this without needing to credit me under the condition it is non-AI and non-commercial (especially as I am selling <a href="/designs/{{ designSolid.slug }}/">this design</a>); just don’t claim you made it, is all I ask. Thank you!</p>
