@@ -5,6 +5,8 @@ const cssNakedDayStart = new Date(`${new Date().getFullYear()}-04-09 00:00:00 UT
 const cssNakedDayEnd = new Date(`${new Date().getFullYear()}-04-10 00:00:00 UTC-12:00`).valueOf();
 const jsNakedDayStart = new Date(`${new Date().getFullYear()}-04-24 00:00:00 UTC+14:00`).valueOf();
 const jsNakedDayEnd = new Date(`${new Date().getFullYear()}-04-25 00:00:00 UTC-12:00`).valueOf();
+const isCssNakedDay = now >= cssNakedDayStart && now < cssNakedDayEnd;
+const isJsNakedDay = now >= jsNakedDayStart && now < jsNakedDayEnd;
 
 export default {
 	title: 'chriskirknielsen',
@@ -26,6 +28,6 @@ export default {
 		TeePublic: 'https://www.teepublic.com/user/chriskirknielsen/',
 		DesignByHumans: 'https://www.designbyhumans.com/shop/chriskirknielsen/',
 	},
-	nakedCss: now >= cssNakedDayStart && now < cssNakedDayEnd,
-	nakedJs: now >= jsNakedDayStart && now < jsNakedDayEnd,
+	nakedCss: isCssNakedDay,
+	nakedJs: isJsNakedDay,
 };

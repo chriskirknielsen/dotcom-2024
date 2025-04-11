@@ -101,6 +101,7 @@ I also took a few from <a href="https://iconsvg.xyz/">IconSVG.xyz</a>:
     </ul>
 </div>
 
+{% if not metadata.nakedJs %}
 <script>
 document.addEventListener('click', (e) => {
     const inlineSetter = e.target.closest('main [data-theme-set]');
@@ -110,3 +111,4 @@ document.addEventListener('click', (e) => {
     picker.querySelector(`[data-theme-set="${theme}"]`).click();
 });
 </script>
+{% endif %}

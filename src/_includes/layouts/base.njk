@@ -4,7 +4,7 @@
 		{% include 'parts/head.njk' %}
 
 		{% block headInner %}
-		{# inline JS (instantly assigns the theme before any paint) #}
+		{# Inline JS (instantly assigns the theme before any paint) #}
 		{% if not metadata.nakedJs %}
 		<script>
 		{%- js 'head' -%}
@@ -40,7 +40,7 @@
 			{% if metadata.nakedCss %}
 				{% set announcement %}My CSS isn‘t broken! 🙅 No CSS for <a href="https://css-naked-day.org/">CSS Naked Day</a> (9th of April)!{% endset %}
 			{% elseif metadata.nakedJs %}
-				{% set announcement %}🙅 No JavaScript for <a href="https://js-naked-day.org/">JS Naked Day</a> (24th of April)!{% endset %}
+				{% set announcement %}Your JavaScript isn't broken! 🙅 No JS for <a href="https://js-naked-day.org/">JS Naked Day</a> (24th of April)!{% endset %}
 			{# {% else %}{% set announcement = "" %} #}
 			{% endif %}
 			{% if announcement %}

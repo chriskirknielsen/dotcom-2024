@@ -73,6 +73,21 @@
         </form>
         {% endif %}
 
+        <h2 class="css-logo-usage">Want to use it?</h2>
+        <p>Although very appreciated, you may use this without needing to credit me under the condition it is non-AI and non-commercial (especially as I am selling <a href="/designs/{{ designSolid.slug }}/">this design</a>); just don’t claim you made it, is all I ask. Thank you!</p>
+
+        <div class="tooltip" data-tooltip-pos="start center">
+            <p class="grouper grouper--wrap">
+                <strong>Download:</strong>
+
+                <a href="{{ [assets.images, 'css-logo.svg'] | toPath }}" download class="button">SVG</a>
+                <a href="{{ [assets.images, 'css-logo.png'] | toPath }}" download class="button">PNG</a>
+                <a href="{{ [assets.images, 'css-logo.jpg'] | toPath }}" download class="button">JPG</a>
+            </p>
+
+            <div class="tooltip-content">original design, no edits</div>
+        </div>
+
         {% if not metadata.nakedJs %}
         <script>
         {% set cssLogoFormScript %}
@@ -326,21 +341,6 @@
         {{ cssLogoFormStyle | cssmin | safe }}
         </style>
         {% endif %}
-
-        <h2 class="css-logo-usage">Want to use it?</h2>
-        <p>Although very appreciated, you may use this without needing to credit me under the condition it is non-AI and non-commercial (especially as I am selling <a href="/designs/{{ designSolid.slug }}/">this design</a>); just don’t claim you made it, is all I ask. Thank you!</p>
-
-        <div class="tooltip" data-tooltip-pos="start center">
-            <p class="grouper grouper--wrap">
-                <strong>Download:</strong>
-
-                <a href="{{ [assets.images, 'css-logo.svg'] | toPath }}" download class="button">SVG</a>
-                <a href="{{ [assets.images, 'css-logo.png'] | toPath }}" download class="button">PNG</a>
-                <a href="{{ [assets.images, 'css-logo.jpg'] | toPath }}" download class="button">JPG</a>
-            </p>
-
-            <div class="tooltip-content">original design, no edits</div>
-        </div>
     </div>
 </div>
 

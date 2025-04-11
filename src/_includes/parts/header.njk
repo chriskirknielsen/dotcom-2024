@@ -7,7 +7,7 @@
             } %}
         </a>
         
-        {% if (not metadata.nakedCss) and (not metadata.nakedJs) %}
+        {% if not metadata.nakedCss %}
         {% component 'cta', {
             iconStack: {
                 'idle': 'menu-icon',
