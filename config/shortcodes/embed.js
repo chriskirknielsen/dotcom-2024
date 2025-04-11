@@ -30,7 +30,7 @@ export default function (eleventyConfig, options = {}) {
 	eleventyConfig.addPairedShortcode('remotequote', function (content, author, url, date) {
 		let authorLine = author;
 		let domain;
-		let citePrefix = '—';
+		let citePrefix = '—'; // Em-dash
 		if (date && !isNaN(Date.parse(date))) {
 			authorLine += `, ${eleventyConfig.getFilter('dateFormat')(new Date(date), { format: 'nice' })}`;
 		}
