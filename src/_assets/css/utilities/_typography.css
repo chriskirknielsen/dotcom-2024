@@ -65,3 +65,7 @@
 .textWrap-pretty {
 	text-wrap: pretty;
 }
+.textWrap-avoidShortLastLines {
+	text-wrap: pretty;
+	text-wrap: avoid-short-last-lines;
+}

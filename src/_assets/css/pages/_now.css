@@ -55,6 +55,7 @@
 
 	text-wrap: balance;
 	text-wrap: pretty;
+	text-wrap: avoid-short-last-lines;
 }
 
 .now-item-image {
