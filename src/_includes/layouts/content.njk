@@ -1,7 +1,7 @@
 {% extends 'layouts/base.njk' %}
 
 {% block baseContent %}
-	{% set tag %}{% if section == 'post' %}article{% else %}div{% endif %}{% endset %}
+	{% set tag = 'article' if section == 'post' else 'div' %}
 	<{{tag}} class="page-content | container{% if useFlow != false %} flow{% endif %}"{% if gridBlockGutter %} style="--grid-block-gutter: {{ gridBlockGutter }};"{% endif %}>
 		{% block theContent %}
 			{{ content | safe }}
