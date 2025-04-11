@@ -18,6 +18,7 @@ export default {
 		shortname: 'Chris',
 		email: 'chriskirknielsen@gmail.com',
 		mastodon: social.mastodon.url,
+		// bluesky: social.bluesky.url,
 	},
 	tweetArchiveUrl: 'https://tweets.chriskirknielsen.com/',
 	copyrightStart: 1992,
