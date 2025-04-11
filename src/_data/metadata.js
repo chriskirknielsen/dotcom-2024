@@ -29,6 +29,10 @@ export default {
 		TeePublic: 'https://www.teepublic.com/user/chriskirknielsen/',
 		DesignByHumans: 'https://www.designbyhumans.com/shop/chriskirknielsen/',
 	},
+	support: {
+		kofi: 'https://ko-fi.com/chriskirknielsen',
+		buymeacoffee: 'https://buymeacoffee.com/ckirknielsen',
+	},
 	nakedCss: isCssNakedDay,
 	nakedJs: isJsNakedDay,
 };
