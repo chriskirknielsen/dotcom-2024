@@ -8,7 +8,7 @@ tags:
 toc: true
 ---
 
-I keep making updates to my website, and for this holiday break, amongst other things, I added a highlighter logic to my table of contents. It’s gone through a couple of iterations, but I’ve landed on a good one, and it’s following a nice principle: Keep It Simple, Stupid. 💋
+I keep making updates to my website, and for this holiday break, amongst other things, I added a highlighter logic to my table of contents (also known as "scroll spy"). It’s gone through a couple of iterations, but I’ve landed on a good one, and it’s following a nice principle: Keep It Simple, Stupid. 💋
 
 My Table of Contents (TOC) component, if you can even call it a component, appears before the content: above on smaller screens, and stuck to the side as you scroll on larger screens. In the latter situation, it will now highlight the section you are (most likely) reading. I have added a TOC on this post for demonstration purposes while you read this (if using a wide enough screen, that is, and if JavaScript is available).
 

@@ -91,3 +91,4 @@ This helpful matrix from the original article is an image, so… _tadaaa_ (hopef
 - [Item Flow, Part 1: A new unified concept for layout](https://webkit.org/blog/16587/item-flow-part-1-a-new-unified-concept-for-layout/)
 - [Robin Rendle’s thoughts on their blog](https://robinrendle.com/notes/item-flow/)
 - [Andy Bell’s thoughts via Piccalilli](https://piccalil.li/links/item-flow-part-1-a-new-unified-concept-for-layout/)
+- [Ahmad Shadeed’s (interactive!) notes on their blog](https://ishadeed.com/article/item-flow/)
