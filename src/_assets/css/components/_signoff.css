@@ -30,7 +30,6 @@
 .signoff-photo {
 	flex-grow: 1;
 	align-self: start;
-
 	/* inline-size: clamp(3rem, 25%, 12rem); */
 	min-inline-size: 3rem;
 
