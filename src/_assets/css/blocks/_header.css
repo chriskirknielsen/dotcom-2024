@@ -38,8 +38,6 @@
 	.logo-paths use {
 		fill: var(--_logo-color-active);
 		stroke: var(--_logo-color);
-		stroke-width: var(--LOGO-stroke-width, 17);
-		/*! Magic number: in the context of the SVG for the logo, a 17 point border is just enough to cover the shape, plus some margin for subpixel rounding */
 		clip-path: var(--CLIP, none);
 
 		@media (--accept-motion) {
@@ -58,7 +56,7 @@
 	}
 
 	&:is(:hover, :focus-visible) .logo-paths use {
-		--LOGO-stroke-width: 0;
+		stroke-width: 0;
 	}
 }
 

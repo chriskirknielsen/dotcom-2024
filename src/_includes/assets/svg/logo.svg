@@ -26,23 +26,20 @@
             ></path>
         </clipPath>
     </defs>
-    <g class="logo-paths">
+    <g class="logo-paths" fill="currentColor" stroke-width="17">
         <use
             xlink:href="#ckn-logo-c"
             data-c=""
-            fill="currentColor"
             style="--CLIP:url(#ckn-logo-c-clip)"
         />
         <use
             xlink:href="#ckn-logo-k"
             data-k=""
-            fill="currentColor"
             style="--CLIP:url(#ckn-logo-k-clip)"
         />
         <use
             xlink:href="#ckn-logo-n"
             data-n=""
-            fill="currentColor"
             style="--CLIP:url(#ckn-logo-n-clip)"
         />
     </g>
