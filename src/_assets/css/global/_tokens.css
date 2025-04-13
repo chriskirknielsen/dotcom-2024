@@ -345,6 +345,7 @@ html[data-theme="director"] {
 --main-background: linear-gradient(90deg, transparent, var(--C-heading), transparent) no-repeat 50% 0 / 100% 1px, radial-gradient(100% 100% at 50% -25%, #7E1B17, transparent) no-repeat 50% 0% / 100% min(100%, max(800px, min(50%, 50vh)));
 --footer-special-char: '◈';
 --font-heading-size-adjust: 0.552;
+--link-underline-color-active: var(--C-surface-alt);
 --cta-text-color: var(--C-text);
 --cta-border-color: var(--C-accent);
 --cta-bg-color: var(--C-surface-alt);
