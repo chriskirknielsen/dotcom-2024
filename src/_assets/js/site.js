@@ -46,34 +46,19 @@ window.matchMedia(`(min-width:${globalBreakpoint})`).addEventListener('change', 
 	toggleInertForMenu(false);
 });
 
-console.log(
-	`%c
-           Howdy fellow explorer of the Internet.
-                 Thanks for stoppin' on by.
+console.log(`
+To meet a fellow explorer
+In these liminal spaces
+Outside hyperlink anchors
+Hah, what a nice surprise
 
+I hope not to take much
+Of your attention any further
+But hope you will keep an eye out
+For what is worthy to discover
 
------------------------------♥︎------------------------------
-
-
-     CCCCCCCCCCCCCCCCC        KKKKKKKK NNNNNNNNNNNNNNNN     
-  CCCCCCCCCCCCCCCCCCCC      KKKKKKKK   NNNNNNNNNNNNNNNNNNN  
- CCCCCCCCCCCCCCCCCCCCC    KKKKKKKK     NNNNNNNNNNNNNNNNNNNN 
-CCCCCCC          CCCCC  KKKKKKKK       NNNNNN        NNNNNNN
-CCCCCC           CCC  KKKKKKKK         NNNNNN         NNNNNN
-CCCCCC              KKKKKKKK           NNNNNN         NNNNNN
-CCCCCC             KKKKKKKK            NNNNNN         NNNNNN
-CCCCCC              KKKKKKKK           NNNNNN         NNNNNN
-CCCCCC           CCC  KKKKKKKK         NNNNNN         NNNNNN
-CCCCCCC          CCCCC  KKKKKKKK       NNNNNN         NNNNNN
- CCCCCCCCCCCCCCCCCCCCC    KKKKKKKK     NNNNNN         NNNNNN
-  CCCCCCCCCCCCCCCCCCCC      KKKKKKKK   NNNNNN         NNNNNN
-     CCCCCCCCCCCCCCCCC       KKKKKKKKK NNNNNN         NNNNNN
-
-	 
------------------------------!------------------------------
-
-
-This place is not a place of honor...no highly esteemed deed
-       is commemorated here...nothing valued is here.`,
-	`font-family:monospace;`
-);
+I wish your quest leads you farther
+Someplace you can feel safe, and yet
+Where you'd still want whisper:
+“Hah, what a nice surprise.”
+`.trim()); // ckn mmxxv
