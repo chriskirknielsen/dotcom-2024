@@ -149,7 +149,7 @@
 	grid-column: --edge;
 	max-block-size: 100%;
 	inline-size: 100%;
-	max-inline-size: 64rem;
+	max-inline-size: min(64rem, 100vw - 2 * var(--layout-gutter));
 	margin: auto;
 	overflow: visible;
 
