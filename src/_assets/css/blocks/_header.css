@@ -1,4 +1,5 @@
 .header-wrap {
+	position: relative;
 	z-index: 3;
 
 	background: var(--_header-bg-color);
@@ -41,7 +42,7 @@
 		clip-path: var(--CLIP, none);
 
 		@media (--accept-motion) {
-			transition-timing-function: var(--easing-circ-in);
+			transition-timing-function: var(--easing-circ-out);
 			transition-duration: var(--anim-long);
 			transition-property: stroke-width;
 
@@ -233,6 +234,29 @@ html[data-js='false'] .header-themepicker {
 @media (--small-viewport) {
 	.header-wrap {
 		transition: box-shadow var(--anim-short) var(--easing-out);
+
+		&::before {
+			content: '';
+
+			pointer-events: none;
+
+			position: absolute;
+			inset: calc(100% + 1px) 0 auto 0;
+			z-index: 1;
+
+			block-size: 100vh;
+
+			background: var(--C-canvas); /* Fallback */
+			background: color-mix(in hsl, var(--C-canvas), transparent 25%);
+
+			opacity: 0;
+			-webkit-backdrop-filter: blur(12px);
+			backdrop-filter: blur(12px);
+
+			@media (--accept-motion) {
+				transition: opacity var(--anim-short) var(--easing-in);
+			}
+		}
 	}
 
 	.header-logo,
@@ -280,7 +304,7 @@ html[data-js='false'] .header-themepicker {
 		background-color: var(--C-surface);
 		box-shadow: var(--_shadow-active);
 
-		transform: translate(0, 100%);
+		transform: translateY(8em) scale(0.9);
 		opacity: 0;
 
 		@media (--accept-motion) {
@@ -370,7 +394,7 @@ html[data-js='false'] .header-themepicker {
 
 		@media (--accept-motion) {
 			transition-duration: var(--anim-medium);
-			transition-timing-function: var(--easing-circ-in);
+			transition-timing-function: var(--easing-circ-out);
 		}
 
 		& > * {
@@ -392,7 +416,22 @@ html[data-js='false'] .header-themepicker {
 	html[data-js='false'] .header-wrap:has(.header-menu-toggle:focus + .header-menu),
 	html[data-js='false'] .header-wrap:has(.header-menu:focus-within),
 	html[data-js='true'] .header-wrap:has(.header-menu-toggle[aria-pressed='true']) {
-		box-shadow: 0 0 0 100vmax var(--C-canvas);
+		&::before {
+			pointer-events: auto; /* Make it clickable to trigger a close */
+
+			opacity: 1;
+		}
+
+		/* 
+		 * Due to de-nesting via LightningCSS, we cannot use foo::before { @media { ... } } as the selector,
+		 * including ::before, gets wrapped into an :is(), and pseudos are not valid inside :is()!
+		 */
+		@media (--accept-motion) {
+			&::before {
+				transition-duration: var(--anim-medium);
+				transition-timing-function: var(--easing-out);
+			}
+		}
 	}
 }
 

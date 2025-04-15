@@ -1,5 +1,5 @@
 function toggleInertForMenu(newState = false) {
-	Array.from(document.body.querySelectorAll(':scope > :not(header)')).forEach((el) => (el.inert = newState));
+	Array.from(document.body.querySelectorAll(':scope > :not(header,script,style)')).forEach((el) => (el.inert = newState));
 }
 
 document.addEventListener('click', function (e) {
@@ -11,6 +11,16 @@ document.addEventListener('click', function (e) {
 		if (target.matches('.header-menu-toggle')) {
 			toggleInertForMenu(newPressedValue);
 		}
+	} else if ((target = e.target.closest('.header-wrap'))) {
+		// If the click occurred inside the header, do nothing
+		if (e.target.closest('.header')) {
+			return;
+		}
+
+		// Clicked on ::before
+		target.querySelector('.header-menu-toggle').setAttribute('aria-pressed', false);
+		toggleInertForMenu(false);
+		target.querySelector('.header-menu-toggle').focus();
 	} else {
 		target = e.target;
 		// Auto-close the theme picker if clicking outside of its container
@@ -46,7 +56,8 @@ window.matchMedia(`(min-width:${globalBreakpoint})`).addEventListener('change', 
 	toggleInertForMenu(false);
 });
 
-console.log(`
+console.log(
+	`
 To meet a fellow explorer
 In these liminal spaces
 Outside hyperlink anchors
@@ -61,4 +72,5 @@ I wish your quest leads you farther
 Someplace you can feel safe, and yet
 Where you'd still want whisper:
 “Hah, what a nice surprise.”
-`.trim()); // ckn mmxxv
+`.trim()
+); // ckn mmxxv
