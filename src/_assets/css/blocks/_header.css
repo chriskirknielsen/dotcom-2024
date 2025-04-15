@@ -233,8 +233,6 @@ html[data-js='false'] .header-themepicker {
 
 @media (--small-viewport) {
 	.header-wrap {
-		transition: box-shadow var(--anim-short) var(--easing-out);
-
 		&::before {
 			content: '';
 
@@ -252,8 +250,10 @@ html[data-js='false'] .header-themepicker {
 			opacity: 0;
 			-webkit-backdrop-filter: blur(12px);
 			backdrop-filter: blur(12px);
+		}
 
-			@media (--accept-motion) {
+		@media (--accept-motion) {
+			&::before {
 				transition: opacity var(--anim-short) var(--easing-in);
 			}
 		}
