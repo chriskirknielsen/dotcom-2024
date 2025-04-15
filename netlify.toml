@@ -39,6 +39,9 @@ package = "netlify-plugin-debug-cache"
 [[redirects]]
   from = "/shop/"
   to = "/designs/"
+[[redirects]]
+  from = "/merch/"
+  to = "/designs/"
 ### Other aliases
 [[redirects]]
   from = "/thanks/"
