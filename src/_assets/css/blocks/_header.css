@@ -239,13 +239,13 @@ html[data-js='false'] .header-themepicker {
 			pointer-events: none;
 
 			position: absolute;
-			inset: calc(100% + 1px) 0 auto 0;
+			inset: 100% 0 auto 0;
 			z-index: 1;
 
 			block-size: 100vh;
 
 			background: var(--C-canvas); /* Fallback */
-			background: color-mix(in hsl, var(--C-canvas), transparent 25%);
+			background: color-mix(in hsl, var(--C-canvas), transparent 75%);
 
 			opacity: 0;
 			-webkit-backdrop-filter: blur(12px);
@@ -428,9 +428,26 @@ html[data-js='false'] .header-themepicker {
 		 */
 		@media (--accept-motion) {
 			&::before {
-				transition-duration: var(--anim-medium);
+				transition-duration: var(--anim-long);
 				transition-timing-function: var(--easing-out);
 			}
+		}
+
+		& + main {
+			transform: scale(0.95);
+
+			@media (--accept-motion) {
+				transition-duration: var(--anim-long);
+				transition-timing-function: var(--easing-out);
+			}
+		}
+	}
+
+	@media (--accept-motion) {
+		main {
+			transform-origin: 50% 50vh; /* Middle of the screen regardless of <main>'s height) */
+
+			transition: transform var(--anim-short) var(--easing-in);
 		}
 	}
 }

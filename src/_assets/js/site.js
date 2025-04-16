@@ -9,6 +9,9 @@ document.addEventListener('click', function (e) {
 		target.setAttribute('aria-pressed', newPressedValue.toString());
 
 		if (target.matches('.header-menu-toggle')) {
+			if (newPressedValue) {
+				document.documentElement.scrollTop = 0;
+			}
 			toggleInertForMenu(newPressedValue);
 		}
 	} else if ((target = e.target.closest('.header-wrap'))) {
