@@ -232,30 +232,29 @@ html[data-js='false'] .header-themepicker {
 }
 
 @media (--small-viewport) {
-	.header-wrap {
-		&::before {
-			content: '';
+	.header-wrap::before {
+		content: '';
 
-			pointer-events: none;
+		pointer-events: none;
 
-			position: absolute;
-			inset: 100% 0 auto 0;
-			z-index: 1;
+		position: absolute;
+		inset: 100% 0 auto 0;
+		z-index: 1;
 
-			block-size: 100vh;
+		block-size: 100vh;
 
-			background: var(--C-canvas); /* Fallback */
-			background: color-mix(in hsl, var(--C-canvas), transparent 75%);
+		background-color: var(--C-canvas); /* Fallback */
+		background-color: color-mix(in hsl, var(--C-canvas), transparent 67%);
 
-			opacity: 0;
-			-webkit-backdrop-filter: blur(12px);
-			backdrop-filter: blur(12px);
-		}
+		opacity: 0;
+		-webkit-backdrop-filter: blur(12px);
+		backdrop-filter: blur(12px);
+		/* Only works in Chrome 😢
+		-webkit-backdrop-filter: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='0' height='0'%3E%3Cdefs%3E%3Cfilter id='noisyblur'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='1' seed='0' stitchTiles='noStitch' result='feTurbulence-6f6b7e9a'%3E%3C/feTurbulence%3E%3CfeGaussianBlur in='SourceGraphic' stdDeviation='8' edgeMode='none' result='feGaussianBlur-57739bbc'%3E%3C/feGaussianBlur%3E%3CfeDisplacementMap in='feGaussianBlur-57739bbc' in2='feTurbulence-6f6b7e9a' scale='32' xChannelSelector='R' yChannelSelector='R'%3E%3C/feDisplacementMap%3E%3C/filter%3E%3C/defs%3E%3C/svg%3E#noisyblur");
+		backdrop-filter: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='0' height='0'%3E%3Cdefs%3E%3Cfilter id='noisyblur'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='1' seed='0' stitchTiles='noStitch' result='feTurbulence-6f6b7e9a'%3E%3C/feTurbulence%3E%3CfeGaussianBlur in='SourceGraphic' stdDeviation='8' edgeMode='none' result='feGaussianBlur-57739bbc'%3E%3C/feGaussianBlur%3E%3CfeDisplacementMap in='feGaussianBlur-57739bbc' in2='feTurbulence-6f6b7e9a' scale='32' xChannelSelector='R' yChannelSelector='R'%3E%3C/feDisplacementMap%3E%3C/filter%3E%3C/defs%3E%3C/svg%3E#noisyblur"); */
 
 		@media (--accept-motion) {
-			&::before {
-				transition: opacity var(--anim-short) var(--easing-in);
-			}
+			transition: opacity var(--anim-short) var(--easing-in);
 		}
 	}
 
@@ -384,8 +383,8 @@ html[data-js='false'] .header-themepicker {
 		pointer-events: none;
 	}
 
-	html[data-js='false'] .header-menu-toggle:focus + .header-menu,
 	html[data-js='false'] .header-menu:focus-within,
+	html[data-js='false'] .header-menu-toggle:focus + .header-menu,
 	html[data-js='true'] .header-menu-toggle[aria-pressed='true'] + .header-menu {
 		visibility: visible;
 
@@ -406,39 +405,29 @@ html[data-js='false'] .header-themepicker {
 		pointer-events: auto;
 	}
 
-	html[data-js='false']:has(.header-menu-toggle:focus + .header-menu),
 	html[data-js='false']:has(.header-menu:focus-within),
+	html[data-js='false']:has(.header-menu-toggle:focus + .header-menu),
 	html[data-js='true']:has(.header-menu-toggle[aria-pressed='true'] + .header-menu) {
 		overflow: hidden; /* Prevent scrolling */
 		scrollbar-gutter: stable; /* Preserve space occupied by scrollbar */
-	}
 
-	html[data-js='false'] .header-wrap:has(.header-menu-toggle:focus + .header-menu),
-	html[data-js='false'] .header-wrap:has(.header-menu:focus-within),
-	html[data-js='true'] .header-wrap:has(.header-menu-toggle[aria-pressed='true']) {
-		&::before {
-			pointer-events: auto; /* Make it clickable to trigger a close */
-
-			opacity: 1;
-		}
-
-		/* 
-		 * Due to de-nesting via LightningCSS, we cannot use foo::before { @media { ... } } as the selector,
-		 * including ::before, gets wrapped into an :is(), and pseudos are not valid inside :is()!
-		 */
-		@media (--accept-motion) {
+		& .header-wrap {
 			&::before {
-				transition-duration: var(--anim-long);
-				transition-timing-function: var(--easing-out);
-			}
-		}
+				pointer-events: auto; /* Make it clickable to trigger a close */
 
-		& + main {
-			transform: scale(0.95);
+				opacity: 1;
+			}
+
+			& + main {
+				transform: scale(0.95);
+			}
 
 			@media (--accept-motion) {
-				transition-duration: var(--anim-long);
-				transition-timing-function: var(--easing-out);
+				&::before,
+				& + main {
+					transition-duration: var(--anim-long);
+					transition-timing-function: var(--easing-out);
+				}
 			}
 		}
 	}
