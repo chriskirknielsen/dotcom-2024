@@ -38,7 +38,7 @@ const partsDir = `${includesDir}/parts`; // Layout parts folder
 const layoutsDir = `${includesDir}/layouts`; // Layouts folder
 const assetsDir = `_assets`; // Assets folder
 const BUILD_CONTEXT = process?.env?.BUILD_CONTEXT || 'LIVE';
-const md = new markdownIt().disable('code');
+const md = new markdownIt({ html: true, breaks: true, linkify: true }).disable('code');
 const purgeCssList = {
 	_global: { safe: [/^\:[-a-z]+$/, 'translated-rtl', 'data-tooltip-pos'], block: [] }, // Preserve any pseudo-class for now (thanks laurentpayot; still broken in 6.0 https://github.com/FullHuman/purgecss/issues/978)
 	home: { safe: ['data-section=home'], block: ['data-section=about'] },
