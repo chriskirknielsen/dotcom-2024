@@ -75,9 +75,9 @@ That does the job. Since our `forEach` is our top level loop, Eleventy only need
 
 ## Using a list from data at build time
 
-It’s now time to think a little further… a little deeper, I’d wager! This time, let’s try to double-paginate our tags. That list is definitely going to be evolving over time, and hardcoding that list, while doable, is an annoying obstacle to low-maintenance blogging. 
+It’s now time to think a little further… a little deeper, I’d wager! This time, let’s try to double-paginate our tags. That list is definitely going to be evolving over time, and hardcoding it, while doable, is an annoying obstacle to low-maintenance blogging. 
 
-The thing to be know is that we’re faced with a race condition (at least I think!). `addCollection` needs to run when all templates are ready, but we want to build a new collection from existing templates. Chicken and egg, or egg and chicken? There are ways around that, such as pre-compiling the tags list in a `before` step, but that is complexity we may want to avoid (I sure do). So, what do we need to make this happen automatically? Time to go sicko-mode on these tags.
+The thing to know is that we’re faced with a race condition (at least I think!). `addCollection` needs to run when all templates are ready, but we want to build a new collection from existing templates. Chicken and egg, or egg and chicken? There are ways around that, such as pre-compiling the tags list in a `before` step, but that is complexity we may want to avoid (I sure do). So, what do we need to make this happen automatically? Time to go sicko-mode on these tags.
 
 We’ll start off the creation of a new collection looking through all the posts, which will contain every single tag — with `new Set()` we ensure all values are unique. In my case, I am excluding tags starting with an underscore, as I consider those “private” (or meta), and thus, they are more of a “collection” tag than a “topic” tag. I haven’t tested what would happen, but I can also imagine this helps keep me away from potential recursion issues.
 
@@ -284,7 +284,7 @@ export default async function (eleventyConfig) {
 
 ## Bonus: paginator component
 
-While we’re here, I might as well share the paginator “component” I built. It is a little more readable in Vento thanks to the JS syntax but I converted it to Nunjucks should you need it — thought it is BYOS (Bring Your Own Styles): that’s the fun part!
+While we’re here, I might as well share the paginator “component” I built. It is a little more readable in Vento thanks to the JS syntax but I converted it to Nunjucks should you need it — though it is BYOS (Bring Your Own Styles): that’s the fun part!
 
 ```njk:paginator.njk{% raw %}
 {% set currentPage = pagination.pageNumber + 1 %}
