@@ -156,7 +156,7 @@ We now have an array (top level) which contains arrays of these sub-pages, but w
 ```js:.eleventy.js{% raw %}
 // While I am using a virtual template, you can do the exact same in a regular file
 eleventyConfig.addTemplate(
-	`content/dlbtag.njk`,
+	`content/tags.njk`,
 	// Once again due to this being in Nunjucks, the data must be passed via the parent context
 	`{% set pagination = tagData.subPagination %}
 	<ul>{% for p in tagData.pageItems %}
@@ -185,7 +185,7 @@ Well that is neat! A handful of code, to be sure, but still… it works! I will 
 
 ## tl;dr I just want the full code
 
-Skipping to the good part? Have you not seen the 2006 cinematic masterpiece _Click_ with Adam Sandler and Christopher Walken warning us about the dangers of ——
+Skipping to the good part? Have you not seen the 2006 cinematic masterpiece _Click_ with Adam Sandler and Christopher Walken warning us about the dangers of — —
 
 {% expander "Erm, yeah, check out that code" %}
 
@@ -254,7 +254,7 @@ export default async function (eleventyConfig) {
 
 	// While I am using a virtual template, you can do the exact same in a regular file
 	eleventyConfig.addTemplate(
-		`content/dlbtag.njk`,
+		`content/tags.njk`,
 		// Once again due to this being in Nunjucks, the data must be passed via the parent context
 		`{% set pagination = tagData.subPagination %}
 		<ul>{% for p in tagData.pageItems %}
