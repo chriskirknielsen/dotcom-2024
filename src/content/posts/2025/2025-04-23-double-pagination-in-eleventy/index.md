@@ -167,7 +167,7 @@ eleventyConfig.addTemplate(
 	{
 		layout: 'page.njk',
 		pagination: {
-			data: `collections._dbltags`,
+			data: `collections._tags`,
 			size: 1,
 			alias: 'tagData',
 		},
@@ -265,7 +265,7 @@ export default async function (eleventyConfig) {
 		{
 			layout: 'page.njk',
 			pagination: {
-				data: `collections._dbltags`,
+				data: `collections._tags`,
 				size: 1,
 				alias: 'tagData',
 			},
