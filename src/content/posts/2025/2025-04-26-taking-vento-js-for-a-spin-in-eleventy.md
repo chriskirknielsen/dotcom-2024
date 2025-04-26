@@ -95,7 +95,7 @@ src/content/pages/index.vto undefined 63 [NotFound [Error]: ENOENT: no such file
 
 I haven’t figured out exactly why these problems occur, but I will report them on GitHub once I create a repo with a test case, I promise!
 
-**Update:** I filed an [issue for the second bug](https://github.com/noelforte/eleventy-plugin-vento/issues/216) on the eleventy-plugin-vento repo! Now to figure out the shortcode one…
+**Update:** I filed an [issue for the first shortcode bug](https://github.com/ventojs/vento/issues/103) on Vento's repo, and another [issue for the second bug](https://github.com/noelforte/eleventy-plugin-vento/issues/216) on the eleventy-plugin-vento repo.
 
 ## A bright future
 While the issues are frustrating, I still think there’s a bright future ahead for Vento. It is packed with features and seems like it has it all, while being actively maintained — it’s quite impressive. Thanks again to Óscar for doing something about the frustrations of modern templating languages, and to Noel for making it super accessible to Eleventy users!
