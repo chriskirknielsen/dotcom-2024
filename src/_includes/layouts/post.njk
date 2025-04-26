@@ -15,7 +15,7 @@
     {% endset %}
 
     {% component 'hero', {
-        heroTags: tags,
+        heroTags: (tags | sort),
         heroTitle: title,
         heroSup: dateInfo,
         pageContext: page
