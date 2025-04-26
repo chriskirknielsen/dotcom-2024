@@ -61,7 +61,7 @@
 .expander-content {
 	--CODE-bg: var(--C-surface-alt, var(--C-canvas));
 	margin-inline: var(--size-s);
-	padding: var(--size-m) var(--layout-gutter);
+	padding: var(--size-m);
 
 	background: var(--C-surface);
 	box-shadow: var(--_shadow);
