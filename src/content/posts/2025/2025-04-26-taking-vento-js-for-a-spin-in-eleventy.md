@@ -5,6 +5,7 @@ tags: [javascript, eleventy]
 toc: true
 templateEngineOverride: md
 time: 03:51:00
+updated: 2025-04-28
 ---
 
 In a recent rebuild for another blog of mine, where I switched from Hugo to Eleventy, I decided to give [VentoJS](https://vento.js.org/) a try, which is the new kid on the block, as far as templating languages go. There are [IDE integrations](https://vento.js.org/editor-integrations/) that make it feel right at home in VS Code (for me), and an [Eleventy plugin](https://github.com/noelforte/eleventy-plugin-vento) to make it painless to start using with my favourite static site generator. Thanks to both Óscar Otero for making Vento, and Noel Forte for the Eleventy plugin!
@@ -57,6 +58,8 @@ If `{{ layout }}` is `{% extends %}`, then `{{ function }}` is `{% macro %}` (th
 
 ## The rough edges
 
+**Update: _Good news everyone!_ See the updates at the end of this section.**
+
 I’ve sung praises, I know, but it’s not *perfect*. I ran into issues that may be more related to the Eleventy plugin that Vento itself, but I think it is a problem with the templating engine: error reporting is sometimes opaque.  It won’t always tell you what’s wrong, and might point at something unhelpful as the error, when it is actually somewhere else. This requires you to be a little more diligent about what you write, which can be difficult when you’re converting code from one templating language to another. [It’s acknowledged by both Óscar and Noel in this thread by (11ty superuser) uncenter](https://github.com/ventojs/vento/issues/85), so it’s at least on their minds, which is nice to see, but it’s hard to address.
 
 On my other blog, I migrated from Hugo, which isn’t too far off from either Nunjucks or Vento, but I missed a `| filterName` that needed to be `|> filterName` a couple of times, and the error doesn’t point at that directly (which may be due to the fact that `|` is valid JavaScript as a [bitwise OR operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_OR)?).
@@ -95,7 +98,9 @@ src/content/pages/index.vto undefined 63 [NotFound [Error]: ENOENT: no such file
 
 I haven’t figured out exactly why these problems occur, but I will report them on GitHub once I create a repo with a test case, I promise!
 
-**Update:** I filed an [issue for the first shortcode bug](https://github.com/ventojs/vento/issues/103) on Vento's repo, and another [issue for the second bug](https://github.com/noelforte/eleventy-plugin-vento/issues/216) on the eleventy-plugin-vento repo.
+🚨 **Update #1:** I filed an [issue for the first shortcode bug](https://github.com/ventojs/vento/issues/103) on Vento's repo, and another [issue for the second bug](https://github.com/noelforte/eleventy-plugin-vento/issues/216) on the eleventy-plugin-vento repo.
+
+🚨 **Update #2:** The shortcode issue actually stemmed from the plugin and has been fixed, with both Óscar and Noel taking a look. The second bug was seemingly due to a bug in Eleventy itself, and Noel helped me figure out what was going on! I guess I now have no excuse not to refactor this site…
 
 ## A bright future
 While the issues are frustrating, I still think there’s a bright future ahead for Vento. It is packed with features and seems like it has it all, while being actively maintained — it’s quite impressive. Thanks again to Óscar for doing something about the frustrations of modern templating languages, and to Noel for making it super accessible to Eleventy users!
