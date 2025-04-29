@@ -100,7 +100,7 @@ I haven’t figured out exactly why these problems occur, but I will report them
 
 🚨 **Update #1:** I filed an [issue for the first shortcode bug](https://github.com/ventojs/vento/issues/103) on Vento's repo, and another [issue for the second bug](https://github.com/noelforte/eleventy-plugin-vento/issues/216) on the eleventy-plugin-vento repo.
 
-🚨 **Update #2:** The shortcode issue actually stemmed from the plugin and has been fixed, with both Óscar and Noel taking a look. The second bug was seemingly due to a bug in Eleventy itself, and Noel helped me figure out what was going on! I guess I now have no excuse not to refactor this site…
+🚨 **Update #2:** The shortcode issue actually stemmed from the plugin and has been fixed, with both Óscar and Noel taking a look. The second bug was seemingly due to a bug in Eleventy itself, and Noel helped me figure out what was going on! I guess I now have no excuse not to refactor this site… Cherry on top: Noel found out that error reporting gets way better in Eleventy `3.1.0-beta.1`, should that influence your decision (I was running 3.0.0 stable).
 
 ## A bright future
 While the issues are frustrating, I still think there’s a bright future ahead for Vento. It is packed with features and seems like it has it all, while being actively maintained — it’s quite impressive. Thanks again to Óscar for doing something about the frustrations of modern templating languages, and to Noel for making it super accessible to Eleventy users!
