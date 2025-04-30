@@ -28,6 +28,7 @@ import { EleventyRenderPlugin, BundlePlugin } from '@11ty/eleventy';
 import pluginRss from '@11ty/eleventy-plugin-rss';
 import pageAssetsPluginMxbckFix from 'eleventy-plugin-page-assets';
 import pluginSyntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
+import { VentoPlugin } from 'eleventy-plugin-vento';
 import EleventyPluginRobotsTxt from 'eleventy-plugin-robotstxt';
 
 //* Constants
@@ -97,6 +98,7 @@ export default async function (eleventyConfig) {
 		},
 	});
 	eleventyConfig.addPlugin(pluginRss);
+	eleventyConfig.addPlugin(VentoPlugin, { autotrim: false });
 	eleventyConfig.addPlugin(assetCompiler, { fontsDir: '/assets/fonts' });
 	eleventyConfig.addPlugin(mediaGallery, { galleryClasses: ['image-gallery'] });
 	eleventyConfig.addPlugin(callout, { markdownEngine: md });
