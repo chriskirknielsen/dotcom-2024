@@ -98,7 +98,6 @@ export default async function (eleventyConfig) {
 		},
 	});
 	eleventyConfig.addPlugin(pluginRss);
-	eleventyConfig.addPlugin(VentoPlugin, { autotrim: false });
 	eleventyConfig.addPlugin(assetCompiler, { fontsDir: '/assets/fonts' });
 	eleventyConfig.addPlugin(mediaGallery, { galleryClasses: ['image-gallery'] });
 	eleventyConfig.addPlugin(callout, { markdownEngine: md });
@@ -184,6 +183,7 @@ export default async function (eleventyConfig) {
 		},
 	});
 	eleventyConfig.addPlugin(EleventyPluginRobotsTxt, { shouldBlockAIRobots: 'true' });
+	eleventyConfig.addPlugin(VentoPlugin, { autotrim: false });
 
 	//* Collections
 	eleventyConfig.addCollection('_posts.en', (collectionApi) => collectionApi.getFilteredByTag('_posts').filter((item) => ['en', undefined].includes(item.data.lang)));

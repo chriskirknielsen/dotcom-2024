@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html {{ if section }}data-section="{{ section }}"{{ /if }} lang="{{ metadata.lang }}" data-js="false">
+	<head>
+		{{ set headInner }}
+		{{# Inline JS (instantly assigns the theme before any paint) #}}
+		{{ if not metadata.nakedJs }}
+		<script>
+		{{- js 'head' -}}
+			let globalBreakpoint = `{{ tokens.settings.breakpoint }}`;
+			let docEl = document.documentElement; // For minification purposes only
+			docEl.setAttribute('data-js', 'true');
+			window.themeKeys = {{ themes |> pluck('key') |> dump }};
+			{{- include 'assets/js/theme-set.js' }}
+		{{ /js }}
+		{{- getBundle 'js', 'head' -}}
+		</script>
+		{{ /if }}
+
+		{{ if not metadata.nakedCss }}
+		{{# Inline CSS instead of <link href="/assets/css/style.css" rel="stylesheet"> #}}
+		<style>{{ assets.inlineCssPlaceholder }}</style>
+		{{ /if }}
+
+		{{# Print styles #}}
+		<link rel="stylesheet" media="print" href="/assets/css/print.css">
+		
+		{{# RSS feed #}}
+		<link rel="alternate" type="application/rss+xml" title="{{ metadata.title }}" href="{{ (rssFeedOverride || nav.rss.path) |> absoluteUrl(metadata.url) }}">
+		{{ /set }}
+
+		{{ include 'parts/head.vto' { headInner } }}
+	</head>
+
+	<body class="h-card">
+		<a class="skip-link" href="#content">Skip to content</a>
+
+		{{ include 'parts/header.njk' }}
+
+		<main class="main | container flow" id="content" tabindex="-1"{{ if lang }} lang="{{ lang }}"{{ /if }}>
+			{{ if metadata.nakedCss }}
+				{{ set announcement }}My CSS isn‘t broken! 🙅 No CSS for <a href="https://css-naked-day.org/">CSS Naked Day</a> (9th of April)!{{ /set }}
+			{{ elseif metadata.nakedJs }}
+				{{ set announcement }}Your JavaScript isn't broken! 🙅 No JS for <a href="https://js-naked-day.org/">JS Naked Day</a> (24th of April)!{{ /set }}
+			{{# {{ else }}{{ set announcement = "" }} #}}
+			{{ /if }}
+			{{ if announcement }}
+				<div class="announcement"><p class="textWrap-balance textAlign-center">{{ announcement |> markdown(true) }}</p></div>
+			{{ /if }}
+
+			{{ content }}
+		</main>
+
+		{{ include 'parts/footer.njk' }}
+		{{ include 'parts/foot.njk' }}
+	</body>
+</html>

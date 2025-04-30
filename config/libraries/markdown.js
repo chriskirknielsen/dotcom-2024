@@ -163,7 +163,7 @@ export default function (eleventyConfig, options = {}) {
 	eleventyConfig.setLibrary('md', md);
 
 	/** Take markup content and automatically create anchors for headings. Should only be used when content is not Markdown. */
-	eleventyConfig.addFilter('autoHeadingAnchors', (markup, includeH1 = false) => {
+	eleventyConfig.addFilter('getHeadingAnchors', (markup, includeH1 = false) => {
 		// If this isn't a string, there isn't anything we can do!
 		if (typeof markup !== 'string') {
 			return markup;
