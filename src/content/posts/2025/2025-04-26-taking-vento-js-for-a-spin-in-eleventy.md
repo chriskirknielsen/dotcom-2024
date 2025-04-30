@@ -12,7 +12,7 @@ In a recent rebuild for another blog of mine, where I switched from Hugo to Elev
 
 Vento might seem like a variation on the “JavaScript framework of the week” meme, but I assure you it packs a punch!
 
-Vento draws inspiration from Nunjucks, Liquid, Eta, and Mustache. I’ve personally used Nunjucks a lot (on this website!) and really like it, but it has issues. I’ve also used Liquid on Shopify stores and on the version first version of my website, and it has a couple niceties, but I usually prefer Nunjucks. I had never heard of Eta, and never used Mustache (but what a lovely name given the syntax!).
+Vento draws inspiration from Nunjucks, Liquid, Eta, and Mustache. I’ve personally used Nunjucks a lot (on this website!) and really like it, but it has issues. I’ve also used Liquid on Shopify stores and on the first version of my website, and it has a couple niceties, but I usually prefer Nunjucks. I had never heard of Eta, and never used Mustache (but what a lovely name given the syntax!).
 
 Óscar lists some of the issues they had with all those languages, such as:
 
