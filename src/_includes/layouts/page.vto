@@ -1,5 +1,5 @@
 {{ layout 'layouts/content.vto' }}
-    {{ set slashPages = (collections._slash |> pluck('page') |> pluck('url')) }}
+    {{ set slashPages = collections._slash.map(s => s.page.url) }}
     {{ if slashPages.includes(page.url) || page.url === '/about/' }}
         {{ set heroCta = nav.slashPages }}
     {{ /if }}
@@ -8,11 +8,12 @@
         {{ pageHero }}
     {{ else }}
         {{ component 'hero', {
+            ext: 'vto',
             heroTitle: heroTitle || title,
             heroSub: heroSub || heroHideSummary ? null : summary,
             heroSup: heroSup || null,
             heroCta: heroCta || null,
-            pageContext: page
+            pageContext: page,
         } }}
     {{ /if }}
 

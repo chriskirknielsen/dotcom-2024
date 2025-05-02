@@ -246,8 +246,9 @@ export default function (eleventyConfig, options = {}) {
 
 	/** Render a web component from the component/web folder. */
 	eleventyConfig.addAsyncShortcode('component', async function (filename, componentOptions = {}) {
-		const filePath = `${componentsFolder}/${filename}.njk`;
-		const content = eleventyConfig.nunjucks.asyncShortcodes.renderFile(filePath, componentOptions, 'njk'); // Only pass in the provided data object
+		const ext = componentOptions.ext || 'njk';
+		const filePath = `${componentsFolder}/${filename}.${ext}`;
+		const content = eleventyConfig.getShortcode('renderFile')(filePath, componentOptions, ext); // Only pass in the provided data object
 		return content;
 	});
 }

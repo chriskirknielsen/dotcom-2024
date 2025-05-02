@@ -1,0 +1,27 @@
+---
+layout: page.njk
+heroCta: [{ url: "/projects/", label: "Back to Projects", icon: "arrow-left", iconBefore: true }]
+---
+
+{{ content }}
+
+{{ if externalUrl }}
+<p class="post-external | grouper grouper--wrap">
+	{{ component 'cta', {
+		ext: 'vto',
+		url: externalUrl,
+		label: projectButtonLabel or "View Project",
+		icon: 'arrow-right'
+	} }}
+	{{ if extraCta }}
+		{{ for extraCtaItem in extraCta }}
+		{{ component 'cta', {
+			ext: 'vto',
+			url: extraCtaItem.url,
+			label: extraCtaItem.label,
+			icon: extraCtaItem.icon or 'arrow-right'
+		} }}
+		{{ /for }}
+	{{ /if }}
+</p>
+{{ /if }}

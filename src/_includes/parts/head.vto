@@ -26,7 +26,7 @@
 <meta property="og:type" content="{{ if section === 'post' }}article{{ else }}website{{ /if }}">
 <meta property="og:url" content="{{ (page.url || '/') |> absoluteUrl(metadata.url) }}">
 
-{{ set meta_image_url }}{{ customMetaImage || ([assets.images, 'metaimage.jpg'] |> toPath) }}{{ /set }}
+{{ set meta_image_url }}{{ if customMetaImage }}{{ customMetaImage }}{{ else }}{{ [assets.images, 'metaimage.jpg'] |> toPath }}{{ /if }}{{ /set }}
 <meta property="og:image" content="{{ meta_image_url |> trim |> absoluteUrl(metadata.url) }}">
 <meta property="og:image:alt" content="{{ title }}">
 

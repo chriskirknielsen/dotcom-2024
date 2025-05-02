@@ -15,6 +15,7 @@
 
 {{ set pageHero }}
     {{ component 'hero', {
+        ext: 'vto',
         heroTags: (tags |> sort((a,b) => a.localeCompare(b))),
         heroTitle: title,
         heroSup: dateInfo,
@@ -59,11 +60,11 @@
         {{ set nextPost = collections["_posts.en"] |> getNextCollectionItem }}
         <nav aria-label="More posts" class="grouper grouper--wrap justifyContent-center">
             {{ if prevPost }}
-                {{ component 'cta', { icon: 'arrow-left', iconBefore: true, url: prevPost.url, safeLabel: true, label: { text: "Previously", aria: "Previous post" } } }}
+                {{ component 'cta', { ext: 'vto', icon: 'arrow-left', iconBefore: true, url: prevPost.url, safeLabel: true, label: { text: "Previously", aria: "Previous post" } } }}
             {{ /if }}
             
             {{ if !metadata.nakedJs }}
-                {{ component 'cta', { icon: 'arrow-shuffle', safeLabel: true, label: { text: "Random", aria: "Random post" }, ctaClass: 'hide-when-nojs textDecoration-underline', ctaAttr: 'data-randompost' } }}
+                {{ component 'cta', { ext: 'vto', icon: 'arrow-shuffle', safeLabel: true, label: { text: "Random", aria: "Random post" }, ctaClass: 'hide-when-nojs textDecoration-underline', ctaAttr: 'data-randompost' } }}
                 {{ js 'foot-randompost' }}
                 document.querySelector('[data-randompost]').onclick = () => fetch('/search.json').then((response) => response.json()).then((all) => {
                     const enPosts = all.filter(p => p.type === '_posts' && (!p.lang || p.lang === 'en') && !window.location.href.includes(p.url));
@@ -74,7 +75,7 @@
             {{ /if }}
             
             {{ if nextPost }}
-                {{ component 'cta', { icon: 'arrow-right', url: nextPost.url, safeLabel: true, label: { text: "Up next", aria: "Next post" } } }}
+                {{ component 'cta', { ext: 'vto', icon: 'arrow-right', url: nextPost.url, safeLabel: true, label: { text: "Up next", aria: "Next post" } } }}
             {{ /if }}
         </nav>
     {{ /if }}
@@ -84,7 +85,7 @@
     {{ if originalUrl }}
         <div>
         {{ if originalTitle }}
-            {{ component 'cta', { url: originalUrl, label: originalTitle, icon: 'arrow-right' } }}
+            {{ component 'cta', { ext: 'vto', url: originalUrl, label: originalTitle, icon: 'arrow-right' } }}
         {{ else }}
             View original post: <a href="{{ originalUrl }}">{{ originalUrl }}</a>
         {{ /if }}
@@ -98,7 +99,7 @@
         <hr>
         <div>
         {{ if externalHost }}
-            {{ component 'cta', { url: externalUrl, label: `View original post on ${externalHost}`, icon: 'arrow-right' } }}
+            {{ component 'cta' { ext: 'vto', url: externalUrl, label: `View original post on ${externalHost}`, icon: 'arrow-right' } }}
         {{ else }}
             View original post: <a href="{{ externalUrl }}">{{ externalUrl }}</a>
         {{ /if }}

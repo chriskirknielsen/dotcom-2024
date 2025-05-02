@@ -49,6 +49,7 @@ const purgeCssList = {
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default async function (eleventyConfig) {
 	//* Plugins
+	eleventyConfig.addPlugin(VentoPlugin, { autotrim: false });
 	eleventyConfig.addPlugin(EleventyRenderPlugin);
 	eleventyConfig.addPlugin(BundlePlugin, {
 		toFileDirectory: 'assets',
@@ -91,7 +92,7 @@ export default async function (eleventyConfig) {
 		silent: true,
 	});
 	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
-		templateFormats: ['md', 'html', 'njk'],
+		templateFormats: ['md', 'html', 'njk', 'vto'],
 		preAttributes: {
 			tabindex: 0,
 			class: (context) => `${context.language ? 'language-' + context.language : ''} codeblock-pre`.trim(),
@@ -183,7 +184,6 @@ export default async function (eleventyConfig) {
 		},
 	});
 	eleventyConfig.addPlugin(EleventyPluginRobotsTxt, { shouldBlockAIRobots: 'true' });
-	eleventyConfig.addPlugin(VentoPlugin, { autotrim: false });
 
 	//* Collections
 	eleventyConfig.addCollection('_posts.en', (collectionApi) => collectionApi.getFilteredByTag('_posts').filter((item) => ['en', undefined].includes(item.data.lang)));
@@ -242,6 +242,7 @@ export default async function (eleventyConfig) {
 
 	return {
 		pathPrefix: '/',
+		templateFormats: ['md', 'vto', 'njk', '11ty.js'],
 		markdownTemplateEngine: 'njk',
 		htmlTemplateEngine: 'njk',
 		passthroughFileCopy: true,

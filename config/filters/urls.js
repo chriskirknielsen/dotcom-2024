@@ -4,7 +4,7 @@ const removeTrailingSlash = (str) => str.trim().replace(/\/$/g, '');
 
 export default function (eleventyConfig) {
 	/** Checks if the provided URL is the current page and returns the correct ARIA attribute. */
-	eleventyConfig.addFilter('current', (url, page) => (page.url === url ? 'aria-current="page"' : ''));
+	eleventyConfig.addFilter('getIsCurrentPage', (url, page) => (page.url === url ? 'aria-current="page"' : ''));
 
 	/** Removes any slash at the end of a string. */
 	eleventyConfig.addFilter('removeTrailingSlash', removeTrailingSlash);

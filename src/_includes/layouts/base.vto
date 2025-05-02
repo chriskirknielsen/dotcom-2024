@@ -3,7 +3,7 @@
 	<head>
 		{{ set headInner }}
 		{{# Inline JS (instantly assigns the theme before any paint) #}}
-		{{ if not metadata.nakedJs }}
+		{{ if !metadata.nakedJs }}
 		<script>
 		{{- js 'head' -}}
 			let globalBreakpoint = `{{ tokens.settings.breakpoint }}`;
@@ -16,7 +16,7 @@
 		</script>
 		{{ /if }}
 
-		{{ if not metadata.nakedCss }}
+		{{ if !metadata.nakedCss }}
 		{{# Inline CSS instead of <link href="/assets/css/style.css" rel="stylesheet"> #}}
 		<style>{{ assets.inlineCssPlaceholder }}</style>
 		{{ /if }}
@@ -34,12 +34,12 @@
 	<body class="h-card">
 		<a class="skip-link" href="#content">Skip to content</a>
 
-		{{ include 'parts/header.njk' }}
+		{{# {{ include 'parts/header.njk' }} #}}
 
 		<main class="main | container flow" id="content" tabindex="-1"{{ if lang }} lang="{{ lang }}"{{ /if }}>
 			{{ if metadata.nakedCss }}
 				{{ set announcement }}My CSS isn‘t broken! 🙅 No CSS for <a href="https://css-naked-day.org/">CSS Naked Day</a> (9th of April)!{{ /set }}
-			{{ elseif metadata.nakedJs }}
+			{{ else if metadata.nakedJs }}
 				{{ set announcement }}Your JavaScript isn't broken! 🙅 No JS for <a href="https://js-naked-day.org/">JS Naked Day</a> (24th of April)!{{ /set }}
 			{{# {{ else }}{{ set announcement = "" }} #}}
 			{{ /if }}
@@ -50,7 +50,7 @@
 			{{ content }}
 		</main>
 
-		{{ include 'parts/footer.njk' }}
-		{{ include 'parts/foot.njk' }}
+		{{# {{ include 'parts/footer.njk' }} #}}
+		{{# {{ include 'parts/foot.njk' }} #}}
 	</body>
 </html>

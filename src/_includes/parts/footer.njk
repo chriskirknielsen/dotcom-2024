@@ -17,7 +17,7 @@
                         {% set linkHref = (metadata.repo + '/blob/main/' + page.inputPath) if navItem.isRepoFileLink else navItem.path %}
                         <li><a
                             href="{{ linkHref }}"
-                            {{ navItem.path | current(page) | safe }}
+                            {{ navItem.path | getIsCurrentPage(page) | safe }}
                             {% if 'mailto:' in navItem.path %}id="footer-email-link" class="u-email"{% endif %}
                         >{{ navItem.label }}</a></li>
                     {% endfor %}
