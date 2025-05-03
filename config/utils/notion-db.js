@@ -13,11 +13,21 @@ import { Client as NotionClient } from '@notionhq/client';
  * @returns {object[]} List of results.
  */
 export default async function (queryConfig) {
+	if (!process.env.NOTION_BEARER_TOKEN) {
+		console.warn('Missing `NOTION_BEARER_TOKEN` environment variable. Returning empty data.');
+		return [];
+	}
+
 	const databaseId = queryConfig.databaseId;
 	const label = queryConfig.label || databaseId;
 	const propsToUse = queryConfig.propsToUse || ['Title'];
 	const filter = queryConfig.filter || {};
 	const dataPostProcess = queryConfig.dataPostProcess || null;
+
+	if (!databaseId) {
+		console.warn('Missing `databaseId` parameter. Returning empty data.');
+		return [];
+	}
 
 	// Set up Notion stuff
 	const notionClient = new NotionClient({ auth: process.env.NOTION_BEARER_TOKEN });

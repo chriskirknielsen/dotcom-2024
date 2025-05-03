@@ -160,7 +160,7 @@ const gameslibrary = await notionDatabaseQuery({
 			return item.parentItem.length === 0;
 		});
 
-		// Provide a compiled list of all trophy levels
+		// Provide a compiled list of all trophy levels using a needlessly complex one-line operation
 		const totalTrophyData = psnTrophyData.map((t) => t.earnedTrophies).reduce((p, c) => Object.fromEntries(Object.keys(p).map((k) => [k, p[k] + c[k]])));
 
 		return {

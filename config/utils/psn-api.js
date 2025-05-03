@@ -9,6 +9,11 @@ const psnApiPageSize = Math.min(500, PSN_API_MAX_PAGE_SIZE); // Preferred page s
 
 /** Retrieve trophy data from the PlayStation Network. */
 export default async function () {
+	if (!process.env.PLAYSTATION_NPSSO_TOKEN) {
+		console.warn('Missing `PLAYSTATION_NPSSO_TOKEN` environment variable. Returning empty data.');
+		return [];
+	}
+
 	// Set up access to the PSN API
 	const accessCode = await exchangeNpssoForCode(process.env.PLAYSTATION_NPSSO_TOKEN);
 	const authorization = await exchangeCodeForAccessToken(accessCode);
