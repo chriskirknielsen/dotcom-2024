@@ -147,13 +147,13 @@
 	@container (inline-size > 20rem) {
 		.card {
 			flex-direction: row;
-			width: 100%;
+			inline-size: 100%;
 		}
 
 		.card-image {
 			flex: 0 0 auto;
 			display: flex;
-			width: 8rem;
+			inline-size: 8rem;
 		}
 
 		.card-image img {
