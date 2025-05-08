@@ -9,21 +9,23 @@ versionsInfo: {
 }
 ---
 
-<ol class="cards" data-grid-cols="2">
+<ol class="timeline">
 {% for versionYear, versionDescription in versionsInfo | dictsort | reverse %}
-	<li class="card-wrapper">
-		{% component 'card', {
-			link: "https://"+versionYear+".chriskirknielsen.com",
-			image: {
-				src: [assets.images, "site-archives/year-"+versionYear+".jpg"] | toPath | toNetlifyImage,
-				width: 600,
-				height: 600,
-				focusPoint: "50% 0",
-				lazy: loop.index >= 8
-			},
-			heading: versionYear,
-			description: versionDescription
-		} %}
+	<li class="timeline-item">
+		<div class="timeline-content">
+            <h2 class="timeline-title">{{ versionYear }}</h2>
+            <p class="timeline-info fontSize-smaller">{{ versionDescription }}</p>
+        </div>
+		<a href="https://{{ versionYear }}.chriskirknielsen.com" class="timeline-link">
+            <img
+                src="{{ [assets.images, "site-archives/year-"+versionYear+".jpg"] | toPath | toNetlifyImage }}"
+                width="600"
+                height="600"
+                {% if loop.index >= 5 %}loading="lazy"{% endif %}
+                class="timeline-image"
+                alt="My website’s {{ versionYear }} version"
+            >
+        </a>
     </li>
 {% endfor %}
 </ol>
