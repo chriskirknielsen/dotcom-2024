@@ -3,7 +3,7 @@
         <p class="hero-sup">{{ heroSup | safe }}</p>
     {% endif %}
 
-    <h1 class="hero-heading" style="--HERO-title-scaling: {{ heroTitle | sizeFactor }};">{{ heroTitle | shy | safe }}</h1>
+    <h1 class="hero-heading" id="hero-heading" style="--HERO-title-scaling: {{ heroTitle | sizeFactor }};">{{ heroTitle | shy | safe }}</h1>
 
     {% if heroTags %}
         <div class="hero-tags">
