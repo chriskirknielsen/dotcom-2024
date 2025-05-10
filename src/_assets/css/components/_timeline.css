@@ -50,6 +50,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: var(--size-s);
+	max-inline-size: 24rem;
 
 	&::before {
 		content: '';
@@ -92,7 +93,7 @@
 		--TL-gap-y: var(--size-xl);
 
 		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-		grid-template-rows: repeat(auto-fit, minmax(0, 1fr) minmax(0, 1fr));
+		grid-template-rows: repeat(auto-fit, minmax(0, 0.2fr) minmax(0, 0.8fr));
 		gap: var(--TL-gap-y) calc(var(--TL-gap-x) * 2);
 		padding-inline-start: 0;
 
@@ -125,6 +126,8 @@
 		}
 
 		&:nth-child(2n-1) {
+			justify-self: end;
+
 			&::before {
 				inset: 50% auto auto 100%;
 
