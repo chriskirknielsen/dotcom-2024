@@ -22,7 +22,7 @@ versionsInfo: {
                     src="{{ [assets.images, "site-archives/year-"+versionYear+"-light.jpg"] | toPath | toNetlifyImage }}"
                     width="600"
                     height="600"
-                    {% if loop.index >= 5 %}loading="lazy"{% endif %}
+                    {% if loop.index >= 3 %}loading="lazy"{% endif %}
                     class="timeline-image hide-when-dark"
                     alt="My website’s {{ versionYear }} version"
                 >
@@ -30,7 +30,7 @@ versionsInfo: {
                     src="{{ [assets.images, "site-archives/year-"+versionYear+"-dark.jpg"] | toPath | toNetlifyImage }}"
                     width="600"
                     height="600"
-                    {% if loop.index >= 5 %}loading="lazy"{% endif %}
+                    {% if loop.index >= 3 %}loading="lazy"{% endif %}
                     class="timeline-image hide-when-light"
                     alt="My website’s {{ versionYear }} version"
                 >
@@ -39,7 +39,7 @@ versionsInfo: {
                     src="{{ [assets.images, "site-archives/year-"+versionYear+".jpg"] | toPath | toNetlifyImage }}"
                     width="600"
                     height="600"
-                    {% if loop.index >= 5 %}loading="lazy"{% endif %}
+                    {% if loop.index >= 3 %}loading="lazy"{% endif %}
                     class="timeline-image"
                     alt="My website’s {{ versionYear }} version"
                 >
