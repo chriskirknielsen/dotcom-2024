@@ -74,6 +74,15 @@
 	overflow: hidden;
 
 	border-radius: clamp(0px, var(--_corner) * 999, var(--_card-corner));
+	box-shadow: var(--_shadow);
+
+	@media (--accept-motion) {
+		transition: box-shadow var(--anim-medium) var(--easing-out);
+	}
+
+	&:is(:hover, :focus-visible) {
+		box-shadow: var(--_shadow-active);
+	}
 }
 
 .timeline-image {
