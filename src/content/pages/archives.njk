@@ -2,29 +2,48 @@
 title: Archives
 summary: A digital museum of the previous versions of this website
 versionsInfo: {
-    2016: "Definitely a student’s website",
-    2018: "The DeLorean got an upgrade",
-    2020: "A little more web-dev oriented",
-    2022: "I… uh… made it better with themes!"
+    2016: { description: "Definitely a student’s website" },
+    2018: { description: "The DeLorean got an upgrade" },
+    2020: { description: "A little more web-dev oriented", hasScheme: true },
+    2022: { description: "I… uh… made it better with themes!", hasScheme: true }
 }
 ---
 
 <ol class="timeline">
-{% for versionYear, versionDescription in versionsInfo | dictsort | reverse %}
+{% for versionYear, versionInfo in versionsInfo | dictsort | reverse %}
 	<li class="timeline-item">
 		<div class="timeline-content">
             <h2 class="timeline-title">{{ versionYear }}</h2>
-            <p class="timeline-info fontSize-smaller">{{ versionDescription }}</p>
+            <p class="timeline-info fontSize-smaller">{{ versionInfo.description }}</p>
         </div>
 		<a href="https://{{ versionYear }}.chriskirknielsen.com" class="timeline-link">
-            <img
-                src="{{ [assets.images, "site-archives/year-"+versionYear+".jpg"] | toPath | toNetlifyImage }}"
-                width="600"
-                height="600"
-                {% if loop.index >= 5 %}loading="lazy"{% endif %}
-                class="timeline-image"
-                alt="My website’s {{ versionYear }} version"
-            >
+            {% if versionInfo.hasScheme %}
+               <img
+                    src="{{ [assets.images, "site-archives/year-"+versionYear+"-light.jpg"] | toPath | toNetlifyImage }}"
+                    width="600"
+                    height="600"
+                    {% if loop.index >= 5 %}loading="lazy"{% endif %}
+                    class="timeline-image hide-when-dark"
+                    alt="My website’s {{ versionYear }} version"
+                >
+               <img
+                    src="{{ [assets.images, "site-archives/year-"+versionYear+"-dark.jpg"] | toPath | toNetlifyImage }}"
+                    width="600"
+                    height="600"
+                    {% if loop.index >= 5 %}loading="lazy"{% endif %}
+                    class="timeline-image hide-when-light"
+                    alt="My website’s {{ versionYear }} version"
+                >
+            {% else %}
+                <img
+                    src="{{ [assets.images, "site-archives/year-"+versionYear+".jpg"] | toPath | toNetlifyImage }}"
+                    width="600"
+                    height="600"
+                    {% if loop.index >= 5 %}loading="lazy"{% endif %}
+                    class="timeline-image"
+                    alt="My website’s {{ versionYear }} version"
+                >
+            {% endif %}
         </a>
     </li>
 {% endfor %}
