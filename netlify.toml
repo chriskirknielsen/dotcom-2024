@@ -51,6 +51,9 @@ package = "netlify-plugin-debug-cache"
   to = "/rss.xml"
   status = 301
   force = true
+[[redirects]]
+  from = "/resume/"
+  to = "/about/#resume"
 ### Well-known
 [[redirects]]
   from = "/.well-known/avatar"
