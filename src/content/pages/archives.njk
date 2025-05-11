@@ -18,7 +18,7 @@ versionsInfo: {
         </div>
 		<a href="https://{{ versionYear }}.chriskirknielsen.com" class="timeline-link">
             {% if versionInfo.hasScheme %}
-               <img
+                <img
                     src="{{ [assets.images, "site-archives/year-"+versionYear+"-light.jpg"] | toPath | toNetlifyImage }}"
                     width="600"
                     height="600"
@@ -26,7 +26,7 @@ versionsInfo: {
                     class="timeline-image hide-when-dark"
                     alt="My website’s {{ versionYear }} version"
                 >
-               <img
+                <img
                     src="{{ [assets.images, "site-archives/year-"+versionYear+"-dark.jpg"] | toPath | toNetlifyImage }}"
                     width="600"
                     height="600"

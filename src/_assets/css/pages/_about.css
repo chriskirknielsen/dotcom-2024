@@ -434,10 +434,118 @@
 
 .about-icons-list {
 	--s: var(--size-l); /* Size */
+
+	isolation: isolate;
+
 	font-size: var(--s);
 	/* line-height: calc(1.6 * var(--s)); */
 }
 
+.about-icons-list-item {
+	line-height: 1;
+}
+
 .about-icons-list-icon {
 	--ICON-size: var(--s);
+}
+
+.about-icons-list-details {
+	position: relative;
+
+	display: inline-block;
+}
+
+.about-icons-list-summary {
+	position: relative;
+
+	list-style-type: '';
+
+	&::-webkit-details-marker {
+		content: '';
+
+		display: none;
+	}
+
+	&::after {
+		content: '';
+		content: '' / '+';
+
+		position: absolute;
+		inset: auto auto 100% 100%;
+
+		block-size: var(--size-s);
+		inline-size: var(--size-s);
+
+		border-radius: 50%;
+		background-image: linear-gradient(90deg, transparent calc(50% - 0.5px), var(--C-canvas) 0, var(--C-canvas) calc(50% + 0.5px), transparent 0),
+			linear-gradient(0deg, transparent calc(50% - 0.5px), var(--C-canvas) 0, var(--C-canvas) calc(50% + 0.5px), transparent 0);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 50% 50%;
+		background-color: currentColor;
+
+		will-change: rotate;
+	}
+
+	.about-icons-list-details[open] &::after {
+		rotate: 45deg;
+	}
+}
+
+.about-icons-list-details[open] {
+	z-index: 1;
+}
+.about-icons-list-details[open] .about-icons-list-summary {
+	z-index: 2;
+}
+
+.about-icons-list-extra {
+	position: absolute;
+	inset: 100% auto auto 50%; /* Leaving room for growth */
+	z-index: 1;
+
+	display: flex;
+	justify-content: center;
+	gap: var(--size-2xs);
+	inline-size: fit-content;
+	min-inline-size: 100%;
+	margin: 0 auto;
+	padding: var(--size-2xs);
+
+	text-align: center;
+
+	background: var(--C-canvas);
+	background: color-mix(in hsl, var(--C-canvas), transparent 25%);
+
+	translate: -50% 0;
+
+	& .about-icons-list-icon {
+		--ICON-size: calc(var(--s) * 0.75); /* Teeny bit smaller! */
+
+		flex-shrink: 0; /* Safari fix */
+	}
+}
+
+.about-icons-list:has(.about-icons-list-details[open]) .about-icons-list-item:not(:has(.about-icons-list-details[open])) {
+	opacity: 0.5;
+}
+
+@media (--accept-motion) {
+	.about-icons-list-summary::after {
+		transition: rotate var(--anim-medium) var(--easing-out);
+	}
+	.about-icons-list-details[open] .about-icons-list-extra {
+		animation: revealDown var(--anim-medium) var(--easing-out) 1 backwards;
+	}
+
+	.about-icons-list-item {
+		transition: opacity var(--anim-medium) var(--easing-out);
+	}
+}
+
+@keyframes revealDown {
+	from {
+		opacity: 0;
+		transform: translateY(-25%);
+	}
 }
