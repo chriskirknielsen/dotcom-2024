@@ -467,8 +467,9 @@
 	}
 
 	&::after {
+		--TL-plus-thickness: 0.999px; /* Technically half-thickness */
+		--TL-plus-stem: transparent calc(50% - var(--TL-plus-thickness)), var(--C-canvas) 0, var(--C-canvas) calc(50% + var(--TL-plus-thickness)), transparent 0;
 		content: '';
-		content: '' / '+';
 
 		position: absolute;
 		inset: auto auto 100% 100%;
@@ -477,18 +478,17 @@
 		inline-size: var(--size-s);
 
 		border-radius: 50%;
-		background-image: linear-gradient(90deg, transparent calc(50% - 0.5px), var(--C-canvas) 0, var(--C-canvas) calc(50% + 0.5px), transparent 0),
-			linear-gradient(0deg, transparent calc(50% - 0.5px), var(--C-canvas) 0, var(--C-canvas) calc(50% + 0.5px), transparent 0);
+		background-image: linear-gradient(90deg, var(--TL-plus-stem)), linear-gradient(0deg, var(--TL-plus-stem));
 		background-position: center;
 		background-repeat: no-repeat;
-		background-size: 50% 50%;
+		background-size: 67% 67%;
 		background-color: currentColor;
 
-		will-change: rotate;
+		transform: scale(0.999); /* Fixes sub-pixel and Safari cut-off issues */
 	}
 
 	.about-icons-list-details[open] &::after {
-		rotate: 45deg;
+		transform: scale(0.999) rotate(225deg);
 	}
 }
 
@@ -532,7 +532,7 @@
 
 @media (--accept-motion) {
 	.about-icons-list-summary::after {
-		transition: rotate var(--anim-medium) var(--easing-out);
+		transition: transform var(--anim-medium) var(--easing-out);
 	}
 	.about-icons-list-details[open] .about-icons-list-extra {
 		animation: revealDown var(--anim-medium) var(--easing-out) 1 backwards;
@@ -541,11 +541,34 @@
 	.about-icons-list-item {
 		transition: opacity var(--anim-medium) var(--easing-out);
 	}
+
+	@supports (interpolate-size: allow-keywords) {
+		.about-icons-list-details {
+			&::details-content {
+				overflow-y: visible;
+
+				opacity: 0;
+				transform: scale(0.75) translateY(-25%);
+
+				transition-property: content-visibility, opacity, transform;
+				transition-behavior: allow-discrete;
+			}
+
+			&[open]::details-content {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		.about-icons-list-details[open] .about-icons-list-extra {
+			animation: none;
+		}
+	}
 }
 
 @keyframes revealDown {
 	from {
 		opacity: 0;
-		transform: translateY(-25%);
+		transform: scale(0.75) translateY(-25%);
 	}
 }
