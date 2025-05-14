@@ -447,6 +447,8 @@
 
 .about-icons-list-icon {
 	--ICON-size: var(--s);
+
+	will-change: opacity; /* Prevents a sub-pixel jump in Safari when switching from non-GPU to GPU mode (due to 50% opacity when a sibling element is expanded) */
 }
 
 .about-icons-list-details {
@@ -467,8 +469,6 @@
 	}
 
 	&::after {
-		--TL-plus-thickness: 0.999px; /* Technically half-thickness */
-		--TL-plus-stem: transparent calc(50% - var(--TL-plus-thickness)), var(--C-canvas) 0, var(--C-canvas) calc(50% + var(--TL-plus-thickness)), transparent 0;
 		content: '';
 
 		position: absolute;
@@ -478,13 +478,13 @@
 		inline-size: var(--size-s);
 
 		border-radius: 50%;
-		background-image: linear-gradient(90deg, var(--TL-plus-stem)), linear-gradient(0deg, var(--TL-plus-stem));
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: 67% 67%;
-		background-color: currentColor;
+		background: currentColor;
 
-		transform: scale(0.999); /* Fixes sub-pixel and Safari cut-off issues */
+		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='white' d='M0 0h100v100H0z'/%3E%3Cpath stroke='black' stroke-width='16' d='M50 20v60M20 50h60'/%3E%3C/svg%3E");
+		mask-repeat: no-repeat;
+		mask-position: 50%;
+		mask-size: 100% 100%;
+		mask-mode: luminance;
 	}
 
 	.about-icons-list-details[open] &::after {
