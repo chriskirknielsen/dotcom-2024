@@ -1,0 +1,38 @@
+---
+title: Music
+summary: My musical tastes laid bare
+permalink: /music/
+section: music
+tags: [_slash]
+artists: {
+    "sleep-token": "Sleep Token",
+    "thrice": "Thrice",
+    "architects": "Architects",
+    "nine-inch-nails": "Nine Inch Nails",
+    "deadmau5": "deadmau5",
+    "deftones": "Deftones",
+    "carpenter-brut": "Carpenter Brut",
+    "bring-me-the-horizon": "Bring Me The Horizon",
+    "bad-omens": "Bad Omens",
+    "linkin-park": "Linkin Park",
+    "justice": "Justice",
+    "tycho": "Tycho",
+}
+---
+
+<p>
+    While I do make music (well, not so much anymore) as <a href="https://chronoise.com" class="link-label-anchor">{% svg 'chronoise-icon', { class: 'inline-icon inline-icon--center' } %} <span class="link-label-text">Chronoise</span></a>, this page is a little “shrine” for the artists I enjoy listening to rather frequently. If you think there's a band I might like, please share <a href="{{ metadata.author.mastodon }}">with me on Mastodon</a>!
+</p>
+
+<hr aria-hidden="true">
+
+<ul class="cards" data-grid-cols="3">
+    {% for artistKey, artistName in artists %}
+    <li class="card-wrapper">
+        <figure>
+            {% injectsvg 'artists/'+artistKey, { class: "single-media" } %}
+            <figcaption class="textAlign-center">{{ artistName }}</figcaption>
+        </figure>
+    </li>
+    {% endfor %}
+</ul>

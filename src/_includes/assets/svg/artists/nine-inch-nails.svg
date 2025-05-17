@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200">
+    <title>Nine Inch Nails logo</title>
+    <path fill="#1e1e1e" stroke="#df492d" stroke-width="20" d="M1190 10v1180H10V10z" />
+    <g fill="#df492d">
+        <path d="M344 487v226h512V487H344Zm483 197H373V516h454v168Z" />
+        <path d="m688.8 657 73.7-67.6-.5 67.5h33.2V543.6h-33.9l-72.9 65.8v-65.8H654v113.3h34.8ZM438.1 588.4l74.2 68.5h36V543.6H512v66.8l-73.8-66.8H405v113.3h33.1v-68.5ZM617.4 543.6h-33.9v113.3h34V543.6Z" />
+    </g>
+</svg>

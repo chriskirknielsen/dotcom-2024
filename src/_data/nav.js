@@ -14,6 +14,7 @@ const slashPages = [
 	{ path: '/support/', label: '/support' },
 	{ path: '/now/', label: '/now' },
 	{ path: '/games/', label: '/games' },
+	{ path: '/music/', label: '/music' },
 ];
 const gamesLibrary = { path: '/games/library/', label: 'Games Library' };
 const email = { path: `mailto:${encodeURIComponent('chriskirknielsen+dot-com@gmail.com')}`, label: 'Email' };

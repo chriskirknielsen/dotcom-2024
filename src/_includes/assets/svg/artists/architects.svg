@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200">
+    <title>Architects logo</title>
+    <path fill="#1b1f26" stroke="#ccbea3" stroke-width="20" d="M1190 10v1180H10V10z" />
+    <g fill="none" stroke="#ccbea3" stroke-width="39.3">
+        <path d="M300.7 701.7a315.8 315.8 0 0 0 598.6 0" />
+        <path d="M276.6 600.9h646.8" />
+        <path d="m319.9 439.2 480.9 277.7" />
+        <path d="M438.3 320.8 600 600.9" />
+        <path d="M880.1 439.2 399.2 716.9" />
+        <path d="M761.7 320.8 600 600.9" />
+        <path d="M600 277.5v563.7" />
+    </g>
+</svg>
