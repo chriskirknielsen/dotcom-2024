@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200">
+    <title>Justice logo</title>
+    <g stroke="#be9641">
+        <path fill="#090209" stroke-width="20" d="M1190 10v1180H10V10z" />
+        <path fill="#090209" paint-order="stroke" stroke-width="8" d="m836.5 419.6-38.3-59.2H656.8l-19.7-83.7h-74.2l-19.7 83.7H401.8l-38.3 59.2 27.8 121.5h109.4l-60.5 257.1 30.6 133.9h258.4l30.6-133.9-60.5-257.1h109.4l27.8-121.5z" />
+        <g fill="none" stroke-width="2">
+            <path d="M759.8 798.2H440.2" />
+            <path d="M363.5 419.6h165.8l-28.6 121.5M836.5 419.6H670.7l28.6 121.5" />
+        </g>
+    </g>
+</svg>
