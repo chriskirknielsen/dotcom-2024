@@ -10,12 +10,18 @@ artists: {
     "architects": "Architects",
     "nine-inch-nails": "Nine Inch Nails",
     "deadmau5": "deadmau5",
+    "audioslave": "Audioslave",
     "deftones": "Deftones",
+    "blink-182": "blink-182",
     "carpenter-brut": "Carpenter Brut",
     "bring-me-the-horizon": "Bring Me The Horizon",
     "bad-omens": "Bad Omens",
     "linkin-park": "Linkin Park",
+    "the-strokes": "The Strokes",
     "justice": "Justice",
+    "a-perfect-circle": "A Perfect Circle",
+    "tool": "Tool",
+    "aphex-twin": "Aphex Twin",
     "tycho": "Tycho",
 }
 ---
@@ -30,7 +36,7 @@ artists: {
     {% for artistKey, artistName in artists %}
     <li class="card-wrapper">
         <figure>
-            {% injectsvg 'artists/'+artistKey, { class: "single-media" } %}
+            {% image "/" + assets.images + "/artists/"+artistKey+".svg" | toRoot, "Logo for "+artistName, "", { bypassLink: true, bypassCdn: true, width: 600, height: 600, eager: loop.index <= 3 } %}
             <figcaption class="textAlign-center">{{ artistName }}</figcaption>
         </figure>
     </li>

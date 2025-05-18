@@ -54,7 +54,12 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 			attrs.poster = options.poster;
 		}
 	} else if (type === 'image') {
-		attrs = { loading: 'lazy', decoding: 'async', alt: alt, srcset: srcset.join(', '), sizes: sizes };
+		attrs = { alt: alt, decoding: 'async', loading: options.eager ? 'eager' : 'lazy' };
+
+		if (!options.bypassCdn) {
+			attrs.srcset = srcset.join(', ');
+			attrs.sizes = sizes;
+		}
 	}
 
 	// Assign a ratio to the media
@@ -102,7 +107,14 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 	if (type === 'video') {
 		mediaMarkup = `<video src="${src}" ${attrsStr}></video>`;
 	} else if (type === 'image') {
-		mediaMarkup = `<a href="${src}"><img src="${toNetlifyImage(src, { w: widths.at(-2) })}" ${attrsStr} /></a>`;
+		const imageSrc = options.bypassCdn ? src : toNetlifyImage(src, { w: widths.at(-2) });
+		const imageTag = `<img src="${imageSrc}" ${attrsStr}>`;
+
+		if (options.bypassLink) {
+			mediaMarkup = imageTag;
+		} else {
+			mediaMarkup = `<a href="${src}">${imageTag}</a>`;
+		}
 	}
 
 	let output;
