@@ -113,7 +113,8 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 		if (options.bypassLink) {
 			mediaMarkup = imageTag;
 		} else {
-			mediaMarkup = `<a href="${src}">${imageTag}</a>`;
+			const imageLink = options.linkOverride || src;
+			mediaMarkup = `<a href="${imageLink}">${imageTag}</a>`;
 		}
 	}
 
