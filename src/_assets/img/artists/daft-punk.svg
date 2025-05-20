@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200">
     <title>Daft Punk's Alive logo</title>
-    <g stroke="#01ecff">
-        <path fill="#0a061e" stroke-width="20" d="M10 10h1180v1180H10V10z" />
+    <g stroke="#5cafcc">
+        <path fill="#09133d" stroke-width="20" d="M10 10h1180v1180H10V10z" />
         <g fill="none" stroke-width="10">
             <path d="M547 356H360L232 581h184l141-242 10 18" />
             <path d="m262 565 108-190h145L407 565H262zM443 502l-73-127M479 439l-36-64M407 565l-72-128M335 565l-36-64M336 565l107-190" />
