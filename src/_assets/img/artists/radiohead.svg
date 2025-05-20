@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200">
     <title>Radiohead logo</title>
     <path fill="#212852" stroke="#6a9fcb" stroke-width="20" d="M10 10h1180v1180H10V10z" />
-    <g fill="none" stroke="#6a9fcb" stroke-width="20">
+    <g fill="none" stroke="#6a9fcb" stroke-width="20" transform="translate(0 28)">
         <circle cx="600" cy="632.9" r="269.8" />
         <path d="M342 711h517" />
         <circle cx="464" cy="583.6" r="127.3" />
