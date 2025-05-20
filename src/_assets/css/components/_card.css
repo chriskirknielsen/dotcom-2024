@@ -15,9 +15,6 @@
 		&[data-grid-cols='2'] {
 			--gridlist-cell-size: 24rem;
 		}
-
-		&[data-grid-layout='importance'] {
-		}
 	}
 }
 

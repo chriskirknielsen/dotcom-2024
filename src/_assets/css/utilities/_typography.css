@@ -32,6 +32,19 @@
 	font-size: 1.25em;
 }
 
+/** Line height adjustments */
+.lineHeight-normal {
+	line-height: 1.6;
+}
+
+.lineHeight-tight {
+	line-height: 1.1;
+}
+
+.lineHeight-dense {
+	line-height: 1;
+}
+
 /** Font weights */
 .fontWeight-bold {
 	font-weight: bold;
