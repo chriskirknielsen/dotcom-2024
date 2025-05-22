@@ -16,7 +16,7 @@ const slashPages = [
 	{ path: '/games/', label: '/games' },
 	{ path: '/music/', label: '/music' },
 ];
-const gamesLibrary = { path: '/games/library/', label: 'Games Library' };
+const gamesLibrary = { path: '/games/library/', label: 'Gaming Library' };
 const email = { path: `mailto:${encodeURIComponent('chriskirknielsen+dot-com@gmail.com')}`, label: 'Email' };
 
 export default {
