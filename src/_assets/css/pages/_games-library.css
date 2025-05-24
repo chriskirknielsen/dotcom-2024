@@ -452,9 +452,9 @@
 }
 
 [data-gaming-platform='pc'] {
-	--game-case-plastic: #121313;
+	--game-case-plastic: #333639;
 	--game-spine-top-text: #f8f8f8;
-	--game-spine-top-bg: #333639;
+	--game-spine-top-bg: #121313;
 }
 
 [data-gaming-platform='gameboy'],
