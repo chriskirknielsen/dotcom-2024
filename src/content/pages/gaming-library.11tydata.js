@@ -24,8 +24,21 @@ const gameslibrary = await notionDatabaseQuery({
 				select: { is_not_empty: true },
 			},
 			{
-				property: 'Platform',
-				select: { does_not_equal: 'PC' },
+				or: [
+					// I have a lot of PC games I've never played so I'd rather just list the ones I've completed
+					{
+						property: 'Platform',
+						select: {
+							does_not_equal: 'PC',
+						},
+					},
+					{
+						property: 'Completed',
+						checkbox: {
+							equals: true,
+						},
+					},
+				],
 			},
 			{
 				property: 'Platform',
@@ -43,10 +56,6 @@ const gameslibrary = await notionDatabaseQuery({
 				property: 'Hidden',
 				checkbox: { equals: false },
 			},
-			// {
-			// 	property: 'Parent item',
-			// 	relation: { is_empty: true },
-			// },
 		],
 	},
 	dataPostProcess: async (data) => {
@@ -146,7 +155,7 @@ const gameslibrary = await notionDatabaseQuery({
 						};
 					})
 					.filter((t) => Boolean(t))
-					.sort((a, b) => a.sortTitle.localeCompare(b.sortTitle, 'en', { numeric: true }))
+					.sort((a, b) => (a.sortTitle || a.title).localeCompare(b.sortTitle || b.title, 'en', { numeric: true }))
 					.map((sub) => {
 						delete sub.sortTitle; // We don't need this property once we've sorted the sub-items
 						return sub;

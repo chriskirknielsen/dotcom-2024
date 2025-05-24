@@ -13,11 +13,12 @@ platformLabels: {
     'PSV': 'PS Vita',
     'PSP': 'PlayStation Portable',
     'Switch': 'Switch',
-    'Dreamcast': 'Dreamcast'
+    'Dreamcast': 'Dreamcast',
+    'PC': 'PC',
 }
 ---
 
-{% renderTemplate 'md' %}Drawing _a little_ inspiration from [Robb Knight’s list](https://rknight.me/collections/games/), here’s my mostly accurate collection of video games (many of which are collecting something of their own: dust!).{% endrenderTemplate %}
+{% renderTemplate 'md' %}Drawing _a little_ inspiration from [Robb Knight’s list](https://rknight.me/collections/games/), here’s my mostly accurate collection of video games (many of which are collecting something of their own: dust!). Games for more recent consoles are mostly digital copies, that I.{% endrenderTemplate %}
 
 <hr aria-hidden="true">
 
@@ -45,7 +46,12 @@ platformLabels: {
 {% for platform, games in gameslibrary.data | groupby('platform') | dictsort | sortentries(platformLabels | keys) %}
     {% set platformSlug = platform | lower | replace(' ', '-') %}
     {% setAsync 'expanderLabel' %}
-        {% injectsvg 'gaming-'+platformSlug, { class: 'gaming-logo inline-icon' } %}
+        {% if platformSlug == 'pc' %}
+            {% svg 'device-desktop', { class: 'gaming-logo inline-icon' } %}
+            {% injectsvg 'gaming-pc', { class: 'visually-hidden' } %}
+        {% else %}
+            {% injectsvg 'gaming-'+platformSlug, { class: 'gaming-logo inline-icon' } %}
+        {% endif %}
         {{ platformLabels[platform] }} ({{ games | length }})
     {% endsetAsync %}
     {% expander expanderLabel, true, loop.first %}
@@ -105,6 +111,16 @@ platformLabels: {
                                         class="gaming-spine-logo-extra"
                                         aria-hidden="true"
                                     ><use xlink:href="#gaming-vertical-{{ platformSlug }}-logo"></use></svg>
+                                {% elseif platformSlug == 'pc' %}
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="32"
+                                        height="32"
+                                        viewBox="0 0 32 32"
+                                        class="gaming-spine-logo-extra"
+                                        aria-hidden="true"
+                                    ><use xlink:href="#gaming-pc-logo"></use></svg>
                                 {% else %}
                                     {% set displayLogo = 'ps1' if (platformSlug in ['ps2', 'psp']) else platformSlug %}
                                     {% if platformSlug in ['ps4', 'ps5'] %}{% set displayLogo = 'solid-ps1' %}{% endif %}
@@ -221,7 +237,7 @@ platformLabels: {
                 (<span data-slot-computed="format"></span>)
             </dd>
 
-            <dt class="grouper grouper--icon-text-pair">
+            <dt data-slot-show="region" class="grouper grouper--icon-text-pair">
                 {% svg 'world', { class: 'inline-icon' } %}
                 <span>Region</span>
             </dt>
