@@ -245,7 +245,7 @@ summary: "Welcome to the personal website of the one they call Christopher Kirk-
 </hgroup>
 
 <div class="flow" data-homepage="body">
-	<h2>The Human Behind the Website</h2>
+	<h2 id="the-human-behind-the-website">The Human Behind the Website</h2>
 
 	<p>
 		Hey there, my name’s Chris! I’m a <strong class="p-job-title">front-end developer</strong> with a designer background who loves building for the web. I currently work at <a href="https://mojopsg.com">MOJO</a> and still <a href="/designs/">design</a> on occasion. I enjoy languages, movies, and <strong>all the puns</strong>. Oh, and I’m bald thanks to my DNA. Still curious?
@@ -256,7 +256,7 @@ summary: "Welcome to the personal website of the one they call Christopher Kirk-
 		} %}
 	</p>
 </div>
-<aside class="homepage-side" data-homepage="side">
+<aside class="homepage-side" data-homepage="side" aria-labelledby="the-human-behind-the-website">
 	<h2 class="visually-hidden">Good Old Hyperlinks</h2>
 
 	<div class="homepage-photo">
@@ -279,7 +279,7 @@ summary: "Welcome to the personal website of the one they call Christopher Kirk-
 			{% component 'cta', { url: social.codepen.url, label: { aria: social.codepen.label }, icon: 'codepen', iconClass: ' ', iconSvgOpts: { width: 24, height: 24 } } %}
 		</li>
 		<li>
-			{% component 'cta', { url: social.github.url, label: { aria: social.github.label }, icon: 'github', iconClass: ' ', iconSvgOpts: { width: 24, height: 24 } } %}
+			{% component 'cta', { url: social.github.url, label: { aria: social.github.label }, icon: 'github-icon', iconClass: ' ', iconSvgOpts: { width: 24, height: 24 } } %}
 		</li>
 	</ul>
 </aside>

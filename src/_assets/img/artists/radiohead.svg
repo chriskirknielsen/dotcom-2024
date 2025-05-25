@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200">
+    <title>Radiohead logo</title>
+    <path fill="#212852" stroke="#6a9fcb" stroke-width="20" d="M10 10h1180v1180H10V10z" />
+    <g fill="none" stroke="#6a9fcb" stroke-width="20" transform="translate(0 28)">
+        <circle cx="600" cy="632.9" r="269.8" />
+        <path d="M342 711h517" />
+        <circle cx="464" cy="583.6" r="127.3" />
+        <circle cx="736.1" cy="583.6" r="127.3" />
+        <path d="M636 363a146 146 0 1 1 212 163" />
+        <path d="M688 379a93 93 0 1 1 134 100M564 363a146 146 0 1 0-212 163" />
+        <path d="M512 379a93 93 0 1 0-134 100" />
+        <path stroke-linejoin="bevel" d="m817 793-55-82-53 169-55-169-54 192-54-192-55 169-53-169-55 82" />
+    </g>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200">
+    <title>The Glitch Mob logo</title>
+    <path fill="#1c1c11" stroke="#b8a344" stroke-width="20" d="M10 10h1180v1180H10V10z" />
+    <g fill="none" stroke="#b8a344" stroke-width="10">
+        <circle cx="465.4" cy="597.6" r="269.2" />
+        <circle cx="734.6" cy="597.6" r="269.2" />
+        <path stroke-linejoin="bevel" d="M600 364.4 330.7 830.8h538.6L600 364.4z" />
+        <path stroke-linejoin="bevel" d="m600 830.8 133.3-230.9H466.7L600 830.8zM600 364.4v466.4" />
+    </g>
+</svg>

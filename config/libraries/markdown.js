@@ -1,5 +1,6 @@
 import markdownIt from 'markdown-it';
 import markdownItAnchor from 'markdown-it-anchor';
+import markdownItAttrs from 'markdown-it-attrs';
 import markdownItCodeWrap from 'markdown-it-codewrap';
 import * as cheerio from 'cheerio';
 
@@ -110,6 +111,12 @@ export default function (eleventyConfig, options = {}) {
 		linkify: true,
 	};
 
+	let markdownItAttrsOptions = {
+		leftDelimiter: options.attrsLeftDelimiter || '{',
+		rightDelimiter: options.attrsRightDelimiter || '}',
+		allowedAttributes: options.attrsAllowedAttributes || [],
+	};
+
 	let markdownItAnchorOptions = {
 		permalink: true,
 		permalinkSpace: false,
@@ -157,7 +164,11 @@ export default function (eleventyConfig, options = {}) {
 	};
 
 	// Configure the MarkdownIt instance
-	const md = new markdownIt(markdownItOptions).disable('code').use(markdownItAnchor, markdownItAnchorOptions).use(markdownItCodeWrap, markdownItCodeWrapOptions);
+	const md = new markdownIt(markdownItOptions)
+		.disable('code')
+		.use(markdownItAttrs, markdownItAttrsOptions)
+		.use(markdownItAnchor, markdownItAnchorOptions)
+		.use(markdownItCodeWrap, markdownItCodeWrapOptions);
 
 	/** Configure the markdown-it library to use. */
 	eleventyConfig.setLibrary('md', md);

@@ -92,3 +92,4 @@ This helpful matrix from the original article is an image, so… _tadaaa_ (hopef
 - [Robin Rendle’s thoughts on their blog](https://robinrendle.com/notes/item-flow/)
 - [Andy Bell’s thoughts via Piccalilli](https://piccalil.li/links/item-flow-part-1-a-new-unified-concept-for-layout/)
 - [Ahmad Shadeed’s (interactive!) notes on their blog](https://ishadeed.com/article/item-flow/)
+- [Eric Meyer’s thoughts on their website](https://meyerweb.com/eric/thoughts/2025/05/21/masonry-item-flow-and-gulp/)

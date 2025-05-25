@@ -1,0 +1,10 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="32"
+    height="32"
+    viewBox="0 0 32 32"
+>
+    <g id="gaming-pc-logo">
+        <path fill="#fff" d="M1.3 3.3v25.4h6.2v-8.5h3.6l4-4v-9l-4-4H1.3ZM8.7 15H7.5V8.4h1.2V15Zm22-1.8V7.3l-4-4.1h-6.6l-4 4.1v17.4l4 4h6.6l4-4v-6.9h-6.6v5.8H23V8.4h1.1v4.8h6.6z" />
+    </g>
+</svg>

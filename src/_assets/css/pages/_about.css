@@ -434,10 +434,141 @@
 
 .about-icons-list {
 	--s: var(--size-l); /* Size */
+
+	isolation: isolate;
+
 	font-size: var(--s);
 	/* line-height: calc(1.6 * var(--s)); */
 }
 
+.about-icons-list-item {
+	line-height: 1;
+}
+
 .about-icons-list-icon {
 	--ICON-size: var(--s);
+
+	will-change: opacity; /* Prevents a sub-pixel jump in Safari when switching from non-GPU to GPU mode (due to 50% opacity when a sibling element is expanded) */
+}
+
+.about-icons-list-details {
+	position: relative;
+
+	display: inline-block;
+}
+
+.about-icons-list-summary {
+	position: relative;
+
+	list-style-type: '';
+
+	&::-webkit-details-marker {
+		content: '';
+
+		display: none;
+	}
+
+	&::after {
+		content: '';
+
+		position: absolute;
+		inset: auto auto 100% 100%;
+
+		block-size: var(--size-s);
+		inline-size: var(--size-s);
+
+		border-radius: 50%;
+		background: currentColor;
+
+		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='white' d='M0 0h100v100H0z'/%3E%3Cpath stroke='black' stroke-width='16' d='M50 20v60M20 50h60'/%3E%3C/svg%3E");
+		mask-repeat: no-repeat;
+		mask-position: 50%;
+		mask-size: 100% 100%;
+		mask-mode: luminance;
+	}
+
+	.about-icons-list-details[open] &::after {
+		transform: scale(0.999) rotate(225deg);
+	}
+}
+
+.about-icons-list-details[open] {
+	z-index: 1;
+}
+.about-icons-list-details[open] .about-icons-list-summary {
+	z-index: 2;
+}
+
+.about-icons-list-extra {
+	position: absolute;
+	inset: 100% auto auto 50%; /* Leaving room for growth */
+	z-index: 1;
+
+	display: flex;
+	justify-content: center;
+	gap: var(--size-2xs);
+	inline-size: fit-content;
+	min-inline-size: 100%;
+	margin: 0 auto;
+	padding: var(--size-2xs);
+
+	text-align: center;
+
+	background: var(--C-canvas);
+	background: color-mix(in hsl, var(--C-canvas), transparent 25%);
+
+	translate: -50% 0;
+
+	& .about-icons-list-icon {
+		--ICON-size: calc(var(--s) * 0.75); /* Teeny bit smaller! */
+
+		flex-shrink: 0; /* Safari fix */
+	}
+}
+
+.about-icons-list:has(.about-icons-list-details[open]) .about-icons-list-item:not(:has(.about-icons-list-details[open])) {
+	opacity: 0.5;
+}
+
+@media (--accept-motion) {
+	.about-icons-list-summary::after {
+		transition: transform var(--anim-medium) var(--easing-out);
+	}
+	.about-icons-list-details[open] .about-icons-list-extra {
+		animation: revealDown var(--anim-medium) var(--easing-out) 1 backwards;
+	}
+
+	.about-icons-list-item {
+		transition: opacity var(--anim-medium) var(--easing-out);
+	}
+
+	@supports (interpolate-size: allow-keywords) {
+		.about-icons-list-details {
+			&::details-content {
+				overflow-y: visible;
+
+				opacity: 0;
+				transform: scale(0.75) translateY(-25%);
+
+				transition-property: content-visibility, opacity, transform;
+				transition-behavior: allow-discrete;
+			}
+
+			&[open]::details-content {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		.about-icons-list-details[open] .about-icons-list-extra {
+			animation: none;
+		}
+	}
+}
+
+@keyframes revealDown {
+	from {
+		opacity: 0;
+		transform: scale(0.75) translateY(-25%);
+	}
 }

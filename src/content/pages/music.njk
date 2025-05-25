@@ -1,0 +1,60 @@
+---
+title: Music
+summary: My musical tastes laid bare
+permalink: /music/
+section: music
+tags: [_slash]
+artists: {
+    "sleep-token": "Sleep Token",
+    "thrice": "Thrice",
+    "architects": "Architects",
+    "audioslave": "Audioslave",
+    "deadmau5": "deadmau5",
+    "nine-inch-nails": "Nine Inch Nails",
+    "deftones": "Deftones",
+    "rammstein": "Rammstein",
+    "pendulum": "Pendulum",
+    "blink-182": "blink-182",
+    "bring-me-the-horizon": "Bring Me The Horizon",
+    "bad-omens": "Bad Omens",
+    "innerpartysystem": "Innerpartysystem",
+    "linkin-park": "Linkin Park",
+    "daft-punk": "Daft Punk",
+    "justice": "Justice",
+    "a-perfect-circle": "A Perfect Circle",
+    "tool": "Tool",
+    "foo-fighters": "Foo Fighters",
+    "radiohead": "Radiohead",
+    "the-glitch-mob": "The Glitch Mob",
+    "static-x": "Static-X",
+    "slipknot": "Slipknot",
+    "tycho": "Tycho",
+    "the-strokes": "The Strokes",
+    "carpenter-brut": "Carpenter Brut",
+    "aphex-twin": "Aphex Twin",
+}
+---
+
+<style>
+.artist-figure { inline-size: 100%; max-inline-size: 10rem; margin-inline: auto; }
+.artist-label { margin-block-start: var(--size-s, 8px); }
+</style>
+
+<p>
+    While I do make music (well… used to!) as <a href="https://chronoise.com" class="link-label-anchor">{% svg 'chronoise-icon', { class: 'inline-icon inline-icon--center' } %} <span class="link-label-text">Chronoise</span></a>, this page is a little “shrine” for some of the artists I enjoy listening to with variable frequency (but my iPod has loads more). If you think there's a band I might like, please share <a href="{{ metadata.author.mastodon }}">with me on Mastodon</a>!
+</p>
+
+<hr aria-hidden="true">
+
+<ul class="cards" style="--gridlist-cell-size: 8rem;">
+    {% for artistKey, artistName in artists %}
+    <li class="card-wrapper">
+        <figure class="artist-figure">
+            {% image "/" + assets.images + "/artists/"+artistKey+".svg" | toRoot, "Logo for "+artistName, "", { title: artistName, bypassLink: true, bypassCdn: true, width: 600, height: 600, eager: loop.index <= 3 } %}
+            <figcaption class="artist-label textAlign-center lineHeight-dense fontSize-tiny">{{ artistName }}</figcaption>
+        </figure>
+    </li>
+    {% endfor %}
+</ul>
+
+<p class="textAlign-center fontSize-smaller fontStyle-italic">Don’t-sue-me notice: all logos belong to their respective owners.</p>

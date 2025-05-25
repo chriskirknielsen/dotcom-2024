@@ -26,7 +26,7 @@
 	li {
 		counter-increment: tocList;
 
-		page-break-inside: avoid;
+		break-inside: avoid;
 
 		&::before {
 			content: counter(tocList, var(--toc-marker-type, decimal-leading-zero)) ' ';

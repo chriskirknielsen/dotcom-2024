@@ -3,12 +3,12 @@
         <p class="hero-sup">{{ heroSup | safe }}</p>
     {% endif %}
 
-    <h1 class="hero-heading" style="--HERO-title-scaling: {{ heroTitle | sizeFactor }};">{{ heroTitle | shy | safe }}</h1>
+    <h1 class="hero-heading" id="hero-heading" style="--HERO-title-scaling: {{ heroTitle | sizeFactor }};">{{ heroTitle | shy | safe }}</h1>
 
     {% if heroTags %}
         <div class="hero-tags">
             <p id="tags-description" class="visually-hidden">Tags:</p>
-            <ul class="flex-list | fontSize-small" aria-describedby="tags-description">
+            <ul class="flex-list flex-list--center | fontSize-small" aria-describedby="tags-description">
                 {% for tag in heroTags | startsWith('_', true) %}
                     <li>
                         <a href="/tags/{{ tag }}" class="button button--tag | p-category">{{ tag }}</a>
@@ -24,7 +24,7 @@
 
     {% if heroCta %}
         <div class="hero-tags">
-            <ul class="flex-list | fontSize-small">
+            <ul class="flex-list flex-list--center | fontSize-small">
                 {% for cta in heroCta %}
                     <li>
                         {% component 'cta', cta | objConcat({ pageContext: pageContext }) %}

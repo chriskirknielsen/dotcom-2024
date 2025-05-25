@@ -47,7 +47,7 @@
 	&::after {
 		content: '';
 		grid-column: --edge;
-		width: 100%;
+		inline-size: 100%;
 		grid-row: --text;
 		align-self: stretch;
 		border-width: var(--HOME-logo-line-weight) 0;

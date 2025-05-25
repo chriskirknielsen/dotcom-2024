@@ -1,4 +1,6 @@
 <header class="header-wrap | container">
+    <a class="skip-link" href="#content">Skip to content</a>
+    
     <div class="header">
         <a href="/" class="header-logo | u-url" {{ '/' | getIsCurrentPage(page) | safe }}>
             {% injectsvg 'logo', {
@@ -23,7 +25,7 @@
         {% endif %}
 
         <div class="header-menu">
-            <nav class="header-nav">
+            <nav class="header-nav" aria-label="Main navigation">
                 <ul class="header-list">
                     {% for menuItem in nav.navbar %}
                         <li class="header-item">

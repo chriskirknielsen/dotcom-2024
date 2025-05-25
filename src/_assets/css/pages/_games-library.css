@@ -293,16 +293,29 @@
 	--box-depth: 15;
 }
 
-[data-gaming-platform='ps2'] {
-	--game-case-plastic: #2e60c1;
-	--game-spine-top-text: #f8f8f8;
-	--game-spine-top-bg: #464a4f;
+[data-gaming-platform='ps2'],
+[data-gaming-platform='pc'] {
 	--box-width: 135;
 	--box-height: 190;
 	--box-depth: 14;
-	--spine-paper-padding: 0.25em 0.25em 0.5em;
 	--box-border-size-block: 0.1875em;
 	--box-border-size-inline: 0;
+
+	& .gaming-spine-top {
+		align-items: center;
+		gap: 0.5em;
+	}
+
+	& .gaming-spine-logo-extra {
+		inline-size: 67%;
+	}
+}
+
+[data-gaming-platform='ps2'] {
+	--spine-paper-padding: 0.25em 0.25em 0.5em;
+	--game-case-plastic: #2e60c1;
+	--game-spine-top-text: #f8f8f8;
+	--game-spine-top-bg: #464a4f;
 
 	& .gaming-box-wrap {
 		&[data-gaming-edition='platinum'] {
@@ -314,18 +327,9 @@
 		}
 	}
 
-	& .gaming-spine-top {
-		align-items: center;
-		gap: 0.5em;
-	}
-
 	& .gaming-spine-logo {
 		background: #333639;
 		border: 1px solid #c1c1c1;
-	}
-
-	& .gaming-spine-logo-extra {
-		inline-size: 67%;
 	}
 }
 
@@ -445,6 +449,13 @@
 	& .gaming-spine-paper {
 		border-radius: calc(var(--box-border-size) / 2);
 	}
+}
+
+[data-gaming-platform='pc'] {
+	--spine-paper-padding: 0.375em 0.25em;
+	--game-case-plastic: #333639;
+	--game-spine-top-text: #f8f8f8;
+	--game-spine-top-bg: #121313;
 }
 
 [data-gaming-platform='gameboy'],

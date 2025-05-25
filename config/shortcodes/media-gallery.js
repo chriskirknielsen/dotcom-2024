@@ -1,6 +1,13 @@
 //* Imports
 import { toNetlifyImage } from '../utils/image-transforms.js';
 
+function escapeAttr(attrValue) {
+	return String(attrValue || '')
+		.replace(/"+/g, '&quot;')
+		.replace(/<+/g, '&lt;')
+		.replace(/>+/g, '&gt;');
+}
+
 function imageGalleryShortcode(pictures, addClass = []) {
 	let galleryClasses = [];
 	if (addClass) {
@@ -14,7 +21,7 @@ function imageGalleryShortcode(pictures, addClass = []) {
 }
 
 function mediaShortcode(type, src, alt, caption = '', options = {}) {
-	if (!['image', 'video'].includes(type)) {
+	if (['image', 'video'].includes(type) === false) {
 		throw new Error(`The type parameter must either be image or video.`);
 	}
 	if (typeof alt === 'undefined') {
@@ -30,12 +37,8 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 	const widths = type === 'video' ? [] : options.widths || [480, 800, 1200];
 	const srcset = widths.map((w) => `${toNetlifyImage(src, { w: w })} ${w}w`);
 
-	if (alt.indexOf('"') > -1) {
-		alt = alt.split('"').join('&quot;');
-	}
-	if (alt.indexOf('<') > -1) {
-		alt = alt.split('<').join('&lt;');
-	}
+	// Safely escape the alt attribute
+	alt = escapeAttr(alt);
 
 	let attrs = {};
 
@@ -54,7 +57,16 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 			attrs.poster = options.poster;
 		}
 	} else if (type === 'image') {
-		attrs = { loading: 'lazy', decoding: 'async', alt: alt, srcset: srcset.join(', '), sizes: sizes };
+		attrs = { alt: alt, decoding: 'async', loading: options.eager ? 'eager' : 'lazy' };
+
+		if (!options.bypassCdn) {
+			attrs.srcset = srcset.join(', ');
+			attrs.sizes = sizes;
+		}
+	}
+
+	if (options.title) {
+		attrs.title = escapeAttr(options.title.trim());
 	}
 
 	// Assign a ratio to the media
@@ -102,7 +114,15 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 	if (type === 'video') {
 		mediaMarkup = `<video src="${src}" ${attrsStr}></video>`;
 	} else if (type === 'image') {
-		mediaMarkup = `<a href="${src}"><img src="${toNetlifyImage(src, { w: widths.at(-2) })}" ${attrsStr} /></a>`;
+		const imageSrc = options.bypassCdn ? src : toNetlifyImage(src, { w: widths.at(-2) });
+		const imageTag = `<img src="${imageSrc}" ${attrsStr}>`;
+
+		if (options.bypassLink) {
+			mediaMarkup = imageTag;
+		} else {
+			const imageLink = options.linkOverride || src;
+			mediaMarkup = `<a href="${imageLink}">${imageTag}</a>`;
+		}
 	}
 
 	let output;

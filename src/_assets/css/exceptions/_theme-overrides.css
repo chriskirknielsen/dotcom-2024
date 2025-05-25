@@ -660,13 +660,21 @@ html[data-theme='director'] {
 		--LINK-underline-color: var(--C-accent);
 	}
 
-	:not(pre) > code {		
+	:not(pre) > code {
 		/* Kind of a black marker "redacted" type of thing, hence the slight angle */
-		--CODE-bg: linear-gradient(calc(90deg + 4deg * var(--f, 1)), transparent 2px, var(--C-surface-alt) 3px, var(--C-surface-alt) calc(100% - 3px), transparent calc(100% - 2px));
-		
+		--CODE-bg: linear-gradient(
+			calc(90deg + 4deg * var(--f, 1)),
+			transparent 2px,
+			var(--C-surface-alt) 3px,
+			var(--C-surface-alt) calc(100% - 3px),
+			transparent calc(100% - 2px)
+		);
+
 		padding-inline: 0.25em;
-		
-		&:nth-of-type(2n) { --f: -1; } /* Invert the angle for every other inline code tag */
+
+		&:nth-of-type(2n) {
+			--f: -1;
+		} /* Invert the angle for every other inline code tag */
 	}
 
 	hr {

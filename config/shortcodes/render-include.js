@@ -177,7 +177,8 @@ export default function (eleventyConfig, options = {}) {
 		}
 
 		// Instantiate a new SVG element that will hold the "spritesheet"
-		const emptyHiddenSvgElement = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="visually-hidden" width="0" height="0"></svg>';
+		const emptyHiddenSvgElement =
+			'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="visually-hidden" width="0" height="0" aria-hidden="true"></svg>';
 		const $ = cheerio.load(emptyHiddenSvgElement, null, false);
 		const $svgSprite = $('svg');
 

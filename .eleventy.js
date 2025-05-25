@@ -106,6 +106,9 @@ export default async function (eleventyConfig) {
 	eleventyConfig.addPlugin(embed, { markdownEngine: md });
 	eleventyConfig.addPlugin(expander);
 	eleventyConfig.addPlugin(markdownLibrary, {
+		attrsLeftDelimiter: '{$',
+		attrsRightDelimiter: '$}',
+		attrsAllowedAttributes: ['id'],
 		anchorClass: 'heading-anchor',
 		outerCustomElement: 'code-wrap',
 		outerCustomElementAttrs: { class: 'codeblock', 'copy-label': '📋 Copy', 'copy-class': 'button', 'copy-done-label': '✅ Done' },

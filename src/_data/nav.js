@@ -14,8 +14,9 @@ const slashPages = [
 	{ path: '/support/', label: '/support' },
 	{ path: '/now/', label: '/now' },
 	{ path: '/games/', label: '/games' },
+	{ path: '/music/', label: '/music' },
 ];
-const gamesLibrary = { path: '/games/library/', label: 'Games Library' };
+const gamesLibrary = { path: '/games/library/', label: 'Gaming Library' };
 const email = { path: `mailto:${encodeURIComponent('chriskirknielsen+dot-com@gmail.com')}`, label: 'Email' };
 
 export default {
@@ -25,7 +26,7 @@ export default {
 	footerGroups: [
 		[{ path: '/', label: 'Home' }],
 		[...navbar],
-		[...slashPages, gamesLibrary],
+		[...slashPages],
 		[
 			{ path: '/colophon/', label: 'Colophon' },
 			{ path: '/search/', label: 'Search' },
@@ -34,8 +35,8 @@ export default {
 			{ path: '/webring/', label: 'Webring' },
 		],
 		[
-			{ path: '/archives/', label: 'Website Archives' },
-			{ path: metadata.tweetArchiveUrl, label: 'Tweet Archive' },
+			gamesLibrary,
+			{ path: '/archives/', label: 'Archives' },
 			{ path: '', label: 'Report Issue', isRepoFileLink: true }, // Empty link that gets replaced on every page with the GitHub one
 		],
 		[{ ...rss, label: 'RSS' }, ...socialFromEntry],

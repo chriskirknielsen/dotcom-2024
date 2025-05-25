@@ -55,35 +55,48 @@ Array.from(document.querySelectorAll('.synth-slider, .synth-waveform-button, .sy
 {% renderTemplate 'md' %}
 ## Hobbies
 
-While I’m not watching as many as in the past, I still indulge in a decent amount of [movies and TV shows](https://trakt.tv/users/chriskirknielsen) (I love a good quote). So much good stuff to watch, so little time! I appreciate [video games](/games/), especially narrative and puzzle games, and I enjoy reading when I’m not staring at a screen (e-ink doesn't count, right?), despite being a pretty [slow reader](http://goodreads.com/chriskirknielsen). I also run, which is not something I’d ever have thought myself capable of doing, and yet…!
+While I’m not watching as many as in the past, I still indulge in a decent amount of [movies and TV shows](https://trakt.tv/users/chriskirknielsen) (I love a good quote), and spend many hours listening to [music](/music/) every day. So much good stuff to watch, so little time! I appreciate [video games](/games/), especially narrative and puzzle games, and I enjoy reading a nice [book](http://goodreads.com/chriskirknielsen) when I’m not staring at a screen (e-ink doesn’t count, right?), despite being a pretty slow reader. I also go running semi-frequently, and have even completed a couple half-marathons — an impossible feat for my past-self!
 
-Curiosity is part of my DNA (alongside the bald gene!) and I value understanding how things work. **Oh, and I love jokes, puns, and any kind of wordplay. Yes, I love dad jokes despites not being a father — such a faux pa.**
+Curiosity is part of my DNA (alongside whichever gene made me bald) and I value understanding how things work. **Oh, and I love jokes, puns, and any kind of wordplay. Yes, I love dad jokes despites not being a father — such a faux pa.**
 
 ## Languages
 
 I grew up in Lyon, France, born to **Danish** parents. Australia was my home for a year as a child, speaking **English** with a Down Under accent (which I’ve since then lost), and I even held a baby koala. Between those and **French**, I sometimes mix things up, which can result in inadvertently funny sentences. I do know a decent amount of **Italian** but natives seem to prefer to answer me in English — <em lang="it">ché peccato</em>. I took **Japanese** in high school, but didn't apply myself (and instead learned the Cyrillic alphabet, for some reason?), so I’m not good at it, but I did learn some vocabulary thanks to DuoLingo (I stopped after my 1,000-day streak). Anyways, I find languages (and accents) fascinating! 
 
-## Skills, a.k.a. The Professional Section
+## Skills, a.k.a. The Professional Section {$#resume$}
 {% endrenderTemplate %}
 
-<p>I’m a creative developer, or “design engineer”, meaning I can code and design, keeping an eye on details (including fonts!). Front-end fluency with <strong>HTML</strong> (the semantic kind), <strong>CSS</strong> (I’m a nerd for it), and <strong>JavaScript</strong> (not React!) is where I shine, but I don’t shy away from <strong>PHP and SQL</strong> (mainly for WordPress projects) or <strong>Webflow</strong>. I use <strong>git</strong> (GitHub, GitLab, Bitbucket) to keep my projects neatly tracked, and like to write squeaky-clean(ish) commented code. The <strong>Adobe Creative Suite</strong> and I go <em>way</em> back (2005!), especially <strong>Photoshop, Illustrator, and After Effects</strong>, though I’ve also gotten on the <strong>Figma</strong> train (sorry, Sketch!).</p>
+<p>I’m a creative developer, or “design engineer”, meaning I can code and design, keeping an eye on details (including fonts!). Front-end fluency with <strong>HTML</strong> (the semantic kind), <strong>CSS</strong> (I’m a nerd for it), and <strong>JavaScript</strong> (not React!) is where I shine, but I don’t shy away from <strong>PHP and MySQL</strong> (mainly for <strong>WordPress</strong> projects) or <strong>Webflow</strong>. I use <strong>git</strong> (any of GitHub, GitLab, or Bitbucket) to keep my projects neatly tracked, and like to write commented, squeaky-cleanish code. The <strong>Adobe Creative Suite</strong> and I go <em>way</em> back (2005!), especially <strong>Photoshop, Illustrator, and After Effects</strong>, though I’ve also gotten on the <strong>Figma</strong> train (sorry, Sketch!).</p>
 
 {% set icons = {
-    html: 'HyperText Markup Language',
-    css: 'Cascading Stylesheets',
-    js: 'JavaScript',
-    git: 'git',
-    sass: 'Sass/SCSS',
-    nunjucks: 'Nunjucks',
-    php: 'PHP',
-    wordpress: 'WordPress',
-    webflow: 'Webflow',
-    adobecs: 'Adobe Creative Suite',
-    figma: 'Figma'
+    html: { label: 'HyperText Markup Language', sub: { nunjucks: 'Nunjucks Templating' } },
+    css: { label: 'Cascading Stylesheets', sub: { sass: 'Sass/SCSS' } },
+    js: { label: 'JavaScript' },
+    git: { label: 'git', sub: { github: 'GitHub', gitlab: 'GitLab', bitbucket: 'Bitbucket' } },
+    php: { label: 'PHP', sub: { wordpress: 'WordPress' } },
+    webflow: { label: 'Webflow' },
+    figma: { label: 'Figma' },
+    adobecs: { label: 'Adobe Creative Suite', sub: { photoshop: 'Photoshop', illustrator: 'Illustrator', aftereffects: 'After Effects' } }
 } %}
 <ul class="inline-list unstuck-list textAlign-center | about-icons-list" style="--c: {{ icons | keys | length }};">
-    {% for iconKey, iconLabel in icons %}
-        <li class="about-icons-list-item" style="--i: {{ loop.index0 }};">{% svg iconKey+'-icon', { title: iconLabel, class: 'about-icons-list-icon inline-icon inline-icon--center' } %}</li>
+    {% for iconKey, iconInfo in icons %}
+        <li class="about-icons-list-item" style="--i: {{ loop.index0 }};">
+        {%- if iconInfo.sub -%}
+            <details name="about-language-icon" class="about-icons-list-details">
+                <summary class="about-icons-list-summary">
+                    {% svg iconKey+'-icon', { title: iconInfo.label, class: 'about-icons-list-icon inline-icon inline-icon--center' } %}
+                    <span class="visually-hidden">(and more)</span>
+                </summary>
+                <div class="about-icons-list-extra">
+                {% for subIconKey, subIconLabel in iconInfo.sub %}
+                    {% svg subIconKey+'-icon', { title: subIconLabel, class: 'about-icons-list-icon inline-icon inline-icon--center' } %}
+                {% endfor %}
+                </div>
+            </details>
+        {%- else -%}
+            {%- svg iconKey+'-icon', { title: iconInfo.label, class: 'about-icons-list-icon inline-icon inline-icon--center' } -%}
+        {%- endif -%}
+        </li>
     {% endfor %}
 </ul>
 

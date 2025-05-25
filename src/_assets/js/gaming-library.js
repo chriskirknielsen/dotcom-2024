@@ -138,7 +138,11 @@ function loadAndPopulateGameDetailDialog(target, navAnimSign = 0) {
 	Array.from(dialog.childNodes).forEach((el) => el.remove());
 	dialog.append(clone);
 	dialog.setAttribute('aria-labelledby', dialogTitleRefId);
-	dialog.style.setProperty('--cover-url', `url(${gameData.boxart.url})`);
+	if (gameData.boxart) {
+		dialog.style.setProperty('--cover-url', `url(${gameData.boxart.url})`);
+	} else {
+		dialog.style.setProperty('--cover-url', `url(#null)`);
+	}
 
 	try {
 		dialog.showModal();

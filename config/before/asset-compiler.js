@@ -145,7 +145,7 @@ export default function (eleventyConfig, options) {
 				compileFn: async function (parsed) {
 					const bundled = bundle({
 						filename: `${parsed.dir}/${parsed.base}`,
-						minify: true,
+						minify: false,
 					});
 					const transformed = transform({
 						code: new TextEncoder().encode(bundled.code),

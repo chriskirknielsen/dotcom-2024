@@ -127,6 +127,7 @@
 	}
 	html[data-theme="dawn"] {
 		--T-dawn: var(--ON);
+		& .hide-when-light { display: none !important; }
 	}
 	
 	@media screen and (prefers-color-scheme: dark) {
@@ -136,6 +137,7 @@
 	}
 	html[data-theme="dusk"] {
 		--T-dusk: var(--ON);
+		& .hide-when-dark { display: none !important; }
 	}
 html:not([data-theme]), html[data-theme="dawn"], [data-theme="dusk"] {
 			--color-scheme: var(--T-dawn, light) var(--T-dusk, dark);
@@ -200,6 +202,7 @@ html[data-theme="vapor"] {
 				--font-heading-family: XanhMono, ui-monospace,Cascadia Code,Source Code Pro,Monaco,Menlo,Consolas,DejaVu Sans Mono,monospace;--font-heading-weight: 400;--font-heading-style: italic;
 --font-body-family: system-ui,sans-serif;
 			}
+			html[data-theme="vapor"] .hide-when-light { display: none !important; }
 html[data-theme="vintage"] {
 				--T-vintage: var(--ON);
 				--color-scheme: light;
@@ -246,6 +249,7 @@ html[data-theme="vintage"] {
 				--font-heading-family: Switzer, Helvetica Neue, system-ui,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
 --font-body-family: Georgia,Constantia,Lucida Bright,Lucidabright,Lucida Serif,Lucida,DejaVu Serif,Bitstream Vera Serif,Liberation Serif,serif;
 			}
+			html[data-theme="vintage"] .hide-when-light { display: none !important; }
 html[data-theme="quill"] {
 				--T-quill: var(--ON);
 				--color-scheme: light;
@@ -268,6 +272,7 @@ html[data-theme="quill"] {
 				--font-heading-family: InstrumentSerif, Apple Garamond,AppleGaramond,Garamond, Georgia,Constantia,Lucida Bright,Lucidabright,Lucida Serif,Lucida,DejaVu Serif,Bitstream Vera Serif,Liberation Serif,serif;--font-heading-weight: 400;--font-heading-style: normal;
 --font-body-family: system-ui,sans-serif;
 			}
+			html[data-theme="quill"] .hide-when-light { display: none !important; }
 html[data-theme="cyberpunk"] {
 				--T-cyberpunk: var(--ON);
 				--color-scheme: dark;
@@ -312,6 +317,7 @@ html[data-theme="cyberpunk"] {
 				--font-heading-family: Rajdhani, system-ui,sans-serif;--font-heading-weight: 500;--font-heading-style: normal;
 --font-body-family: system-ui,sans-serif;
 			}
+			html[data-theme="cyberpunk"] .hide-when-dark { display: none !important; }
 html[data-theme="campfire"] {
 				--T-campfire: var(--ON);
 				--color-scheme: dark;
@@ -336,6 +342,7 @@ html[data-theme="campfire"] {
 				--font-heading-family: Chinook, CooperBlack,Cooper Black, Georgia,Constantia,Lucida Bright,Lucidabright,Lucida Serif,Lucida,DejaVu Serif,Bitstream Vera Serif,Liberation Serif,serif;--font-heading-weight: 900;--font-heading-style: normal;
 --font-body-family: Georgia,Constantia,Lucida Bright,Lucidabright,Lucida Serif,Lucida,DejaVu Serif,Bitstream Vera Serif,Liberation Serif,serif;
 			}
+			html[data-theme="campfire"] .hide-when-dark { display: none !important; }
 html[data-theme="director"] {
 				--T-director: var(--ON);
 				--color-scheme: dark;
@@ -367,6 +374,7 @@ html[data-theme="director"] {
 				--font-heading-family: TeXGyreAdventor, ITC Avant-Garde Gothic,Avenir,Montserrat,Corbel,URW Gothic,source-sans-pro, system-ui,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
 --font-body-family: system-ui,sans-serif;
 			}
+			html[data-theme="director"] .hide-when-dark { display: none !important; }
 @custom-media --small-viewport (width <= 576px);
 @custom-media --large-viewport (width > 576px);
 @custom-media --has-gutter-space (width > calc(960px + 4 * 24px));
@@ -375,13 +383,16 @@ html[data-theme="director"] {
 	@media (--prefers-light) {
 		html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='dawn']) {
 			display: none !important;
-		}
+
+			}
+		html:not([data-theme]) .hide-when-light { display: none !important; }
 	}
 	
 	@media (--prefers-dark) {
 		html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='dusk']) {
 			display: none !important;
 		}
+		html:not([data-theme]) .hide-when-dark { display: none !important; }
 	}html[data-theme]:not([data-theme='dawn']) [data-theme-condition='dawn'] {
 			display: none !important;
 		}

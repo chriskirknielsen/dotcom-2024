@@ -87,20 +87,25 @@ export default function (string) {
 		'has-gutter-space': `(width > calc(${maxContent} + 4 * ${gutter}))`,
 		'toc-side': `(min-width: calc(${maxContent} + 2 * ${tocMinWidth})) and (min-height: ${tocMinHeight})`,
 	};
-	let toolsOutput = `${Object.entries(customMedias)
+	const customMediaOutput = Object.entries(customMedias)
 		.map(([key, cond]) => `@custom-media --${key} ${cond};`)
-		.join('\n')}
+		.join('\n');
+
+	let toolsOutput = `${customMediaOutput}
 	
 	@media (--prefers-light) {
 		html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='${lightThemeKey}']) {
 			display: none !important;
-		}
+
+			}
+		html:not([data-theme]) .hide-when-light { display: none !important; }
 	}
 	
 	@media (--prefers-dark) {
 		html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='${darkThemeKey}']) {
 			display: none !important;
 		}
+		html:not([data-theme]) .hide-when-dark { display: none !important; }
 	}`;
 
 	// All themes are disabled by default
@@ -152,6 +157,7 @@ export default function (string) {
 	}
 	html[data-theme="${lightThemeKey}"] {
 		--T-${lightThemeKey}: var(--ON);
+		& .hide-when-light { display: none !important; }
 	}
 	
 	@media screen and (prefers-color-scheme: dark) {
@@ -161,6 +167,7 @@ export default function (string) {
 	}
 	html[data-theme="${darkThemeKey}"] {
 		--T-${darkThemeKey}: var(--ON);
+		& .hide-when-dark { display: none !important; }
 	}\n`;
 
 	// Loop over one of the default themes, since symmetry can be expected from the default themes and their respective tokens
@@ -228,7 +235,8 @@ export default function (string) {
 				${regularTokens}
 				${colorTokens}
 				${fontTokens}
-			}`;
+			}
+			html[data-theme="${themeKey}"] .hide-when-${data.scheme} { display: none !important; }`;
 		})
 		.join('\n');
 
