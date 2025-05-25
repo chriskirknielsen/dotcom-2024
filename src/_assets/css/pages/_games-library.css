@@ -298,7 +298,6 @@
 	--box-width: 135;
 	--box-height: 190;
 	--box-depth: 14;
-	--spine-paper-padding: 0.25em 0.25em 0.5em;
 	--box-border-size-block: 0.1875em;
 	--box-border-size-inline: 0;
 
@@ -313,6 +312,7 @@
 }
 
 [data-gaming-platform='ps2'] {
+	--spine-paper-padding: 0.25em 0.25em 0.5em;
 	--game-case-plastic: #2e60c1;
 	--game-spine-top-text: #f8f8f8;
 	--game-spine-top-bg: #464a4f;
@@ -452,6 +452,7 @@
 }
 
 [data-gaming-platform='pc'] {
+	--spine-paper-padding: 0.375em 0.25em;
 	--game-case-plastic: #333639;
 	--game-spine-top-text: #f8f8f8;
 	--game-spine-top-bg: #121313;
