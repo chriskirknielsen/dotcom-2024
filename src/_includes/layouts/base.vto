@@ -34,7 +34,7 @@
 	<body class="h-card">
 		<a class="skip-link" href="#content">Skip to content</a>
 
-		{{# {{ include 'parts/header.njk' }} #}}
+		{{ include 'parts/header.vto' }}
 
 		<main class="main | container flow" id="content" tabindex="-1"{{ if lang }} lang="{{ lang }}"{{ /if }}>
 			{{ if metadata.nakedCss }}
@@ -50,7 +50,7 @@
 			{{ content }}
 		</main>
 
-		{{# {{ include 'parts/footer.njk' }} #}}
-		{{# {{ include 'parts/foot.njk' }} #}}
+		{{ include 'parts/footer.vto' }}
+		{{ include 'parts/foot.vto' }}
 	</body>
 </html>

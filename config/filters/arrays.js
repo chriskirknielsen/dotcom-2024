@@ -20,6 +20,23 @@ export default function (eleventyConfig) {
 	/** Runs Object.values() on an array of objects. */
 	eleventyConfig.addFilter('toValues', (arr) => arr.map((obj) => Object.values(obj)));
 
+	/** Groups array of objects by a property value. */
+	eleventyConfig.addFilter('groupBy', (array, prop) => {
+		const groups = {};
+
+		for (let item of array) {
+			const groupVal = item[prop];
+
+			if (groups.hasOwnProperty(groupVal) === false) {
+				groups[groupVal] = [];
+			}
+
+			groups[groupVal].push(item);
+		}
+
+		return groups;
+	});
+
 	/** Removes values from a list that don't begin with the provided string. Can be reverse with a boolean argument */
 	eleventyConfig.addFilter('startsWith', (list, str, flip = false) => list.filter((value) => String(value).startsWith(str) ^ flip)); // Bitwise XOR, wild stuff
 

@@ -27,4 +27,14 @@ export default function (eleventyConfig) {
 		const wordScale = clampNum(invertedMinRatio, remapNum(wordCount, minWords, maxWords, invertedMaxRatio, invertedMinRatio), invertedMaxRatio);
 		return parseFloat(((wordScale + letterScale) / 2).toFixed(2)); // Get the average between word count scale and letter count scale, rounded to 2 decimal places
 	});
+
+	/** Calculates a factor to use to have a smaller ratio for larger strings */
+	eleventyConfig.addFilter('toTitleCase', function (string) {
+		string = (string || '').trim();
+		const words = string
+			.split(' ')
+			.map((w) => `${w.slice(0, 1).toUpperCase()}${w.slice(1)}`)
+			.join(' ');
+		return words;
+	});
 }

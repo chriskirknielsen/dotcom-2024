@@ -1,0 +1,22 @@
+{{ css 'foot' }}{{ include 'assets/css/font-face.css' }}{{ /css }}
+{{ js 'foot' }}{{ include 'assets/js/site.js' }}{{ /js }}
+
+{{ if toc }}
+	{{ js 'foot-toc' }}{{ include 'assets/js/toc.js' }}{{ /js }}
+{{ /if }}
+
+{{ if !metadata.nakedCss }}
+<style>
+	{{- getBundle 'css', 'foot' -}}
+</style>
+{{ /if }}
+{{ if !metadata.nakedJs }}
+<script>
+	{{- getBundle 'js', 'foot' }}
+	{{- getBundle 'js', 'foot-toc' }}
+	{{- getBundle 'js', 'foot-codewrap' }}
+	{{- getBundle 'js', 'foot-about' }}
+	{{- getBundle 'js', 'foot-gameslibrary' }}
+	{{- getBundle 'js', 'foot-randompost' -}}
+</script>
+{{ /if }}
