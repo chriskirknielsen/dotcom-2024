@@ -240,8 +240,10 @@ export default function (eleventyConfig, options = {}) {
 
 	/** Render a component from the component folder. */
 	eleventyConfig.addAsyncShortcode('webcomponent', async function (filename, attributes = {}, componentData = {}) {
-		const filePath = `${componentsFolder}/web/${filename}.njk`;
-		const content = eleventyConfig.nunjucks.asyncShortcodes.renderFile(filePath, { ...this.ctx, componentData, componentAttrs: attributes }, 'njk'); // Pass in the global context for web components
+		const ext = componentData.ext || 'njk';
+		const filePath = `${componentsFolder}/web/${filename}.${ext}`;
+		const renderer = eleventyConfig.nunjucks.asyncShortcodes.renderFile.bind(this);
+		const content = renderer(filePath, { ...(this.ctx || {}), componentData, componentAttrs: attributes }, ext); // Pass in the global context for web components
 		return content;
 	});
 
@@ -249,7 +251,8 @@ export default function (eleventyConfig, options = {}) {
 	eleventyConfig.addAsyncShortcode('component', async function (filename, componentOptions = {}) {
 		const ext = componentOptions.ext || 'njk';
 		const filePath = `${componentsFolder}/${filename}.${ext}`;
-		const content = eleventyConfig.getShortcode('renderFile')(filePath, componentOptions, ext); // Only pass in the provided data object
+		const renderer = eleventyConfig.getShortcode('renderFile').bind(this);
+		const content = renderer(filePath, componentOptions, ext); // Only pass in the provided data object
 		return content;
 	});
 }

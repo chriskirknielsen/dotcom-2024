@@ -49,8 +49,7 @@ const purgeCssList = {
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default async function (eleventyConfig) {
 	//* Plugins
-	eleventyConfig.addPlugin(VentoPlugin, { autotrim: false });
-	eleventyConfig.addPlugin(EleventyRenderPlugin);
+	eleventyConfig.addPlugin(EleventyRenderPlugin, { accessGlobalData: true });
 	eleventyConfig.addPlugin(BundlePlugin, {
 		toFileDirectory: 'assets',
 		transforms: [
@@ -216,6 +215,9 @@ export default async function (eleventyConfig) {
 			}
 		},
 	});
+
+	//* Vento templating (needs to be added last)
+	eleventyConfig.addPlugin(VentoPlugin, { autotrim: false });
 
 	//* Passthroughs
 	eleventyConfig.addPassthroughCopy({
