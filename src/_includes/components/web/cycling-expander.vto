@@ -1,0 +1,16 @@
+{{ set attrs = componentAttrs |> objToAttr -}}
+<cycling-expander {{ attrs }}>
+    <details class="expander" data-expander="wrapper">
+        <summary class="expander-button | button | inline-size-100pc" data-expander="trigger">
+            <span>{{ componentData.buttonLabel }}</span>
+        </summary>
+
+        <div class="expander-content | textAlign-center textWrap-balance" data-expander="content">
+            <ul class="textAlign-start" data-expander="content-items">
+                {{ for emoji, fact of componentData.listItems }}
+                    <li data-item-emoji="{{ emoji }}">{{ fact }}</li>
+                {{ /for }}
+            </ul>
+        </div>
+    </details>
+</cycling-expander>

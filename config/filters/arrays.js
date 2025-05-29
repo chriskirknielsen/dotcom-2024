@@ -21,11 +21,17 @@ export default function (eleventyConfig) {
 	eleventyConfig.addFilter('toValues', (arr) => arr.map((obj) => Object.values(obj)));
 
 	/** Groups array of objects by a property value. */
-	eleventyConfig.addFilter('groupBy', (array, prop) => {
+	eleventyConfig.addFilter('groupBy', (array, prop, sort = 'asc') => {
 		const groups = {};
+		const propChain = prop.split('.');
 
 		for (let item of array) {
-			const groupVal = item[prop];
+			let groupVal = item;
+			const chain = propChain.slice();
+			while (chain.length > 0) {
+				const subProp = chain.shift();
+				groupVal = groupVal[subProp];
+			}
 
 			if (groups.hasOwnProperty(groupVal) === false) {
 				groups[groupVal] = [];

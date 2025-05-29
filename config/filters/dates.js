@@ -30,6 +30,9 @@ const dateFormat = (date, opts = {}) => {
 			}
 			return utcDate.setLocale(lang).toFormat('d LLLL yyyy');
 		}
+		case 'ms': {
+			return utcDate.toMillis();
+		}
 	}
 };
 
