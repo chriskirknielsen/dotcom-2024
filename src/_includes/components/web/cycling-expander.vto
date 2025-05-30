@@ -7,7 +7,9 @@
 
         <div class="expander-content | textAlign-center textWrap-balance" data-expander="content">
             <ul class="textAlign-start" data-expander="content-items">
-                {{ for emoji, fact of componentData.listItems }}
+                {{ for factData of componentData.listItems }}
+                    {{ set emoji = factData[0] }}
+                    {{ set fact = factData[1] }}
                     <li data-item-emoji="{{ emoji }}">{{ fact }}</li>
                 {{ /for }}
             </ul>

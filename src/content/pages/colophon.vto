@@ -5,7 +5,7 @@ permalink: '/colophon/'
 toc: true
 ---
 
-{% renderTemplate 'md' %}
+{{ echo |> markdown }}
 ## Tech Stack
 
 ### Build
@@ -28,28 +28,33 @@ The [Gaming Library page](/games/library/) is built with a couple of APIs: [Noti
 My website has distinct themes with distinct typefaces (some paid, some free) and visuals, making it, in effect, my very own [CSS Zen Garden](https://csszengarden.com/). You’ll find some more details below for each theme (the Dusk, Campfire and Cyberpunk themes are remixes of themes from my website’s previous version, so they may look familiar), but if you still have questions, please feel free to ask!
 
 First off, the homepage wordmark for my name is a custom edit of the [Sprat typeface](https://www.collletttivo.it/typefaces/sprat) with everything tightened up and minor corrections. When I first saw it, I knew I had to use it: it’s got a vibe reminiscent of Stephen King books and other designs using [ITC Benguiat](https://fontsinuse.com/typefaces/1682/itc-benguiat) (you know, the Stranger Things logo!). The reveal animation is very simple but does the trick and is pretty performant compared to the [last version](/archives/)!
-{% endrenderTemplate %}
+{{ /echo }}
 
 <p>Also, I used a handful of SVG icons from <a href="https://lucide.dev/icons/">Lucide</a>, listed here:
-{% for name, icon in tokens._meta.icons.lucide.used %}
-    {% if loop.last %}and {% endif %}
-    <span class="icon-text-pair">{% svg name, { class: 'inline-icon inline-icon--center linecap-auto' } %} <code>{{ icon }}</code></span>
-    {%- if loop.last %}.{% else %},{% endif %}
-{% endfor %}
+{{> let loopIndex = 0 }}
+{{ for name, icon of tokens._meta.icons.lucide.used }}
+    {{> loopIndex++ }}
+    {{ if loopIndex === Object.keys(tokens._meta.icons.lucide.used).length }}and {{ /if }}
+    <span class="icon-text-pair">{{ svg name, { class: 'inline-icon inline-icon--center linecap-auto' } }} <code>{{ icon }}</code></span>
+    {{- if loopIndex === Object.keys(tokens._meta.icons.lucide.used).length }}.{{ else }},{{ /if }}
+{{ /for }}
 I also took a few from <a href="https://iconsvg.xyz/">IconSVG.xyz</a>:
-{% for name, icon in tokens._meta.icons.iconsvgxyz.used %}
-    {% if loop.last %}and {% endif %}
-    <span class="icon-text-pair">{% svg name, { class: 'inline-icon inline-icon--center linecap-auto' } %} <code>{{ icon }}</code></span>
-    {%- if loop.last %}.{% else %},{% endif %}
-{% endfor %}
+{{> loopIndex = 0 }}
+{{ for name, icon of tokens._meta.icons.iconsvgxyz.used }}
+    {{> loopIndex++ }}
+    {{ if loopIndex === Object.keys(tokens._meta.icons.iconsvgxyz.used).length }}and {{ /if }}
+    <span class="icon-text-pair">{{ svg name, { class: 'inline-icon inline-icon--center linecap-auto' } }} <code>{{ icon }}</code></span>
+    {{- if loopIndex === Object.keys(tokens._meta.icons.iconsvgxyz.used).length }}.{{ else }},{{ /if }}
+{{ /for }}
 (other icons like themes or the super complicated hamburger menu, I made myself)
 </p>
 
-{% callout "Keyboard user?", "⌨️", { mode: 'markup', class: 'hide-when-nojs' } %}
-<p>If you are using a keyboard with JS enabled, you can press a number key to activate the corresponding theme based on the theme picker order (the <kbd>0</kbd> key and current theme index {% for t in themes %}<kbd data-theme-condition="{{t.key}}">{{loop.index}}</kbd>{% endfor %} will revert to the system light/dark default).</p>
-{% endcallout %}
+{{ callout "Keyboard user?", "⌨️", { mode: 'markup', class: 'hide-when-nojs' } }}
+{{> loopIndex = 0 }}
+<p>If you are using a keyboard with JS enabled, you can press a number key to activate the corresponding theme based on the theme picker order (the <kbd>0</kbd> key and current theme index {{ for t of themes }}{{> loopIndex++ }}<kbd data-theme-condition="{{ t.key }}">{{ loopIndex }}</kbd>{{ /for }} will revert to the system light/dark default).</p>
+{{ /callout }}
 
-{% set themeDetails = {
+{{ set themeDetails = {
     'Dawn': "The default Light Mode theme is set in [Canela Bold](https://type.today/en/canela) for headings and overall is aiming for some vintage print design, hence the off-white background and sharp red contrasting headings, going for an old book that’s sat in the sun too long kind of feel. (ironically enough, I sampled some colours from a gorgeous [OmniChord OM84](http://www.suzukimusic.co.uk/omnichord-heaven/models/om36-84.html) electronic instrument)",
 
     'Vapor': "This vaporwave theme tries to stay minimal while being loud with colours. The headings are set in [Xahn Mono Italic](https://fonts.google.com/specimen/Xanh+Mono) with exaggerated tracking, a serif-monospace hybrid that looks lovely.",
@@ -65,43 +70,43 @@ I also took a few from <a href="https://iconsvg.xyz/">IconSVG.xyz</a>:
     'Campfire': "I want to be more outdoorsy, but living in a city, this will have to do for now, with a theme heavily inspired by US national parks and more specifically, the art for the Firewatch video game by [Olly Moss](http://ollymoss.com/#/firewatch/). I used the [Chinook](https://fontesk.com/chinook-font/) typeface to get the soft serif vibe I was after, and made a vector landscape of Mont Blanc, the mountain peak close to my hometown of Lyon, in France. ([Alistair](https://alistairshepherd.uk/) did something similar, but like, way better)",
     
     'Director': "If you’ve every played Control, this one will seem familiar. It draws from the game’s look and feel (brutalist with hints of colour), and the inverted pyramids. The headings are set in [TeX Gyre Adventor](https://www.fontsquirrel.com/fonts/tex-gyre-adventor), a close match to the original ITC Avant-Garde Gothic used in the game."
-} %}
+} }}
 
-{# The markdown lib handles the auto-linking of headings, but also screws up injected Nunjucks, so this bastardly approach below solves both problems, at the cost of maintaining the text content in an object above… #}
-{% for tName, tDetails in themeDetails %}
-    {% set tKey = tName | lower %}
-    {{- ('### '+ tName) | markdown | safe }}
+{{# The markdown lib handles the auto-linking of headings, but also screws up injected Nunjucks, so this bastardly approach below solves both problems, at the cost of maintaining the text content in an object above… #}}
+{{ for tName, tDetails of themeDetails }}
+    {{ set tKey = tName |> toLowerCase }}
+    {{- ('### '+ tName) |> markdown }}
     <p>
-        {% component 'cta', {
+        {{ component 'cta', {
             type: 'button',
             label: { aria: 'Toggle '+tName+' theme' },
             ctaAttr: 'data-theme-set="'+tKey+'"',
             ctaClass: 'button hide-when-nojs',
             icon: 'theme-'+tKey
-        } %}
-        {{ tDetails | markdown(true) | safe }}
+        } }}
+        {{ tDetails |> markdown(true) }}
     </p>
-{% endfor %}
+{{ /for }}
 
 <div>
     <ul class="flex-list flex-list--center | img-88x31-list">
         <li>
             <!-- Made by leap123: https://front-end.social/@leap123@wetdry.world/111641069489695533 -->
-            <a href="https://11ty.dev" class="display-block"><img src="{{ [assets.images, 'made-with-11ty.gif'] | toPath }}" alt="Made with Eleventy." loading="lazy" width="88" height="31"></a>
+            <a href="https://11ty.dev" class="display-block"><img src="{{ [assets.images, 'made-with-11ty.gif'] |> toPath }}" alt="Made with Eleventy." loading="lazy" width="88" height="31"></a>
         </li>
         <li>
-            <img src="{{ [assets.images, 'ckn-html5-lgtm.gif'] | toPath }}" alt="Chris’s Seal of Approval: HTML5 looks good to me" loading="lazy" width="88" height="31">
+            <img src="{{ [assets.images, 'ckn-html5-lgtm.gif'] |> toPath }}" alt="Chris’s Seal of Approval: HTML5 looks good to me" loading="lazy" width="88" height="31">
         </li>
         <li>
-            <img src="{{ [assets.images, 'ckn-css-lgtm.gif'] | toPath }}" alt="Chris’s Seal of Approval: CSS looks good to me" loading="lazy" width="88" height="31">
+            <img src="{{ [assets.images, 'ckn-css-lgtm.gif'] |> toPath }}" alt="Chris’s Seal of Approval: CSS looks good to me" loading="lazy" width="88" height="31">
         </li>
         <li>
-            <a href="http://validator.w3.org/feed/check.cgi?url=https%3A//chriskirknielsen.com/rss.xml" class="display-block"><img src="{{ [assets.images, 'rss-atom-valid.png'] | toPath }}" alt="Valid Atom 1.0" loading="lazy" width="88" height="31"></a>
+            <a href="http://validator.w3.org/feed/check.cgi?url=https%3A//chriskirknielsen.com/rss.xml" class="display-block"><img src="{{ [assets.images, 'rss-atom-valid.png'] |> toPath }}" alt="Valid Atom 1.0" loading="lazy" width="88" height="31"></a>
         </li>
     </ul>
 </div>
 
-{% if not metadata.nakedJs %}
+{{ if !metadata.nakedJs }}
 <script>
 document.addEventListener('click', (e) => {
     const inlineSetter = e.target.closest('main [data-theme-set]');
@@ -111,4 +116,4 @@ document.addEventListener('click', (e) => {
     picker.querySelector(`[data-theme-set="${theme}"]`).click();
 });
 </script>
-{% endif %}
+{{ /if }}

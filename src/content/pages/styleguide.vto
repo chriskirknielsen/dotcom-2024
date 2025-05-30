@@ -7,7 +7,7 @@ autoToc: true
 eleventyExcludeFromCollections: true
 ---
 
-{# <h1>font-size-adjust: <span style="outline: 1px solid red;">b</span><span style="font-size-adjust: 0.5; outline: 1px solid red;">b</span></h1> #}
+{{# <h1>font-size-adjust: <span style="outline: 1px solid red;">b</span><span style="font-size-adjust: 0.5; outline: 1px solid red;">b</span></h1> #}}
 
 <h1>What a Level 1 this is, but like, less than the hero’s</h1>
 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, nesciunt.</p>
@@ -44,11 +44,11 @@ eleventyExcludeFromCollections: true
 <h1>Paragraph &amp; with some inline elements</h1>
 <p>
 	With a click, <button type="button" class="button">I can do things</button> or even <a href="#">navigate</a> some other place. I can make
-	<a href="#" class="button">navigation more prominent</a> as well! Buttons can also be just an icon {% component 'cta', {'icon': 'palette'} %} or {% component 'cta', {
+	<a href="#" class="button">navigation more prominent</a> as well! Buttons can also be just an icon {{ component 'cta', {'icon': 'palette'} }} or {{ component 'cta', {
 		'icon': 'palette',
 		'iconBefore': true,
 		'label': 'have both'
-	} %}. Do you like other styles? This should cover it: Normal, <abbr title="Abbreviations">abbr</abbr>,
+	} }}. Do you like other styles? This should cover it: Normal, <abbr title="Abbreviations">abbr</abbr>,
 	<del>del</del>, <dfn>dfn</dfn>, <em>em</em>, <ins>ins</ins>, <mark>mark</mark>, <s>strike through</s>, <small>small</small>, <strong>strong</strong>, <sub>sub</sub>,
 	<sup>sup</sup>, <b>bbb</b>, <u>uuu</u>, <i>iii</i>.
 </p>
@@ -72,19 +72,19 @@ eleventyExcludeFromCollections: true
 	</footer>
 </blockquote>
 
-{% callout "Some Cool Text", "🇩🇰" %}
+{{ callout "Some Cool Text", "🇩🇰" }}
 Important information comes in all shapes and sizes.
-{% endcallout %}
+{{ /callout }}
 
 <p>But then you have more to say.</p>
 
-{% callout "Very Neat Text" %}
+{{ callout "Very Neat Text" }}
 I got no emoji, but I can add it here, yay! 🇫🇷
-{% endcallout %}
+{{ /callout }}
 
 <h1>Code stuff</h1>
 <p>This is inline code <code>&lt;div&gt;div element&lt;/div&gt;</code>. This is sample output <samp>sample</samp> And below is block code.</p>
-{% renderTemplate 'md' %}
+{{ echo |> markdown }}
 ```html
 <div id="identify">
 	div element
@@ -101,13 +101,13 @@ I got no emoji, but I can add it here, yay! 🇫🇷
 }
 ```
 ```js
-function move(coordinates, system = 'local') {
+const move = (coordinates, system = 'local') => {
 	const { x, y, z } = coordinates[system];
 	if (z === 0) { throw new Error('Depth missing!'); }
 	return x * y * z; // Cool beans
 }
 ```
-{% endrenderTemplate %}
+{{ /echo }}
 <p>The input keyboard <kbd>Ctrl</kbd>+<kbd>S</kbd>. This is variable: <var>y</var> = <var>m</var>
 	<var>x</var> + <var>b</var>
 </p>

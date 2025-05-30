@@ -37,4 +37,16 @@ export default function (eleventyConfig) {
 			.join(' ');
 		return words;
 	});
+
+	/** Calculates a factor to use to have a smaller ratio for larger strings */
+	eleventyConfig.addFilter('toEscaped', function (string) {
+		const lookup = {
+			'&': '&amp;',
+			'"': '&quot;',
+			"'": '&apos;',
+			'<': '&lt;',
+			'>': '&gt;',
+		};
+		return String(string || '').replace(/[&"'<>]/g, (c) => lookup[c]);
+	});
 }

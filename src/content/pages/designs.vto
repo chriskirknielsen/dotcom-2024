@@ -8,87 +8,89 @@
 }
 ---
 
-{% set activeDesigns = designs | selectattr('showInGallery') %}
+{{ set activeDesigns = designs.filter(d => d.showInGallery) }}
 
 <p class="textAlign-center">If you want to commission a design from me, <a href="#footer-email-link">reach out via email</a>!</p>
 
 <div class="textAlign-center">
 	<h2 class="visually-hidden" id="designs-shops-label">Shops</h2>
 	<ul class="designs-stores | flex-list justifyContent-center | fontWeight-bold fontSize-small" aria-labelledby="designs-shops-label" style="--list-gap: var(--size-m);">
-		{% for merchStore, merchUrl in metadata.merch %}
-			{% set storeIconName %}store-icon-{{ merchStore | lower }}{% endset %}
+		{{ for merchStore, merchUrl of metadata.merch }}
+			{{ set storeIconName }}store-icon-{{ merchStore |> toLowerCase }}{{ /set }}
 			<li>
 				<a href="{{ merchUrl }}">
-					{% svg storeIconName, { class: 'store-icon', width: 32, height: 32 } %}
+					{{ svg storeIconName, { class: 'store-icon', width: 32, height: 32 } }}
 					{{ merchStore }}
 				</a>
 			</li>
-		{% endfor %}
+		{{ /for }}
 	</ul>
 </div>
 
 <hr>
 
-<filtered-tiles class="flow" data-filters="{{ activeDesigns | pluck('tags') | flatten | unique | sort | join(',') }}">
+<filtered-tiles class="flow" data-filters="{{ activeDesigns |> pluck('tags') |> flatten |> unique |> sort |> join(',') }}">
 	<ul data-filtered-tiles-group class="cards">
-		{% for design in activeDesigns %}
+		{{> let loopIndex = 0 }}
+		{{ for design of activeDesigns }}
+			{{> loopIndex++ }}
 			<li class="card-wrapper" id="{{ design.slug }}"
-				data-tags="{{ design.tags | join(',') }}"
+				data-tags="{{ design.tags |> join(',') }}"
 				aria-hidden="false"
-				{% if enableViewTransitions or design.accent -%}
+				{{ if enableViewTransitions || design.accent -}}
 					style="
-						{%- if enableViewTransitions %}view-transition-name:{{ design.slug }};{% endif -%}
-						{%- if design.accent %}--CARD-accent:{{ design.accent }};{% endif -%}
+						{{- if enableViewTransitions }}view-transition-name:{{ design.slug }};{{ /if -}}
+						{{- if design.accent }}--CARD-accent:{{ design.accent }};{{ /if -}}
 					"
-				{%- endif %}
+				{{- /if }}
 			>
-			{% set designPermalink = '/designs/' + design.slug + '/' %}
-			{% set designVariant -%}
-				{% if design.variant %}
+			{{ set designPermalink = `/designs/${design.slug}/` }}
+			{{ set designVariant -}}
+				{{ if design.variant }}
 					<div class="grouper grouper--icon-text-pair" style="--GAP: var(--size-s);">
-						{% svg 'arrow-bidir', { class: 'inline-icon linecap-auto' } %}
+						{{ svg 'arrow-bidir', { class: 'inline-icon linecap-auto' } }}
 						<span>Variant available</span>
 					</div>
-				{% endif %}
-			{%- endset %}
-			{% set designCommission -%}
-				{% if design.isCommission %}
+				{{ /if }}
+			{{- /set }}
+			{{ set designCommission -}}
+				{{ if design.isCommission }}
 					<div class="grouper grouper--icon-text-pair" style="--GAP: var(--size-s);">
-						{% svg 'handshake', { class: 'inline-icon linecap-auto' } %}
+						{{ svg 'handshake', { class: 'inline-icon linecap-auto' } }}
 						<span>Commissioned</span>
 					</div>
-				{% endif %}
-			{%- endset %}
-			{% set designLinks %}
-				<ul role="list" class="flex-list | marginBlockStart-auto" {% if enableViewTransitions %}style="view-transition-name:{{ design.slug }}-list;"{% endif %}>
-					{%- for site, url in design.links %}
-					{% set siteIconId %}store-icon-{{ site | lower }}{% endset %}
+				{{ /if }}
+			{{- /set }}
+			{{ set designLinks }}
+				<ul role="list" class="flex-list | marginBlockStart-auto" {{ if enableViewTransitions }}style="view-transition-name:{{ design.slug }}-list;"{{ /if }}>
+					{{- for site, url of design.links }}
+					{{ set siteIconId }}store-icon-{{ site |> toLowerCase }}{{ /set }}
 					<li>
 						<a href="{{ url }}" class="store-icon-linkwrap | display-block">
 							<span class="visually-hidden">Get on {{ site }}</span>
-							{% svg siteIconId, { class: 'store-icon-inline', width: 24, height: 24 } %}
+							{{ svg siteIconId, { class: 'store-icon-inline', width: 24, height: 24 } }}
 						</a>
 					</li>
-					{% endfor -%}
+					{{ /for -}}
 				</ul>
-			{% endset %}
-
-			{% component 'card', {
+			{{ /set }}
+			{{ set cardImageSrc = [assets.images, 'designs', design.img] |> toPath |> toNetlifyImage({ w: 320 }) }}
+			{{ component 'card', {
 				image: {
-					decorator: (designVariant | trim) or (designCommission | trim),
-					src: [assets.images, 'designs', design.img] | toPath | toNetlifyImage({ w: 320 }),
+					decorator: (designVariant || designCommission).trim(),
+					src: cardImageSrc,
 					width: 600,
 					height: 600,
-					lazy: loop.index >= 8
+					lazy: loopIndex >= 8
 				},
 				link: designPermalink,
 				heading: design.name,
 				descriptionMarkup: designLinks,
 				classes: 'card--design',
 				containsLinks: true
-			} %}
+			} }}
 			</li>
-		{% endfor %}
+		{{ /for }}
 	</ul>
 
 	<template data-filtered-tiles-template>
@@ -101,8 +103,8 @@
 
 <p class="textAlign-center fontStyle-italic">Note: this is not an exhaustive list, more designs are available in each shop!</p>
 
-{% if not metadata.nakedJs %}
+{{ if !metadata.nakedJs }}
 <script>
-{% include 'assets/js/components/filtered-tiles.js' %}
+{{ include 'assets/js/components/filtered-tiles.js' }}
 </script>
-{% endif %}
+{{ /if }}

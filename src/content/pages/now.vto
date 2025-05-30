@@ -14,56 +14,56 @@ nowInfo: {
 tags: [_slash]
 ---
 
-{%- set lastKey = '' -%}
-{% macro nowList(nowKey, nowItems, nowData) %}
-    {% set detailPrefix = nowData.detail or false %}
-    {% set imageWidth = 600 %}
-    {% set imageHeight = 600 %}
-    {% set cloudinaryParams = 'c_fill,g_auto:faces,h_' + imageHeight + ',w_' + imageWidth + '/q_auto:eco' %}
-    {% for nowItem in nowItems %}
+{{ set lastKey = '' }}
+{{ set imageWidth = 600 }}
+{{ set imageHeight = 600 }}
+{{ set cloudinaryParams = `c_fill,g_auto:faces,h_${imageHeight},w_${imageWidth}/q_auto:eco` }}
+{{ function nowList(nowKey, nowItems, nowData) }}
+    {{ set detailPrefix = nowData.detail || false }}
+    {{ for nowItem of nowItems }}
         <div class="now-item">
-            {% if lastKey != nowKey %}
+            {{ if lastKey !== nowKey }}
                 <h2 class="now-section-heading" aria-hidden="true">{{ nowInfo[nowKey].heading }}</h2>
-            {% endif %}
+            {{ /if }}
 
-            {% if nowItem.image %}
+            {{ if nowItem.image }}
                 <img
-                    src="{{ nowItem.image | toCloudinary(cloudinaryParams) }}"
+                    src="{{ nowItem.image |> toCloudinary(cloudinaryParams) }}"
                     alt=""
                     aria-hidden="true"
                     class="now-item-image"
                     width="{{ imageWidth }}"
                     height="{{ imageHeight }}"
                 >
-            {% endif %}
+            {{ /if }}
 
             <p class="now-item-content | fontSize-small">
-                {% if nowItem.link %}
+                {{ if nowItem.link }}
                     <a href="{{ nowItem.link }}">
-                {% endif %}
+                {{ /if }}
                     <strong class="display-block h4 textWrap-balance">
                         {{- nowItem.title }}
-                        {% if nowItem.detail %}({% if detailPrefix %}{{ detailPrefix }}&nbsp;{% endif %}{{ nowItem.detail }}){% endif -%}
+                        {{ if nowItem.detail }}({{ if detailPrefix }}{{ detailPrefix }}&nbsp;{{ /if }}{{ nowItem.detail }}){{ /if -}}
                     </strong>
-                {% if nowItem.link %}
+                {{ if nowItem.link }}
                     </a>
-                {% endif %}
-                {% if nowItem.blurb %}
-                    {{ nowItem.blurb | markdown(true) | safe }}
-                {% endif %}
+                {{ /if }}
+                {{ if nowItem.blurb }}
+                    {{ nowItem.blurb |> markdown(true) }}
+                {{ /if }}
             </p>
         </div>
-        {%- set lastKey = nowKey -%}
-    {% endfor %}
-{% endmacro %}
+        {{- set lastKey = nowKey -}}
+    {{ /for }}
+{{ /function }}
 
 <div class="now-grid">
-    {% for nowKey, nowData in nowInfo %}
-        {%- if now[nowKey] -%}
+    {{ for nowKey, nowData of nowInfo }}
+        {{- if now[nowKey] -}}
             <h2 class="visually-hidden">{{ nowInfo[nowKey].heading }}</h2>
             {{ nowList(nowKey, now[nowKey], nowData) -}}
-        {%- endif -%}
-    {%- endfor -%}
+        {{- /if -}}
+    {{- /for -}}
 </div>
 
 <hr>

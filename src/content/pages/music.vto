@@ -41,20 +41,23 @@ artists: {
 </style>
 
 <p>
-    While I do make music (well… used to!) as <a href="https://chronoise.com" class="link-label-anchor">{% svg 'chronoise-icon', { class: 'inline-icon inline-icon--center' } %} <span class="link-label-text">Chronoise</span></a>, this page is a little “shrine” for some of the artists I enjoy listening to with variable frequency (but my iPod has loads more). If you think there's a band I might like, please share <a href="{{ metadata.author.mastodon }}">with me on Mastodon</a>!
+    While I do make music (well… used to!) as <a href="https://chronoise.com" class="link-label-anchor">{{ svg 'chronoise-icon', { class: 'inline-icon inline-icon--center' } }} <span class="link-label-text">Chronoise</span></a>, this page is a little “shrine” for some of the artists I enjoy listening to with variable frequency (but my iPod has loads more). If you think there's a band I might like, please share <a href="{{ metadata.author.mastodon }}">with me on Mastodon</a>!
 </p>
 
 <hr aria-hidden="true">
 
 <ul class="cards" style="--gridlist-cell-size: 8rem;">
-    {% for artistKey, artistName in artists %}
+{{> let loopIndex = 0 }}
+{{ for artistKey, artistName of artists }}
+    {{> loopIndex++ }}
     <li class="card-wrapper">
         <figure class="artist-figure">
-            {% image "/" + assets.images + "/artists/"+artistKey+".svg" | toRoot, "Logo for "+artistName, "", { title: artistName, bypassLink: true, bypassCdn: true, width: 600, height: 600, eager: loop.index <= 3 } %}
+            {{ set artistSymbol = `/${assets.images}/artists/${artistKey}.svg` |> toRoot }}
+            {{ image artistSymbol, `Logo for ${artistName}`, "", { title: artistName, bypassLink: true, bypassCdn: true, width: 600, height: 600, eager: loopIndex <= 3 } }}
             <figcaption class="artist-label textAlign-center lineHeight-dense fontSize-tiny">{{ artistName }}</figcaption>
         </figure>
     </li>
-    {% endfor %}
+{{ /for }}
 </ul>
 
 <p class="textAlign-center fontSize-smaller fontStyle-italic">Don’t-sue-me notice: all logos belong to their respective owners.</p>

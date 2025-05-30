@@ -149,7 +149,7 @@ games: [
         developer: "Irrational Games",
         platform: "PS3",
         year: 2013,
-        blurb: "I saw my brother play Bioshock, and then played Bioshock 2 myself. Not a great choice, but Bioshock Infinite saved it for me. Playing in a city hanging in the clouds, in a detailed world with a lot going on, and lots of guns/powers to find answers. The story pulled me in, though fun gameplay also did its fair share."
+        blurb: "I saw my brother play Bioshock, and then I played Bioshock 2 myself. Not a great choice, but Bioshock Infinite saved it for me. Playing in a city hanging in the clouds, in a detailed world with a lot going on, and lots of guns/powers to find answers. The story pulled me in, though fun gameplay also did its fair share."
     },
     {
         category: "Action",
@@ -240,58 +240,58 @@ games: [
 tags: [_slash]
 ---
 
-{% set goatIndicator %}
+{{ set goatIndicator }}
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="inline-icon inline-icon--center | color-accent | goat-indicator-instance">
     <title>(greatest of all time)</title>
     <use xlink:href="#goat-indicator"></use>
 </svg>
-{% endset %}
+{{ /set }}
 
 <p>
-    Inspired by <a href="https://localghost.dev/games/">Sophie Koonin</a>, <a href="https://alistairshepherd.uk/games/">Alistair Shepherd</a>, and <a href="https://tylersticka.com/journal/favorite-games/">Tyler Sticka</a>, here are some of my favourite games. (see also <a href="https://rknight.me/blog/my-favourite-games/">Robb Knight’s</a>) The only reason I am anywhere near good enough with design and development is because I made a fan-site about video games back in the day, so this feels like a necessary page. If some of these resonate with you and you want to chat about it, <a href="{{ metadata.author.mastodon }}">let me know on Mastodon</a>! (I have listed all {% component 'cta', { label: "the games in my library", url: "/games/library/" } %} here if that’s of interest)
+    Inspired by <a href="https://localghost.dev/games/">Sophie Koonin</a>, <a href="https://alistairshepherd.uk/games/">Alistair Shepherd</a>, and <a href="https://tylersticka.com/journal/favorite-games/">Tyler Sticka</a>, here are some of my favourite games. (see also <a href="https://rknight.me/blog/my-favourite-games/">Robb Knight’s</a>) The only reason I am anywhere near good enough with design and development is because I made a fan-site about video games back in the day, so this feels like a necessary page. If some of these resonate with you and you want to chat about it, <a href="{{ metadata.author.mastodon }}">let me know on Mastodon</a>! (I have listed all {{ component 'cta', { label: "the games in my library", url: "/games/library/" } }} here if that’s of interest)
     <br>
     <span class="fontStyle-italic fontSize-smaller">
-        {{ goatIndicator | safe }}
+        {{ goatIndicator }}
         indicates a game I consider to be one of the greatest of all time.
     </span>
 </p>
 
 <hr aria-hidden="true">
 
-{% for category, gamesByCategory in games | groupby('category') %}
+{{ for category, gamesByCategory of games |> groupBy('category') }}
     <h2>{{ category }}</h2>
     <ul data-list="long">
-        {% for entry in gamesByCategory | sort | sort(false, false, 'year') %}
+        {{ for entry of gamesByCategory |> sort |> sortBy(false, false, 'year') }}
             <li>
                 <p>
-                    {% if entry.goat %}
-                        {{ goatIndicator | safe }}
-                    {% endif %}
+                    {{ if entry.goat }}
+                        {{ goatIndicator }}
+                    {{ /if }}
 
-                    {% if entry.link %}<a href="{{ entry.link }}" class="fontWeight-bold">{% else %}<span class="fontWeight-bold">{% endif -%}
+                    {{ if entry.link }}<a href="{{ entry.link }}" class="fontWeight-bold">{{ else }}<span class="fontWeight-bold">{{ /if -}}
                     {{- entry.title -}}
-                    {%- if entry.link %}</a>{% else %}</span>{% endif %}
+                    {{- if entry.link }}</a>{{ else }}</span>{{ /if }}
                     
                     ({{ entry.developer }}, {{ entry.year }}, {{ entry.platform }})
                     
-                    {% if entry.blurb %}
+                    {{ if entry.blurb }}
                         <br>
-                        {{ entry.blurb | markdown(true) | safe }}
-                    {% endif %}
+                        {{ entry.blurb |> markdown(true) }}
+                    {{ /if }}
                     
-                    {% if entry.similar %}
+                    {{ if entry.similar }}
                         <br>
-                        <span class="fontStyle-italic fontSize-smaller">(also check out: {{ entry.similar | join(', ') }})</span>
-                    {% endif %}
+                        <span class="fontStyle-italic fontSize-smaller">(also check out: {{ entry.similar |> join(', ') }})</span>
+                    {{ /if }}
                 </p>
             </li>
-        {% endfor %}
+        {{ /for }}
     </ul>
-{% endfor %}
+{{ /for }}
 
 <svg xmlns="http://www.w3.org/2000/svg" class="visually-hidden" width="0" height="0">
     <defs>
-        {% if not metadata.nakedCss %}
+        {{ if !metadata.nakedCss }}
         <style>
         @media (prefers-reduced-motion: reduce) {
             #goat-indicator-outline { display: none; }
@@ -308,7 +308,7 @@ tags: [_slash]
             50%, 100% { transform: scale(1.75); opacity: 0; }
         }
         </style>
-        {% endif %}
+        {{ /if }}
         <symbol id="goat-indicator" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" id="goat-indicator-outline" fill="transparent" />
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>

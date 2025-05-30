@@ -12,8 +12,8 @@
     CSS_OKLCH_HUE: 303.37,
 }
 ---
-{% set designSolid = designs | find('slug', 'css-logo-solid') %}
-{% set designTransparent = designs | find('slug', 'css-logo-transparent') %}
+{{ set designSolid = designs |> find('slug', 'css-logo-solid') }}
+{{ set designTransparent = designs |> find('slug', 'css-logo-transparent') }}
 <p>
     I’ve had this idea for a new logo for CSS that would riff off of the famous "CSS is Awesome" meme. There’s room for adding a version number in the corner as well. It’s not official by any means (<a href="https://github.com/CSS-Next/logo.css">here is the new official CSS logo!</a>) but maybe it’s good enough to use? You tell me. I’ve made this available on my apparel stores (both <a href="/designs/{{ designSolid.slug }}/">solid</a> and <a href="/designs/{{ designTransparent.slug }}/">transparent</a> variants).
 </p>
@@ -31,7 +31,7 @@
     </div>
 
     <div class="flow">
-        {% if not metadata.nakedCss and not metadata.nakedJs %}
+        {{ if !metadata.nakedCss && !metadata.nakedJs }}
         <form class="flow" data-csslogo-controls hidden>
             <h2>Customiser</h2>
 
@@ -43,13 +43,13 @@
                     <label for="css-logo-value-control" class="visually-hidden">Version</label>
                     <input id="css-logo-value-control" type="text" value="{{ CSS_VER_NUM }}" size="5" data-csslogo-control="numberValue" data-csslogo-control-area style="--control-area: --num-input;">
 
-                    {% component 'cta', {
+                    {{ component 'cta', {
                         ctaType: 'button',
                         iconBefore: true,
                         icon: 'visibility',
                         label: 'Toggle',
                         ctaAttr: 'data-csslogo-control="toggleNumberVisibility" aria-pressed="true" data-csslogo-control-area style="--control-area: --num-toggle;"'
-                    } %}
+                    } }}
                 </fieldset>
 
                 <fieldset class="css-logo-control-group | grouper grouper--vertical">
@@ -61,17 +61,17 @@
                         <input id="css-logo-hue-control" type="range" min="0" max="360" value="{{ CSS_HUE }}" step="5" data-csslogo-control="colorHue">
                     </div>
 
-                    {% component 'cta', {
+                    {{ component 'cta', {
                         ctaType: 'button',
                         iconBefore: true,
                         icon: 'arrow-bidir',
                         label: 'Invert',
                         ctaAttr: 'data-csslogo-control="toggleColorSwap" aria-pressed="true" data-csslogo-control-area style="--control-area: --col-toggle;"'
-                    } %}
+                    } }}
                 </fieldset>
             </div>
         </form>
-        {% endif %}
+        {{ /if }}
 
         <h2 class="css-logo-usage">Want to use it?</h2>
         <p>Although very appreciated, you may use this without needing to credit me under the condition it is non-AI and non-commercial (especially as I am selling <a href="/designs/{{ designSolid.slug }}/">this design</a>); just don’t claim you made it, is all I ask. Thank you!</p>
@@ -80,17 +80,17 @@
             <p class="grouper grouper--wrap">
                 <strong>Download:</strong>
 
-                <a href="{{ [assets.images, 'css-logo.svg'] | toPath }}" download class="button">SVG</a>
-                <a href="{{ [assets.images, 'css-logo.png'] | toPath }}" download class="button">PNG</a>
-                <a href="{{ [assets.images, 'css-logo.jpg'] | toPath }}" download class="button">JPG</a>
+                <a href="{{ [assets.images, 'css-logo.svg'] |> toPath }}" download class="button">SVG</a>
+                <a href="{{ [assets.images, 'css-logo.png'] |> toPath }}" download class="button">PNG</a>
+                <a href="{{ [assets.images, 'css-logo.jpg'] |> toPath }}" download class="button">JPG</a>
             </p>
 
             <div class="tooltip-content">original design, no edits</div>
         </div>
 
-        {% if not metadata.nakedJs %}
+        {{ if !metadata.nakedJs }}
         <script>
-        {% set cssLogoFormScript %}
+        {{ set cssLogoFormScript |> await jsmin }}
         (function() {
             const CSS_VER_NUM = {{ CSS_VER_NUM }};
             const isNaNorExp = (str) => String(str).trim() === '' || isNaN(str) || String(str).indexOf('e') > -1; // Is not a number or is an exponent
@@ -180,14 +180,14 @@
                 return false;
             });
         })();
-        {% endset %}
-        {{ cssLogoFormScript | jsmin | safe }}
+        {{ /set }}
+        {{ cssLogoFormScript }}
         </script>
-        {% endif %}
+        {{ /if }}
 
-        {% if not metadata.nakedCss %}
+        {{ if !metadata.nakedCss }}
         <style>
-        {% set cssLogoFormStyle %}
+        {{ set cssLogoFormStyle |> await cssmin }}
             .css-logo {
                 --css-alpha: hsl(var(--css-hue, {{ CSS_HUE }}), 100%, 97.8%);
                 --css-omega: hsl(var(--css-hue, {{ CSS_HUE }}), 68.4%, 29.8%);
@@ -337,10 +337,10 @@
                 border-radius: var(--slider-thumb-radius);
                 background: var(--slider-thumb-bg);
             }
-        {% endset %}
-        {{ cssLogoFormStyle | cssmin | safe }}
+        {{ /set }}
+        {{ cssLogoFormStyle }}
         </style>
-        {% endif %}
+        {{ /if }}
     </div>
 </div>
 

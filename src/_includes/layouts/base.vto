@@ -9,7 +9,7 @@
 			let globalBreakpoint = `{{ tokens.settings.breakpoint }}`;
 			let docEl = document.documentElement; // For minification purposes only
 			docEl.setAttribute('data-js', 'true');
-			window.themeKeys = {{ themes |> pluck('key') |> dump }};
+			window.themeKeys = {{ themes |> pluck('key') |> JSON.stringify }};
 			{{- include 'assets/js/theme-set.js' }}
 		{{ /js }}
 		{{- getBundle 'js', 'head' -}}
@@ -25,7 +25,7 @@
 		<link rel="stylesheet" media="print" href="/assets/css/print.css">
 		
 		{{# RSS feed #}}
-		<link rel="alternate" type="application/rss+xml" title="{{ metadata.title }}" href="{{ (rssFeedOverride || nav.rss.path) |> absoluteUrl(metadata.url) }}">
+		<link rel="alternate" type="application/rss+xml" title="{{ metadata.title }}" href="{{ (rssFeedOverride || nav.rss.path) }}">
 		{{ /set }}
 
 		{{ include 'parts/head.vto' { headInner } }}
@@ -41,7 +41,7 @@
 				{{ set announcement }}My CSS isn‘t broken! 🙅 No CSS for <a href="https://css-naked-day.org/">CSS Naked Day</a> (9th of April)!{{ /set }}
 			{{ else if metadata.nakedJs }}
 				{{ set announcement }}Your JavaScript isn't broken! 🙅 No JS for <a href="https://js-naked-day.org/">JS Naked Day</a> (24th of April)!{{ /set }}
-			{{# {{ else }}{{ set announcement = "" }} #}}
+			{{ else }}{{ set announcement = "This is vento!!" }}
 			{{ /if }}
 			{{ if announcement }}
 				<div class="announcement"><p class="textWrap-balance textAlign-center">{{ announcement |> markdown(true) }}</p></div>

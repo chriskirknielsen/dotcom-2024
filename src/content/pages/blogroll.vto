@@ -476,31 +476,34 @@ blogroll: {
 ---
 
 <p>Here’s the list of blogs I follow (RSS never went away, <em>babeyyy</em>), from people I respect and admire — you’ll definitely find interesting stuff! <span class="hide-when-nojs">You can download an OPML file for each category to import into your RSS reader.</span> And if you’ve got suggestions, please do send them my way via <a href="{{ social.mastodon.url }}">Mastodon</a>.</p>
-{% set blogIconSize = 32 %}
-{% for group, blogs in blogroll %}
-    {% set isFirstLoop = loop.first %}
-    <h2 data-blogroll="{{ group }}">{{ group }} &times;{{ blogs | length }}</h2>
+{{ set blogIconSize = 32 }}
+{{> let isFirstLoop = true }}
+{{ for group, blogs of blogroll }}
+    <h2 data-blogroll="{{ group }}">{{ group }} &times;{{ blogs.length }}</h2>
     <ul class="blogroll" style="--_tooltip-offset: 0px;">
-        {% for blog in blogs | sort(false, false, 'title') %}
+        {{> let loopIndex = 1 }}
+        {{ for blog of blogs |> sortBy(false, false, 'title') }}
             <li class="blogroll-item">
                 <a
                     href="{{ blog.htmlUrl }}"
-                    class="link-label-anchor{% if blog.blurb %} tooltip{% endif %}"
+                    class="link-label-anchor{{ if blog.blurb }} tooltip{{ /if }}"
                     rel="noopener noreferrer"
-                    {% if blog.blurb %}data-tooltip-pos="start center"{% endif %}
+                    {{ if blog.blurb }}data-tooltip-pos="start center"{{ /if }}
                 >
-                    {%- if blog['rssfr-favicon'] %}
-                        {%- set faviconbg %}{% if blog['favicon-dark'] %},b_white{% endif %}{% endset -%}
-                        <img src="{{ blog['rssfr-favicon'] | toCloudinary('c_fill,w_'+blogIconSize+',h_'+blogIconSize+''+faviconbg+'/q_auto:eco') }}" width="{{blogIconSize}}" height="{{blogIconSize}}" class="inline-icon" alt="" {% if not isFirstLoop or loop.index > 24 %}loading="lazy"{% endif %}>
-                    {% endif %}
+                    {{- if blog['rssfr-favicon'] }}
+                        {{- set faviconbg }}{{ if blog['favicon-dark'] }},b_white{{ /if }}{{ /set -}}
+                        <img src="{{ blog['rssfr-favicon'] |> toCloudinary(`c_fill,w_${blogIconSize},h_${blogIconSize}${faviconbg}/q_auto:eco`) }}" width="{{blogIconSize}}" height="{{blogIconSize}}" class="inline-icon" alt="" {{ if !isFirstLoop || loopIndex > 24 }}loading="lazy"{{ /if }}>
+                    {{ /if }}
                     <span class="link-label-text">{{ blog.title }}</span>
-                    {%- if blog.blurb -%}<span class="tooltip-content">{{ blog.blurb }}</span>{%- endif -%}
+                    {{- if blog.blurb -}}<span class="tooltip-content">{{ blog.blurb }}</span>{{- /if -}}
                 </a>
             </li>
-        {% endfor %}
+            {{> loopIndex++ }}
+        {{ /for }}
     </ul>
-{% endfor %}
-{% if not metadata.nakedCss %}
+    {{> isFirstLoop = false }}
+{{ /for }}
+{{ if !metadata.nakedCss }}
 <style>
     .blogroll {
         display: grid;
@@ -514,11 +517,11 @@ blogroll: {
         gap: 0.5em;
     }
 </style>
-{% endif %}
+{{ /if }}
 
-{% if not metadata.nakedJs %}
+{{ if !metadata.nakedJs }}
 <script>(function(){
-    const blogroll = {{ blogroll | dump | safe }};
+    const blogroll = {{ blogroll |> JSON.stringify }};
     const safeAttrUrl = (url) => url.replace(/(&)+/g, '&amp;').replace(/(")+/g, '&quot;');
     Array.from(document.querySelectorAll('[data-blogroll]')).forEach((h2) => {
         const groupLabel = h2.getAttribute('data-blogroll');
@@ -534,4 +537,4 @@ blogroll: {
         h2.append(' ', download);
     });
 })();</script>
-{% endif %}
+{{ /if }}

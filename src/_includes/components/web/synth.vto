@@ -118,15 +118,15 @@
                 {{ set w = w1 - 1 }}
                 {{ set noteIndexW = w % 7 }}
                 {{ set noteW = notes[ noteIndexW ] }}
-                {{ set octaveW = ((w / 7) |> round(0, 'floor')) + ((noteIndexW < 5) ? 1 : 2) }}
+                {{ set octaveW = (Math.floor(w / 7)) + ((noteIndexW < 5) ? 1 : 2) }}
                 <button type="button" style="--synth-key-index: {{ w + 1 }}" class="button-reset synth-key" data-key="white" data-note="{{ noteW }}" data-octave="{{ octaveW }}" aria-label="{{ noteW }}{{ octaveW }}" aria-pressed="false" disabled>
                     <kbd class="synth-key-label"></kbd>
                 </button>
                 {{ set b = w + 1 }}
                 {{ set noteIndexB = b % 7 - 1 }}
                 {{ set noteB = notes[ noteIndexB ] }}
-                {{ set octaveB = ((b / 7) |> round(0, 'floor')) + ((noteIndexB < 5) ? 1 : 2) }}
-                {{ if b % 7 !== 0 and ((b + 4) % 7 !== 0) and b < noteCount }}
+                {{ set octaveB = (Math.floor(b / 7)) + ((noteIndexB < 5) ? 1 : 2) }}
+                {{ if b % 7 !== 0 && ((b + 4) % 7 !== 0) && b < noteCount }}
                     <button type="button" style="--synth-key-index: {{ b + 1 }}" class="button-reset synth-key" data-key="black" data-note="{{ noteB }}#" data-octave="{{ octaveB }}" aria-label="{{ noteB }}#{{ octaveB }}" aria-pressed="false" disabled>
                         <kbd class="synth-key-label"></kbd>
                     </button>

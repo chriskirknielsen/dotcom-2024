@@ -1,5 +1,5 @@
 ---
-layout: page.njk
+layout: page.vto
 heroCta: [{ url: "/projects/", label: "Back to Projects", icon: "arrow-left", iconBefore: true }]
 ---
 
@@ -10,16 +10,16 @@ heroCta: [{ url: "/projects/", label: "Back to Projects", icon: "arrow-left", ic
 	{{ component 'cta', {
 		ext: 'vto',
 		url: externalUrl,
-		label: projectButtonLabel or "View Project",
+		label: projectButtonLabel || 'View Project',
 		icon: 'arrow-right'
 	} }}
 	{{ if extraCta }}
-		{{ for extraCtaItem in extraCta }}
+		{{ for extraCtaItem of extraCta }}
 		{{ component 'cta', {
 			ext: 'vto',
 			url: extraCtaItem.url,
 			label: extraCtaItem.label,
-			icon: extraCtaItem.icon or 'arrow-right'
+			icon: extraCtaItem.icon || 'arrow-right'
 		} }}
 		{{ /for }}
 	{{ /if }}

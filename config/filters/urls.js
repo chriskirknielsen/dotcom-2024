@@ -11,7 +11,8 @@ export default function (eleventyConfig) {
 
 	/** Rewrites a path so the current directory `./` becomes the path from the root, e.g. `./foo.jpg` within /projects/xyz becomes `/projects/xyz/foo.jpg` */
 	eleventyConfig.addFilter('toRoot', function (url) {
-		return url.replace(/^(\.?\/){1}/, this.ctx.page.url); //! Cannot be fat arrow function to preserve `this`
+		const root = this?.ctx?.page?.url || this?.data?.page?.url; // Njk or Vto object path
+		return url.replace(/^(\.?\/){1}/, root); //! Cannot be fat arrow function to preserve `this`
 	});
 
 	/** Joins an array of path parts into a single part, optionally with a different root. Does not preserve trailing slashes for directory paths. */

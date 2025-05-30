@@ -1,4 +1,4 @@
-import metadata from './metadata.js';
+// import metadata from './metadata.js';
 import social from './social.js';
 
 const rss = { path: '/rss.xml', label: 'RSS Feed' };

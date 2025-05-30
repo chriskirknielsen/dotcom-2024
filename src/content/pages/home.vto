@@ -1,10 +1,11 @@
 ---
-layout: content.njk
 gridBlockGutter: 2
 section: home
 permalink: "/"
 title: Home
 summary: "Welcome to the personal website of the one they call Christopher Kirk-Nielsen, a creative developer with zero awards who is, in fact, a CSS nerd"
+eleventyComputed:
+    layout: content.vto
 ---
 
 <hgroup class="homepage-logo | content-wide">
@@ -12,45 +13,45 @@ summary: "Welcome to the personal website of the one they call Christopher Kirk-
 		<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
 			<g class="homepage-logo-circle--deco" fill="none">
 				<g data-theme-condition="dawn" stroke-linecap="round" style="--CTX-factor: 5;">
-					{# Longer lines #}
+					{{# Longer lines #}}
 					<g data-deco-anim="path" style="--CTX-delay: 0;">
 						<path pathLength="1" d="M50 6.05v-5"/>
 						<path pathLength="1" d="M34.96 8.7 33.25 4"/>
 						<path pathLength="1" d="m21.73 16.34-3.22-3.83"/>
-						{# <path pathLength="1" d="m11.91 28.04-4.33-2.5"/> #}
-						{# <path pathLength="1" d="m6.69 42.39-4.93-.87"/> #}
-						{# <path pathLength="1" d="m6.69 57.67-4.93.87"/> #}
-						{# <path pathLength="1" d="m11.91 72.02-4.33 2.5"/> #}
+						{{# <path pathLength="1" d="m11.91 28.04-4.33-2.5"/> #}}
+						{{# <path pathLength="1" d="m6.69 42.39-4.93-.87"/> #}}
+						{{# <path pathLength="1" d="m6.69 57.67-4.93.87"/> #}}
+						{{# <path pathLength="1" d="m11.91 72.02-4.33 2.5"/> #}}
 						<path pathLength="1" d="m21.73 83.72-3.22 3.83"/>
 						<path pathLength="1" d="m34.96 91.36-1.71 4.7"/>
 						<path pathLength="1" d="M50 94.01v5"/>
 						<path pathLength="1" d="m65.04 91.36 1.71 4.7"/>
 						<path pathLength="1" d="m78.27 83.72 3.22 3.83"/>
-						{# <path pathLength="1" d="m88.09 72.02 4.33 2.5"/> #}
-						{# <path pathLength="1" d="m93.31 57.67 4.93.87"/> #}
-						{# <path pathLength="1" d="m93.31 42.39 4.93-.87"/> #}
-						{# <path pathLength="1" d="m88.09 28.04 4.33-2.5"/> #}
+						{{# <path pathLength="1" d="m88.09 72.02 4.33 2.5"/> #}}
+						{{# <path pathLength="1" d="m93.31 57.67 4.93.87"/> #}}
+						{{# <path pathLength="1" d="m93.31 42.39 4.93-.87"/> #}}
+						{{# <path pathLength="1" d="m88.09 28.04 4.33-2.5"/> #}}
 						<path pathLength="1" d="m78.27 16.34 3.22-3.83"/>
 						<path pathLength="1" d="M65.04 8.7 66.75 4"/>
 					</g>
 
-					{# Shorter lines #}
+					{{# Shorter lines #}}
 					<g data-deco-anim="path" style="--CTX-delay: 3;">
 						<path pathLength="1" d="m42.36 6.72-.44-2.53"/>
 						<path pathLength="1" d="m28.01 11.94-1.28-2.22"/>
 						<path pathLength="1" d="m16.31 21.76-1.97-1.65"/>
-						{# <path pathLength="1" d="m8.67 34.99-2.41-.88"/> #}
-						{# <path pathLength="1" d="M6.02 50.03H3.46"/> #}
-						{# <path pathLength="1" d="m8.67 65.07-2.41.88"/> #}
+						{{# <path pathLength="1" d="m8.67 34.99-2.41-.88"/> #}}
+						{{# <path pathLength="1" d="M6.02 50.03H3.46"/> #}}
+						{{# <path pathLength="1" d="m8.67 65.07-2.41.88"/> #}}
 						<path pathLength="1" d="m16.31 78.3-1.97 1.65"/>
 						<path pathLength="1" d="m28.01 88.12-1.28 2.22"/>
 						<path pathLength="1" d="m42.36 93.34-.44 2.53"/>
 						<path pathLength="1" d="m57.64 93.34.44 2.53"/>
 						<path pathLength="1" d="m71.99 88.12 1.28 2.22"/>
 						<path pathLength="1" d="m83.69 78.3 1.97 1.65"/>
-						{# <path pathLength="1" d="m91.33 65.07 2.41.88"/> #}
-						{# <path pathLength="1" d="M93.98 50.03h2.56"/> #}
-						{# <path pathLength="1" d="m91.33 34.99 2.41-.88"/> #}
+						{{# <path pathLength="1" d="m91.33 65.07 2.41.88"/> #}}
+						{{# <path pathLength="1" d="M93.98 50.03h2.56"/> #}}
+						{{# <path pathLength="1" d="m91.33 34.99 2.41-.88"/> #}}
 						<path pathLength="1" d="m83.69 21.76 1.97-1.65"/>
 						<path pathLength="1" d="m71.99 11.94 1.28-2.22"/>
 						<path pathLength="1" d="m57.64 6.72.44-2.53"/>
@@ -63,7 +64,7 @@ summary: "Welcome to the personal website of the one they call Christopher Kirk-
 
 			<g class="homepage-logo-circle--deco" fill="none">
 				<g data-theme-condition="dawn">
-					{# Art Deco lines #}
+					{{# Art Deco lines #}}
 					<g fill="none">
 						<g>
 							<path d="m20.768 28.425 24.313-14.071 24.312 14.071" />
@@ -233,8 +234,8 @@ summary: "Welcome to the personal website of the one they call Christopher Kirk-
 
 	<h1 class="visually-hidden | p-name">{{ metadata.author.name }}</h1>
 
-	{% injectsvg 'name-wide', { class: 'homepage-logo-name homepage-logo-name--wide' } %}
-	{% injectsvg 'name-stack', { class: 'homepage-logo-name homepage-logo-name--stack' } %}
+	{{ injectsvg 'name-wide', { class: 'homepage-logo-name homepage-logo-name--wide' } }}
+	{{ injectsvg 'name-stack', { class: 'homepage-logo-name homepage-logo-name--stack' } }}
 
 	<p class="homepage-logo-text homepage-logo-text--below">
 		<span>
@@ -249,11 +250,11 @@ summary: "Welcome to the personal website of the one they call Christopher Kirk-
 
 	<p>
 		Hey there, my name’s Chris! I’m a <strong class="p-job-title">front-end developer</strong> with a designer background who loves building for the web. I currently work at <a href="https://mojopsg.com">MOJO</a> and still <a href="/designs/">design</a> on occasion. I enjoy languages, movies, and <strong>all the puns</strong>. Oh, and I’m bald thanks to my DNA. Still curious?
-		{% component 'cta', {
+		{{ component 'cta', {
 			url: '/about/',
 			label: 'More about me',
 			icon: 'arrow-right'
-		} %}
+		} }}
 	</p>
 </div>
 <aside class="homepage-side" data-homepage="side" aria-labelledby="the-human-behind-the-website">
@@ -261,7 +262,7 @@ summary: "Welcome to the personal website of the one they call Christopher Kirk-
 
 	<div class="homepage-photo">
 		<img
-			src="{{ [assets.images, 'profile-256.jpg'] | toPath | toNetlifyImage({ w: 256 }) }}"
+			src="{{ [assets.images, 'profile-256.jpg'] |> toPath |> toNetlifyImage({ w: 256 }) }}"
 			alt="A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head."
 			width="256"
 			height="256"
@@ -270,59 +271,59 @@ summary: "Welcome to the personal website of the one they call Christopher Kirk-
 
 	<ul class="homepage-social" aria-label="Find me around the web">
 		<li>
-			{% component 'cta', { url: nav.rss.path, label: { aria: nav.rss.label }, icon: 'rss', iconClass: ' ', iconSvgOpts: { width: 24, height: 24 } } %}
+			{{ component 'cta', { url: nav.rss.path, label: { aria: nav.rss.label }, icon: 'rss', iconClass: ' ', iconSvgOpts: { width: 24, height: 24 } } }}
 		</li>
 		<li>
-			{% component 'cta', { url: social.mastodon.url, label: { aria: social.mastodon.label }, icon: 'mastodon', iconClass: ' ', iconSvgOpts: { width: 24, height: 24 } } %}
+			{{ component 'cta', { url: social.mastodon.url, label: { aria: social.mastodon.label }, icon: 'mastodon', iconClass: ' ', iconSvgOpts: { width: 24, height: 24 } } }}
 		</li>
 		<li>
-			{% component 'cta', { url: social.codepen.url, label: { aria: social.codepen.label }, icon: 'codepen', iconClass: ' ', iconSvgOpts: { width: 24, height: 24 } } %}
+			{{ component 'cta', { url: social.codepen.url, label: { aria: social.codepen.label }, icon: 'codepen', iconClass: ' ', iconSvgOpts: { width: 24, height: 24 } } }}
 		</li>
 		<li>
-			{% component 'cta', { url: social.github.url, label: { aria: social.github.label }, icon: 'github-icon', iconClass: ' ', iconSvgOpts: { width: 24, height: 24 } } %}
+			{{ component 'cta', { url: social.github.url, label: { aria: social.github.label }, icon: 'github-icon', iconClass: ' ', iconSvgOpts: { width: 24, height: 24 } } }}
 		</li>
 	</ul>
 </aside>
 
-{% set hasFeatured = (collections['_posts.featured'] | length) > 0 %}
-{% set latestFeatured = collections['_posts.featured'] | reverse %}
-{% set nonFeaturedCount = 1 if hasFeatured else 2 %}
-{% set nonFeaturedItems = collections['_posts.not_featured'] | reverse %}
-{% set frontpagePosts = {
+{{ set hasFeatured = collections['_posts.featured'].length > 0 }}
+{{ set latestFeatured = collections['_posts.featured'] |> slice |> reverse }}
+{{ set nonFeaturedCount = hasFeatured ? 1 : 2 }}
+{{ set nonFeaturedItems = collections['_posts.not_featured'] |> slice |> reverse }}
+{{ set frontpagePosts = {
 	featured: latestFeatured.slice(0, 1),
 	latest: nonFeaturedItems.slice(0, nonFeaturedCount)
-} %}
+} }}
 <div class="homepage-posts" data-homepage="posts">
-	{% for postGroup, posts in frontpagePosts %}
-		{% if (posts | length) > 0 %}
+	{{ for postGroup, posts of frontpagePosts }}
+		{{ if posts.length > 0 }}
 			<div class="homepage-postgroup" data-homepage="postgroup">
-				{% if postGroup == 'featured' %}
+				{{ if postGroup == 'featured' }}
 					<h2 class="homepage-postheading" data-homepage="postgroup-heading">Featured Post</h2>
-				{% elseif postGroup == 'latest' %}
+				{{ else if postGroup == 'latest' }}
 					<h2 class="homepage-postheading" data-homepage="postgroup-heading">
-						Recent Post{% if nonFeaturedCount > 1 %}s{% endif %}
+						Recent Post{{ if nonFeaturedCount > 1 }}s{{ /if }}
 					</h2>
-				{% endif %}
+				{{ /if }}
 
-				{% for postData in posts %}
-					{% set dateString = postData.date | timeTag %}
-					{% component 'card', {
+				{{ for postData of posts }}
+					{{ set dateString = postData.date |> timeTag }}
+					{{ component 'card', {
 						link: postData.url,
 						eyebrow: dateString,
 						heading: postData.data.title,
 						headingTag: 'h3',
 						description: postData.data.summary
-					} %}
-				{% endfor %}
+					} }}
+				{{ /for }}
 			</div>
-		{% endif %}
-	{% endfor %}
+		{{ /if }}
+	{{ /for }}
 </div>
 
 <p>
 	If you want to see all I’ve written, I have
-	{% component 'cta', {
+	{{ component 'cta', {
 		url: '/blog/',
-		label: (collections['_posts'] | length) + ' blogposts'
-	} %} available in the Bloggy Corner!
+		label: `${collections['_posts'].length} blogposts`
+	} }} available in the Bloggy Corner!
 </p>

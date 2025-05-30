@@ -20,11 +20,13 @@
         <span class="visually-hidden">{{ label.aria }}</span>
         {{ if label.text }}
             {{> emptyLabel = false }}
-            <span aria-hidden="true">{{ safeLabel ? label.text : (label.text |> escape) }}</span>
+            {{ set escapedLabel = label.text |> escape }}
+            <span aria-hidden="true">{{ safeLabel ? label.text : escapedLabel }}</span>
         {{ /if }}
     {{ else if label }}
         {{> emptyLabel = false }}
-        <span>{{ safeLabel ? label : (label |> escape) }}</span>
+            {{ set escapedLabel = label |> escape }}
+        <span>{{ safeLabel ? label : escapedLabel }}</span>
     {{ /if }}
 {{ /set }}
 {{ set classList }}button {{ if (icon || iconStack) && emptyLabel }}button--icon-only{{ /if }} {{ ctaClass || '' }}{{ /set }}

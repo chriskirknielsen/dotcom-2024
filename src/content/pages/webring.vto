@@ -11,24 +11,24 @@ permalink: /webring/
 <p>Websites of people that enjoy experimenting with CSS :)</p>
 
 <div class="grouper" style="--flow-space: var(--size-m);">
-    {% component 'cta', {
+    {{ component 'cta', {
         url: 'https://webri.ng/webring/cssjoy/previous?via=https://chriskirknielsen.com/webring/',
         label: { aria: 'Previous', text: 'Prev' },
         icon: 'arrow-left',
         iconBefore: true,
         ctaAttr: 'data-shape="flipped"'
-    } %}
+    } }}
 
-    {% component 'cta', {
+    {{ component 'cta', {
         url: 'https://webri.ng/webring/cssjoy/random?via=https://chriskirknielsen.com/webring/',
         label: 'Random',
         icon: false,
         ctaAttr: 'data-shape="rect"'
-    } %}
+    } }}
 
-    {% component 'cta', {
+    {{ component 'cta', {
         url: 'https://webri.ng/webring/cssjoy/next?via=https://chriskirknielsen.com/webring/',
         label: 'Next',
-        icon: "arrow-right"
-    } %}
+        icon: 'arrow-right'
+    } }}
 </div>

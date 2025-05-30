@@ -10,43 +10,46 @@ versionsInfo: {
 ---
 
 <ol class="timeline">
-{% for versionYear, versionInfo in versionsInfo | dictsort | reverse %}
+{{> let loopIndex = 1 }}
+{{ for versionYear of versionsInfo |> Object.keys |> sort |> reverse }}
+    {{ set versionInfo = versionsInfo[versionYear] }}
 	<li class="timeline-item">
 		<div class="timeline-content">
             <h2 class="timeline-title">{{ versionYear }}</h2>
             <p class="timeline-info fontSize-smaller">{{ versionInfo.description }}</p>
         </div>
 		<a href="https://{{ versionYear }}.chriskirknielsen.com" class="timeline-link">
-            {% if versionInfo.hasScheme %}
+            {{ if versionInfo.hasScheme }}
                 <img
-                    src="{{ [assets.images, "site-archives/year-"+versionYear+"-light.jpg"] | toPath | toNetlifyImage }}"
+                    src="{{ [assets.images, "site-archives/year-"+versionYear+"-light.jpg"] |> toPath |> toNetlifyImage }}"
                     width="600"
                     height="600"
-                    {% if loop.index >= 3 %}loading="lazy"{% endif %}
+                    {{ if loopIndex >= 3 }}loading="lazy"{{ /if }}
                     class="timeline-image hide-when-dark"
                     alt="My website’s {{ versionYear }} version"
                 >
                 <img
-                    src="{{ [assets.images, "site-archives/year-"+versionYear+"-dark.jpg"] | toPath | toNetlifyImage }}"
+                    src="{{ [assets.images, "site-archives/year-"+versionYear+"-dark.jpg"] |> toPath |> toNetlifyImage }}"
                     width="600"
                     height="600"
-                    {% if loop.index >= 3 %}loading="lazy"{% endif %}
+                    {{ if loopIndex >= 3 }}loading="lazy"{{ /if }}
                     class="timeline-image hide-when-light"
                     alt="My website’s {{ versionYear }} version"
                 >
-            {% else %}
+            {{ else }}
                 <img
-                    src="{{ [assets.images, "site-archives/year-"+versionYear+".jpg"] | toPath | toNetlifyImage }}"
+                    src="{{ [assets.images, "site-archives/year-"+versionYear+".jpg"] |> toPath |> toNetlifyImage }}"
                     width="600"
                     height="600"
-                    {% if loop.index >= 3 %}loading="lazy"{% endif %}
+                    {{ if loopIndex >= 3 }}loading="lazy"{{ /if }}
                     class="timeline-image"
                     alt="My website’s {{ versionYear }} version"
                 >
-            {% endif %}
+            {{ /if }}
         </a>
     </li>
-{% endfor %}
+    {{> loopIndex++ }}
+{{ /for }}
 </ol>
 
 <p class="textAlign-center fontStyle-italic">… previous records are unavailable.</p>

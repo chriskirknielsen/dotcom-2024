@@ -4,9 +4,9 @@ summary: You might find a cool, nerdy font by yours truly
 ---
 
 <ul class="cards" data-grid-cols="3">
-    {% for font in collections._fonts | sort(false, false, 'inputPath') %}
+    {{ for font of collections._fonts |> sortBy(false, false, 'inputPath') }}
         <li class="card-wrapper">
-            {% component 'card', {
+            {{ component 'card', {
                 link: font.url,
                 image: {
                     src: font.data.customMetaImage,
@@ -15,9 +15,9 @@ summary: You might find a cool, nerdy font by yours truly
                 },
                 heading: font.data.title,
                 description: font.data.summary
-            } %}
+            } }}
         </li>
-    {% endfor %}
+    {{ /for }}
 </ul>
 
 <p class="textAlign-center textWrap-balance fontSize-smaller fontStyle-italic">If you were looking for the fonts used on this website, it’s detailed for every theme on the <a href="/colophon/">Colophon page</a>.</p>

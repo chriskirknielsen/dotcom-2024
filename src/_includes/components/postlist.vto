@@ -3,7 +3,7 @@
         <div class="postlist-group-list | flow">
     {{ /if }}
     {{ set groupedPosts = postlist |> groupBy('data.year') }}
-    {{ set years = groupedPosts |> Object.keys |> slice |> sort |> reverse }}
+    {{ set years = groupedPosts |> Object.keys |> sort |> reverse }}
     {{ for year of years }}
         {{ set posts = groupedPosts[year] }}
         {{ if groupByYear }}

@@ -74,10 +74,13 @@ export default function (eleventyConfig) {
 	/** Formats a number into. */
 	eleventyConfig.addFilter('formatNumber', (num) => new Intl.NumberFormat('en-US').format(num));
 
+	/** Sums an array of numbers. */
+	eleventyConfig.addFilter('sum', (nums) => nums.reduce((sum, num) => sum + num, 0));
+
 	/** Rounds a number to the preferred integer. */
-	eleventyConfig.addFilter('round', (num, precision = 0, method = 'round') => {
+	eleventyConfig.addFilter('toRound', (num, precision = 0, method = 'round') => {
 		precision = Math.max(Math.round(precision), 0); // Zero or more
-		const factor = precision > 0 ? Math.pow(10, precision) : 1;
+		const factor = Math.pow(10, precision);
 		const factoredNum = num * factor;
 		switch (method) {
 			case 'down':
