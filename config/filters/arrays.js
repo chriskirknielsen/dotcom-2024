@@ -68,7 +68,7 @@ export default function (eleventyConfig) {
 	eleventyConfig.addFilter('startsWith', (list, str, flip = false) => list.filter((value) => String(value).startsWith(str) ^ flip)); // Bitwise XOR, wild stuff
 
 	/** Sorts an array of entries (Object.entries-style, an array of arrays e.g. [key, value]) by a provided arbitrary map. */
-	eleventyConfig.addFilter('sortentries', (entries, map) => {
+	eleventyConfig.addFilter('sortEntries', (entries, map) => {
 		return Array.from(entries).sort((a, b) => {
 			const aIndex = map.indexOf(a[0]);
 			const bIndex = map.indexOf(b[0]);

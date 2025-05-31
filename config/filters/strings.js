@@ -30,23 +30,11 @@ export default function (eleventyConfig) {
 
 	/** Calculates a factor to use to have a smaller ratio for larger strings */
 	eleventyConfig.addFilter('toTitleCase', function (string) {
-		string = (string || '').trim();
+		string = String(string || '').trim();
 		const words = string
 			.split(' ')
 			.map((w) => `${w.slice(0, 1).toUpperCase()}${w.slice(1)}`)
 			.join(' ');
 		return words;
-	});
-
-	/** Calculates a factor to use to have a smaller ratio for larger strings */
-	eleventyConfig.addFilter('toEscaped', function (string) {
-		const lookup = {
-			'&': '&amp;',
-			'"': '&quot;',
-			"'": '&apos;',
-			'<': '&lt;',
-			'>': '&gt;',
-		};
-		return String(string || '').replace(/[&"'<>]/g, (c) => lookup[c]);
 	});
 }

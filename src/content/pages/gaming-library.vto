@@ -18,7 +18,9 @@ platformLabels: {
 }
 ---
 
-{{ echo |> markdown }}Drawing _a little_ inspiration from [Robb Knight’s list](https://rknight.me/collections/games/), here’s my mostly accurate collection of video games (many of which are collecting something of their own: dust!). Games for more recent consoles are mostly digital copies, as I just do not have space for physical copies.{{ /echo }}
+{{ echo |> markdown }}
+    Drawing _a little_ inspiration from [Robb Knight’s list](https://rknight.me/collections/games/), here’s my mostly accurate collection of video games (many of which are collecting something of their own: dust!). Games for more recent consoles are mostly digital copies, as I just do not have space for physical copies.
+{{ /echo }}
 
 <hr aria-hidden="true">
 
@@ -44,7 +46,7 @@ platformLabels: {
 
 <div class="expander-group | flow" id="games-library-expander">
 {{> let loopIndex = 0 }}
-{{ for platform, games of gameslibrary.data |> groupBy('platform') |> Object.entries |> sortentries(Object.keys(platformLabels)) |> Object.fromEntries }}
+{{ for platform, games of gameslibrary.data |> groupBy('platform') |> Object.entries |> sortEntries(Object.keys(platformLabels)) |> Object.fromEntries }}
     {{> loopIndex++ }}
     {{ set platformSlug = platform |> toLowerCase |> replace(' ', '-') }}
     {{ set expanderLabel }}
@@ -200,8 +202,8 @@ platformLabels: {
     
     <ul class="gaming-details-trophies | inline-list" data-flow="run-in">
         {{ for lvl, count of trophiesByLevel }}
-            <li><span class="gaming-details-trophies-badge" data-trophy-level="{{lvl}}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24" class="gaming-details-trophies-icon | inline-icon">
-                <title>{{ lvl }} trophies</title>
+            <li><span class="gaming-details-trophies-badge" data-trophy-level="{{ lvl }}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24" class="gaming-details-trophies-icon | inline-icon">
+                <title>{{ lvl |> toTitleCase }} trophies</title>
                 <use xlink:href="#icon-psn-trophy" width="24" height="24"></use>
             </svg> {{ count |> formatNumber }}</span></li>
         {{ /for }}
