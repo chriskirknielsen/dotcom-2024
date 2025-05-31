@@ -32,7 +32,7 @@
 	</head>
 
 	<body class="h-card">
-		<a class="skip-link" href="#content">Skip to content</a>
+		<a href="#content" class="skip-link">Skip to content</a>
 
 		{{ include 'parts/header.vto' }}
 
@@ -41,7 +41,7 @@
 				{{ set announcement }}My CSS isn‘t broken! 🙅 No CSS for <a href="https://css-naked-day.org/">CSS Naked Day</a> (9th of April)!{{ /set }}
 			{{ else if metadata.nakedJs }}
 				{{ set announcement }}Your JavaScript isn't broken! 🙅 No JS for <a href="https://js-naked-day.org/">JS Naked Day</a> (24th of April)!{{ /set }}
-			{{ else }}{{ set announcement = "This is vento!!" }}
+			{{# {{ else }}{{ set announcement = "This is Vento! 🌬️" }} #}}
 			{{ /if }}
 			{{ if announcement }}
 				<div class="announcement"><p class="textWrap-balance textAlign-center">{{ announcement |> markdown(true) }}</p></div>
