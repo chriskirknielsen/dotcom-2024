@@ -2,7 +2,7 @@
 permalink: /fonts/download-preview.js
 eleventyExcludeFromCollections: true
 ---
-{% set fontPreviewDownload %}
+{{ set fontPreviewDownload |> await jsmin('fontPreviewDownload') }}
 if (typeof Promise !== "undefined" && fontPreviewData) {
     fontPreviewData.saveButton.hidden = false;
 
@@ -458,5 +458,5 @@ if (typeof Promise !== "undefined" && fontPreviewData) {
         saveSvgAsPng(fontPreviewData.previewSvg, 'preview_'+fontPreviewData.nameSlug+'.png', { scale: 2 });
     });
 }
-{% endset %}
-{{ fontPreviewDownload | jsmin('fontPreviewDownload') | safe }}
+{{ /set }}
+{{ fontPreviewDownload }}
