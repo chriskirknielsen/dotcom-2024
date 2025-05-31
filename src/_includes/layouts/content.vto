@@ -1,6 +1,6 @@
 {{ layout 'layouts/base.vto' }}
 	{{ set tag = (section === 'post') ? 'article' : 'div' }}
-	<{{tag}} class="page-content | container{{ if useFlow != false }} flow{{ /if }}"{{ if gridBlockGutter }} style="--grid-block-gutter: {{ gridBlockGutter }};"{{ /if }}>
+	<{{tag}} class="page-content | container{{ if useFlow !== false }} flow{{ /if }}"{{ if gridBlockGutter }} style="--grid-block-gutter: {{ gridBlockGutter }};"{{ /if }}>
 		{{ content }}
 
 		{{ include 'parts/poison.vto' }}

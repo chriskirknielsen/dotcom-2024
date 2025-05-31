@@ -8,7 +8,7 @@
             {{- if (updated |> dateFormat) != (date |> dateFormat) -}}
                 <time datetime="{{ updated |> dateFormat({ format: 'iso' }) }}" title="{{ updated |> dateFormat({ format: 'iso' }) }}">
                     {{ updated |> dateFormat({ format: 'nice', lang: lang }) }}</time>
-            {{- endif }})
+            {{- /if }})
         </span>
     {{ /if }}
 {{ /set }}
