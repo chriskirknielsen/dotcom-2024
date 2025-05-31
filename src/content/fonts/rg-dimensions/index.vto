@@ -29,12 +29,11 @@ fontSpecimenNav: {
 }
 ---
 
-{% extends 'layouts/font-specimen.njk' %}
-
-{% block content %}
+{{ import { fontPreviewer } from 'layouts/font-specimen.vto' }}
+{{ layout 'layouts/font-specimen.vto' }}
     <div class="main-heading-block fullbleed">
         <div class="main-heading-bg">
-            {% set svgCogwheelViewBoxSize = 113.653 %}
+            {{ set svgCogwheelViewBoxSize = 113.653 }}
             <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 {{ svgCogwheelViewBoxSize }} {{ svgCogwheelViewBoxSize }}" class="cogwheel" aria-hidden="true">
                 <g class="cogwheel-rings">
                     <circle cx="56.827" cy="56.827" r="32.216" fill="none" stroke="#fff" stroke-miterlimit="10"/>
@@ -49,7 +48,7 @@ fontSpecimenNav: {
         </div>
 
         <div class="main-heading-text">
-            <h1 class="main-heading-title text-center specimen specimen-italic">{{ title | safe }}</h1>
+            <h1 class="main-heading-title text-center specimen specimen-italic">{{ title }}</h1>
             <p class="main-heading-sub text-center font-italic">A dimensional Ratchet &amp; Clank font</p>
         </div>
 
@@ -60,7 +59,7 @@ fontSpecimenNav: {
     </p>
 
     <div class="full" id="test">
-        {% set previewOptions = {
+        {{ set previewOptions = {
             "italic": {
                 default: true,
                 label: "Enable Italics"
@@ -73,9 +72,9 @@ fontSpecimenNav: {
                 default: true,
                 label: "Enable Stylistic Alternates"
             }
-        } %}
+        } }}
 
-        {% call fontPreviewer(previewOptions, fontSpecimenSampleDefault) %}
+        {{ set previewContents }}
         <svg id="preview-svg" class="preview-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 1000 300" width="1000" height="300" aria-hidden="true">
             <defs>
                 <linearGradient id="specimenPreviewFill" x1="0" y1="0" x2="100%" y2="0" gradientTransform="scale(1 2)">
@@ -107,53 +106,54 @@ fontSpecimenNav: {
             <use xlink:href="#sample-text" fill="#1a1c1c" transform="translate(-1 1)"/>
             <use xlink:href="#sample-text" fill="url(#specimenPreviewFill)" filter="url(#bevel)"/>
         </svg>
-        {% endcall %}
+        {{ /set }}
+        {{ await fontPreviewer(previewContents, previewOptions, fontSpecimenSampleDefault) }}
     </div>
 
     <div class="glyph-split color-alt bg-alt full-change fullbleed" id="glyphs">
         <div class="glyph-detail specimen" hidden>A</div>
         <div class="glyph-list flow">
-            {% set alphabet = 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z'.split(' ') %}
+            {{ set alphabet = 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z'.split(' ') }}
             <h2>Uppercase</h2>
             <p class="demo-grid-multi specimen-set-demo demo-grid specimen">
-                {% for char in alphabet %}
+                {{ for char of alphabet }}
                     <span class="glyph">{{ char }}</span>
-                {% endfor %}
+                {{ /for }}
             </p>
 
             <h2>Lowercase</h2>
             <p class="demo-grid-multi specimen-set-demo demo-grid specimen">
-                {% for char in alphabet %}
+                {{ for char of alphabet }}
                     <span class="glyph">{{ char | lower }}</span>
-                {% endfor %}
+                {{ /for }}
             </p>
 
             <h2>Numbers</h2>
             <p class="demo-grid-multi specimen-set-demo demo-grid specimen">
-                {% for char in '1 2 3 4 5 6 7 8 9 0'.split(' ') %}
+                {{ for char of '1 2 3 4 5 6 7 8 9 0'.split(' ') }}
                     <span class="glyph">{{ char }}</span>
-                {% endfor %}
+                {{ /for }}
             </p>
 
             <h2>Symbols</h2>
             <p class="demo-grid-multi specimen-set-demo demo-grid specimen">
-                {% for char in '_ - &'.split(' ') %}
+                {{ for char of '_ - &'.split(' ') }}
                     <span class="glyph">{{ char }}</span>
-                {% endfor %}
+                {{ /for }}
             </p>
 
             <h2>Stylistic Alternates</h2>
             <p class="demo-grid-multi specimen-set-demo demo-grid specimen specimen-aalt specimen-ss01">
-                {% for char in 't'.split(' ') %}
+                {{ for char of 't'.split(' ') }}
                     <span class="glyph" data-variant="specimen-aalt specimen-ss01">{{ char }}</span>
-                {% endfor %}
+                {{ /for }}
             </p>
             
             <h2>Ligatures</h2>
             <p class="demo-grid-multi specimen-set-demo demo-grid specimen specimen-dlig">
-                {% for char in 'et an'.split(' ') %}
+                {{ for char of 'et an'.split(' ') }}
                     <span class="glyph" data-variant="specimen-dlig">{{ char }}</span>
-                {% endfor %}
+                {{ /for }}
             </p>
         </div>
     </div>
@@ -175,9 +175,9 @@ fontSpecimenNav: {
     <p>While this is a free font for personal use, it may not be modified or redistributed without permission. To share this font, please refer to this page!</p>
 
     <p class="text-center">
-        <a href="./RGDimensions.zip" class="download-button"><span class="specimen specimen-dlig specimen-italic">Download {{ title | safe }}{# on Ratchet-Galaxy #}</span>
+        <a href="./RGDimensions.zip" class="download-button"><span class="specimen specimen-dlig specimen-italic">Download {{ title }}{{# on Ratchet-Galaxy #}}</span>
         </a>
     </p>
 
     <p class="text-center font-italic">Ratchet &amp; Clank is a licence developed by Insomniac Games and published by Sony Interactive Entertainment Inc.</p>
-{% endblock %}
+{{ /layout }}

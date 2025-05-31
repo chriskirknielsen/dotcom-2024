@@ -1,29 +1,29 @@
-{% set miniSiteSlug = 'minisite-'+page.fileSlug %}
+{{ set miniSiteSlug = 'minisite-'+page.fileSlug }}
 
-{# Set up unique CSS for the typeface page #}
-{% css miniSiteSlug %}{% include 'assets/css/font-specimen/'+page.fileSlug+'.css' %}{% endcss %}
-{%- for fontSpecimenName, fontSpecimensFaces in fontSpecimen -%}
-    {# Preload the "default" font #}
-    {%- set fontPreload -%}<link rel="preload" href="./{{ fontSpecimensFaces[0].file }}" as="font" type="font/woff2" crossorigin>{% endset %}
+{{# Set up unique CSS for the typeface page #}}
+{{ css miniSiteSlug }}{{ include 'assets/css/font-specimen/'+page.fileSlug+'.css' }}{{ /css }}
+{{- for fontSpecimenName, fontSpecimensFaces of fontSpecimen -}}
+    {{# Preload the "default" font #}}
+    {{- set fontPreload -}}<link rel="preload" href="./{{ fontSpecimensFaces[0].file }}" as="font" type="font/woff2" crossorigin>{{ /set }}
 
-    {% css miniSiteSlug %}
-    {%- for fontSpecimenFace in fontSpecimensFaces -%}
+    {{ css miniSiteSlug }}
+    {{- for fontSpecimenFace of fontSpecimensFaces -}}
 		@font-face {
 			font-family: '{{ fontSpecimenName }}';
 			src: url('{{ './' + fontSpecimenFace.file }}') format('woff2');
-			font-weight: {{ fontSpecimenFace.weight or 400 }};
-			font-style: {{ fontSpecimenFace.style or 'normal' }};
+			font-weight: {{ fontSpecimenFace.weight || 400 }};
+			font-style: {{ fontSpecimenFace.style || 'normal' }};
 			font-display: swap;
-			{% if fontSpecimenFace.ascentOverride %}ascent-override: {{ fontSpecimenFace.ascentOverride }};{% endif %}
-        {% if fontSpecimenFace.descentOverride %}descent-override: {{ fontSpecimenFace.descentOverride }};{% endif %}
-        {% if fontSpecimenFace.lineGapOverride %}line-gap-override: {{ fontSpecimenFace.lineGapOverride }};{% endif %}
+			{{ if fontSpecimenFace.ascentOverride }}ascent-override: {{ fontSpecimenFace.ascentOverride }};{{ /if }}
+        {{ if fontSpecimenFace.descentOverride }}descent-override: {{ fontSpecimenFace.descentOverride }};{{ /if }}
+        {{ if fontSpecimenFace.lineGapOverride }}line-gap-override: {{ fontSpecimenFace.lineGapOverride }};{{ /if }}
 		}
-    {%- endfor -%}
-    .specimen { font-family: '{{ fontSpecimenName }}', {{ (fontSpecimenFallback | safe) or 'sans-serif' }}; }
-    {% endcss %}
-{%- endfor -%}
+    {{- /for -}}
+    .specimen { font-family: '{{ fontSpecimenName }}', {{ fontSpecimenFallback || 'sans-serif' }}; }
+    {{ /css }}
+{{- /for -}}
 
-{% macro fontPreviewer(previewOptions = '', defaultText = 'Type Anything', warningMessages = '') %}
+{{ export async function fontPreviewer(contents, previewOptions = '', defaultText = 'Type Anything', warningMessages = '') }}
     <font-preview class="full-content" data-default-sample="{{ fontSpecimenSampleDefault }}">
         <form class="preview">
             <div class="preview-fallback">
@@ -38,26 +38,26 @@
                 <button type="button" class="styled-button" data-fontpreview="preview-update"><span>Update</span></button>
             </div>
 
-            {% if warningMessages %}
-                {% for warningMessageId, warningMessageMarkup in warningMessages %}
-                    <p class="preview-warning" id="{{ warningMessageId }}" hidden>{{ warningMessageMarkup | safe }}</p>
-                {% endfor %}
-            {% endif %}
+            {{ if warningMessages }}
+                {{ for warningMessageId, warningMessageMarkup of warningMessages }}
+                    <p class="preview-warning" id="{{ warningMessageId }}" hidden>{{ warningMessageMarkup }}</p>
+                {{ /for }}
+            {{ /if }}
 
             <output data-fontpreview="preview-output-wrap" for="preview-input" aria-label="{{ defaultText }}">
-                {{ caller() }}
+                {{ contents }}
             </output>
 
             <div class="preview-actions">
                 <div class="preview-options flow" style="--flow: 0.5rem;">
-                    {% for optKey, optData in previewOptions %}
+                    {{ for optKey, optData of previewOptions }}
                         <p class="preview-option">
                             <span class="preview-option-switch">
-                                <input type="checkbox" name="{{ optKey }}" data-preview-option id="preview-option-{{ optKey }}" {% if optData.default %}checked{% endif %}/>
+                                <input type="checkbox" name="{{ optKey }}" data-preview-option id="preview-option-{{ optKey }}" {{ if optData.default }}checked{{ /if }}/>
                             </span>
                             <label for="preview-option-{{ optKey }}">{{ optData.label }}</label>
                         </p>
-                    {% endfor %}
+                    {{ /for }}
                 </div>
 
                 <button type="button" id="save-preview" class="preview-save styled-button" hidden><span>Save as PNG</span></button>
@@ -65,43 +65,43 @@
         </form>
     </font-preview>
 
-    {% js miniSiteSlug %}{% include 'assets/js/components/font-preview.js' %}{% endjs %}
-{% endmacro -%}
+    {{ js 'fontSpecimenScript' }}{{ include 'assets/js/components/font-preview.js' }}{{ /js }}
+{{ /export -}}
 
 <!DOCTYPE html>
-<html lang="en" class="no-js" data-slug="{{miniSiteSlug}}">
+<html lang="en" class="no-js" data-slug="{{ miniSiteSlug }}">
     <head>
-		{% include 'parts/head.njk' %}
-		{% block headInner %}
+		{{ set headInner }}
             {{ fontPreload }}
-            <style>{% getBundle 'css', miniSiteSlug %}</style>
+            <style>{{ getBundle 'css', miniSiteSlug }}</style>
             <script>document.documentElement.classList.remove('no-js')</script>
-		{% endblock %}
+		{{ /set }}
+		{{ include 'parts/head.vto' { headInner } }}
 	</head>
 
 	<body>
         <header class="header">
             <nav aria-label="Page Sections">
                 <ul class="nav">
-                    {% for url, label in fontSpecimenNav %}
+                    {{ for url, label of fontSpecimenNav }}
                     <li><a href="{{ url }}">{{ label }}</a></li>
-                    {% endfor %}
+                    {{ /for }}
                 </ul>
             </nav>
         </header>
 
         <main class="content flow" id="content">
-            {% block content %}{{ content | safe }}{% endblock %}
+            {{ content }}
         </main>
 
         <footer class="footer">
-            Font built with {{ fontLove or 'love' }} by <a href="/">{{ metadata.author.name }}</a>
+            Font built with {{ fontLove || 'love' }} by <a href="/">{{ metadata.author.name }}</a>
             |
             <a href="/fonts/">Font Directory</a>
         </footer>
 
         <script>
-        {% js miniSiteSlug %}
+        {{ js 'fontSpecimenScript' }}
             document.addEventListener('click', function(e) {
                 let ligCode = e.target.closest('.ligature-sample-code');
                 if (!ligCode) {
@@ -119,7 +119,7 @@
             const fontPreviewData = {
                 saveButton: document.getElementById('save-preview'),
                 previewSvg: document.getElementById('preview-svg'),
-                nameSlug: `{{ title | slugify }}`
+                nameSlug: `{{ title |> slugify }}`
             };
 
             document.addEventListener('DOMContentLoaded', function() {
@@ -153,8 +153,8 @@
                     glyphDetail.className = (glyphButton.getAttribute('data-variant') || '').split(' ').filter(Boolean).concat([glyphDetailBaseClass, glyphButton.getAttribute('data-base-class')].filter(Boolean)).join(' ');
                 })
             });
-        {% endjs %}
-        {% getBundle 'js', miniSiteSlug %}
+        {{ /js }};
+        {{ getBundle 'js', 'fontSpecimenScript' }}
         </script>
         <script src="../download-preview.js" defer></script>
     </body>
