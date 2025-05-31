@@ -75,7 +75,7 @@ export default function (eleventyConfig) {
 	eleventyConfig.addFilter('formatNumber', (num) => new Intl.NumberFormat('en-US').format(num));
 
 	/** Sums an array of numbers. */
-	eleventyConfig.addFilter('sum', (nums) => nums.reduce((sum, num) => sum + num, 0));
+	eleventyConfig.addFilter('sum', (nums) => nums.reduce((sum, num) => sum + num || 0, 0));
 
 	/** Rounds a number to the preferred integer. */
 	eleventyConfig.addFilter('toRound', (num, precision = 0, method = 'round') => {

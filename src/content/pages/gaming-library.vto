@@ -43,21 +43,20 @@ platformLabels: {
 </form>
 
 <div class="expander-group | flow" id="games-library-expander">
-{{ set groupedGames = gameslibrary |> groupBy('platform') }}
-{{ set platforms = groupedGames |> Object.keys |> sort |> reverse }}
-{{ for platform of platforms }}
-    {{ set games = groupedGames[platform] }}
+{{> let loopIndex = 0 }}
+{{ for platform, games of gameslibrary.data |> groupBy('platform') |> Object.entries |> sortentries(Object.keys(platformLabels)) |> Object.fromEntries }}
+    {{> loopIndex++ }}
     {{ set platformSlug = platform |> toLowerCase |> replace(' ', '-') }}
-    {{ setAsync 'expanderLabel' }}
+    {{ set expanderLabel }}
         {{ if platformSlug == 'pc' }}
             {{ svg 'device-desktop', { class: 'gaming-logo inline-icon' } }}
             {{ injectsvg 'gaming-pc', { class: 'visually-hidden' } }}
         {{ else }}
-            {{ injectsvg 'gaming-'+platformSlug, { class: 'gaming-logo inline-icon' } }}
+            {{ injectsvg `gaming-${platformSlug}`, { class: 'gaming-logo inline-icon' } }}
         {{ /if }}
         {{ platformLabels[platform] }} ({{ games.length }})
-    {{ /setAsync }}
-    {{ expander expanderLabel, true, loop.first }}
+    {{ /set }}
+    {{ expander expanderLabel, true, loopIndex === 1 }}
         <ul class="gaming-platform-group" data-gaming-platform="{{ platformSlug }}">
             {{ for game of games |> sortBy(false, false, 'sortTitle') }}
                 <li
@@ -104,7 +103,7 @@ platformLabels: {
                                             aria-hidden="true"
                                         ><use xlink:href="#gaming-new-{{ platformSlug }}-logo" width="32" height="64"></use></svg>
                                     {{ /if }}
-                                {{ elseif platformSlug === 'psv' }}
+                                {{ else if platformSlug === 'psv' }}
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -114,7 +113,7 @@ platformLabels: {
                                         class="gaming-spine-logo-extra"
                                         aria-hidden="true"
                                     ><use xlink:href="#gaming-vertical-{{ platformSlug }}-logo"></use></svg>
-                                {{ elseif platformSlug === 'pc' }}
+                                {{ else if platformSlug === 'pc' }}
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -170,19 +169,22 @@ platformLabels: {
 </div>
 
 <div class="textAlign-center textWrap-balance fontSize-smaller">
-    {{> totalTrophyData|>log}}
     {{ if gameslibrary.meta.totalTrophyData }}
         {{ set trophiesByLevel = gameslibrary.meta.totalTrophyData }}
         {{ set trophyTotal = trophiesByLevel |> values |> sum  }}
     {{ else }}
-        {{ set trophiesTop = gameslibrary.data |> pluck('trophyEarned') |> filter(t => Boolean(t)) }}
-        {{ set trophiesSub = gameslibrary.data |> pluck('subItems') |> flatten |> pluck('trophyEarned') |> filter(t => Boolean(t)) }}
-        {{ set trophies = trophiesTop.concat(trophiesSub) }}
+        {{ set trophiesTop = gameslibrary.data |> pluck('trophyEarned') }}
+        {{ set trophiesSub = gameslibrary.data |> pluck('subItems') |> flatten |> pluck('trophyEarned') }}
+        {{ set trophies = [].concat(trophiesTop, trophiesSub) }}
+        {{ set bronzeCount = trophies |> pluck('bronze') |> sum }}
+        {{ set silverCount = trophies |> pluck('silver') |> sum }}
+        {{ set goldCount = trophies |> pluck('gold') |> sum }}
+        {{ set platinumCount = trophies |> pluck('platinum') |> sum }}
         {{ set trophiesByLevel = {
-            bronze: trophies |> pluck('bronze') |> sum,
-            silver: trophies |> pluck('silver') |> sum,
-            gold: trophies |> pluck('gold') |> sum,
-            platinum: trophies |> pluck('platinum') |> sum
+            bronze: bronzeCount,
+            silver: silverCount,
+            gold: goldCount,
+            platinum: platinumCount
         } }}
         {{ set trophyTotal = trophies |> toValues |> flatten |> sum }}
     {{ /if }}
