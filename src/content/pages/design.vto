@@ -47,7 +47,7 @@
 				{{ if design.isCommission && (design.note.includes("Commission")) }}
 					{{ svg 'handshake', { class: 'inline-icon inline-icon--center linecap-auto' } }}
 				{{ /if }}
-				{{ design.note |> markdown(true) |> replace('\n','<br>') }}
+				{{ design.note |> markdown(true) |> replace('\n', '<br>') }}
 			</p>
 		{{ /if }}
 		
@@ -57,6 +57,7 @@
 				{{- for variantSlug of design.variant }}
 					{{ set variantDesign = designs |> find('slug', variantSlug) }}
 					{{ set safeSlug = variantDesign.slug |> slugify }}
+					<li>
 						<a href="{{ ['designs', safeSlug] |> toPath }}/" class="tooltip" data-tooltip-flow="inline" data-tooltip-pos="start center">
 							<span>{{ variantDesign.name |> safe }}</span>
 
