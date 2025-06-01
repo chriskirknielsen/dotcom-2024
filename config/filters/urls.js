@@ -29,4 +29,14 @@ export default function (eleventyConfig) {
 
 	/** Passes a local or remote URL string to Cloudinary CDN */
 	eleventyConfig.addFilter('toCloudinary', toCloudinary);
+
+	eleventyConfig.addFilter('absoluteUrl', function (string, base) {
+		const absUrlFilterFn = eleventyConfig?.nunjucks?.filters?.absoluteUrl;
+		if (typeof absUrlFilterFn === 'function') {
+			return absUrlFilterFn.apply(string, arguments);
+		}
+
+		console.warn('Unable to find the Nunjucks filter `absoluteUrl`, returning original URL instead.');
+		return string;
+	});
 }

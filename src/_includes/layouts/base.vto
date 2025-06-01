@@ -25,7 +25,7 @@
 		<link rel="stylesheet" media="print" href="/assets/css/print.css">
 		
 		{{# RSS feed #}}
-		<link rel="alternate" type="application/rss+xml" title="{{ metadata.title }}" href="{{ (rssFeedOverride || nav.rss.path) }}">
+		<link rel="alternate" type="application/rss+xml" title="{{ metadata.title }}" href="{{ (rssFeedOverride || nav.rss.path) |> absoluteUrl(metadata.url) }}">
 		{{ /set }}
 
 		{{ include 'parts/head.vto' { headInner } }}

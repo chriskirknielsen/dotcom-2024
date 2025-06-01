@@ -37,4 +37,29 @@ export default function (eleventyConfig) {
 			.join(' ');
 		return words;
 	});
+
+	/**
+	 * Analog of jinja's [striptags](https://jinja.palletsprojects.com/en/stable/templates/#jinja-filters.striptags). If `preserve_linebreaks` is `false` (default), strips SGML/XML tags and replaces adjacent whitespace with one space. If `preserve_linebreaks` is `true`, normalizes whitespace, trying to preserve original linebreaks.
+	 * @see /node_modules/nunjucks/src/filters.js Directly adapted from the `striptags` function.
+	 * @param {string} input Original string to sanitize from HTML tags.
+	 * @param {boolean} preserveLinebreaks Optional. Whether to keep line breaks intact. Defaults to `false`.
+	 * @returns {string} Markup-less string.
+	 */
+	eleventyConfig.addFilter('stripTags', function (input = '', preserveLinebreaks = false) {
+		if ([false, null, undefined].includes(input)) {
+			return '';
+		}
+
+		const tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>|<!--[\s\S]*?-->/gi;
+		const trimmedInput = input.replace(tags, '').trim();
+
+		if (preserveLinebreaks) {
+			return trimmedInput
+				.replace(/^ +| +$/gm, '') // remove leading and trailing spaces
+				.replace(/ +/g, ' ') // squash adjacent spaces
+				.replace(/(\r\n)/g, '\n') // normalize linebreaks (CRLF -> LF)
+				.replace(/\n\n\n+/g, '\n\n'); // squash abnormal adjacent linebreaks
+		}
+		return trimmedInput.replace(/\s+/gi, ' ');
+	});
 }

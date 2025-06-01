@@ -15,8 +15,8 @@
 			font-style: {{ fontSpecimenFace.style || 'normal' }};
 			font-display: swap;
 			{{ if fontSpecimenFace.ascentOverride }}ascent-override: {{ fontSpecimenFace.ascentOverride }};{{ /if }}
-        {{ if fontSpecimenFace.descentOverride }}descent-override: {{ fontSpecimenFace.descentOverride }};{{ /if }}
-        {{ if fontSpecimenFace.lineGapOverride }}line-gap-override: {{ fontSpecimenFace.lineGapOverride }};{{ /if }}
+            {{ if fontSpecimenFace.descentOverride }}descent-override: {{ fontSpecimenFace.descentOverride }};{{ /if }}
+            {{ if fontSpecimenFace.lineGapOverride }}line-gap-override: {{ fontSpecimenFace.lineGapOverride }};{{ /if }}
 		}
     {{- /for -}}
     .specimen { font-family: '{{ fontSpecimenName }}', {{ fontSpecimenFallback || 'sans-serif' }}; }
