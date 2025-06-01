@@ -1,0 +1,59 @@
+---
+title: Archives
+summary: A digital museum of the previous versions of this website
+versionsInfo: {
+    2016: { description: "Definitely a student’s website" },
+    2018: { description: "The DeLorean got an upgrade" },
+    2020: { description: "A little more web-dev oriented", hasScheme: true },
+    2022: { description: "I… uh… made it better with themes!", hasScheme: true }
+}
+---
+
+<ol class="timeline">
+{{> let loopIndex = 1 }}
+{{ for versionYear of versionsInfo |> Object.keys |> sort |> reverse }}
+    {{ set versionInfo = versionsInfo[versionYear] }}
+	<li class="timeline-item">
+		<div class="timeline-content">
+            <h2 class="timeline-title">{{ versionYear }}</h2>
+            <p class="timeline-info fontSize-smaller">{{ versionInfo.description }}</p>
+        </div>
+		<a href="https://{{ versionYear }}.chriskirknielsen.com" class="timeline-link">
+            {{ if versionInfo.hasScheme }}
+                <img
+                    src="{{ [assets.images, "site-archives/year-"+versionYear+"-light.jpg"] |> toPath |> toNetlifyImage }}"
+                    width="600"
+                    height="600"
+                    {{ if loopIndex >= 3 }}loading="lazy"{{ /if }}
+                    class="timeline-image hide-when-dark"
+                    alt="My website’s {{ versionYear }} version"
+                >
+                <img
+                    src="{{ [assets.images, "site-archives/year-"+versionYear+"-dark.jpg"] |> toPath |> toNetlifyImage }}"
+                    width="600"
+                    height="600"
+                    {{ if loopIndex >= 3 }}loading="lazy"{{ /if }}
+                    class="timeline-image hide-when-light"
+                    alt="My website’s {{ versionYear }} version"
+                >
+            {{ else }}
+                <img
+                    src="{{ [assets.images, "site-archives/year-"+versionYear+".jpg"] |> toPath |> toNetlifyImage }}"
+                    width="600"
+                    height="600"
+                    {{ if loopIndex >= 3 }}loading="lazy"{{ /if }}
+                    class="timeline-image"
+                    alt="My website’s {{ versionYear }} version"
+                >
+            {{ /if }}
+        </a>
+    </li>
+    {{> loopIndex++ }}
+{{ /for }}
+</ol>
+
+<p class="textAlign-center fontStyle-italic">… previous records are unavailable.</p>
+
+<hr>
+
+<p>I used to post on Twitter, and exported all my tweets before deleting my account via <a href="https://github.com/tweetback/tweetback">tweetback</a>, kept for posterity over on my <a href="{{ metadata.tweetArchiveUrl }}" class="button">Tweet Archive</a>.</p>

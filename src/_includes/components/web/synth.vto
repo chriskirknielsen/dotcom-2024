@@ -1,0 +1,173 @@
+{{ set notes = ['C','D','E','F','G','A','B'] }}
+{{ set octaves = 2 }}
+{{ set whitesPerOctave = 7 }}
+{{ set whiteKeyCount = octaves * whitesPerOctave }}
+{{ set noteCount = 1 + whiteKeyCount }}
+
+<div class="flow">
+    <div id="synth" class="synth">
+        <p class="visually-hidden">Synthesizer</p>
+
+        <a class="skip-link" href="#synth-after" data-skiplink="local">Skip synthesizer controls</a>
+
+        <div class="synth-groups">
+            <div class="synth-group synth-speaker-wrap" aria-hidden="true">
+                <div class="synth-speaker"></div>
+            </div>
+
+            <div class="synth-group" data-synthgroup="waveform">
+                <label class="synth-group-label" for="synth-waveform">WAVEFORM</label>
+                <div class="synth-group-content">
+                    <div class="synth-waveform-labels">
+                        <button onclick="document.getElementById('synth-waveform').value=1" type="button" class="button-reset synth-waveform-button" data-synth-type="sinewave" data-about-action="synth-set-type" disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="20" height="12" viewBox="0 0 20 12"><path fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M2,6s2-8,8,0,8,0,8,0"/></svg>
+                            <span class="visually-hidden" lang="en">Sinewave waveform</span>
+                        </button>
+
+                        <button onclick="document.getElementById('synth-waveform').value=2" type="button" class="button-reset synth-waveform-button" data-synth-type="triangle" data-about-action="synth-set-type" disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="20" height="12" viewBox="0 0 20 12"><path fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m2 10 8-8 8 8"/></svg>
+                            <span class="visually-hidden" lang="en">Triangle waveform</span>
+                        </button>
+
+                        <button onclick="document.getElementById('synth-waveform').value=3" type="button" class="button-reset synth-waveform-button" data-synth-type="square" data-about-action="synth-set-type" disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="20" height="12" viewBox="0 0 20 12"><path fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M2 10V2h8v8h8V2"/></svg>
+                            <span class="visually-hidden" lang="en">Square waveform</span>
+                        </button>
+
+                        <button onclick="document.getElementById('synth-waveform').value=4" type="button" class="button-reset synth-waveform-button" data-synth-type="sawtooth" data-about-action="synth-set-type" disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="20" height="12" viewBox="0 0 20 12"><path fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M2 10V2l16 8V2"/></svg>
+                            <span class="visually-hidden" lang="en">Sawtooth waveform</span>
+                        </button>
+                    </div>
+                    <div class="synth-slider-wrap" data-dir="h">
+                        <input class="synth-slider" type="range" min="1" max="4" step="1" id="synth-waveform" value="1" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="synth-group">
+                <div class="synth-group-label">Envelope</div>
+                <div class="synth-group-line">
+                    <div  class="synth-slider-control">
+                        <label for="synth-osc-attack" title="Attack">
+                            <span class="visually-hidden">Attack</span>
+                            <span aria-hidden="true">ATK</span>
+                        </label>
+                        <div class="synth-slider-wrap" data-dir="v">
+                            <input class="synth-slider" id="synth-osc-attack" type="range" min="0" max="10" step="1" value="0" disabled>
+                        </div>
+                    </div>
+                    <div  class="synth-slider-control">
+                        <label for="synth-osc-decay" title="Decay">
+                            <span class="visually-hidden">Decay</span>
+                            <span aria-hidden="true">DCY</span>
+                        </label>
+                        <div class="synth-slider-wrap" data-dir="v">
+                            <input class="synth-slider" id="synth-osc-decay" type="range" min="0" max="10" step="1" value="5" disabled>
+                        </div>
+                    </div>
+                    <div  class="synth-slider-control">
+                        <label for="synth-osc-sustain" title="Sustain">
+                            <span class="visually-hidden">Sustain</span>
+                            <span aria-hidden="true">STN</span>
+                        </label>
+                        <div class="synth-slider-wrap" data-dir="v">
+                            <input class="synth-slider" id="synth-osc-sustain" type="range" min="0" max="10" step="1" value="8" disabled>
+                        </div>
+                    </div>
+                    <div  class="synth-slider-control">
+                        <label for="synth-osc-release" title="Release">
+                            <span class="visually-hidden">Release</span>
+                            <span aria-hidden="true">RLS</span>
+                        </label>
+                        <div class="synth-slider-wrap" data-dir="v">
+                            <input class="synth-slider" id="synth-osc-release" type="range" min="0" max="10" step="1" value="2" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="synth-group">
+                <div class="synth-group-label">Filter</div>
+                <div class="synth-group-line">
+                    <div  class="synth-slider-control">
+                        <label for="synth-osc-filter" title="Lowpass Filter">
+                            <span class="visually-hidden">Lowpass Filter</span>
+                            <span aria-hidden="true">LPF</span>
+                        </label>
+                        <div class="synth-slider-wrap" data-dir="v">
+                            <input class="synth-slider" id="synth-osc-filter" type="range" min="0" max="100" step="1" value="100" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="synth-branding">
+                <div class="synth-branding-label">
+                    <span>Chris&shy;tone</span>
+                    <span>KN-92</span>
+                </div>
+                <div class="synth-branding-description">
+                    Electronic Musical Instrument
+                </div>
+            </div>
+        </div>
+
+        <div class="synth-keys" style="--synth-white-keys: {{ whiteKeyCount + 1 }};">
+            {{ for w1 of (noteCount + 1) }}
+                {{ set w = w1 - 1 }}
+                {{ set noteIndexW = w % 7 }}
+                {{ set noteW = notes[ noteIndexW ] }}
+                {{ set octaveW = (Math.floor(w / 7)) + ((noteIndexW < 5) ? 1 : 2) }}
+                <button type="button" style="--synth-key-index: {{ w + 1 }}" class="button-reset synth-key" data-key="white" data-note="{{ noteW }}" data-octave="{{ octaveW }}" aria-label="{{ noteW }}{{ octaveW }}" aria-pressed="false" disabled>
+                    <kbd class="synth-key-label"></kbd>
+                </button>
+                {{ set b = w + 1 }}
+                {{ set noteIndexB = b % 7 - 1 }}
+                {{ set noteB = notes[ noteIndexB ] }}
+                {{ set octaveB = (Math.floor(b / 7)) + ((noteIndexB < 5) ? 1 : 2) }}
+                {{ if b % 7 !== 0 && ((b + 4) % 7 !== 0) && b < noteCount }}
+                    <button type="button" style="--synth-key-index: {{ b + 1 }}" class="button-reset synth-key" data-key="black" data-note="{{ noteB }}#" data-octave="{{ octaveB }}" aria-label="{{ noteB }}#{{ octaveB }}" aria-pressed="false" disabled>
+                        <kbd class="synth-key-label"></kbd>
+                    </button>
+                {{ /if }}
+            {{ /for }}
+        </div>
+    </div>
+
+    <div class="synth-instructions">
+        {{# <div class="toggleswitch">
+            <label class="toggleswitch-label" for="synth-keyboard-layout-switch">Keyboard Layout:</label>
+            
+            <button type="button" class="button-reset toggleswitch-value" id="synth-layoutmode-off" data-value="false">
+                <span class="visually-hidden">Off: </span>
+                QWERTY<span class="visually-hidden">.</span>
+            </button>
+
+            <button type="button" class="button-reset toggleswitch-value" id="synth-layoutmode-on" data-value="true">
+                <span class="visually-hidden">On: </span>
+                AZERTY<span class="visually-hidden">.</span>
+            </button>
+
+            <span class="toggleswitch-toggle">
+                <input
+                    type="checkbox"
+                    role="switch"
+                    aria-checked="false"
+                    class="toggleswitch-checkbox"
+                    id="synth-keyboard-layout-switch"
+                    aria-labelledby="synth-layoutmode-off synth-layoutmode-on"
+                >
+
+                <label class="toggleswitch-back" aria-hidden="true" for="synth-keyboard-layout-switch">
+                    <span class="toggleswitch-thumb"></span>
+                </label>
+            </span>
+        </div> #}}
+
+        <p class="fontSize-smaller">Hold the <kbd>Shift</kbd> key to shift octaves</p>
+        <p class="fontSize-smaller"><a href="/colophon/#synthesizer">How I made this</a></p>
+    </div>
+
+    <div aria-hidden="true" id="synth-after" tabindex="-1" style="--flow-space:0"></div>
+</div>

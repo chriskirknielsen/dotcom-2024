@@ -48,6 +48,18 @@ export default async function (eleventyConfig, options = {}) {
 	}
 
 	/** Minify a block of JavaScript code and optionally caches the result for reuse if a key is provided. */
+	eleventyConfig.addAsyncFilter('jsmin', async function (code, cacheKey = null) {
+		const cachedCode = await cachedJsmin(code, cacheKey);
+		return cachedCode;
+	});
+
+	/** Add ability to minify inline CSS. */
+	eleventyConfig.addAsyncFilter('cssmin', async function (code, cacheKey = null) {
+		const cachedCode = await cachedCssmin(code, cacheKey);
+		return cachedCode;
+	});
+
+	/** Minify a block of JavaScript code and optionally caches the result for reuse if a key is provided. */
 	eleventyConfig.addNunjucksAsyncFilter('jsmin', async function (code, ...rest) {
 		const callback = rest.pop();
 		const cacheKey = rest.length > 0 ? rest[0] : null;

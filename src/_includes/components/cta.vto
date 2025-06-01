@@ -1,0 +1,45 @@
+{{ set href = url || path || false }} {{# Normalise from the nav file #}}
+{{ set iconClassStr = iconClass || 'inline-icon' }} {{# Set to an empty space for no-scale behaviour #}}
+{{ set ctaType = href ? 'a' : 'button' }}
+{{ set iconSvgOptions = iconSvgOpts || {} }}
+{{ set iconRender -}}
+    {{ if icon }}
+        {{ svg icon, Object.assign({ class: `${iconClassStr} linecap-auto`.trim(), ariaHidden: true }, iconSvgOptions) }}
+    {{ else if iconStack }}
+        <div class="cellstack">
+            {{ svg iconStack.idle, Object.assign({ class: iconClassStr + ' button-content button-content--idle', ariaHidden: true }, iconSvgOptions) }}
+            {{ svg iconStack.pressed, Object.assign({ class: iconClassStr + ' button-content button-content--pressed', ariaHidden: true }, iconSvgOptions) }}
+        </div>
+    {{ /if }}
+{{- /set }}
+{{> let emptyLabel = true }}
+{{ set labelRender -}}
+    {{ if label.aria }}
+        <span class="visually-hidden">{{ label.aria }}</span>
+        {{ if label.text }}
+            {{> emptyLabel = false }}
+            {{ set escapedLabel = label.text |> escape }}
+            <span aria-hidden="true">{{ safeLabel ? label.text : escapedLabel }}</span>
+        {{ /if }}
+    {{ else if label }}
+        {{> emptyLabel = false }}
+            {{ set escapedLabel = label |> escape }}
+        <span>{{ safeLabel ? label : escapedLabel }}</span>
+    {{ /if }}
+{{ /set }}
+{{ set classList }}button {{ if (icon || iconStack) && emptyLabel }}button--icon-only{{ /if }} {{ ctaClass || '' }}{{ /set }}
+<{{ctaType}}
+    {{ if href }}
+        href="{{href}}"
+        {{ if pageContext && href === pageContext.url }}aria-current="page"{{ /if }}
+    {{ else }}
+        type="{{ type || 'button' }}"{{# In case type=submit is needed #}}
+    {{ /if }}
+    class="{{ classList |> trim }}"
+    {{ ctaAttr }}
+>
+    {{ if (icon || iconStack) && iconBefore }}{{ iconRender }}{{ /if }}
+    {{ labelRender }}
+    {{ if (icon || iconStack) && !iconBefore }}{{ iconRender }}
+    {{ /if }}
+</{{ctaType}}>

@@ -1,0 +1,110 @@
+---js
+{
+	title: "Designs",
+	summary: "A collection of my shirt/sticker/poster designs (and more!), available across multiple print-on-demand shops",
+	eleventyComputed: {
+		customMetaImage: function (data) { return this.toPath([data.assets.images, 'metaimage-designs.jpg']); }
+	}
+}
+---
+
+{{ set activeDesigns = designs.filter(d => d.showInGallery) }}
+
+<p class="textAlign-center">If you want to commission a design from me, <a href="#footer-email-link">reach out via email</a>!</p>
+
+<div class="textAlign-center">
+	<h2 class="visually-hidden" id="designs-shops-label">Shops</h2>
+	<ul class="designs-stores | flex-list justifyContent-center | fontWeight-bold fontSize-small" aria-labelledby="designs-shops-label" style="--list-gap: var(--size-m);">
+		{{ for merchStore, merchUrl of metadata.merch }}
+			{{ set storeIconName }}store-icon-{{ merchStore |> toLowerCase }}{{ /set }}
+			<li>
+				<a href="{{ merchUrl }}">
+					{{ svg storeIconName, { class: 'store-icon', width: 32, height: 32 } }}
+					{{ merchStore }}
+				</a>
+			</li>
+		{{ /for }}
+	</ul>
+</div>
+
+<hr>
+
+<filtered-tiles class="flow" data-filters="{{ activeDesigns |> pluck('tags') |> flatten |> unique |> sort |> join(',') }}">
+	<ul data-filtered-tiles-group class="cards">
+		{{> let loopIndex = 0 }}
+		{{ for design of activeDesigns }}
+			{{> loopIndex++ }}
+			<li class="card-wrapper" id="{{ design.slug }}"
+				data-tags="{{ design.tags |> join(',') }}"
+				aria-hidden="false"
+				{{ if enableViewTransitions || design.accent -}}
+					style="
+						{{- if enableViewTransitions }}view-transition-name:{{ design.slug }};{{ /if -}}
+						{{- if design.accent }}--CARD-accent:{{ design.accent }};{{ /if -}}
+					"
+				{{- /if }}
+			>
+			{{ set designPermalink = `/designs/${design.slug}/` }}
+			{{ set designVariant -}}
+				{{ if design.variant }}
+					<div class="grouper grouper--icon-text-pair" style="--GAP: var(--size-s);">
+						{{ svg 'arrow-bidir', { class: 'inline-icon linecap-auto' } }}
+						<span>Variant available</span>
+					</div>
+				{{ /if }}
+			{{- /set }}
+			{{ set designCommission -}}
+				{{ if design.isCommission }}
+					<div class="grouper grouper--icon-text-pair" style="--GAP: var(--size-s);">
+						{{ svg 'handshake', { class: 'inline-icon linecap-auto' } }}
+						<span>Commissioned</span>
+					</div>
+				{{ /if }}
+			{{- /set }}
+			{{ set designLinks }}
+				<ul role="list" class="flex-list | marginBlockStart-auto" {{ if enableViewTransitions }}style="view-transition-name:{{ design.slug }}-list;"{{ /if }}>
+					{{- for site, url of design.links }}
+					{{ set siteIconId }}store-icon-{{ site |> toLowerCase }}{{ /set }}
+					<li>
+						<a href="{{ url }}" class="store-icon-linkwrap | display-block">
+							<span class="visually-hidden">Get on {{ site }}</span>
+							{{ svg siteIconId, { class: 'store-icon-inline', width: 24, height: 24 } }}
+						</a>
+					</li>
+					{{ /for -}}
+				</ul>
+			{{ /set }}
+			{{ set cardImageSrc = [assets.images, 'designs', design.img] |> toPath |> toNetlifyImage({ w: 320 }) }}
+			{{ component 'card', {
+				image: {
+					decorator: (designVariant || designCommission).trim(),
+					src: cardImageSrc,
+					width: 600,
+					height: 600,
+					lazy: loopIndex >= 8
+				},
+				link: designPermalink,
+				heading: design.name,
+				descriptionMarkup: designLinks,
+				classes: 'card--design',
+				containsLinks: true
+			} }}
+			</li>
+		{{ /for }}
+	</ul>
+
+	<template data-filtered-tiles-template>
+		<div class="filtering-item">
+			<input type="radio" class="visually-hidden">
+			<label class="button button--cbox filtering-tag"></label>
+		</div>
+	</template>
+</filtered-tiles>
+
+<p class="textAlign-center fontStyle-italic">Note: this is not an exhaustive list, more designs are available in each shop!</p>
+
+{{ if !metadata.nakedJs }}
+<script>
+{{ include 'assets/js/components/filtered-tiles.js' }}
+</script>
+{{ /if }}

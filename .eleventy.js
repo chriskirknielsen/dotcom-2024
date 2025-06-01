@@ -28,6 +28,7 @@ import { EleventyRenderPlugin, BundlePlugin } from '@11ty/eleventy';
 import pluginRss from '@11ty/eleventy-plugin-rss';
 import pageAssetsPluginMxbckFix from 'eleventy-plugin-page-assets';
 import pluginSyntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
+import { VentoPlugin } from 'eleventy-plugin-vento';
 import EleventyPluginRobotsTxt from 'eleventy-plugin-robotstxt';
 
 //* Constants
@@ -48,7 +49,7 @@ const purgeCssList = {
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default async function (eleventyConfig) {
 	//* Plugins
-	eleventyConfig.addPlugin(EleventyRenderPlugin);
+	eleventyConfig.addPlugin(EleventyRenderPlugin, { accessGlobalData: true });
 	eleventyConfig.addPlugin(BundlePlugin, {
 		toFileDirectory: 'assets',
 		transforms: [
@@ -81,16 +82,16 @@ export default async function (eleventyConfig) {
 	eleventyConfig.addPlugin(pageAssetsPluginMxbckFix, {
 		mode: 'directory',
 		postsMatching: [
-			`${rootDir}/content/pages/**/index.{njk,md}`, // Regular pages
-			`${rootDir}/content/posts/**/index.{njk,md}`, // Regular posts
-			`${rootDir}/content/projects/**/index.{njk,md}`, // Projects
-			`${rootDir}/content/fonts/*/*.njk`, // Fonts
+			`${rootDir}/content/pages/**/index.{vto,njk,md}`, // Regular pages
+			`${rootDir}/content/posts/**/index.{vto,njk,md}`, // Regular posts
+			`${rootDir}/content/projects/**/index.{vto,njk,md}`, // Projects
+			`${rootDir}/content/fonts/*/*.{vto,njk}`, // Fonts
 		],
 		assetsMatching: '*.jpg|*.png|*.gif|*.mp4|*.otf|*.woff|*.woff2|*.zip', // Images, videos, fonts, and archives
 		silent: true,
 	});
 	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
-		templateFormats: ['md', 'html', 'njk'],
+		templateFormats: ['md', 'html', 'njk', 'vto'],
 		preAttributes: {
 			tabindex: 0,
 			class: (context) => `${context.language ? 'language-' + context.language : ''} codeblock-pre`.trim(),
@@ -215,6 +216,9 @@ export default async function (eleventyConfig) {
 		},
 	});
 
+	//* Vento templating (needs to be added last)
+	eleventyConfig.addPlugin(VentoPlugin, { autotrim: false });
+
 	//* Passthroughs
 	eleventyConfig.addPassthroughCopy({
 		[`${rootDir}/_includes/assets/css/`]: '/assets/css/',
@@ -243,6 +247,7 @@ export default async function (eleventyConfig) {
 
 	return {
 		pathPrefix: '/',
+		templateFormats: ['md', 'vto', 'njk', '11ty.js'],
 		markdownTemplateEngine: 'njk',
 		htmlTemplateEngine: 'njk',
 		passthroughFileCopy: true,

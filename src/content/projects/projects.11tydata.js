@@ -1,5 +1,5 @@
 export default {
-	layout: 'project.njk',
+	layout: 'project.vto',
 	tags: ['_projects'],
 	permalink: function (data) {
 		return `/projects/${this.slugify(data.slug || data.page.fileSlug)}/index.html`;

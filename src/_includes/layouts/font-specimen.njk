@@ -4,7 +4,7 @@
 {% css miniSiteSlug %}{% include 'assets/css/font-specimen/'+page.fileSlug+'.css' %}{% endcss %}
 {%- for fontSpecimenName, fontSpecimensFaces in fontSpecimen -%}
     {# Preload the "default" font #}
-    {%- set fontPreload -%}<link rel="preload" href="'./'{{ fontSpecimensFaces[0].file }}" as="font" type="font/woff2" crossorigin>{% endset %}
+    {%- set fontPreload -%}<link rel="preload" href="./{{ fontSpecimensFaces[0].file }}" as="font" type="font/woff2" crossorigin>{% endset %}
 
     {% css miniSiteSlug %}
     {%- for fontSpecimenFace in fontSpecimensFaces -%}

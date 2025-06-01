@@ -1,0 +1,33 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }} | {{ metadata.title }}</title>
+
+{{ headInner }}
+
+{{# Icons and colours #}}
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/{{ assets.images }}/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/{{ assets.images }}/apple-touch-icon.png">
+<meta name="color-scheme" content="light dark">
+
+{{# Meta, SEO, etc. #}}
+<meta name="author" content="{{ metadata.author.name }}">
+<meta name="generator" content="{{ eleventy.generator }}">
+<meta name="fediverse:creator" content="{{ social.mastodon.handle }}">
+<link href="{{ social.mastodon.url }}" rel="me">
+
+<meta property="og:title" content="{{ title }} | {{ metadata.title }}">
+<meta property="og:site_name" content="{{ metadata.title }}">
+{{- if summary }}
+<meta name="description" content="{{ (metaDescriptionOverride || summary) |> stripTags }}">
+<meta name="og:description" content="{{ (metaDescriptionOverride || summary) |> stripTags }}">
+{{ /if -}}
+<meta property="og:locale" content="{{ metadata.lang }}">
+<meta property="og:type" content="{{ section === 'post' ? 'article' : 'website' }}">
+<meta property="og:url" content="{{ (page.url || '/') |> absoluteUrl(metadata.url) }}">
+{{- set meta_image_url }}{{ if customMetaImage }}{{ customMetaImage }}{{ else }}{{ [assets.images, 'metaimage.jpg'] |> toPath }}{{ /if }}{{ /set }}
+<meta property="og:image" content="{{ meta_image_url |> trim |> absoluteUrl(metadata.url) }}">
+<meta property="og:image:alt" content="{{ title }}">
+
+{{# One-off additions to the head content (psst, it's called meta but you can pass in <link>, too!) #}}
+{{ if metaExtra }}{{ metaExtra }}{{ /if }}

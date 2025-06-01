@@ -2,7 +2,7 @@
     <a class="skip-link" href="#content">Skip to content</a>
     
     <div class="header">
-        <a href="/" class="header-logo | u-url" {{ '/' | current(page) | safe }}>
+        <a href="/" class="header-logo | u-url" {{ '/' | getIsCurrentPage(page) | safe }}>
             {% injectsvg 'logo', {
                 class: 'logo | u-logo',
                 title: 'Christopher Kirk-Nielsen logo, to homepage'
@@ -29,7 +29,7 @@
                 <ul class="header-list">
                     {% for menuItem in nav.navbar %}
                         <li class="header-item">
-                            <a href="{{ menuItem.path }}" {{ menuItem.path | current(page) | safe }} class="header-link">{{ menuItem.label }}</a>
+                            <a href="{{ menuItem.path }}" {{ menuItem.path | getIsCurrentPage(page) | safe }} class="header-link">{{ menuItem.label }}</a>
                         </li>
                     {% endfor %}
                 </ul>

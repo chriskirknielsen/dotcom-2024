@@ -1,0 +1,347 @@
+---js
+{
+    title: "CSS Logo",
+    summary: "A cheeky idea for a new logo",
+    eleventyComputed: {
+        customMetaImage: function (data) {
+            return this.toPath([data.assets.images, 'css-logo.jpg']);
+        },
+    },
+    CSS_VER_NUM: 4,
+    CSS_HUE: 270,
+    CSS_OKLCH_HUE: 303.37,
+}
+---
+{{ set designSolid = designs |> find('slug', 'css-logo-solid') }}
+{{ set designTransparent = designs |> find('slug', 'css-logo-transparent') }}
+<p>
+    I’ve had this idea for a new logo for CSS that would riff off of the famous "CSS is Awesome" meme. There’s room for adding a version number in the corner as well. It’s not official by any means (<a href="https://github.com/CSS-Next/logo.css">here is the new official CSS logo!</a>) but maybe it’s good enough to use? You tell me. I’ve made this available on my apparel stores (both <a href="/designs/{{ designSolid.slug }}/">solid</a> and <a href="/designs/{{ designTransparent.slug }}/">transparent</a> variants).
+</p>
+
+<div class="fifty-fifty">
+    <div class="single-media">
+        <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" class="css-logo invert">
+            <title>An unofficial CSS logo made with love by chriskirknielsen :)</title>
+            <polygon id="css-logo-frame" points="433.798 464.1438 17.5099 464.1438 17.5099 47.8557 433.798 47.8557 433.798 206.1613 401.798 206.1613 401.798 79.8557 49.5099 79.8557 49.5099 432.1438 401.798 432.1438 401.798 404.465 433.798 404.465 433.798 464.1438"/>
+            <path id="css-logo-c" d="M186.2929,330.3929c-4.2822,15.3181-15.033,25.4979-32.2649,25.4979-29.4688,0-40.5459-25.0801-40.5459-49.9512,0-26.124,11.0771-51.2041,40.5459-51.2041,16.0762,0,30.1108,10.9769,32.5015,25.5121h31.7859c-4.2288-34.0958-31.6714-53.1-64.2874-53.1-46.189,0-73.3589,34.4844-73.3589,78.792,0,43.0547,27.1699,77.5391,73.3589,77.5391,33.8977,0,58.4456-20.4748,64.5223-53.0858h-32.2574Z"/>
+            <path id="css-logo-s1" d="M266.1149,330.3928c0,19.8555,15.4658,27.5879,33.0215,27.5879,11.4951,0,29.0508-3.3438,29.0508-18.6006,0-16.0928-22.3623-18.8096-44.3076-24.6621-22.1538-5.8516-44.5166-14.4209-44.5166-42.4268,0-30.5137,28.8418-45.1436,55.8027-45.1436,31.1406,0,59.7734,13.585,59.7734,48.0693h-31.7676c-1.0449-17.9736-13.7939-22.5723-29.4688-22.5723-10.4502,0-22.5723,4.3896-22.5723,16.9297,0,11.4951,7.1064,12.958,44.5166,22.5713,10.8682,2.7178,44.3086,9.6143,44.3086,43.4727,0,27.3789-21.5273,47.8604-62.0732,47.8604-33.022,0-63.9536-16.3018-63.5356-53.0859h31.7681Z"/>
+            <path id="css-logo-s2" d="M405.4313,330.3928c0,19.8555,15.4658,27.5879,33.0215,27.5879,11.4951,0,29.0508-3.3438,29.0508-18.6006,0-16.0928-22.3623-18.8096-44.3076-24.6621-22.1543-5.8516-44.5166-14.4209-44.5166-42.4268,0-30.5137,28.8418-45.1436,55.8027-45.1436,31.1406,0,59.7734,13.585,59.7734,48.0693h-31.7676c-1.0449-17.9736-13.7939-22.5723-29.4688-22.5723-10.4502,0-22.5723,4.3896-22.5723,16.9297,0,11.4951,7.1064,12.958,44.5166,22.5713,10.8682,2.7178,44.3086,9.6143,44.3086,43.4727,0,27.3789-21.5273,47.8604-62.0732,47.8604-33.0215,0-63.9541-16.3018-63.5361-53.0859h31.7686Z"/>
+            <text id="css-logo-number" class="css-logo-number-shown" opacity="0.001" font-size="156" letter-spacing="-0.025em" x="385" y="206.16" text-anchor="end">{{ CSS_VER_NUM }}</text>
+        </svg>
+    </div>
+
+    <div class="flow">
+        {{ if !metadata.nakedCss && !metadata.nakedJs }}
+        <form class="flow" data-csslogo-controls hidden>
+            <h2>Customiser</h2>
+
+            <div class="css-logo-control-groups | flow">
+                <fieldset class="css-logo-control-group | grouper grouper--vertical">
+                    <legend class="visually-hidden">Version Info</legend>
+                    <strong data-csslogo-control-area style="--control-area: --num-legend;" aria-hidden="true">Version</strong>
+
+                    <label for="css-logo-value-control" class="visually-hidden">Version</label>
+                    <input id="css-logo-value-control" type="text" value="{{ CSS_VER_NUM }}" size="5" data-csslogo-control="numberValue" data-csslogo-control-area style="--control-area: --num-input;">
+
+                    {{ component 'cta', {
+                        ctaType: 'button',
+                        iconBefore: true,
+                        icon: 'visibility',
+                        label: 'Toggle',
+                        ctaAttr: 'data-csslogo-control="toggleNumberVisibility" aria-pressed="true" data-csslogo-control-area style="--control-area: --num-toggle;"'
+                    } }}
+                </fieldset>
+
+                <fieldset class="css-logo-control-group | grouper grouper--vertical">
+                    <legend class="visually-hidden">Color</legend>
+                    <strong data-csslogo-control-area style="--control-area: --col-legend;" aria-hidden="true">Color</strong>
+
+                    <label for="css-logo-hue-control" class="visually-hidden">Logo Hue</label>
+                    <div data-inputlike="wrap" data-csslogo-control-area="colorHue" style="--control-area: --col-slider;">
+                        <input id="css-logo-hue-control" type="range" min="0" max="360" value="{{ CSS_HUE }}" step="5" data-csslogo-control="colorHue">
+                    </div>
+
+                    {{ component 'cta', {
+                        ctaType: 'button',
+                        iconBefore: true,
+                        icon: 'arrow-bidir',
+                        label: 'Invert',
+                        ctaAttr: 'data-csslogo-control="toggleColorSwap" aria-pressed="true" data-csslogo-control-area style="--control-area: --col-toggle;"'
+                    } }}
+                </fieldset>
+            </div>
+        </form>
+        {{ /if }}
+
+        <h2 class="css-logo-usage">Want to use it?</h2>
+        <p>Although very appreciated, you may use this without needing to credit me under the condition it is non-AI and non-commercial (especially as I am selling <a href="/designs/{{ designSolid.slug }}/">this design</a>); just don’t claim you made it, is all I ask. Thank you!</p>
+
+        <div class="tooltip" data-tooltip-pos="start center">
+            <p class="grouper grouper--wrap">
+                <strong>Download:</strong>
+
+                <a href="{{ [assets.images, 'css-logo.svg'] |> toPath }}" download class="button">SVG</a>
+                <a href="{{ [assets.images, 'css-logo.png'] |> toPath }}" download class="button">PNG</a>
+                <a href="{{ [assets.images, 'css-logo.jpg'] |> toPath }}" download class="button">JPG</a>
+            </p>
+
+            <div class="tooltip-content">original design, no edits</div>
+        </div>
+
+        {{ if !metadata.nakedJs }}
+        <script>
+        {{ set cssLogoFormScript |> await jsmin }}
+        (function() {
+            const CSS_VER_NUM = {{ CSS_VER_NUM }};
+            const isNaNorExp = (str) => String(str).trim() === '' || isNaN(str) || String(str).indexOf('e') > -1; // Is not a number or is an exponent
+            const form = document.querySelector('[data-csslogo-controls]');
+            const cssLogoNum = document.getElementById('css-logo-number');
+            const cssLogoNumBaseFontSize = cssLogoNum.getAttribute('font-size');
+            
+            form.hidden = false;
+            Array.from(document.querySelectorAll('[data-csslogo-control="numberValue"], [data-csslogo-control="colorHue"]')).forEach((input) => { input.value = input.defaultValue; }); // Reset on page reload
+            
+            // Safari doesn't like hidden transforms on page load, so it’s visible by default (opacity of 0.001 so it’s effectively invisible)
+            // and once it's "laid out", hide it for real by clicking the toggle button programmatically
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    document.querySelector('[data-csslogo-control="toggleNumberVisibility"]').click();
+                    cssLogoNum.removeAttribute('opacity');
+                }, 100);
+            })
+
+            form.addEventListener('click', function(e) {
+                const control = e.target.closest('[data-csslogo-control]');
+                if (!control) { return }
+                switch (control.getAttribute('data-csslogo-control')) {
+                    case 'toggleNumberVisibility': {
+                        cssLogoNum.classList.toggle('css-logo-number-shown');
+                        break;
+                    }
+                    case 'toggleColorSwap': {
+                        document.querySelector('.css-logo').classList.toggle('invert');
+                        break;
+                    }
+                    default: { return; } // Invalid operation, bail here
+                }
+                control.setAttribute('aria-pressed', (control.getAttribute('aria-pressed') === 'false').toString());
+            });
+
+            form.addEventListener('input', function(e) {
+                const control = e.target.closest('[data-csslogo-control]');
+                if (!control) { return }
+                switch (control.getAttribute('data-csslogo-control')) {
+                    case 'numberValue': {
+                        let newNum = control.value.trim();
+                        if (newNum) {
+                            cssLogoNum.classList.add('css-logo-number-shown');
+                            form.querySelector('[data-csslogo-control="toggleNumberVisibility"]').setAttribute('aria-pressed', 'true');
+                        } else {
+                            newNum = CSS_VER_NUM; // Reset to CSS_VER_NUM on failure
+                        }
+                        cssLogoNum.textContent = newNum;
+                        if (newNum.length > 2) {
+                            cssLogoNum.setAttribute('font-size', cssLogoNumBaseFontSize * Math.pow(0.9, Math.min(newNum.length - 2, 7)));
+                        } else {
+                            cssLogoNum.setAttribute('font-size', cssLogoNumBaseFontSize); // Reset to initial font size
+                        }
+                        break;
+                    }
+                    case 'colorHue': {
+                        let newHue = parseInt(control.value, 10);
+                        if (newHue === 0 || (newHue && !isNaNorExp(newHue))) {
+                            newHue = Math.max(0, Math.min(360, newHue));
+                        } else {
+                            newHue = 'initial';
+                        }
+                        document.querySelector('.css-logo').style.setProperty('--css-hue', newHue);
+                        break;
+                    }
+                    // default: { return; } // Invalid operation, bail here
+                }
+            });
+
+            form.addEventListener('focusout', function(e) {
+                const control = e.target.closest('[data-csslogo-control]');
+                if (!control) { return }
+                switch (control.getAttribute('data-csslogo-control')) {
+                    case 'numberValue': {
+                        if (control.value.trim() === '') {
+                            control.value = CSS_VER_NUM;
+                        }
+                        break;
+                    }
+                    // default: { return; } // Invalid operation, bail here
+                }
+            });
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                return false;
+            });
+        })();
+        {{ /set }}
+        {{ cssLogoFormScript }}
+        </script>
+        {{ /if }}
+
+        {{ if !metadata.nakedCss }}
+        <style>
+        {{ set cssLogoFormStyle |> await cssmin }}
+            .css-logo {
+                --css-alpha: hsl(var(--css-hue, {{ CSS_HUE }}), 100%, 97.8%);
+                --css-omega: hsl(var(--css-hue, {{ CSS_HUE }}), 68.4%, 29.8%);
+                --css-alpha: hsl({{ CSS_HUE }}, 100%, 97.8%);
+
+                block-size: auto;
+                inline-size: 100%;
+
+                fill: var(--css-omega);
+                background: var(--css-alpha);
+            }
+
+            @supports (color: oklch(1% 0 0)) {
+                .css-logo {
+                    --css-alpha: oklch(97.52% 0.017 calc({{ CSS_OKLCH_HUE }} - {{ CSS_HUE }} + var(--css-hue, {{ CSS_HUE }})));
+                    --css-omega: oklch(37.38% 0.164 calc({{ CSS_OKLCH_HUE }} - {{ CSS_HUE }} + var(--css-hue, {{ CSS_HUE }})));
+                }
+            }
+
+            .css-logo.invert {
+                fill: var(--css-alpha);
+                background: var(--css-omega);
+            }
+
+            #css-logo-number {
+                font-family: Switzer, HelveticaNeueLTStd-Hv, 'Helvetica Neue LT Std', HelveticaNeue, Helvetica Neue, SF Pro Text, Helvetica, Roboto, sans-serif;
+                font-weight: 800;
+
+                will-change: transform, opacity;
+                transform-origin: 100% 100%;
+                transform-box: fill-box; 
+                transition: opacity var(--anim-short) var(--easing-in),
+                            transform var(--anim-short) var(--easing-circ-out);
+            }
+
+            #css-logo-number:not(.css-logo-number-shown) {
+                opacity: 0;
+                transform: translateX(-50%) scale(0.8);
+                transition: opacity var(--anim-short) var(--easing-out),
+                            transform var(--anim-short) var(--easing-circ-in);
+                /* display: none; */
+            }
+
+            [data-csslogo-controls][hidden] ~ .css-logo-usage { --flow-space: 0px; }
+            
+            [data-csslogo-controls] {
+                container: cssLogoControls / inline-size;
+                inline-size: 100%;
+            }
+
+            @container cssLogoControls (inline-size >= 20rem) {
+                .css-logo-control-groups {
+                    display: grid;
+                    grid-template-rows: auto auto;
+                    grid-template-columns: auto auto min-content max-content;
+                    grid-template-areas:
+                        "--num-legend --num-legend --num-input --num-toggle"
+                        "--col-legend --col-slider --col-slider --col-toggle";
+                    gap: var(--GAP,var(--size-m));
+                    inline-size: fit-content;
+                    max-inline-size: 100%;
+                }
+
+                .css-logo-control-group {
+                    display: contents;
+                }
+
+                [data-csslogo-control-area] {
+                    grid-area: var(--control-area);
+                }
+
+                [data-csslogo-control-area="colorHue"] {
+                    inline-size: 0;
+                    min-inline-size: 100%;
+                }
+            }
+
+            #css-logo-value-control {
+                min-inline-size: 4rem;
+
+                text-align: end;
+            }
+
+            #css-logo-hue-control {
+                --slider-track-height: 12px;
+                --slider-track-bg:
+                    linear-gradient(90deg, #aa3429, #85582a, #29734e, #275fb8, #8c3b9a, #aa3429) no-repeat 50% 50% / calc(100% - var(--slider-track-height) / 2 - 2px) calc(var(--slider-track-height) - 2px),
+                    linear-gradient(var(--_cta-border-color), var(--_cta-border-color)) no-repeat 50% 50% / calc(100% - var(--slider-track-height) / 2) var(--slider-track-height);
+                --slider-thumb-size: calc(var(--slider-track-height) * 1.75);
+                --slider-thumb-border: 2px solid var(--_cta-text-color);
+                --slider-thumb-radius: clamp(0px, var(--_corner) * 999, var(--slider-thumb-size) / 2);
+                --slider-thumb-bg: var(--_cta-bg-color);
+
+                block-size: var(--slider-track-height);
+                inline-size: 100%;
+
+                -webkit-appearance: none;
+                appearance: none;
+                background: transparent;
+            }
+
+            #css-logo-hue-control::-webkit-slider-runnable-track {
+                background: var(--slider-track-bg);
+            }
+            #css-logo-hue-control::-moz-range-track {
+                height: var(--slider-track-height);
+                background: var(--slider-track-bg);
+            }
+            #css-logo-hue-control::slider-fill {
+                height: var(--slider-track-height);
+                background: var(--slider-track-bg);
+            }
+
+            #css-logo-hue-control::-webkit-slider-thumb {
+                box-sizing: border-box;
+                cursor: ew-resize;
+                width: var(--slider-thumb-size);
+                height: var(--slider-thumb-size);
+                
+                -webkit-appearance: none;
+                appearance: none;
+                border: var(--slider-thumb-border);
+                border-radius: var(--slider-thumb-radius);
+                background: var(--slider-thumb-bg);
+            }
+            #css-logo-hue-control::-moz-range-thumb {
+                box-sizing: border-box;
+                cursor: ew-resize;
+                width: var(--slider-thumb-size);
+                height: var(--slider-thumb-size);
+                
+                -webkit-appearance: none;
+                appearance: none;
+                border: var(--slider-thumb-border);
+                border-radius: var(--slider-thumb-radius);
+                background: var(--slider-thumb-bg);
+            }
+            #css-logo-hue-control::slider-thumb {
+                box-sizing: border-box;
+                cursor: ew-resize;
+                width: var(--slider-thumb-size);
+                height: var(--slider-thumb-size);
+                
+                -webkit-appearance: none;
+                appearance: none;
+                border: var(--slider-thumb-border);
+                border-radius: var(--slider-thumb-radius);
+                background: var(--slider-thumb-bg);
+            }
+        {{ /set }}
+        {{ cssLogoFormStyle }}
+        </style>
+        {{ /if }}
+    </div>
+</div>
+
+<p class="fontStyle-italic fontSize-small">For type nerds: this uses a modified Helvetica Neue (I opened the C more to match the S), at weight 75 (Bold). The version number is set in the same font at weight 85 (Heavy) in the original design — the editable version uses Switzer from my "Vintage" theme, or a sans-serif typeface from your device.</p>

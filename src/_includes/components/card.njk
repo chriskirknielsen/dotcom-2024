@@ -23,7 +23,8 @@
 	{% endif %}
 
 	<div class="card-content">
-		{% if eyebrow %}{{ eyebrow | safe }}
+		{% if eyebrow %}
+			{{ eyebrow | safe }}
 		{% endif %}
 		{% if heading %}
 			<{{ headingTag or 'h2' }} class="h3 | card-heading">

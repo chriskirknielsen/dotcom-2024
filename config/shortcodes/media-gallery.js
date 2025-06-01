@@ -132,7 +132,7 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 		output = mediaMarkup;
 	}
 
-	// If not grouped in a gallery (wrapped in a {% gallery %} shortcode pair), make it a single-media gallery
+	// If not grouped in a gallery (wrapped in a `gallery` shortcode pair), make it a single-media gallery
 	if (!isGroupContext) {
 		return imageGalleryShortcode(output, options._galleryClasses);
 	}

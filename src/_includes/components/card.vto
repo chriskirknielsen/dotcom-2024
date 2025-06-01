@@ -1,0 +1,43 @@
+{{ set attrs }}class="{{ ('card ' + (classes || '')) |> trim }}" {{ if cardAttrs }}{{ cardAttrs }}{{ /if }}{{ /set }}
+{{ set imageLink = image.link || link }}
+{{ set isImageAriaHidden = image.isAriaHidden || (!image.alt && heading) || imageLink == link }}
+<article {{ attrs |> trim }}>
+	{{ if image }}
+		<div class="card-image">
+			<a href="{{ imageLink }}"{{ if isImageAriaHidden }} tabindex="-1" aria-hidden="true"{{ /if }}>
+				<img
+					src="{{ image.src }}"
+					{{ if image.srcset }}srcset="{{ image.srcset }}"{{ /if }}
+					{{ if image.sizes }}sizes="{{ image.sizes }}"{{ /if }}
+					alt="{{ image.alt || ((imageLink && !isImageAriaHidden) ? heading  : '') }}"
+					width="{{ image.width }}"
+					height="{{ image.height }}"
+					{{ if image.lazy }}loading="lazy"{{ /if }}
+					{{ if image.focusPoint }}style="--CARD-image-focus-point: {{ image.focusPoint }};"{{ /if }}
+				>
+			</a>
+			{{ if image.decorator }}
+				<div class="card-decorator | fontSize-tiny">{{ image.decorator }}</div>
+			{{ /if }}
+		</div>
+	{{ /if }}
+
+	<div class="card-content">
+		{{ if eyebrow }}
+			{{ eyebrow }}
+		{{ /if }}
+		{{ if heading }}
+			<{{ headingTag || 'h2' }} class="h3 | card-heading">
+			<a href="{{ link }}" {{ if !containsLinks }}class="card-link--cover"{{ /if }}>
+				{{ heading }}
+			</a>
+			</{{ headingTag || 'h2' }}>
+		{{ /if }}
+		
+		{{ if descriptionMarkup }}
+			{{ descriptionMarkup }}
+		{{ elseif description }}
+			<p class="card-description | textWrap-balance">{{ description }}</p>
+		{{ /if }}
+	</div>
+</article>

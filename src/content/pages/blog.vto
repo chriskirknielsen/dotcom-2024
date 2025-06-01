@@ -1,0 +1,49 @@
+---js
+{
+    permalink: "/blog/",
+    title: "Bloggy Corner",
+    metaDescriptionOverride: "I like to write once in a while. Enjoy!",
+    heroCta: [{ label: "All Tags", url: "/tags/" }, { label: "Blogroll", url: "/blogroll/" }],
+    eleventyComputed: {
+        summary: async function (data) {
+            const hasPostsData = Array.isArray(data?.collections?._posts) && data.collections._posts.length > 0;
+            let textInsert = '';
+
+            if (hasPostsData) {
+                const postsByDate = data.collections._posts.map(p => new Date(p.date)).sort((a, b) => a.getTime() - b.getTime());
+                const firstPostDate = postsByDate[0];
+                const lastPostDate = postsByDate[postsByDate.length - 1];
+                const postDateDelta = lastPostDate.getTime() - firstPostDate.getTime(); // milliseconds between first and last post
+                const monthDelta = postDateDelta / 1000 / 3600 / 24 / (365.25/12); // milliseconds by second / seconds by hour / hours by day / days by month (on average taking into account leap years)
+                const averagePerMonth = monthDelta / postsByDate.length;
+                const averageInteger = Math.floor(averagePerMonth);
+                const averageDecimal = averagePerMonth - averageInteger;
+                const averageDecimalRounded = parseFloat((Math.round(averageDecimal * 8) / 8).toPrecision(3));
+                let averageDecimalFraction = '';
+                let averageDecimalLabel = '';
+                switch (averageDecimalRounded) {
+                    case 0.125: averageDecimalFraction = '&frac18;'; averageDecimalLabel = 'an eighth'; break;
+                    case 0.250: averageDecimalFraction = '&frac14;'; averageDecimalLabel = 'a quarter'; break;
+                    case 0.375: averageDecimalFraction = '&frac38;'; averageDecimalLabel = 'three eighths'; break;
+                    case 0.500: averageDecimalFraction = '&frac12;'; averageDecimalLabel = 'a half'; break;
+                    case 0.625: averageDecimalFraction = '&frac58;'; averageDecimalLabel = 'five eighths'; break;
+                    case 0.750: averageDecimalFraction = '&frac34;'; averageDecimalLabel = 'three quarters'; break;
+                    case 0.875: averageDecimalFraction = '&frac78;'; averageDecimalLabel = 'seven eighths'; break;
+                }
+                const averageDecimalFractionMarkup = averageDecimalFraction ? `&thinsp;<span class="visually-hidden">and ${averageDecimalLabel}</span><span aria-hidden="true">${averageDecimalFraction}</span>` : '';
+                const isSingleMonth = averageInteger === 1 && averageDecimalFraction === '';
+                const pluralMark = isSingleMonth ? '' : 's'; // Month pluralisation
+                const countString = isSingleMonth ? '' :  `${averageInteger}${averageDecimalFractionMarkup}`;
+                textInsert = ` (every ${countString} month${pluralMark} on average, it seems)`;
+            }
+
+            return `I like to write once in a while${textInsert}. Enjoy!`;
+        },
+        customMetaImage: function (data) { return this.toPath([data.assets.images, 'metaimage-blog.jpg']); }
+    }
+}
+---
+
+{{ component 'postlist', { postlist: collections['_posts'] } }}
+
+{{ callout "More?" }}If you’re looking for even more content, check out my [Blogroll](/blogroll/), there’s good stuff in there!{{ /callout }}

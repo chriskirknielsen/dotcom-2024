@@ -1,0 +1,103 @@
+---js
+{
+	tags: ['_designs'],
+	pagination: {
+		data: 'designs',
+		size: 1,
+		alias: 'design',
+		addAllPagesToCollections: true,
+		before: function(paginationData, fullData) {
+			paginationData.sort((a,b) => new Date(a.date) - new Date(b.date));
+			return paginationData;
+		}
+	},
+	eleventyComputed: {
+		permalink: function (data) { return `designs/${this.slugify(data.design.slug)}/`; },
+		pageTitle: (data) => data.design.name,
+		title: (data) => data.design.name,
+		summary: (data) => data.design.description,
+		customMetaImage: (data) => `/${data.assets.images}/designs/${data.design.img}`,
+		date: (data) => new Date(data.design.date),
+		metaExtra: function(data) { return `<link rel="preload" as="image" href="${this.toNetlifyImage(this.toPath([data.assets.images, 'designs', data.design.img]))}">`; }
+	},
+	heroCta: [{ url: "/designs/", label: "Back to Designs", icon: "arrow-left", iconBefore: true }]
+}
+---
+
+<div class="fifty-fifty">
+	{{ set designImagePath = [assets.images, 'designs', design.img] |> toPath |> toNetlifyImage }}
+	{{ if design.img }}
+	<div class="single-media" {{ if design.mockup }}data-mockup="{{ design.mockup }}" style="--MOCKUP-image: url({{ designImagePath }}); --MOCKUP-bg: url({{ [assets.images, 'mockup-'+design.mockup+'.jpg'] |> toPath |> toNetlifyImage }});"{{ /if }}>
+		<img src="{{ designImagePath }}" alt="" width="600" height="600" class="inline-size-100pc">
+	</div>
+	{{ /if }}
+
+	<div class="flow">
+		{{ if design.links }}
+			<h2>Available on</h2>
+			<ul class="flow">
+				{{- for site, url of design.links }}
+				<li><a href="{{ url }}">{{ site }}</a></li>
+				{{ /for -}}
+			</ul>
+		{{ /if }}
+
+		{{ if design.note }}
+			<p class="fontStyle-italic fontSize-smaller">
+				{{ if design.isCommission && (design.note.includes("Commission")) }}
+					{{ svg 'handshake', { class: 'inline-icon inline-icon--center linecap-auto' } }}
+				{{ /if }}
+				{{ design.note |> markdown(true) |> replace('\n', '<br>') }}
+			</p>
+		{{ /if }}
+		
+		{{ if design.variant }}
+			<h2 class="h3">Variant{{ if design.variant.length != 1 }}s{{ /if }}</h2>
+			<ul class="flow">
+				{{- for variantSlug of design.variant }}
+					{{ set variantDesign = designs |> find('slug', variantSlug) }}
+					{{ set safeSlug = variantDesign.slug |> slugify }}
+					<li>
+						<a href="{{ ['designs', safeSlug] |> toPath }}/" class="tooltip" data-tooltip-flow="inline" data-tooltip-pos="start center">
+							<span>{{ variantDesign.name |> safe }}</span>
+
+							<span class="tooltip-content">
+								<img src="{{ [assets.images, 'designs', variantDesign.img] |> toPath |> toNetlifyImage({ w: 150 }) }}" alt="" width="150" height="150" loading="lazy">
+							</span>
+						</a>
+					</li>
+				{{ /for -}}
+			</ul>
+		{{ /if }}
+		
+		{{ if design.similar }}
+			<h2 class="h3">Similar designs</h2>
+			<ul class="flow">
+				{{- for otherDesignSlug of design.similar }}
+					{{ set otherDesign = designs |> find('slug', otherDesignSlug) }}
+					{{ set safeSlug = otherDesign.slug |> slugify }}
+					<li>
+						<a href="{{ ['designs', safeSlug] |> toPath }}/" class="tooltip" data-tooltip-flow="inline" data-tooltip-pos="start center">
+							<span>{{ otherDesign.name }}</span>
+
+							<span class="tooltip-content">
+								<img src="{{ [assets.images, 'designs', otherDesign.img] |> toPath |> toNetlifyImage({ w: 150 }) }}" alt="" width="150" height="150" loading="lazy">
+							</span>
+						</a>
+					</li>
+				{{ /for -}}
+			</ul>
+		{{ /if }}
+	</div>
+</div>
+
+{{ if !metadata.nakedJs }}
+<script>
+// If the hash value was a special keyword, restore whatever was in session storage
+const prevPageFilter = sessionStorage.getItem('designFilter') || '';
+const prevPageButton = document.querySelector('.hero a[href$="/designs/"]');
+if (prevPageFilter && prevPageButton) {
+	prevPageButton.href += `#filter:${prevPageFilter}`;
+}
+</script>
+{{ /if }}

@@ -1,0 +1,75 @@
+---
+title: Now
+summary: What am I doing these days?
+permalink: /now/
+section: now
+nowInfo: {
+    home: { heading: "Living" },
+    music: { heading: "Listening" },
+    sport: { heading: "Training" },
+    show: { heading: "Watching", detail: "Season" },
+    book: { heading: "Reading" },
+    game: { heading: "Playing" },
+}
+tags: [_slash]
+---
+
+{{ set lastKey = '' }}
+{{ set imageWidth = 600 }}
+{{ set imageHeight = 600 }}
+{{ set cloudinaryParams = `c_fill,g_auto:faces,h_${imageHeight},w_${imageWidth}/q_auto:eco` }}
+{{ function nowList(nowKey, nowItems, nowData) }}
+    {{ set detailPrefix = nowData.detail || false }}
+    {{ for nowItem of nowItems }}
+        <div class="now-item">
+            {{ if lastKey !== nowKey }}
+                <h2 class="now-section-heading" aria-hidden="true">{{ nowInfo[nowKey].heading }}</h2>
+            {{ /if }}
+
+            {{ if nowItem.image }}
+                <img
+                    src="{{ nowItem.image |> toCloudinary(cloudinaryParams) }}"
+                    alt=""
+                    aria-hidden="true"
+                    class="now-item-image"
+                    width="{{ imageWidth }}"
+                    height="{{ imageHeight }}"
+                >
+            {{ /if }}
+
+            <p class="now-item-content | fontSize-small">
+                {{ if nowItem.link }}
+                    <a href="{{ nowItem.link }}">
+                {{ /if }}
+                    <strong class="display-block h4 textWrap-balance">
+                        {{- nowItem.title }}
+                        {{ if nowItem.detail }}({{ if detailPrefix }}{{ detailPrefix }}&nbsp;{{ /if }}{{ nowItem.detail }}){{ /if -}}
+                    </strong>
+                {{ if nowItem.link }}
+                    </a>
+                {{ /if }}
+                {{ if nowItem.blurb }}
+                    {{ nowItem.blurb |> markdown(true) }}
+                {{ /if }}
+            </p>
+        </div>
+        {{- set lastKey = nowKey -}}
+    {{ /for }}
+{{ /function }}
+
+<div class="now-grid">
+    {{ for nowKey, nowData of nowInfo }}
+        {{- if now[nowKey] -}}
+            <h2 class="visually-hidden">{{ nowInfo[nowKey].heading }}</h2>
+            {{ nowList(nowKey, now[nowKey], nowData) -}}
+        {{- /if -}}
+    {{- /for -}}
+</div>
+
+<hr>
+
+<p class="textAlign-center fontSize-smaller fontStyle-italic">
+    <a href="https://nownownow.com/about">What’s a Now page?</a>
+    | 
+    Built using the <a href="/blog/leverage-api-like-notion-with-cache/">Notion API</a>.
+</p>

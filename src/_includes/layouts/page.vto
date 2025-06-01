@@ -1,0 +1,34 @@
+{{ layout 'layouts/content.vto' }}
+    {{ set slashPages = collections._slash.map(s => s.page.url) }}
+    {{ set isSlashPage = slashPages.includes(page.url) || page.url === '/about/' }}
+
+    {{ if pageHero }}
+        {{ pageHero }}
+    {{ else }}
+        {{ component 'hero', {
+            ext: 'vto',
+            heroTitle: heroTitle || title,
+            heroSub: heroSub || (heroHideSummary ? null : summary),
+            heroSup: heroSup || null,
+            heroCta: heroCta || (isSlashPage ? nav.slashPages : null),
+            pageContext: page,
+        } }}
+    {{ /if }}
+
+    <section class="container flow" aria-labelledby="hero-heading">
+        {{ if toc }}
+            <div class="toc | flow">
+                <p class="toc-title | h3" id="toc-title">Table of Contents</p>
+                {{ content |> autoToc('toc-list | fontSize-small', 'toc-title') }}
+            </div>
+        {{ /if }}
+
+        {{ if autoToc || autoHeadingAnchors }}
+            {{ content |> getHeadingAnchors(true) }}
+        {{ else }}
+            {{ content }}
+        {{ /if }}
+    </section>
+    
+    {{ pageFooter || '' }}
+{{ /layout }}

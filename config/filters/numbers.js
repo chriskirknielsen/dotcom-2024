@@ -71,6 +71,33 @@ export default function (eleventyConfig) {
 	/** Converts an integer to its modern Roman numeral counterpart. */
 	eleventyConfig.addFilter('toRomanNumeral', (num) => toRomanNumeral(num));
 
-	/** Formats a number into */
+	/** Formats a number into. */
 	eleventyConfig.addFilter('formatNumber', (num) => new Intl.NumberFormat('en-US').format(num));
+
+	/** Sums an array of numbers. */
+	eleventyConfig.addFilter('sum', (nums) => nums.reduce((sum, num) => sum + num || 0, 0));
+
+	/** Rounds a number to the preferred integer. */
+	eleventyConfig.addFilter('toRound', (num, precision = 0, method = 'round') => {
+		precision = Math.max(Math.round(precision), 0); // Zero or more
+		const factor = Math.pow(10, precision);
+		const factoredNum = num * factor;
+		switch (method) {
+			case 'down':
+			case 'floor': {
+				return Math.floor(factoredNum) / factor;
+			}
+
+			case 'up':
+			case 'ceil': {
+				return Math.ceil(factoredNum) / factor;
+			}
+
+			case 'closest':
+			case 'round':
+			default: {
+				return Math.round(factoredNum) / factor;
+			}
+		}
+	});
 }

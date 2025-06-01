@@ -1,0 +1,117 @@
+---
+permalink: /styleguide/
+titleAlt: 'Style­guide: I’m holding out for a hero ‘til the end of the night <span style="outline: 1px solid red;">b</span><span style="outline: 1px solid red; font-size-adjust: 0.4975">b</span>'
+title: "Style­guide"
+summary: "Testing the waters"
+autoToc: true
+eleventyExcludeFromCollections: true
+---
+
+{{# <h1>font-size-adjust: <span style="outline: 1px solid red;">b</span><span style="font-size-adjust: 0.5; outline: 1px solid red;">b</span></h1> #}}
+
+<h1>What a Level 1 this is, but like, less than the hero’s</h1>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, nesciunt.</p>
+<h2>A deeper Level 2 which is very interesting</h2>
+<h3>Reaching Level 3 is pretty rare but hey, you never know</h3>
+<p>
+	Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid quia sed eaque architecto magnam at ipsum laborum mollitia earum odio. Dolores, architecto? Nisi hic rem
+	odio voluptatem minus quam? Exercitationem adipisci consequuntur praesentium facilis quo. Blanditiis, adipisci quas eligendi non aut, natus iure laboriosam odit praesentium
+	ea, atque officia optio.
+</p>
+
+<ol>
+	<li>Lorem, ipsum.</li>
+	<li>Aliquam, id!</li>
+	<li>Nostrum, quibusdam.</li>
+	<li>
+			Mas, listas:
+			<ul>
+			<li>Lorem, ipsum.</li>
+			<li>Dolor, provident!</li>
+		</ul>
+	</li>
+</ol>
+
+<ul>
+	<li>Lorem, ipsum dolor.</li>
+	<li>Dolore, excepturi possimus.</li>
+	<li>Magni, libero quis?</li>
+	<li>Totam, quae labore.</li>
+</ul>
+
+<hr/>
+
+<h1>Paragraph &amp; with some inline elements</h1>
+<p>
+	With a click, <button type="button" class="button">I can do things</button> or even <a href="#">navigate</a> some other place. I can make
+	<a href="#" class="button">navigation more prominent</a> as well! Buttons can also be just an icon {{ component 'cta', {'icon': 'palette'} }} or {{ component 'cta', {
+		'icon': 'palette',
+		'iconBefore': true,
+		'label': 'have both'
+	} }}. Do you like other styles? This should cover it: Normal, <abbr title="Abbreviations">abbr</abbr>,
+	<del>del</del>, <dfn>dfn</dfn>, <em>em</em>, <ins>ins</ins>, <mark>mark</mark>, <s>strike through</s>, <small>small</small>, <strong>strong</strong>, <sub>sub</sub>,
+	<sup>sup</sup>, <b>bbb</b>, <u>uuu</u>, <i>iii</i>.
+</p>
+
+<h1>Images &amp; Figures</h1>
+<figure>
+	<img
+		src="/{{ assets.images }}/profile.jpg"
+		alt="A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head."
+		width="512"
+		height="512"
+	/>
+	<figcaption>Yo checkout bald boy over here!</figcaption>
+</figure>
+
+<h1>Blockquote with a cite</h1>
+<blockquote>
+	<p>Kinship!</p>
+	<p>Lost in time, like tears in rain.</p>
+	<footer>—Roy Batty, <cite>Blade Runner (1982)</cite>
+	</footer>
+</blockquote>
+
+{{ callout "Some Cool Text", "🇩🇰" }}
+Important information comes in all shapes and sizes.
+{{ /callout }}
+
+<p>But then you have more to say.</p>
+
+{{ callout "Very Neat Text" }}
+I got no emoji, but I can add it here, yay! 🇫🇷
+{{ /callout }}
+
+<h1>Code stuff</h1>
+<p>This is inline code <code>&lt;div&gt;div element&lt;/div&gt;</code>. This is sample output <samp>sample</samp> And below is block code.</p>
+{{ echo |> markdown }}
+```html
+<div id="identify">
+	div element
+	<!-- Cool beans -->
+	<p class="yourself">paragraph</p>
+</div>
+```
+```css
+/* Cool beans */
+@supports selector(:nth-child(2+n of .things)) {
+	#identify .yourself :not([aria-expanded='true']) {
+		gap: calc(1% + 2vw) var(--gap, 5px);
+	}
+}
+```
+```js
+function move(coordinates, system = 'local') {
+	const { x, y, z } = coordinates[system];
+	if (z === 0) { throw new Error('Depth missing!'); }
+	return x * y * z; // Cool beans
+}
+```
+{{ /echo }}
+<p>The input keyboard <kbd>Ctrl</kbd>+<kbd>S</kbd>. This is variable: <var>y</var> = <var>m</var>
+	<var>x</var> + <var>b</var>
+</p>
+
+<p>
+	<em>Note: Some of these examples were lazily copied from <a href="https://codepen.io/sarajw/details/xxBGmRZ">Sara Joy’s excellent classless CSS setup</a>.</em>
+</p>

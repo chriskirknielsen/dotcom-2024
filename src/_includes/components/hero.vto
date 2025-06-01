@@ -1,0 +1,36 @@
+<header class="hero">
+    {{ if heroSup }}
+        <p class="hero-sup">{{ heroSup }}</p>
+    {{ /if }}
+
+    <h1 class="hero-heading" id="hero-heading" style="--HERO-title-scaling: {{ heroTitle |> sizeFactor }};">{{ heroTitle |> shy }}</h1>
+
+    {{ if heroTags }}
+        <div class="hero-tags">
+            <p id="tags-description" class="visually-hidden">Tags:</p>
+            <ul class="flex-list | fontSize-small" aria-describedby="tags-description">
+                {{ for tag of heroTags.filter(t => t.startsWith('_')) }}
+                    <li>
+                        <a href="/tags/{{ tag }}" class="button button--tag | p-category">{{ tag }}</a>
+                    </li>
+                {{ /for }}
+            </ul>
+        </div>
+    {{ /if }}
+
+    {{ if heroSub }}
+        <p class="hero-sub">{{ heroSub }}</p>
+    {{ /if }}
+
+    {{ if heroCta }}
+        <div class="hero-tags">
+            <ul class="flex-list flex-list--center | fontSize-small">
+                {{ for cta of heroCta }}
+                    <li>
+                        {{ component 'cta', Object.assign({ pageContext, ext: 'vto' }, cta) }}
+                    </li>
+                {{ /for }}
+            </ul>
+        </div>
+    {{ /if }}
+</header>

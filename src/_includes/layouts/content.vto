@@ -1,0 +1,12 @@
+{{ layout 'layouts/base.vto' }}
+	{{ set tag = (section === 'post') ? 'article' : 'div' }}
+	<{{tag}} class="page-content | container{{ if useFlow !== false }} flow{{ /if }}"{{ if gridBlockGutter }} style="--grid-block-gutter: {{ gridBlockGutter }};"{{ /if }}>
+		{{ content }}
+
+		{{ include 'parts/poison.vto' }}
+	</{{tag}}>
+
+{{ /layout }}
+{{ if content.includes('</code-wrap>') }}
+	{{ js 'foot-codewrap' }}{{ include 'assets/js/components/code-wrap.js' }}{{ /js }}
+{{ /if }}

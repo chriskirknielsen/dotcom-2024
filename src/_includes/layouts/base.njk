@@ -34,12 +34,12 @@
 	<body class="h-card">
 		{% include 'parts/header.njk' %}
 
-		<main class="main | container flow" id="content" {% if lang %}lang="{{ lang }}"{% endif %}tabindex="-1">
+		<main class="main | container flow" id="content" tabindex="-1"{% if lang %} lang="{{ lang }}"{% endif %}>
 			{% if metadata.nakedCss %}
 				{% set announcement %}My CSS isn‘t broken! 🙅 No CSS for <a href="https://css-naked-day.org/">CSS Naked Day</a> (9th of April)!{% endset %}
 			{% elseif metadata.nakedJs %}
 				{% set announcement %}Your JavaScript isn't broken! 🙅 No JS for <a href="https://js-naked-day.org/">JS Naked Day</a> (24th of April)!{% endset %}
-			{# {% else %}{% set announcement = "" %} #}
+			{# {% else %}{% set announcement = "This is Nunjucks 🥷🪈🔗🪈" %} #}
 			{% endif %}
 			{% if announcement %}
 				<div class="announcement"><p class="textWrap-balance textAlign-center">{{ announcement | markdown(true) | safe }}</p></div>

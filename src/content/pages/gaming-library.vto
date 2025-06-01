@@ -1,0 +1,295 @@
+---
+title: Gaming Library
+summary: Dang, I’ve played a lot of games, eh?
+permalink: /games/library/
+section: games
+heroCta: [{ label: "/games", url: "/games/" }, { label: "PSN Profile", url: "https://psnprofiles.com/JaKhris" }]
+platformLabels: {
+    'PS5': 'PlayStation 5',
+    'PS4': 'PlayStation 4',
+    'PS3': 'PlayStation 3',
+    'PS2': 'PlayStation 2',
+    'PS1': 'PlayStation',
+    'PSV': 'PS Vita',
+    'PSP': 'PlayStation Portable',
+    'Switch': 'Switch',
+    'Dreamcast': 'Dreamcast',
+    'PC': 'PC',
+}
+---
+
+{{ echo |> markdown }}
+    Drawing _a little_ inspiration from [Robb Knight’s list](https://rknight.me/collections/games/), here’s my mostly accurate collection of video games (many of which are collecting something of their own: dust!). Games for more recent consoles are mostly digital copies, as I just do not have space for physical copies.
+{{ /echo }}
+
+<hr aria-hidden="true">
+
+<p class="fontSize-smaller">Click the title on a spine to view more details, then use the <kbd>Left</kbd>/<kbd>Right</kbd> arrow keys or swipe horizontally on a touch screen to cycle through games on the same platform. To close the modal, press <kbd>Escape</kbd> or click outside the box.</p>
+
+<form class="grouper grouper--wrap grouper--toolbar" data-gaming-toolbar hidden>
+    <button type="button" class="expander-button button" data-games-toggle-all="games-library-expander" aria-pressed="false" data-indeterminate="true">
+        <span class="expander-button-arrow" aria-hidden="true"></span>
+        Toggle All
+    </button>
+    
+    <div class="form-label-wrap">
+        <label for="spine-sizing" class="fontWeight-bold">Size:</label>
+        <div class="button button--select">
+            <select id="spine-sizing" data-games-sizing>
+                <option value="sm">Smaller</option>
+                <option value="md" selected>Standard</option>
+                <option value="lg">Larger</option>
+            </select>
+        </div>
+    </div>
+</form>
+
+<div class="expander-group | flow" id="games-library-expander">
+{{> let loopIndex = 0 }}
+{{ for platform, games of gameslibrary.data |> groupBy('platform') |> Object.entries |> sortEntries(Object.keys(platformLabels)) |> Object.fromEntries }}
+    {{> loopIndex++ }}
+    {{ set platformSlug = platform |> toLowerCase |> replace(' ', '-') }}
+    {{ set expanderLabel }}
+        {{ if platformSlug == 'pc' }}
+            {{ svg 'device-desktop', { class: 'gaming-logo inline-icon' } }}
+            {{ injectsvg 'gaming-pc', { class: 'visually-hidden' } }}
+        {{ else }}
+            {{ injectsvg `gaming-${platformSlug}`, { class: 'gaming-logo inline-icon' } }}
+        {{ /if }}
+        {{ platformLabels[platform] }} ({{ games.length }})
+    {{ /set }}
+    {{ expander expanderLabel, true, loopIndex === 1 }}
+        <ul class="gaming-platform-group" data-gaming-platform="{{ platformSlug }}">
+            {{ for game of games |> sortBy(false, false, 'sortTitle') }}
+                <li
+                    class="gaming-box-wrap"
+                    {{ if ['Essentials', 'Platinum'].includes(game.edition) }}data-gaming-edition="{{ game.edition |> toLowerCase |> replace(' ', '-') }}"{{ /if }}
+                    {{ if platformSlug === 'ps3' }}data-gaming-branding="{{ game.year < 2009 ? 'old' : 'new' }}"{{ /if }}
+                    data-game="{{ game |> JSON.stringify |> escape }}"
+                >
+                    <div class="gaming-box">
+                        <span class="visually-hidden">{{ game.title }}</span>
+                        {{ if game.boxart }}
+                        <div class="gaming-front">
+                            <img
+                                src="{{ game.boxart.url |> toCloudinary('c_fill,h_500/q_auto:eco') }}" 
+                                class="gaming-front-art"
+                                width="{{ game.boxart.width }}"
+                                height="{{ game.boxart.height }}"
+                                alt=""
+                                loading="lazy"
+                            >
+                        </div>
+                        {{ /if }}
+                        <div class="gaming-spine-paper" aria-hidden="true">
+                            <div class="gaming-spine-top">
+                                {{ if platformSlug === 'ps3' }}
+                                    {{ if game.year < 2009 }}
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="32"
+                                            height="32"
+                                            viewBox="0 0 32 32"
+                                            class="gaming-spine-logo"
+                                            aria-hidden="true"
+                                        ><use xlink:href="#gaming-old-{{ platformSlug }}-logo" width="32" height="32"></use></svg>
+                                    {{ else }}
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="32"
+                                            height="64"
+                                            viewBox="0 0 32 64"
+                                            class="gaming-spine-logo"
+                                            aria-hidden="true"
+                                        ><use xlink:href="#gaming-new-{{ platformSlug }}-logo" width="32" height="64"></use></svg>
+                                    {{ /if }}
+                                {{ else if platformSlug === 'psv' }}
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="32"
+                                        height="80"
+                                        viewBox="0 0 32 80"
+                                        class="gaming-spine-logo-extra"
+                                        aria-hidden="true"
+                                    ><use xlink:href="#gaming-vertical-{{ platformSlug }}-logo"></use></svg>
+                                {{ else if platformSlug === 'pc' }}
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="32"
+                                        height="32"
+                                        viewBox="0 0 32 32"
+                                        class="gaming-spine-logo-extra"
+                                        aria-hidden="true"
+                                    ><use xlink:href="#gaming-pc-logo"></use></svg>
+                                {{ else }}
+                                    {{ set displayLogo = ['ps2', 'psp'].includes(platformSlug) ? 'ps1' : platformSlug }}
+                                    {{ if ['ps4', 'ps5'].includes(platformSlug) }}{{ set displayLogo = 'solid-ps1' }}{{ /if }}
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="32"
+                                        height="32"
+                                        viewBox="0 0 32 32"
+                                        class="gaming-spine-logo"
+                                        aria-hidden="true"
+                                    ><use xlink:href="#gaming-{{ displayLogo }}-logo" width="32" height="32"></use></svg>
+                                    {{ if ['ps2'].includes(platformSlug) }}
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="32"
+                                            height="154.4"
+                                            viewBox="0 0 32 154.4"
+                                            class="gaming-spine-logo-extra"
+                                            aria-hidden="true"
+                                        ><use xlink:href="#gaming-vertical-{{ platformSlug }}-logo"></use></svg>
+                                    {{ else if ['ps4', 'ps5', 'psp'].includes(platformSlug) }}
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="32"
+                                            height="64"
+                                            viewBox="0 0 32 64"
+                                            class="gaming-spine-logo-extra"
+                                            aria-hidden="true"
+                                        ><use xlink:href="#gaming-vertical-{{ platformSlug }}-logo"></use></svg>
+                                    {{ /if }}
+                                {{ /if }}
+                            </div>
+                            <div class="gaming-spine-label" style="--spine-title-scale: {{ game.title |> sizeFactor }}"><span>{{ game.title |> replace("'", '’') }}</span></div>
+                        </div>
+                    </div>
+                </li>
+            {{ /for }}
+        </ul>
+    {{ /expander }}
+{{ /for }}
+</div>
+
+<div class="textAlign-center textWrap-balance fontSize-smaller">
+    {{ if gameslibrary.meta.totalTrophyData }}
+        {{ set trophiesByLevel = gameslibrary.meta.totalTrophyData }}
+        {{ set trophyTotal = trophiesByLevel |> values |> sum  }}
+    {{ else }}
+        {{ set trophiesTop = gameslibrary.data |> pluck('trophyEarned') }}
+        {{ set trophiesSub = gameslibrary.data |> pluck('subItems') |> flatten |> pluck('trophyEarned') }}
+        {{ set trophies = [].concat(trophiesTop, trophiesSub) }}
+        {{ set bronzeCount = trophies |> pluck('bronze') |> sum }}
+        {{ set silverCount = trophies |> pluck('silver') |> sum }}
+        {{ set goldCount = trophies |> pluck('gold') |> sum }}
+        {{ set platinumCount = trophies |> pluck('platinum') |> sum }}
+        {{ set trophiesByLevel = {
+            bronze: bronzeCount,
+            silver: silverCount,
+            gold: goldCount,
+            platinum: platinumCount
+        } }}
+        {{ set trophyTotal = trophies |> toValues |> flatten |> sum }}
+    {{ /if }}
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="inline-icon inline-icon--center" aria-hidden="true">
+        <g id="icon-psn-trophy">
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path fill="currentColor" d="M23.15 6.14a3.53 3.53 0 0 0-3.53-3.53H4.38A3.53 3.53 0 0 0 .85 6.14c0 3.71 4.16 6.72 7.87 6.72l.7 3.16H6.68l-.73 5.37h12.12l-.73-5.37h-2.76l.71-3.16c3.71 0 7.87-3.01 7.87-6.72Zm-5.69-.97s3.05-1.02 3.05 1.56c0 2.62-4.15 3.36-4.15 3.36l1.1-4.92ZM3.5 6.73c0-2.58 3.05-1.56 3.05-1.56l1.1 4.92S3.5 9.35 3.5 6.73Z"/>
+        </g>
+    </svg>
+
+    <strong>PlayStation Network Trophies ({{ trophyTotal |> formatNumber }}):</strong>
+    
+    <ul class="gaming-details-trophies | inline-list" data-flow="run-in">
+        {{ for lvl, count of trophiesByLevel }}
+            <li><span class="gaming-details-trophies-badge" data-trophy-level="{{ lvl }}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24" class="gaming-details-trophies-icon | inline-icon">
+                <title>{{ lvl |> toTitleCase }} trophies</title>
+                <use xlink:href="#icon-psn-trophy" width="24" height="24"></use>
+            </svg> {{ count |> formatNumber }}</span></li>
+        {{ /for }}
+    </ul>
+</div>
+
+<template id="gaming-details-dialog-template" data-trophy-svg-id="icon-psn-trophy">
+    <div class="gaming-details-dialog-inner flow" style="--flow-space: var(--size-s);">
+        <div class="grouper">
+            <img src="" alt="" data-slot="trophyIcon" data-slot-img="trophyIcon" aria-hidden="true" height="128" width="">
+            
+            <div class="flexGrow-1">
+                <div class="grouper grouper--toolbar">
+                    <h2><span data-slot="title"></span></h2>
+
+                    {{ component 'cta', {
+                        icon: 'close',
+                        iconClass: ' ',
+                        label: { aria: 'Close' },
+                        ctaClass: 'gaming-details-dialog-close',
+                        ctaAttr: 'data-hide-game-info autofocus'
+                    } }}
+                </div>
+            
+                <p style="--flow-space: 0px;">
+                    <span data-slot="edition" class="fontStyle-italic" style="--flow-space: var(--size-2xs);" hidden></span>
+                    <span data-slot-show="year" class="font-reset fontSize-small">(<span data-slot="year"></span>)</span>
+                </p>
+            </div>
+        </div>
+
+        <dl>
+            <dt class="grouper grouper--icon-text-pair">
+                {{ svg 'controller', { class: 'inline-icon' } }}
+                <span>Platform</span>
+            </dt>
+            <dd>
+                <span data-slot="platform"></span>
+                (<span data-slot-computed="format"></span>)
+            </dd>
+
+            <dt data-slot-show="region" class="grouper grouper--icon-text-pair">
+                {{ svg 'world', { class: 'inline-icon' } }}
+                <span>Region</span>
+            </dt>
+            <dd data-slot="region"></dd>
+
+            <dt data-slot-show="dlc" class="grouper grouper--icon-text-pair">
+                {{ svg 'added', { class: 'inline-icon' } }}
+                <span>DLC</span>
+            </dt>
+            <dd data-slot="dlc"></dd>
+
+            <dt class="grouper grouper--icon-text-pair">
+                {{ svg 'checkbox', { class: 'inline-icon linecap-auto' } }}
+                <span>Completed</span>
+            </dt>
+            <dd>
+                <input type="checkbox" aria-hidden="true" data-slot-checkbox="completed">
+                <span data-slot-computed="completed"></span>
+            </dd>
+
+            <dt data-slot-show="trophyProgress" class="grouper grouper--icon-text-pair">
+                {{ svg 'trophy', { class: 'inline-icon linecap-auto' } }}
+                <span>Trophies</span>
+            </dt>
+            <dd data-slot-show="trophyProgress" data-slot-computed="trophyEarned"></dd>
+
+            <dt data-slot-show="rating" class="grouper grouper--icon-text-pair">
+                {{ injectsvg 'star', { id: 'svg-star-icon', class: 'inline-icon linecap-auto' } }}
+                <span>Rating</span>
+            </dt>
+            <dd data-slot-show="rating" data-slot-computed="rating"></dd>
+
+            <dt data-slot-show="subItems" class="grouper grouper--icon-text-pair">
+                {{ svg 'subfolders', { class: 'inline-icon linecap-auto' } }}
+                <span>Includes</span>
+            </dt>
+            <dd data-slot-show="subItems" data-slot-computed="subItems"></dd>
+        </dl>
+    </div>
+</template>
+<dialog id="gaming-details-dialog" class="gaming-details-dialog"></dialog>
+
+{{ js 'foot-gameslibrary' }}{{ include 'assets/js/gaming-library.js' }}{{ /js }}
+
+<hr>
+
+<p class="textAlign-center fontSize-smaller fontStyle-italic">Built using <a href="/blog/leverage-api-like-notion-with-cache/">psn-api and the Notion API</a>.</p>

@@ -1,0 +1,50 @@
+---
+title: "Search"
+summary: Find, uh, stuff
+eleventyExcludeFromCollections: true
+---
+<instant-search data-search-input="q" class="display-block | flow">
+    <search role="search">
+        <form method="get" class="inline-form" action="https://duckduckgo.com/" autocomplete="off" novalidate>
+            <input type="hidden" name="sites" value="https://chriskirknielsen.com"/>
+            <label for="q" class="fontWeight-bold">Keyword:</label>
+            <input type="text" value="" name="q" id="q" enterkeyhint="search">
+            {{ component 'cta', {
+                type: 'submit',
+                label: 'Search',
+                ctaAttr: 'id="searchsubmit"',
+                icon: 'search',
+                iconBefore: true
+            } }}
+        </form>
+    </search>
+
+    <hr data-show-on-first-run hidden>
+
+    <div class="grouper grouper--wrap grouper--toolbar" data-show-on-first-run hidden>
+        <h2>Results <span data-results-count></span></h2>
+        <div class="form-label-wrap" data-formlike>
+            <label for="results-filter" class="fontWeight-bold">Filter:</label>
+            <div class="button button--select"><select id="results-filter" class="search-filter" data-results-filter></select></div>
+        </div>
+    </div>
+
+    <ul data-show-on-first-run data-results-list class="search-results" style="--flow-space: var(--size-s)" role="list" aria-live="polite"></ul>
+
+    <template>
+        <li class="search-result-item" data-result-type>
+            <span class="fontSize-smaller" data-result-slot="type"></span>
+            <span data-result-slot="info">
+                <a href="/" hreflang=""></a>
+                <time datetime="" class="fontSize-smaller u-fontVariant-tabularNums"></time>
+                <span class="fontSize-smaller" data-result-slot="lang"></span>
+            </span>
+        </li>
+    </template>
+</instant-search>
+
+{{ if !metadata.nakedJs }}
+<script>
+{{ include 'assets/js/components/instant-search.js' }}
+</script>
+{{ /if }}
