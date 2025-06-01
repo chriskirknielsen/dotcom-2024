@@ -7,5 +7,3 @@ package-lock.json
 .netlify
 .cache
 src/_includes/assets/css/*.css
-styleguide.njk
-styleguide.vto
