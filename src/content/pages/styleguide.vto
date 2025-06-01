@@ -101,7 +101,7 @@ I got no emoji, but I can add it here, yay! 🇫🇷
 }
 ```
 ```js
-const move = (coordinates, system = 'local') => {
+function move(coordinates, system = 'local') {
 	const { x, y, z } = coordinates[system];
 	if (z === 0) { throw new Error('Depth missing!'); }
 	return x * y * z; // Cool beans
