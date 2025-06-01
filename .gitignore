@@ -8,3 +8,4 @@ package-lock.json
 .cache
 src/_includes/assets/css/*.css
 styleguide.njk
+styleguide.vto

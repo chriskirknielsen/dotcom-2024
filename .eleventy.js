@@ -82,10 +82,10 @@ export default async function (eleventyConfig) {
 	eleventyConfig.addPlugin(pageAssetsPluginMxbckFix, {
 		mode: 'directory',
 		postsMatching: [
-			`${rootDir}/content/pages/**/index.{njk,md}`, // Regular pages
-			`${rootDir}/content/posts/**/index.{njk,md}`, // Regular posts
-			`${rootDir}/content/projects/**/index.{njk,md}`, // Projects
-			`${rootDir}/content/fonts/*/*.njk`, // Fonts
+			`${rootDir}/content/pages/**/index.{vto,njk,md}`, // Regular pages
+			`${rootDir}/content/posts/**/index.{vto,njk,md}`, // Regular posts
+			`${rootDir}/content/projects/**/index.{vto,njk,md}`, // Projects
+			`${rootDir}/content/fonts/*/*.{vto,njk}`, // Fonts
 		],
 		assetsMatching: '*.jpg|*.png|*.gif|*.mp4|*.otf|*.woff|*.woff2|*.zip', // Images, videos, fonts, and archives
 		silent: true,

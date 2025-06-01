@@ -1,4 +1,4 @@
 export default {
-	layout: 'content.njk',
+	layout: 'content.vto',
 	useFlow: true,
 };
