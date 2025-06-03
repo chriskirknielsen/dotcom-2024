@@ -16,7 +16,7 @@
 {{ set pageHero }}
     {{ component 'hero', {
         ext: 'vto',
-        heroTags: (tags |> sort((a,b) => a.localeCompare(b))),
+        heroTags: tags |> sort((a,b) => a.localeCompare(b)),
         heroTitle: title,
         heroSup: dateInfo,
         pageContext: page

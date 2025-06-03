@@ -1,14 +1,16 @@
 function getDeepProp(obj, prop = null) {
+	// If there is no property, return the value as-is
 	if (!prop) {
 		return obj;
 	}
 
+	// Create a list of properties to pluck one by one
 	const propChain = prop.split('.');
-	let groupVal = obj;
+	let groupVal = obj; // Start with the original value
 	const chain = propChain.slice();
-	while (chain.length > 0) {
+	while (chain.length > 0 && groupVal !== null) {
 		const subProp = chain.shift();
-		groupVal = groupVal[subProp];
+		groupVal = groupVal[subProp] ?? null;
 	}
 	return groupVal;
 }
@@ -35,8 +37,15 @@ export default function (eleventyConfig) {
 	/** Runs Object.values() on an array of objects. */
 	eleventyConfig.addFilter('toValues', (arr) => arr.map((obj) => Object.values(obj)));
 
-	/** Groups array of objects by a property value. */
+	/** Groups array of objects by a property value (note: array in, object out). */
 	eleventyConfig.addFilter('groupBy', (array, prop) => {
+		if (Array.isArray(array) === false) {
+			throw new Error(`groupBy filter expects an array, was given ${typeof array}`);
+		}
+		if (!prop || typeof prop !== 'string') {
+			throw new Error(`groupBy filter expects a property key (or dot-separated path), was given ${typeof array}`);
+		}
+
 		const groups = {};
 
 		for (let item of array) {
@@ -54,6 +63,13 @@ export default function (eleventyConfig) {
 
 	/** Sorts array of objects by a property value. */
 	eleventyConfig.addFilter('sortBy', (array, reverse, caseSens, prop = null) => {
+		if (Array.isArray(array) === false) {
+			throw new Error(`sortBy filter expects an array, was given ${typeof array}`);
+		}
+		if (prop && typeof prop !== 'string') {
+			throw new Error(`groupBy filter expects a property key (or dot-separated path), was given ${typeof array}`);
+		}
+
 		const sortedArray = array.slice();
 		const factor = reverse ? -1 : 1;
 
