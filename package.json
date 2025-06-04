@@ -46,5 +46,10 @@
 		"purgecss": "^7.0.2",
 		"sharp": "^0.33.2",
 		"through2": "^4.0.2"
+	},
+	"overrides": {
+		"eleventy-plugin-vento": {
+			"ventojs": "^1.13.2"
+		}
 	}
 }

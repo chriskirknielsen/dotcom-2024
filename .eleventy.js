@@ -91,10 +91,59 @@ export default async function (eleventyConfig) {
 		silent: true,
 	});
 	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
-		templateFormats: ['md', 'html', 'njk', 'vto'],
+		languages: ['md', 'html', 'njk', 'vto', 'css', 'js', 'scss', 'text', 'php', 'json'],
 		preAttributes: {
 			tabindex: 0,
 			class: (context) => `${context.language ? 'language-' + context.language : ''} codeblock-pre`.trim(),
+		},
+		init: function ({ Prism }) {
+			// Avoids re-running some logic for each save/rebuild
+			if (Prism.hasOwnProperty('__CUSTOM_OVERRIDES_ARE_PREPARED__') === false) {
+				Prism.__CUSTOM_OVERRIDES_ARE_PREPARED__ = false;
+			}
+
+			Prism.languages.njk = Object.assign({}, Prism.languages.django);
+			Prism.languages.vto = Object.assign({}, Prism.languages.django, {
+				comment: /^\{\{#[\s\S]*?#\}\}$/,
+				tag: {
+					pattern: /(^\{\{[>+-]?\s*)\w+/,
+					lookbehind: true,
+					alias: 'keyword',
+				},
+				delimiter: {
+					pattern: /^\{\{[>+-]?|[+-]?\}\}$/,
+					alias: 'punctuation',
+				},
+				filter: {
+					pattern: /(\|>)\w+/,
+					lookbehind: true,
+					alias: 'function',
+				},
+				keyword: /\b(?:async|await|echo|else|export|for|from|function|if|import|in|of|set|typeof|while)\b/,
+				operator: /--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/, // JS operators
+				boolean: /false|true/,
+			}); // Close enough?
+
+			let patternForNunjucks = /\{\{[\s\S]*?\}\}|\{%[\s\S]*?%\}|\{#[\s\S]*?#\}/g;
+			let patternForVento = /\{\{>?[\s\S]*?\}\}|\{\{#[\s\S]*?#\}\}/g;
+			let markupTemplating = Prism.languages['markup-templating'];
+
+			if (!Prism.__CUSTOM_OVERRIDES_ARE_PREPARED__) {
+				Prism.__CUSTOM_OVERRIDES_ARE_PREPARED__ = true;
+				Prism.hooks.add('before-tokenize', function (env) {
+					markupTemplating.buildPlaceholders(env, 'njk', patternForNunjucks);
+				});
+				Prism.hooks.add('after-tokenize', function (env) {
+					markupTemplating.tokenizePlaceholders(env, 'njk');
+				});
+
+				Prism.hooks.add('before-tokenize', function (env) {
+					markupTemplating.buildPlaceholders(env, 'vto', patternForVento);
+				});
+				Prism.hooks.add('after-tokenize', function (env) {
+					markupTemplating.tokenizePlaceholders(env, 'vto');
+				});
+			}
 		},
 	});
 	eleventyConfig.addPlugin(pluginRss);
@@ -137,9 +186,19 @@ export default async function (eleventyConfig) {
 					toolbarIconRef = 'js';
 					break;
 				}
+				case 'json': {
+					toolbarLabel = 'JSON';
+					toolbarIconRef = 'json';
+					break;
+				}
 				case 'njk': {
 					toolbarLabel = 'Nunjucks';
 					toolbarIconRef = 'nunjucks';
+					break;
+				}
+				case 'vto': {
+					toolbarLabel = 'Vento';
+					toolbarIconRef = 'vento';
 					break;
 				}
 				case 'html': {
