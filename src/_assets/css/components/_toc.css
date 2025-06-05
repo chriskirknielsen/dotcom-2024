@@ -18,7 +18,7 @@
 			--toc-marker-type: upper-alpha;
 
 			ol {
-				--toc-marker-type: lower-alpha;
+				--toc-marker-type: lower-roman;
 			}
 		}
 	}
@@ -29,7 +29,7 @@
 		break-inside: avoid;
 
 		&::before {
-			content: counter(tocList, var(--toc-marker-type, decimal-leading-zero)) ' ';
+			content: counter(tocList, var(--toc-marker-type, decimal)) ' ';
 
 			display: inline-flex; /* 2 */
 			justify-content: flex-end; /* 2 */
