@@ -1,7 +1,7 @@
 ---
 title: Taking VentoJS for a spin in Eleventy
 summary: "There’s a new kid on the templating block."
-tags: [javascript, eleventy]
+tags: [javascript, eleventy, vento]
 toc: true
 templateEngineOverride: md
 time: 03:51:00
