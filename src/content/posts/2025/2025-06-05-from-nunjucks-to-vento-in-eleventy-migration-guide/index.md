@@ -467,6 +467,8 @@ const renderer = eleventyConfig.getShortcode('renderFile').bind(this);
 const content = renderer(filePath, componentOptions, ext);
 ```
 
+You may need to do something similar if you have any code making use of Nunjucks's `this.ctx`, but that all depends on your custom shortcode or filter.
+
 ### Render plugin with limited availability
 
 One more thing related to the Render Plugin in my case: the supplied shortcodes don’t work, but it seems to be an issue with how Eleventy exposes those filters/shortcodes strictly to Liquid, Nunjucks and JavaScript data file. So neither Vento nor the 11ty plugin are to blame, and as such I reported it on the [Eleventy repository with issue 3841](https://github.com/11ty/eleventy/issues/3841). I have a workaround, though — for example, for `renderTemplate`, we can wrap a new global shortcode function around the Nunjucks-only version to get the desired behaviour:
