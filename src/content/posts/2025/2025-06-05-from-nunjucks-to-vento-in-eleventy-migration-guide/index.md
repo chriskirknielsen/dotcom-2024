@@ -12,7 +12,7 @@ I already wrote a little about [refactoring a blog of mine with Vento](/blog/tak
 I am by no means a Vento expert, but I’m fairly competent with JavaScript, which can be handy. If you run into issues, I’d recommend posting in the [11ty Discord](https://www.11ty.dev/blog/discord/) (I know, I know… walled gardens and all that, but right now it’s the best we got) where I would be glad to help!
 {% endcallout %}
 
-FYI: This guide is written with `eleventy-plugin-vento` on version `4.4.1`, using `ventojs` on version `1.13.1`.
+At the time of writing, I am using `@11ty/eleventy` v3.1.1, with `eleventy-plugin-vento` v4.4.1 using `ventojs` on version 1.13.1 (overwritten to 1.13.2 in my configuration).
 
 ## Step 1: install eleventy-plugin-vento
 
