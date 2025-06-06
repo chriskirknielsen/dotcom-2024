@@ -4,6 +4,7 @@ summary: "A few tips to refactor your njk into vto."
 tags: [javascript, eleventy, vento]
 toc: true
 time: 04:51:23
+updated: 2025-06-05
 ---
 
 I already wrote a little about [refactoring a blog of mine with Vento](/blog/taking-vento-js-for-a-spin-in-eleventy) recently ([check out Helen’s post](https://helenchong.dev/blog/posts/2025-05-21-vento-in-eleventy/), too!), but it was a rather simple codebase, making it relatively easy to work with. This website (or [chriskirknielsen.com](https://chriskirknielsen.com) if you’re reading this via the RSS feed!), while not a web-behemoth, has its fair share of complexity, so I wanted to see if a full refactor was feasible. Thus, over the past few weeks, I‘ve been working on a separate branch, converting Nunjucks to Vento, page by page, and template by template. There were some pain points which I’ll cover, along some solutions to help you make the switch if you fancy it. I’m sure you can to apply most of this stuff to a Liquid codebase, by the way. I believe in you!
@@ -27,7 +28,7 @@ import { VentoPlugin } from 'eleventy-plugin-vento';
 export default async function (eleventyConfig) {
 	/* Most of the 11ty config, including all other plugins ... */
 	
-	eleventyConfig.addPlugin(VentoPlugin, { autotrim: false }); // I explicitly want to disable autotrim, but you can remove the options object if you want to keep it it on
+	eleventyConfig.addPlugin(VentoPlugin); // autotrim is false by default
 	
 	return { ... };
 }
@@ -65,7 +66,7 @@ And then, as you can expect, the closing tags:
 **Replace:** `}}`
 {% endraw %}
 
-If you use `autotrim: true` in the Vento plugin option, you can now do an extra pass to remove all the trimming dashes: {% raw %}`{{-` becomes `{{` and `-}}` becomes `}}`{% endraw %}. If you do not want auto-trimming, like me, then we will handle special cases below.
+If you use `autotrim: true` in the Vento plugin option (the default is `false`), you can now do an extra pass to remove all the trimming dashes: {% raw %}`{{-` becomes `{{` and `-}}` becomes `}}`{% endraw %}. If you do not want auto-trimming, like me, then we will handle special cases below.
 
 We still need to adjust the `end` tags, since Vento uses a “closing slash” (e.g. `endif` becomes `/if`). However, you may have, like me, whitespace-stripping dashes, such as {% raw %}`{%- endif %}`{% endraw %}, and a plain find and replace on {% raw %}`{{ end`{% endraw %} (after our first tag replacement operations) won’t do, so we can either do the replace in sequence ({% raw %}`{{ end` to `{{ /`, then `{{- end` to `{{- /`{% endraw %}), or use a regular expression (yes I know: what is wrong with me?!). Whichever method you choose is definitely a must: in some cases, an incorrectly closed tag doesn’t throw an error and you’ll be left scratching your head.
 
@@ -492,6 +493,7 @@ Also, I quickly hacked together Vento syntax highlighting via Prism for this art
 
 ## More reading
 - [Vento’s documentation](https://vento.js.org/syntax/)
+- [eleventy-plugin-vento’s documentation](https://github.com/noelforte/eleventy-plugin-vento/blob/main/readme.md)
 - [Nunjucks's documentation](https://mozilla.github.io/nunjucks/templating.html)
 - [My first experience with Vento](/blog/taking-vento-js-for-a-spin-in-eleventy) 
 
