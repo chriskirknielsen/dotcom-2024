@@ -51,12 +51,12 @@
 		inset-block-start: var(--layout-gutter);
 
 		/* Large-ish negative number (-9 should cover most cases since having a TOC means there's at least a moderate amount of content)
-			   fills up all the rows since `1 / -1` makes the first item in the main column take up as much space as just this TOC row… */
+			fills up all the rows since `1 / -1` makes the first item in the main column take up as much space as just this TOC row… */
 		grid-row: 1 / -9;
 		grid-column: --fullbleed-start / --wide-start;
 		justify-self: end;
 		align-self: start;
-		max-block-size: 100dvh;
+		max-block-size: calc(100dvh - var(--layout-gutter) * 2);
 		overflow: auto;
 		padding-inline: calc(var(--layout-gutter) * 2) var(--layout-gutter);
 		padding-block-end: var(--size-xs);
