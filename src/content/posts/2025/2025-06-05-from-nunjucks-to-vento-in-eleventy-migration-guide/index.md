@@ -5,6 +5,9 @@ tags: [javascript, eleventy, vento]
 toc: true
 time: 04:51:23
 updated: 2025-06-05
+changelog: {
+	'2025-06-05': "Change plugin import demo to remove `autotrim` option as it is the default. Add link to plugin's readme/docs."
+}
 ---
 
 I already wrote a little about [refactoring a blog of mine with Vento](/blog/taking-vento-js-for-a-spin-in-eleventy) recently ([check out Helen’s post](https://helenchong.dev/blog/posts/2025-05-21-vento-in-eleventy/), too!), but it was a rather simple codebase, making it relatively easy to work with. This website (or [chriskirknielsen.com](https://chriskirknielsen.com) if you’re reading this via the RSS feed!), while not a web-behemoth, has its fair share of complexity, so I wanted to see if a full refactor was feasible. Thus, over the past few weeks, I‘ve been working on a separate branch, converting Nunjucks to Vento, page by page, and template by template. There were some pain points which I’ll cover, along some solutions to help you make the switch if you fancy it. I’m sure you can to apply most of this stuff to a Liquid codebase, by the way. I believe in you!
@@ -411,7 +414,7 @@ Not exactly what I was after! So if you run into this, you can create a new vari
 
 If you also used `foo = foo or bar` here and there in Nunjucks… find the potential cases in your codebase with a handy named group RegExp: `\{\{ set (?<var>[a-zA-Z0-9_]+) = (\k<var>) or`. For the if-wrapped scenario, though, that all depends on the context of the file, so no RegExp can help us…
 
-I have reported [this bug on the Vento repository](https://github.com/ventojs/vento/issues/108), and **it has been fixed as of Vento v1.13.2**, but not merged into the plugin yet. If I happen to post this article before it gets merged, and you want to use the fix, you can force it in your npm package via an override:
+I have reported [this bug on the Vento repository](https://github.com/ventojs/vento/issues/108), and **it has been fixed as of Vento v1.13.2**, but not [merged into the plugin yet](https://github.com/noelforte/eleventy-plugin-vento/pull/262). If I happen to post this article before it gets merged, and you want to use the fix, you can force it in your npm package via an override:
 
 ```json:package.json
 {

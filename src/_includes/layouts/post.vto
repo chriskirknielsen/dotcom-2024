@@ -105,4 +105,14 @@
         {{ /if }}
         </div>
     {{ /if }}
+    
+    {{ if changelog }}
+        {{ expander "View post change log" }}
+            <ol aria-labelledby="post-footer-changelog-heading" reversed>
+                {{ for logDate, logMsg of changelog }}
+                    <li><strong>{{ logDate |> timeTag({ format: 'machine' }) }}</strong>: {{ logMsg |> markdown(true) }}</li>
+                {{ /for }}
+            </ol>
+        {{ /expander }}
+    {{ /if }}
 {{ /layout }}
