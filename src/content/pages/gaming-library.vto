@@ -58,7 +58,7 @@ platformLabels: {
         {{ /if }}
         {{ platformLabels[platform] }} ({{ games.length }})
     {{ /set }}
-    {{ expander expanderLabel, true, loopIndex === 1 }}
+    {{ expander expanderLabel, { isExpanded: loopIndex === 1 } }}
         <ul class="gaming-platform-group" data-gaming-platform="{{ platformSlug }}">
             {{ for game of games |> sortBy(false, false, 'sortTitle') }}
                 <li
