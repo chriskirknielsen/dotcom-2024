@@ -4,9 +4,10 @@ summary: "A few tips to refactor your njk into vto."
 tags: [javascript, eleventy, vento]
 toc: true
 time: 04:51:23
-updated: 2025-06-05
+updated: 2025-06-07
 changelog: {
-	'2025-06-05': "Change plugin import demo to remove `autotrim` option as it is the default. Add link to plugin's readme/docs."
+	'2025-06-05': "Change plugin import demo to remove `autotrim` option as it is the default. Add link to plugin's readme/docs.",
+	'2025-06-07': "Update to reflect new `eleventy-plugin-vento` version.",
 }
 ---
 
@@ -16,7 +17,7 @@ I already wrote a little about [refactoring a blog of mine with Vento](/blog/tak
 I am by no means a Vento expert, but I’m fairly competent with JavaScript, which can be handy. If you run into issues, I’d recommend posting in the [11ty Discord](https://www.11ty.dev/blog/discord/) (I know, I know… walled gardens and all that, but right now it’s the best we got) where I would be glad to help!
 {% endcallout %}
 
-At the time of writing, I am using `@11ty/eleventy` v3.1.1, with `eleventy-plugin-vento` v4.4.1 using `ventojs` on version 1.13.1 (overwritten to 1.13.2 in my configuration).
+At the time of writing, I am using `@11ty/eleventy` v3.1.1, with `eleventy-plugin-vento` v4.4.2 using `ventojs` on version 1.13.2. (updated on the 7th of June)
 
 ## Step 1: install eleventy-plugin-vento
 
@@ -414,19 +415,7 @@ Not exactly what I was after! So if you run into this, you can create a new vari
 
 If you also used `foo = foo or bar` here and there in Nunjucks… find the potential cases in your codebase with a handy named group RegExp: `\{\{ set (?<var>[a-zA-Z0-9_]+) = (\k<var>) or`. For the if-wrapped scenario, though, that all depends on the context of the file, so no RegExp can help us…
 
-I have reported [this bug on the Vento repository](https://github.com/ventojs/vento/issues/108), and **it has been fixed as of Vento v1.13.2**, but not [merged into the plugin yet](https://github.com/noelforte/eleventy-plugin-vento/pull/262). If I happen to post this article before it gets merged, and you want to use the fix, you can force it in your npm package via an override:
-
-```json:package.json
-{
-	...,
-	"devDependencies": { ... },
-	"overrides": {
-		"eleventy-plugin-vento": {
-			"ventojs": "1.13.2"
-		}
-	}
-}
-```
+I have reported [this bug on the Vento repository](https://github.com/ventojs/vento/issues/108), and **it has been fixed as of Vento v1.13.2**, ~~but not [merged into the plugin yet](https://github.com/noelforte/eleventy-plugin-vento/pull/262). If I happen to post this article before it gets merged, and you want to use the fix, you can force it in your npm package via [a package override](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#overrides)~~ and it has now been updated with `eleventy-plugin-vento` version 4.4.2!
 
 ### Interjected filter rejection
 

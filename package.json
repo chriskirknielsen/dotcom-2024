@@ -31,7 +31,7 @@
 		"dotenv": "^16.4.5",
 		"eleventy-plugin-page-assets": "github:chriskirknielsen/eleventy-plugin-page-assets#patch-1",
 		"eleventy-plugin-robotstxt": "^0.0.4",
-		"eleventy-plugin-vento": "^4.4.1",
+		"eleventy-plugin-vento": "^4.4.2",
 		"esbuild": "^0.25.0",
 		"fast-glob": "^3.3.2",
 		"glob": "^10.3.10",
@@ -46,10 +46,5 @@
 		"purgecss": "^7.0.2",
 		"sharp": "^0.33.2",
 		"through2": "^4.0.2"
-	},
-	"overrides": {
-		"eleventy-plugin-vento": {
-			"ventojs": "^1.13.2"
-		}
 	}
 }

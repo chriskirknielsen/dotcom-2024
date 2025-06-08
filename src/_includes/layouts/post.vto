@@ -109,8 +109,8 @@
     {{ if changelog }}
         {{ expander 'View post change log', { summaryId: 'post-footer-changelog-heading' } }}
             <ol aria-labelledby="post-footer-changelog-heading" reversed>
-                {{ for logDate, logMsg of changelog }}
-                    <li><strong>{{ logDate |> timeTag({ format: 'machine' }) }}</strong>: {{ logMsg |> markdown(true) }}</li>
+                {{ for logDate of changelog |> Object.keys |> reverse }}
+                    <li><strong>{{ logDate |> timeTag({ format: 'machine' }) }}</strong>: {{ changelog[logDate] |> markdown(true) }}</li>
                 {{ /for }}
             </ol>
         {{ /expander }}
