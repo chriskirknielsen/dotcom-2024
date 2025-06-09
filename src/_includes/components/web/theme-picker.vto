@@ -38,4 +38,92 @@
 			{{ /for }}
 		</div>
 	{{ /for }}
+
+	<div class="theme-picker-scheme-group">
+		<span class="theme-picker-scheme-label">Custom</span>
+		<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}">
+			<button class="button button--icon-only" data-theme-set="custom" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-custom-description">
+				{{ svg 'paintbrush', { width: 24, height: 24 } }}
+			</button>
+			<span class="tooltip-content" id="theme-picker-custom-description">
+				<span class="visually-hidden">Toggle theme:</span>
+				User custom
+			</span>
+		</div>
+		<button class="button button--icon-only" aria-label="Customise" data-theme-custom-action="open">
+			<span class="visually-hidden">Adjust custom theme styles</span>
+			{{ svg 'sliders', { width: 24, height: 24 } }}
+		</button>
+	</div>
+
+	<dialog id="theme-custom-controls">
+		<div class="dialog-inner flow" style="--flow-space: var(--size-s);">
+			<div class="grouper">
+				<h2>Customise your theme</h2>
+				<button class="button button--icon-only" aria-label="Customise" data-theme-custom-action="close">
+					{{ svg 'close', { width: 24, height: 24 } }}
+				</button>
+			</div>
+
+			<form method="dialog" id="theme-custom-form" class="flow">
+				<fieldset>
+					<legend class="visually-hidden">Color Scheme</legend>
+					<span aria-hidden="true" class="h3">Color Scheme</span>
+					<p>
+						<input type="radio" id="theme-custom-color-scheme-light" name="color-scheme" value="light">
+						<label for="theme-custom-color-scheme-light">Light</label>
+						|
+						<input type="radio" id="theme-custom-color-scheme-dark" name="color-scheme" value="dark">
+						<label for="theme-custom-color-scheme-dark">Dark</label>
+					</p>
+				</fieldset>
+
+				<fieldset>
+					<legend class="visually-hidden">Colours</legend>
+					<span aria-hidden="true" class="h3">Colours</span>
+
+					{{ set colorDefaults = { 'canvas': 'black', 'surface': 'darkgray', 'text': 'white', 'heading': 'white', 'accent': 'red' } }}
+					{{ for colorKey of colorDefaults |> Object.keys }}
+					<p>
+						<label for="theme-custom-color-{{ colorKey }}">{{ colorKey |> toTitleCase }}:</label>
+						<input type="color" id="theme-custom-color-{{ colorKey }}" name="C-{{ colorKey }}" value="{{ colorDefaults[colorKey] }}">
+					</p>
+					{{ /for }}
+				</fieldset>
+
+				<fieldset>
+					<legend class="visually-hidden">Fonts</legend>
+					<span aria-hidden="true" class="h3">Fonts</span>
+
+					<p>
+						<label for="theme-custom-font-heading">Heading font family:</label>
+						<select id="theme-custom-font-heading" name="font-heading-family">
+							<option value="Canela">Canela</option>
+							<option value="XanhMono">Xahn Mono</option>
+							<option value="Switzer">Switzer</option>
+							<option value="InstrumentSerif">Instrument Serif</option>
+							<option value="MDNichrome">MD Nichrome</option>
+							<option value="Rajdhani">Rajdhani</option>
+							<option value="Chinook">Chinook</option>
+							<option value="TeXGyreAdventor">TeX Gyre Adventor</option>
+							<option value="Comic Sans MS">Comic Sans MS</option>
+						</select>
+					</p>
+
+					<p>
+						<label for="theme-custom-font-body">Body font family:</label>
+						<select id="theme-custom-font-body" name="font-body-family">
+							<option value="var(--fontStack-serif)">Serif</option>
+							<option value="var(--fontStack-sans-serif)">Sans Serif</option>
+							<option value="var(--fontStack-monospace)">Monospace</option>
+						</select>
+					</p>
+				</fieldset>
+
+				<div>
+					<button type="submit" id="theme-custom-apply" class="button" data-theme-custom-action="close">Apply styles</button>
+				</div>
+			</form>
+		</div>
+	</dialog>
 </theme-picker>

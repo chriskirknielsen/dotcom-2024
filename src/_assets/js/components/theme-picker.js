@@ -4,7 +4,7 @@ class ThemePicker extends HTMLElement {
 
 		// Absorb the properties from the window (safe from minification)
 		this.store = window.themeStore;
-		this.keys = window.themeKeys;
+		this.keys = [].concat(window.themeKeys, ['custom']);
 		this.defaults = {
 			light: this.dataset.light,
 			dark: this.dataset.dark,
@@ -15,7 +15,16 @@ class ThemePicker extends HTMLElement {
 
 		// Events handlers
 		this.addEventListener('click', this);
+		this.addEventListener('change', this);
 		document.addEventListener('keyup', this);
+
+		// Set up a constructable stylesheet for user custom styles
+		this.styleStore = 'cknCustom';
+		this.customSheet = new CSSStyleSheet();
+	}
+
+	getPreferredScheme() {
+		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 	}
 
 	setTheme(theme) {
@@ -50,14 +59,47 @@ class ThemePicker extends HTMLElement {
 			return false; // If the user hasn't set an override, respect the `prefers-color-scheme` setting
 		}
 		if (this.keys.includes(activeTheme) === false) {
-			const preferredScheme = window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+			const preferredScheme = this.getPreferredScheme();
 			return this.defaults[preferredScheme];
 		}
 		return activeTheme;
 	}
 
-	// Don't really need this
-	// connectedCallback() {}
+	updateCustomThemeStyles() {
+		const form = document.getElementById('theme-custom-form');
+		const values = Object.fromEntries(new FormData(form));
+		this.customSheet.replaceSync(`:root[data-theme="custom"] {
+			${Object.entries(values)
+				.map(([key, value]) => `--${key}: ${value};`)
+				.join('\n')}
+			}`);
+		document.adoptedStyleSheets = [this.customSheet];
+		window.localStorage.setItem(this.styleStore, JSON.stringify(values));
+	}
+
+	connectedCallback() {
+		const savedStyles = JSON.parse(window.localStorage.getItem(this.styleStore) || null);
+		const form = document.getElementById('theme-custom-form');
+		if (savedStyles) {
+			Array.from(form.querySelectorAll('[name]')).forEach((field) => {
+				const name = field.getAttribute('name');
+				const type = field.getAttribute('type') || null;
+				const value = savedStyles[name];
+				if (type == 'radio') {
+					field.checked = field.value === value;
+				} else {
+					field.value = value;
+				}
+			});
+		} else {
+			const preferredScheme = this.getPreferredScheme();
+			Array.from(form.querySelectorAll(`[name="color-scheme"]`)).forEach((schemeField) => {
+				schemeField.checked = schemeField.value === preferredScheme;
+			});
+		}
+
+		this.updateCustomThemeStyles();
+	}
 
 	// Ain't no way the picker is ever getting removed
 	// disconnectedCallback() {
@@ -67,8 +109,20 @@ class ThemePicker extends HTMLElement {
 
 	handleEvent(e) {
 		if (e.type === 'click') {
+			const customDialog = e.target.closest('[data-theme-custom-action]');
 			const setter = e.target.closest('[data-theme-set]');
-			if (setter) {
+
+			if (customDialog) {
+				const dialog = document.getElementById('theme-custom-controls');
+				const action = customDialog.getAttribute('data-theme-custom-action');
+
+				if (action === 'open') {
+					dialog.showModal();
+					this.updateCustomThemeStyles();
+				} else if (action === 'close') {
+					dialog.close();
+				}
+			} else if (setter) {
 				const isPressed = setter.getAttribute('aria-pressed') === 'true';
 				this.setTheme(!isPressed ? setter.getAttribute('data-theme-set') : false);
 			}
@@ -85,6 +139,10 @@ class ThemePicker extends HTMLElement {
 				const pressedDigit = parseInt(e.key, 10);
 				this.querySelectorAll('[data-theme-set]')[pressedDigit]?.click();
 			}
+		}
+
+		if (e.type === 'change') {
+			this.updateCustomThemeStyles();
 		}
 	}
 }
