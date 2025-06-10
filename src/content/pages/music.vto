@@ -24,12 +24,15 @@ artists: {
     "a-perfect-circle": "A Perfect Circle",
     "tool": "Tool",
     "foo-fighters": "Foo Fighters",
+    "muse": "Muse",
     "radiohead": "Radiohead",
     "the-glitch-mob": "The Glitch Mob",
     "static-x": "Static-X",
     "slipknot": "Slipknot",
+    "underoath": "Underoath",
     "tycho": "Tycho",
     "the-strokes": "The Strokes",
+    "system-of-a-down": "System of a Down",
     "carpenter-brut": "Carpenter Brut",
     "aphex-twin": "Aphex Twin",
 }
@@ -52,7 +55,7 @@ artists: {
     {{> loopIndex++ }}
     <li class="card-wrapper">
         <figure class="artist-figure">
-            {{ set artistSymbol = `/${assets.images}/artists/${artistKey}.svg` |> toRoot }}
+            {{ set artistSymbol = `/${assets.images}/artists/${artistKey}.svg` }}
             {{ image artistSymbol, `Logo for ${artistName}`, "", { title: artistName, bypassLink: true, bypassCdn: true, width: 600, height: 600, eager: loopIndex <= 3 } }}
             <figcaption class="artist-label textAlign-center lineHeight-dense fontSize-tiny">{{ artistName }}</figcaption>
         </figure>
