@@ -52,7 +52,7 @@ artists: {
     {{> loopIndex++ }}
     <li class="card-wrapper">
         <figure class="artist-figure">
-            {{ set artistSymbol = `/${assets.images}/artists/${artistKey}.svg` |> toRoot }}
+            {{ set artistSymbol = `/${assets.images}/artists/${artistKey}.svg` }}
             {{ image artistSymbol, `Logo for ${artistName}`, "", { title: artistName, bypassLink: true, bypassCdn: true, width: 600, height: 600, eager: loopIndex <= 3 } }}
             <figcaption class="artist-label textAlign-center lineHeight-dense fontSize-tiny">{{ artistName }}</figcaption>
         </figure>
