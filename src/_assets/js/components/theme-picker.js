@@ -4,7 +4,7 @@ class ThemePicker extends HTMLElement {
 
 		// Absorb the properties from the window (safe from minification)
 		this.store = window.themeStore;
-		this.keys = [].concat(window.themeKeys, ['custom']);
+		this.keys = window.themeKeys;
 		this.defaults = {
 			light: this.dataset.light,
 			dark: this.dataset.dark,
@@ -72,7 +72,8 @@ class ThemePicker extends HTMLElement {
 			${Object.entries(values)
 				.map(([key, value]) => `--${key}: ${value};`)
 				.join('\n')}
-			}`);
+			--header-bg-color: var(--C-surface);
+		}`);
 		document.adoptedStyleSheets = [this.customSheet];
 		window.localStorage.setItem(this.styleStore, JSON.stringify(values));
 	}
@@ -85,7 +86,7 @@ class ThemePicker extends HTMLElement {
 				const name = field.getAttribute('name');
 				const type = field.getAttribute('type') || null;
 				const value = savedStyles[name];
-				if (type == 'radio') {
+				if (type === 'radio') {
 					field.checked = field.value === value;
 				} else {
 					field.value = value;
@@ -93,8 +94,32 @@ class ThemePicker extends HTMLElement {
 			});
 		} else {
 			const preferredScheme = this.getPreferredScheme();
-			Array.from(form.querySelectorAll(`[name="color-scheme"]`)).forEach((schemeField) => {
-				schemeField.checked = schemeField.value === preferredScheme;
+			const isDark = preferredScheme === 'dark';
+			const defaultColors = {
+				canvas: isDark ? '#001111' : '#eeffff',
+				surface: isDark ? '#003333' : '#cccccc',
+				text: isDark ? '#ffffff' : '#000000',
+				heading: isDark ? '#ddffff' : '#003333',
+				accent: isDark ? '#00ffff' : '#550000',
+			};
+
+			// Array.from(form.querySelectorAll(`[name="color-scheme"]`)).forEach((schemeField) => {
+			// 	schemeField.checked = schemeField.value === preferredScheme;
+			// });
+
+			Array.from(form.querySelectorAll(`input[type="color"][data-color-key]`)).forEach((colorField) => {
+				colorField.value = defaultColors[colorField.getAttribute('data-color-key')];
+			});
+
+			Array.from(form.querySelectorAll('[data-default]')).forEach((defaultOption) => {
+				const selectField = defaultOption.closest('select');
+				const radioField = defaultOption.closest('input[type="radio"]');
+				if (selectField) {
+					selectField.value = defaultOption.value;
+				} else if (radioField) {
+					radioField.checked = true;
+					console.log(radioField);
+				}
 			});
 		}
 
@@ -120,6 +145,9 @@ class ThemePicker extends HTMLElement {
 					dialog.showModal();
 					this.updateCustomThemeStyles();
 				} else if (action === 'close') {
+					dialog.close();
+				} else if (action === 'apply') {
+					this.updateCustomThemeStyles();
 					dialog.close();
 				}
 			} else if (setter) {

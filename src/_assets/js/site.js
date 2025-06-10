@@ -1,4 +1,5 @@
 function toggleInertForMenu(newState = false) {
+	debugger;
 	Array.from(document.body.querySelectorAll(':scope > :not(header,script,style)')).forEach((el) => (el.inert = newState));
 }
 

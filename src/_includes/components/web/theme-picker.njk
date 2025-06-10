@@ -38,4 +38,104 @@
 			{% endfor %}
 		</div>
 	{% endfor %}
+
+	<div class="theme-picker-scheme-group">
+		<span class="theme-picker-scheme-label">Custom</span>
+		<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}">
+			<button class="button button--icon-only" data-theme-set="custom" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-custom-description">
+				{% svg 'paintbrush', { width: 24, height: 24 } %}
+			</button>
+			<span class="tooltip-content" id="theme-picker-custom-description">
+				<span class="visually-hidden">Toggle theme:</span>
+				Custom
+			</span>
+		</div>
+		<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}">
+			<button class="button button--icon-only" aria-label="Customise" data-theme-custom-action="open" aria-labelledby="theme-picker-custom-adjust-label">
+				{% svg 'sliders', { width: 24, height: 24 } %}
+			</button>
+			<span class="tooltip-content" id="theme-picker-custom-adjust-label">
+				Adjust <span class="visually-hidden">custom theme styles</span>
+			</span>
+		</div>
+	</div>
+
+	<dialog id="theme-custom-controls">
+		<div class="dialog-inner flow" style="--flow-space: var(--size-s);">
+			<div class="grouper grouper--toolbar">
+				<h2>Customise your theme</h2>
+				<button class="button button--icon-only" aria-label="Customise" data-theme-custom-action="close">
+					{% svg 'close', { width: 24, height: 24 } %}
+				</button>
+			</div>
+
+			<form method="dialog" id="theme-custom-form" class="flow">
+				<fieldset class="flow" style="--flow-space: var(--size-xs);">
+					<legend class="visually-hidden">Colours</legend>
+					<span aria-hidden="true" class="h3">Colours</span>
+
+					{% set colorKeys = ['canvas', 'surface', 'text', 'heading', 'accent'] %}
+					{% for colorKey in colorKeys %}
+						<p>
+							<label for="theme-custom-color-{{ colorKey }}">{{ colorKey | toTitleCase }}:</label>
+							<input type="color" id="theme-custom-color-{{ colorKey }}" data-color-key="{{ colorKey }}" name="C-{{ colorKey }}">
+						</p>
+					{% endfor %}
+				</fieldset>
+
+				<fieldset class="flow" style="--flow-space: var(--size-xs);">
+					<legend class="visually-hidden">Fonts</legend>
+					<span aria-hidden="true" class="h3">Fonts</span>
+
+					<p>
+						<label for="theme-custom-font-heading">Heading font family:</label>
+						<select id="theme-custom-font-heading" name="font-heading-family">
+							<optgroup label="Serif">
+								<option value="Canela">Canela</option>
+								<option value="InstrumentSerif">Instrument Serif</option>
+								<option value="Chinook">Chinook</option>
+							</optgroup>
+							<optgroup label="Sans-Serif">
+								<option value="Switzer" data-default>Switzer</option>
+								<option value="MDNichrome">MD Nichrome</option>
+								<option value="Rajdhani">Rajdhani</option>
+								<option value="TeXGyreAdventor">TeX Gyre Adventor</option>
+								<option value="Comic Sans MS">Comic Sans MS</option>
+								<option value="XanhMono">Xahn Mono</option>
+							</optgroup>
+						</select>
+					</p>
+
+					<p>
+						<label for="theme-custom-font-body">Body font family:</label>
+						<select id="theme-custom-font-body" name="font-body-family">
+							<option value="var(--fontStack-serif)" data-default>Serif</option>
+							<option value="var(--fontStack-sans-serif)">Sans Serif</option>
+							<option value="var(--fontStack-monospace)">Monospace</option>
+						</select>
+					</p>
+				</fieldset>
+
+				<fieldset class="flow" style="--flow-space: var(--size-xs);">
+					<legend class="visually-hidden">Details</legend>
+					<span aria-hidden="true" class="h3">Details</span>
+					<p>
+						<label for="theme-custom-corner-style-square">
+							<input type="radio" id="theme-custom-corner-style-square" name="corner" value="0px">
+							<span>Square</span>
+						</label>
+						|
+						<label for="theme-custom-corner-style-round">
+							<input type="radio" id="theme-custom-corner-style-round" name="corner" value="4px" data-default>
+							<span>Round</span>
+						</label>
+					</p>
+				</fieldset>
+
+				<div>
+					<button type="submit" id="theme-custom-apply" class="button" data-theme-custom-action="apply">Apply styles</button>
+				</div>
+			</form>
+		</div>
+	</dialog>
 </theme-picker>

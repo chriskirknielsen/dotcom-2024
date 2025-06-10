@@ -10,6 +10,7 @@
 			let docEl = document.documentElement; // For minification purposes only
 			docEl.setAttribute('data-js', 'true');
 			window.themeKeys = {{ themes |> pluck('key') |> JSON.stringify }};
+			window.themeKeys.push('custom');
 			{{- include 'assets/js/theme-set.js' }}
 		{{ /js }}
 		{{- getBundle 'js', 'head' -}}
