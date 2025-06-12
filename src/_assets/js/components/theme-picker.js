@@ -27,6 +27,70 @@ class ThemePicker extends HTMLElement {
 		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 	}
 
+	/** Convert hex to RGB */
+	hexToRgb(H) {
+		H = H.trim();
+		if (H.startsWith('#') === false) {
+			H = `#${H};`;
+		}
+
+		let r = 0;
+		let g = 0;
+		let b = 0;
+		if (H.length === 4) {
+			r = '0x' + H[1] + H[1];
+			g = '0x' + H[2] + H[2];
+			b = '0x' + H[3] + H[3];
+		} else if (H.length === 7) {
+			r = '0x' + H[1] + H[2];
+			g = '0x' + H[3] + H[4];
+			b = '0x' + H[5] + H[6];
+		}
+		return { r, g, b };
+	}
+
+	/** Convert RGB to HSL */
+	rgbToHsl({ r, g, b }) {
+		r /= 255;
+		g /= 255;
+		b /= 255;
+		let cmin = Math.min(r, g, b);
+		let cmax = Math.max(r, g, b);
+		let delta = cmax - cmin;
+		let h = 0;
+		let s = 0;
+		let l = 0;
+
+		if (delta === 0) {
+			h = 0;
+		} else if (cmax === r) {
+			h = ((g - b) / delta) % 6;
+		} else if (cmax === g) {
+			h = (b - r) / delta + 2;
+		} else {
+			h = (r - g) / delta + 4;
+		}
+
+		h = Math.round(h * 60);
+
+		if (h < 0) {
+			h += 360;
+		}
+
+		l = (cmax + cmin) / 2;
+		s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+		s = +(s * 100).toFixed(1);
+		l = +(l * 100).toFixed(1);
+
+		return { h, s, l };
+	}
+
+	/** Convert #hex to HSL */
+	hexToHsl(H) {
+		const rgb = this.hexToRgb(H);
+		return this.rgbToHsl(rgb);
+	}
+
 	setTheme(theme) {
 		if (!theme || this.keys.includes(theme) === false) {
 			theme = ''; // System default is an empty string
@@ -68,14 +132,26 @@ class ThemePicker extends HTMLElement {
 	updateCustomThemeStyles() {
 		const form = document.getElementById('theme-custom-form');
 		const values = Object.fromEntries(new FormData(form));
+		const canvasHsl = this.hexToHsl(values['C-canvas']);
+		const accentHsl = this.hexToHsl(values['C-accent']);
+		const isDark = canvasHsl.l < 50; // Guestimation
+		const isRound = values.corner !== '0px';
+
 		this.customSheet.replaceSync(`:root[data-theme="custom"] {
+			--color-scheme: ${isDark ? 'dark' : 'light'};
 			${Object.entries(values)
 				.map(([key, value]) => `--${key}: ${value};`)
 				.join('\n')}
-			--header-bg-color: var(--C-surface);
+			--font-heading-style: ${values['font-heading-family'] === 'XanhMono' ? 'italic' : 'normal'};
+			--font-heading-size-adjust: none;
+			--header-bg-color: color-mix(in oklch, var(--C-surface), var(--C-canvas));
+			--stroke-linecap: ${isRound ? 'round' : 'square'};
+			--shadow-color: ${accentHsl.h}deg ${Math.max(33, Math.round(100 - canvasHsl.s))}% ${Math.min(67, Math.round(100 - canvasHsl.l))}%;
+			${values['font-body-family'].includes('monospace') ? 'font-size-adjust: 0.45;' : ''}
 		}`);
+
 		document.adoptedStyleSheets = [this.customSheet];
-		window.localStorage.setItem(this.styleStore, JSON.stringify(values));
+		window.localStorage.setItem(this.styleStore, JSON.stringify(values)); // To re-apply upon subsequent page loads
 	}
 
 	connectedCallback() {
@@ -84,10 +160,12 @@ class ThemePicker extends HTMLElement {
 		if (savedStyles) {
 			Array.from(form.querySelectorAll('[name]')).forEach((field) => {
 				const name = field.getAttribute('name');
-				const type = field.getAttribute('type') || null;
+				const type = field.getAttribute('type') || field.tagName.toLowerCase();
 				const value = savedStyles[name];
 				if (type === 'radio') {
 					field.checked = field.value === value;
+				} else if (type === 'select') {
+					field.value = field.querySelector(`option[value="${value}"]`) ? value : field.querySelector(`option[data-default]`).value;
 				} else {
 					field.value = value;
 				}
@@ -97,10 +175,10 @@ class ThemePicker extends HTMLElement {
 			const isDark = preferredScheme === 'dark';
 			const defaultColors = {
 				canvas: isDark ? '#001111' : '#eeffff',
-				surface: isDark ? '#003333' : '#cccccc',
+				surface: isDark ? '#003333' : '#cceeee',
 				text: isDark ? '#ffffff' : '#000000',
 				heading: isDark ? '#ddffff' : '#003333',
-				accent: isDark ? '#00ffff' : '#550000',
+				accent: isDark ? '#33ffff' : '#550000',
 			};
 
 			// Array.from(form.querySelectorAll(`[name="color-scheme"]`)).forEach((schemeField) => {
@@ -118,7 +196,6 @@ class ThemePicker extends HTMLElement {
 					selectField.value = defaultOption.value;
 				} else if (radioField) {
 					radioField.checked = true;
-					console.log(radioField);
 				}
 			});
 		}

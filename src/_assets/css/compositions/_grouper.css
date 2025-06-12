@@ -6,6 +6,9 @@
 .grouper--wrap {
 	flex-wrap: wrap;
 }
+.grouper--baseline {
+	align-items: baseline;
+}
 
 .grouper--vertical {
 	flex-direction: column;
@@ -13,7 +16,7 @@
 
 .grouper--toolbar {
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-start;
 }
 
 .grouper--icon-text-pair {

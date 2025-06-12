@@ -60,77 +60,143 @@
 		</div>
 	</div>
 
-	<dialog id="theme-custom-controls">
+	<dialog id="theme-custom-controls" class="theme-picker-custom-dialog">
 		<div class="dialog-inner flow" style="--flow-space: var(--size-s);">
-			<div class="grouper grouper--toolbar">
-				<h2>Customise your theme</h2>
-				<button class="button button--icon-only" aria-label="Customise" data-theme-custom-action="close">
-					{% svg 'close', { width: 24, height: 24 } %}
-				</button>
+			<div>
+				<div class="grouper grouper--toolbar">
+					<h2>Customise your theme</h2>
+					<button class="button button--icon-only linecap-auto" aria-label="Customise" data-theme-custom-action="close">
+						{% svg 'close', { width: 24, height: 24 } %}
+					</button>
+				</div>
+
+				<p><em lang="es">Mi casa es su casa.</em> Please, make yourself at home!</p>
 			</div>
 
 			<form method="dialog" id="theme-custom-form" class="flow">
-				<fieldset class="flow" style="--flow-space: var(--size-xs);">
-					<legend class="visually-hidden">Colours</legend>
-					<span aria-hidden="true" class="h3">Colours</span>
+				<div>
+					<fieldset class="flow" style="--flow-space: var(--size-xs);">
+						<span aria-hidden="true" class="h3">Colours</span>
+						<legend class="visually-hidden">Colours</legend>
 
-					{% set colorKeys = ['canvas', 'surface', 'text', 'heading', 'accent'] %}
-					{% for colorKey in colorKeys %}
-						<p>
-							<label for="theme-custom-color-{{ colorKey }}">{{ colorKey | toTitleCase }}:</label>
-							<input type="color" id="theme-custom-color-{{ colorKey }}" data-color-key="{{ colorKey }}" name="C-{{ colorKey }}">
+						<div class="flow" style="--flow-space: var(--size-s);">
+							<div>
+								<fieldset class="flow" style="--flow-space: var(--size-xs);">
+									<span aria-hidden="true" class="h4">Background</span>
+									<legend class="visually-hidden">Background</legend>
+									<div class="theme-custom-control-group">
+										{% for colorKey in ['canvas', 'surface'] %}
+											<p class="theme-custom-control">
+												<label for="theme-custom-color-{{ colorKey }}" class="theme-custom-control-inner">
+													<span class="theme-custom-control-label">{{ colorKey | toTitleCase }}:</span>
+													<input type="color" id="theme-custom-color-{{ colorKey }}" data-color-key="{{ colorKey }}" name="C-{{ colorKey }}" class="theme-custom-control-field">
+												</label>
+											</p>
+										{% endfor %}
+									</div>
+								</fieldset>
+							</div>
+						
+							<div>
+								<fieldset class="flow" style="--flow-space: var(--size-xs);">
+									<span aria-hidden="true" class="h4">Foreground</span>
+									<legend class="visually-hidden">Foreground</legend>
+									<div class="theme-custom-control-group">
+										{% for colorKey in ['text', 'heading', 'accent'] %}
+											<p class="theme-custom-control">
+												<label for="theme-custom-color-{{ colorKey }}" class="theme-custom-control-inner">
+													<span class="theme-custom-control-label">{{ colorKey | toTitleCase }}:</span>
+													<input type="color" id="theme-custom-color-{{ colorKey }}" data-color-key="{{ colorKey }}" name="C-{{ colorKey }}" class="theme-custom-control-field">
+												</label>
+											</p>
+										{% endfor %}
+									</div>
+								</fieldset>
+							</div>
+						</div>
+
+						<p>Keep a high contrast between background and foreground, for your own sake!</p>
+					</fieldset>
+				</div>
+
+				<div class="flow" style="--flow-space: var(--size-xs);">
+					<fieldset class="flow" style="--flow-space: var(--size-xs);">
+						<span aria-hidden="true" class="h3">Fonts</span>
+						<legend class="visually-hidden">Fonts</legend>
+
+						<div class="theme-custom-control-group">
+							<p class="theme-custom-control">
+								<label for="theme-custom-font-heading" class="theme-custom-control-inner">
+									<span class="theme-custom-control-label">Heading font family:</span>
+									<select id="theme-custom-font-heading" name="font-heading-family" class="theme-custom-control-field">
+										<optgroup label="Serif">
+											<option value="Canela">Canela</option>
+											<option value="XanhMono">Xahn Mono</option>
+											<option value="InstrumentSerif">Instrument Serif</option>
+											<option value="Chinook">Chinook</option>
+											<option value="Times New Roman, Times">Times New Roman</option>
+											<option value="Didot, Bodoni MT, Noto Serif Display, URW Palladio L, P052, Sylfaen, serif">(Didone)</option>
+										</optgroup>
+										<optgroup label="Sans-Serif">
+											<option value="Switzer" data-default>Switzer</option>
+											<option value="MDNichrome">MD Nichrome</option>
+											<option value="Rajdhani">Rajdhani</option>
+											<option value="TeXGyreAdventor">TeX Gyre Adventor</option>
+											<option value="Comic Sans MS, casual, cursive">Comic Sans MS</option>
+											<option value="Optima, Candara, Noto Sans, source-sans-pro, sans-serif">(Humanist)</option>
+										</optgroup>
+									</select>
+								</label>
+							</p>
+
+							<p class="theme-custom-control">
+								<label for="theme-custom-font-body" class="theme-custom-control-inner">
+									<span class="theme-custom-control-label">Body font family:</span>
+									<select id="theme-custom-font-body" name="font-body-family" class="theme-custom-control-field">
+										<option value="var(--fontStack-serif)" data-default>Serif</option>
+										<option value="var(--fontStack-sans-serif)">Sans Serif</option>
+										<option value="var(--fontStack-monospace)">Monospace</option>
+									</select>
+								</label>
+							</p>
+						</div>
+
+						<fieldset>
+							<legend>Heading text-transform</legend>
+							<div class="theme-custom-control-group">
+								<p class="grouper grouper--baseline grouper--wrap">
+									<label for="theme-custom-heading-transform-none">
+										<input type="radio" id="theme-custom-heading-transform-none" name="font-heading-transform" value="none" data-default>
+										<span>None</span>
+									</label>
+									|
+									<label for="theme-custom-heading-transform-uppercase">
+										<input type="radio" id="theme-custom-heading-transform-uppercase" name="font-heading-transform" value="uppercase">
+										<span>Uppercase</span>
+									</label>
+								</p>
+							</div>
+						</fieldset>
+					</fieldset>
+				</div>
+
+				<div>
+					<fieldset class="flow" style="--flow-space: var(--size-xs);">
+						<span aria-hidden="true" class="h3">Details</span>
+						<legend class="visually-hidden">Details</legend>
+						<p class="grouper grouper--baseline grouper--wrap">
+							<label for="theme-custom-corner-style-square">
+								<input type="radio" id="theme-custom-corner-style-square" name="corner" value="0px">
+								<span>Sharp</span>
+							</label>
+							|
+							<label for="theme-custom-corner-style-round">
+								<input type="radio" id="theme-custom-corner-style-round" name="corner" value="4px" data-default>
+								<span>Soft</span>
+							</label>
 						</p>
-					{% endfor %}
-				</fieldset>
-
-				<fieldset class="flow" style="--flow-space: var(--size-xs);">
-					<legend class="visually-hidden">Fonts</legend>
-					<span aria-hidden="true" class="h3">Fonts</span>
-
-					<p>
-						<label for="theme-custom-font-heading">Heading font family:</label>
-						<select id="theme-custom-font-heading" name="font-heading-family">
-							<optgroup label="Serif">
-								<option value="Canela">Canela</option>
-								<option value="InstrumentSerif">Instrument Serif</option>
-								<option value="Chinook">Chinook</option>
-							</optgroup>
-							<optgroup label="Sans-Serif">
-								<option value="Switzer" data-default>Switzer</option>
-								<option value="MDNichrome">MD Nichrome</option>
-								<option value="Rajdhani">Rajdhani</option>
-								<option value="TeXGyreAdventor">TeX Gyre Adventor</option>
-								<option value="Comic Sans MS">Comic Sans MS</option>
-								<option value="XanhMono">Xahn Mono</option>
-							</optgroup>
-						</select>
-					</p>
-
-					<p>
-						<label for="theme-custom-font-body">Body font family:</label>
-						<select id="theme-custom-font-body" name="font-body-family">
-							<option value="var(--fontStack-serif)" data-default>Serif</option>
-							<option value="var(--fontStack-sans-serif)">Sans Serif</option>
-							<option value="var(--fontStack-monospace)">Monospace</option>
-						</select>
-					</p>
-				</fieldset>
-
-				<fieldset class="flow" style="--flow-space: var(--size-xs);">
-					<legend class="visually-hidden">Details</legend>
-					<span aria-hidden="true" class="h3">Details</span>
-					<p>
-						<label for="theme-custom-corner-style-square">
-							<input type="radio" id="theme-custom-corner-style-square" name="corner" value="0px">
-							<span>Square</span>
-						</label>
-						|
-						<label for="theme-custom-corner-style-round">
-							<input type="radio" id="theme-custom-corner-style-round" name="corner" value="4px" data-default>
-							<span>Round</span>
-						</label>
-					</p>
-				</fieldset>
+					</fieldset>
+				</div>
 
 				<div>
 					<button type="submit" id="theme-custom-apply" class="button" data-theme-custom-action="apply">Apply styles</button>
