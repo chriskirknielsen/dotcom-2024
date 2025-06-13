@@ -136,18 +136,47 @@ class ThemePicker extends HTMLElement {
 		const accentHsl = this.hexToHsl(values['C-accent']);
 		const isDark = canvasHsl.l < 50; // Guestimation
 		const isRound = values.corner !== '0px';
+		const remappedValues = Object.entries(values).map(([key, inputValue]) => {
+			let value;
+			switch (key) {
+				case 'font-heading-family': {
+					const map = {
+						Canela: 'Canela, serif',
+						XanhMono: 'XanhMono, monospace',
+						InstrumentSerif: 'InstrumentSerif, serif',
+						Chinook: 'Chinook, Cooper Black, serif',
+						didone: 'Didot, Bodoni MT, Noto Serif Display, URW Palladio L, P052, Sylfaen, serif',
+						Switzer: 'Switzer, sans-serif',
+						MDNichrome: 'MDNichrome, sans-serif',
+						Rajdhani: 'Rajdhani, sans-serif',
+						TeXGyreAdventor: 'TeXGyreAdventor, ITC Avant Garde, sans-serif',
+						times: 'Times New Roman, Times',
+						comicsans: 'Comic Sans MS, casual, cursive',
+						humanist: 'Optima, Candara, Noto Sans, source-sans-pro, sans-serif',
+					};
+					value = map[inputValue] || 'sans-serif';
+					break;
+				}
+				case 'font-body-family': {
+					value = `var(--fontStack-${inputValue})`;
+					break;
+				}
+				default: {
+					value = inputValue;
+				}
+			}
+			return `--${key}: ${value};`;
+		});
 
 		this.customSheet.replaceSync(`:root[data-theme="custom"] {
 			--color-scheme: ${isDark ? 'dark' : 'light'};
-			${Object.entries(values)
-				.map(([key, value]) => `--${key}: ${value};`)
-				.join('\n')}
+			${remappedValues.join('\n')}
 			--font-heading-style: ${values['font-heading-family'] === 'XanhMono' ? 'italic' : 'normal'};
 			--font-heading-size-adjust: none;
 			--header-bg-color: color-mix(in oklch, var(--C-surface), var(--C-canvas));
 			--stroke-linecap: ${isRound ? 'round' : 'square'};
 			--shadow-color: ${accentHsl.h}deg ${Math.max(33, Math.round(100 - canvasHsl.s))}% ${Math.min(67, Math.round(100 - canvasHsl.l))}%;
-			${values['font-body-family'].includes('monospace') ? 'font-size-adjust: 0.45;' : ''}
+			${values['font-body-family'] === 'monospace' ? 'font-size-adjust: 0.45;' : ''}
 		}`);
 
 		document.adoptedStyleSheets = [this.customSheet];
@@ -211,21 +240,21 @@ class ThemePicker extends HTMLElement {
 
 	handleEvent(e) {
 		if (e.type === 'click') {
+			const dialog = document.getElementById('theme-custom-controls');
+			const isTargetDialogBackdrop = e.target === dialog;
 			const customDialog = e.target.closest('[data-theme-custom-action]');
 			const setter = e.target.closest('[data-theme-set]');
 
-			if (customDialog) {
-				const dialog = document.getElementById('theme-custom-controls');
-				const action = customDialog.getAttribute('data-theme-custom-action');
+			if (customDialog || isTargetDialogBackdrop) {
+				const action = customDialog && customDialog.getAttribute('data-theme-custom-action');
 
-				if (action === 'open') {
+				if (action === 'apply' || isTargetDialogBackdrop) {
+					this.updateCustomThemeStyles();
+					dialog.close();
+				} else if (action === 'open') {
 					dialog.showModal();
 					this.updateCustomThemeStyles();
-				} else if (action === 'close') {
-					dialog.close();
-				} else if (action === 'apply') {
-					this.updateCustomThemeStyles();
-					dialog.close();
+					this.setTheme('custom');
 				}
 			} else if (setter) {
 				const isPressed = setter.getAttribute('aria-pressed') === 'true';
