@@ -24,6 +24,7 @@ export default function (eleventyConfig) {
 
 	/** Finds the first object in a provided list whose prop matches the value. */
 	eleventyConfig.addFilter('find', (array, prop, value) => array.find((item) => item[prop] === value));
+	eleventyConfig.addFilter('findBy', (array, prop, value) => array.find((item) => item[prop] === value));
 
 	/** Ensure every value of the provided list is unique. */
 	eleventyConfig.addFilter('unique', (arr) => [...new Set(arr)]);

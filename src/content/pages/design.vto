@@ -7,7 +7,7 @@
 		alias: 'design',
 		addAllPagesToCollections: true,
 		before: function(paginationData, fullData) {
-			paginationData.sort((a,b) => new Date(a.date) - new Date(b.date));
+			paginationData.sort((a, b) => new Date(a.date) - new Date(b.date));
 			return paginationData;
 		}
 	},

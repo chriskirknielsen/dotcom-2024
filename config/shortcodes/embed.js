@@ -1,4 +1,5 @@
 import { toCloudinary } from '../utils/image-transforms.js';
+import metadata from '../../src/_data/metadata.js';
 
 export default function (eleventyConfig, options = {}) {
 	if (!options || !options.hasOwnProperty('markdownEngine')) {
@@ -19,7 +20,7 @@ export default function (eleventyConfig, options = {}) {
 		</div>`;
 
 		// Only inject the CodePen embed script once per page
-		if (!this.page.hasOwnProperty('__codepen_embed_script_injected__') && !this.ctx.metadata.nakedJs) {
+		if (!this.page.hasOwnProperty('__codepen_embed_script_injected__') && !metadata.nakedJs) {
 			markup += `<script async src="https://static.codepen.io/assets/embed/ei.js"></script>`;
 			this.page.__codepen_embed_script_injected__ = true;
 		}

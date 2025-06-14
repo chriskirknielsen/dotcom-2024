@@ -1,11 +1,13 @@
 
 
 {{ set dateInfo }}
-    <time datetime="{{ date |> dateFormat({ format: 'iso' }) }}" title="{{ date |> dateFormat({ format: 'iso' }) }}">{{ date |> dateFormat({ format: 'nice', lang: lang }) }}</time>
+    <time datetime="{{ date |> dateFormat({ format: 'iso' }) }}" title="{{ date |> dateFormat({ format: 'iso' }) }}">{{ date |> dateFormat({ format: 'nice', lang }) }}</time>
     {{ if updated }}
+        {{ set updatedDateFormatted = updated |> dateFormat }}
+        {{ set publishedDateFormatted = date |> dateFormat }}
         <br>
         <span class="fontSize-tiny">(Updated
-            {{- if (updated |> dateFormat) != (date |> dateFormat) -}}
+            {{- if updatedDateFormatted !== publishedDateFormatted -}}
                 <time datetime="{{ updated |> dateFormat({ format: 'iso' }) }}" title="{{ updated |> dateFormat({ format: 'iso' }) }}">
                     {{ updated |> dateFormat({ format: 'nice', lang: lang }) }}</time>
             {{- /if }})
@@ -13,10 +15,11 @@
     {{ /if }}
 {{ /set }}
 
+{{ set sortedTags = tags |> sort((a, b) => a.localeCompare(b)) }}
 {{ set pageHero }}
     {{ component 'hero', {
         ext: 'vto',
-        heroTags: tags |> sort((a,b) => a.localeCompare(b)),
+        heroTags: sortedTags,
         heroTitle: title,
         heroSup: dateInfo,
         pageContext: page
@@ -99,7 +102,7 @@
         <hr>
         <div>
         {{ if externalHost }}
-            {{ component 'cta' { ext: 'vto', url: externalUrl, label: `View original post on ${externalHost}`, icon: 'arrow-right' } }}
+            {{ component 'cta', { ext: 'vto', url: externalUrl, label: `View original post on ${externalHost}`, icon: 'arrow-right' } }}
         {{ else }}
             View original post: <a href="{{ externalUrl }}">{{ externalUrl }}</a>
         {{ /if }}
