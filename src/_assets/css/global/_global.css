@@ -18,3 +18,40 @@ body {
 body > footer {
 	margin-block-start: auto;
 }
+
+dialog {
+	/* 20ms delay + backwards fill to reduce amount of stutter upon opening a dialog */
+	position: fixed;
+	inset: clamp(var(--size-m), 4.5vh, var(--size-2xl)) 0 auto; /* Top-aligned */
+
+	inline-size: var(--layout-max-content);
+	max-inline-size: 90%;
+	margin: auto;
+	padding: 0;
+
+	color: var(--C-text);
+	border: 2px solid var(--C-text);
+	border-radius: var(--_corner);
+	background: var(--C-surface);
+
+	transform-origin: 50% 0%;
+	animation: fadeIn var(--anim-short) var(--easing-out) 20ms 1 backwards;
+
+	@media (--accept-motion) {
+		animation-name: fadeIn, scaleUp;
+	}
+
+	&:not([open]) {
+		display: none;
+
+		animation: none;
+	}
+
+	&::backdrop {
+		padding: 33vh var(--size-xl) var(--size-xl);
+
+		background: #000a;
+
+		animation: fadeIn var(--anim-short, 200ms) var(--easing-out, ease-out) 20ms 1 backwards;
+	}
+}

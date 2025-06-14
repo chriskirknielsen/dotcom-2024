@@ -15,7 +15,80 @@ class ThemePicker extends HTMLElement {
 
 		// Events handlers
 		this.addEventListener('click', this);
+		this.addEventListener('change', this);
 		document.addEventListener('keyup', this);
+
+		// Set up a constructable stylesheet for user custom styles
+		this.styleStore = 'cknCustom';
+		this.customSheet = new CSSStyleSheet();
+	}
+
+	getPreferredScheme() {
+		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+	}
+
+	/** Convert hex to RGB */
+	hexToRgb(H) {
+		H = H.trim();
+		if (H.startsWith('#') === false) {
+			H = `#${H};`;
+		}
+
+		let r = 0;
+		let g = 0;
+		let b = 0;
+		if (H.length === 4) {
+			r = '0x' + H[1] + H[1];
+			g = '0x' + H[2] + H[2];
+			b = '0x' + H[3] + H[3];
+		} else if (H.length === 7) {
+			r = '0x' + H[1] + H[2];
+			g = '0x' + H[3] + H[4];
+			b = '0x' + H[5] + H[6];
+		}
+		return { r, g, b };
+	}
+
+	/** Convert RGB to HSL */
+	rgbToHsl({ r, g, b }) {
+		r /= 255;
+		g /= 255;
+		b /= 255;
+		let cmin = Math.min(r, g, b);
+		let cmax = Math.max(r, g, b);
+		let delta = cmax - cmin;
+		let h = 0;
+		let s = 0;
+		let l = 0;
+
+		if (delta === 0) {
+			h = 0;
+		} else if (cmax === r) {
+			h = ((g - b) / delta) % 6;
+		} else if (cmax === g) {
+			h = (b - r) / delta + 2;
+		} else {
+			h = (r - g) / delta + 4;
+		}
+
+		h = Math.round(h * 60);
+
+		if (h < 0) {
+			h += 360;
+		}
+
+		l = (cmax + cmin) / 2;
+		s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+		s = +(s * 100).toFixed(1);
+		l = +(l * 100).toFixed(1);
+
+		return { h, s, l };
+	}
+
+	/** Convert #hex to HSL */
+	hexToHsl(H) {
+		const rgb = this.hexToRgb(H);
+		return this.rgbToHsl(rgb);
 	}
 
 	setTheme(theme) {
@@ -50,14 +123,119 @@ class ThemePicker extends HTMLElement {
 			return false; // If the user hasn't set an override, respect the `prefers-color-scheme` setting
 		}
 		if (this.keys.includes(activeTheme) === false) {
-			const preferredScheme = window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+			const preferredScheme = this.getPreferredScheme();
 			return this.defaults[preferredScheme];
 		}
 		return activeTheme;
 	}
 
-	// Don't really need this
-	// connectedCallback() {}
+	updateCustomThemeStyles() {
+		const form = document.getElementById('theme-custom-form');
+		const values = Object.fromEntries(new FormData(form));
+		const canvasHsl = this.hexToHsl(values['C-canvas']);
+		const accentHsl = this.hexToHsl(values['C-accent']);
+		const isDark = canvasHsl.l < 50; // Guestimation
+		const isRound = values.corner !== 'sharp';
+		const remappedValues = Object.entries(values).map(([key, input]) => {
+			let value;
+			switch (key) {
+				case 'font-heading-family': {
+					const map = {
+						Canela: 'Canela, serif',
+						XanhMono: 'XanhMono, monospace',
+						InstrumentSerif: 'InstrumentSerif, serif',
+						Chinook: 'Chinook, Cooper Black, serif',
+						didone: 'Didot, Bodoni MT, Noto Serif Display, URW Palladio L, P052, Sylfaen, serif',
+						Switzer: 'Switzer, sans-serif',
+						MDNichrome: 'MDNichrome, sans-serif',
+						Rajdhani: 'Rajdhani, sans-serif',
+						TeXGyreAdventor: 'TeXGyreAdventor, ITC Avant Garde, sans-serif',
+						times: 'Times New Roman, Times',
+						comicsans: 'Comic Sans MS, casual, cursive',
+						humanist: 'Optima, Candara, Noto Sans, source-sans-pro, sans-serif',
+					};
+					value = map[input] || 'sans-serif';
+					break;
+				}
+				case 'font-body-family': {
+					value = `var(--fontStack-${input})`;
+					break;
+				}
+				case 'corner': {
+					value = input === 'round' ? '4px' : '0px';
+					break;
+				}
+				default: {
+					value = input;
+				}
+			}
+			return `--${key}: ${value};`;
+		});
+
+		this.customSheet.replaceSync(`:root[data-theme="custom"] {
+			--color-scheme: ${isDark ? 'dark' : 'light'};
+			${remappedValues.join('\n')}
+			--font-heading-style: ${values['font-heading-family'] === 'XanhMono' ? 'italic' : 'normal'};
+			--font-heading-size-adjust: none;
+			${values['font-heading-transform'] === 'uppercase' ? '--HERO-title-factor: 1.75;' : ''}
+			--header-bg-color: color-mix(in oklch, var(--C-surface), var(--C-canvas));
+			--stroke-linecap: ${values.corner};
+			--shadow-color: ${accentHsl.h}deg ${Math.max(33, Math.round(100 - canvasHsl.s))}% ${Math.min(67, Math.round(100 - canvasHsl.l))}%;
+			${values['font-body-family'] === 'monospace' ? 'font-size-adjust: 0.45;' : ''}
+		}`);
+
+		document.adoptedStyleSheets = [this.customSheet];
+		window.localStorage.setItem(this.styleStore, JSON.stringify(values)); // To re-apply upon subsequent page loads
+	}
+
+	connectedCallback() {
+		const savedStyles = JSON.parse(window.localStorage.getItem(this.styleStore) || null);
+		const form = document.getElementById('theme-custom-form');
+		if (savedStyles) {
+			Array.from(form.querySelectorAll('[name]')).forEach((field) => {
+				const name = field.getAttribute('name');
+				const type = field.getAttribute('type') || field.tagName.toLowerCase();
+				const value = savedStyles[name];
+				if (type === 'radio') {
+					field.checked = field.value === value;
+				} else if (type === 'select') {
+					field.value = field.querySelector(`option[value="${value}"]`) ? value : field.querySelector(`option[data-default]`).value;
+				} else {
+					field.value = value;
+				}
+			});
+		} else {
+			const preferredScheme = this.getPreferredScheme();
+			const isDark = preferredScheme === 'dark';
+			const defaultColors = {
+				canvas: isDark ? '#001111' : '#eeffff',
+				surface: isDark ? '#003333' : '#cceeee',
+				text: isDark ? '#ffffff' : '#000000',
+				heading: isDark ? '#ddffff' : '#003333',
+				accent: isDark ? '#33ffff' : '#550000',
+			};
+
+			// Array.from(form.querySelectorAll(`[name="color-scheme"]`)).forEach((schemeField) => {
+			// 	schemeField.checked = schemeField.value === preferredScheme;
+			// });
+
+			Array.from(form.querySelectorAll(`input[type="color"][data-color-key]`)).forEach((colorField) => {
+				colorField.value = defaultColors[colorField.getAttribute('data-color-key')];
+			});
+
+			Array.from(form.querySelectorAll('[data-default]')).forEach((defaultOption) => {
+				const selectField = defaultOption.closest('select');
+				const radioField = defaultOption.closest('input[type="radio"]');
+				if (selectField) {
+					selectField.value = defaultOption.value;
+				} else if (radioField) {
+					radioField.checked = true;
+				}
+			});
+		}
+
+		this.updateCustomThemeStyles();
+	}
 
 	// Ain't no way the picker is ever getting removed
 	// disconnectedCallback() {
@@ -67,8 +245,23 @@ class ThemePicker extends HTMLElement {
 
 	handleEvent(e) {
 		if (e.type === 'click') {
+			const dialog = document.getElementById('theme-custom-controls');
+			const isTargetDialogBackdrop = e.target === dialog;
+			const customDialog = e.target.closest('[data-theme-custom-action]');
 			const setter = e.target.closest('[data-theme-set]');
-			if (setter) {
+
+			if (customDialog || isTargetDialogBackdrop) {
+				const action = customDialog && customDialog.getAttribute('data-theme-custom-action');
+
+				if (action === 'apply' || isTargetDialogBackdrop) {
+					this.updateCustomThemeStyles();
+					dialog.close();
+				} else if (action === 'open') {
+					dialog.showModal();
+					this.updateCustomThemeStyles();
+					this.setTheme('custom');
+				}
+			} else if (setter) {
 				const isPressed = setter.getAttribute('aria-pressed') === 'true';
 				this.setTheme(!isPressed ? setter.getAttribute('data-theme-set') : false);
 			}
@@ -85,6 +278,10 @@ class ThemePicker extends HTMLElement {
 				const pressedDigit = parseInt(e.key, 10);
 				this.querySelectorAll('[data-theme-set]')[pressedDigit]?.click();
 			}
+		}
+
+		if (e.type === 'change') {
+			this.updateCustomThemeStyles();
 		}
 	}
 }

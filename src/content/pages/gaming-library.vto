@@ -211,13 +211,13 @@ platformLabels: {
 </div>
 
 <template id="gaming-details-dialog-template" data-trophy-svg-id="icon-psn-trophy">
-    <div class="gaming-details-dialog-inner flow" style="--flow-space: var(--size-s);">
+    <div class="gaming-details-dialog-inner | dialog-inner flow" style="--flow-space: var(--size-s);">
         <div class="grouper">
             <img src="" alt="" data-slot="trophyIcon" data-slot-img="trophyIcon" aria-hidden="true" height="128" width="">
             
             <div class="flexGrow-1">
                 <div class="grouper grouper--toolbar">
-                    <h2><span data-slot="title"></span></h2>
+                    <h2 id="gaming-details-dialog-heading"><span data-slot="title"></span></h2>
 
                     {{ component 'cta', {
                         icon: 'close',
@@ -286,7 +286,7 @@ platformLabels: {
         </dl>
     </div>
 </template>
-<dialog id="gaming-details-dialog" class="gaming-details-dialog"></dialog>
+<dialog id="gaming-details-dialog" class="gaming-details-dialog" aria-labelledby="gaming-details-dialog-heading"></dialog>
 
 {{ js 'foot-gameslibrary' }}{{ include 'assets/js/gaming-library.js' }}{{ /js }}
 

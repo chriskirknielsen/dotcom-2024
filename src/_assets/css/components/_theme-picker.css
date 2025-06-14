@@ -7,3 +7,27 @@ theme-picker {
 [data-theme-set] {
 	flex-shrink: 0;
 }
+
+.theme-picker-custom-dialog {
+	pointer-events: auto; /* Undo some of the nullified pointer events in the header (should this line be in the header CSS partial? hmm) */
+	inline-size: 90%;
+	max-inline-size: 36rem;
+}
+.theme-custom-control-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--size-xs);
+}
+.theme-custom-control {
+	flex: 1 0 0;
+	min-inline-size: 4rem;
+	max-inline-size: 18rem;
+}
+.theme-custom-control-inner {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-2xs);
+}
+.theme-custom-control-field {
+	inline-size: 100%;
+}
