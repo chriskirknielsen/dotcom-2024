@@ -135,8 +135,8 @@ class ThemePicker extends HTMLElement {
 		const canvasHsl = this.hexToHsl(values['C-canvas']);
 		const accentHsl = this.hexToHsl(values['C-accent']);
 		const isDark = canvasHsl.l < 50; // Guestimation
-		const isRound = values.corner !== '0px';
-		const remappedValues = Object.entries(values).map(([key, inputValue]) => {
+		const isRound = values.corner !== 'sharp';
+		const remappedValues = Object.entries(values).map(([key, input]) => {
 			let value;
 			switch (key) {
 				case 'font-heading-family': {
@@ -154,15 +154,19 @@ class ThemePicker extends HTMLElement {
 						comicsans: 'Comic Sans MS, casual, cursive',
 						humanist: 'Optima, Candara, Noto Sans, source-sans-pro, sans-serif',
 					};
-					value = map[inputValue] || 'sans-serif';
+					value = map[input] || 'sans-serif';
 					break;
 				}
 				case 'font-body-family': {
-					value = `var(--fontStack-${inputValue})`;
+					value = `var(--fontStack-${input})`;
+					break;
+				}
+				case 'corner': {
+					value = input === 'round' ? '4px' : '0px';
 					break;
 				}
 				default: {
-					value = inputValue;
+					value = input;
 				}
 			}
 			return `--${key}: ${value};`;
@@ -173,8 +177,9 @@ class ThemePicker extends HTMLElement {
 			${remappedValues.join('\n')}
 			--font-heading-style: ${values['font-heading-family'] === 'XanhMono' ? 'italic' : 'normal'};
 			--font-heading-size-adjust: none;
+			${values['font-heading-transform'] === 'uppercase' ? '--HERO-title-factor: 1.75;' : ''}
 			--header-bg-color: color-mix(in oklch, var(--C-surface), var(--C-canvas));
-			--stroke-linecap: ${isRound ? 'round' : 'square'};
+			--stroke-linecap: ${values.corner};
 			--shadow-color: ${accentHsl.h}deg ${Math.max(33, Math.round(100 - canvasHsl.s))}% ${Math.min(67, Math.round(100 - canvasHsl.l))}%;
 			${values['font-body-family'] === 'monospace' ? 'font-size-adjust: 0.45;' : ''}
 		}`);

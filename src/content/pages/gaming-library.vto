@@ -217,7 +217,7 @@ platformLabels: {
             
             <div class="flexGrow-1">
                 <div class="grouper grouper--toolbar">
-                    <h2><span data-slot="title"></span></h2>
+                    <h2 id="gaming-details-dialog-heading"><span data-slot="title"></span></h2>
 
                     {{ component 'cta', {
                         icon: 'close',
@@ -286,7 +286,7 @@ platformLabels: {
         </dl>
     </div>
 </template>
-<dialog id="gaming-details-dialog" class="gaming-details-dialog"></dialog>
+<dialog id="gaming-details-dialog" class="gaming-details-dialog" aria-labelledby="gaming-details-dialog-heading"></dialog>
 
 {{ js 'foot-gameslibrary' }}{{ include 'assets/js/gaming-library.js' }}{{ /js }}
 

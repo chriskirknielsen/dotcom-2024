@@ -33,12 +33,14 @@
 	}
 }
 
+/* To make a select look like other buttons */
 .button.button--select {
 	--SELECT-arrow-size: 0.75em;
 	--SELECT-arrow-gap: var(--size-xs);
 
 	pointer-events: none;
 
+	display: inline-block;
 	padding: 0;
 	padding-inline-end: 0;
 
@@ -60,6 +62,7 @@
 		mask-position: center;
 	}
 }
+
 .button.button--select > select {
 	padding: var(--CTA-padding);
 	padding-inline-end: calc(var(--SELECT-arrow-size) + 2 * var(--SELECT-arrow-gap));
@@ -76,6 +79,11 @@
 	display: flex;
 	align-items: baseline;
 	gap: 0.25em;
+
+	&:has(input:is([type='checkbox'], [type='radio'])) {
+		gap: 0.75em;
+		align-items: center;
+	}
 }
 
 [data-inputlike='wrap'] {
