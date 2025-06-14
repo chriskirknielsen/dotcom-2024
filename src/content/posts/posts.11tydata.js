@@ -1,5 +1,5 @@
 export default {
-	layout: 'post.njk',
+	layout: 'post.vto',
 	tags: ['_posts'],
 	section: 'post',
 	eleventyComputed: {

@@ -17,7 +17,7 @@ The selector is more complex to understand at a glance, and is probably slightly
 li:nth-child(-n + 3 of .el ~ *) { background: hotpink; }
 ```
 
-{% codepen "https://codepen.io/chriskirknielsen/pen/yLdWpvY/", "css,result", 480 %}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/yLdWpvY/", "css,result", 480 }}
 
 For my specific use-case on my [About](/about/) page, the selector is a bit more… *exotic*, but It Just Works™:
 

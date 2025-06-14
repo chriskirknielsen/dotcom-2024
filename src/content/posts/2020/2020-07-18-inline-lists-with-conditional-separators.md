@@ -48,9 +48,9 @@ Here’s the whole setup, using a pipe as a separator, similar to what I use on 
 }
 ```
 
-{% callout %}
+{{ callout }}
 Setting a gradient stop of `0` will effectively make the colour startpoint the same as the previous colour’s endpoint, removing the need to repeat the `calc()` declarations in this situation.
-{% endcallout %}
+{{ /callout }}
 
 Here I’m setting a very thin line at the centre of the space, but you could use any background, such as a `radial-gradient` to make a bullet, or load in an SVG or image… We don’t need to ensure it isn’t applied to the last item since the whitespace will collapse at the end of the text-block that is our list, but if you do happen to run into issues, you can add `:not(:last-child)` to prevent that behaviour.
 
@@ -91,4 +91,4 @@ I’d recommend the first one.
 
 ## Demo
 
-{% codepen "https://codepen.io/chriskirknielsen/pen/KKVryZB/" %}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/KKVryZB/" }}

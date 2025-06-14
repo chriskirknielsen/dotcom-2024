@@ -49,9 +49,9 @@ for (var i = 1; i <= 10; i++) {
 console.log(txt); // Renvoie une erreur, "`txt` is undefined" car `txt` n'existe pas en-dehors du scope de notre boucle
 ```
 
-{% callout %}
+{{ callout }}
 J'ai également utilisé la syntaxe moderne appelée _template literals_ (ou en français [littéraux de gabarits](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Template_literals)) car si nous pouvons nous permettre `let`, nous pouvons aussi nous permettre cette syntaxe !
-{% endcallout %}
+{{ /callout }}
 
 Avec `let` ici, nous évitons le besoin de recourir à une fonction pour protéger notre variable de fuiter en-dehors de son cadre.
 

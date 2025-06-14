@@ -128,7 +128,7 @@ It is frustrating that Chrome is shipping — or rather prototyping — all thes
 
 I got you covered, dear reader. Just remember it will only work on a supporting browser, which at this time is just Chrome Canary with a special flag.
 
-{% codepen "https://codepen.io/chriskirknielsen/details/VYweVOj" %}
+{{ codepen "https://codepen.io/chriskirknielsen/details/VYweVOj" }}
 
 ## More reading
 

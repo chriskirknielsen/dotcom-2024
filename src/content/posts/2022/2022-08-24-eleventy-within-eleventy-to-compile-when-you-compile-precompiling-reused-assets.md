@@ -1,17 +1,16 @@
 ---
 slug: eleventy-within-eleventy-precompiling-reused-assets
-title: 'Eleventy within Eleventy to compile when you compile: precompiling reused assets.'
+title: 'Eleventy within Eleventy to compile when you compile: precompiling reused assets'
 summary: Pre-compile some reused assets to avoid repeating the same operation.
 date: 2022-08-25
 updated: 2022-08-25
 tags:
     - eleventy
     - javascript
-templateEngineOverride: njk,md
 toc: true
 ---
 
-{% callout "Update", "🚨" %}[Okay, so maybe don’t do this? More info below!](#quick-update){% endcallout %}
+{{ callout "Update", "🚨" }}[Okay, so maybe don’t do this? More info below!](#quick-update){{ /callout }}
 
 A bit of a weird title, but I’m sure Xzibit would approve. So let me explain what I’m on about: I have two components on my site that use inlined JS: once in the `<head>`, once before `</body>`. These two components are included on every page, and me being forever the optimist—I mean optimiser—I minify those bits of JS with a `jsmin` filter. This is an [approach recommended by Eleventy](https://www.11ty.dev/docs/quicktips/inline-js/). Totally valid, if you do this, don’t let me stop you!
 
@@ -19,7 +18,7 @@ Additionally, those components of mine use some global data, so I inject it into
 
 Here’s how that particular section looks in that `head.njk` component of mine:
 
-```njk{% raw %}
+```njk{{ echo }}
 {% set headScript %}
 (function(){
 	// tokens.json is a data file in the _data folder
@@ -33,7 +32,7 @@ Here’s how that particular section looks in that `head.njk` component of mine:
 })()
 {% endset %}
 <script>{{ headScript | jsmin | safe }}</script>
-{% endraw %}```
+{{ /echo }}```
 
 Ultimately, this all works but here’s my “issue”: if, like me, you are seeing Eleventy warning you that the `jsmin` filter is taking up quite a bit of time by running in all the pages (once per page for every minified script), then read on: I have an idea! If not, your build is probably fast enough that you don’t need to worry about this.
 
@@ -48,7 +47,7 @@ This event lets you run some operations before Eleventy builds your site. Sounds
 ---
 permalink: head-script.js
 ---
-{% raw %}
+{{ echo }}
 {% set headScript %}
 (function(){
 	const themeKeys = {{ tokens.themes | objectKeys | dump | safe }};
@@ -56,11 +55,11 @@ permalink: head-script.js
 })()
 {% endset %}
 {{ headScript | jsmin | safe }}
-{% endraw %}```
+{{ /echo }}```
 
-{% callout %}
+{{ callout }}
 I’m wrapping this in an Immediately-Invoked Function Expression (also called IIFE) so that the JS minifier can make variable names shorter. I’m also leaving the `script` tags out so that’ll be the responsibility of the `head` component, outputting this as a JS file and nothing else.
-{% endcallout %}
+{{ /callout }}
 
 So how do you run Eleventy before Eleventy runs? Well, you can run it on the command line, so if you make use of the Node-provided `child_process.exec` method, you can run `npx @11ty/eleventy`—very cool. I could probably provide all the options right there but honestly, using a config file is way easier to me. Yup, two Eleventy config files—that there is enough to make me realise this is weird. But does that stop me? Hah, no!
 
@@ -125,9 +124,9 @@ module.exports = function (eleventyConfig) {
 
 And now, when the main Eleventy build runs, it’ll run this beforehand, creating my `head-script.js` file in the `_includes/assets/js` folder, which I can inject in my `head.njk` component:
 
-```njk{% raw %}
+```njk{{ echo }}
 <script>{% include 'assets/js/head-script.js' %}</script>
-{% endraw %}```
+{{ /echo }}```
 
 The `jsmin` filter now runs once on the same piece of code instead of running on every single page using this layout. It’s a minor optimisation, for sure, but it does make my build time non-trivially faster, so I’ll take it. Given I have 2 scripts and about 80 pages, that’s running it twice instead of 160 times, so technically an improvement of 98.75%, I guess? Someone who is good at maths please help me calculate this. My statistic is dying.
 
@@ -148,7 +147,7 @@ I admit it: my example was simplified. There is a whole JS script making use of 
 ---
 permalink: head-script.js
 ---
-{% raw %}
+{{ echo }}
 {% setAsync "headScript" %}
 (function(){
 	const themeKeys = {{ tokens.themes | objectKeys | dump | safe }};
@@ -156,11 +155,11 @@ permalink: head-script.js
 })()
 {% endsetAsync %}
 {{ headScript | jsmin | safe }}
-{% endraw %}```
+{{ /echo }}```
 
-{% callout %}
+{{ callout }}
 The file is rendered with the HTML engine since that effectively passes it as plaintext, as [noted in the docs](https://www.11ty.dev/docs/languages/), preventing any unnecessary transformations on the file.
-{% endcallout %}
+{{ /callout }}
 
 One caveat is that those files get rendered at the root of the main build due to the `permalink` in the frontmatter, but I’m sure that could be worked around. And that’s it. That’s my hacky solution. But then [on Twitter, I was asked about if I had tried a global data file](https://twitter.11ty.dev/1562480526396919808/)… here’s what I came up with.
 

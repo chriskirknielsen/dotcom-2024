@@ -19,6 +19,6 @@ I had an epiphany while brushing my teeth (as you can tell, I think very interes
 
 Because I am fun at parties, I made a lil’ converter that implements this newfound knowledge of mine (which… you could just calculate between the two inputs of the same unit, but where’s the fun in that?!):
 
-{% codepen "https://codepen.io/chriskirknielsen/pen/PwYBzxN" %}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/PwYBzxN" }}
 
 PS: You should definitely try to convert cold and hot temperatures… **no reason!**

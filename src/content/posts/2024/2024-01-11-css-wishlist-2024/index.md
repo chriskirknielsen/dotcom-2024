@@ -9,9 +9,9 @@ The amount of new features we have gotten in the past few years is staggering. I
 
 But, as someone probably once said: never be `display:contents`. So here’s some content for you to read!
 
-{% callout "Beware!" %}
+{{ callout "Beware!" }}
 Note that pretty much all the code snippets in here are invalid CSS!
-{% endcallout %}
+{{ /callout }}
 
 ## Allow attr(…) with other properties
 

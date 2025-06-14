@@ -27,14 +27,14 @@ First, we create a data file in the `_data` folder and name it `utilities.json`.
 }
 ```
 
-{% callout %}
+{{ callout }}
 You can also create a `.js` file instead, if you need some JavaScript sprinkled on top of it (in my case, with comments) — make sure to use the `module.exports = { ... }` syntax!
-{% endcallout %}
+{{ /callout }}
 
 We can now call this collection of utility classes very easily, we don’t need to remember all the classes it requires, and if we need to update it, all is maintained in a single file that’s easy to find and edit:
 
 ```html
-<a href="https://www.11ty.dev/" class="{% raw %}{{ utilities.buttonLink }}{% endraw %}">Eleventy’s website</a>
+<a href="https://www.11ty.dev/" class="{{ echo }}{{ utilities.buttonLink }}{{ /echo }}">Eleventy’s website</a>
 ```
 
 ## Usage within a shortcode

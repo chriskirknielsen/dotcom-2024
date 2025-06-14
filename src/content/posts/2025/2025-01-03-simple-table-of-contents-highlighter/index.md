@@ -15,9 +15,9 @@ My Table of Contents (TOC) component, if you can even call it a component, appea
 ## The Basic Idea
 This uses the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver), and is powered by JavaScript. By observing every heading in the content (more accurately, all the `<h2>` elements in my case), I could highlight any visible heading in the table of contents. Easy!
 
-{% callout %}
+{{ callout }}
 There’s a future where Scroll-Driven Animations are supported everywhere, which would allow us to do all of this in CSS alone, and not a hint of JavaScript.
-{% endcallout %}
+{{ /callout }}
 
 A first hurdle: if there is a lot of content between two headings, then no headings will intersect in the viewport, and nothing gets highlighted, because I’m only observing headings, not headings and all the content between them.
 
@@ -36,8 +36,8 @@ I used the height of the `<body>` element as the extension value for the interse
 ```js
 new IntersectionObserver(..., { rootMargin: `${document.body.clientHeight}px 0px -33% 0px` });
 ```
-
-{% image './toc-intersection-observer.png' | toRoot, "A representation of the intersection detection on a sample page.", "A crude representation of what is going on.", { ratio: 1920/1200 } %}
+{{ set imageUrl = './toc-intersection-observer.png' |> toRoot }}
+{{ image imageUrl, "A representation of the intersection detection on a sample page.", "A crude representation of what is going on.", { ratio: 1920/1200 } }}
 
 When I noticed highlighting on [Roman Komarov’s blog](https://blog.kizu.dev) (a CSS genius), I got curious and tried to reverse-engineer the feature by inspecting the minified JavaScript to improve my own implementation. I later found out he has an entire [blog post](https://blog.kizu.dev/toc-scroll-markers/) with links to [the source code](https://github.com/kizu/kizu-blog/blob/main/src/components/ScrollMarkers.astro), which I really should have looked for earlier! (the scroll-driven animation code is fascinating, which has [its own write-up](https://kizu.dev/scroll-driven-animations/)) The improvements from here on out directly benefited from Roman’s ideas.
 

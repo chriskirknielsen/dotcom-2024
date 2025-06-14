@@ -12,7 +12,7 @@ Okay, so this is an old trick. I’ve used it a few times over the years, but I 
 
 The idea is that you rotate an element clockwise, move it away from its anchor point, and rotate it counter-clockwise so that its "horizon" is stable. As they say, a stylised animated demo is worth a thousand words:
 
-{% codepen "https://codepen.io/chriskirknielsen/pen/MWpPJYM/" %}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/MWpPJYM/" }}
 
 A perfect orbit that would make any celestial body jealous!
 
@@ -94,9 +94,9 @@ We can create two independent animations for this: `infX` and `infY`.
 
 We are using different easing values to better match the shape of our infinity symbol. Feel free to keep it as `ease-in-out` for both if you prefer!
 
-{% codepen "https://codepen.io/chriskirknielsen/pen/vYxVmVg/" %}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/vYxVmVg/" }}
 
-{% callout %}This will only work in browsers that support declaring `@property`, such as Google Chrome{% endcallout %}
+{{ callout }}This will only work in browsers that support declaring `@property`, such as Google Chrome{{ /callout }}
 
 ## The future
 

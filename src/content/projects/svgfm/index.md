@@ -9,8 +9,9 @@ projectImportance: 1
 projectOrder: 7
 ---
 
-{% gallery %}
-{% image "./ui.jpg" | toRoot, "A view of the SVG Filter Maker app where connected nodes appear at once, forming a SVG preview at the bottom of the UI.", "", { ratio: "1200/658", group: true } %}
-{% endgallery %}
+{{ gallery }}
+{{ set imageUrl = "./ui.jpg" |> toRoot }}
+{{ image imageUrl, "A view of the SVG Filter Maker app where connected nodes appear at once, forming a SVG preview at the bottom of the UI.", "", { ratio: "1200/658", group: true } }}
+{{ /gallery }}
 
 I love SVG so much, but its filters are a little complex to wrap my smooth brain around… so to make it a little easier, I built a tool to dynamically build an SVG filter with a GUI. An SVG Filter Maker, or SVGFM, for short…

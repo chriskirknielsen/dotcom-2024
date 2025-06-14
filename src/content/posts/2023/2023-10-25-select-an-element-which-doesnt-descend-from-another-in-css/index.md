@@ -11,13 +11,13 @@ updated: 2023-11-16
 
 <hr>
 
-{% callout "TL;DR", "", { mode: "block" } %}
+{{ callout "TL;DR", "", { mode: "block" } }}
 **Situation:** we want to select all links that aren’t inside an `.archived` element.
 
 **Don’t do this:** `:not(.archived) a`
 
 **Instead, do:** `a:not(.archived *)`
-{% endcallout %}
+{{ /callout }}
 
 I ran into this issue the other day and was talking with my coworker Joel about this. He reminded me of a neat trick that can come in handy when you’re working with some HTML you don’t control (in our case, a library that loves wrappin’ in `<div>`s!). Since I am likely to forget, I am blogging for myself, and maybe you’ll get something out of it too, dear reader!
 
@@ -49,7 +49,8 @@ With that little tweak, we can now safely use our CSS selector to find links out
 
 Note that if you’re in control of the markup, this is pretty unlikely to be all that useful, but if you’re imposed a library that just hands out `<div>`s like candy on Halloween, then it might be useful! In my case, we were looking for interactive elements in automated browser tests that were not inside a disabled component, but those could wildly vary in terms of markup. So `button:not([aria-disabled=true] *)` resolved it.
 
-{% image "./is-this-scope.jpg" | toRoot, "A variation of the meme where an anime character looks at a butterfly and says 'Is this a pigeon?'. This one is captioned 'Is this at-scope?' with the text ':not()' superimposed on the butterfly.", null, { ratio: 1200/630 } %}
+{{ set imageUrl = "./is-this-scope.jpg" |> toRoot }}
+{{ image imageUrl, "A variation of the meme where an anime character looks at a butterfly and says 'Is this a pigeon?'. This one is captioned 'Is this at-scope?' with the text ':not()' superimposed on the butterfly.", null, { ratio: 1200/630 } }}
 
 It kind of looks like "doughnut/donut scoping" when I think about it. If we wanted to do something like this in a card component but not for links inside of the card content, we might do:
 
@@ -71,7 +72,7 @@ Both of these will technically "scope" the selector, however `@scope` has a few 
 
 **Minor update:** I realise Lea Verou thought of this years ago already… because of course Lea did!
 
-{% remotequote "@LeaVerou", "https://twitter.com/LeaVerou/status/1354760561087676416", "2021-01-28T11:57:42.000Z" %}
+{{ remotequote "@LeaVerou", "https://twitter.com/LeaVerou/status/1354760561087676416", "2021-01-28T11:57:42.000Z" }}
 TIL that all modern browsers now support complex selectors in :not()! 😍
 
 Test: [https://dabblet.com/gist/e7769cbe23d3670665e97a03fe0622d3](https://dabblet.com/gist/e7769cbe23d3670665e97a03fe0622d3)
@@ -79,4 +80,4 @@ Test: [https://dabblet.com/gist/e7769cbe23d3670665e97a03fe0622d3](https://dabble
 So you can do things like:
 - .foo :not(.foo .foo *) to match things inside one .foo wrapper but not two 
 - .container :not(.content *) to get simple (shallow) “donut scope”
-{% endremotequote %}
+{{ /remotequote }}

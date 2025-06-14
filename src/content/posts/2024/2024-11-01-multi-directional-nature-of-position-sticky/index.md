@@ -11,6 +11,6 @@ I was working on a product page where the "Add to Cart" button should appear fix
 
 So you can set `top` and `bottom`, or if there’s horizontal scroll, `left` and `right`. And, well, you guessed it, you can set all four, too (or use `inset` to set them all at once!):
 
-{% codepen "https://codepen.io/chriskirknielsen/pen/YzmvNbd" %}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/YzmvNbd" }}
 
 I knew you could set one for each axis (`top` and `left` for example), but never tried both sides of the same axis. Cool stuff!

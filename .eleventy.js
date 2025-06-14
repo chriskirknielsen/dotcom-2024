@@ -307,8 +307,8 @@ export default async function (eleventyConfig) {
 	return {
 		pathPrefix: '/',
 		templateFormats: ['md', 'vto', 'njk', '11ty.js'],
-		markdownTemplateEngine: 'njk',
-		htmlTemplateEngine: 'njk',
+		markdownTemplateEngine: 'vto',
+		htmlTemplateEngine: 'vto',
 		passthroughFileCopy: true,
 		dir: {
 			input: rootDir,

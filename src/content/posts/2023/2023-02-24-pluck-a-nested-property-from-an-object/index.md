@@ -80,9 +80,9 @@ const object = {
 const japanese = pluckObject(object, 'ja'); // { one: 'ichi', two: 'ni', three: 'san' }
 ```
 
-{% callout "Chaos" %}
+{{ callout "Chaos" }}
 In the `map`, you could do `.map((item) => { item[1] = item[1][prop]; return item; })` but that’s less readable to me and maybe a bit destructive (I assume it might mutate the original object in some cases).
-{% endcallout %}
+{{ /callout }}
 
 ## Plucking well done
 
@@ -104,8 +104,8 @@ function pluck(list, prop) {
 }
 ```
 
-{% callout %}
+{{ callout }}
 I love early returns, such a good pattern.
-{% endcallout %}
+{{ /callout }}
 
 Let me know if you have other methods, even if it’s "clever code" that’s absolutely garbage to decypher, I’m just curious about alternative approaches to this.

@@ -51,9 +51,9 @@ What would you say about getting the best of both worlds? We can reuse our code 
 }
 ```
 
-{% callout %}
+{{ callout }}
 `clamp()` won’t allow `MIN > MAX`, so we add a couple of `if()` inside the clamp function to flip the values if the small breakpoint font size is larger than its large breakpoint counterpart. Also, you don’t need to wrap the middle expression in `calc()`, as `clamp()` will evaluate its contents just the same!
-{% endcallout %}
+{{ /callout }}
 
 Here’s an example using this mixin, and its result:
 

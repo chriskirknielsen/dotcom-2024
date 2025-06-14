@@ -42,13 +42,13 @@ Another cool thing about the plugin is that you can run a custom transformer on 
 
 If you do not cache your minification, this next part is irrelevant, but if you do, there’s a gotcha! If your homepage requires, say `global.js` and your blog page requires `global.js` *and* `blog.js`, then you cannot include them both in the same bucket. Because I cache the results as a compound key based on the bucket type and name (e.g. `js_foot`), whichever page is processed first would cache the result for what that page calls, and you’d either see the `blog.js` code on the homepage, or not see it on the blog page. The solution is pretty simple: multiple buckets! I still drop them all in the same place and it works just fine. A little less elegant, I will grant you, but the benefits are worth it:
 
-```html
-{% raw %}<script>
+```html{{ echo }}
+<script>
 	{% getBundle "js", "foot" %}
 	{% getBundle "js", "foot-codewrap" %}
 	{% getBundle "js", "foot-about" %}
-</script>{% endraw %}
-```
+</script>
+{{ /echo }}```
 
 ## Themes
 
@@ -132,11 +132,11 @@ eleventyConfig.addFilter('sizeFactor', function (string) {
 
 I wanted to wrap my code blocks in a custom element instead of some hardcoded mess, so this made me update my plugin to allow this. That way I could use some JS to add the button and all the event handling instead of some weird half-baked stuff that is modified during a post-build Eleventy transform (which works, but is expensive to run on every page!). I can then be a little smart about it and in my main template, add this bit of code to detect a code-wrap closing tag, and if so, I inject the code for the custom element:
 
-```njk
-{% raw %}{% if ("</code-wrap>" in content) %}
+```njk{{ echo }}
+{% if ("</code-wrap>" in content) %}
 	{% js 'foot-codewrap' %}{%- include "assets/js/components/code-wrap.js" -%}{% endjs %}
-{% endif %}{% endraw %}
-```
+{% endif %}
+{{ /echo }}```
 
 ### Smarter SVGs
 
@@ -163,7 +163,7 @@ I also noticed some issue with the homepage wordmark (or my "large" logo, if you
 
 And something comical: the "welcome" text around my name on the homepage? It’s got responsive sizing, but Safari is doing something funky, so every time I refresh the page, the font size grows. Not present in Technology Preview but this one’s weird. And funny!
 
-{% video "./safari-font-size-refresh.mp4", "This website’s homepage being refreshed many times, and each time a piece of text grows bigger until it takes up the entire screen.", "", { width: 1279, height: 782, loop: false, poster: "./safari-font-size-refresh.jpg" } %}
+{{ video "./safari-font-size-refresh.mp4", "This website’s homepage being refreshed many times, and each time a piece of text grows bigger until it takes up the entire screen.", "", { width: 1279, height: 782, loop: false, poster: "./safari-font-size-refresh.jpg" } }}
 
 ### Firefox
 

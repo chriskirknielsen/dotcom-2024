@@ -3,7 +3,8 @@ title: Taking VentoJS for a spin in Eleventy
 summary: "There’s a new kid on the templating block."
 tags: [javascript, eleventy, vento]
 toc: true
-templateEngineOverride: md
+templateEngineOverride: md # Ensure the Vento/Nunjucks isn't processed
+layout: 'post.vto'
 time: 03:51:00
 updated: 2025-04-28
 ---

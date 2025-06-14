@@ -102,4 +102,4 @@ And those are all the bullet points to sum up my media diet and a little bit of 
 
 That’s all I got… happy new year to y'all!
 
-{% if not metadata.nakedCss %}<style>main li { text-wrap: pretty; }</style>{% endif %}
+{{ if !metadata.nakedCss }}<style>main li { text-wrap: pretty; }</style>{{ /if }}

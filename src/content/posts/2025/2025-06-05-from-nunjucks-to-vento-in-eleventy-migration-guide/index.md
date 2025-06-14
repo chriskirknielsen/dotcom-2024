@@ -13,9 +13,9 @@ changelog: {
 
 I already wrote a little about [refactoring a blog of mine with Vento](/blog/taking-vento-js-for-a-spin-in-eleventy) recently ([check out Helen’s post](https://helenchong.dev/blog/posts/2025-05-21-vento-in-eleventy/), too!), but it was a rather simple codebase, making it relatively easy to work with. This website (or [chriskirknielsen.com](https://chriskirknielsen.com) if you’re reading this via the RSS feed!), while not a web-behemoth, has its fair share of complexity, so I wanted to see if a full refactor was feasible. Thus, over the past few weeks, I‘ve been working on a separate branch, converting Nunjucks to Vento, page by page, and template by template. There were some pain points which I’ll cover, along some solutions to help you make the switch if you fancy it. I’m sure you can to apply most of this stuff to a Liquid codebase, by the way. I believe in you!
 
-{% callout "Disclaimer" %}
+{{ callout "Disclaimer" }}
 I am by no means a Vento expert, but I’m fairly competent with JavaScript, which can be handy. If you run into issues, I’d recommend posting in the [11ty Discord](https://www.11ty.dev/blog/discord/) (I know, I know… walled gardens and all that, but right now it’s the best we got) where I would be glad to help!
-{% endcallout %}
+{{ /callout }}
 
 At the time of writing, I am using `@11ty/eleventy` v3.1.1, with `eleventy-plugin-vento` v4.4.2 using `ventojs` on version 1.13.2. (updated on the 7th of June)
 
@@ -38,7 +38,7 @@ export default async function (eleventyConfig) {
 }
 ```
 
-{% callout %}Because plugin order can affect which features are available to other plugins, it is recommended to load the Vento plugin as late as possible.{% endcallout %}
+{{ callout }}Because plugin order can affect which features are available to other plugins, it is recommended to load the Vento plugin as late as possible.{{ /callout }}
 
 You may want to review any mentions of `njk` in you config, to see if you need to add on, or replace with, `vto`. In my case, `templateLanguages` in the `return` object is an array to which I added `vto`.
 
@@ -59,27 +59,27 @@ Any of the find-and-replace operations below can be applied to the entire projec
 ### Update all the opening and closing tags
 
 The first thing to find and replace is going to be every single Nunjucks tag you are using.
-{% raw %}
+{{ echo }}
 **Find:** `{%`
 **Replace:** `{{`
-{% endraw %}
+{{ /echo }}
 
 And then, as you can expect, the closing tags:
-{% raw %}
+{{ echo }}
 **Find:** `%}`
 **Replace:** `}}`
-{% endraw %}
+{{ /echo }}
 
-If you use `autotrim: true` in the Vento plugin option (the default is `false`), you can now do an extra pass to remove all the trimming dashes: {% raw %}`{{-` becomes `{{` and `-}}` becomes `}}`{% endraw %}. If you do not want auto-trimming, like me, then we will handle special cases below.
+If you use `autotrim: true` in the Vento plugin option (the default is `false`), you can now do an extra pass to remove all the trimming dashes: {{ echo }}`{{-` becomes `{{` and `-}}` becomes `}}`{{ /echo }}. If you do not want auto-trimming, like me, then we will handle special cases below.
 
-We still need to adjust the `end` tags, since Vento uses a “closing slash” (e.g. `endif` becomes `/if`). However, you may have, like me, whitespace-stripping dashes, such as {% raw %}`{%- endif %}`{% endraw %}, and a plain find and replace on {% raw %}`{{ end`{% endraw %} (after our first tag replacement operations) won’t do, so we can either do the replace in sequence ({% raw %}`{{ end` to `{{ /`, then `{{- end` to `{{- /`{% endraw %}), or use a regular expression (yes I know: what is wrong with me?!). Whichever method you choose is definitely a must: in some cases, an incorrectly closed tag doesn’t throw an error and you’ll be left scratching your head.
+We still need to adjust the `end` tags, since Vento uses a “closing slash” (e.g. `endif` becomes `/if`). However, you may have, like me, whitespace-stripping dashes, such as {{ echo }}`{%- endif %}`{{ /echo }}, and a plain find and replace on {{ echo }}`{{ end`{{ /echo }} (after our first tag replacement operations) won’t do, so we can either do the replace in sequence ({{ echo }}`{{ end` to `{{ /`, then `{{- end` to `{{- /`{{ /echo }}), or use a regular expression (yes I know: what is wrong with me?!). Whichever method you choose is definitely a must: in some cases, an incorrectly closed tag doesn’t throw an error and you’ll be left scratching your head.
 
 **Find (RegExp):** `\{\{(-? ?)end`: this will find the partially converted end tags, optionally with a dash and optionally with a space, and capture that in group #1
-**Replace:** {% raw %}`{{$1/`{% endraw %} : this will replace our `end` with a slash, and the optional dash and/or space before it, thanks to capture group #1 (`$1`)
+**Replace:** {{ echo }}`{{$1/`{{ /echo }} : this will replace our `end` with a slash, and the optional dash and/or space before it, thanks to capture group #1 (`$1`)
 
 Okay, now, one last replace… comments! Nunjucks has simple curly braces, whereas Vento uses two. Respectively, replace them to ensure your comments don’t show up as plain text.
-**Find:** {% raw %}`{#` and `#}`{% endraw %}
-**Replace:** {% raw %}`{{#` and `#}}`{% endraw %}
+**Find:** {{ echo }}`{#` and `#}`{{ /echo }}
+**Replace:** {{ echo }}`{{#` and `#}}`{{ /echo }}
 
 At this point, it’s good to take a minute to review a converted page and see if all these replacements worked as expected. Our code will likely remain be broken due to other syntax changes, but we’ll get there!
 
@@ -98,7 +98,7 @@ While the first three are pretty self-explanatory, the `in` keyword is used for 
 
 There is some overlap between Nunjucks and Vento’s blocks (or [tags](https://mozilla.github.io/nunjucks/templating.html#tags)), such as `set`, `for`, and `include`. The nice thing is that Vento remains async-friendly either way, so we do not need `setAsync` (which I think is not standard but provided by Eleventy?) or `asyncEach`. Replacing these is easy enough, but we _do_ need to ensure that any asynchronous value is also `await`ed, so that does require checking things… though you‘ll quickly notice if your content outputs `[object Promise]`!
 
-{% raw %}
+{{ echo }}
 ```vto
 {{ set icon = 'arrow-right' |> await getIconSvg }}
 
@@ -106,11 +106,11 @@ There is some overlap between Nunjucks and Vento’s blocks (or [tags](https://m
   {{ item }}
 {{ /for }}
 ```
-{% endraw %}
+{{ /echo }}
 
 #### From extends to layout
 With Eleventy, you can declare `layout: page.njk` in your frontmatter, and it basically will chain from your content all the way up to the top-level layout (for example, `post.njk` calls `page.njk` which calls `base.njk`). You can keep doing this with Vento, but for some cases, `extends` was a better fit, in order to pass named `block` content to the parent layout. We can still do this, but blocks aren’t their own thing in Vento. Let’s take a look at Nunjucks first:
-{% raw %}
+{{ echo }}
 ```njk:post.njk
 {% extends 'layout/page.njk' %}
 
@@ -131,10 +131,10 @@ With Eleventy, you can declare `layout: page.njk` in your frontmatter, and it ba
 {% endblock %}
 </aside>
 ```
-{% endraw %}
+{{ /echo }}
 
 To do this with Vento, we need to pass in our blocks explicitly:
-{% raw %}
+{{ echo }}
 ```vto:post.vto
 {{ set aside }}
 	<p>Some content unrelated to this post.</p>
@@ -157,15 +157,15 @@ To do this with Vento, we need to pass in our blocks explicitly:
 	</aside>
 {{ /layout }}
 ```
-{% endraw %}
+{{ /echo }}
 
-As you can see, our `block` capture becomes a standard `set`, which is then given to the `layout` block as additional data (we don’t need to repeat the key in the object because JavaScript is fine with that, but it’s the same as writing `{ aside: aside }`). We can pass in as many blocks as needed, but we also need to if/else every block that needs default content. A small price to pay, though you could use something like {% raw %}`{{ aside || 'Some content' }}`{% endraw %} if you wanted, but I would recommend reserving that for small bits of text, not a chunky block of HTML, in order to keep everything readable.
+As you can see, our `block` capture becomes a standard `set`, which is then given to the `layout` block as additional data (we don’t need to repeat the key in the object because JavaScript is fine with that, but it’s the same as writing `{ aside: aside }`). We can pass in as many blocks as needed, but we also need to if/else every block that needs default content. A small price to pay, though you could use something like {{ echo }}`{{ aside || 'Some content' }}`{{ /echo }} if you wanted, but I would recommend reserving that for small bits of text, not a chunky block of HTML, in order to keep everything readable.
 
-We’re also able to use {% raw %}`{{ include 'path/to/file.vto' { someData } }}`{% endraw %} should we need to include a file with some provided data — something I’ve wished from Nunjucks more than once!
+We’re also able to use {{ echo }}`{{ include 'path/to/file.vto' { someData } }}`{{ /echo }} should we need to include a file with some provided data — something I’ve wished from Nunjucks more than once!
 
 #### From macro to function
 Another big deal of a block is `macro` — this is basically a function, which can almost be replaced one-to-one, except that Vento supports asynchronous data (with the `async` keyword), unlike macros. However, we lose access to Nunjucks’s convenient `caller` feature, which allows you to run the macro "around" a block of content, so in Vento it needs to be captured, then fed into the function. You win some, you lose some… Here’s a quick refactored example:
-{% raw %}
+{{ echo }}
 ```njk
 {% macro myFigCaptionator(caption = '') %}
 <figure class="media">
@@ -178,9 +178,9 @@ Another big deal of a block is `macro` — this is basically a function, which c
 	<img src="cat.jpg" alt="A kitten with large and curious blue eyes" width="400" height="300">
 {% endcall %}
 ```
-{% endraw %}
+{{ /echo }}
 
-{% raw %}
+{{ echo }}
 ```vto
 {{ function myFigCaptionator(content, caption = '') }}
 <figure class="media">
@@ -194,11 +194,11 @@ Another big deal of a block is `macro` — this is basically a function, which c
 {{ /set }}
 {{ myFigCaptionator(figContent, "Meow") }}
 ```
-{% endraw %}
+{{ /echo }}
 
 We can export and import these functions across our templates, too! Here is an example from my own website:
 
-{% raw %}
+{{ echo }}
 ```vto:layouts/font-specimen.vto
 {{ export async function fontPreviewer(contents, previewOptions = '', defaultText = 'Type Anything', warningMessages = '') }}
 	{{# Bunch of code ... #}}
@@ -212,7 +212,7 @@ Be sure to close your exports with `/export`! I stayed stuck on `/function` for 
 {{# A little further down ... #}}
 {{ await fontPreviewer(previewContents, previewOptions, fontSpecimenSampleDefault) }}
 ```
-{% endraw %}
+{{ /echo }}
 
 ### Ce filtre n’est pas une pipe
 
@@ -229,7 +229,7 @@ With that, we’re starting to get closer to having something that *could* run. 
 
 While Nunjucks has a pseudo-ternary syntax, Vento implements JavaScript’s, so we will need to modify any of those.
 
-{% raw %}
+{{ echo }}
 ```njk
 {{ "true" if foo else "false" }}
 ```
@@ -237,9 +237,9 @@ While Nunjucks has a pseudo-ternary syntax, Vento implements JavaScript’s, so 
 ```vto
 {{ foo ? "true" : "false" }}
 ```
-{% endraw %}
+{{ /echo }}
 
-Note that unlike Nunjucks, the ternary _requires_ an `else` path. If you absolutely want to skip it, a standard {% raw %}`{{ if }}`{% endraw %} block will be needed.
+Note that unlike Nunjucks, the ternary _requires_ an `else` path. If you absolutely want to skip it, a standard {{ echo }}`{{ if }}`{{ /echo }} block will be needed.
 
 ### They’re only chasing safety
 
@@ -248,17 +248,17 @@ Nunjucks escapes everything by default. If you’re building your Eleventy site,
 **Find:** <code> | safe</code> (note the initial space before the pipe)
 **Replace:** (empty string)
 
-If you have third-party code you *don’t* trust, you can use the `escape` filter on that code like so: {% raw %}`{{ someUnsafeValue |> escape }}`{% endraw %}. Isn’t it nice not having to unescape everything?
+If you have third-party code you *don’t* trust, you can use the `escape` filter on that code like so: {{ echo }}`{{ someUnsafeValue |> escape }}`{{ /echo }}. Isn’t it nice not having to unescape everything?
 
 ### The meta side of things
 
 If you happen to run a blog with articles about code, you may have posts with a block of Nunjucks code that should *not* be converted. In this case, you’ll need to use Vento’s `echo` tag instead to render your Nunjucks code blocks verbatim (since there is some overlap, it can cause issues, even for Nunjucks code in a Vento template):
-{% raw %}
+{{ echo }}
 **Find:** <code>{&percnt; raw &percnt;}</code> and <code>{&percnt; endraw &percnt;}</code>
-**Replace:** `{{ echo }}` and `{{ /echo }}`
-{% endraw %}
+**Replace:** <code>&#123;&#123; echo &#125;&#125;</code> and <code>&#123;&#123; /echo &#125;&#125;</code>
+{{ /echo }}
 
-One last thing to mention that I’ve never used in Nunjucks (and honestly didn’t know existed): `filter`. You can pipe filters to blocks in Vento so anything that may have looked like {% raw %}`{% filter trim %}  Hello world  {% endfilter %}`{% endraw %} you can replicate with {% raw %}`{{ echo |> trim }}  Hello world  {{ /echo }}`{% endraw %}.
+One last thing to mention that I’ve never used in Nunjucks (and honestly didn’t know existed): `filter`. You can pipe filters to blocks in Vento so anything that may have looked like {{ echo }}`{% filter trim %}  Hello world  {% endfilter %}`{{ /echo }} you can replicate with <code>&#123;&#123; echo &#124;&gt; trim &#125;&#125;  Hello world  &#123;&#123; /echo &#125;&#125;</code>.
 
 At this point, you might be able to run your code, and you’ll start seeing what errors are left over. This next section will try to cover what I imagine are the common issues.
 
@@ -326,7 +326,7 @@ eleventyConfig.addFilter('sortBy', (array, reverse = false, caseSens = false, pr
 
 For other specific stuff like `striptags`, I copied and pasted directly from the Nunjucks package: it’s about 15 lines of code, way easier than using a new dedicated package (as excellent as one of those may be), and at least I can rest assured that whatever was working before will keep working exactly the same way. And yes, I also camelCased it!
 
-{% callout "A word of warning", "⚠️" %}Fundamentally, Vento executes JavaScript. This means that we can use `Object.keys` as a filter, but that also means that we need to be more careful with how we name our filters in Eleventy to avoid naming collisions.{% endcallout %}
+{{ callout "A word of warning", "⚠️" }}Fundamentally, Vento executes JavaScript. This means that we can use `Object.keys` as a filter, but that also means that we need to be more careful with how we name our filters in Eleventy to avoid naming collisions.{{ /callout }}
 
 I *believe* that filters that don’t exist have a passthrough behaviour to avoid failing, meaning you don’t get an error or warning about it, but your value doesn’t get transformed (or is spat out as undefined?), so: beware!
 
@@ -335,17 +335,17 @@ I *believe* that filters that don’t exist have a passthrough behaviour to avoi
 Iteration is one of the bigger thorns I’ve run into with my refactor.
 
 Nunjucks has a very handy `range(a, b)` helper to create specifically-indexed loops from `a` to `b`. We can easily work around this, as Vento offers a shortcut: `for i of b` where `b` is the number of iterations, but it starts the index at 1, which is not always desired. To start at 0, what we can do is:
-{% raw %}
+{{ echo }}
 ```vto
 {{ for i1 of 42 }}
 	{{ set i = i1 - 1 }}
 	...
 {{ /for }}
 ```
-{% endraw %}
+{{ /echo }}
 
-Another sweet Nunjucks feature is the auto-magic `loop` variable, which includes, among others, the current index (both provided as 0- and 1-indexed), the total length, and whether a loop is at the first or last iteration. Given loops can operate over arrays or objects, it’s not as convenient to figure out what the length of the loop is to determine the equivalent of `loop.last`, but we can accomplish it like so (note the {% raw %}`{{> ... }}`{% endraw %} syntax is to [execute pure JS code](https://vento.js.org/syntax/javascript/), which I prefer because of the `loopIndex++` within the loop itself, which is concise):
-{% raw %}
+Another sweet Nunjucks feature is the auto-magic `loop` variable, which includes, among others, the current index (both provided as 0- and 1-indexed), the total length, and whether a loop is at the first or last iteration. Given loops can operate over arrays or objects, it’s not as convenient to figure out what the length of the loop is to determine the equivalent of `loop.last`, but we can accomplish it like so (note the {{ echo }}`{{> ... }}`{{ /echo }} syntax is to [execute pure JS code](https://vento.js.org/syntax/javascript/), which I prefer because of the `loopIndex++` within the loop itself, which is concise):
+{{ echo }}
 ```vto
 {{> let loopIndex = 0 }}
 {{> let loopLength = Array.isArray(list) ? list.length : Object.keys(list).length) }}
@@ -356,20 +356,20 @@ Another sweet Nunjucks feature is the auto-magic `loop` variable, which includes
 	{{# Iteration logic #}}
 {{ /for }}
 ```
-{% endraw %}
+{{ /echo }}
 
 Okay… now we’re done fixing our loops, right? Well, almost. I ran into a peculiar issue I should report as a bug, but basically the sort order was seemingly reset for objects being iterated (maybe the objects are recreated instead of referenced or copied verbatim?), when that object was manipulated somewhere else (like a filter). So, instead of sorting the object directly, I opted to extract the keys into a plain array, sort those, and loop over them; the value is grabbed inside the loop instead. Less squeaky clean, but unless I‘m doing something wrong, the sort order from the object appears to reset every time. The original Nunjucks loop:
 
-{% raw %}
+{{ echo }}
 ```njk
 {% for year, posts of postList | groupby('date.year', 'desc') %}
 	{# More stuff ... #}
 {% endfor %}
 ```
-{% endraw %}
+{{ /echo }}
 
 … became:
-{% raw %}
+{{ echo }}
 ```vto
 {{ set postsByYear =  postList |> groupBy('date.year') }}
 {{ for year of postsByYear |> Object.keys |> sort |> reverse }}
@@ -377,27 +377,27 @@ Okay… now we’re done fixing our loops, right? Well, almost. I ran into a pec
 	{{# More stuff ... #}}
 {{ /for }}
 ```
-{% endraw %}
+{{ /echo }}
 
 ### Data override side-effects
 
 Now that I’m done rambling about loops, here’s a gotcha that perplexed me for a while! It seems that if you have a value passed to a template file, let’s say some global data `{ foo: false, bar: 'abc' }`, then the following block:
 
-{% raw %}
+{{ echo }}
 ```vto
  {{ if foo }}{{ set bar = 'xyz' }}{{ /if }}
 ```
-{% endraw %}
+{{ /echo }}
 
 … will reset `bar` to `undefined` if `foo` is `false`. To give you a better example, from my CTA component (button and button-looking links), I was re-assigning the `url` variable if a `path` property was passed. So if there’s a `path` value but no `url`, set `url` to `path` — easy! However, when there already was a `url` value, it turned into `undefined` after this bit of logic!
 
-{% raw %}
+{{ echo }}
 ```vto
 {{> console.log('before', {url, path}) }}
 {{ if !url && path }}{{ set url = path }}{{ /if }}
 {{> console.log('after', {url, path}) }}
 ```
-{% endraw %}
+{{ /echo }}
 
 This logs, for a truthy `url` and falsy `path`:
 
@@ -407,11 +407,11 @@ after { url: undefined, path: undefined }
 ```
 
 Not exactly what I was after! So if you run into this, you can create a new variable (you have to, even without an `if` block) to avoid re-assigning the existing variable. For this example, that’d be a brand new `href` variable:
-{% raw %}
+{{ echo }}
 ```vto
 {{ set href = url || path || false }}
 ```
-{% endraw %}
+{{ /echo }}
 
 If you also used `foo = foo or bar` here and there in Nunjucks… find the potential cases in your codebase with a handy named group RegExp: `\{\{ set (?<var>[a-zA-Z0-9_]+) = (\k<var>) or`. For the if-wrapped scenario, though, that all depends on the context of the file, so no RegExp can help us…
 
@@ -420,7 +420,7 @@ I have reported [this bug on the Vento repository](https://github.com/ventojs/ve
 ### Interjected filter rejection
 
 I haven’t looked too much into it, but you cannot inject filters mid-way into an expression in every scenario, like on a property value in a basic object. So this doesn’t work:
-{% raw %}
+{{ echo }}
 ```vto
 {{ set trophiesByLevel = {
     bronze: trophies |> pluck('bronze') |> sum,
@@ -429,11 +429,11 @@ I haven’t looked too much into it, but you cannot inject filters mid-way into 
     platinum: trophies |> pluck('platinum') |> sum
 } }}
 ```
-{% endraw %}
+{{ /echo }}
 
 That throws an error: `Invalid filter: sum`. But this works:
 
-{% raw %}
+{{ echo }}
 ```vto
 {{ component 'hero', {
     ext: 'vto',
@@ -443,7 +443,7 @@ That throws an error: `Invalid filter: sum`. But this works:
     pageContext: page
 } }}
 ```
-{% endraw %}
+{{ /echo }}
 
 Maybe it’s because one is a set operation and the other is a shortcode… either way, we need to keep track of this, which caused me to create a few extra variables to declare the value separately, but it’s not the end of the world. Plus, you can write native JS, so it’s not difficult to work around, but it can still be a little confusing so I figured it’d be good to call it out given Nunjucks will happily apply filters anywhere.
 
@@ -479,7 +479,7 @@ eleventyConfig.addAsyncShortcode('renderTemplateGlobal', async function (filenam
 
 I hope this is helpful to get your migrated over to Vento, or to help you see that it’s not a huge leap from using Nunjucks. If you feel like any of this is confusing (incoherent rambling is kinda my thing), or if I missed some crucial point since we all use Eleventy and/or Nunjucks a little differently, please let me know — I’d be happy to expand this “guide” to cover more cases as needed.
 
-For transparency, I’ve kept all my posts in Markdown files with Nunjucks templating for now. I only really use <code>{&percnt; raw &percnt;}</code> to prevent Nunjucks in my code blocks from being rendered, as well as my custom shortcodes {% raw %}`{% callout %}` and `{% codepen %}`{% endraw %}. It should be a pretty quick update with replacing `raw` with `echo`, but I ran out of weekend/steam/willpower/excuses (pick one).
+For transparency, I’ve kept all my posts in Markdown files with Nunjucks templating for now. I only really use <code>{&percnt; raw &percnt;}</code> to prevent Nunjucks in my code blocks from being rendered, as well as my custom shortcodes {{ echo }}`{% callout %}` and `{% codepen %}`{{ /echo }}. It should be a pretty quick update with replacing `raw` with `echo`, but I ran out of weekend/steam/willpower/excuses (pick one).
 
 Also, I quickly hacked together Vento syntax highlighting via Prism for this article, it isn‘t perfect but I do hope it makes the reading experience a little better than a monochrome block of text. And I do hope you enjoyed all these “fun” section heading titles as much as I did making them!
 

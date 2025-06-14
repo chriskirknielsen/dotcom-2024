@@ -13,7 +13,7 @@ If you want all elements to take up the same height but don’t need a slider , 
 
 I did not want any JS to handle which slide was visible — I wanted a pure CSS solution with a classic scrollbar (scroll-snapping makes it look good). Well, good news for us: transforms introduce scrolling. In my case, I could very easily apply a vertical translate of 100% multiplied by the slide index: `transform: translateY(calc(var(--i) * 100%))`. Since they are all the same height, the next one begins where the previous one ends — just what I needed.
 
-{% codepen "https://codepen.io/chriskirknielsen/pen/zxOowyy" %}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/zxOowyy" }}
 
 A couple of caveats: the slide index needs to be provided one way or another. I went with an inline `style` attribute providing a `--i` custom property, but you could use a list of `:nth-child(1) { --i: 0; }` and so on and so forth (until we get `sibling-index()` that is) if you wanted to handle it in CSS only.
 

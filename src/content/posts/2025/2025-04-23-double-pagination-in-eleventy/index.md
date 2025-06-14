@@ -10,15 +10,15 @@ So I recently converted [a French blog of mine](https://geekometric.com) to Elev
 
 Anyways, sorry for the long intro. The point is: use Eleventy long enough and you’ll end up needing double-pagination. You can find many articles on the topic, as this blog post is far from the only one (heck, I wouldn’t be surprised if there was one which does _exactly_ what I’m about to describe). There are several ways to achieve this, and I’ll cover two techniques in this article. For a little clarity, what I refer to as "top level loop" is the metadata needing to be split up (e.g. a list of tags), and the second level loop corresponds to the pages numbers of the top level (for example: a top level loop for the “eleventy” tag, and a second-level loop for its pages 1 through 11).
 
-{% callout %}
+{{ callout }}
 My rebuild uses [VentoJS](https://vento.js.org/) as the templating language. I have converted it to the more popular Nunjucks syntax, but please forgive me if I’ve missed anything (and let me know!). Also! Please consider all this code as wrapped inside a `export default async function (eleventyConfig) { ... }` block. (yay for ESM!)
-{% endcallout %}
+{{ /callout }}
 
 ## Using a hardcoded list
 
 This is the “easy” one but not-so-dynamic one. It requires us to know what we’re looping through ahead of time. In my converted blog, that was mapped to categories: a list which is separate from tags, set in the front-matter (usually a category is a media type like “gaming”, and the tags will be something like “RPG” or “puzzle”). If you’re like me and only blog every two or three months about similar topics, those categories are nearly static. Because of that, we don’t need to seek them out at build time: we can prepare the list beforehand, and loop over it during the build itself. Then, we can use [Eleventy’s virtual templates](https://www.11ty.dev/docs/virtual-templates/) to create the top level loop page which will receive the pagination. Here’s how that looks:
 
-```js:.eleventy.js{% raw %}
+```js:.eleventy.js{{ echo }}
 const PAGE_SIZE = 5; // N posts per page
 // Hardcoded list of categories to paginate
 const categoriesMap = {
@@ -56,7 +56,7 @@ Object.keys(categoriesMap).forEach((cat) => {
 					return paginationData;
 				},
 			},
-			permalink: `/categories/${cat}/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber + 1 }}/{{ endif }}index.html`,
+			permalink: `/categories/${cat}/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber + 1 }}/{% endif %}index.html`,
 			eleventyExcludeFromCollections: true,
 			eleventyComputed: {
 				title: (data) => `Category: ${catLabel}` + (data.pagination.pageNumber > 0 ? `, page ${data.pagination.pageNumber + 1}` : ''),
@@ -66,7 +66,7 @@ Object.keys(categoriesMap).forEach((cat) => {
 });
 
 return { ... };
-{% endraw %}
+{{ /echo }}
 ```
 
 One thing of note: I am not using `eleventyComputed` for the permalinks as it seems to throw things off for the results of `pagination.href` (~~I may need to file an issue, yes~~ EDIT: Harris on the 11ty Discord mentioned the same problem, [filed an issue](https://github.com/11ty/eleventy/issues/3818), and it has been fixed!), so I am mixing in a template string to inject the category slug, but leaving the rest up to the “runtime” template parser!
@@ -98,7 +98,7 @@ Cool, now we need to do two more things for all these chunks by looping over the
 
 The Eleventy pagination object is relatively simple but detailed, so here we’ll add all we need: current page number, whether there’s a previous or next page, a bunch of relative permalinks (first page, previous page, etc.), and the full list of page links and chunks. I have written the word “chunk” too many times, semantic satiation is kicking in…
 
-```js:.eleventy.js{% raw %}
+```js:.eleventy.js{{ echo }}
 const alias = 'pageItems'; // Data property which will contain the posts of the current sub-pages
 
 eleventyConfig.addCollection('_tags', (collectionApi) => {
@@ -148,12 +148,12 @@ eleventyConfig.addCollection('_tags', (collectionApi) => {
 		.flat(); // Flatten the array of pages
 	return allPostsPerTag; // Single flat array of all pages for all tags, fully iterable!
 });
-{% endraw %}
+{{ /echo }}
 ```
 
 We now have an array (top level) which contains arrays of these sub-pages, but we want to iterate over them as a collection… so, just like before `#Array.flat()` will handle that for us. Because this is built *from* existing data, we don’t need to worry about empty chunks: that should be impossible. And so… finally! A nested but also technically flat collection! With the assumption that we have two files (`postsList.njk` which displays the provided posts, and `paginator.njk` which displays the list of pages) to consume this data to render our HTML, let’s throw that into our template and see what happens.
 
-```js:.eleventy.js{% raw %}
+```js:.eleventy.js{{ echo }}
 // While I am using a virtual template, you can do the exact same in a regular file
 eleventyConfig.addTemplate(
 	`content/tags.njk`,
@@ -178,7 +178,7 @@ eleventyConfig.addTemplate(
 		},
 	}
 );
-{% endraw %}
+{{ /echo }}
 ```
 
 Well that is neat! A handful of code, to be sure, but still… it works! I will however raise a potential concern: this may not be the fastest way to loop over all this data. In other words, this may slow down your build time depending on how may posts and tags you have.
@@ -187,9 +187,9 @@ Well that is neat! A handful of code, to be sure, but still… it works! I will 
 
 Skipping to the good part? Have you not seen the 2006 cinematic masterpiece _Click_ with Adam Sandler and Christopher Walken warning us about the dangers of — —
 
-{% expander "Erm, yeah, check out that code" %}
+{{ expander "Erm, yeah, check out that code" }}
 
-```js:.eleventy.js{% raw %}
+```js:.eleventy.js{{ echo }}
 export default async function (eleventyConfig) {
 	const PAGE_SIZE = 5; // N posts per page
 	const alias = 'pageItems'; // Data property which will contain the posts of the current sub-pages
@@ -277,16 +277,16 @@ export default async function (eleventyConfig) {
 		}
 	);
 }
-{% endraw %}
+{{ /echo }}
 ```
 
-{% endexpander %}
+{{ /expander }}
 
 ## Bonus: paginator component
 
 While we’re here, I might as well share the paginator “component” I built. It is a little more readable in Vento thanks to the JS syntax but I converted it to Nunjucks should you need it — though it is BYOS (Bring Your Own Styles): that’s the fun part!
 
-```njk:paginator.njk{% raw %}
+```njk:paginator.njk{{ echo }}
 {% set currentPage = pagination.pageNumber + 1 %}
 {% set totalPages = pagination.pages.length %}
 {% set adjacentLinks = 2 %}
@@ -348,15 +348,16 @@ While we’re here, I might as well share the paginator “component” I built.
 	</ul>
 </nav>
 {% endif %}
-{% endraw %}
+{{ /echo }}
 ```
 
-{% callout %}
+{{ callout }}
 In Nunjucks, a ternary expression looks like `ifValue if (trueCondition) else elseValue`, as opposed to JavaScript’s `(trueCondition) ? ifValue : elseValue`. The parentheses are optional but they sure make things legible to me, despite, in this case, `beforeLimit` and `afterLimit` bordering on unhinged territory.
-{% endcallout %}
+{{ /callout }}
 
 Whew, what a ride. I should write about VentoJS because it is cool. I should also write some sort of helper to paginate… a plugin might be cool, but the configuration would need to be very customisable… ah well, an idea for another day. For now, I hope this helped you in one way or another!
 
 Go forth and paginate! Also here's a meme from yesteryear because I am a cool and hip.
 
-{% image "./yodawg.jpg" | toRoot, "A terribly old meme of famous rapper Xzibit laughing, captioned: Yo dawg, I heard you liked pagination, so I added pagination inside your paginated pages, so you can paginate while you paginate.", null, { ratio: 500/320 } %}
+{{ set imageUrl = "./yodawg.jpg" |> toRoot }}
+{{ image imageUrl, "A terribly old meme of famous rapper Xzibit laughing, captioned: Yo dawg, I heard you liked pagination, so I added pagination inside your paginated pages, so you can paginate while you paginate.", null, { ratio: 500/320 } }}

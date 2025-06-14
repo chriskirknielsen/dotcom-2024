@@ -11,13 +11,13 @@ You may already know this, but I have a slight bias towards theming “efficient
 
 Una already wrote a [great introduction to this feature](https://developer.chrome.com/blog/style-queries/) as a demo on how this can be applied to components, and even themes. If you have never played with container style queries, I highly recommend having a look at the article before reading further here. As Una shows, you can style based on a theme property, but how would we go about actually implementing that idea on a site-wide scale? We’ll take a look at this from a “multi-theme” perspective, though this works fine for a binary light/dark mode theme setup.
 
-{% callout "Still Experimental", "⚠️" %}
+{{ callout "Still Experimental", "⚠️" }}
 Please note that this is an experimental feature which has not yet landed in stable browsers at the time of writing, so you’ll likely want to test it out in [Chrome Canary](https://www.google.com/chrome/canary/), or regular Chrome might even work these days!
-{% endcallout %}
+{{ /callout }}
 
 First off, let’s take a look at a demo where you can cycle through a theme value that affects the entire layout:
 
-{% video "./style-query-demo.mp4", "A simple webpage with a button at the top that changes the style of the page when clicked, toggling through a dark blue styled site, then pastel pink, then white.", '<a href="https://codepen.io/chriskirknielsen/details/xxQjWYo">Live demo on CodePen</a>', { width: 780, height: 480 } %}
+{{ video "./style-query-demo.mp4", "A simple webpage with a button at the top that changes the style of the page when clicked, toggling through a dark blue styled site, then pastel pink, then white.", '<a href="https://codepen.io/chriskirknielsen/details/xxQjWYo">Live demo on CodePen</a>', { width: 780, height: 480 } }}
 
 We want to define our custom properties once for each theme, and then access them as we would any other custom property. But to spice things up, we’ll also ensure we have a set of sensible defaults. These defaults will have two roles:
 
@@ -65,9 +65,9 @@ Wait a tick… `html:not([data-theme])` has a score of `0,1,1`, which is still s
 
 Okay, you got me: there’s no specific (hah!) reason besides me wanting a low score that makes other overrides and exceptions easier to implement. You can omit the `:where()` wrapper and you’ll likely get the exact same result. And honestly, I had been waiting to use `:where()` for so long that I now use it very liberally, which is a “me” problem!
 
-{% callout %}
+{{ callout }}
 We’ll be checking for two scenarios: missing data-attribute and user preferences, or a defined data-attribute (the override), as the former combination allows the styles to be displayed without JavaScript while respecting user preferences!
-{% endcallout %}
+{{ /callout }}
 
 ## Current approach: write everything twice
 
@@ -280,7 +280,7 @@ Nowadays, it is pretty common to consume a JSON file with design tokens for a we
 
 I don’t want to make this article any longer than it already is, so optionally, let’s write a “short” build-time tool in JavaScript (I’ll be using a Node.js environment) to convert this JSON to CSS. This can be plugged into an [Eleventy asset pipeline](https://chriskirknielsen.com/blog/eleventy-asset-pipeline-precompiled-assets/) or made into a gulp pipeline.
 
-{% expander "Build-time tool to convert JSON to CSS" %}
+{{ expander "Build-time tool to convert JSON to CSS" }}
 We need to loop over each object, and while the default object will output “public” properties, the other themes will need to be “private”. We also need to know which of these themes are the default schemes, which is why I included a `_USER_SCHEME` property.
 
 This will work in two parts:
@@ -413,11 +413,11 @@ Well dang, that’s a lot… but the beauty of it is that it will automate any n
 ```js
 jsonTokensToCss('./assets/tokens.json', './assets/css/themes.css'); // Returns a Promise
 ```
-{% endexpander %}
+{{ /expander }}
 
 We’ve created our stylesheet and are now ready to use our themes! I’ve added a third theme in my demo, and created a quick script to set and toggle the override theme when you press a button. We end up with the result you saw at the start of this article, demonstrated as a live example below, if you browser supports style queries:
 
-{% codepen "https://codepen.io/chriskirknielsen/details/xxQjWYo" %}
+{{ codepen "https://codepen.io/chriskirknielsen/details/xxQjWYo" }}
 
 There are good articles on how to build a theme switcher ([Lea Rosema](https://codepen.io/learosema/pen/zYmvQJV), [Max Böck](https://mxb.dev/blog/color-theme-switcher/), and [Jason Lengstorf](https://www.learnwithjason.dev/blog/css-color-theme-switcher-no-flash#1-start-with-a-basic-html-and-css-site) have great examples) so the main behaviour is to add a `data-theme` attribute to the `<html>` with a value matching the theme key. I didn’t add a `localStorage` feature for this demo but you’d definitely want that so the same theme applies across page navigations and repeat visits! The data-attribute has a higher specificity than our default `html` selector, so it will always override it — just what we’re after!
 
@@ -510,9 +510,9 @@ And update our (optional) JSON-to-CSS function:
 
 I suppose we could hardcode `light` and `dark` for the scheme ones, since we know what they are, up to you! We could also throw `background` in there (without omitting `--_background` among the other tokens as we might want to access the custom property inside another element!), but that’ll start to be a bit much in terms of repetition, so this is a small CSS sin for the greater good of unrepeated code.
 
-{% callout "Today I learned", "💡" %}
+{{ callout "Today I learned", "💡" }}
 While writing this, I discovered that the [`color-scheme` property](https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme), if set to a specific value (`light` or `dark`, instead of `normal`, `light dark`, or `dark light`), determines the actual colour used by those system colours we saw earlier. I thought it was only controlled by the media query! A `(prefers-color-scheme: dark)` media query around `html` using `color-scheme: light` will render in “light mode”! My website themes use `color-scheme`, so the CodePen demo for browsers without support will change based on the theme’s dominant scheme! (well, only in Firefox, it seems) That’s so cool! But it also highlights why defining this property is important if we’re overriding user preferences.
-{% endcallout %}
+{{ /callout }}
 
 ## Conclusion
 

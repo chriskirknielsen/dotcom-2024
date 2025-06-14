@@ -5,7 +5,6 @@ tags:
     - eleventy
     - javascript
     - css
-templateEngineOverride: njk,md
 toc: true
 updated: 2023-05-21
 ---
@@ -24,15 +23,15 @@ Alright, so the idea is to use the `eleventy.before` event, which replaces my Gu
 
 The callback for the `before` event passes in the base `config`, including current folder information, which I can use for the Sass compiler [as demonstrated on the Eleventy docs](https://www.11ty.dev/docs/languages/custom/#using-inputpath), to properly resolve imports.
 
-{% callout %}
+{{ callout }}
 I have my assets in `/src/assets/scss` and `/src/assets/js`, and the resulting files are output to `/src/_includes/assets/css` and `/src/_includes/assets/js`, respectively, so if you decide to use this setup, make sure you adjust for your file structure!
-{% endcallout %}
+{{ /callout }}
 
 ## Let’s get coding
 
 First, the packages I use need to be installed, in my case via npm:
 
-```text:Terminal
+```
 npm install glob json-sass sass esbuild
 ```
 
@@ -215,9 +214,9 @@ const scripts = () => compileAssets({
 });
 ```
 
-{% callout %}
+{{ callout }}
 While the `filterFn` accepts a string, the `compileFn` makes use of the parsed path object. The filter function is, for my needs, very light so I’d rather only parse the paths of the files I know I’ll compile (if this smells of micro-optimisation to you… you’re probably right).
-{% endcallout %}
+{{ /callout }}
 
 So now I need to tell Eleventy this is done and the build can start, right?
 

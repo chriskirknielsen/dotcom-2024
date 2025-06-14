@@ -58,7 +58,7 @@ In the context of flexbox cramming (gotta say, "to cram" sounds like bad practic
 
 ## Naming opinions
 
-{% callout %}I know these are all temporary names, but I’ll still offer some thoughts on the current proposed names, just for argument’s sake.{% endcallout %}
+{{ callout }}I know these are all temporary names, but I’ll still offer some thoughts on the current proposed names, just for argument’s sake.{{ /callout }}
 
 ### The item prefix
 I think `item-*` is a bit weird, given we have `align-items` and `justify-items` in plural form. Since this is a control given to the parent, it would make more sense to have `items-flow`, but I may be looking at this from the wrong angle… maybe it’s the flow of the parent item, so it is better as a singular noun? I guess that goes to show how hard it is to name things!
@@ -85,7 +85,7 @@ I think this is an elegant way to unite all these concepts under a single term, 
 
 This helpful matrix from the original article is an image, so… _tadaaa_ (hopefully I didn't muck up semantics, but the `tfoot` is probably not super appropriate):
 
-{% codepen "https://codepen.io/chriskirknielsen/pen/YPzJLOx", "result", 610  %}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/YPzJLOx", "result", 610  }}
 
 ## More reading
 - [Item Flow, Part 1: A new unified concept for layout](https://webkit.org/blog/16587/item-flow-part-1-a-new-unified-concept-for-layout/)
