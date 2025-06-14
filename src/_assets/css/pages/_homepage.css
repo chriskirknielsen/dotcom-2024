@@ -103,7 +103,7 @@
 	[data-deco-anim] {
 		transform-origin: 50% 50%;
 		animation: resetTransform calc(var(--CTX-factor, 1) * var(--anim-medium)) var(--CTX-easing, var(--easing-out)) 1 forwards;
-		animation-delay: calc(300ms + var(--CTX-delay, 0) * 100ms);
+		animation-delay: calc((300ms + var(--CTX-delay, 0) * 100ms) * var(--anim-f));
 	}
 
 	[data-deco-anim]:not([data-deco-anim='path']),
@@ -169,7 +169,7 @@
 		animation-timing-function: var(--easing-out);
 		animation-duration: var(--anim-eternity);
 		animation-fill-mode: both;
-		animation-delay: calc(200ms + var(--anim-short) + var(--d, 0) * var(--anim-delay) * var(--f, 2));
+		animation-delay: calc((200ms + var(--anim-short) + var(--d, 0) * var(--anim-delay) * var(--f, 2)) * var(--anim-f));
 	}
 
 	[data-name-part='last'] {

@@ -52,6 +52,6 @@ dialog {
 
 		background: #000a;
 
-		animation: fadeIn var(--anim-short, 200ms) var(--easing-out, ease-out) 20ms 1 backwards;
+		animation: fadeIn var(--anim-short, calc(200ms * var(--anim-f))) var(--easing-out, ease-out) 20ms 1 backwards;
 	}
 }

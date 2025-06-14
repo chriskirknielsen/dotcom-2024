@@ -645,7 +645,7 @@ code,
 		color: var(--bg-alt);
 		background-color: var(--color-main);
 
-		animation: codePress 200ms var(--easing) 1;
+		animation: codePress calc(200ms * var(--anim-f)) var(--easing) 1;
 	}
 
 	html.no-js &:is(button) {

@@ -138,11 +138,11 @@
 
 	@media (--accept-motion) {
 		&:is(:hover, :focus-visible, :has(:focus-visible)) > .tooltip-content {
-			animation: fadeIn var(--easing-in-out) 200ms;
+			animation: fadeIn var(--easing-in-out) calc(200ms * var(--anim-f));
 
 			&,
 			&::before {
-				transition: transform var(--easing-in-out) 200ms;
+				transition: transform var(--easing-in-out) calc(200ms * var(--anim-f));
 			}
 		}
 	}

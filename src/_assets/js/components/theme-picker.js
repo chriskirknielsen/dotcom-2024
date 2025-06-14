@@ -26,6 +26,9 @@ class ThemePicker extends HTMLElement {
 	getPreferredScheme() {
 		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 	}
+	getPreferredMotion() {
+		return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduce' : 'no-preference';
+	}
 
 	/** Convert hex to RGB */
 	hexToRgb(H) {
@@ -135,7 +138,6 @@ class ThemePicker extends HTMLElement {
 		const canvasHsl = this.hexToHsl(values['C-canvas']);
 		const accentHsl = this.hexToHsl(values['C-accent']);
 		const isDark = canvasHsl.l < 50; // Guestimation
-		const isRound = values.corner !== 'sharp';
 		const remappedValues = Object.entries(values).map(([key, input]) => {
 			let value;
 			switch (key) {
@@ -163,6 +165,10 @@ class ThemePicker extends HTMLElement {
 				}
 				case 'corner': {
 					value = input === 'round' ? '4px' : '0px';
+					break;
+				}
+				case 'anim-f': {
+					value = input === 'reduce' ? '0' : '1';
 					break;
 				}
 				default: {
@@ -226,10 +232,17 @@ class ThemePicker extends HTMLElement {
 			Array.from(form.querySelectorAll('[data-default]')).forEach((defaultOption) => {
 				const selectField = defaultOption.closest('select');
 				const radioField = defaultOption.closest('input[type="radio"]');
+
 				if (selectField) {
 					selectField.value = defaultOption.value;
 				} else if (radioField) {
-					radioField.checked = true;
+					if (radioField.getAttribute('data-default') === 'from-media') {
+						if (defaultOption.name === 'anim-f') {
+							radioField.checked = this.getPreferredMotion() === radioField.value;
+						}
+					} else {
+						radioField.checked = true;
+					}
 				}
 			});
 		}

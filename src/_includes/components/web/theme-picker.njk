@@ -183,17 +183,37 @@
 				<fieldset>
 					<span aria-hidden="true" class="h3">Details</span>
 					<legend class="visually-hidden">Details</legend>
-					<p class="grouper grouper--baseline grouper--wrap">
-						<label for="theme-custom-corner-style-square" class="form-label-wrap">
-							<input type="radio" id="theme-custom-corner-style-square" name="corner" value="square">
-							<span>Sharp</span>
-						</label>
-						|
-						<label for="theme-custom-corner-style-round" class="form-label-wrap">
-							<input type="radio" id="theme-custom-corner-style-round" name="corner" value="round" data-default>
-							<span>Soft</span>
-						</label>
-					</p>
+					<div class="flow" style="--flow-space: var(--size-xs);">
+						<fieldset>
+							<legend>Corners:</legend>
+							<p class="grouper grouper--baseline grouper--wrap">
+								<label for="theme-custom-corner-style-square" class="form-label-wrap">
+									<input type="radio" id="theme-custom-corner-style-square" name="corner" value="square">
+									<span>Sharp</span>
+								</label>
+								|
+								<label for="theme-custom-corner-style-round" class="form-label-wrap">
+									<input type="radio" id="theme-custom-corner-style-round" name="corner" value="round" data-default>
+									<span>Soft</span>
+								</label>
+							</p>
+						</fieldset>
+
+						<fieldset>
+							<legend>Motion:</legend>
+							<p class="grouper grouper--baseline grouper--wrap">
+								<label for="theme-custom-motion-enabled" class="form-label-wrap">
+									<input type="radio" id="theme-custom-motion-enabled" name="anim-f" value="1" data-default="from-media">
+									<span>Full</span>
+								</label>
+								|
+								<label for="theme-custom-motion-reduced" class="form-label-wrap">
+									<input type="radio" id="theme-custom-motion-reduced" name="anim-f" value="0" data-default="from-media">
+									<span>Reduced</span>
+								</label>
+							</p>
+						</fieldset>
+					</div>
 				</fieldset>
 
 				<div>
