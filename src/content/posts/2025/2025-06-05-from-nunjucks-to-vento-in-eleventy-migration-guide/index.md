@@ -4,10 +4,11 @@ summary: "A few tips to refactor your njk into vto."
 tags: [javascript, eleventy, vento]
 toc: true
 time: 04:51:23
-updated: 2025-06-07
+updated: 2025-06-15
 changelog: {
 	'2025-06-05': "Change plugin import demo to remove `autotrim` option as it is the default. Add link to plugin's readme/docs.",
 	'2025-06-07': "Update to reflect new `eleventy-plugin-vento` version.",
+	'2025-06-15': "Add [a note](#this-is-missing-some-context) about `this.ctx` in Nunjucks.",
 }
 ---
 
@@ -474,6 +475,9 @@ eleventyConfig.addAsyncShortcode('renderTemplateGlobal', async function (filenam
 	return content;
 });
 ```
+
+### This is missing some context
+**Update on 2025-06-15:** `this.ctx`, which is happily passed through by Nunjucks (I think Liquid does this too, but not other templating languages), is not available in Vento filters and shortcodes. We do have access to `this.page`, but that provides information about the raw source file (such as `inputPath`, `fileSlug`, `date`, `rawInput`, and so on), not its full context, so the Eleventy data cascade is not exposed. It’s a “magic property” from Nunjucks, so I knew it was risky and limited how much I used it, so finding an alternative wasn’t too difficult. Maybe this can be a future goal of the Vento plugin for Eleventy?
 
 ## Step 4: go forth and blow us away
 

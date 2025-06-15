@@ -24,7 +24,7 @@ html {
 
 /* Adjust list padding, slightly magic number to fit a counter and dot for <ol> elements */
 :is(ul, ol):where(:not([class])) {
-	padding-inline-start: 1.625ch;
+	padding-inline-start: 1.875ch;
 }
 
 /* Set core body defaults */
