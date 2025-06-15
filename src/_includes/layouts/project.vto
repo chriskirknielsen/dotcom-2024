@@ -8,7 +8,6 @@ heroCta: [{ url: "/projects/", label: "Back to Projects", icon: "arrow-left", ic
 {{ if externalUrl }}
 <p class="post-external | grouper grouper--wrap">
 	{{ component 'cta', {
-		ext: 'vto',
 		url: externalUrl,
 		label: projectButtonLabel || 'View Project',
 		icon: 'arrow-right'
@@ -16,7 +15,6 @@ heroCta: [{ url: "/projects/", label: "Back to Projects", icon: "arrow-left", ic
 	{{ if extraCta }}
 		{{ for extraCtaItem of extraCta }}
 		{{ component 'cta', {
-			ext: 'vto',
 			url: extraCtaItem.url,
 			label: extraCtaItem.label,
 			icon: extraCtaItem.icon || 'arrow-right'

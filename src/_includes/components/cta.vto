@@ -14,7 +14,7 @@
 {{- /set }}
 {{> let emptyLabel = true }}
 {{ set labelRender -}}
-    {{ if label.aria }}
+    {{ if label && label.aria }}
         <span class="visually-hidden">{{ label.aria }}</span>
         {{ if label.text }}
             {{> emptyLabel = false }}
@@ -23,7 +23,7 @@
         {{ /if }}
     {{ else if label }}
         {{> emptyLabel = false }}
-            {{ set escapedLabel = label |> escape }}
+        {{ set escapedLabel = label |> escape }}
         <span>{{ safeLabel ? label : escapedLabel }}</span>
     {{ /if }}
 {{ /set }}

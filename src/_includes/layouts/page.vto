@@ -6,7 +6,6 @@
         {{ pageHero }}
     {{ else }}
         {{ component 'hero', {
-            ext: 'vto',
             heroTitle: heroTitle || title,
             heroSub: heroSub || (heroHideSummary ? null : summary),
             heroSup: heroSup || null,

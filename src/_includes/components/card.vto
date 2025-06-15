@@ -1,6 +1,6 @@
-{{ set attrs }}class="{{ ('card ' + (classes || '')) |> trim }}" {{ if cardAttrs }}{{ cardAttrs }}{{ /if }}{{ /set }}
-{{ set imageLink = image.link || link }}
-{{ set isImageAriaHidden = image.isAriaHidden || (!image.alt && heading) || imageLink == link }}
+{{ set attrs }}class="{{ `card ${classes || ''}` |> trim }}" {{ cardAttrs || '' }}{{ /set }}
+{{ set imageLink = (image ? image.link : null) || link }}
+{{ set isImageAriaHidden = image && (image.isAriaHidden || (!image.alt && heading) || imageLink == link) }}
 <article {{ attrs |> trim }}>
 	{{ if image }}
 		<div class="card-image">
@@ -26,6 +26,7 @@
 		{{ if eyebrow }}
 			{{ eyebrow }}
 		{{ /if }}
+
 		{{ if heading }}
 			<{{ headingTag || 'h2' }} class="h3 | card-heading">
 			<a href="{{ link }}" {{ if !containsLinks }}class="card-link--cover"{{ /if }}>
@@ -36,7 +37,7 @@
 		
 		{{ if descriptionMarkup }}
 			{{ descriptionMarkup }}
-		{{ elseif description }}
+		{{ else if description }}
 			<p class="card-description | textWrap-balance">{{ description }}</p>
 		{{ /if }}
 	</div>

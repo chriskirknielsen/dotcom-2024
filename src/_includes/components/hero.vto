@@ -27,7 +27,7 @@
             <ul class="flex-list flex-list--center | fontSize-small">
                 {{ for cta of heroCta }}
                     <li>
-                        {{ component 'cta', Object.assign({ pageContext, ext: 'vto' }, cta) }}
+                        {{ component 'cta', Object.assign({ pageContext }, cta) }}
                     </li>
                 {{ /for }}
             </ul>
