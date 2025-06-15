@@ -90,8 +90,7 @@ class ThemePicker extends HTMLElement {
 
 	/** Convert #hex to HSL */
 	hexToHsl(H) {
-		const rgb = this.hexToRgb(H);
-		return this.rgbToHsl(rgb);
+		return this.rgbToHsl(this.hexToRgb(H));
 	}
 
 	setTheme(theme) {
@@ -177,16 +176,19 @@ class ThemePicker extends HTMLElement {
 			}
 			return `--${key}: ${value};`;
 		});
+		const shadowSaturation = canvasHsl.l < 5 || canvasHsl.l >= 95 ? 0 : Math.round(Math.pow((accentHsl.s - canvasHsl.s) / 100, 2) * 100); // Ensure <5% and >=95% BG saturation is greyscale
+		const shadowLightness = Math.min(67, Math.round(Math.pow(1 - canvasHsl.l / 100, 2) * 100)); // Make the shadow follow the lightness opposite to the background (light BG = dark shadow, dark BG = glow) to stand out
+		const shadowColor = `${accentHsl.h}deg ${shadowSaturation}% ${shadowLightness}%`;
 
 		this.customSheet.replaceSync(`:root[data-theme="custom"] {
 			--color-scheme: ${isDark ? 'dark' : 'light'};
-			${remappedValues.join('\n')}
+			${remappedValues.join('\n\t\t\t')}
 			--font-heading-style: ${values['font-heading-family'] === 'XanhMono' ? 'italic' : 'normal'};
 			--font-heading-size-adjust: none;
 			${values['font-heading-transform'] === 'uppercase' ? '--HERO-title-factor: 1.75;' : ''}
 			--header-bg-color: color-mix(in oklch, var(--C-surface), var(--C-canvas));
 			--stroke-linecap: ${values.corner};
-			--shadow-color: ${accentHsl.h}deg ${Math.max(33, Math.round(100 - canvasHsl.s))}% ${Math.min(67, Math.round(100 - canvasHsl.l))}%;
+			--shadow-color: ${shadowColor};
 			${values['font-body-family'] === 'monospace' ? 'font-size-adjust: 0.45;' : ''}
 		}`);
 
