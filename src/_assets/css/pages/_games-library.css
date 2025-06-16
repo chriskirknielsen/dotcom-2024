@@ -512,21 +512,8 @@
 	font-display: swap;
 }
 
-.gaming-details-dialog {
-	&::backdrop {
-		padding: 33vh var(--size-xl) var(--size-xl);
-
-		background: conic-gradient(#000a 0 0) border-box, var(--cover-url) no-repeat 50% 100% / contain content-box;
-
-		animation-name: fadeIn, backdropImage;
-	}
-}
-
-.dialog-inner {
+.gaming-details-dialog-inner {
 	container: gamingDetailsDialog / inline-size;
-
-	padding: var(--size-m);
-	overflow: auto;
 
 	dl {
 		padding-block-start: var(--flow-space);
@@ -548,6 +535,28 @@
 		dd + dt {
 			margin-block-start: var(--size-s);
 		}
+	}
+
+	&::before {
+		content: '';
+		pointer-events: none;
+
+		position: absolute;
+		inset: 0 0 0 auto;
+		z-index: -1;
+
+		block-size: 100%;
+		aspect-ratio: 6/4; /* Original is 3/4, so let's zoom a little */
+
+		background-image: var(--cover-url);
+		background-repeat: no-repeat;
+		background-position: 100% 50%;
+		background-size: cover;
+
+		opacity: 0.125;
+		mask-image: linear-gradient(to right, transparent, tan);
+		filter: grayscale();
+		animation: fadeIn 500ms ease-out 250ms backwards 1; /* A little delay ("good 4G" throttle) to let the image load, hopefully, before displaying it */
 	}
 }
 
@@ -679,11 +688,5 @@
 		& > li {
 			font-size: 0.75em;
 		}
-	}
-}
-
-@keyframes backdropImage {
-	from {
-		padding: 0 50% 50%;
 	}
 }

@@ -55,3 +55,8 @@ dialog {
 		animation: fadeIn var(--anim-short, calc(200ms * var(--anim-f))) var(--easing-out, ease-out) 20ms 1 backwards;
 	}
 }
+
+.dialog-inner {
+	padding: var(--size-m);
+	overflow: auto;
+}
