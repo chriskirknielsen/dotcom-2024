@@ -61,7 +61,8 @@ export default function (eleventyConfig, options = {}) {
 	}
 
 	const { svgAssetFolder, componentsFolder, isSvgCached } = options;
-	const svgCache = {}; // If caching is enabled, this object will be used to store recurring SVGs
+	const svgCache = {}; // If caching is enabled, this object will be used to store reused SVGs
+	const cheerioCache = {}; // Sync cache of cheerio manipulations
 
 	/** Fetch the raw contents of an SVG file. */
 	async function loadSvg(filename) {
@@ -69,7 +70,11 @@ export default function (eleventyConfig, options = {}) {
 	}
 
 	/** Manipulate the DOM for an SVG element. */
-	function processSvg(content, svgOptions) {
+	function processSvg(content, svgOptions, key = null) {
+		if (key && cheerioCache.hasOwnProperty(key)) {
+			return cheerioCache[key];
+		}
+
 		try {
 			// If there are options that inject attributes, we can use cheerio to inject them
 			const $ = cheerio.load(content, null, false);
@@ -119,7 +124,11 @@ export default function (eleventyConfig, options = {}) {
 				svg.attr('preserveAspectRatio', svgOptions.preserveAspectRatio);
 			}
 
-			return $.root().html();
+			const output = $.root().html();
+			if (key) {
+				cheerioCache[key] = output;
+			}
+			return output;
 		} catch {
 			// Return the SVG content as-is
 			return content;
@@ -142,7 +151,7 @@ export default function (eleventyConfig, options = {}) {
 				return `<!-- Unable to render ${filename}: ${err} -->`;
 			})
 			.then((content) => {
-				return processSvg(content, svgOptions);
+				return processSvg(content, svgOptions, filename);
 			});
 
 		if (isSvgCached) {
@@ -154,8 +163,9 @@ export default function (eleventyConfig, options = {}) {
 
 	/** Insert a reference to an SVG "spritesheet" (synchronous!). */
 	eleventyConfig.addShortcode('svg', function (filename, svgOptions = {}) {
-		const content = `<svg xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="#${getSpriteId(filename)}" width="100%" height="100%"></use></svg>`;
-		const output = processSvg(content, svgOptions);
+		const spriteKey = getSpriteId(filename);
+		const content = `<svg xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="#${spriteKey}" width="100%" height="100%"></use></svg>`;
+		const output = processSvg(content, svgOptions, spriteKey);
 
 		return output;
 	});
