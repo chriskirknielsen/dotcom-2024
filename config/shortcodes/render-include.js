@@ -70,7 +70,8 @@ export default function (eleventyConfig, options = {}) {
 	}
 
 	/** Manipulate the DOM for an SVG element. */
-	function processSvg(content, svgOptions, key = null) {
+	function processSvg(content, svgOptions, name = null) {
+		const key = name ? name + '_' + quickHash(JSON.stringify(svgOptions)) : null;
 		if (key && cheerioCache.hasOwnProperty(key)) {
 			return cheerioCache[key];
 		}
