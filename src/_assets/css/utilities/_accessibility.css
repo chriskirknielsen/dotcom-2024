@@ -25,7 +25,7 @@
 
 .visually-hidden,
 .skip-link:not(:focus),
-.tooltip:not(:hover, :focus-visible, :has(:focus-visible)) > .tooltip-content {
+.tooltip:not(:hover, :focus-visible, :focus-within) > .tooltip-content {
 	position: absolute;
 	width: 1px;
 	height: 0;
@@ -81,17 +81,17 @@
 		--TOOLTIP-arrow-y: -50%;
 		--TOOLTIP-arrow-margin-block: 0 auto;
 	}
-	&[data-tooltip-pos^='center'] {
+	/* &[data-tooltip-pos^='center'] {
 		--TOOLTIP-block: 50% auto;
 		--TOOLTIP-translate-y: -50%;
 		--TOOLTIP-arrow-margin-block: auto;
-	}
+	} */
 
-	&[data-tooltip-pos$='start'] {
+	/* &[data-tooltip-pos$='start'] {
 		--TOOLTIP-inline: 0 auto;
 		--TOOLTIP-arrow-x: 100%;
 		--TOOLTIP-arrow-margin-inline: 0 auto;
-	}
+	} */
 	&[data-tooltip-pos$='end'] {
 		--TOOLTIP-inline: auto 0;
 		--TOOLTIP-arrow-x: -100%;
@@ -103,7 +103,7 @@
 		--TOOLTIP-arrow-margin-inline: auto;
 	}
 
-	&[data-tooltip-pos='center start'] {
+	/* &[data-tooltip-pos='center start'] {
 		--TOOLTIP-inline: auto calc(100% + var(--TOOLTIP-arrow-size) + var(--TOOLTIP-offset));
 		--TOOLTIP-arrow-margin-inline: auto 0;
 		--TOOLTIP-arrow-x: 50%;
@@ -112,7 +112,7 @@
 		--TOOLTIP-inline: calc(100% + var(--TOOLTIP-arrow-size) + var(--TOOLTIP-offset)) auto;
 		--TOOLTIP-arrow-margin-inline: 0 auto;
 		--TOOLTIP-arrow-x: -50%;
-	}
+	} */
 
 	& > .tooltip-content {
 		&,
@@ -130,7 +130,7 @@
 	}
 
 	@media (--accept-motion) {
-		&:is(:hover, :focus-visible, :has(:focus-visible)) > .tooltip-content {
+		&:is(:hover, :focus-visible, :focus-within) > .tooltip-content {
 			animation: fadeIn var(--easing-in-out) calc(200ms * var(--anim-f));
 
 			&,
@@ -159,6 +159,7 @@
 
 		transform: translate(var(--TOOLTIP-translate-x, 0%), var(--TOOLTIP-translate-y, 0%));
 
+		/* Only if the contents aren't a singular image do we want inline padding */
 		&:not(:has(img:only-child)) {
 			padding-inline: var(--size-2xs);
 		}
@@ -178,7 +179,7 @@
 		}
 	}
 
-	&:is(:hover, :focus-visible, :has(:focus-visible)) > .tooltip-content::before {
+	&:is(:hover, :focus-visible, :focus-within) > .tooltip-content::before {
 		--TOOLTIP-arrow-scale: 1;
 	}
 }
