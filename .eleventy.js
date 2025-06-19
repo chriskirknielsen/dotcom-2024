@@ -256,7 +256,7 @@ export default async function (eleventyConfig) {
 	eleventyConfig.addPlugin(renderInclude, {
 		svgAssetFolder: `./${rootDir}/${includesDir}/assets/svg`,
 		componentsFolder: `./${rootDir}/${includesDir}/components`,
-		cacheSvg: true, //BUILD_CONTEXT === 'LIVE', // While serving locally, set to `false` if editing SVG assets so the cache doesn't persist across builds
+		isSvgCached: true, //BUILD_CONTEXT === 'LIVE', // While serving locally, set to `false` if editing SVG assets so the cache doesn't persist across builds
 	});
 
 	//* Transforms

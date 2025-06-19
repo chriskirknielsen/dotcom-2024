@@ -60,7 +60,7 @@ export default function (eleventyConfig, options = {}) {
 		throw new Error('The `options` argument expects a `componentsFolder` property to use as a folder path for the `component` shortcode.');
 	}
 
-	const { svgAssetFolder, componentsFolder, cacheSvg } = options;
+	const { svgAssetFolder, componentsFolder, isSvgCached } = options;
 	const svgCache = {}; // If caching is enabled, this object will be used to store recurring SVGs
 
 	/** Fetch the raw contents of an SVG file. */
@@ -130,7 +130,7 @@ export default function (eleventyConfig, options = {}) {
 	eleventyConfig.addAsyncShortcode('injectsvg', async function (filename, svgOptions = {}) {
 		const cacheKey = filename + '_' + quickHash(JSON.stringify(svgOptions));
 
-		if (cacheSvg && svgCache.hasOwnProperty(cacheKey)) {
+		if (isSvgCached && svgCache.hasOwnProperty(cacheKey)) {
 			return svgCache[cacheKey]; // Wait for the data
 		}
 
@@ -145,7 +145,7 @@ export default function (eleventyConfig, options = {}) {
 				return processSvg(content, svgOptions);
 			});
 
-		if (cacheSvg) {
+		if (isSvgCached) {
 			svgCache[cacheKey] = output;
 		}
 
@@ -185,7 +185,7 @@ export default function (eleventyConfig, options = {}) {
 		// Loop through all the references, with an await since loading the SVGs is asynchronous
 		const symbols = useReferences.map(async (ref) => {
 			const cacheKey = ref; // No SVG options attached here, so it will be the original file contents
-			if (!cacheSvg || svgCache.hasOwnProperty(cacheKey) === false) {
+			if (!isSvgCached || svgCache.hasOwnProperty(cacheKey) === false) {
 				svgCache[cacheKey] = loadSvg(ref); // Cache the raw SVG markup in a promise
 			}
 			const svg = await svgCache[cacheKey]; // Get the raw cache contents

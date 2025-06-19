@@ -10,6 +10,7 @@
 		"devall": "npx @11ty/eleventy --serve --port=2024",
 		"netlify": "netlify dev",
 		"debug": "DEBUG=Eleventy* npx @11ty/eleventy --dryrun",
+		"bench": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy --dryrun",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
