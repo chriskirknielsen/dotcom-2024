@@ -20,7 +20,6 @@ body > footer {
 }
 
 dialog {
-	/* 20ms delay + backwards fill to reduce amount of stutter upon opening a dialog */
 	position: fixed;
 	inset: clamp(var(--size-m), 4.5vh, var(--size-2xl)) 0 auto; /* Top-aligned */
 
@@ -36,6 +35,7 @@ dialog {
 
 	transform-origin: 50% 0%;
 	animation: fadeIn var(--anim-short) var(--easing-out) 20ms 1 backwards;
+	/* 20ms delay + backwards fill to reduce amount of stutter upon opening a dialog */
 
 	@media (--accept-motion) {
 		animation-name: fadeIn, scaleUp;
@@ -54,6 +54,11 @@ dialog {
 
 		animation: fadeIn var(--anim-short, calc(200ms * var(--anim-f))) var(--easing-out, ease-out) 20ms 1 backwards;
 	}
+}
+
+:root:has(dialog[open]) {
+	scrollbar-gutter: stable;
+	overflow: hidden;
 }
 
 .dialog-inner {

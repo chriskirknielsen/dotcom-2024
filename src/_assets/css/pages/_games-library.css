@@ -560,11 +560,6 @@
 	}
 }
 
-:root:has(dialog[open]) {
-	scrollbar-gutter: stable;
-	overflow: hidden;
-}
-
 .gaming-details-dialog-close {
 	z-index: 1;
 
