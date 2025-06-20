@@ -1,4 +1,4 @@
-class SearchData {
+export default class {
 	data() {
 		return {
 			permalink: '/search.json',
@@ -34,5 +34,3 @@ class SearchData {
 		return JSON.stringify(searchData);
 	}
 }
-
-export default SearchData;
