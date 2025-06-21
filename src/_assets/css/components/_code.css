@@ -92,6 +92,10 @@ kbd {
 	color: var(--C-inactive, #808080);
 }
 
+.token.comment {
+	font-style: italic;
+}
+
 .token.boolean,
 .token.number,
 .token.atrule,
