@@ -57,8 +57,11 @@ h1,
 }
 
 /* Inline */
-em,
-var {
+:where(main) strong {
+	color: color-mix(in hsl, currentColor, var(--C-accent) 25%);
+}
+
+:where(main) :is(em, var) {
 	font-family: var(--fontStack-serif);
 }
 
