@@ -1,3 +1,5 @@
+{{ set groupByYear = !Boolean(ungrouped) }}
+{{# By default, posts should be shown by year unless #}}
 <div class="postlist | flow">
     {{ if !groupByYear }}
         <div class="postlist-group-list | flow">
@@ -19,7 +21,7 @@
                 {{ for post of posts |> slice |> reverse }}
                     <article class="postlist-post">
                         <p class="fontSize-small">
-                            <time datetime="{{ post.date |> dateFormat }}">{{ post.date |> dateFormat({ format: 'nice' }) }}</time>
+                            <time datetime="{{ post.date |> dateFormat }}">{{ post.date |> dateFormat({ format: 'nice', lang: post.data.lang }) }}</time>
                             {{ if post.data.updated }}
                                 {{ set originalTime = post.date |> dateFormat('ms')}}
                                 {{ set updateTime = post.data.updated |> dateFormat('ms')}}
