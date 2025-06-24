@@ -151,6 +151,8 @@ class ThemePicker extends HTMLElement {
 						MDNichrome: 'MDNichrome, sans-serif',
 						Rajdhani: 'Rajdhani, sans-serif',
 						TeXGyreAdventor: 'TeXGyreAdventor, ITC Avant Garde, sans-serif',
+						LibreFranklin: 'LibreFranklin, Libre Franklin, Franklin Gothic, HEX Franklin, sans-serif',
+						Outfit: 'Outfit, Century Gothic, sans-serif',
 						times: 'Times New Roman, Times',
 						comicsans: 'Comic Sans MS, casual, cursive',
 						humanist: 'Optima, Candara, Noto Sans, source-sans-pro, sans-serif',

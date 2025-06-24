@@ -2,12 +2,13 @@ export default function (string, fontsDir) {
 	let outputRoot = ''; // Compose a CSS string from the JSON tokens
 	const json = JSON.parse(string);
 	const themes = json.themes;
+	const themeFonts = Object.keys(themes)
+		.map((t) => themes[t].font.heading)
+		.filter((f) => f.filename); // No filename means we're expecting to use a local font
+	const extraFonts = json.extraFonts || [];
+	const allFonts = [].concat(themeFonts, extraFonts);
 
-	for (let themeKey in themes) {
-		const themeHeadingFont = themes[themeKey].font.heading;
-		if (!themeHeadingFont.filename) {
-			continue; // No filename means we're expecting to use a local font
-		}
+	for (let themeHeadingFont of allFonts) {
 		const localFontNames = themeHeadingFont.local || [];
 		const localFontList = Array.from(new Set([themeHeadingFont.family].concat(localFontNames))).map((localName) => `local("${localName}")`);
 		const filename = themeHeadingFont.filename || themeHeadingFont.family;
@@ -16,21 +17,22 @@ export default function (string, fontsDir) {
 			'font-weight': 'weight',
 			'font-style': 'style',
 			'size-adjust': 'size-adjust',
-			'ascent-override': 'ascent-override',
-			'descent-override': 'descent-override',
-			'line-gap-override': 'line-gap-override',
+			ascent: 'ascent-override',
+			descent: 'descent-override',
+			'line-gap': 'line-gap-override',
 		};
 		const extraProps = Object.entries(extraPropsMap)
 			.map(([prop, fontDataKey]) => (themeHeadingFont.hasOwnProperty(fontDataKey) ? `${prop}: ${themeHeadingFont[fontDataKey]};` : ''))
 			.filter(Boolean);
 		const fontFaceDeclaration = `
-        @font-face {
-            font-family: "${themeHeadingFont.family}";
-            src: ${fontSrcList.join(', ')};
-            ${extraProps.join('\n')}
-            font-display: swap;
-        }`;
-		outputRoot += `${fontFaceDeclaration}\n`;
+		@font-face {
+			font-family: "${themeHeadingFont.family}";
+			src: ${fontSrcList.join(', ')};
+			${extraProps.join(`
+			`)}
+			font-display: swap;
+		}`;
+		outputRoot += fontFaceDeclaration;
 	}
 
 	return outputRoot;

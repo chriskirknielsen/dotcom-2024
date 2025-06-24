@@ -1,66 +1,72 @@
 
-        @font-face {
-            font-family: "Canela";
-            src: local("Canela"), url("/assets/fonts/Canela-Bold.woff2") format("woff2");
-            font-weight: 700;
-font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: "XanhMono";
-            src: local("XanhMono"), local("Xanh Mono"), url("/assets/fonts/XanhMono-Italic.woff2") format("woff2");
-            font-weight: 400;
-font-style: italic;
-size-adjust: none;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: "Switzer";
-            src: local("Switzer"), local("SwitzerBold"), url("/assets/fonts/Switzer-Bold.woff2") format("woff2");
-            font-weight: 700;
-font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: "InstrumentSerif";
-            src: local("InstrumentSerif"), local("Instrument Serif"), url("/assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");
-            font-weight: 400;
-font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: "MDNichrome";
-            src: local("MDNichrome"), url("/assets/fonts/MDNichrome-Bold.woff2") format("woff2");
-            font-weight: 700;
-font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: "Rajdhani";
-            src: local("Rajdhani"), url("/assets/fonts/Rajdhani-Medium.woff2") format("woff2");
-            font-weight: 500;
-font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: "Chinook";
-            src: local("Chinook"), url("/assets/fonts/Chinook-Regular.woff2") format("woff2");
-            font-weight: 900;
-font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: "TeXGyreAdventor";
-            src: local("TeXGyreAdventor"), local("TeX Gyre Adventor Bold"), local("TeX Gyre Adventor"), url("/assets/fonts/TeXGyreAdventor-Bold.woff2") format("woff2");
-            font-weight: 700;
-font-style: normal;
-ascent-override: 105%;
-            font-display: swap;
-        }
+		@font-face {
+			font-family: "Canela";
+			src: local("Canela"), url("/assets/fonts/Canela-Bold.woff2") format("woff2");
+			font-weight: 700;
+			font-style: normal;
+			font-display: swap;
+		}
+		@font-face {
+			font-family: "XanhMono";
+			src: local("XanhMono"), local("Xanh Mono"), url("/assets/fonts/XanhMono-Italic.woff2") format("woff2");
+			font-weight: 400;
+			font-style: italic;
+			size-adjust: none;
+			font-display: swap;
+		}
+		@font-face {
+			font-family: "Switzer";
+			src: local("Switzer"), local("SwitzerBold"), url("/assets/fonts/Switzer-Bold.woff2") format("woff2");
+			font-weight: 700;
+			font-style: normal;
+			font-display: swap;
+		}
+		@font-face {
+			font-family: "InstrumentSerif";
+			src: local("InstrumentSerif"), local("Instrument Serif"), url("/assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");
+			font-weight: 400;
+			font-style: normal;
+			font-display: swap;
+		}
+		@font-face {
+			font-family: "MDNichrome";
+			src: local("MDNichrome"), url("/assets/fonts/MDNichrome-Bold.woff2") format("woff2");
+			font-weight: 700;
+			font-style: normal;
+			font-display: swap;
+		}
+		@font-face {
+			font-family: "Rajdhani";
+			src: local("Rajdhani"), url("/assets/fonts/Rajdhani-Medium.woff2") format("woff2");
+			font-weight: 500;
+			font-style: normal;
+			font-display: swap;
+		}
+		@font-face {
+			font-family: "Chinook";
+			src: local("Chinook"), url("/assets/fonts/Chinook-Regular.woff2") format("woff2");
+			font-weight: 900;
+			font-style: normal;
+			font-display: swap;
+		}
+		@font-face {
+			font-family: "TeXGyreAdventor";
+			src: local("TeXGyreAdventor"), local("TeX Gyre Adventor Bold"), local("TeX Gyre Adventor"), url("/assets/fonts/TeXGyreAdventor-Bold.woff2") format("woff2");
+			font-weight: 700;
+			font-style: normal;
+			font-display: swap;
+		}
+		@font-face {
+			font-family: "Outfit";
+			src: local("Outfit"), url("/assets/fonts/Outfit-Medium.woff2") format("woff2");
+			font-weight: 500;
+			font-style: normal;
+			font-display: swap;
+		}
+		@font-face {
+			font-family: "LibreFranklin";
+			src: local("LibreFranklin"), url("/assets/fonts/LibreFranklin-ExtraBold.woff2") format("woff2");
+			font-weight: 800;
+			font-style: normal;
+			font-display: swap;
+		}
