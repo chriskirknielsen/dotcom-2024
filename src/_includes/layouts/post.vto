@@ -27,7 +27,7 @@
 
 {{ set pageFooter }}
     <footer class="signoff">
-        <div class="signoff-photo">
+        <a href="/about/" class="signoff-photo" tabindex="-1" aria-hidden="true">
             <img
                 src="{{ [assets.images, 'profile.jpg'] |> toPath |> toNetlifyImage({ w: 160 }) }}"
                 alt=""
@@ -35,10 +35,11 @@
                 height="160"
                 loading="lazy"
             >
-        </div>
+        </a>
         <div class="signoff-message">
             <p class="signoff-title | h4">Hey, I’m <span class="p-given-name">{{ metadata.author.shortname }}</span>, a front-end developer, CSS nerd, and designer.</p>
             <p class="signoff-body | fontSize-smaller">
+                <a href="/about/">Here’s more about me</a>.
                 You can find me on
                 <a href="{{ social.mastodon.url }}" class="link-label-anchor">
                     {{ svg 'mastodon', { class: 'inline-icon inline-icon--center', ariaHidden: true } }}
