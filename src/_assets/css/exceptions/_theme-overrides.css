@@ -204,6 +204,7 @@ html[data-theme='vapor'] {
 			mask-image: radial-gradient(var(--crt-size) 100%, var(--crt-mask)), radial-gradient(100% var(--crt-size), var(--crt-mask));
 			mask-composite: intersect;
 		}
+
 		@supports (corner-shape: bevel) {
 			corner-shape: squircle;
 
