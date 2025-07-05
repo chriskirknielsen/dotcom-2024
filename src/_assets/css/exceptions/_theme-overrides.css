@@ -16,6 +16,11 @@ html[data-theme='dawn'] {
 
 @media (--prefers-dark) {
 	html:not([data-theme]) {
+		@supports (fill: color(display-p3 1 1 1)) {
+			--C-accent: color(display-p3 0.99289 0.1318 0.44724);
+			--C-heading: color(display-p3 0.17445 0.86504 0.83123);
+		}
+
 		.homepage-logo {
 			--HOME-logo-name-color: var(--C-accent);
 		}
@@ -95,6 +100,11 @@ html[data-theme='dawn'] {
 }
 
 html[data-theme='dusk'] {
+	@supports (fill: color(display-p3 1 1 1)) {
+		--C-accent: color(display-p3 0.99289 0.1318 0.44724);
+		--C-heading: color(display-p3 0.17445 0.86504 0.83123);
+	}
+
 	.homepage-logo {
 		--HOME-logo-name-color: var(--C-accent);
 	}
@@ -275,6 +285,10 @@ html[data-theme='quill'] {
 
 html[data-theme='cyberpunk'] {
 	--cut-size: clamp(0.25rem, 0.375em, 0.75rem);
+
+	@supports (fill: color(display-p3 1 1 1)) {
+		--C-accent: color(display-p3 0.42472 0.99866 0.9163);
+	}
 
 	.homepage-logo {
 		--HOME-logo-name-color: var(--C-accent);
