@@ -643,7 +643,7 @@ const designs = [
 		description: "A poster illustrating Ellie's signature knife in The Last of Us.",
 		img: 'tlou-switchblade.jpg',
 		links: {
-			RedBubble: 'https://www.redbubble.com/i/poster/The-Last-of-Us-Switchblade-by-ckirknielsen/106050948.LVTDI',
+			// RedBubble: 'https://www.redbubble.com/i/poster/The-Last-of-Us-Switchblade-by-ckirknielsen/106050948.LVTDI',
 			TeePublic: 'https://www.teepublic.com/poster-and-art/28918532-the-last-of-us-switchblade',
 		},
 		tags: ['games', 'gaming-arsenal'],
