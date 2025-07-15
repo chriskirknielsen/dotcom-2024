@@ -18,12 +18,12 @@
         {{ if toc }}
             <div class="toc | flow">
                 <p class="toc-title | h3" id="toc-title">Table of Contents</p>
-                {{ content |> autoToc('toc-list | fontSize-small', 'toc-title') }}
+                {{ content |> getHeadingAnchors |> autoToc('toc-list | fontSize-small', 'toc-title') }}
             </div>
         {{ /if }}
 
         {{ if autoToc || autoHeadingAnchors }}
-            {{ content |> getHeadingAnchors(true) }}
+            {{ content |> getHeadingAnchors }}
         {{ else }}
             {{ content }}
         {{ /if }}

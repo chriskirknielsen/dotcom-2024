@@ -4,6 +4,8 @@ import markdownItAttrs from 'markdown-it-attrs';
 import markdownItCodeWrap from 'markdown-it-codewrap';
 import * as cheerio from 'cheerio';
 
+let anchorifiedContentCache = {};
+
 class TableOfContents {
 	constructor(options = {}) {
 		this.markup = options.markup;
@@ -92,7 +94,9 @@ class TableOfContents {
 
 		const list = this.populateList(this.hierarchy);
 		list.addClass(this.listClass);
-		if (this.listLabelledBy) list.attr('aria-labelledby', this.listLabelledBy);
+		if (this.listLabelledBy) {
+			list.attr('aria-labelledby', this.listLabelledBy);
+		}
 		return list.prop('outerHTML');
 	}
 }
@@ -180,6 +184,10 @@ export default function (eleventyConfig, options = {}) {
 			return markup;
 		}
 
+		if (anchorifiedContentCache.hasOwnProperty(markup)) {
+			return anchorifiedContentCache[markup]; // Return cached value
+		}
+
 		const selector = `${includeH1 ? 'h1,' : ''} h2, h3, h4, h5, h6`;
 
 		const $ = cheerio.load(markup, null, false); // Load the contents into cheerio to get a DOM representation
@@ -187,6 +195,7 @@ export default function (eleventyConfig, options = {}) {
 
 		// If there are no headings, just return the content
 		if (headings.length === 0) {
+			anchorifiedContentCache[markup] = markup;
 			return markup;
 		}
 
@@ -202,21 +211,24 @@ export default function (eleventyConfig, options = {}) {
 
 			const text = h.text(); // Get the heading content
 			const slug = slugify(text); // Create a slug from the content
+			const id = h.attr('id') || slug;
 			const inner = `<a class="${anchorClass}" href="#${slug}">${text}</a>`;
-			h.attr('id', slug);
+			h.attr('id', id);
 			h.attr('tabindex', '-1');
 			h.html(inner);
 			return h;
 		});
 
-		return $.html();
+		const processedMarkup = $.html();
+		anchorifiedContentCache[markup] = processedMarkup;
+		return processedMarkup;
 	});
 
 	/** Create a table of content list from markup */
 	eleventyConfig.addFilter('autoToc', function (markup, listClass, listLabelledBy) {
 		// If this isn't a string, there isn't anything we can do!
 		if (typeof markup !== 'string') {
-			return markup;
+			return '';
 		}
 
 		const toc = new TableOfContents({ markup, selectors: 'h2, h3, h4', listClass: listClass, listLabelledBy });
