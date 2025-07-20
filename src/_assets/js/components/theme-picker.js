@@ -182,7 +182,10 @@ class ThemePicker extends HTMLElement {
 		const shadowLightness = Math.min(67, Math.round(Math.pow(1 - canvasHsl.l / 100, 2) * 100)); // Make the shadow follow the lightness opposite to the background (light BG = dark shadow, dark BG = glow) to stand out
 		const shadowColor = `${accentHsl.h}deg ${shadowSaturation}% ${shadowLightness}%`;
 
-		this.customSheet.replaceSync(`:root[data-theme="custom"] {
+		this.customSheet.replaceSync(`html[data-theme]:not([data-theme='custom']) [data-theme-condition='custom'] {
+			display: none !important;
+		}
+		:root[data-theme="custom"] {
 			--color-scheme: ${isDark ? 'dark' : 'light'};
 			${remappedValues.join('\n\t\t\t')}
 			--font-heading-style: ${values['font-heading-family'] === 'XanhMono' ? 'italic' : 'normal'};

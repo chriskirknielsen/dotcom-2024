@@ -50,7 +50,7 @@ I also took a few from <a href="https://iconsvg.xyz/">IconSVG.xyz</a>:
 </p>
 
 {{ callout "Keyboard user?", "⌨️", { mode: 'markup', class: 'hide-when-nojs' } }}
-<p>If you are using a keyboard with JS enabled, you can press a number key to activate the corresponding theme based on the theme picker order (the <kbd>0</kbd> key and current theme index {{ for i, t of themes }}<kbd data-theme-condition="{{ t.key }}">{{ i+1 }}</kbd>{{ /for }} will revert to the system light/dark default).</p>
+<p>If you are using a keyboard with JS enabled, you can press a number key to activate the corresponding theme based on the theme picker order (the <kbd>0</kbd> key and current theme index {{ for i, t of [].concat(themes,[{key:'custom'}]) }}<kbd data-theme-condition="{{ t.key }}">{{ i+1 }}</kbd>{{ /for }} will revert to the system light/dark default).</p>
 {{ /callout }}
 
 {{ set themeDetails = {
