@@ -41,11 +41,17 @@
 
 	<div class="theme-picker-scheme-group">
 		<span class="theme-picker-scheme-label">Custom</span>
-		<button class="button button--icon-only" data-theme-set="custom" aria-pressed="false" aria-label="Toggle theme: Custom" data-persist-pressed-style>
-			{{ svg 'paint-roller', { width: 24, height: 24 } }}
-		</button>
+		
 		<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}">
-			<button class="button button--icon-only" aria-label="Customise" data-theme-custom-action="open" aria-labelledby="theme-picker-custom-adjust-label">
+			<button class="button button--icon-only" data-theme-set="custom" aria-pressed="false" aria-label="Toggle theme: Custom" data-persist-pressed-style>
+				{{ svg 'paint-roller', { width: 24, height: 24 } }}
+			</button>
+			<span class="tooltip-content" id="theme-picker-custom-apply-label">
+				Apply <span class="visually-hidden">custom theme</span>
+			</span>
+		</div>
+		<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}">
+			<button class="button button--icon-only" aria-label="Customise" aria-describedby="theme-picker-custom-adjust-label" data-theme-custom-action="open">
 				{{ svg 'sliders', { width: 24, height: 24 } }}
 			</button>
 			<span class="tooltip-content" id="theme-picker-custom-adjust-label">
