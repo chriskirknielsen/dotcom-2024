@@ -4,11 +4,12 @@ summary: "A few tips to refactor your njk into vto."
 tags: [javascript, eleventy, vento]
 toc: true
 time: 04:51:23
-updated: 2025-06-15
+updated: 2025-07-20
 changelog: {
 	'2025-06-05': "Change plugin import demo to remove `autotrim` option as it is the default. Add link to plugin’s readme/docs.",
 	'2025-06-07': "Update to reflect new `eleventy-plugin-vento` version.",
 	'2025-06-15': "Add [a note](#this-is-missing-some-context) about `this.ctx` in Nunjucks.",
+	'2025-07-20': "Added a note about `loopIndex` for simple array iteration.",
 }
 ---
 
@@ -358,6 +359,9 @@ Another sweet Nunjucks feature is the auto-magic `loop` variable, which includes
 {{ /for }}
 ```
 {{ /echo }}
+
+{{ callout }}You can use {{ echo }}`{{ for loopIndex, item of list }}`{{ /echo }} for Arrays (zero-indexed, mind!), but the above will still be necessary for iterating through objects as `key, value` (you can use `Object.keys` or `Object.entries` if you want to have both index and key/key-value).
+{{ /callout }}
 
 Okay… now we’re done fixing our loops, right? Well, almost. I ran into a peculiar issue I should report as a bug, but basically the sort order was seemingly reset for objects being iterated (maybe the objects are recreated instead of referenced or copied verbatim?), when that object was manipulated somewhere else (like a filter). So, instead of sorting the object directly, I opted to extract the keys into a plain array, sort those, and loop over them; the value is grabbed inside the loop instead. Less squeaky clean, but unless I‘m doing something wrong, the sort order from the object appears to reset every time. The original Nunjucks loop:
 

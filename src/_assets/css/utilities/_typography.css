@@ -71,6 +71,9 @@
 .textDecoration-underline {
 	text-decoration: underline;
 }
+.fontVariant-tabularNums {
+	font-variant-numeric: tabular-nums;
+}
 
 .textWrap-balance {
 	text-wrap: balance;
