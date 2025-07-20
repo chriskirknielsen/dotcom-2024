@@ -10,8 +10,7 @@ versionsInfo: {
 ---
 
 <ol class="timeline">
-{{> let loopIndex = 1 }}
-{{ for versionYear of versionsInfo |> Object.keys |> sort |> reverse }}
+{{ for loopIndex, versionYear of versionsInfo |> Object.keys |> sort |> reverse }}
     {{ set versionInfo = versionsInfo[versionYear] }}
 	<li class="timeline-item">
 		<div class="timeline-content">
@@ -32,7 +31,7 @@ versionsInfo: {
                     src="{{ [assets.images, "site-archives/year-"+versionYear+"-dark.jpg"] |> toPath |> toNetlifyImage }}"
                     width="600"
                     height="600"
-                    {{ if loopIndex >= 3 }}loading="lazy"{{ /if }}
+                    {{ if loopIndex >= 2 }}loading="lazy"{{ /if }}
                     class="timeline-image hide-when-light"
                     alt="My website’s {{ versionYear }} version"
                 >
@@ -41,14 +40,13 @@ versionsInfo: {
                     src="{{ [assets.images, "site-archives/year-"+versionYear+".jpg"] |> toPath |> toNetlifyImage }}"
                     width="600"
                     height="600"
-                    {{ if loopIndex >= 3 }}loading="lazy"{{ /if }}
+                    {{ if loopIndex >= 2 }}loading="lazy"{{ /if }}
                     class="timeline-image"
                     alt="My website’s {{ versionYear }} version"
                 >
             {{ /if }}
         </a>
     </li>
-    {{> loopIndex++ }}
 {{ /for }}
 </ol>
 

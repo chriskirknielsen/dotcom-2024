@@ -80,10 +80,8 @@ I’m a creative developer, or “design engineer”, meaning I can code and des
     adobecs: { label: 'Adobe Creative Suite', sub: { photoshop: 'Photoshop', illustrator: 'Illustrator', aftereffects: 'After Effects' } }
 } }}
 <ul class="inline-list unstuck-list textAlign-center | about-icons-list" style="--c: {{ icons | keys | length }};">
-    {{> let loopIndex = 0 }}
     {{ for iconKey, iconInfo of icons }}
-        {{> loopIndex++ }}
-        <li class="about-icons-list-item" style="--i: {{ loopIndex - 1 }};">
+        <li class="about-icons-list-item">
         {{- if iconInfo.sub -}}
             <details name="about-language-icon" class="about-icons-list-details">
                 <summary class="about-icons-list-summary">

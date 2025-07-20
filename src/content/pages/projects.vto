@@ -5,8 +5,7 @@ summary: Some of the things I’ve made, either passion projects or real-world w
 
 <ul class="cards" data-grid-cols="3" data-grid-layout="importance">
 	{{> let loopIndex = 0 }}
-	{{ for project of collections._projects |> sortBy(true, false, 'data.projectOrder') }}
-		{{> loopIndex++ }}
+	{{ for loopIndex, project of collections._projects |> sortBy(true, false, 'data.projectOrder') }}
 		{{ set customMetaImage800 = project.data.customMetaImage |> toNetlifyImage({ w: 800 }) }}
 		{{ set customMetaImage400 = project.data.customMetaImage |> toNetlifyImage({ w: 400 }) }}
 		<li class="card-wrapper"{{ if project.data.projectImportance }} data-importance="{{ project.data.projectImportance }}"{{ /if }}>
@@ -20,7 +19,7 @@ summary: Some of the things I’ve made, either passion projects or real-world w
 					src: customMetaImage400,
 					width: 600,
 					height: 600,
-					lazy: loopIndex >= 8
+					lazy: loopIndex >= 7
 				}, cardImageSizeSet || {}),
 				heading: project.data.title,
 				description: project.data.summary

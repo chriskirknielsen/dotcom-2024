@@ -220,15 +220,13 @@ fontSpecimenNav: {
         'tt'
     ] }}
     <div class="specimen-set-demo specimen specimen-dlig ligature-set-demo">
-        {{> let loopIndex = 0 }}
-        {{ for liga of ligaList }}
-            {{> loopIndex++ }}
+        {{ for loopIndex, liga of ligaList }}
             {{ set ligatureSlug = liga |> trim |> slugify }}
             {{ set ligaId = 'liga-' + loopIndex + '-' + ligatureSlug }}
             <label for="{{ ligaId }}" class="ligature-sample" title="&quot;{{ liga }}&quot;">
                 {{ liga }}
                 <button type="button" class="ligature-sample-code" aria-hidden="true" tabindex="-1">{{ liga }}</button>
-                <input type="text" class="ligature-sample-code" value="{{ liga }}" id="{{ligaId}}" readonly>
+                <input type="text" class="ligature-sample-code" value="{{ liga }}" id="{{ ligaId }}" readonly>
             </label>
         {{ /for }}
     </div>

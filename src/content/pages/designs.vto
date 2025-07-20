@@ -31,9 +31,7 @@
 
 <filtered-tiles class="flow" data-filters="{{ activeDesigns |> pluck('tags') |> flatten |> unique |> sort |> join(',') }}">
 	<ul data-filtered-tiles-group class="cards">
-		{{> let loopIndex = 0 }}
-		{{ for design of activeDesigns }}
-			{{> loopIndex++ }}
+		{{ for loopIndex, design of activeDesigns }}
 			<li class="card-wrapper" id="{{ design.slug }}"
 				data-tags="{{ design.tags |> join(',') }}"
 				aria-hidden="false"
@@ -81,7 +79,7 @@
 					src: cardImageSrc,
 					width: 600,
 					height: 600,
-					lazy: loopIndex >= 8
+					lazy: loopIndex >= 7
 				},
 				link: designPermalink,
 				heading: design.name,
