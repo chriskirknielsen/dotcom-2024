@@ -129,10 +129,9 @@ function loadAndPopulateGameDetailDialog(target, navAnimSign = 0) {
 		clone.querySelector('[data-slot-img="trophyIcon"]').setAttribute('width', iconWidth);
 	}
 	clone.querySelector('[data-slot-computed="trophyEarned"]').innerHTML = gameData.trophyEarned
-		? `<span class="gaming-details-trophies-percentage ${gameData.trophyProgress === 100 ? 'fontWeight-bold' : ''}">${gameData.trophyProgress}%:</span> ${toTrophyList(
-				gameData.trophyEarned,
-				trophySvgId
-		  )}`
+		? `<span class="gaming-details-trophies-percentage">${Object.values(gameData.trophyEarned).reduce((p, c) => p + c, 0)} <span${
+				gameData.trophyProgress === 100 ? ' class="fontWeight-bold"' : ''
+		  }>(${gameData.trophyProgress}%)</span>:</span> ${toTrophyList(gameData.trophyEarned, trophySvgId)}`
 		: '';
 
 	Array.from(dialog.childNodes).forEach((el) => el.remove());
