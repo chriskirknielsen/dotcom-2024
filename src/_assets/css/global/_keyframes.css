@@ -2,24 +2,16 @@
 	from {
 		opacity: 0;
 	}
-
-	/* 100% {
-		opacity: 1;
-	} */
 }
 
 @keyframes scaleUp {
 	from {
-		transform: scale(0);
+		scale: 0;
 	}
-
-	/* 100% {
-		transform: scale(1);
-	} */
 }
 
 @keyframes moveUp {
 	from {
-		transform: translateY(100%);
+		translate: 0 100%;
 	}
 }
