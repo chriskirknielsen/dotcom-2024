@@ -128,13 +128,8 @@ const gameslibrary = await notionDatabaseQuery({
 				return processedEntry;
 			});
 
-		// Here's a dirty trick… JavaScript provides each item in a loop by reference, which means that it is mutable,
-		// so to avoid a .map() directly followed by a .filter(), we can instead use a filter to exclude results we don't want
-		// while also looking for the data we want to update, since we have access to the entire array even as we discard items,
-		// because .filter() creates a shallow copy and doesn't mutate `data` itself. Nasty trick, but if you're looping over
-		// a lot of data, doing a single loop instead of two can be practical to shave off some processing time! (probably about 3ms lol)
-		// Basically I've discovered .reduce() I guess?
-		const filteredData = normalizedData.filter((item) => {
+		// Using reduce to do map+filter in a single loop — very useful to be economical for this which takes… ~2.5ms on average :clown emoji:
+		const filteredData = normalizedData.reduce((list, item) => {
 			// If there are sub-items, let's find them in the list, grab their title + completion status, and use that as their value
 			if (item.subItems.length > 0) {
 				let totalCompletion = [];
@@ -165,9 +160,12 @@ const gameslibrary = await notionDatabaseQuery({
 				item.completed = new Set(totalCompletion).size === 1 ? totalCompletion.at(0) : null;
 			}
 
-			// We only want to show top-level items, so we can reject sub-items if their have a non-empty parentItem value
-			return item.parentItem.length === 0;
-		});
+			// We only want to show top-level items, so we can reject sub-items if they have a non-empty parentItem value
+			if (item.parentItem.length === 0) {
+				list.push(item);
+			}
+			return list;
+		}, []);
 
 		// Provide a compiled list of all trophy levels using a needlessly complex one-line operation
 		const totalTrophyData = psnTrophyData.map((t) => t.earnedTrophies).reduce((p, c) => Object.fromEntries(Object.keys(p).map((k) => [k, p[k] + c[k]])));
