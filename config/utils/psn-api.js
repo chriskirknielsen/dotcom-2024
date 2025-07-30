@@ -2,7 +2,7 @@ import Module from 'node:module';
 const require = Module.createRequire(import.meta.url);
 import 'dotenv/config';
 import apiCache from './api-cache.js';
-const { exchangeNpssoForCode, exchangeCodeForAccessToken, getUserTitles } = require('psn-api');
+const { exchangeNpssoForAccessCode, exchangeAccessCodeForAuthTokens, getUserTitles } = require('psn-api');
 
 const PSN_API_MAX_PAGE_SIZE = 800; // This is a hardcoded limit to the number of titles that can be returned in a single getUserTitles call
 const psnApiPageSize = Math.min(500, PSN_API_MAX_PAGE_SIZE); // Preferred page size, but not more than the max
@@ -15,8 +15,8 @@ export default async function () {
 	}
 
 	// Set up access to the PSN API
-	const accessCode = await exchangeNpssoForCode(process.env.PLAYSTATION_NPSSO_TOKEN);
-	const authorization = await exchangeCodeForAccessToken(accessCode);
+	const accessCode = await exchangeNpssoForAccessCode(process.env.PLAYSTATION_NPSSO_TOKEN);
+	const authorization = await exchangeAccessCodeForAuthTokens(accessCode);
 
 	// Get the cache data, and if missing or stale, provide the complete data query logic
 	const cachedData = apiCache({

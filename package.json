@@ -43,7 +43,7 @@
 		"markdown-it-attrs": "^4.3.1",
 		"markdown-it-codewrap": "^1.0.1",
 		"netlify-plugin-cache": "^1.0.3",
-		"psn-api": "^2.10.1",
+		"psn-api": "^2.15.0",
 		"purgecss": "^7.0.2",
 		"sharp": "^0.33.2",
 		"through2": "^4.0.2"
