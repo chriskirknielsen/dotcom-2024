@@ -1,7 +1,4 @@
 .hero {
-	--HERO-rule-thickness: 1px;
-	--HERO-rule-color: var(--_hero-rule-color);
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -9,7 +6,14 @@
 	padding-block-end: var(--flow-space);
 
 	text-align: center;
-	border-block-end: var(--HERO-rule-thickness) solid var(--HERO-rule-color);
+}
+
+.hero,
+hr.hero-like {
+	border-block-end: 1px solid var(--_hero-rule-color);
+}
+hr.hero-like {
+	background: none;
 }
 
 .hero-heading {

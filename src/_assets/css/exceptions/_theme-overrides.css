@@ -72,7 +72,7 @@ html[data-theme='dawn'] {
 			box-shadow: inset 0 0 1em -0.5em var(--CODEBLOCK-border-color);
 		}
 
-		hr {
+		hr:where(:not(.hero-like)) {
 			position: relative;
 			overflow: visible;
 
@@ -156,7 +156,7 @@ html[data-theme='dusk'] {
 		box-shadow: inset 0 0 1em -0.5em var(--CODEBLOCK-border-color);
 	}
 
-	hr {
+	hr:where(:not(.hero-like)) {
 		position: relative;
 		overflow: visible;
 
@@ -237,7 +237,7 @@ html[data-theme='vapor'] {
 		color: var(--C-surface-alt);
 	}
 
-	hr {
+	hr:where(:not(.hero-like)) {
 		block-size: 4px;
 		mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='4'%3E%3Cdefs%3E%3Cpattern id='wave' width='15' height='4' patternUnits='userSpaceOnUse'%3E%3Cpath fill='none' stroke='black' d='M0 1c3.8 0 3.8 2 7.6 2s3.8-2 7.6-2'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='4' fill='url(%23wave)'/%3E%3C/svg%3E")
 			repeat-x center;
@@ -258,7 +258,7 @@ html[data-theme='quill'] {
 		background-color: var(--C-surface);
 	}
 
-	hr {
+	hr:where(:not(.hero-like)) {
 		position: relative;
 		overflow: visible;
 
@@ -417,7 +417,7 @@ html[data-theme='cyberpunk'] {
 		text-transform: uppercase;
 	}
 
-	hr {
+	hr:where(:not(.hero-like)) {
 		--s: 12px;
 		--g1: var(--C-accent-alt) 50%, transparent 0;
 		--g2: transparent 25%, var(--C-accent-alt) calc(25% + 0.5px), var(--C-accent-alt) calc(75% - 0.5px), transparent 75%;
@@ -476,7 +476,7 @@ html[data-theme='vintage'] {
 		background: var(--C-heading);
 	}
 
-	hr {
+	hr:where(:not(.hero-like)) {
 		block-size: 1rem;
 
 		border-radius: 2px;
@@ -544,7 +544,7 @@ html[data-theme='campfire'] {
 		border-radius: 100% 100% var(--size-xs) var(--size-xs) / 30% 30% var(--size-xs) var(--size-xs);
 	}
 
-	hr {
+	hr:where(:not(.hero-like)) {
 		block-size: 0.75rem;
 
 		/* background: linear-gradient(#908158 25%, #d2b123 0 50%, #cc711d 0 75%, #6d1b28 0) repeat-x 0 0 / 100% 100%;
@@ -724,7 +724,7 @@ html[data-theme='director'] {
 		} /* Invert the angle for every other inline code tag */
 	}
 
-	hr {
+	hr:where(:not(.hero-like)) {
 		--h: 20px;
 		--sqrt3: 1.7321;
 		--w: calc(var(--h) / var(--sqrt3));

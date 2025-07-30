@@ -138,13 +138,10 @@
 
 	@media (--accept-motion) {
 		&:is(:hover, :focus-visible, :focus-within) > .tooltip-content {
+			filter: drop-shadow(0px 3px 2px hsl(var(--_shadow-color) / 0.5));
+			transition: filter var(--easing-in-out) calc(200ms * var(--anim-f));
 			animation: fadeIn var(--easing-in-out) calc(200ms * var(--anim-f)), scaleUp var(--easing-in-out) calc(200ms * var(--anim-f));
 			transform-origin: var(--TOOLTIP-origin-x) var(--TOOLTIP-origin-y);
-
-			/* &,
-			&::before {
-				transition: transform var(--easing-in-out) calc(200ms * var(--anim-f));
-			} */
 		}
 	}
 

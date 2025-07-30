@@ -10,24 +10,12 @@
 
 {{ set activeDesigns = designs.filter(d => d.showInGallery) }}
 
-<p class="textAlign-center">If you want to commission a design from me, <a href="#footer-email-link">reach out via email</a>!</p>
+<p class="textAlign-center fontWeight-bold">
+	<span class="icon-text-pair">{{ svg 'handshake', { class: 'inline-icon inline-icon--center linecap-auto' } }} If</span>
+	you want to commission a design from me, <a href="#footer-email-link">reach out via email</a>!
+</p>
 
-<div class="textAlign-center">
-	<h2 class="visually-hidden" id="designs-shops-label">Shops</h2>
-	<ul class="designs-stores | flex-list justifyContent-center | fontWeight-bold fontSize-small" aria-labelledby="designs-shops-label" style="--list-gap: var(--size-m);">
-		{{ for merchStore, merchUrl of metadata.merch }}
-			{{ set storeIconName }}store-icon-{{ merchStore |> toLowerCase }}{{ /set }}
-			<li>
-				<a href="{{ merchUrl }}">
-					{{ svg storeIconName, { class: 'store-icon', width: 32, height: 32 } }}
-					{{ merchStore }}
-				</a>
-			</li>
-		{{ /for }}
-	</ul>
-</div>
-
-<hr>
+<hr class="hero-like">
 
 <filtered-tiles class="flow" data-filters="{{ activeDesigns |> pluck('tags') |> flatten |> unique |> sort |> join(',') }}">
 	<ul data-filtered-tiles-group class="cards">
@@ -99,7 +87,23 @@
 	</template>
 </filtered-tiles>
 
-<p class="textAlign-center fontStyle-italic">Note: this is not an exhaustive list, more designs are available in each shop!</p>
+<p class="textAlign-center fontStyle-italic">Note: this is not an exhaustive list, some more designs are available in each shop below.</p>
+
+
+<div class="textAlign-center">
+	<h2 class="visually-hidden" id="designs-shops-label">Shops</h2>
+	<ul class="designs-stores | flex-list justifyContent-center | fontSize-small" aria-labelledby="designs-shops-label" style="--list-gap: var(--size-m);">
+		{{ for merchStore, merchUrl of metadata.merch }}
+			{{ set storeIconName }}store-icon-{{ merchStore |> toLowerCase }}{{ /set }}
+			<li>
+				<a href="{{ merchUrl }}">
+					{{ svg storeIconName, { class: 'store-icon', width: 32, height: 32 } }}
+					{{ merchStore }}
+				</a>
+			</li>
+		{{ /for }}
+	</ul>
+</div>
 
 {{ if !metadata.nakedJs }}
 <script>
