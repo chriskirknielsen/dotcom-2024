@@ -1,3 +1,58 @@
+@media (--accept-motion) {
+	@supports (top: calc(sqrt(pow(tan(atan2(var(--x), 1px)), 2) + pow(tan(atan2(var(--y), 1px)), 2)) * 1px)) {
+		@property --THEMESWITCH-root-origin-x {
+			syntax: '<length>';
+			initial-value: 0px;
+			inherits: false;
+		}
+
+		@property --100vb {
+			syntax: '<length>';
+			initial-value: 0px;
+			inherits: false;
+		}
+
+		:root {
+			--100vb: 100vb; /* Scalars trick by Jane Ori: https://dev.to/janeori/css-type-casting-to-numeric-tanatan2-scalars-582j */
+			--THEMESWITCH-root-duration: 400ms;
+			--THEMESWITCH-root-easing: var(--easing-in);
+			--THEMESWITCH-root-origin-x: calc(
+				min(100vi, 50vi + var(--layout-max-content) / 2) - var(--layout-gutter) - var(--_cta-padding-inline)
+			); /* Approx. center of the Theme picker button icon */
+			--THEMESWITCH-root-origin: var(--THEMESWITCH-root-origin-x) 0px;
+			--THEMESWITCH-root-length-x: tan(atan2(var(--THEMESWITCH-root-origin-x), 1px));
+			--THEMESWITCH-root-length-y: tan(atan2(var(--100vb), 1px));
+			--THEMESWITCH-root-radius: calc(sqrt(pow(var(--THEMESWITCH-root-length-x), 2) + pow(var(--THEMESWITCH-root-length-y), 2)) * 1px); /* Pythagoras, baby! */
+		}
+
+		::view-transition-old(root) {
+			animation: --blurIn var(--THEMESWITCH-root-duration) var(--THEMESWITCH-root-easing);
+		}
+		::view-transition-new(root) {
+			animation: --punchOut var(--THEMESWITCH-root-duration) var(--THEMESWITCH-root-easing);
+		}
+
+		@keyframes --punchOut {
+			0% {
+				clip-path: circle(0px at var(--THEMESWITCH-root-origin));
+			}
+			100% {
+				filter: invert(0);
+				clip-path: circle(var(--THEMESWITCH-root-radius) at var(--THEMESWITCH-root-origin));
+			}
+		}
+
+		@keyframes --blurIn {
+			0% {
+				filter: blur(0);
+			}
+			100% {
+				filter: blur(16px);
+			}
+		}
+	}
+}
+
 @media (--prefers-light) {
 	html:not([data-theme]) {
 		.homepage-photo {

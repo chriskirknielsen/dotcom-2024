@@ -11,7 +11,7 @@ class ThemePicker extends HTMLElement {
 		};
 
 		// Trigger as soon as possible to give the current theme's trigger the appropriate aria-pressed value
-		this.setTheme(this.getTheme());
+		this.setTheme(this.getTheme(), false);
 
 		// Events handlers
 		this.addEventListener('click', this);
@@ -93,29 +93,52 @@ class ThemePicker extends HTMLElement {
 		return this.rgbToHsl(this.hexToRgb(H));
 	}
 
-	setTheme(theme) {
+	setTheme(theme, runViewTransition = true) {
 		if (!theme || this.keys.includes(theme) === false) {
 			theme = ''; // System default is an empty string
 		}
 
-		// Prevent weird transition between theme styles for a brief instant
-		document.documentElement.style.setProperty('--anim-f', '0');
+		let updatedPromised;
+		const isSameThemeKey = document.documentElement.getAttribute('data-theme') === theme || (document.documentElement.hasAttribute('data-theme') === false && !theme);
+		const isDefaultSameTarget = !theme && document.documentElement.getAttribute('data-theme') === this.defaults[this.getPreferredScheme()];
+		const isDefaultSameSource = !document.documentElement.getAttribute('data-theme') && theme === this.defaults[this.getPreferredScheme()];
+		const isSameTheme = isSameThemeKey || isDefaultSameTarget || isDefaultSameSource;
+		const useFallback = isSameTheme || !runViewTransition || !document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-		if (theme) {
-			document.documentElement.setAttribute('data-theme', theme);
-			localStorage.setItem(this.store, theme);
+		// Prevent weird transition between theme styles for a brief instant
+		document.documentElement.style.setProperty('--anim-f', useFallback ? '0' : '0.000000001');
+
+		const applyTheme = async () => {
+			if (theme) {
+				document.documentElement.setAttribute('data-theme', theme);
+				localStorage.setItem(this.store, theme);
+			} else {
+				document.documentElement.removeAttribute('data-theme');
+				localStorage.removeItem(this.store);
+			}
+
+			document.querySelectorAll('[data-theme-set]').forEach(function (btn) {
+				btn.setAttribute('aria-pressed', (btn.getAttribute('data-theme-set') === theme).toString());
+			});
+			return theme;
+		};
+		const restoreAnim = async () => {
+			if (useFallback) {
+				await new Promise((r, _) => requestAnimationFrame(() => setTimeout(r)));
+			}
+
+			// Once the theme's updated, allow transitions again
+			document.documentElement.style.removeProperty('--anim-f');
+		};
+
+		if (useFallback) {
+			updatedPromised = applyTheme();
 		} else {
-			document.documentElement.removeAttribute('data-theme');
-			localStorage.removeItem(this.store);
+			updatedPromised = document.startViewTransition(applyTheme).finished;
 		}
 
-		// Once the theme's updated, allow transitions again (RAF+timeout is weird but apparently necessary!)
-		requestAnimationFrame(() => {
-			setTimeout(() => document.documentElement.style.removeProperty('--anim-f'));
-		});
-
-		document.querySelectorAll('[data-theme-set]').forEach(function (btn) {
-			btn.setAttribute('aria-pressed', (btn.getAttribute('data-theme-set') === theme).toString());
+		return updatedPromised.then(restoreAnim).then((x) => {
+			return x;
 		});
 	}
 
@@ -277,9 +300,10 @@ class ThemePicker extends HTMLElement {
 					this.updateCustomThemeStyles();
 					dialog.close();
 				} else if (action === 'open') {
-					dialog.showModal();
 					this.updateCustomThemeStyles();
-					this.setTheme('custom');
+					this.setTheme('custom').then(() => {
+						dialog.showModal();
+					});
 				}
 			} else if (setter) {
 				const isPressed = setter.getAttribute('aria-pressed') === 'true';
