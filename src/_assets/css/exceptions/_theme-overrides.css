@@ -37,7 +37,6 @@
 				clip-path: circle(0px at var(--THEMESWITCH-root-origin));
 			}
 			100% {
-				filter: invert(0);
 				clip-path: circle(var(--THEMESWITCH-root-radius) at var(--THEMESWITCH-root-origin));
 			}
 		}
@@ -491,6 +490,13 @@ html[data-theme='cyberpunk'] {
 
 		& :any-link {
 			--LINK-color: var(--C-canvas);
+		}
+	}
+
+	@supports (corner-shape: bevel) {
+		theme-picker {
+			border-radius: 0 0 var(--PICKER-padding) 0;
+			corner-shape: bevel;
 		}
 	}
 }
