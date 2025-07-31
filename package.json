@@ -34,9 +34,7 @@
 		"eleventy-plugin-robotstxt": "^0.0.4",
 		"eleventy-plugin-vento": "^4.4.2",
 		"esbuild": "^0.25.0",
-		"fast-glob": "^3.3.2",
 		"glob": "^10.3.10",
-		"install": "^0.13.0",
 		"lightningcss": "^1.29.3",
 		"markdown-it": "^14.0.0",
 		"markdown-it-anchor": "^8.6.7",
@@ -45,7 +43,6 @@
 		"netlify-plugin-cache": "^1.0.3",
 		"psn-api": "^2.15.0",
 		"purgecss": "^7.0.2",
-		"sharp": "^0.33.2",
 		"through2": "^4.0.2"
 	}
 }
