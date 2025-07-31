@@ -31,3 +31,27 @@ theme-picker {
 .theme-custom-control-field {
 	inline-size: 100%;
 }
+
+html:not([data-theme]) {
+	theme-picker button:is([data-theme-set='dawn'], [data-theme-set='dusk'])::after {
+		--s: 8px;
+		position: absolute;
+		inset: calc(var(--s) * -0.5) calc(var(--s) * -0.5) auto auto;
+		block-size: var(--s);
+		aspect-ratio: 1;
+
+		border-radius: 50%;
+		background: var(--C-accent);
+	}
+
+	@media (--prefers-light) {
+		theme-picker button[data-theme-set='dawn']::after {
+			content: '';
+		}
+	}
+	@media (--prefers-dark) {
+		theme-picker button[data-theme-set='dusk']::after {
+			content: '';
+		}
+	}
+}
