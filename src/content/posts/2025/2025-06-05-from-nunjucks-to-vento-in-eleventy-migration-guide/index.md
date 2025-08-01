@@ -1,7 +1,7 @@
 ---
 title: "From Nunjucks to Vento in Eleventy: a migration guide (kinda)"
 summary: "A few tips to refactor your njk into vto."
-tags: [javascript, eleventy, vento]
+tags: [javascript, eleventy, nunjucks, vento]
 toc: true
 time: 04:51:23
 updated: 2025-07-20
