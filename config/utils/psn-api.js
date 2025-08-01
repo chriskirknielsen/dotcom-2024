@@ -1,8 +1,6 @@
-import Module from 'node:module';
-const require = Module.createRequire(import.meta.url);
 import 'dotenv/config';
 import apiCache from './api-cache.js';
-const { exchangeNpssoForAccessCode, exchangeAccessCodeForAuthTokens, getUserTitles } = require('psn-api');
+import { exchangeNpssoForAccessCode, exchangeAccessCodeForAuthTokens, getUserTitles } from 'psn-api';
 
 const PSN_API_MAX_PAGE_SIZE = 800; // This is a hardcoded limit to the number of titles that can be returned in a single getUserTitles call
 const psnApiPageSize = Math.min(500, PSN_API_MAX_PAGE_SIZE); // Preferred page size, but not more than the max
