@@ -1,7 +1,9 @@
 // Helpers
-const navAnimOffset = 100; // How far to move the dialog when navigating between games (in px)
+const navAnimOffset = 160; // How far to move the dialog when navigating between games (in px)
 const navAnimOpacity = 0; // How opaque to show the dialog when navigating between games (within [0;1])
-const navAnimDuration = 200; // How fast to transition states for the dialog box (in ms)
+const navAnimDuration = 300; // How fast to transition states for the dialog box (in ms)
+const navAnimEaseIn = 'ease-in';
+const navAnimEaseOut = 'ease-out';
 
 /** Get the SVG icon in the document to re-use. */
 function getTrophySvg(svgId, lvl) {
@@ -162,9 +164,9 @@ function loadAndPopulateGameDetailDialog(target, navAnimSign = 0) {
 			.animate(
 				[
 					{ translate: `${navAnimSign * navAnimOffset}px 0`, opacity: navAnimOpacity },
-					{ translate: '0 0', opacity: 1 },
+					{ translate: '0 0', scale: 1, opacity: 1 },
 				],
-				{ duration: navAnimDuration / 2, ease: 'ease-out' }
+				{ duration: navAnimDuration / 2, easing: navAnimEaseOut }
 			)
 			.finished.then(resetMoveEffect);
 	} else {
@@ -332,7 +334,12 @@ document.addEventListener('keyup', function (e) {
 		if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
 			let navAnimSign = e.key === 'ArrowLeft' ? 1 : e.key === 'ArrowRight' ? -1 : 0;
 			target.getAnimations().forEach((a) => a.finish());
-			target.animate([{ translate: `${navAnimSign * navAnimOffset}px 0`, opacity: navAnimOpacity }], { duration: navAnimDuration / 2, ease: 'ease-in' }).finished.then(doNav);
+			target
+				.animate([{ translate: `${navAnimSign * navAnimOffset}px 0`, opacity: navAnimOpacity }], {
+					duration: navAnimDuration / 2,
+					easing: navAnimEaseIn,
+				})
+				.finished.then(doNav);
 		} else {
 			doNav();
 		}
@@ -419,7 +426,7 @@ document.addEventListener('ckn:swipe', function (e) {
 		if (deltaX < deltaY || (moveX === 0 && moveY === 0) || deltaX < thresholdX) {
 			if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
 				targetEl.getAnimations().forEach((a) => a.finish());
-				targetEl.animate([{ translate: '0 0', opacity: 1 }], { duration: navAnimDuration / 2, ease: 'ease-out' }).finished.then(resetSwipe);
+				targetEl.animate([{ translate: '0 0', opacity: 1 }], { duration: navAnimDuration / 2, easing: navAnimEaseOut }).finished.then(resetSwipe);
 			} else {
 				resetSwipe();
 			}
@@ -432,8 +439,8 @@ document.addEventListener('ckn:swipe', function (e) {
 				swipeX: moveX,
 				swipeY: moveY,
 				swipeDirection: {
-					x: moveX > 0 ? 'right' : 'left',
-					y: moveY > 0 ? 'down' : 'up',
+					x: { '-1': 'left', 0: null, 1: 'right' }[Math.sign(moveX)],
+					y: { '-1': 'up', 0: null, 1: 'down' }[Math.sign(moveX)],
 				},
 			},
 		});
