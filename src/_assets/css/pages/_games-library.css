@@ -581,6 +581,10 @@
 }
 
 .gaming-details-trophies-badge {
+	--r: 0.25em;
+
+	position: relative;
+
 	padding: 0.125em 0.25em;
 
 	font-size: 0.875em;
@@ -589,7 +593,7 @@
 
 	color: var(--trophy-color);
 	background-color: var(--trophy-background);
-	border-radius: 0.25em;
+	border-radius: var(--r);
 
 	@supports (background-image: linear-gradient(in oklch, red, color-mix(in oklch, var(--a), var(--b)))) {
 		background-image: linear-gradient(to bottom right in oklch, color-mix(in oklch, var(--trophy-color), var(--trophy-background) 75%), var(--trophy-background));
@@ -603,16 +607,59 @@
 	&[data-trophy-level='silver'] {
 		--trophy-color: #d9e6ed;
 		--trophy-background: #364b63;
+		--trophy-angle-offset: 43deg;
 	}
 
 	&[data-trophy-level='gold'] {
 		--trophy-color: #f5e23d;
 		--trophy-background: #584419;
+		--trophy-angle-offset: 89deg;
 	}
 
 	&[data-trophy-level='platinum'] {
 		--trophy-color: #adf7ff;
 		--trophy-background: #144d90;
+		--trophy-angle-offset: 131deg;
+	}
+
+	&::after {
+		content: '';
+		pointer-events: none;
+
+		position: absolute;
+		inset: 1px;
+
+		border: 1px solid transparent;
+		border-radius: calc(var(--r) - 1px);
+		background: repeating-conic-gradient(
+				from calc(var(--trophy-angle-offset, 0deg) + var(--trophy-angle, 0deg)) at center,
+				var(--trophy-color) 0%,
+				transparent 12.5% 20.8%,
+				var(--trophy-color) 33.3%
+			)
+			border-box;
+
+		opacity: 0.5;
+		mask: conic-gradient(#000 0 0) padding-box, conic-gradient(#000 0 0);
+		mask-composite: exclude;
+	}
+}
+
+@media (--accept-motion) {
+	@property --trophy-angle {
+		syntax: '<angle>';
+		initial-value: 0deg;
+		inherits: false;
+	}
+
+	.gaming-details-trophies-badge::after {
+		animation: --trophyAngleAnim 5s linear infinite;
+	}
+
+	@keyframes --trophyAngleAnim {
+		to {
+			--trophy-angle: 360deg;
+		}
 	}
 }
 
