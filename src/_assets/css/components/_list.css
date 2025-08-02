@@ -8,11 +8,11 @@ ol > li > ol {
 	text-wrap: balance;
 
 	&:is(:not([data-flow]), [data-flow='block']) {
-		display: block;
+		display: block; /* List is on its own line */
 	}
 
 	&[data-flow='run-in'] {
-		display: inline;
+		display: inline; /* List is on the same line as preceding content */
 	}
 
 	& > li {

@@ -1,6 +1,6 @@
 // Helpers
 const navAnimOffset = 100; // How far to move the dialog when navigating between games (in px)
-const navAnimOpacity = 0.5; // How opaque to show the dialog when navigating between games (within [0;1])
+const navAnimOpacity = 0; // How opaque to show the dialog when navigating between games (within [0;1])
 const navAnimDuration = 200; // How fast to transition states for the dialog box (in ms)
 
 /** Get the SVG icon in the document to re-use. */
