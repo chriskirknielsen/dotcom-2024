@@ -164,7 +164,7 @@ function loadAndPopulateGameDetailDialog(target, navAnimSign = 0) {
 					{ translate: `${navAnimSign * navAnimOffset}px 0`, opacity: navAnimOpacity },
 					{ translate: '0 0', opacity: 1 },
 				],
-				{ duration: navAnimDuration, ease: 'ease-out' }
+				{ duration: navAnimDuration / 2, ease: 'ease-out' }
 			)
 			.finished.then(resetMoveEffect);
 	} else {
@@ -419,7 +419,7 @@ document.addEventListener('ckn:swipe', function (e) {
 		if (deltaX < deltaY || (moveX === 0 && moveY === 0) || deltaX < thresholdX) {
 			if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
 				targetEl.getAnimations().forEach((a) => a.finish());
-				targetEl.animate([{ translate: '0 0', opacity: 1 }], { duration: navAnimDuration, ease: 'ease-out' }).finished.then(resetSwipe);
+				targetEl.animate([{ translate: '0 0', opacity: 1 }], { duration: navAnimDuration / 2, ease: 'ease-out' }).finished.then(resetSwipe);
 			} else {
 				resetSwipe();
 			}
