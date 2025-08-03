@@ -20,7 +20,6 @@ export default {
 		mastodon: social.mastodon.url,
 		// bluesky: social.bluesky.url,
 	},
-	tweetArchiveUrl: 'https://tweets.chriskirknielsen.com/',
 	copyrightStart: 1992,
 	currentYear: new Date().getFullYear(),
 	lang: 'en',

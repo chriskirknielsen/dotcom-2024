@@ -4,9 +4,7 @@ summary: Precompiled Sass and JS files that become part of the source folder.
 tags:
     - snippet
     - git
-templateEngineOverride: njk,md
-originalUrl: https://tweets.chriskirknielsen.com/1573313737502515206/
-originalTitle: From chriskirknielsen’s tweet archive
+templateEngineOverride: vto,md
 ---
 
 I aliased a git command to move commits from one branch to another (usually `main` to `dev`). A bad idea? 🤷
@@ -18,3 +16,7 @@ switcheroo = "!f(){ git checkout ${3}; git cherry-pick ${1}; git checkout ${2}; 
 
 Usage: `git switcheroo {COMMIT HASH} {SOURCE BRANCH} {TARGET BRANCH}`
 ➡️ e.g: `git switcheroo 7edaf7 main dev`
+
+{{ callout }}
+Originally posted on Twitter on 23 September 2022. Figured it'd be worth its own post here.
+{{ /callout }}
