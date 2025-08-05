@@ -65,7 +65,7 @@ const gameslibrary = await notionDatabaseQuery({
 				.map((s) => s.trim())
 				.join(' ')
 				.trim();
-			console.log(`\x1b[30m[11ty] \x1b[31mpsi-api error: ${errorMessage}\x1b[0m`);
+			console.error(`\x1b[30m[11ty] \x1b[31mpsn-api error: ${errorMessage}\x1b[0m`);
 			return []; // If the trophy information is not available, don't fail the build
 		});
 
