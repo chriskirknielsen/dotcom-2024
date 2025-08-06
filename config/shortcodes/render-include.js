@@ -1,4 +1,5 @@
-import fs from 'fs';
+import fs from 'node:fs';
+import path from 'node:path';
 import pluginImage from '@11ty/eleventy-img';
 import * as cheerio from 'cheerio';
 
@@ -231,11 +232,13 @@ export default function (eleventyConfig, options = {}) {
 		}
 
 		const returnValue = pluginImage(svgSrc, {
-			urlPath: `/assets/svg`,
-			outputDir: `./_site/assets/svg/`,
+			urlPath: `/assets/svg/`,
+			// outputDir: `./_site/assets/svg/`,
+			outputDir: `.cache/svg/`,
 			widths: [1200],
 			formats: ['svg'],
 			svgShortCircuit: true,
+			failOnError: false,
 			filenameFormat: function (id, src, width, format, options) {
 				if (filename.endsWith(`.${format}`)) {
 					return filename;
@@ -247,6 +250,13 @@ export default function (eleventyConfig, options = {}) {
 		});
 		svgCache[filename] = returnValue;
 		return returnValue;
+	});
+
+	/** Sync the cached SVGs. */
+	eleventyConfig.on('eleventy.after', () => {
+		fs.cpSync('.cache/svg/', path.join(eleventyConfig.directories.output, '/assets/svg/'), {
+			recursive: true,
+		});
 	});
 
 	/** Render a component from the component folder. */

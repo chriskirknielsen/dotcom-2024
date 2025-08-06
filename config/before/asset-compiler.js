@@ -1,5 +1,5 @@
 import path from 'node:path';
-import fs from 'fs';
+import fs from 'node:fs';
 import { glob } from 'glob';
 import esbuild from 'esbuild';
 import { bundle, transform, Features } from 'lightningcss';
