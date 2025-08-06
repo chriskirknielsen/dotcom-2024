@@ -3,6 +3,7 @@ design/
 node_modules/
 package-lock.json
 .env
+.nvmrc
 *.code-workspace
 .netlify
 .cache
