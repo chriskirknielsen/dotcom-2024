@@ -4,7 +4,7 @@
     data: "collections",
     size: 1,
     alias: "tag",
-    before: function(paginationData, fullData) {
+    before: function (paginationData, fullData) {
       return paginationData.filter(function(t) {
         // Exclude tags that are "system" tags (starting with an underscore)
         return !t.startsWith('_')

@@ -18,7 +18,7 @@
 		summary: (data) => data.design.description,
 		customMetaImage: (data) => `/${data.assets.images}/designs/${data.design.img}`,
 		date: (data) => new Date(data.design.date),
-		metaExtra: function(data) { return `<link rel="preload" as="image" href="${this.toNetlifyImage(this.toPath([data.assets.images, 'designs', data.design.img]))}">`; }
+		metaExtra: function (data) { return `<link rel="preload" as="image" href="${this.toNetlifyImage(this.toPath([data.assets.images, 'designs', data.design.img]))}">`; }
 	},
 	heroCta: [{ url: "/designs/", label: "Back to Designs", icon: "arrow-left", iconBefore: true }]
 }

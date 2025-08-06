@@ -5,7 +5,7 @@
     metaDescriptionOverride: "I like to write once in a while. Enjoy!",
     heroCta: [{ label: "All Tags", url: "/tags/" }, { label: "Blogroll", url: "/blogroll/" }],
     eleventyComputed: {
-        summary: async function (data) {
+        summary: function (data) {
             const hasPostsData = Array.isArray(data?.collections?._posts) && data.collections._posts.length > 0;
             let textInsert = '';
 
