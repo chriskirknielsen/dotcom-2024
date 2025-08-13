@@ -7,6 +7,7 @@ code-wrap {
 	--CODEBLOCK-border-width: 1px;
 	--CODEBLOCK-padding: calc(var(--layout-gutter) - var(--CODEBLOCK-border-width));
 	--CODEBLOCK-border-color: var(--C-accent);
+	--CODEBLOCK-toolbar-padding: 6px;
 	--CODEBLOCK-toolbar-color: var(--C-surface);
 }
 
@@ -20,7 +21,7 @@ code-wrap {
 
 	justify-content: space-between;
 	align-items: center;
-	padding: 0.25em 0.25em 0.25em var(--layout-gutter);
+	padding: var(--CODEBLOCK-toolbar-padding) var(--CODEBLOCK-toolbar-padding) var(--CODEBLOCK-toolbar-padding) var(--layout-gutter);
 
 	color: var(--CODEBLOCK-toolbar-color);
 	border-radius: var(--_corner) var(--_corner) 0 0;

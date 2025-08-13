@@ -59,7 +59,6 @@
 }
 
 .tooltip {
-	--sqrt2: 1.4142; /* Not 100% sure about browser support for sqrt() so… playing it safe */
 	--TOOLTIP-arrow-size: var(--size-xs);
 	--TOOLTIP-offset: var(--_tooltip-offset, var(--size-2xs));
 	--TOOLTIP-inset-block: calc(100% + var(--TOOLTIP-arrow-size) + var(--TOOLTIP-offset));

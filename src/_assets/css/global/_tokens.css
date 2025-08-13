@@ -1,6 +1,8 @@
 :root {
 --ON: initial;
 --OFF:  ;
+--sqrt2: 1.4142;
+--sqrt3: 1.7321;
 --layout-breakpoint: 576px;
 --layout-max-content: 960px;
 --layout-gutter: 24px;

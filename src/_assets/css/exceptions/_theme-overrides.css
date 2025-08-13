@@ -495,8 +495,27 @@ html[data-theme='cyberpunk'] {
 
 	@supports (corner-shape: bevel) {
 		theme-picker {
-			border-radius: 0 0 var(--PICKER-padding) 0;
+			border-radius: 0 0 calc((var(--cut-size) + var(--PICKER-padding) / var(--sqrt2))) 0;
 			corner-shape: bevel;
+		}
+
+		.callout {
+			border-radius: 0 0 var(--CALLOUT-padding) 0;
+			corner-shape: bevel;
+		}
+
+		.signoff {
+			border-radius: 0 0 1em 0;
+			corner-shape: bevel;
+		}
+
+		.codeblock-toolbar {
+			border-radius: 0 calc((var(--cut-size) + var(--CODEBLOCK-toolbar-padding)) / var(--sqrt2)) 0 0;
+			corner-shape: bevel;
+
+			& [data-codewrap-copy] {
+				border-radius: 0 var(--cut-size) 0 0;
+			}
 		}
 	}
 }
@@ -787,7 +806,6 @@ html[data-theme='director'] {
 
 	hr:where(:not(.hero-like)) {
 		--h: 20px;
-		--sqrt3: 1.7321;
 		--w: calc(var(--h) / var(--sqrt3));
 		--c: var(--C-heading);
 		--b: var(--C-canvas);

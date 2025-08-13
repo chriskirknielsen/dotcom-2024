@@ -24,7 +24,6 @@
 	block-size: 0;
 	inline-size: 0;
 
-	--sqrt3: 1.7321;
 	--CENTER-MASS: calc(100% - var(--sqrt3) * 100% / 3) 50%; /* 2 */
 	--DELAY: calc(var(--anim-short) / 4);
 	--arrow-side-size: 0.5em;
