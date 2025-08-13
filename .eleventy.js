@@ -114,13 +114,14 @@ export default async function (eleventyConfig) {
 					pattern: /^\{\{[>+-]?|[+-]?\}\}$/,
 					alias: 'punctuation',
 				},
-				filter: {
-					pattern: /(\|>)\w+/,
-					lookbehind: true,
-					alias: 'function',
-				},
+				// filter: {
+				// 	pattern: /(?<=\|>\s*)(\w+)/,
+				// 	alias: 'function',
+				// },
+				punctuation: /(?:\|>|[{}[\](),.:;])/, // The usual plus |>
 				keyword: /\b(?:async|await|echo|else|export|for|from|function|if|import|in|of|set|typeof|while)\b/,
-				operator: /--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/, // JS operators
+				// operator: /--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/, // JS operators
+				operator: /--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|(?:((?!|)>)|((?<!\|)>)|([-+*/%&^!=<]))=?|\.{3}|\?\?=?|\?\.?|[~:]/, // JS operators, sans |> matching
 				boolean: /false|true/,
 			}); // Close enough?
 
