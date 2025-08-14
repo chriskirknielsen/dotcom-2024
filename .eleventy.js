@@ -106,9 +106,9 @@ export default async function (eleventyConfig) {
 			Prism.languages.vto = Object.assign({}, Prism.languages.django, {
 				comment: /^\{\{#[\s\S]*?#\}\}$/,
 				tag: {
-					pattern: /(^\{\{[>+-]?\s*)\w+/,
+					pattern: /(^\{\{[>+-]?\s*)(?!async|await|echo|else|export|for|from|function|if|import|in|of|set|typeof|while)\b/,
 					lookbehind: true,
-					alias: 'keyword',
+					alias: 'variable',
 				},
 				delimiter: {
 					pattern: /^\{\{[>+-]?|[+-]?\}\}$/,
