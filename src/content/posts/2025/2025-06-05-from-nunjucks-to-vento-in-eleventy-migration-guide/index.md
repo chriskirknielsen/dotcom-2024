@@ -293,7 +293,7 @@ function getDeepProp(obj, prop = null) {
 /** Groups array of objects by a property value (note: array in, object out). */
 eleventyConfig.addFilter('groupBy', (array, prop) => {
 	if (Array.isArray(array) === false) { throw new Error(`groupBy filter expects an array, was given ${typeof array}`); }
-	if (!prop || typeof prop !== 'string') { throw new Error(`groupBy filter expects a property key (or dot-separated path), was given ${typeof array}`); }
+	if (!prop || typeof prop !== 'string') { throw new Error(`groupBy filter expects a property key (or dot-separated path), was given ${typeof prop}`); }
 	
 	const groups = {};
 
@@ -313,7 +313,7 @@ eleventyConfig.addFilter('groupBy', (array, prop) => {
 /** Sorts array of objects by a property value. */
 eleventyConfig.addFilter('sortBy', (array, reverse = false, caseSens = false, prop = null) => {
 	if (Array.isArray(array) === false) { throw new Error(`sortBy filter expects an array, was given ${typeof array}`); }
-	if (prop && typeof prop !== 'string') { throw new Error(`groupBy filter expects a property key (or dot-separated path), was given ${typeof array}`); }
+	if (prop && typeof prop !== 'string') { throw new Error(`groupBy filter expects a property key (or dot-separated path), was given ${typeof pro}`); }
 	
 	const sortedArray = array.slice();
 	const factor = reverse ? -1 : 1;

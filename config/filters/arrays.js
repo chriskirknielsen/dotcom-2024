@@ -44,7 +44,7 @@ export default function (eleventyConfig) {
 			throw new Error(`groupBy filter expects an array, was given ${typeof array}`);
 		}
 		if (!prop || typeof prop !== 'string') {
-			throw new Error(`groupBy filter expects a property key (or dot-separated path), was given ${typeof array}`);
+			throw new Error(`groupBy filter expects a property key (or dot-separated path), was given ${typeof prop}`);
 		}
 
 		const groups = {};
@@ -68,7 +68,7 @@ export default function (eleventyConfig) {
 			throw new Error(`sortBy filter expects an array, was given ${typeof array}`);
 		}
 		if (prop && typeof prop !== 'string') {
-			throw new Error(`groupBy filter expects a property key (or dot-separated path), was given ${typeof array}`);
+			throw new Error(`groupBy filter expects a property key (or dot-separated path), was given ${typeof pro}`);
 		}
 
 		const sortedArray = array.slice();
