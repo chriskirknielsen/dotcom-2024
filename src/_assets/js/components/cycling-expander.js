@@ -57,22 +57,6 @@ class CyclingExpander extends HTMLElement {
 		// Change the duration of the transition animation
 		this.transitionTime = 200;
 
-		// Disable root view transition
-		if (document.startViewTransition) {
-			const noAnimRootStyle = this.spawn('style', {
-				textContent:
-					// Disable view transition for root element
-					`html { view-transition-name: none; }` +
-					// Ensure the button stays clickable by disabling pointer events on transition snapshots
-					`::view-transition, ::view-transition-group(root) { pointer-events: none !important; }` +
-					// Simple trick to keep aspect ratio acceptable from https://jakearchibald.com/2024/view-transitions-handling-aspect-ratio-changes/
-					`::view-transition-old(content), ::view-transition-new(content) { height: 100%; object-fit: none; overflow: clip; }` +
-					// Set the transition duration
-					`::view-transition-group(emoji), ::view-transition-group(content) { animation-duration: ${this.transitionTime}ms; }`,
-			});
-			document.head.append(noAnimRootStyle);
-		}
-
 		this.ctaButton.addEventListener('click', () => {
 			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 			const newItemIndex = (this.currentItemIndex + 1) % this.itemsList.length;
@@ -86,18 +70,58 @@ class CyclingExpander extends HTMLElement {
 			const emojiEl = this.outputContainer.querySelector('[data-item="emoji"]');
 			const contentEl = this.outputContainer.querySelector('[data-item="content"]');
 
-			if (document.startViewTransition) {
-				emojiEl.style.viewTransitionName = 'emoji';
-				contentEl.style.viewTransitionName = 'content';
-			}
-
 			const setContent = () => {
 				emojiEl.innerText = newItemData[0];
 				contentEl.innerText = newItemData[1];
+				return true;
 			};
 
+			if (document.startViewTransition) {
+				emojiEl.style.viewTransitionName = 'emoji';
+				contentEl.style.viewTransitionName = 'content';
+
+				// Disable root view transition
+				if (document.startViewTransition && !this._noAnimRootStyle) {
+					const viewTransitionCSS = this.spawn('style', {
+						textContent:
+							`:root:not(.expander-changing)::view-transition-group(emoji), :root:not(.expander-changing)::view-transition-group(content) { animation: none; }` +
+							// Simple trick to keep aspect ratio acceptable from https://jakearchibald.com/2024/view-transitions-handling-aspect-ratio-changes/
+							`:root.expander-changing::view-transition-old(content), ::view-transition-new(content) { height: 100%; object-fit: none; overflow: clip; }` +
+							// Set the transition duration
+							`:root.expander-changing::view-transition-group(emoji), ::view-transition-group(content) { animation-duration: ${this.transitionTime}ms; }`,
+					});
+					document.head.append(viewTransitionCSS);
+				}
+			}
+
 			if (!prefersReducedMotion && document.startViewTransition && this.currentItemIndex > -1) {
-				document.startViewTransition(() => setContent());
+				document.documentElement.classList.add('expander-changing');
+
+				// Disable root view transition
+				if (!this._noAnimRootStyle) {
+					this._noAnimRootStyle = this.spawn('style', {
+						textContent:
+							// Disable view transition for root element
+							`html { view-transition-name: none; }` +
+							// Ensure the button stays clickable by disabling pointer events on transition snapshots
+							`::view-transition, ::view-transition-group(root) { pointer-events: none !important; }`,
+					});
+					document.head.append(this._noAnimRootStyle);
+				}
+
+				requestAnimationFrame(() => {
+					this._viewTransition = document.startViewTransition(() => setContent());
+					this._viewTransition.finished.then(() => {
+						if (this._noAnimRootStyle) {
+							this._noAnimRootStyle.remove();
+							this._noAnimRootStyle = null;
+							document.documentElement.classList.remove('expander-changing');
+						}
+
+						emojiEl.style.viewTransitionName = '';
+						contentEl.style.viewTransitionName = '';
+					});
+				});
 			} else {
 				if (contentEl.innerText.length <= 1 || prefersReducedMotion) {
 					setContent();

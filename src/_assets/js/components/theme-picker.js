@@ -116,7 +116,7 @@ class ThemePicker extends HTMLElement {
 				document.documentElement.removeAttribute('data-theme');
 				localStorage.removeItem(this.store);
 			}
-
+			document.documentElement.classList.add('theme-changing');
 			document.querySelectorAll('[data-theme-set]').forEach(function (btn) {
 				btn.setAttribute('aria-pressed', (btn.getAttribute('data-theme-set') === theme).toString());
 			});
@@ -129,6 +129,7 @@ class ThemePicker extends HTMLElement {
 
 			// Once the theme's updated, allow transitions again
 			document.documentElement.style.removeProperty('--anim-f');
+			document.documentElement.classList.remove('theme-changing');
 		};
 
 		if (useFallback) {
