@@ -76,7 +76,7 @@ class CyclingExpander extends HTMLElement {
 				return true;
 			};
 
-			if (document.startViewTransition) {
+			if (!prefersReducedMotion && document.startViewTransition) {
 				emojiEl.style.viewTransitionName = 'emoji';
 				contentEl.style.viewTransitionName = 'content';
 
