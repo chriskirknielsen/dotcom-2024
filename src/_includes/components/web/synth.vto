@@ -114,7 +114,7 @@
         </div>
 
         <div class="synth-keys" style="--synth-white-keys: {{ whiteKeyCount + 1 }};">
-            {{ for w1 of (noteCount + 1) }}
+            {{ for w1 of noteCount }}
                 {{ set w = w1 - 1 }}
                 {{ set noteIndexW = w % 7 }}
                 {{ set noteW = notes[ noteIndexW ] }}
@@ -165,7 +165,7 @@
             </span>
         </div> #}}
 
-        <p class="fontSize-smaller">Hold the <kbd>Shift</kbd> key to shift octaves</p>
+        <p class="fontSize-smaller">If you have a keyboard, hold the <kbd>Shift</kbd> key to go up an octave</p>
         <p class="fontSize-smaller"><a href="/colophon/#synthesizer">How I made this</a></p>
     </div>
 
