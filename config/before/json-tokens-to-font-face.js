@@ -17,9 +17,9 @@ export default function (string, fontsDir) {
 			'font-weight': 'weight',
 			'font-style': 'style',
 			'size-adjust': 'size-adjust',
-			ascent: 'ascent-override',
-			descent: 'descent-override',
-			'line-gap': 'line-gap-override',
+			'ascent-override': 'ascent',
+			'descent-override': 'descent',
+			'line-gap-override': 'line-gap',
 		};
 		const extraProps = Object.entries(extraPropsMap)
 			.map(([prop, fontDataKey]) => (themeHeadingFont.hasOwnProperty(fontDataKey) ? `${prop}: ${themeHeadingFont[fontDataKey]};` : ''))

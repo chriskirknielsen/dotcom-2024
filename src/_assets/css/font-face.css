@@ -50,8 +50,8 @@
 			font-display: swap;
 		}
 		@font-face {
-			font-family: "TeXGyreAdventor";
-			src: local("TeXGyreAdventor"), local("TeX Gyre Adventor Bold"), local("TeX Gyre Adventor"), url("/assets/fonts/TeXGyreAdventor-Bold.woff2") format("woff2");
+			font-family: "OPTIAuvantGothic";
+			src: local("OPTIAuvantGothic"), local("OPTI Auvant Gothic"), url("/assets/fonts/OPTIAuvantGothic-Bold.woff2") format("woff2");
 			font-weight: 700;
 			font-style: normal;
 			font-display: swap;

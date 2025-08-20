@@ -745,12 +745,15 @@ html[data-theme='director'] {
 	}
 
 	.hero-heading {
-		--HERO-title-factor: 2.5;
+		/* --HERO-title-factor: 2.25;
+		--initial-lh: 1.1;
+		--target-lh: 0.8;
+		--offset: calc((var(--initial-lh) - var(--target-lh)) * 1em / 2);
 
-		margin-block-end: 0.125em; /* Compensate for reduced line-height */
+		margin-block: var(--offset); /* Compensate for reduced line-height */
 
-		letter-spacing: -0.05em;
-		line-height: 0.8;
+		/* line-height: var(--target-lh); */
+		letter-spacing: -0.025em;
 		text-transform: uppercase;
 	}
 

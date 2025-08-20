@@ -174,7 +174,7 @@ class ThemePicker extends HTMLElement {
 						Switzer: 'Switzer, sans-serif',
 						MDNichrome: 'MDNichrome, sans-serif',
 						Rajdhani: 'Rajdhani, sans-serif',
-						TeXGyreAdventor: 'TeXGyreAdventor, ITC Avant Garde, sans-serif',
+						TeXGyreAdventor: 'OPTIAuvantGothic, ITC Avant Garde, sans-serif',
 						LibreFranklin: 'LibreFranklin, Libre Franklin, Franklin Gothic, HEX Franklin, sans-serif',
 						Outfit: 'Outfit, Century Gothic, sans-serif',
 						times: 'Times New Roman, Times',
