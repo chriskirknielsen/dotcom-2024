@@ -379,7 +379,7 @@ html[data-theme="director"] {
 --C-surface-alt: #0d1d34;
 --C-accent-alt: #00dbb0;
 --C-inactive: #a48383;
-				--font-heading-family: OPTIAuvantGothic, ITC Avant-Garde Gothic,TeXGyreAdventor,Avenir,Montserrat,Corbel,URW Gothic,source-sans-pro, system-ui,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
+				--font-heading-family: OPTIAuvantGothic, ITC Avant-Garde Gothic,Avenir,Montserrat,Corbel,URW Gothic,source-sans-pro, system-ui,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
 --font-body-family: system-ui,sans-serif;
 			}
 			html[data-theme="director"] .hide-when-dark { display: none !important; }
