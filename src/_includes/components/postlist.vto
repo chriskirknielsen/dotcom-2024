@@ -45,7 +45,7 @@
                         <p>
                             {{- post.data.summary || post.excerpt }}
                             {{ for t of (post.data.tags || post.tags) |> startsWith('_', false) }}
-                                <a href="/tags/{{ t }}" class="link-label-anchor fontSize-smaller"><span class="color-accent fontSize-smaller">#&hairsp;</span><span class="link-label-text">{{ t }}</span></a>
+                                <a href="/tags/{{ t }}/" class="link-label-anchor fontSize-smaller"><span class="color-accent fontSize-smaller">#&hairsp;</span><span class="link-label-text">{{ t }}</span></a>
                             {{ /for -}}
                         </p>
                     </article>
