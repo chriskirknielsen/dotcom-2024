@@ -14,8 +14,8 @@
   eleventyExcludeFromCollections: true,
   eleventyComputed: {
     permalink: (data) => `/tags/${data.tag}/`,
-    title: (data) => `Posts tagged “${data.tag}”`,
-    heroCta: [{ label: "All Tags", url: "/tags/" }],
+    title: (data) => `${data.collections[ data.tag ].length} post${data.collections[ data.tag ].length !== 1 ? 's' : ''} tagged “${data.tag}”`,
+    heroCta: [{ label: "All Tags", url: "/tags/" }, { label: "Blog", url: "/Blog/" }],
   }
 }
 ---

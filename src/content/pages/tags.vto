@@ -1,9 +1,10 @@
 ---
 title: Tags
-summary: A thrilling list of the tags I've used
+summary: A thrilling list of the tags I've used (larger tag = more posts!)
+heroCta: [{ label: "Blog", url: "/Blog/" }]
 ---
 
-{{- set tagList = collections |> Object.keys |> startsWith('_', true) }}
+{{- set tagList = collections |> Object.keys |> startsWith('_', false) }}
 {{ set countedTags = [] }}
 {{ for t of tagList }}
     {{ if t != 'all' }}

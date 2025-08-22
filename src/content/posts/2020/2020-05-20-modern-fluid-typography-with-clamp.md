@@ -6,9 +6,7 @@ date: 2020-05-20
 tags:
     - css
     - sass
-    - clamp
     - typography
-    - font
     - quick-tip
 ---
 
