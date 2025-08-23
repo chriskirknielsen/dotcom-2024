@@ -29,18 +29,31 @@ eleventyExcludeFromCollections: true
         </div>
     </div>
 
-    <ul data-show-on-first-run data-results-list class="search-results" style="--flow-space: var(--size-s)" role="list" aria-live="polite"></ul>
+    <div class="search-results-container">
+        <table class="search-results" data-show-on-first-run aria-live="polite" role="table" hidden>
+            <thead role="rowgroup">
+                <tr class="search-results-header" role="row">
+                    <th class="search-results-col-type" role="columnheader">Type</th>
+                    <th class="search-results-col-title" role="columnheader">Title</th>
+                    <th class="search-results-col-date" role="columnheader">Date</th>
+                </tr>
+            </thead>
+            <tbody data-results-list role="rowgroup"></tbody>
+        </table>
 
-    <template>
-        <li class="search-result-item" data-result-type>
-            <span class="fontSize-smaller" data-result-slot="type"></span>
-            <span data-result-slot="info">
-                <a href="/" hreflang=""></a>
-                <time datetime="" class="fontSize-smaller u-fontVariant-tabularNums"></time>
-                <span class="fontSize-smaller" data-result-slot="lang"></span>
-            </span>
-        </li>
-    </template>
+        <template>
+            <tr class="search-results-item" data-result-type role="row">
+                <td class="search-results-col-type fontSize-smaller" data-result-slot="type" role="cell"></td>
+                <td class="search-results-col-title" role="cell">
+                    <a href="/" hreflang="" data-result-slot="link"></a>
+                    <span class="fontSize-smaller" data-result-slot="lang"></span>
+                </td>
+                <td class="search-results-col-date fontSize-smaller" role="cell">
+                    <time datetime="" data-result-slot="date" class="fontVariant-tabularNums"></time>
+                </td>
+            </tr>
+        </template>
+    </div>
 </instant-search>
 
 {{ if !metadata.nakedJs }}

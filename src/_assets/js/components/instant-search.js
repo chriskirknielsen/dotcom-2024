@@ -91,9 +91,8 @@ class InstantSearch extends HTMLElement {
 					const tpl = resultItemTemplate.content.cloneNode(true);
 					const listItemEl = tpl.querySelector('[data-result-type]');
 					const typeEl = tpl.querySelector('[data-result-slot="type"]');
-					const resultInfoEl = tpl.querySelector('[data-result-slot="info"]');
-					const dateEl = tpl.querySelector('time[datetime]');
-					const anchorEl = tpl.querySelector('a[href]');
+					const dateEl = tpl.querySelector('[data-result-slot="date"]');
+					const anchorEl = tpl.querySelector('[data-result-slot="link"]');
 					const langEl = tpl.querySelector('[data-result-slot="lang"]');
 
 					const dateInIso = new Date(page.date).toISOString().split('T').shift();
@@ -106,11 +105,12 @@ class InstantSearch extends HTMLElement {
 					anchorEl.setAttribute('hreflang', page.lang);
 					anchorEl.innerHTML = page.title;
 
-					if (type === '_posts') {
+					if (['_posts', '_designs'].includes(type)) {
 						dateEl.setAttribute('datetime', dateInIso);
 						dateEl.innerText = dateInIso;
 					} else {
-						dateEl.hidden = true;
+						console.log();
+						dateEl.parentElement.innerHTML = ''; // Remove the date element altogether
 					}
 
 					// If the result is not in English, indicate it
