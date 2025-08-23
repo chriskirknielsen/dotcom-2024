@@ -54,9 +54,7 @@
 
 @container --searchResults (max-inline-size: 400px) {
 	.search-results {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: var(--size-xs);
+		display: block;
 
 		& > thead {
 			position: absolute;
@@ -73,7 +71,9 @@
 		}
 
 		& > tbody {
-			display: contents;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: var(--size-xs);
 		}
 	}
 
