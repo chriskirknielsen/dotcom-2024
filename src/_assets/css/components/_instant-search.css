@@ -13,6 +13,13 @@
 	border-collapse: collapse;
 }
 
+.search-results-item > td {
+	padding-block: var(--size-2xs);
+}
+
+.search-results-header th {
+	text-align: start;
+}
 .search-results-col-type {
 	inline-size: 6ch;
 	padding-inline-start: var(--size-s);
@@ -23,16 +30,11 @@
 
 	text-wrap: pretty;
 }
-.search-results-col-date {
+:is(td, th).search-results-col-date {
 	inline-size: 8ch;
 	padding-inline-end: var(--size-s);
-}
-.search-results-item > td {
-	padding-block: var(--size-2xs);
-}
 
-.search-results-header th {
-	text-align: start;
+	text-align: end;
 }
 
 :is(.search-results-header, .search-results-item:not(:last-child)) {
@@ -100,7 +102,6 @@
 		grid-row: 1;
 		grid-column: 2;
 		inline-size: auto;
-		text-align: end;
 
 		&::before {
 			display: none;
