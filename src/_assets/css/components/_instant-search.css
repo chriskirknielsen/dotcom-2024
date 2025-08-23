@@ -37,9 +37,6 @@
 	text-align: end;
 }
 
-:is(.search-results-header, .search-results-item:not(:last-child)) {
-	/* border-bottom: 1px solid var(--C-inactive); */
-}
 .search-results-item > .search-results-col-date:empty::before {
 	content: '—';
 	content: '—' / '';
@@ -86,6 +83,7 @@
 	}
 
 	.search-results-item > td {
+		display: block;
 		padding: 0;
 	}
 	.search-results-col-type {
