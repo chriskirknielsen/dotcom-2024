@@ -17,7 +17,7 @@
 	padding-block: var(--size-2xs);
 }
 
-.search-results-header th {
+.search-results-header :where(th) {
 	text-align: start;
 }
 .search-results-col-type {
@@ -30,7 +30,7 @@
 
 	text-wrap: pretty;
 }
-:is(td, th).search-results-col-date {
+.search-results-col-date {
 	inline-size: 8ch;
 	padding-inline-end: var(--size-s);
 
