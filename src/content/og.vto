@@ -1,0 +1,14 @@
+---js
+{
+    layout: 'opengraph.vto',
+    templateEngineOverride: 'vto',
+    pagination: {
+        data: 'collections._posts',
+        size: 1,
+        alias: 'post',
+    },
+    eleventyExcludeFromCollections: true,
+    permalink: "{{ post.url }}og.html",
+    title: "{{ post.title }}",
+}
+---

@@ -5,6 +5,7 @@ tags:
     - css
     - quick-tip
 updated: 2023-11-16
+metaImage: "./is-this-scope.jpg"
 ---
 
 **Update:** This article initially proposed `a:not(.archived a)`, but [Šime Vidas suggested](https://mastodon.social/@simevidas/111294439227937167) `a:not(.archived *)` which avoids repeating the target. This has been adjusted throughout the article. Thanks, Šime!
