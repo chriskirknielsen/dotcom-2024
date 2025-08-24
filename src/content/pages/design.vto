@@ -11,14 +11,22 @@
 			return paginationData;
 		}
 	},
+	permalink: `designs/{{ design.slug |> slugify }}/index.html`,
 	eleventyComputed: {
-		permalink: function (data) { return `designs/${this.slugify(data.design.slug)}/`; },
 		pageTitle: (data) => data.design.name,
 		title: (data) => data.design.name,
 		summary: (data) => data.design.description,
-		customMetaImage: (data) => `/${data.assets.images}/designs/${data.design.img}`,
 		date: (data) => new Date(data.design.date),
-		metaExtra: function (data) { return `<link rel="preload" as="image" href="${this.toNetlifyImage(this.toPath([data.assets.images, 'designs', data.design.img]))}">`; }
+		metaExtra: function (data) { return `<link rel="preload" as="image" href="${this.toNetlifyImage(this.toPath([data.assets.images, 'designs', data.design.img]))}">`; },
+		metaImage: function (data) { return this.toPath([data.assets.images, 'designs', data.design.img]); },
+		customMetaImage: function (data) {
+			if (data.permalink) {
+				const absolutePermalink = `${data.metadata.url}/${data.page.url}og.html`;
+				const ogUrl = `https://v1.screenshot.11ty.dev/${encodeURIComponent(absolutePermalink)}/opengraph/`;
+				return ogUrl;
+			}
+			return `/${data.assets.images}/designs/${data.design.img}`;
+		},
 	},
 	heroCta: [{ url: "/designs/", label: "Back to Designs", icon: "arrow-left", iconBefore: true }]
 }

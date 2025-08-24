@@ -37,14 +37,19 @@
 			}
 			body::before {
 				content: '';
-				
+				mix-blend-mode: overlay;
+				opacity: 0.8;
+			}
+			body::before,
+			body::after {
 				position: absolute;
 				inset: 0;
 				z-index: -1;
 
 				background: no-repeat center / cover;
-				mix-blend-mode: overlay;
-				opacity: 0.8;
+			}
+			body::after {
+				opacity: 0.25;
 			}
 			.title {
 				margin: 0.1em 0;
@@ -57,6 +62,8 @@
 					0 0.25em 0.5em var(--cb);
 			}
 			.logo-wrap {
+				position: relative;
+
 				align-self: start;
 				display: flex;
 				justify-content: center;
@@ -74,8 +81,23 @@
 				height: calc(var(--fs) / 20);
 				background: var(--ca);
 			}
-			.logo {
+			.logo-inner {
 				flex: 0 0 auto;
+			}
+			.logo-overlay {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+
+				font-size: 0.2em;
+				text-align: center;
+				-webkit-text-stroke: calc(var(--fs) / 15) var(--ca);
+				paint-order: stroke;
+
+				transform: translateY(50%) skewY(-10deg);
+			}
+			.logo {
 				width: 1em;
 				height: auto;
 				display: block;
@@ -88,13 +110,22 @@
 				stroke-width: calc(var(--fs) / 10);
 				paint-order: stroke;
 			}
-			{{ /css }}
-			{{- getBundle 'css', 'opengraph' }}
-			body::before { background-image: url("{{ imageUrl }}"); }
+		{{ /css }}
+		{{- getBundle 'css', 'opengraph' -}}
+		body::before, body::after { background-image: url("{{ imageUrl }}"); }
+		{{ if post.data.tags.includes('_designs') }}
+		.title { grid-row: -1; }
+		body::after { content: ''; }
+		{{ /if }}
 		</style>
 	</head>
 	<body>
-		<div class="logo-wrap">{{ injectsvg 'logo', { class: 'logo' } }}</div>
+		<div class="logo-wrap">
+			<div class="logo-inner">
+				{{ injectsvg 'logo', { class: 'logo' } }}
+				<span class="logo-overlay">{{ if post.data.tags.includes('_designs') }}Designs{{ /if }}</span>
+			</div>
+		</div>
 		<h1 class="title" style="--scale: {{ post.data.title |> sizeFactor }}">{{ post.data.title }}</h1>
 	</body>
 </html>
