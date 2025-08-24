@@ -20,6 +20,11 @@ export default {
 			return `blog/${this.slugify(data.slug || data.page.fileSlug)}/index.html`;
 		},
 		customMetaImage: function (data) {
+			if (data.permalink) {
+				const absolutePermalink = `${data.metadata.url}/${data.permalink.replace('index.html', 'og.html')}`;
+				const ogUrl = `https://v1.screenshot.11ty.dev/${encodeURIComponent(absolutePermalink)}/opengraph/`;
+				return ogUrl;
+			}
 			return this.toPath([data.assets.images, 'metaimage-blog.jpg']);
 		},
 	},
