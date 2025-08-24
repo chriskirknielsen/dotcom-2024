@@ -245,7 +245,10 @@ export default async function (eleventyConfig) {
 			return `<span class="codeblock-toolbar-label">${[toolbarIcon, toolbarLabel].join(' ').trim()}</span>`;
 		},
 	});
-	eleventyConfig.addPlugin(EleventyPluginRobotsTxt, { shouldBlockAIRobots: 'true' });
+	eleventyConfig.addPlugin(EleventyPluginRobotsTxt, {
+		rules: new Map([['*', [{ disallow: '*/og.html$' }]]]),
+		shouldBlockAIRobots: 'true',
+	});
 
 	//* Collections
 	eleventyConfig.addCollection('_og', (collectionApi) => [].concat(collectionApi.getFilteredByTag('_posts'), collectionApi.getFilteredByTag('_designs')));
