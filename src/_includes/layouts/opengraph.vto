@@ -8,6 +8,7 @@
 		<title>{{ post.data.title }}</title>
 		<link rel="stylesheet" href="/assets/css/font-face.css">
 		<style>
+		{{- css 'opengraph' }}
 			* {
 				box-sizing: border-box;
 				margin: 0;
@@ -41,11 +42,13 @@
 				inset: 0;
 				z-index: -1;
 
-				background: url("{{ imageUrl }}") no-repeat center / cover;
+				background: no-repeat center / cover;
 				mix-blend-mode: overlay;
 				opacity: 0.8;
 			}
 			.title {
+				margin: 0.1em 0;
+
 				font-size: calc(var(--fs) * 2.25 * var(--scale, 1));
 				line-height: 1.1;
 				text-wrap: balance;
@@ -59,20 +62,21 @@
 				justify-content: center;
 				align-items: center;
 				gap: var(--fs);
-				min-width: calc(var(--fs) * 6);
-				max-width: calc(var(--fs) * 10);
-				margin-inline: auto;
+				width: 6em;
+				margin: 0 auto;
+
+				font-size: calc(var(--fs) * 2.5);
 			}
 			.logo-wrap::before,
 			.logo-wrap::after {
 				content: '';
 				flex: 1 0 0;
-				height: 1px;
+				height: calc(var(--fs) / 20);
 				background: var(--ca);
 			}
 			.logo {
 				flex: 0 0 auto;
-				width: calc(var(--fs) * 2);
+				width: 1em;
 				height: auto;
 				display: block;
 				margin: auto;
@@ -84,6 +88,9 @@
 				stroke-width: calc(var(--fs) / 10);
 				paint-order: stroke;
 			}
+			{{ /css }}
+			{{- getBundle 'css', 'opengraph' }}
+			body::before { background-image: url("{{ imageUrl }}"); }
 		</style>
 	</head>
 	<body>
