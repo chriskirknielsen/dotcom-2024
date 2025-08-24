@@ -295,7 +295,7 @@ export default async function (eleventyConfig) {
 	eleventyConfig.addWatchTarget(`./${rootDir}/${assetsDir}/js/**/*.js`);
 	eleventyConfig.setConcurrency(1);
 
-	// The following ressources are built in the `before` step, so we must not watch them, lest we want to trigger a build loop
+	// The following resources are built in the `before` step, so we must not watch them, lest we want to trigger a build loop
 	eleventyConfig.watchIgnores.add(`./${rootDir}/${assetsDir}/css/global/_tokens.css`);
 	eleventyConfig.watchIgnores.add(`./${rootDir}/${assetsDir}/css/font-face.css`);
 	eleventyConfig.watchIgnores.add(`./${rootDir}/${includesDir}/assets/css/**/*`);

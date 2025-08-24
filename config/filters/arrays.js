@@ -82,7 +82,9 @@ export default function (eleventyConfig) {
 	});
 
 	/** Filters values that begin with the provided string. Can be reversed with a boolean argument. */
-	eleventyConfig.addFilter('startsWith', (list, str, truthyPass = true) => list.filter((value) => String(value).startsWith(str) ^ !truthyPass)); // Bitwise XOR to flip the boolean, wild stuff but really convenient!
+	eleventyConfig.addFilter('startsWith', (list, str, truthyPass = true) => {
+		return list.filter((value) => String(value).startsWith(str) ^ !truthyPass); // Bitwise XOR to flip the boolean, wild stuff but really convenient!
+	});
 
 	/** Sorts an array of entries (Object.entries-style, an array of arrays e.g. [key, value]) by a provided arbitrary map. */
 	eleventyConfig.addFilter('sortEntries', (entries, map) => {
