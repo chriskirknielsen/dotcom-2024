@@ -251,7 +251,6 @@ export default async function (eleventyConfig) {
 	});
 
 	//* Collections
-	eleventyConfig.addCollection('_og', (collectionApi) => [].concat(collectionApi.getFilteredByTag('_posts'), collectionApi.getFilteredByTag('_designs')));
 	eleventyConfig.addCollection('_posts.en', (collectionApi) => collectionApi.getFilteredByTag('_posts').filter((item) => ['en', undefined].includes(item.data.lang)));
 	eleventyConfig.addCollection('_posts.fr', (collectionApi) => collectionApi.getFilteredByTag('_posts').filter((item) => item.data.lang === 'fr'));
 	eleventyConfig.addCollection('_posts.featured', (collectionApi) => collectionApi.getFilteredByTag('_posts').filter((item) => item.data.featured));

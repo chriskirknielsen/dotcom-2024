@@ -1,12 +1,25 @@
----
-title: About
-heroTitle: "Hiya, I’m Chris"
-summary: 'A French Dane living in the USA who used to be a designer and who now likes to build on the web'
-heroHideSummary: true
-heroSub: '(he/him)'
-permalink: '/about/'
-autoHeadingAnchors: true
-toc: true
+---js
+{
+    title: 'About',
+    heroTitle: "Hiya, I’m Chris",
+    summary: 'A French Dane living in the USA who used to be a designer and who now likes to build on the web',
+    ogImageTitle: "Hiya, I’m Chris",
+    ogImageSummary: "(he/him)",
+    tags: ['_pages', '_og'],
+    heroHideSummary: true,
+    heroSub: '(he/him)',
+    permalink: '/about/',
+    autoHeadingAnchors: true,
+    toc: true,
+    eleventyComputed: {
+		customMetaImage: function (data) {
+			if (data.permalink) {
+				return this.toOgImage(data);
+			}
+			return this.toPath([data.assets.images, 'metaimage.jpg']);
+		}
+	}
+}
 ---
 
 {{ echo |> markdown }}

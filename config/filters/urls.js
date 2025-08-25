@@ -30,6 +30,19 @@ export default function (eleventyConfig) {
 	/** Passes a local or remote URL string to Cloudinary CDN */
 	eleventyConfig.addFilter('toCloudinary', toCloudinary);
 
+	/** Passes a permalink through to the 11ty Screenshot service and returns its URL */
+	eleventyConfig.addFilter('toOgImage', function (data, url = null) {
+		if (!url) {
+			url = data.permalink || data.page.url; // Extract the link from the data if not provided
+		}
+		if (url.endsWith('/index.html') === false) {
+			url = url.trim().replace(/\/$/, '/index.html'); // Ensure folder-like permalinks get treated as a standard /index.html link
+		}
+
+		const absolutePermalink = `${data.metadata.url}/${url.replace('index.html', 'og.html')}`;
+		return `https://v1.screenshot.11ty.dev/${encodeURIComponent(absolutePermalink)}/opengraph/`;
+	});
+
 	eleventyConfig.addFilter('absoluteUrl', function (string, base) {
 		const absUrlFilterFn = eleventyConfig?.nunjucks?.filters?.absoluteUrl;
 		if (typeof absUrlFilterFn === 'function') {

@@ -4,6 +4,7 @@
     title: "Bloggy Corner",
     metaDescriptionOverride: "I like to write once in a while. Enjoy!",
     heroCta: [{ label: "All Tags", url: "/tags/" }, { label: "Blogroll", url: "/blogroll/" }],
+    tags: ['_og'],
     eleventyComputed: {
         summary: function (data) {
             const hasPostsData = Array.isArray(data?.collections?._posts) && data.collections._posts.length > 0;
@@ -39,7 +40,12 @@
 
             return `I like to write once in a while${textInsert}. Enjoy!`;
         },
-        customMetaImage: function (data) { return this.toPath([data.assets.images, 'metaimage-blog.jpg']); }
+		customMetaImage: function (data) {
+			if (data.permalink) {
+				return this.toOgImage(data);
+			}
+			return this.toPath([data.assets.images, 'metaimage-blog.jpg']);
+		}
     }
 }
 ---

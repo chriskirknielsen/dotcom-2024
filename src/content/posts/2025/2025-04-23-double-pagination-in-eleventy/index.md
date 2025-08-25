@@ -4,7 +4,7 @@ summary: 'Yo dawg, I heard you liked pagination, so I added pagination inside yo
 tags:
     - eleventy
 toc: true
-metaImage: "./yodawg.jpg"
+ogBackground: "./yodawg.jpg"
 ---
 
 So I recently converted [a French blog of mine](https://geekometric.com) to Eleventy from a Hugo-powered one (which itself was previously a WordPress…), as one does on a cloudy weekend. While Hugo is a very fast static site generator, it also uses a syntax which can easily get confusing if not used often. Given I barely did any maintenance since 2019, and basically only published content every so often, it’s been holding up surprisingly well. However, small changes few and far in between really highlighted how brittle this setup was. As such, I figured I’d reduce the technical debt and switch to Eleventy. But… Hugo does have some nice things out of the box, namely: **nested pagination**. Pass in a template with pagination inside of an already-paginating loop, and it… just works? It’s been so long that I don’t remember how, which is kind of a problem.

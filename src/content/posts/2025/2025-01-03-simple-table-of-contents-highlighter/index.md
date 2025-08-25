@@ -6,7 +6,7 @@ tags:
     - quick-tip
     - javascript
 toc: true
-metaImage: "./toc-intersection-observer.png"
+ogBackground: "./toc-intersection-observer.png"
 ---
 
 I keep making updates to my website, and for this holiday break, amongst other things, I added a highlighter logic to my table of contents (also known as "scroll spy"). It’s gone through a couple of iterations, but I’ve landed on a good one, and it’s following a nice principle: Keep It Simple, Stupid. 💋

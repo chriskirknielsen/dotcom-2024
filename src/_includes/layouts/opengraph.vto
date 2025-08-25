@@ -1,5 +1,5 @@
 {{# Shout out to https://my.stuffandthings.lol/blog/2025-08-23/og-images-using-11ty-screenshot-service.html #}}
-{{- set imageUrl }}{{ if post.data.metaImage }}{{ post.data.metaImage }}{{ else }}{{ [assets.images, 'profile.jpg'] |> toPath }}{{ /if }}{{ /set -}}
+{{- set imageUrl }}{{ if post.data.ogBackground }}{{ post.data.ogBackground }}{{ else }}{{ [assets.images, 'profile.jpg'] |> toPath }}{{ /if }}{{ /set -}}
 <!DOCTYPE html>
 <html data-theme="dusk" lang="{{ metadata.lang }}">
 	<head>
@@ -51,16 +51,6 @@
 			body::after {
 				opacity: 0.25;
 			}
-			.title {
-				margin: 0.1em 0;
-
-				font-size: calc(var(--fs) * 2.25 * var(--scale, 1));
-				line-height: 1.1;
-				text-wrap: balance;
-				text-shadow:
-					0.02em 0.02em 0 var(--ca),
-					0 0.25em 0.5em var(--cb);
-			}
 			.logo-wrap {
 				position: relative;
 
@@ -95,7 +85,7 @@
 				-webkit-text-stroke: calc(var(--fs) / 15) var(--ca);
 				paint-order: stroke;
 
-				transform: translateY(50%) skewY(-10deg);
+				transform: translateY(50%) skewY(-6deg);
 			}
 			.logo {
 				width: 1em;
@@ -109,6 +99,25 @@
 				stroke: var(--ca);
 				stroke-width: calc(var(--fs) / 10);
 				paint-order: stroke;
+			}
+			.title {
+				margin: 0.1em 0;
+
+				font-size: calc(var(--fs) * 2.25 * var(--scale, 1));
+				line-height: 1.1;
+				text-wrap: balance;
+				text-shadow:
+					0.02em 0.02em 0 var(--ca),
+					0 0.25em 0.5em var(--cb);
+			}
+			.summary {
+				font-size: calc(var(--fs) * 0.75);
+				line-height: 1.5;
+				font-family: sans-serif;
+				text-transform: uppercase;
+				text-wrap: balance;
+				letter-spacing: 0.0875em;
+				font-weight: 200;
 			}
 		{{ /css }}
 		{{- getBundle 'css', 'opengraph' -}}
@@ -124,9 +133,15 @@
 		<div class="logo-wrap">
 			<div class="logo-inner">
 				{{ injectsvg 'logo', { class: 'logo' } }}
-				<span class="logo-overlay">{{ if post.data.tags.includes('_designs') }}Designs{{ /if }}</span>
+				<span class="logo-overlay">
+					{{ if post.data.tags.includes('_designs') }}Designs{{ /if }}
+					{{ if post.data.tags.includes('_posts') }}Bloggy Corner{{ /if }}
+				</span>
 			</div>
 		</div>
-		<h1 class="title" style="--scale: {{ post.data.title |> sizeFactor }}">{{ post.data.title }}</h1>
+		{{ set isHome = post.data.title === 'Home' }}
+		{{ set heading = isHome ? new URL(post.data.metadata.url).host : (post.data.ogImageTitle || post.data.title) }}
+		<h1 class="title" style="--scale: {{ heading |> sizeFactor }}">{{ heading }}</h1>
+		{{ if post.data.ogImageSummary }}<p class="summary">{{ post.data.ogImageSummary }}</p>{{ /if }}
 	</body>
 </html>

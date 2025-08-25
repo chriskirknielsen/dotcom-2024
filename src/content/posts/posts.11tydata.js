@@ -1,6 +1,6 @@
 export default {
 	layout: 'post.vto',
-	tags: ['_posts'],
+	tags: ['_posts', '_og'],
 	section: 'post',
 	eleventyComputed: {
 		date: function (data) {
@@ -21,11 +21,24 @@ export default {
 		},
 		customMetaImage: function (data) {
 			if (data.permalink) {
-				const absolutePermalink = `${data.metadata.url}/${data.permalink.replace('index.html', 'og.html')}`;
-				const ogUrl = `https://v1.screenshot.11ty.dev/${encodeURIComponent(absolutePermalink)}/opengraph/`;
-				return ogUrl;
+				return this.toOgImage(data);
 			}
 			return this.toPath([data.assets.images, 'metaimage-blog.jpg']);
+		},
+		ogImageSummary: function (data) {
+			const date = data.date || data.page.date;
+			if (data.time) {
+				const datetime = new Date(date);
+				if (datetime !== 'Invalid DateTime') {
+					return new Intl.DateTimeFormat('en-GB', {
+						year: 'numeric',
+						month: 'long',
+						day: 'numeric',
+						timeZone: 'America/New_York',
+					}).format(datetime);
+				}
+			}
+			return null;
 		},
 	},
 };
