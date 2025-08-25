@@ -4,7 +4,7 @@ export default {
 	section: 'post',
 	eleventyComputed: {
 		date: function (data) {
-			const date = data.date || data.page.date;
+			const date = new Date(data.date || data.page.date);
 			if (data.time) {
 				const datetime = new Date(date.toISOString().replace('00:00:00', data.time));
 				if (datetime !== 'Invalid DateTime') {
@@ -26,15 +26,15 @@ export default {
 			return this.toPath([data.assets.images, 'metaimage-blog.jpg']);
 		},
 		ogImageSummary: function (data) {
-			const date = data.date || data.page.date;
+			const date = new Date(data.date || data.page.date);
 			if (data.time) {
-				const datetime = new Date(date);
+				const datetime = new Date(date.toISOString().replace('00:00:00', data.time));
 				if (datetime !== 'Invalid DateTime') {
 					return new Intl.DateTimeFormat('en-GB', {
 						year: 'numeric',
 						month: 'long',
 						day: 'numeric',
-						timeZone: 'America/New_York',
+						timeZone: 'UTC',
 					}).format(datetime);
 				}
 			}
