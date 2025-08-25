@@ -6,7 +6,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>{{ post.data.title }}</title>
-		<link rel="stylesheet" href="/assets/css/font-face.css">
+		<link rel="stylesheet" href="{{ [assets.css, 'font-face.css'] |> toPath }}">
+		<link rel="preload" href="{{ [assets.fonts, `${tokens.themes.dusk.font.heading.filename}.woff2`] |> toPath }}" as="font" type="font/woff2" crossorigin>
 		<style>
 		{{- css 'opengraph' }}
 			* {
