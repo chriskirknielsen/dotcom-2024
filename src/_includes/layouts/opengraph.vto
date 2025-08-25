@@ -116,6 +116,7 @@
 		{{ if post.data.tags.includes('_designs') }}
 		.title { grid-row: -1; }
 		body::after { content: ''; }
+		body::before, body::after { background-size: contain; }
 		{{ /if }}
 		</style>
 	</head>
