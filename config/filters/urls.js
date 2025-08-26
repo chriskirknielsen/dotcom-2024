@@ -32,9 +32,15 @@ export default function (eleventyConfig) {
 
 	/** Passes a permalink through to the 11ty Screenshot service and returns its URL */
 	eleventyConfig.addFilter('toOgImage', function (data, url = null) {
+		// Extract the link from the data if not provided
 		if (!url) {
-			url = data.permalink || data.page.url; // Extract the link from the data if not provided
+			if (data.permalink && typeof data.permalink === 'string') {
+				url = data.permalink;
+			} else if (data?.page?.url && typeof data.page.url === 'string') {
+				url = data.page.url;
+			}
 		}
+
 		if (url.endsWith('/index.html') === false) {
 			url = url.trim().replace(/\/$/, '/index.html'); // Ensure folder-like permalinks get treated as a standard /index.html link
 		}

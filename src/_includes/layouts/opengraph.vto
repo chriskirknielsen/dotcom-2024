@@ -1,5 +1,8 @@
 {{# Shout out to https://my.stuffandthings.lol/blog/2025-08-23/og-images-using-11ty-screenshot-service.html #}}
 {{- set imageUrl }}{{ if post.data.ogBackground }}{{ post.data.ogBackground }}{{ else }}{{ [assets.images, 'profile.jpg'] |> toPath }}{{ /if }}{{ /set -}}
+{{- set isHome = post.data.title === 'Home' -}}
+{{- set isDesignPage = post.data.tags.includes('_designs') -}}
+{{- set isProjectsPage = post.data.title === 'Projects' -}}
 <!DOCTYPE html>
 <html data-theme="dusk" lang="{{ metadata.lang }}">
 	<head>
@@ -122,11 +125,52 @@
 			}
 		{{ /css }}
 		{{- getBundle 'css', 'opengraph' -}}
+		
 		body::before, body::after { background-image: url("{{ imageUrl }}"); }
-		{{ if post.data.tags.includes('_designs') }}
-		.title { grid-row: -1; }
-		body::after { content: ''; }
-		body::before, body::after { background-size: contain; }
+		
+		{{ if isDesignPage }}
+		.title {
+			grid-row: -2;
+			align-self: end;
+		}
+
+		body::after {
+			content: '';
+		}
+
+		body::before,
+		body::after {
+			background-size: contain;
+		}
+		{{ /if }}
+
+		{{ if isProjectsPage }}
+		body::before, body::after { display: none; }
+		.strip {
+			position: absolute;
+			inset: 0;
+			z-index: -1;
+
+			inline-size: 100%;
+			place-content: center;
+			margin: auto;
+			overflow: hidden;
+			
+			text-wrap: balance;
+			text-align: center;
+
+			opacity: 0.5;
+			mix-blend-mode: overlay;
+		}
+
+		.strip > img {
+			display: inline-block;
+			margin: 0.25em;
+			block-size: calc(var(--fs) * 6);
+			inline-size: auto;
+			aspect-ratio: 1;
+			object-fit: cover;
+		}
 		{{ /if }}
 		</style>
 	</head>
@@ -140,9 +184,19 @@
 				</span>
 			</div>
 		</div>
-		{{ set isHome = post.data.title === 'Home' }}
+		{{ if isProjectsPage }}
+		<div class="strip">
+		{{ for project of collections._projects |> reverse }}
+			<img src="{{ project.data.customMetaImage }}" width="512" height="512">
+		{{ /for }}
+		</div>
+		{{ /if }}
+
 		{{ set heading = isHome ? new URL(post.data.metadata.url).host : (post.data.ogImageTitle || post.data.title) }}
 		<h1 class="title" style="--scale: {{ heading |> sizeFactor }}">{{ heading }}</h1>
-		{{ if post.data.ogImageSummary }}<p class="summary">{{ post.data.ogImageSummary }}</p>{{ /if }}
+
+		{{ if post.data.ogImageSummary }}
+		<p class="summary">{{ post.data.ogImageSummary }}</p>
+		{{ /if }}
 	</body>
 </html>

@@ -1,6 +1,15 @@
----
-title: Projects
-summary: Some of the things I’ve made, either passion projects or real-world work
+---js
+{
+	tags: ['_og'],
+	title: 'Projects',
+	summary: "Some of the things I’ve made, either passion projects or real-world work",
+	customMetaImage: function (data) {
+		if (data.permalink) {
+			return this.toOgImage(data);
+		}
+		return this.toPath([data.assets.images, 'metaimage.jpg']);
+	}
+}
 ---
 
 <ul class="cards" data-grid-cols="3" data-grid-layout="importance">
