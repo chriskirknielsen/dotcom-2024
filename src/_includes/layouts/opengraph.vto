@@ -3,6 +3,7 @@
 {{- set isHome = post.data.title === 'Home' -}}
 {{- set isDesignPage = post.data.tags.includes('_designs') -}}
 {{- set isProjectsPage = post.data.title === 'Projects' -}}
+{{- set isFontsPage = post.data.title === 'Font Directory' -}}
 <!DOCTYPE html>
 <html data-theme="dusk" lang="{{ metadata.lang }}">
 	<head>
@@ -144,7 +145,7 @@
 		}
 		{{ /if }}
 
-		{{ if isProjectsPage }}
+		{{ if isProjectsPage || isFontsPage }}
 		body::before, body::after { display: none; }
 		.strip {
 			position: absolute;
@@ -166,7 +167,7 @@
 		.strip > img {
 			display: inline-block;
 			margin: 0.25em;
-			block-size: calc(var(--fs) * 6);
+			block-size: calc(var(--fs) * {{ isProjectsPage ? 6 : 8 }});
 			inline-size: auto;
 			aspect-ratio: 1;
 			object-fit: cover;
@@ -184,9 +185,9 @@
 				</span>
 			</div>
 		</div>
-		{{ if isProjectsPage }}
+		{{ if isProjectsPage || isFontsPage }}
 		<div class="strip">
-		{{ for project of collections._projects |> reverse }}
+		{{ for project of collections[isFontsPage ? '_fonts' : isProjectsPage ? '_projects' : '_'] |> reverse }}
 			<img src="{{ project.data.customMetaImage }}" width="512" height="512">
 		{{ /for }}
 		</div>

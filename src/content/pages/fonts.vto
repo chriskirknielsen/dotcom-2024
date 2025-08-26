@@ -1,6 +1,17 @@
----
-title: "Font Directory"
-summary: You might find a cool, nerdy font by yours truly
+---js
+{
+	tags: ['_og'],
+	title: 'Font Directory',
+	summary: "You might find a cool, nerdy font by yours truly",
+    eleventyComputed: {
+        customMetaImage: function (data) {
+            if (data.permalink) {
+                return this.toOgImage(data);
+            }
+            return this.toPath([data.assets.images, 'metaimage.jpg']);
+        }
+	}
+}
 ---
 
 <ul class="cards" data-grid-cols="3">

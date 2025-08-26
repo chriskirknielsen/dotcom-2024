@@ -2,12 +2,15 @@
 {
 	tags: ['_og'],
 	title: 'Projects',
+	permalink: '/projects/',
 	summary: "Some of the things I’ve made, either passion projects or real-world work",
-	customMetaImage: function (data) {
-		if (data.permalink) {
-			return this.toOgImage(data);
+	eleventyComputed: {
+		customMetaImage: function (data) {
+			if (data.permalink) {
+				return this.toOgImage(data);
+			}
+			return this.toPath([data.assets.images, 'metaimage.jpg']);
 		}
-		return this.toPath([data.assets.images, 'metaimage.jpg']);
 	}
 }
 ---
