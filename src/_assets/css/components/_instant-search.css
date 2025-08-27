@@ -8,7 +8,6 @@
 
 .search-results {
 	inline-size: 100%;
-	table-layout: fixed;
 
 	border-collapse: collapse;
 }
@@ -19,9 +18,13 @@
 
 .search-results-header :where(th) {
 	text-align: start;
+	font-size: 0.625em;
+	font-weight: normal;
+	text-transform: uppercase;
+	color: var(--C-accent);
 }
 .search-results-col-type {
-	inline-size: 6ch;
+	inline-size: max-content;
 	padding-inline-start: var(--size-s);
 }
 .search-results-col-title {
@@ -31,7 +34,7 @@
 	text-wrap: pretty;
 }
 .search-results-col-date {
-	inline-size: 8ch;
+	inline-size: max-content;
 	padding-inline-end: var(--size-s);
 
 	text-align: end;
@@ -40,7 +43,8 @@
 .search-results-item > .search-results-col-date:empty::before {
 	content: '—';
 	content: '—' / '';
-	opacity: 0.5;
+
+	color: var(--C-accent);
 }
 .search-results:not(:has(.search-results-item:not([hidden]) > .search-results-col-date:not(:empty))) .search-results-col-date {
 	display: none; /* When displaying a list of results that are all without a date, hide the date column */
