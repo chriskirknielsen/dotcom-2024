@@ -1,9 +1,17 @@
 ---js
 {
+	tags: ['_og'],
+	permalink: '/designs/',
 	title: "Designs",
 	summary: "A collection of my shirt/sticker/poster designs (and more!), available across multiple print-on-demand shops",
+	ogImageSummary: "Shirts / Stickers / Posters / etc.",
 	eleventyComputed: {
-		customMetaImage: function (data) { return this.toPath([data.assets.images, 'metaimage-designs.jpg']); }
+		customMetaImage: function (data) {
+			if (data.permalink) {
+				return this.toOgImage(data);
+			}
+			return this.toPath([data.assets.images, 'metaimage-designs.jpg']);
+		}
 	}
 }
 ---

@@ -3,6 +3,7 @@
 {{- set isHome = post.data.title === 'Home' -}}
 {{- set isDesignPage = post.data.tags.includes('_designs') -}}
 {{- set isProjectsPage = post.data.title === 'Projects' -}}
+{{- set isDesignsPage = post.data.title === 'Designs' -}}
 {{- set isFontsPage = post.data.title === 'Font Directory' -}}
 <!DOCTYPE html>
 <html data-theme="dusk" lang="{{ metadata.lang }}">
@@ -146,7 +147,7 @@
 		}
 		{{ /if }}
 
-		{{ if isProjectsPage || isFontsPage }}
+		{{ if isProjectsPage || isFontsPage || isDesignsPage }}
 		body::before, body::after { display: none; }
 		.strip {
 			position: absolute;
@@ -168,7 +169,7 @@
 		.strip > img {
 			display: inline-block;
 			margin: 0.25em;
-			block-size: calc(var(--fs) * {{ isProjectsPage ? 6 : 8 }});
+			block-size: calc(var(--fs) * {{ isDesignsPage ? 4 : isProjectsPage ? 6 : 8 }});
 			inline-size: auto;
 			aspect-ratio: 1;
 			object-fit: cover;
@@ -186,10 +187,18 @@
 				</span>
 			</div>
 		</div>
-		{{ if isProjectsPage || isFontsPage }}
+		{{ if isProjectsPage || isFontsPage || isDesignsPage }}
 		<div class="strip">
-		{{ for project of collections[isFontsPage ? '_fonts' : isProjectsPage ? '_projects' : '_'] |> reverse }}
-			<img src="{{ project.data.customMetaImage }}" width="512" height="512">
+		{{ if isProjectsPage }}
+			{{ set entities = collections['_projects'] |> slice |> reverse }}
+		{{ else if isFontsPage }}
+			{{ set entities = collections['_fonts'] }}
+		{{ else if isDesignsPage }}
+			{{> function slugToNum(slug) { return parseInt(slug.replace(/-/, ''), 36) / 10e16 } }}
+			{{ set entities = collections['_designs'].filter(d => d.data.design.showInGallery !== false).sort((a, b) => slugToNum(a.data.design.slug) - slugToNum(b.data.design.slug)) }}{{# Not really random but close enough #}}
+		{{ /if }}
+		{{ for entity of entities }}
+			<img src="{{ entity.data.thumbnail || entity.data.customMetaImage }}" alt="" width="512" height="512">
 		{{ /for }}
 		</div>
 		{{ /if }}

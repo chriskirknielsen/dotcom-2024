@@ -19,6 +19,7 @@
 		date: (data) => new Date(data.design.date),
 		metaExtra: function (data) { return `<link rel="preload" as="image" href="${this.toNetlifyImage(this.toPath([data.assets.images, 'designs', data.design.img]))}">`; },
 		ogBackground: function (data) { return this.toPath([data.assets.images, 'designs', data.design.img]); },
+		thumbnail: function (data) { return `/${data.assets.images}/designs/${data.design.img}`; },
 		customMetaImage: function (data) {
 			if (data.permalink) {
 				return this.toOgImage(data, data.page.url);
