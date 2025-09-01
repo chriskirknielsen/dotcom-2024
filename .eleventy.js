@@ -283,14 +283,30 @@ export default async function (eleventyConfig) {
 	eleventyConfig.addPlugin(VentoPlugin, { autotrim: false });
 
 	//* Passthroughs
+	eleventyConfig.addPassthroughCopy(
+		{
+			[`${rootDir}/_includes/assets/css/`]: '/assets/css/',
+			[`${rootDir}/_assets/fonts/`]: '/assets/fonts/',
+			[`${rootDir}/_assets/vid/`]: '/assets/vid/',
+			[`${rootDir}/_assets/img/`]: '/assets/img/',
+			// [`${rootDir}/_includes/assets/svg/footer-deco-*.svg`]: '/assets/svg/',
+			[`${rootDir}/ai.txt`]: '/ai.txt',
+		},
+		{
+			filter: (filename) => {
+				// Exclude the icon files, those are specifically added in the next passthrough definition
+				const isIconFile = filename.includes('-DEV.') || ['icon.svg', 'apple-touch-icon.png'].includes(filename);
+				return !isIconFile;
+			},
+		}
+	);
+
+	// Favicon files which change based on the build environment
+	const getEnvVersion = (filename) => `${filename}${BUILD_CONTEXT === 'DEV' ? '-DEV' : ''}`;
 	eleventyConfig.addPassthroughCopy({
-		[`${rootDir}/_includes/assets/css/`]: '/assets/css/',
-		[`${rootDir}/_assets/fonts/`]: '/assets/fonts/',
-		[`${rootDir}/_assets/img/`]: '/assets/img/',
-		[`${rootDir}/_assets/vid/`]: '/assets/vid/',
-		// [`${rootDir}/_includes/assets/svg/footer-deco-*.svg`]: '/assets/svg/',
-		[`${rootDir}/favicon.ico`]: '/favicon.ico',
-		[`${rootDir}/ai.txt`]: '/ai.txt',
+		[`${rootDir}/_assets/img/${getEnvVersion('icon')}.svg`]: '/assets/img/icon.svg',
+		[`${rootDir}/_assets/img/${getEnvVersion('apple-touch-icon')}.png`]: '/assets/img/apple-touch-icon.png',
+		[`${rootDir}/${getEnvVersion('favicon')}.ico`]: '/favicon.ico',
 	});
 
 	//* Options for development
