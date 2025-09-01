@@ -1,5 +1,6 @@
 ---
 title: "Conditional favicon in Eleventy using passthrough copy"
+time: 00:00:00
 summary: 'Never mix up dev and prod again! (due to identical icons, at least)'
 tags:
     - eleventy
@@ -27,8 +28,10 @@ Now in `.eleventy.js`, we can determine the environment using the following:
 
 ```js:.eleventy.js
 import 'dotenv/config'; // Not sure this is still necessary in recent Node versions...?
-const BUILD_CONTEXT = process?.env?.BUILD_CONTEXT || 'LIVE'; // No var? We're doing it LIVE
+const BUILD_CONTEXT = process.env.BUILD_CONTEXT || 'LIVE'; // No var? We're doing it LIVE
 ```
+
+{{ callout "A little simpler" }}As pointed out by uncenter (an 11ty MVP!) on Eleventy's Discord, we can use a [built-in variable from Eleventy](https://www.11ty.dev/docs/environment-vars/#eleventy-supplied) — way simpler! Reading `process.env.ELEVENTY_RUN_MODE` will output one of `build`, `serve`, or `watch`. The former would map to `LIVE` in my case, and the latter two would map to `DEV`. This requires less setup, which is always a plus!{{ /callout }}
 
 ## Hue spin me right round
 
