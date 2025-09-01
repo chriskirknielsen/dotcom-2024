@@ -4,6 +4,7 @@ summary: 'Yo dawg, I heard you liked pagination, so I added pagination inside yo
 tags:
     - eleventy
 toc: true
+time: 05:00:00
 ogBackground: "./yodawg.jpg"
 ---
 

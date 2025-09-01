@@ -283,18 +283,19 @@ export default async function (eleventyConfig) {
 	eleventyConfig.addPlugin(VentoPlugin, { autotrim: false });
 
 	//* Passthroughs
+	eleventyConfig.addPassthroughCopy({
+		[`${rootDir}/_includes/assets/css/`]: '/assets/css/',
+		[`${rootDir}/_assets/fonts/`]: '/assets/fonts/',
+		[`${rootDir}/_assets/vid/`]: '/assets/vid/',
+		// [`${rootDir}/_includes/assets/svg/footer-deco-*.svg`]: '/assets/svg/',
+		[`${rootDir}/ai.txt`]: '/ai.txt',
+	});
+
+	// All image assets except the favicon-related ones (handled below)
 	eleventyConfig.addPassthroughCopy(
-		{
-			[`${rootDir}/_includes/assets/css/`]: '/assets/css/',
-			[`${rootDir}/_assets/fonts/`]: '/assets/fonts/',
-			[`${rootDir}/_assets/vid/`]: '/assets/vid/',
-			[`${rootDir}/_assets/img/`]: '/assets/img/',
-			// [`${rootDir}/_includes/assets/svg/footer-deco-*.svg`]: '/assets/svg/',
-			[`${rootDir}/ai.txt`]: '/ai.txt',
-		},
+		{ [`${rootDir}/_assets/img/`]: '/assets/img/' },
 		{
 			filter: (filename) => {
-				// Exclude the icon files, those are specifically added in the next passthrough definition
 				const isIconFile = filename.includes('-DEV.') || ['icon.svg', 'apple-touch-icon.png'].includes(filename);
 				return !isIconFile;
 			},
