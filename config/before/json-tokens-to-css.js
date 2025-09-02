@@ -1,9 +1,8 @@
 //* Imports
-import 'dotenv/config';
 import Color from 'colorjs.io';
 
 //* Constants
-const BUILD_CONTEXT = process?.env?.BUILD_CONTEXT || 'LIVE';
+const BUILD_CONTEXT = ['serve', 'watch'].includes(process.env.ELEVENTY_RUN_MODE) ? 'DEV' : 'LIVE';
 const requiredColorTokens = ['canvas', 'surface', 'text', 'heading', 'accent'];
 const backgroundColorTokens = ['canvas', 'surface', 'surface-alt'];
 const foregroundColorTokens = ['text', 'heading', 'accent', 'accent-alt'];

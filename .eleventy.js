@@ -1,5 +1,4 @@
 //* Imports
-import 'dotenv/config';
 import assets from './src/_data/assets.js';
 
 import assetCompiler from './config/before/asset-compiler.js';
@@ -38,7 +37,7 @@ const includesDir = '_includes'; // Includes folder
 const partsDir = `${includesDir}/parts`; // Layout parts folder
 const layoutsDir = `${includesDir}/layouts`; // Layouts folder
 const assetsDir = `_assets`; // Assets folder
-const BUILD_CONTEXT = process?.env?.BUILD_CONTEXT || 'LIVE';
+const BUILD_CONTEXT = ['serve', 'watch'].includes(process.env.ELEVENTY_RUN_MODE) ? 'DEV' : 'LIVE';
 const md = new markdownIt({ html: true, breaks: true, linkify: true }).disable('code');
 const purgeCssList = {
 	_global: { safe: [/^\:[-a-z]+$/, 'translated-rtl', 'data-tooltip-pos'], block: [] }, // Preserve any pseudo-class for now (thanks laurentpayot; still broken in 6.0 https://github.com/FullHuman/purgecss/issues/978)
