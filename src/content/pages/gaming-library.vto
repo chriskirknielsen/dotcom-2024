@@ -166,6 +166,11 @@ platformLabels: {
                 </li>
             {{ /for }}
         </ul>
+        {{ if platformSlug === 'pc' }}
+        <p class="textAlign-center textWrap-balance fontSize-smaller fontStyle-italic">
+            Only showing completed games, due to hundreds I have never played (and never will), mostly due to Epic Games Store's weekly freebies.
+        </p>
+        {{ /if }}
     {{ /expander }}
 {{ /for }}
 </div>

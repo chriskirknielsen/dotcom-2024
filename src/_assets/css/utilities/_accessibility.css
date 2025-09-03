@@ -11,13 +11,12 @@
 @media (--accept-motion) {
 	:where(:target:not([tabindex='-1'])) {
 		position: relative;
-		animation: targetHighlight var(--anim-eternity) var(--easing-out) var(--anim-eternity) backwards 1;
+		animation: targetHighlight var(--anim-eternity) var(--easing-out) var(--anim-eternity) both 1;
 	}
 
 	@keyframes targetHighlight {
-		from {
-			box-shadow: 0 0 33vmax 67vmax rgba(0, 0, 0, 0.5);
-			outline-width: 0.5em;
+		25% {
+			outline-width: 8px;
 			outline-offset: calc(var(--_focus-outline-offset) * 4);
 		}
 	}
