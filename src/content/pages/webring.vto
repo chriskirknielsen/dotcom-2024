@@ -1,7 +1,18 @@
----
-title: Webring
-summary: Fun sites and things and such!
-permalink: /webring/
+---js
+{
+    title: 'Webring',
+    summary: 'Fun sites and things and such!',
+    permalink: '/webring/',
+    tags: ['_og'],
+    eleventyComputed: {
+        customMetaImage: function (data) {
+            if (data.permalink) {
+                return this.toOgImage(data);
+            }
+            return this.toPath([data.assets.images, 'metaimage.jpg']);
+        }
+    },
+}
 ---
 
 <h2>

@@ -13,7 +13,7 @@ changelog: {
 }
 ---
 
-I already wrote a little about [refactoring a blog of mine with Vento](/blog/taking-vento-js-for-a-spin-in-eleventy) recently ([check out Helen’s post](https://helenchong.dev/blog/posts/2025-05-21-vento-in-eleventy/), too!), but it was a rather simple codebase, making it relatively easy to work with. This website (or [chriskirknielsen.com](https://chriskirknielsen.com) if you’re reading this via the RSS feed!), while not a web-behemoth, has its fair share of complexity, so I wanted to see if a full refactor was feasible. Thus, over the past few weeks, I‘ve been working on a separate branch, converting Nunjucks to Vento, page by page, and template by template. There were some pain points which I’ll cover, along some solutions to help you make the switch if you fancy it. I’m sure you can to apply most of this stuff to a Liquid codebase, by the way. I believe in you!
+I already wrote a little about [refactoring a blog of mine with Vento](/blog/taking-vento-js-for-a-spin-in-eleventy) recently ([check out Helen’s post](https://helenchong.dev/blog/posts/2025-05-21-vento-in-eleventy/), too!), but it was a rather simple codebase, making it relatively easy to work with. This website (or [chriskirknielsen.com](https://chriskirknielsen.com) if you’re reading this via the RSS feed!), while not a web-behemoth, has its fair share of complexity, so I wanted to see if a full refactor was feasible. Thus, over the past few weeks, I’ve been working on a separate branch, converting Nunjucks to Vento, page by page, and template by template. There were some pain points which I’ll cover, along some solutions to help you make the switch if you fancy it. I’m sure you can to apply most of this stuff to a Liquid codebase, by the way. I believe in you!
 
 {{ callout "Disclaimer" }}
 I am by no means a Vento expert, but I’m fairly competent with JavaScript, which can be handy. If you run into issues, I’d recommend posting in the [11ty Discord](https://www.11ty.dev/blog/discord/) (I know, I know… walled gardens and all that, but right now it’s the best we got) where I would be glad to help!
@@ -98,7 +98,7 @@ While the first three are pretty self-explanatory, the `in` keyword is used for 
 
 ### Rebuilding blocks
 
-There is some overlap between Nunjucks and Vento’s blocks (or [tags](https://mozilla.github.io/nunjucks/templating.html#tags)), such as `set`, `for`, and `include`. The nice thing is that Vento remains async-friendly either way, so we do not need `setAsync` (which I think is not standard but provided by Eleventy?) or `asyncEach`. Replacing these is easy enough, but we _do_ need to ensure that any asynchronous value is also `await`ed, so that does require checking things… though you‘ll quickly notice if your content outputs `[object Promise]`!
+There is some overlap between Nunjucks and Vento’s blocks (or [tags](https://mozilla.github.io/nunjucks/templating.html#tags)), such as `set`, `for`, and `include`. The nice thing is that Vento remains async-friendly either way, so we do not need `setAsync` (which I think is not standard but provided by Eleventy?) or `asyncEach`. Replacing these is easy enough, but we _do_ need to ensure that any asynchronous value is also `await`ed, so that does require checking things… though you’ll quickly notice if your content outputs `[object Promise]`!
 
 {{ echo }}
 ```vto
@@ -207,7 +207,7 @@ We can export and import these functions across our templates, too! Here is an e
 {{ /export }}
 ```
 
-Be sure to close your exports with `/export`! I stayed stuck on `/function` for longer than I‘d like to admit…
+Be sure to close your exports with `/export`! I stayed stuck on `/function` for longer than I’d like to admit…
 
 ```vto:fonts/ottselesque/index.vto
 {{ import { fontPreviewer } from 'layouts/font-specimen.vto' }}
@@ -363,7 +363,7 @@ Another sweet Nunjucks feature is the auto-magic `loop` variable, which includes
 {{ callout }}You can use {{ echo }}`{{ for loopIndex, item of list }}`{{ /echo }} for Arrays (zero-indexed, mind!), but the above will still be necessary for iterating through objects as `key, value` (you can use `Object.keys` or `Object.entries` if you want to have both index and key/key-value).
 {{ /callout }}
 
-Okay… now we’re done fixing our loops, right? Well, almost. I ran into a peculiar issue I should report as a bug, but basically the sort order was seemingly reset for objects being iterated (maybe the objects are recreated instead of referenced or copied verbatim?), when that object was manipulated somewhere else (like a filter). So, instead of sorting the object directly, I opted to extract the keys into a plain array, sort those, and loop over them; the value is grabbed inside the loop instead. Less squeaky clean, but unless I‘m doing something wrong, the sort order from the object appears to reset every time. The original Nunjucks loop:
+Okay… now we’re done fixing our loops, right? Well, almost. I ran into a peculiar issue I should report as a bug, but basically the sort order was seemingly reset for objects being iterated (maybe the objects are recreated instead of referenced or copied verbatim?), when that object was manipulated somewhere else (like a filter). So, instead of sorting the object directly, I opted to extract the keys into a plain array, sort those, and loop over them; the value is grabbed inside the loop instead. Less squeaky clean, but unless I’m doing something wrong, the sort order from the object appears to reset every time. The original Nunjucks loop:
 
 {{ echo }}
 ```njk
@@ -489,7 +489,7 @@ I hope this is helpful to get your migrated over to Vento, or to help you see th
 
 For transparency, I’ve kept all my posts in Markdown files with Nunjucks templating for now. I only really use <code>{&percnt; raw &percnt;}</code> to prevent Nunjucks in my code blocks from being rendered, as well as my custom shortcodes {{ echo }}`{% callout %}` and `{% codepen %}`{{ /echo }}. It should be a pretty quick update with replacing `raw` with `echo`, but I ran out of weekend/steam/willpower/excuses (pick one).
 
-Also, I quickly hacked together Vento syntax highlighting via Prism for this article, it isn‘t perfect but I do hope it makes the reading experience a little better than a monochrome block of text. And I do hope you enjoyed all these “fun” section heading titles as much as I did making them!
+Also, I quickly hacked together Vento syntax highlighting via Prism for this article, it isn’t perfect but I do hope it makes the reading experience a little better than a monochrome block of text. And I do hope you enjoyed all these “fun” section heading titles as much as I did making them!
 
 ## More reading
 - [Vento’s documentation](https://vento.js.org/syntax/)

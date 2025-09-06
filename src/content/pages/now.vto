@@ -1,17 +1,28 @@
----
-title: Now
-summary: What am I doing these days?
-permalink: /now/
-section: now
-nowInfo: {
-    home: { heading: "Living" },
-    music: { heading: "Listening" },
-    sport: { heading: "Training" },
-    show: { heading: "Watching", detail: "Season" },
-    book: { heading: "Reading" },
-    game: { heading: "Playing" },
+---js
+{
+    title: 'Now',
+    summary: 'What am I doing these days?',
+    permalink: '/now/',
+    section: 'now',
+    nowInfo: {
+        home: { heading: "Living" },
+        music: { heading: "Listening" },
+        sport: { heading: "Training" },
+        show: { heading: "Watching", detail: "Season" },
+        book: { heading: "Reading" },
+        game: { heading: "Playing" },
+    },
+    tags: ['_slash', '_og'],
+    eleventyComputed: {
+        ogImageTitle: '/now',
+        customMetaImage: function (data) {
+            if (data.permalink) {
+                return this.toOgImage(data);
+            }
+            return this.toPath([data.assets.images, 'metaimage.jpg']);
+        }
+    },
 }
-tags: [_slash]
 ---
 
 {{ set lastKey = '' }}

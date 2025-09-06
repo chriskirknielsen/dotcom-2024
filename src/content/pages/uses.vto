@@ -1,10 +1,21 @@
----
-title: Uses
-summary: "My frequently used tools"
-permalink: '/uses/'
-templateEngineOverride: md
-toc: true
-tags: [_slash]
+---js
+{
+    title: 'Uses',
+    summary: "My frequently used tools",
+    permalink: '/uses/',
+    templateEngineOverride: 'md',
+    toc: true,
+    tags: ['_slash', '_og'],
+    eleventyComputed: {
+        ogImageSummary: (data) => data.summary,
+        customMetaImage: function (data) {
+            if (data.permalink) {
+                return this.toOgImage(data);
+            }
+            return this.toPath([data.assets.images, 'metaimage.jpg']);
+        }
+    },
+}
 ---
 
 ## Hardware

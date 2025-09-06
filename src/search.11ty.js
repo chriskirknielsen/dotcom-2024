@@ -11,7 +11,7 @@ export default class {
 		const acceptedTags = ['_posts', '_fonts', '_designs', '_projects', '_pages']; // _pages must be last since some of these will _also_ be tagged as a page!
 		let searchData = data.collections.all
 			.filter((content) => {
-				return acceptedTags.some((tag) => (content.data.tags || []).includes(tag));
+				return content.data.permalink !== '/search/' && acceptedTags.some((tag) => (content.data.tags || []).includes(tag));
 			})
 			.map((content) => {
 				// If the item is a page but is more specific (Design, Font, Project…), grab the tag that doesn't match _pages first, and if that fails, find the tag for _pages

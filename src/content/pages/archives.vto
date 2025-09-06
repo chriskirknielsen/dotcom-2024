@@ -1,11 +1,24 @@
----
-title: Archives
-summary: A digital museum of the previous versions of this website
-versionsInfo: {
-    2016: { description: "Definitely a student’s website" },
-    2018: { description: "The DeLorean got an upgrade" },
-    2020: { description: "A little more web-dev oriented", hasScheme: true },
-    2022: { description: "I… uh… made it better with themes!", hasScheme: true }
+---js
+{
+    title: 'Archives',
+    summary: 'A digital museum of the previous versions of this website',
+    permalink: '/archives/',
+    versionsInfo: {
+        2016: { description: "Definitely a student’s website" },
+        2018: { description: "The DeLorean got an upgrade" },
+        2020: { description: "A little more web-dev oriented", hasScheme: true },
+        2022: { description: "I… uh… made it better with themes!", hasScheme: true }
+    },
+    tags: ['_og'],
+    eleventyComputed: {
+        ogImageSummary: 'A Digital Museum',
+        customMetaImage: function (data) {
+            if (data.permalink) {
+                return this.toOgImage(data);
+            }
+            return this.toPath([data.assets.images, 'metaimage.jpg']);
+        }
+    },
 }
 ---
 

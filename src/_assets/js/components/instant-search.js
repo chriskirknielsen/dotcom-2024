@@ -62,7 +62,7 @@ class InstantSearch extends HTMLElement {
 				this.firstRunCallback();
 			}
 
-			resultsEl.innerHTML = `<li>Loading…</li>`; // Instant feedback: search is running
+			resultsEl.innerHTML = `<tr><td colspan="3">Loading…</td></tr>`; // Instant feedback: search is running
 			resultFilterEl.innerHTML = '<option value="*">All</option>'; // Reset after every search
 
 			let data = await getDatabase();
@@ -78,7 +78,7 @@ class InstantSearch extends HTMLElement {
 
 				if (result.length === 0) {
 					resultCountEl.innerText = `(0)`;
-					resultsEl.innerHTML = `<li>No results found 😢</li>`;
+					resultsEl.innerHTML = `<tr><td colspan="3">No results found 😢</td></tr>`;
 					return;
 				}
 

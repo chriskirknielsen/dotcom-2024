@@ -1,8 +1,18 @@
----
-title: "Support"
-summary: "If you want to support me for any odd reason, here’s what you could do"
-permalink: /support/
-tags: [_slash]
+---js
+{
+    title: "Support",
+    summary: "If you want to support me for any odd reason, here’s what you could do",
+    permalink: '/support/',
+    tags: ['_slash', '_og'],
+    eleventyComputed: {
+        customMetaImage: function (data) {
+            if (data.permalink) {
+                return this.toOgImage(data);
+            }
+            return this.toPath([data.assets.images, 'metaimage.jpg']);
+        }
+    },
+}
 ---
 
 <h2>For free</h2>

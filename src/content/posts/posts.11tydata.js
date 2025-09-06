@@ -2,6 +2,7 @@ export default {
 	layout: 'post.vto',
 	tags: ['_posts', '_og'],
 	section: 'post',
+	time: '00:00:00',
 	eleventyComputed: {
 		date: function (data) {
 			const date = new Date(data.date || data.page.date);

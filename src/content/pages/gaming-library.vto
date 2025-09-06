@@ -1,20 +1,31 @@
----
-title: Gaming Library
-summary: Dang, I’ve played a lot of games, eh?
-permalink: /games/library/
-section: games
-heroCta: [{ label: "/games", url: "/games/" }, { label: "PSN Profile", url: "https://psnprofiles.com/JaKhris" }]
-platformLabels: {
-    'PS5': 'PlayStation 5',
-    'PS4': 'PlayStation 4',
-    'PS3': 'PlayStation 3',
-    'PS2': 'PlayStation 2',
-    'PS1': 'PlayStation',
-    'PSV': 'PS Vita',
-    'PSP': 'PlayStation Portable',
-    'Switch': 'Switch',
-    'Dreamcast': 'Dreamcast',
-    'PC': 'PC',
+---js
+{
+    title: 'Gaming Library',
+    summary: 'Dang, I’ve played a lot of games, eh?',
+    permalink: '/games/library/',
+    section: 'games',
+    heroCta: [{ label: "/games", url: "/games/" }, { label: "PSN Profile", url: "https://psnprofiles.com/JaKhris" }],
+    platformLabels: {
+        'PS5': 'PlayStation 5',
+        'PS4': 'PlayStation 4',
+        'PS3': 'PlayStation 3',
+        'PS2': 'PlayStation 2',
+        'PS1': 'PlayStation',
+        'PSV': 'PS Vita',
+        'PSP': 'PlayStation Portable',
+        'Switch': 'Switch',
+        'Dreamcast': 'Dreamcast',
+        'PC': 'PC',
+    },
+    tags: ['_og'],
+    eleventyComputed: {
+        customMetaImage: function (data) {
+            if (data.permalink) {
+                return this.toOgImage(data);
+            }
+            return this.toPath([data.assets.images, 'metaimage.jpg']);
+        }
+    },
 }
 ---
 

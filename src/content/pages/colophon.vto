@@ -1,8 +1,20 @@
----
-title: Colophon
-summary: "How did this get here?"
-permalink: '/colophon/'
-toc: true
+---js
+{
+    title: 'Colophon',
+    summary: "How did this get here?",
+    ogImageSummary: "How this website’s made",
+    permalink: '/colophon/',
+    toc: true,
+    tags: ['_og'],
+    eleventyComputed: {
+        customMetaImage: function (data) {
+            if (data.permalink) {
+                return this.toOgImage(data);
+            }
+            return this.toPath([data.assets.images, 'metaimage.jpg']);
+        }
+    },
+}
 ---
 
 {{ echo |> markdown }}

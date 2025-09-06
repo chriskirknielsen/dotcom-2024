@@ -1,40 +1,51 @@
----
-title: Music
-summary: My musical tastes laid bare
-permalink: /music/
-section: music
-tags: [_slash]
-artists: {
-    "thrice": "Thrice",
-    "sleep-token": "Sleep Token",
-    "architects": "Architects",
-    "audioslave": "Audioslave",
-    "deadmau5": "deadmau5",
-    "nine-inch-nails": "Nine Inch Nails",
-    "deftones": "Deftones",
-    "rammstein": "Rammstein",
-    "pendulum": "Pendulum",
-    "blink-182": "blink-182",
-    "bring-me-the-horizon": "Bring Me The Horizon",
-    "bad-omens": "Bad Omens",
-    "innerpartysystem": "Innerpartysystem",
-    "linkin-park": "Linkin Park",
-    "daft-punk": "Daft Punk",
-    "justice": "Justice",
-    "a-perfect-circle": "A Perfect Circle",
-    "tool": "Tool",
-    "foo-fighters": "Foo Fighters",
-    "muse": "Muse",
-    "radiohead": "Radiohead",
-    "moving-mountains": "Moving Mountains",
-    "the-glitch-mob": "The Glitch Mob",
-    "static-x": "Static-X",
-    "slipknot": "Slipknot",
-    "underoath": "Underoath",
-    "tycho": "Tycho",
-    "the-strokes": "The Strokes",
-    "system-of-a-down": "System of a Down",
-    "carpenter-brut": "Carpenter Brut",
+---js
+{
+    title: 'Music',
+    summary: 'My musical tastes laid bare',
+    ogImageSummary: 'Some of my favourite artists',
+    permalink: '/music/',
+    section: 'music',
+    tags: ['_slash', '_og'],
+    artists: {
+        "thrice": "Thrice",
+        "sleep-token": "Sleep Token",
+        "architects": "Architects",
+        "audioslave": "Audioslave",
+        "deadmau5": "deadmau5",
+        "nine-inch-nails": "Nine Inch Nails",
+        "deftones": "Deftones",
+        "rammstein": "Rammstein",
+        "pendulum": "Pendulum",
+        "blink-182": "blink-182",
+        "bring-me-the-horizon": "Bring Me The Horizon",
+        "bad-omens": "Bad Omens",
+        "innerpartysystem": "Innerpartysystem",
+        "linkin-park": "Linkin Park",
+        "daft-punk": "Daft Punk",
+        "justice": "Justice",
+        "a-perfect-circle": "A Perfect Circle",
+        "tool": "Tool",
+        "foo-fighters": "Foo Fighters",
+        "muse": "Muse",
+        "radiohead": "Radiohead",
+        "moving-mountains": "Moving Mountains",
+        "the-glitch-mob": "The Glitch Mob",
+        "static-x": "Static-X",
+        "slipknot": "Slipknot",
+        "underoath": "Underoath",
+        "tycho": "Tycho",
+        "the-strokes": "The Strokes",
+        "system-of-a-down": "System of a Down",
+        "carpenter-brut": "Carpenter Brut",
+    },
+    eleventyComputed: {
+        customMetaImage: function (data) {
+            if (data.permalink) {
+                return this.toOgImage(data);
+            }
+            return this.toPath([data.assets.images, 'metaimage.jpg']);
+        }
+    },
 }
 ---
 
