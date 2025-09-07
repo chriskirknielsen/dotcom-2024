@@ -131,6 +131,7 @@ const designs = [
 		mockup: 'sticker',
 	},
 	{
+		showInGallery: false,
 		slug: 'css-logo-transparent',
 		name: 'CSS Logo (transparent)',
 		description: `CSS is awesome.`,
@@ -143,7 +144,6 @@ const designs = [
 		tags: ['dev', 'css'],
 		date: '2024-11-02',
 		variant: ['css-logo-solid'],
-		showInGallery: false,
 		mockup: 'sticker',
 	},
 	{
@@ -236,6 +236,7 @@ const designs = [
 		mockup: 'sticker',
 	},
 	{
+		showInGallery: false,
 		slug: 'git-reset-hard',
 		name: 'git reset hard',
 		description: `Wait a minute Doc. You're telling me you built a time machine out of a command?`,
@@ -247,7 +248,6 @@ const designs = [
 		tags: ['dev', 'tv-movies'],
 		date: '2024-09-29',
 		variant: ['git-revert'],
-		showInGallery: false,
 		accent: '#fe5e19',
 		mockup: 'sticker',
 	},
@@ -290,51 +290,51 @@ const designs = [
 		},
 		tags: ['games'],
 		date: '2021-10-23',
-		variant: ['control-service-weapon'],
 		accent: '#ed0703',
 		mockup: 'poster',
+		similar: ['god-of-war', 'deathloop', 'dead-space'],
 	},
-	// {
-	// 	slug: 'god-of-war',
-	// 	name: 'Lake of Nine',
-	// 	description: 'A peaceful moment on the Lake of Nine.',
-	// 	img: 'gameart-gow.png',
-	// 	links: {
-	// 		RedBubble: 'https://www.redbubble.com/i/art-print/God-of-War-by-ckirknielsen/106870471.1G4ZT',
-	// 	},
-	// 	tags: ['games'],
-	// 	date: '2021-10-23',
-	// 	variant: ['god-of-war-leviathan-axe'],
-	// 	accent: '#439c9c',
-	// 	mockup: 'poster',
-	// },
-	// {
-	// 	slug: 'deathloop',
-	// 	name: 'Blackreef',
-	// 	description: 'Kill all Visionaries. Break the loop. Easy.',
-	// 	img: 'gameart-deathloop.png',
-	// 	links: {
-	// 		RedBubble: 'https://www.redbubble.com/i/art-print/DEATHLOOP-by-ckirknielsen/106881338.1G4ZT',
-	// 	},
-	// 	tags: ['games'],
-	// 	date: '2021-12-31',
-	// 	variant: ['deathloop-fourpounder'],
-	// 	accent: '#e9521d',
-	// 	mockup: 'poster',
-	// },
+	{
+		slug: 'god-of-war',
+		name: 'Lake of Nine',
+		description: 'A peaceful moment on the Lake of Nine.',
+		img: 'gameart-gow.png',
+		links: {
+			RedBubble: 'https://www.redbubble.com/i/poster/Lake-of-Nine-by-ckirknielsen/173627681.LVTDI',
+		},
+		tags: ['games'],
+		date: '2021-10-23',
+		accent: '#439c9c',
+		mockup: 'poster',
+		similar: ['control', 'deathloop', 'dead-space'],
+	},
+	{
+		slug: 'deathloop',
+		name: 'Blackreef',
+		description: 'Kill all Visionaries. Break the loop. Easy.',
+		img: 'gameart-deathloop.png',
+		links: {
+			RedBubble: 'https://www.redbubble.com/i/poster/Blackreef-by-ckirknielsen/173628637.LVTDI',
+		},
+		tags: ['games'],
+		date: '2021-12-31',
+		accent: '#e9521d',
+		mockup: 'poster',
+		similar: ['control', 'god-of-war', 'dead-space'],
+	},
 	{
 		slug: 'dead-space',
 		name: 'USG Ishimura',
 		description: 'In space, only Necromorphs can hear you scream.',
 		img: 'gameart-deadspace.png',
 		links: {
-			RedBubble: 'https://www.redbubble.com/i/art-print/Dead-Space-by-ckirknielsen/106878842.1G4ZT',
+			RedBubble: 'https://www.redbubble.com/i/poster/USG-Ishimura-by-ckirknielsen/106878842.LVTDI',
 		},
 		tags: ['games'],
 		date: '2022-01-23',
-		variant: ['dead-space-plasma-cutter'],
 		accent: '#06e4d8',
 		mockup: 'poster',
+		similar: ['control', 'god-of-war', 'deathloop'],
 	},
 	{
 		slug: 'jak-daxter-powercell-hunters',
@@ -590,98 +590,9 @@ const designs = [
 		accent: '#43b1a5',
 		isCommission: true,
 	},
-
-	// Below are designs that are hidden but still accessible via their unique URL
-
-	{
-		showInGallery: false,
-		slug: 'control-service-weapon',
-		name: 'Control, Service Weapon',
-		description: 'A poster showcasing a powerful handgun found in Control.',
-		img: 'control-service-weapon.jpg',
-		links: {
-			RedBubble: 'https://www.redbubble.com/i/poster/Control-FBC-Service-Weapon-by-ckirknielsen/89267833.LVTDI',
-			TeePublic: 'https://www.teepublic.com/poster-and-art/24392079-control-fbc-service-weapon',
-		},
-		tags: ['games', 'gaming-arsenal'],
-		date: '2021-10-23',
-		variant: ['control'],
-	},
-	// {
-	// 	showInGallery: false,
-	// 	slug: 'deathloop-fourpounder',
-	// 	name: 'DEATHLOOP, Fourpounder',
-	// 	description: 'A poster showcasing a stylish gun from DEATHLOOP.',
-	// 	img: 'deathloop-fourpounder.jpg',
-	// 	links: {
-	// 		RedBubble: 'https://www.redbubble.com/i/poster/DEATHLOOP-Fourpounder-by-ckirknielsen/97903910.LVTDI',
-	// 		TeePublic: 'https://www.teepublic.com/poster-and-art/26802077-deathloop-fourpounder',
-	// 	},
-	// 	tags: ['games', 'gaming-arsenal'],
-	// 	date: '2021-12-31',
-	// 	variant: ['deathloop'],
-	// },
-	{
-		showInGallery: false,
-		slug: 'god-of-war-leviathan-axe',
-		name: 'God of War, Leviathan Axe',
-		description: 'A poster showcasing a mythical axe from God of War.',
-		img: 'gow-axe.jpg',
-		links: {
-			RedBubble: 'https://www.redbubble.com/i/poster/God-of-War-Leviathan-Axe-by-ckirknielsen/91430397.LVTDI',
-			// 'RedBubble (Alt)': 'https://www.redbubble.com/i/poster/God-of-War-Leviathan-Axe-Alt-Version-by-ckirknielsen/106755016.LVTDI',
-			TeePublic: 'https://www.teepublic.com/poster-and-art/24830737-god-of-war-leviathan-axe',
-		},
-		tags: ['games', 'gaming-arsenal'],
-		date: '2021-10-23',
-		// variant: ['god-of-war'],
-	},
-	{
-		showInGallery: false,
-		slug: 'tlou-switchblade',
-		name: 'The Last of Us, Switchblade',
-		description: "A poster illustrating Ellie's signature knife in The Last of Us.",
-		img: 'tlou-switchblade.jpg',
-		links: {
-			// RedBubble: 'https://www.redbubble.com/i/poster/The-Last-of-Us-Switchblade-by-ckirknielsen/106050948.LVTDI',
-			TeePublic: 'https://www.teepublic.com/poster-and-art/28918532-the-last-of-us-switchblade',
-		},
-		tags: ['games', 'gaming-arsenal'],
-		date: '2022-03-27',
-	},
-	{
-		showInGallery: false,
-		slug: 'ratchet-clank-omniwrench',
-		name: 'Ratchet & Clank, Omniwrench',
-		description: 'A poster presenting a versatile tool in Ratchet & Clank.',
-		img: 'rc-wrench.jpg',
-		links: {
-			RedBubble: 'https://www.redbubble.com/i/poster/Ratchet-and-Clank-Omniwrench-Millenium-by-ckirknielsen/93357003.LVTDI',
-			TeePublic: 'https://www.teepublic.com/poster-and-art/25205497-ratchet-and-clank-omniwrench-millenium',
-		},
-		tags: ['games', 'gaming-arsenal'],
-		date: '2022-04-03',
-	},
-	{
-		showInGallery: false,
-		slug: 'dead-space-plasma-cutter',
-		name: 'Dead Space, Plasma Cutter',
-		description: 'A poster presenting an essential engineering tool in Dead Space.',
-		img: 'ds-plasma-cutter.jpg',
-		links: {
-			RedBubble: 'https://www.redbubble.com/i/poster/Dead-Space-Plasma-Cutter-by-ckirknielsen/99996925.LVTDI',
-			TeePublic: 'https://www.teepublic.com/poster-and-art/27453494-dead-space-plasma-cutter',
-		},
-		tags: ['games', 'gaming-arsenal'],
-		date: '2022-01-23',
-		variant: ['dead-space'],
-	},
 ];
 
 // By default, if the showInGallery prop is missing, infer the design should be shown
 export default designs.map((design) => {
-	if (design.hasOwnProperty('showInGallery')) {
-		return design;
-	}
-	return Object.assign(design, { showInGallery: true });
+	return Object.assign({ showInGallery: true }, design);
 });
