@@ -58,6 +58,7 @@
 	}
 
 	:checked + &.button--cbox,
+	&.button--cbox:has(input:checked),
 	&[data-persist-pressed-style][aria-pressed='true'],
 	&[aria-current='page'] {
 		--CTA-text-color: var(--_cta-text-color-pressed);
@@ -75,8 +76,14 @@
 		--CTA-padding: var(--_cta-padding-block) var(--size-xs);
 	}
 
-	:checked + &.button--cbox {
+	:checked + &.button--cbox,
+	&.button--cbox:has(input:checked) {
 		text-decoration: underline;
+	}
+
+	&.button--cbox:has(input:focus-visible) {
+		outline: var(--_focus-outline);
+		outline-offset: var(--_focus-outline-offset);
 	}
 
 	.button-content {

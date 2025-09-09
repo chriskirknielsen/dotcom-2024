@@ -1,21 +1,19 @@
 .filtering {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: baseline;
-	gap: 0.5em;
+	display: block;
 	margin: 0;
 	padding: 0;
 
+	text-align: center;
+	text-wrap: balance;
 	border: 0;
+
+	& > * {
+		margin: 0.25em;
+	}
 }
 
 .filtering-item {
-	display: inline-block;
-
-	& input[type='radio']:focus-visible + label {
-		outline: 4px dashed var(--C-accent);
-	}
+	display: inline-flex;
 }
 
 .filtering-tag {

@@ -177,7 +177,7 @@ class FilteredTiles extends HTMLElement {
 		Array.from(tilesGroup.children).forEach((c) => c.setAttribute('data-filtered-item', ''));
 
 		// Grab all the relevant attributes
-		const filters = this.dataset.filters.split(',').map((f) => f.trim().toLowerCase());
+		const filters = this.dataset.filters.split(',').map((f) => f.trim().toLowerCase()); // Sorting is performed on the source element, not here
 		const filterClass = this.getAttribute('filter-class') || '';
 		const fieldsetLegend = this.getAttribute('filter-legend') || 'Filter';
 		const filterAllLabel = this.getAttribute('filter-all-label') || 'All';
@@ -208,7 +208,7 @@ class FilteredTiles extends HTMLElement {
 			newItemRadio.value = slug || '';
 			newItemRadio.checked = checked;
 			newItemLabel.htmlFor = checkboxId;
-			newItemLabel.innerText = label || slug;
+			newItemLabel.append(label || slug);
 
 			return newItemElement;
 		};

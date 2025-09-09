@@ -24,8 +24,11 @@
 </p>
 
 <hr class="hero-like">
-
-<filtered-tiles class="flow" data-filters="{{ activeDesigns |> pluck('tags') |> flatten |> unique |> sort |> join(',') }}">
+{{ set availableTags = activeDesigns |> pluck('tags') |> flatten |> unique }}
+{{ set hasCommissionTag = availableTags.includes('commission') }}
+{{ set globalTags = availableTags.filter(t => t !== 'commission') |> sort }}
+{{# Commissions can have their own tag, sure #}}
+<filtered-tiles class="flow" data-filters="{{ globalTags |> join(',') }}{{ hasCommissionTag ? ',commission' : '' }}">
 	<ul data-filtered-tiles-group class="cards">
 		{{ for loopIndex, design of activeDesigns }}
 			<li class="card-wrapper" id="{{ design.slug }}"
@@ -89,8 +92,7 @@
 
 	<template data-filtered-tiles-template>
 		<div class="filtering-item">
-			<input type="radio" class="visually-hidden">
-			<label class="button button--cbox filtering-tag"></label>
+			<label class="button button--cbox filtering-tag"><input type="radio" class="visually-hidden"></label>
 		</div>
 	</template>
 </filtered-tiles>

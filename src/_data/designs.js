@@ -482,7 +482,7 @@ const designs = [
 		links: {
 			CottonBureau: 'https://cottonbureau.com/products/css-retro-vhs#/13046404/tee-men-standard-tee-vintage-black-tri-blend-m',
 		},
-		tags: ['dev', 'css', 'vhs', 'retro'],
+		tags: ['dev', 'css', 'vhs', 'retro', 'commission'],
 		similar: ['js-retro-vhs', 'html-retro-vhs', 'react-retro-vhs'],
 		date: '2021-12-24',
 		accent: '#d6307f',
@@ -497,7 +497,7 @@ const designs = [
 		links: {
 			CottonBureau: 'https://cottonbureau.com/products/javascript-retro-vhs#/13799357/tee-men-standard-tee-vintage-black-tri-blend-m',
 		},
-		tags: ['dev', 'js', 'vhs', 'retro'],
+		tags: ['dev', 'js', 'vhs', 'retro', 'commission'],
 		similar: ['css-retro-vhs', 'html-retro-vhs', 'react-retro-vhs'],
 		date: '2022-03-01',
 		accent: '#3c8ee0',
@@ -512,7 +512,7 @@ const designs = [
 		links: {
 			CottonBureau: 'https://cottonbureau.com/p/8U4SGF/shirt/html-retro-vhs#/20217871/tee-men-standard-tee-vintage-black-tri-blend-m',
 		},
-		tags: ['dev', 'html', 'vhs', 'retro'],
+		tags: ['dev', 'html', 'vhs', 'retro', 'commission'],
 		similar: ['css-retro-vhs', 'js-retro-vhs', 'react-retro-vhs'],
 		date: '2024-05-14',
 		accent: '#eba66f',
@@ -528,7 +528,7 @@ const designs = [
 		links: {
 			CottonBureau: 'https://cottonbureau.com/p/NV42G5/shirt/react-atom#/20741664/tee-men-standard-tee-vintage-navy-tri-blend-m',
 		},
-		tags: ['dev', 'js', 'vhs', 'retro'],
+		tags: ['dev', 'js', 'vhs', 'retro', 'commission'],
 		similar: ['html-retro-vhs', 'css-retro-vhs', 'js-retro-vhs'],
 		date: '2024-07-19',
 		accent: '#9bf4eb',
@@ -543,7 +543,7 @@ const designs = [
 		links: {
 			CottonBureau: 'https://cottonbureau.com/p/Y55DSU/shirt/front-end-friends-css-grid#/19399708/tee-men-standard-tee-vintage-black-tri-blend-m',
 		},
-		tags: ['dev', 'css', 'vhs', 'retro'],
+		tags: ['dev', 'css', 'vhs', 'retro', 'commission'],
 		similar: ['kevin-powell-css', 'kevin-powell-color-space'],
 		date: '2023-12-31',
 		accent: '#30b2b2',
@@ -558,7 +558,7 @@ const designs = [
 		links: {
 			CottonBureau: 'https://cottonbureau.com/p/URUZFW/shirt/front-end-friends-cascading-style-sheets#/19399691/tee-men-standard-tee-natural-100percent-cotton-m',
 		},
-		tags: ['dev', 'css', 'vhs', 'retro'],
+		tags: ['dev', 'css', 'vhs', 'retro', 'commission'],
 		similar: ['kevin-powell-grid', 'kevin-powell-color-space'],
 		date: '2023-12-31',
 		accent: '#f0a135',
@@ -573,7 +573,7 @@ const designs = [
 		links: {
 			CottonBureau: 'https://cottonbureau.com/p/B56YTR/shirt/front-end-friends-explore-color-space#/19399781/tee-men-standard-tee-vintage-black-tri-blend-m',
 		},
-		tags: ['dev', 'css', 'vhs', 'retro'],
+		tags: ['dev', 'css', 'vhs', 'retro', 'commission'],
 		similar: ['kevin-powell-color-space', 'kevin-powell-css'],
 		date: '2023-12-31',
 		accent: '#43b1a5',
