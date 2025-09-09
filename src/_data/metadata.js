@@ -26,7 +26,7 @@ export default {
 	merch: {
 		RedBubble: 'https://www.redbubble.com/people/ckirknielsen/shop',
 		TeePublic: 'https://www.teepublic.com/user/chriskirknielsen/',
-		DesignByHumans: 'https://www.designbyhumans.com/shop/chriskirknielsen/',
+		CottonBureau: 'https://cottonbureau.com/people/christopher-kirk-nielsen',
 	},
 	support: {
 		kofi: 'https://ko-fi.com/chriskirknielsen',

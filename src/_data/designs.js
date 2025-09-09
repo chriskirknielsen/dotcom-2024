@@ -108,7 +108,6 @@ const designs = [
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-CSS-by-ckirknielsen/58081555.DYMRA',
 			TeePublic: 'https://www.teepublic.com/t-shirt/14125152-retro-css?store_id=49603',
-			DesignByHumans: 'https://www.designbyhumans.com/shop/t-shirt/men/retro-css/1831571/',
 		},
 		tags: ['dev', 'css', 'retro'],
 		date: '2020-09-17',
@@ -123,6 +122,7 @@ const designs = [
 		links: {
 			TeePublic: 'https://www.teepublic.com/sticker/67983005-css-logo-solid',
 			RedBubble: 'https://www.redbubble.com/i/sticker/CSS-Logo-solid-by-ckirknielsen/166040147.EJUG5',
+			CottonBureau: 'https://cottonbureau.com/p/D6EHDP/shirt/css-is-awesome',
 		},
 		tags: ['dev', 'css'],
 		date: '2024-11-02',
@@ -154,7 +154,6 @@ const designs = [
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/sticker/CSS-Fact-Sheet-by-ckirknielsen/58082119.EJUG5',
 			TeePublic: 'https://www.teepublic.com/t-shirt/14123881-css-fact-sheet?store_id=49603',
-			DesignByHumans: 'https://www.designbyhumans.com/shop/t-shirt/men/css-fact-sheet/1831576/',
 		},
 		tags: ['dev', 'css'],
 		date: '2020-09-17',
@@ -168,7 +167,6 @@ const designs = [
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/sticker/Radical-Duotype-Cascading-Stylesheets-by-ckirknielsen/130796947.QK27K',
 			TeePublic: 'https://www.teepublic.com/sticker/36307529-radical-duotype-cascading-stylesheets',
-			DesignByHumans: 'https://www.designbyhumans.com/shop/sticker/radical-duotype-cascading-stylesheets/1871221/',
 		},
 		tags: ['dev', 'css'],
 		date: '2022-11-06',
@@ -184,7 +182,6 @@ const designs = [
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/sticker/Radical-Duotype-Semantic-Markup-by-ckirknielsen/130797216.QK27K',
 			TeePublic: 'https://www.teepublic.com/sticker/36307530-radical-duotype-semantic-markup',
-			DesignByHumans: 'https://www.designbyhumans.com/shop/sticker/radical-duotype-semantic-markup/1871223/',
 		},
 		tags: ['dev', 'html'],
 		date: '2022-11-06',
@@ -260,6 +257,7 @@ const designs = [
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/World-Wide-Web-Explorer-by-ckirknielsen/104638901.SWO0S?asc=u',
 			TeePublic: 'https://www.teepublic.com/t-shirt/28541207-world-wide-web-explorer',
+			CottonBureau: 'https://cottonbureau.com/p/XKQCF2/shirt/world-wide-web-explorer#/29541730/tee-men-basic-heavyweight-sport-grey-poly-cotton-s',
 		},
 		tags: ['dev', 'www', 'retro'],
 		date: '2022-03-14',
@@ -273,7 +271,6 @@ const designs = [
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Vaporwave-CSS-by-ckirknielsen/110853198.Y4WIZ',
 			TeePublic: 'https://www.teepublic.com/t-shirt/30315700-vaporwave-css',
-			DesignByHumans: 'https://www.designbyhumans.com/shop/t-shirt/men/vaporwave-css/1835097/',
 		},
 		tags: ['dev', 'css', 'retro'],
 		date: '2022-05-15',
@@ -344,7 +341,6 @@ const designs = [
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Powercell-Hunters-by-ckirknielsen/84952593.2EZFS',
 			TeePublic: 'https://www.teepublic.com/t-shirt/23558909-powercell-hunters',
-			DesignByHumans: 'https://www.designbyhumans.com/shop/t-shirt/men/powercell-hunters/1809059/',
 		},
 		tags: ['games'],
 		date: '2021-08-09',
@@ -359,7 +355,6 @@ const designs = [
 		links: {
 			// RedBubble: 'https://www.redbubble.com/i/t-shirt/Wumpa-Hoarder-by-ckirknielsen/94462053.4AE2Y',
 			TeePublic: 'https://www.teepublic.com/t-shirt/25571868-wumpa-hoarder',
-			DesignByHumans: 'https://www.designbyhumans.com/shop/t-shirt/men/wumpa-hoarder/1831579/',
 		},
 		tags: ['games'],
 		date: '2021-11-14',
@@ -375,7 +370,6 @@ const designs = [
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Gentleman-Thief-by-ckirknielsen/107478068.ADAKE.XYZ',
 			TeePublic: 'https://www.teepublic.com/t-shirt/29290455-gentleman-thief',
-			DesignByHumans: 'https://www.designbyhumans.com/shop/t-shirt/men/gentleman-thief/1831582/',
 		},
 		tags: ['games'],
 		date: '2022-04-10',
@@ -389,7 +383,6 @@ const designs = [
 		links: {
 			TeePublic: 'https://www.teepublic.com/t-shirt/19884473-the-synth-element-symbols',
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/The-Synth-Element-Symbols-by-ckirknielsen/108913348.DYMRA',
-			DesignByHumans: 'https://www.designbyhumans.com/shop/t-shirt/men/the-synth-element-symbols/1831898/',
 		},
 		tags: ['tv-movies'],
 		date: '2022-04-24',
@@ -404,7 +397,6 @@ const designs = [
 		links: {
 			TeePublic: 'https://www.teepublic.com/t-shirt/19884472-the-synth-element-stones',
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/The-Synth-Element-Stones-by-ckirknielsen/108914203.UHLBD',
-			DesignByHumans: 'https://www.designbyhumans.com/shop/t-shirt/men/the-synth-element-stones/1831897/',
 		},
 		tags: ['tv-movies'],
 		date: '2022-04-24',
@@ -431,7 +423,6 @@ const designs = [
 		links: {
 			// RedBubble: 'https://www.redbubble.com/i/sticker/Twin-Pines-Mall-Hill-Valley-CA-by-ckirknielsen/132619127.QK27K',
 			TeePublic: 'https://www.teepublic.com/sticker/36675377-twin-pines-mall-hill-valley-ca',
-			// DesignByHumans: 'https://www.designbyhumans.com/shop/sticker/twin-pines-mall-hill-valley-ca/1873939/',
 		},
 		tags: ['tv-movies'],
 		date: '2022-11-19',
@@ -448,7 +439,6 @@ const designs = [
 		links: {
 			// RedBubble: 'https://www.redbubble.com/i/sticker/Lone-Pine-Mall-Hill-Valley-CA-by-ckirknielsen/132619380.QK27K',
 			TeePublic: 'https://www.teepublic.com/sticker/36675620-lone-pine-mall-hill-valley-ca',
-			// DesignByHumans: 'https://www.designbyhumans.com/shop/sticker/lone-pine-mall-hill-valley-ca/1873940/',
 		},
 		tags: ['tv-movies'],
 		date: '2022-11-19',
@@ -464,7 +454,6 @@ const designs = [
 		links: {
 			TeePublic: 'https://www.teepublic.com/t-shirt/30106971-four-i-mean-five-i-mean-fire',
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Four-I-mean-Five-I-mean-Fire-by-ckirknielsen/110315180.1482B.XYZ',
-			DesignByHumans: 'https://www.designbyhumans.com/shop/t-shirt/men/four-i-mean-five-i-mean-fire/1834133/',
 		},
 		tags: ['tv-movies'],
 		date: '2022-05-09',
