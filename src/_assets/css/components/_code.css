@@ -1,3 +1,9 @@
+pre,
+code {
+	--tab-size: 4;
+	tab-size: var(--tab-size, 4);
+}
+
 code-wrap {
 	display: block;
 }
@@ -39,6 +45,7 @@ code-wrap {
 }
 
 .codeblock pre,
+.codeblock-pre,
 .codeview-render {
 	position: relative;
 
@@ -50,6 +57,10 @@ code-wrap {
 	border: var(--CODEBLOCK-border-width) solid var(--CODEBLOCK-border-color);
 	border-block-start-width: 0;
 	background-color: var(--CODE-bg, var(--C-surface));
+	background-image: conic-gradient(from -90deg at 1px 1px, color-mix(in hsl, var(--C-inactive, #808080), transparent) 0 90deg, transparent 0);
+	background-origin: content-box;
+	background-size: calc(var(--tab-size) * 1ch) 0.33em;
+	background-attachment: local;
 }
 
 .codeview-render {

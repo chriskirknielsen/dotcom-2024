@@ -82,7 +82,6 @@ kbd,
 code {
 	font-size-adjust: 0.45;
 	font-family: var(--fontStack-monospace);
-	tab-size: 4;
 }
 
 time {
