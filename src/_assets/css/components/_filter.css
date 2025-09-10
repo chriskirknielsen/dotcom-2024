@@ -6,14 +6,14 @@
 	text-align: center;
 	text-wrap: balance;
 	border: 0;
+}
+
+.filtering-item {
+	display: inline;
 
 	& > * {
 		margin: 0.25em;
 	}
-}
-
-.filtering-item {
-	display: inline-flex;
 }
 
 .filtering-tag {
