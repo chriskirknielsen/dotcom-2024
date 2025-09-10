@@ -7,12 +7,14 @@
 	text-wrap: balance;
 	border: 0;
 }
-
+.filtering-legend {
+	margin-inline-end: var(--size-xs);
+}
 .filtering-item {
 	display: inline;
 
 	& > * {
-		margin: 0.25em;
+		margin: var(--size-2xs);
 	}
 }
 
