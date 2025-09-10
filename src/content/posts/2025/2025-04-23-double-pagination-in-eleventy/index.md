@@ -105,15 +105,12 @@ const alias = 'pageItems'; // Data property which will contain the posts of the 
 
 eleventyConfig.addCollection('_tags', (collectionApi) => {
 	// Retrieve a list of all posts tagged `_posts`, extract their list of tags, flatten to a single-level array, and feed that into Set to deduplicate
-	const allTags = Array.from(new Set(
-			collectionApi
-				.getFilteredByTag('_posts')
-				.map((p) => p.data.tags)
-				.flat()
-		)).filter((t) => t.startsWith('_') === false); // In my setup, tags starting with `_` are "private" and not meant to be seen by users
+	const flatTagsList = collectionApi.getFilteredByTag('_posts').map((p) => p.data.tags).flat(); // All tags from all posts as a single list
+	const uniqueTags = Array.from(new Set(flatTagsList)); // Deduplicate
+	const availableTags = uniqueTags.filter((t) => t.startsWith('_') === false); // In my setup, tags starting with `_` are "private" and not meant to be seen by users
 
 	// Now iterate over every tag to build out the nested pagination
-	const allPostsPerTag = allTags
+	const allPostsPerTag = availableTags
 		.map((t) => {
 			// Grab every post of the current tag `t`, sorted by post date in descending order
 			const allPostsOfTag = collectionApi.getFilteredByTag(t).sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -207,16 +204,12 @@ export default async function (eleventyConfig) {
 
 	eleventyConfig.addCollection('_tags', (collectionApi) => {
 		// Retrieve a list of all posts tagged `_posts`, extract their list of tags, flatten to a single-level array, and feed that into Set to deduplicate
-		const allTags = Array.from(new Set(
-				collectionApi
-					.getFilteredByTag('_posts')
-					.map((p) => p.data.tags)
-					.flat()
-			)).filter((t) => t.startsWith('_') === false); // In my setup, tags starting with `_` are "private" and not meant to be seen by users
-		const alias = 'pageItems'; // Data property which will contain the posts of the current sub-pages
+		const flatTagsList = collectionApi.getFilteredByTag('_posts').map((p) => p.data.tags).flat(); // All tags from all posts as a single list
+		const uniqueTags = Array.from(new Set(flatTagsList)); // Deduplicate
+		const availableTags = uniqueTags.filter((t) => t.startsWith('_') === false); // In my setup, tags starting with `_` are "private" and not meant to be seen by users
 		
 		// Now iterate over every tag to build out the nested pagination
-		const allPostsPerTag = allTags
+		const allPostsPerTag = availableTags
 			.map((t) => {
 				// Grab every post of the current tag `t`, sorted by post date in descending order
 				const allPostsOfTag = collectionApi.getFilteredByTag(t).sort((a, b) => new Date(b.date) - new Date(a.date));
