@@ -26,7 +26,7 @@
 		"@11ty/eleventy-plugin-bundle": "^1.0.5",
 		"@11ty/eleventy-plugin-rss": "^1.2.0",
 		"@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
-		"@notionhq/client": "^2.2.14",
+		"@notionhq/client": "^5.0.0",
 		"cheerio": "^1.0.0",
 		"colorjs.io": "^0.5.0",
 		"dotenv": "^16.4.5",

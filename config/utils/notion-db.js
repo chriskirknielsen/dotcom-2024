@@ -6,6 +6,7 @@ import { Client as NotionClient } from '@notionhq/client';
  * Retrieve data from a Notion database.
  * @param {object} queryConfig The configuration for the database call and data processing.
  * @param {string} queryConfig.databaseId The unique ID for the database to query.
+ * @param {string} queryConfig.dataSourceId The unique ID for the data source to query.
  * @param {string} [queryConfig.label] Optional. Custom label to assign to the query, used for cache key generation and identification in logs. Defaults to the database ID.
  * @param {string[]} [queryConfig.propsToUse] Optional. List of properties to retrieve for each item in the database. Defaults to `['Title']`.
  * @param {object} [queryConfig.filter] Optional. Structured filtering to restrict which results are returned from the database. Defaults to an empty object to load all items. @see https://developers.notion.com/reference/post-database-query-filter
@@ -19,6 +20,7 @@ export default async function (queryConfig) {
 	}
 
 	const databaseId = queryConfig.databaseId;
+	const dataSourceId = queryConfig.dataSourceId;
 	const label = queryConfig.label || databaseId;
 	const propsToUse = queryConfig.propsToUse || ['Title'];
 	const filter = queryConfig.filter || {};
@@ -40,6 +42,11 @@ export default async function (queryConfig) {
 		getData: async function (dbInfo) {
 			// Based on the database info, build a list of the IDs for the properties needed based on their name
 			const databaseProps = dbInfo.properties;
+			const dataSourceIds = dbInfo.data_sources.map((s) => s.id);
+			if (dataSourceIds.length > 1) {
+				console.warn(`More than 1 data source found for ${label}`);
+			}
+			const dataSourceId = dataSourceIds.at(0);
 			let propsById = [];
 			for (let p in databaseProps) {
 				if (propsToUse.includes(p)) {
@@ -51,7 +58,7 @@ export default async function (queryConfig) {
 			let dbData = [];
 			let data = { has_more: true, next_cursor: -1, results: [] };
 			const queryObject = {
-				database_id: databaseId,
+				data_source_id: dataSourceId,
 				filter_properties: propsById,
 				filter: filter,
 			};
@@ -60,7 +67,7 @@ export default async function (queryConfig) {
 			while (data.has_more) {
 				const queryCursor = data.next_cursor !== -1 ? { start_cursor: data.next_cursor } : {};
 				const query = Object.assign(queryCursor, queryObject);
-				data = await notionClient.databases.query(query);
+				data = await notionClient.dataSources.query(query);
 
 				dbData = [...dbData, ...data.results];
 			}
