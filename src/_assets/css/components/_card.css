@@ -36,6 +36,7 @@
 	display: flex;
 	flex-direction: column;
 	overflow: hidden; /* Hide image corners if they poke out of the container */
+	overflow: clip; /* Ensure keyboard focus doesn't cause janky inner scrolling */
 	inline-size: 100%;
 
 	text-decoration: none;
