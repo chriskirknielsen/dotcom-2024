@@ -13,9 +13,13 @@ Back to my page, when using the Tab key to navigate through those cards, the chi
 
 Why would this happen? The card has `overflow: hidden`, it should keep things hidden! Yes indeed, but actually if you’ve ever messed around with JavaScript, you’ll know you can programmatically scroll a container with `overflow: hidden` if its contents are taller than itself. Similarly here, the browser is scrolling the container to reveal the focused element within. All in all, it makes sense, the browser’s trying to help, making sure you can see what is in focus. But with the transition, it gets unsightly.
 
-Here’s where a newer, better option comes into play: `overflow: clip`. For general use, it works exactly the same as `hidden`, but with a twist: the container can not be scrolled, even programmatically (also: it enables `overflow-clip-margin`, which can be useful, too!). This means that focusing to the link no longer triggers that dejected janky jump, and everything is smooth! See for yourself in the demo below (sorry, you’ll need a keyboard — maybe I’ll update this post with a short video!)
+Here’s where a newer, better option comes into play: `overflow: clip`. For general use, it works exactly the same as `hidden`, but with a twist: the container can not be scrolled, even programmatically (also: it enables `overflow-clip-margin`, which can be useful, too!). This means that focusing to the link no longer triggers that dejected janky jump, and everything is smooth! See for yourself in the demo below (sorry, you’ll need a keyboard — there’s a video preview below)
 
 {{ codepen "https://codepen.io/chriskirknielsen/pen/XJmwXMz/" }}
+
+{{ expander "Video preview" }}
+{{ video "./tabby.mp4", "A showcase of the issue on a webpage, with a card element getting its title focused which reveals it by sliding in from the bottom, shifting all the contents several times during the animation. Another card is focused in a similar fashion but everything remains in the right place while the title is revealed.", "", { width: 1280 , height:  696, poster: "./tabby.jpg" } }}
+{{ /expander }}
 
 You might also notice in that demo that once you've focused away from the janky card, the image has a gap below which definitely wasn’t there before: that’s also due to the scroll. The container was scrolled to reveal the contents, but the link was visible before reaching back to the edge, so it just stays there… not great.
 
