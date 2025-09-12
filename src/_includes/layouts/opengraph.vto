@@ -126,11 +126,24 @@
 				letter-spacing: 0.0875em;
 				font-weight: 200;
 			}
+			.small { font-size: calc(var(--fs) * 0.5); letter-spacing: 0.125em; }
 		{{ /css }}
 		{{- getBundle 'css', 'opengraph' -}}
 		
 		body::before, body::after { background-image: url("{{ imageUrl }}"); }
 		
+		{{ if isHome }}
+		body {
+			grid-template-rows: auto auto auto;
+			align-content: end;
+		}
+		.title, .summary { text-align: right; }
+		.title {
+			--scale: 1.333 !important;
+			letter-spacing: 0.03725em;
+			text-transform: uppercase;
+		}
+		{{ /if }}
 		{{ if isDesignPage }}
 		.title {
 			grid-row: -2;
@@ -178,6 +191,7 @@
 		</style>
 	</head>
 	<body>
+		{{ if !isHome }}
 		<div class="logo-wrap">
 			<div class="logo-inner">
 				{{ injectsvg 'logo', { class: 'logo' } }}
@@ -187,6 +201,7 @@
 				</span>
 			</div>
 		</div>
+		{{ /if }}
 		{{ if isProjectsPage || isFontsPage || isDesignsPage }}
 		<div class="strip">
 		{{ if isProjectsPage }}
@@ -203,11 +218,13 @@
 		</div>
 		{{ /if }}
 
-		{{ set heading = isHome ? new URL(post.data.metadata.url).host : (post.data.ogImageTitle || post.data.title) }}
+
+		{{ set heading = post.data.ogImageTitle || post.data.title }}
 		<h1 class="title" style="--scale: {{ heading |> sizeFactor }}">{{ heading }}</h1>
 
 		{{ if post.data.ogImageSummary }}
 		<p class="summary">{{ post.data.ogImageSummary }}</p>
 		{{ /if }}
+		{{ if isHome }}<p class="summary small">{{ new URL(post.data.metadata.url).host }}</p>{{ /if }}
 	</body>
 </html>
