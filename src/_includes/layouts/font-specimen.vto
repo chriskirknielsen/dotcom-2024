@@ -1,74 +1,75 @@
-{{ set miniSiteSlug = `minisite-${page.fileSlug}` }}
+{{ set miniSiteSlug = 'minisite-'+page.fileSlug }}
+
+{{# Set up unique CSS for the typeface page #}}
+{{ css miniSiteSlug }}{{ include 'assets/css/font-specimen/'+page.fileSlug+'.css' }}{{ /css }}
+{{- for fontSpecimenName, fontSpecimensFaces of fontSpecimen -}}
+    {{# Preload the "default" font #}}
+    {{- set fontPreload -}}<link rel="preload" href="./{{ fontSpecimensFaces[0].file }}" as="font" type="font/woff2" crossorigin>{{ /set }}
+
+    {{ css miniSiteSlug }}
+    {{- for fontSpecimenFace of fontSpecimensFaces -}}
+		@font-face {
+			font-family: '{{ fontSpecimenName }}';
+			src: url('{{ './' + fontSpecimenFace.file }}') format('woff2');
+			font-weight: {{ fontSpecimenFace.weight || 400 }};
+			font-style: {{ fontSpecimenFace.style || 'normal' }};
+			font-display: swap;
+			{{ if fontSpecimenFace.ascentOverride }}ascent-override: {{ fontSpecimenFace.ascentOverride }};{{ /if }}
+            {{ if fontSpecimenFace.descentOverride }}descent-override: {{ fontSpecimenFace.descentOverride }};{{ /if }}
+            {{ if fontSpecimenFace.lineGapOverride }}line-gap-override: {{ fontSpecimenFace.lineGapOverride }};{{ /if }}
+		}
+    {{- /for -}}
+    .specimen { font-family: '{{ fontSpecimenName }}', {{ fontSpecimenFallback || 'sans-serif' }}; }
+    {{ /css }}
+{{- /for -}}
+
+{{ export async function fontPreviewer(contents, previewOptions = '', defaultText = 'Type Anything', warningMessages = '') }}
+    <font-preview class="full-content" data-default-sample="{{ fontSpecimenSampleDefault }}">
+        <form class="preview">
+            <div class="preview-fallback">
+                <label for="font-preview-fallback">Custom preview:</label>
+                <input type="text" id="font-preview-fallback" class="specimen specimen-dlig preview-fallback-input" value="{{ defaultText }}" placeholder="{{ defaultText }}"/>
+                <p class="fallback-warning">To enable advanced preview options, you may need JavaScript enabled or a better Internet service.</p>
+            </div>
+
+            <div class="preview-input-wrap">
+                <label for="preview-input">Preview:</label>
+                <input type="text" placeholder="{{ defaultText }}" data-fontpreview="preview-input" id="preview-input"/>
+                <button type="button" class="styled-button" data-fontpreview="preview-update"><span>Update</span></button>
+            </div>
+
+            {{ if warningMessages }}
+                {{ for warningMessageId, warningMessageMarkup of warningMessages }}
+                    <p class="preview-warning" id="{{ warningMessageId }}" hidden>{{ warningMessageMarkup }}</p>
+                {{ /for }}
+            {{ /if }}
+
+            <output data-fontpreview="preview-output-wrap" for="preview-input" aria-label="{{ defaultText }}">
+                {{ contents }}
+            </output>
+
+            <div class="preview-actions">
+                <div class="preview-options flow" style="--flow: 0.5rem;">
+                    {{ for optKey, optData of previewOptions }}
+                        <p class="preview-option">
+                            <span class="preview-option-switch">
+                                <input type="checkbox" name="{{ optKey }}" data-preview-option id="preview-option-{{ optKey }}" {{ if optData.default }}checked{{ /if }}/>
+                            </span>
+                            <label for="preview-option-{{ optKey }}">{{ optData.label }}</label>
+                        </p>
+                    {{ /for }}
+                </div>
+
+                <button type="button" id="save-preview" class="preview-save styled-button" hidden><span>Save as PNG</span></button>
+            </div>
+        </form>
+    </font-preview>
+
+    {{ js 'fontSpecimenScript' }}{{ include 'assets/js/components/font-preview.js' }}{{ /js }}
+{{ /export -}}
 
 <!DOCTYPE html>
 <html lang="en" class="no-js" data-slug="{{ miniSiteSlug }}">
-    {{# Set up unique CSS for the typeface page #}}
-    {{ css miniSiteSlug }}{{ include 'assets/css/font-specimen/'+page.fileSlug+'.css' }}{{ /css }}
-    {{- for fontSpecimenName, fontSpecimensFaces of fontSpecimen -}}
-        {{# Preload the "default" font #}}
-        {{- set fontPreload -}}<link rel="preload" href="./{{ fontSpecimensFaces[0].file }}" as="font" type="font/woff2" crossorigin>{{ /set }}
-
-        {{ css miniSiteSlug }}
-        {{- for fontSpecimenFace of fontSpecimensFaces -}}
-            @font-face {
-                font-family: '{{ fontSpecimenName }}';
-                src: url('{{ './' + fontSpecimenFace.file }}') format('woff2');
-                font-weight: {{ fontSpecimenFace.weight || 400 }};
-                font-style: {{ fontSpecimenFace.style || 'normal' }};
-                font-display: swap;
-                {{ if fontSpecimenFace.ascentOverride }}ascent-override: {{ fontSpecimenFace.ascentOverride }};{{ /if }}
-                {{ if fontSpecimenFace.descentOverride }}descent-override: {{ fontSpecimenFace.descentOverride }};{{ /if }}
-                {{ if fontSpecimenFace.lineGapOverride }}line-gap-override: {{ fontSpecimenFace.lineGapOverride }};{{ /if }}
-            }
-        {{- /for -}}
-        .specimen { font-family: '{{ fontSpecimenName }}', {{ fontSpecimenFallback || 'sans-serif' }}; }
-        {{ /css }}
-    {{- /for -}}
-
-    {{ export async function fontPreviewer(contents, previewOptions = '', defaultText = 'Type Anything', warningMessages = '') }}
-        <font-preview class="full-content" data-default-sample="{{ fontSpecimenSampleDefault }}">
-            <form class="preview">
-                <div class="preview-fallback">
-                    <label for="font-preview-fallback">Custom preview:</label>
-                    <input type="text" id="font-preview-fallback" class="specimen specimen-dlig preview-fallback-input" value="{{ defaultText }}" placeholder="{{ defaultText }}"/>
-                    <p class="fallback-warning">To enable advanced preview options, you may need JavaScript enabled or a better Internet service.</p>
-                </div>
-
-                <div class="preview-input-wrap">
-                    <label for="preview-input">Preview:</label>
-                    <input type="text" placeholder="{{ defaultText }}" data-fontpreview="preview-input" id="preview-input"/>
-                    <button type="button" class="styled-button" data-fontpreview="preview-update"><span>Update</span></button>
-                </div>
-
-                {{ if warningMessages }}
-                    {{ for warningMessageId, warningMessageMarkup of warningMessages }}
-                        <p class="preview-warning" id="{{ warningMessageId }}" hidden>{{ warningMessageMarkup }}</p>
-                    {{ /for }}
-                {{ /if }}
-
-                <output data-fontpreview="preview-output-wrap" for="preview-input" aria-label="{{ defaultText }}">
-                    {{ contents }}
-                </output>
-
-                <div class="preview-actions">
-                    <div class="preview-options flow" style="--flow: 0.5rem;">
-                        {{ for optKey, optData of previewOptions }}
-                            <p class="preview-option">
-                                <span class="preview-option-switch">
-                                    <input type="checkbox" name="{{ optKey }}" data-preview-option id="preview-option-{{ optKey }}" {{ if optData.default }}checked{{ /if }}/>
-                                </span>
-                                <label for="preview-option-{{ optKey }}">{{ optData.label }}</label>
-                            </p>
-                        {{ /for }}
-                    </div>
-
-                    <button type="button" id="save-preview" class="preview-save styled-button" hidden><span>Save as PNG</span></button>
-                </div>
-            </form>
-        </font-preview>
-
-        {{ js 'fontSpecimenScript' }}{{ include 'assets/js/components/font-preview.js' }}{{ /js }}
-    {{ /export -}}
     <head>
 		{{ set headInner }}
             {{ fontPreload }}

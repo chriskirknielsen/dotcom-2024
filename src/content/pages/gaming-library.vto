@@ -72,13 +72,11 @@
     {{ expander expanderLabel, { isExpanded: loopIndex === 1 } }}
         <ul class="gaming-platform-group" data-gaming-platform="{{ platformSlug }}">
             {{ for game of games |> sortBy(false, false, 'sortTitle') }}
-                {{ set gameDataJson = game |> JSON.stringify }}
                 <li
                     class="gaming-box-wrap"
                     {{ if ['Essentials', 'Platinum'].includes(game.edition) }}data-gaming-edition="{{ game.edition |> toLowerCase |> replace(' ', '-') }}"{{ /if }}
                     {{ if platformSlug === 'ps3' }}data-gaming-branding="{{ game.year < 2009 ? 'old' : 'new' }}"{{ /if }}
-                    data-game="{ {{ gameDataJson |> escape }}"
-                    {{# The prepended { above is nasty but is a bug workaround — escape filter seems to drop the opening curly brace but not the closing one! #}}
+                    data-game="{{ game |> JSON.stringify |> escape }}"
                 >
                     <div class="gaming-box">
                         <span class="visually-hidden">{{ game.title }}</span>

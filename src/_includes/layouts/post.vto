@@ -84,7 +84,7 @@
     {{ /if }}
 {{ /set }}
 
-{{ set pageContent }}
+{{ layout 'layouts/page.vto' { pageHero, pageFooter } }}
     {{ if originalUrl }}
         <div>
         {{ if originalTitle }}
@@ -118,6 +118,4 @@
             </ol>
         {{ /expander }}
     {{ /if }}
-{{ /set }}
-
-{{ include 'layouts/page.vto' { content: pageContent, pageHero, pageFooter } }}
+{{ /layout }}
