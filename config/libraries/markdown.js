@@ -103,7 +103,7 @@ class TableOfContents {
 
 export default function (eleventyConfig, options = {}) {
 	if (['anchorClass'].some((key) => typeof options[key] !== 'string')) {
-		throw new Error('The `anchorClass` property must be provided on the options argument.');
+		throw new Error('The `anchorClass` property must be provided on the `options` argument.');
 	}
 
 	const slugify = eleventyConfig.getFilter('slugify');
@@ -174,7 +174,7 @@ export default function (eleventyConfig, options = {}) {
 		.use(markdownItAnchor, markdownItAnchorOptions)
 		.use(markdownItCodeWrap, markdownItCodeWrapOptions);
 
-	/** Configure the markdown-it library to use. */
+	// Configure the markdown-it library to use
 	eleventyConfig.setLibrary('md', md);
 
 	/** Take markup content and automatically create anchors for headings. Should only be used when content is not Markdown. */
@@ -224,10 +224,11 @@ export default function (eleventyConfig, options = {}) {
 		return processedMarkup;
 	});
 
-	/** Create a table of content list from markup */
+	/** Create a table of content list from markup. */
 	eleventyConfig.addFilter('autoToc', function (markup, listClass, listLabelledBy) {
 		// If this isn't a string, there isn't anything we can do!
-		if (typeof markup !== 'string') {
+		const isString = markup instanceof String || typeof markup === 'string';
+		if (!isString) {
 			return '';
 		}
 
