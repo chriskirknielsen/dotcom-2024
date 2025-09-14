@@ -78,7 +78,7 @@ const gameslibrary = await notionDatabaseQuery({
 
 				const processedEntry = {
 					id: entry.id,
-					title: props.Title.title.pop().plain_text,
+					title: props.Title.title.pop().plain_text.replace(/'/, '’'),
 					sortTitle: props['Sort Title'].rich_text.map((textBlock) => textBlock.plain_text).join(''),
 					edition: props.Edition.rich_text.map((textBlock) => textBlock.plain_text).join(''),
 					platform: props.Platform.select?.name,
@@ -142,7 +142,7 @@ const gameslibrary = await notionDatabaseQuery({
 						}
 						totalCompletion.push(matched.completed);
 						return {
-							title: matched.title,
+							title: matched.title.replace(/'/, '’'),
 							sortTitle: matched.sortTitle,
 							completed: matched.completed,
 							trophyProgress: matched.trophyProgress,
