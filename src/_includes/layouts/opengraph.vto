@@ -119,12 +119,13 @@
 			}
 			.summary {
 				font-size: calc(var(--fs) * 0.75);
+				font-weight: 200;
+				letter-spacing: 0.0875em;
 				line-height: 1.5;
 				font-family: sans-serif;
 				text-transform: uppercase;
 				text-wrap: balance;
-				letter-spacing: 0.0875em;
-				font-weight: 200;
+				text-shadow: 2px 2px 0 var(--cb);
 			}
 			.small { font-size: calc(var(--fs) * 0.5); letter-spacing: 0.125em; }
 		{{ /css }}
@@ -136,6 +137,10 @@
 		body {
 			grid-template-rows: auto auto auto;
 			align-content: end;
+		}
+		body::before {
+			mix-blend-mode: normal;
+			opacity: 0.5;
 		}
 		.title, .summary { text-align: right; }
 		.title {
@@ -167,8 +172,11 @@
 			inset: 0;
 			z-index: -1;
 
-			inline-size: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
 			place-content: center;
+			inline-size: 100%;
 			margin: auto;
 			overflow: hidden;
 			
