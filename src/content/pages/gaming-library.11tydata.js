@@ -167,8 +167,14 @@ const gameslibrary = await notionDatabaseQuery({
 			return list;
 		}, []);
 
-		// Provide a compiled list of all trophy levels using a needlessly complex one-line operation
-		const totalTrophyData = psnTrophyData.map((t) => t.earnedTrophies).reduce((p, c) => Object.fromEntries(Object.keys(p).map((k) => [k, p[k] + c[k]])));
+		// Provide a summed list of all trophy levels
+		const totalTrophyData = {};
+		for (const title of psnTrophyData) {
+			const earnedTrophies = title.earnedTrophies; // Object that should look like `{ bronze: Number, silver: Number, gold: Number, platinum: Number }`
+			for (const lvl in earnedTrophies) {
+				totalTrophyData[lvl] = earnedTrophies[lvl] + (totalTrophyData[lvl] || 0); // Sum the existing amount (or 0 if undefined) with the counts from this title
+			}
+		}
 
 		return {
 			meta: { totalTrophyData },
