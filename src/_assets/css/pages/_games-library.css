@@ -496,6 +496,10 @@
 	}
 }
 
+.gaming-details-dialog {
+	margin: auto; /* Because the dialog is added in a .flow context, it has margin we don't need. */
+}
+
 .gaming-details-dialog-inner {
 	container: gamingDetailsDialog / inline-size;
 
