@@ -5,7 +5,7 @@ tags: [css, quick-tip]
 time: 14:00:00
 ---
 
-I recently fixed an annoying issue on my [Projects page](/projects/), and I did it with CSS, of course. That page has cards, whose title (and link) are in a child container which slides out of view, at least on larger viewports.
+I recently fixed an annoying issue on my [Projects page](/projects/), and I did it with CSS, of course. That page has cards, and each of them have a title (with a link — a focusable one!) in a child container which slides out of view, at least on larger viewports.
 
 A bit of important knowledge first, which is probably something you already knew intuitively: when tabbing to an element, the browser also scrolls you to its position, so you can see what you’ve focused on.
 
