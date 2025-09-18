@@ -256,7 +256,8 @@ export default async function () {
 
 And I keep all the tokens and database IDs secret in my `.env` file. 🤫
 
-```text:.env
+[.env]
+```text
 NOTION_BEARER_TOKEN=secret_SOMESECRET
 NOTION_DATABASE_ID_NOW=somedatabaseid123
 NOTION_DATABASE_ID_GAMES=anotherdatabaseid456

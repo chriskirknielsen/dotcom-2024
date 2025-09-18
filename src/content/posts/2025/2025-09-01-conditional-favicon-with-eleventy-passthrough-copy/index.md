@@ -18,7 +18,8 @@ So how could we use the same path for different files? Maybe we could spin up Re
 
 First we need to know what environment the build is running in. Using an environment variable can provide all the info we need. A reminder: never, _ever_ commit your `.env` file. So in that `.env` file, this line is all we need:
 
-```txt:.env
+[.env]
+```txt
 BUILD_CONTEXT=DEV
 ```
 
@@ -26,7 +27,8 @@ My Netlify deploy settings contain the same variable, set to a value of `LIVE` i
 
 Now in `.eleventy.js`, we can determine the environment using the following:
 
-```js:.eleventy.js
+[.eleventy.js]
+```js
 import 'dotenv/config'; // Not sure this is still necessary in recent Node versions...?
 const BUILD_CONTEXT = process.env.BUILD_CONTEXT || 'LIVE'; // No var? We're doing it LIVE
 ```
@@ -43,7 +45,8 @@ For my setup, I saved each with the same name suffixed with `-DEV`: `icon-DEV.sv
 
 Previously, I would load all the files in my images folder (`_assets/img/`), as well as the root favicon (and more folders we don’t need to look at here), in the passthrough instruction:
 
-```js:.eleventy.js
+[.eleventy.js]
+```js
 eleventyConfig.addPassthroughCopy({
 	[`${rootDir}/_assets/img/`]: '/assets/img/',
 	[`${rootDir}/favicon.ico`]: '/favicon.ico',
@@ -52,7 +55,8 @@ eleventyConfig.addPassthroughCopy({
 
 We need to add some condition to load up the right file and save it at the desired path. I am not particularly savvy with globs, but I did try a few variations like ``[`${rootDir}/_assets/img/{!*-DEV.*}`]: '/assets/img/'`` but that did not work. Luckily, Eleventy does offer [advanced options](https://www.11ty.dev/docs/copy/#advanced-options) via its `recursive-copy` dependency, which includes `filter`. It can take a list, a regular expression, or a function. I think functions are by far the easiest to use and understand so here’s what we can do to exclude all 4 of the images (icon and apple-touch-icon, both original and DEV versions):
 
-```js:.eleventy.js
+[.eleventy.js]
+```js
 eleventyConfig.addPassthroughCopy(
 	{ [`${rootDir}/_assets/img/`]: '/assets/img/' },
 	{
@@ -66,7 +70,8 @@ eleventyConfig.addPassthroughCopy(
 
 Now when we run our build locally, we can see in the output folder that none of the original favicon files, nor the dev variations, are served (remember to empty your output folder if you still see them in there!). However, we get the sinking feeling that something is missing… Well, a second passthrough will make it all better:
 
-```js:.eleventy.js
+[.eleventy.js]
+```js
 eleventyConfig.addPassthroughCopy({
 	[`${rootDir}/_assets/img/icon${BUILD_CONTEXT === 'DEV' ? '-DEV' : ''}.svg`]: '/assets/img/icon.svg',
 	[`${rootDir}/_assets/img/apple-touch-icon${BUILD_CONTEXT === 'DEV' ? '-DEV' : ''}.png`]: '/assets/img/apple-touch-icon.png',
@@ -81,7 +86,8 @@ And just like that, we can see our three alternative favicons in the output fold
 
 Just because that code above is a *little* unsightly, here’s a minor enhancement to conditionally add the suffix:
 
-```js:.eleventy.js
+[.eleventy.js]
+```js
 const getEnvVersion = (filename) => `${filename}${BUILD_CONTEXT === 'DEV' ? '-DEV' : ''}`;
 eleventyConfig.addPassthroughCopy({
 	[`${rootDir}/_assets/img/${getEnvVersion('icon')}.svg`]: '/assets/img/icon.svg',

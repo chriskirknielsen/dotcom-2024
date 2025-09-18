@@ -172,6 +172,42 @@ export default function (eleventyConfig, options = {}) {
 		.disable('code')
 		.use(markdownItAttrs, markdownItAttrsOptions)
 		.use(markdownItAnchor, markdownItAnchorOptions)
+		.use(function (md, options = {}) {
+			// Custom code to extra any `[filename.ext]` before a codeblock, move it as meta data to the codeblock, and finally hide the paragraph itself
+			const proxy = (tokens, idx, options, env, self) => self.renderToken(tokens, idx, options);
+			const defaultRenderer = md.renderer.rules.paragraph_open || proxy;
+
+			// A function that returns a function, so we can pass in the default renderer — currying? Probably…
+			const customRenderer = (defaultRenderer) =>
+				function (tokens, idx, options, env, self) {
+					if (tokens.length > 3) {
+						if (tokens[idx]?.type === 'paragraph_open' && tokens[idx + 2]?.type === 'paragraph_close' && tokens[idx + 3]?.type === 'fence') {
+							const prevParaOpen = tokens[idx];
+							const prevParaInner = tokens[idx + 1];
+							const prevParaClose = tokens[idx + 2];
+							const codeFence = tokens[idx + 3];
+
+							const previousParagraphFilenameMatch = prevParaInner?.content.match(/^\[(([/.a-zA-Z0-9_-]+)?\.([a-zA-Z0-9_-]+))\]$/); // Finds [file.ext] exactly
+							if (previousParagraphFilenameMatch) {
+								codeFence.meta = codeFence.meta || {};
+								codeFence.meta.filename = previousParagraphFilenameMatch[1];
+
+								prevParaOpen.hidden = true;
+								prevParaInner.content = '';
+								prevParaInner.children = []; // If this looks like I don't know what I'm doing, that's because I indeed, do not know what I am doing
+								prevParaInner.hidden = true;
+								prevParaClose.hidden = true;
+
+								return '';
+							}
+						}
+					}
+
+					return defaultRenderer(tokens, idx, options, env, self);
+				};
+
+			md.renderer.rules.paragraph_open = customRenderer(defaultRenderer);
+		})
 		.use(markdownItCodeWrap, markdownItCodeWrapOptions);
 
 	// Configure the markdown-it library to use

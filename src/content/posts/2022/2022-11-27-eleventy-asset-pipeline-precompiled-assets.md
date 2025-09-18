@@ -427,7 +427,8 @@ I realised I didn't provide the logic for the PurgeCSS stuff I mentioned at the 
 
 My `head.njk` file has this line, a comment used as a placeholder to dictate where the final CSS will be inserted (the comment is the important bit, the `id` attribute is optional):
 
-```html:head.njk
+[head.njk]
+```html
 <style id="inline-styles">/* INLINE_CSS */</style>
 ```
 

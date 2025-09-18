@@ -167,17 +167,16 @@ export default async function (eleventyConfig) {
 		codeToolbarTag: 'figcaption',
 		codeToolbarClass: 'codeblock-toolbar',
 		codeToolbarLabel: (tokens, idx, options, env, self) => {
-			// If a "filename" is provided, isolate it
-			if (tokens[idx].info.includes(':')) {
-				const [lang, filename] = tokens[idx].info.split(':');
-				tokens[idx].info = lang || 'text'; // Reset to a "normal" type
-				tokens[idx]._filename = filename; // Create a private property
+			const token = tokens[idx];
+
+			// If a filename was added via metadata
+			if (token?.meta?.filename) {
+				token._filename = token.meta.filename; // Create a private property
 			}
 
 			let toolbarLabel = '';
 			let toolbarIcon = '';
-			let syntaxType = tokens[idx].info;
-
+			let syntaxType = token.info;
 			let toolbarIconRef = '';
 			toolbarLabel = syntaxType.toUpperCase();
 			switch (syntaxType) {
@@ -221,7 +220,7 @@ export default async function (eleventyConfig) {
 				case 'text':
 				case '':
 				default: {
-					toolbarLabel = tokens[idx]?._filename || '';
+					toolbarLabel = token?._filename || '';
 					toolbarIconRef = 'code';
 				}
 			}
@@ -231,9 +230,9 @@ export default async function (eleventyConfig) {
 			}
 
 			// If a filename was provided, use that as a label instead
-			if (tokens[idx]?._filename) {
+			if (token?._filename) {
 				// If it's a file without an extension, add it at the end
-				toolbarLabel = tokens[idx]._filename.includes('.') ? tokens[idx]._filename : tokens[idx]._filename + '.' + syntaxType;
+				toolbarLabel = token._filename.includes('.') ? token._filename : token._filename + '.' + syntaxType;
 			}
 
 			// If no type or filename was given, add a visually hidden label

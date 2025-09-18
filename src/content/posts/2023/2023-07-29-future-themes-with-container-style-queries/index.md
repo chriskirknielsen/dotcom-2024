@@ -257,7 +257,8 @@ I find this to be very practical if you have 6 themes, for example, and 5 of the
 
 Nowadays, it is pretty common to consume a JSON file with design tokens for a website’s stylesheet, so with a little JSON-to-CSS magic, it could be automated with a “default” set of properties, and then one object per theme with the overrides. Let’s take a look at a simplified example:
 
-```json:tokens.json
+[tokens.json]
+```json
 {
 	"default": {
 		"color": "black",
@@ -447,7 +448,8 @@ You may notice that doing this defines all our theme-specific properties into th
 
 While the `background` property will propagate from `body` to `html`, `color-scheme` will not. Which is fair, after all it was introduced later and propagating the background is [considered to be bad](https://twitter.com/TerribleMia/status/1380310383588646916) (not as sinful as `z-index: 999999`, don’t worry), so the CSS specification authors are avoiding it. And since properties cannot be propagated upwards, we’ll need to make an exception in our JSON-to-CSS script to accommodate for this. We’ll modify the JSON file so that each theme has a `_colorScheme` property (using a different kind of “private” key here with the underscore) with the correct `light` or `dark` value, which will ensure the scrollbars conform to the user’s operating system’s interface appearance:
 
-```json:tokens.json
+[tokens.json]
+```json
 {
 	"default": {
 		"color": "Canvas",

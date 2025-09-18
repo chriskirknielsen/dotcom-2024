@@ -27,7 +27,8 @@ Just like we would any other plugin, we will install `eleventy-plugin-vento` to 
 
 Then, the plugin must be loaded into our Eleventy configuration file (likely `.eleventy.js` or `eleventy.config.js` for most of us):
 
-```js:.eleventy.js
+[.eleventy.js]
+```js
 import { VentoPlugin } from 'eleventy-plugin-vento';
 /* More imports ... */
 
@@ -112,8 +113,10 @@ There is some overlap between Nunjucks and Vento’s blocks (or [tags](https://m
 
 #### From extends to layout
 With Eleventy, you can declare `layout: page.njk` in your frontmatter, and it basically will chain from your content all the way up to the top-level layout (for example, `post.njk` calls `page.njk` which calls `base.njk`). You can keep doing this with Vento, but for some cases, `extends` was a better fit, in order to pass named `block` content to the parent layout. We can still do this, but blocks aren’t their own thing in Vento. Let’s take a look at Nunjucks first:
+
 {{ echo }}
-```njk:post.njk
+[post.njk]
+```njk
 {% extends 'layout/page.njk' %}
 
 {% block aside %}
@@ -123,7 +126,8 @@ With Eleventy, you can declare `layout: page.njk` in your frontmatter, and it ba
 {{ content }}
 ```
 
-```njk:page.njk
+[page.njk]
+```njk
 {% extends 'layout/base.njk' %}
 
 <article>{{ content }}</article>
@@ -137,7 +141,8 @@ With Eleventy, you can declare `layout: page.njk` in your frontmatter, and it ba
 
 To do this with Vento, we need to pass in our blocks explicitly:
 {{ echo }}
-```vto:post.vto
+[post.vto]
+```vto
 {{ set aside }}
 	<p>Some content unrelated to this post.</p>
 {{ /set }}
@@ -147,7 +152,8 @@ To do this with Vento, we need to pass in our blocks explicitly:
 {{ /layout }}
 ```
 
-```vto:page.vto
+[page.vto]
+```vto
 {{ layout 'layout/base.vto' }}
 	<article>{{ content }}</article>
 	<aside>
@@ -201,7 +207,8 @@ Another big deal of a block is `macro` — this is basically a function, which c
 We can export and import these functions across our templates, too! Here is an example from my own website:
 
 {{ echo }}
-```vto:layouts/font-specimen.vto
+[layouts/font-specimen.vto]
+```vto
 {{ export async function fontPreviewer(contents, previewOptions = '', defaultText = 'Type Anything', warningMessages = '') }}
 	{{# Bunch of code ... #}}
 {{ /export }}
@@ -209,7 +216,8 @@ We can export and import these functions across our templates, too! Here is an e
 
 Be sure to close your exports with `/export`! I stayed stuck on `/function` for longer than I’d like to admit…
 
-```vto:fonts/ottselesque/index.vto
+[fonts/ottselesque/index.vto]
+```vto
 {{ import { fontPreviewer } from 'layouts/font-specimen.vto' }}
 {{# A little further down ... #}}
 {{ await fontPreviewer(previewContents, previewOptions, fontSpecimenSampleDefault) }}

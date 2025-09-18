@@ -20,7 +20,8 @@ My rebuild uses [VentoJS](https://vento.js.org/) as the templating language. I h
 
 This is the “easy” one but not-so-dynamic one. It requires us to know what we’re looping through ahead of time. In my converted blog, that was mapped to categories: a list which is separate from tags, set in the front-matter (usually a category is a media type like “gaming”, and the tags will be something like “RPG” or “puzzle”). If you’re like me and only blog every two or three months about similar topics, those categories are nearly static. Because of that, we don’t need to seek them out at build time: we can prepare the list beforehand, and loop over it during the build itself. Then, we can use [Eleventy’s virtual templates](https://www.11ty.dev/docs/virtual-templates/) to create the top level loop page which will receive the pagination. Here’s how that looks:
 
-```js:.eleventy.js{{ echo }}
+[.eleventy.js]
+```js{{ echo }}
 const PAGE_SIZE = 5; // N posts per page
 // Hardcoded list of categories to paginate
 const categoriesMap = {
@@ -85,7 +86,8 @@ We’ll start off the creation of a new collection looking through all the posts
 
 Once that is done, we need to loop over every tag we found, and create some “sub-pagination” data for it: given our tags are the top level, this is going to be the second level of pagination. I want 5 posts per page, as presented earlier in the categories example with the `PAGE_SIZE` value, but that number can be whatever you want. (well, technically, any *positive integer* kind of number) This also means we need “chunks” (a fixed-length sub-grouping), which will represent our numbered pages. It’s a relatively easy function to create that:
 
-```js:.eleventy.js
+[.eleventy.js]
+```js
 function toChunk(array, size = PAGE_SIZE) {
 	if (size <= 0) { size = PAGE_SIZE; } // Hey now, let's stay positive
 	const chunks = [];
@@ -100,7 +102,8 @@ Cool, now we need to do two more things for all these chunks by looping over the
 
 The Eleventy pagination object is relatively simple but detailed, so here we’ll add all we need: current page number, whether there’s a previous or next page, a bunch of relative permalinks (first page, previous page, etc.), and the full list of page links and chunks. I have written the word “chunk” too many times, semantic satiation is kicking in…
 
-```js:.eleventy.js{{ echo }}
+[.eleventy.js]
+```js{{ echo }}
 const alias = 'pageItems'; // Data property which will contain the posts of the current sub-pages
 
 eleventyConfig.addCollection('_tags', (collectionApi) => {
@@ -152,7 +155,8 @@ eleventyConfig.addCollection('_tags', (collectionApi) => {
 
 We now have an array (top level) which contains arrays of these sub-pages, but we want to iterate over them as a collection… so, just like before `#Array.flat()` will handle that for us. Because this is built *from* existing data, we don’t need to worry about empty chunks: that should be impossible. And so… finally! A nested but also technically flat collection! With the assumption that we have two files (`postsList.njk` which displays the provided posts, and `paginator.njk` which displays the list of pages) to consume this data to render our HTML, let’s throw that into our template and see what happens.
 
-```js:.eleventy.js{{ echo }}
+[.eleventy.js]
+```js{{ echo }}
 // While I am using a virtual template, you can do the exact same in a regular file
 eleventyConfig.addTemplate(
 	`content/tags.njk`,
@@ -188,7 +192,8 @@ Skipping to the good part? Have you not seen the 2006 cinematic masterpiece _Cli
 
 {{ expander "Erm, yeah, check out that code" }}
 
-```js:.eleventy.js{{ echo }}
+[.eleventy.js]
+```js{{ echo }}
 export default async function (eleventyConfig) {
 	const PAGE_SIZE = 5; // N posts per page
 	const alias = 'pageItems'; // Data property which will contain the posts of the current sub-pages
@@ -281,7 +286,8 @@ export default async function (eleventyConfig) {
 
 While we’re here, I might as well share the paginator “component” I built. It is a little more readable in Vento thanks to the JS syntax but I converted it to Nunjucks should you need it — though it is BYOS (Bring Your Own Styles): that’s the fun part!
 
-```njk:paginator.njk{{ echo }}
+[paginator.njk]
+```njk{{ echo }}
 {% set currentPage = pagination.pageNumber + 1 %}
 {% set totalPages = pagination.pages.length %}
 {% set adjacentLinks = 2 %}
