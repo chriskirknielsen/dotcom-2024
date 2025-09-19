@@ -217,6 +217,12 @@ export default async function (eleventyConfig) {
 					toolbarIconRef = 'sass';
 					break;
 				}
+				case 'markdown':
+				case 'md': {
+					toolbarLabel = 'Markdown';
+					toolbarIconRef = 'markdown';
+					break;
+				}
 				case 'text':
 				case '':
 				default: {
