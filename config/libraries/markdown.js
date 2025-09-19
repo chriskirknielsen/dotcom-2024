@@ -168,50 +168,60 @@ export default function (eleventyConfig, options = {}) {
 	};
 
 	// Configure the MarkdownIt instance
-	const md = new markdownIt(markdownItOptions)
+	const mdit = new markdownIt(markdownItOptions)
 		.disable('code')
 		.use(markdownItAttrs, markdownItAttrsOptions)
 		.use(markdownItAnchor, markdownItAnchorOptions)
-		.use(function (md, options = {}) {
+		.use(function (md) {
 			// Custom code to extra any `[filename.ext]` before a codeblock, move it as meta data to the codeblock, and finally hide the paragraph itself
 			const proxy = (tokens, idx, options, env, self) => self.renderToken(tokens, idx, options);
 			const defaultRenderer = md.renderer.rules.paragraph_open || proxy;
 
-			// A function that returns a function, so we can pass in the default renderer — currying? Probably…
-			const customRenderer = (defaultRenderer) =>
-				function (tokens, idx, options, env, self) {
-					if (tokens.length > 3) {
-						if (tokens[idx]?.type === 'paragraph_open' && tokens[idx + 2]?.type === 'paragraph_close' && tokens[idx + 3]?.type === 'fence') {
-							const prevParaOpen = tokens[idx];
-							const prevParaInner = tokens[idx + 1];
-							const prevParaClose = tokens[idx + 2];
-							const codeFence = tokens[idx + 3];
+			// Finds [file.ext] exactly (allows for subfolders too!) by capturing everything inside square brackets that start and end the line
+			const filenameRegex = /^\[(([/.a-zA-Z0-9_-]+)?\.[a-zA-Z0-9_-]+)\]$/;
 
-							const previousParagraphFilenameMatch = prevParaInner?.content.match(/^\[(([/.a-zA-Z0-9_-]+)?\.([a-zA-Z0-9_-]+))\]$/); // Finds [file.ext] exactly
-							if (previousParagraphFilenameMatch) {
-								codeFence.meta = codeFence.meta || {};
-								codeFence.meta.filename = previousParagraphFilenameMatch[1];
+			// The markdown rendering function that handles extracting filenames if found
+			function customRenderer(tokens, idx, options, env, self) {
+				if (tokens.length > 3) {
+					const currentToken = tokens[idx]; // The opening paragraph token (definitely)
+					const nextToken1 = tokens[idx + 1]; // The paragraph child contents token (likely)
+					const nextToken2 = tokens[idx + 2]; // The closing paragraph token (probably)
+					const nextToken3 = tokens[idx + 3]; // The code fence token (hopefully)
 
-								prevParaOpen.hidden = true;
-								prevParaInner.content = '';
-								prevParaInner.children = []; // If this looks like I don't know what I'm doing, that's because I indeed, do not know what I am doing
-								prevParaInner.hidden = true;
-								prevParaClose.hidden = true;
+					// If all the conditions are met via simple string operations, we can run the more intensive regular expression to find a filename
+					if (
+						currentToken?.type === 'paragraph_open' &&
+						nextToken1?.content?.startsWith('[') &&
+						nextToken1?.content?.endsWith(']') &&
+						nextToken2?.type === 'paragraph_close' &&
+						nextToken3?.type === 'fence'
+					) {
+						const previousParagraphFilenameMatch = nextToken1?.content.match(filenameRegex);
+						if (previousParagraphFilenameMatch) {
+							nextToken3.meta = nextToken3.meta || {};
+							nextToken3.meta.filename = previousParagraphFilenameMatch[1]; // Use everything captured between the square brackets (group 1)
 
-								return '';
-							}
+							// The paragraph's contents have been extracted, and it can now be hidden
+							currentToken.hidden = true; // Not required but it just feels cleaner to have both opening and closing tokens hidden
+							nextToken1.children = []; // If left as-is, this will render raw text, without the wrapping paragraph tag
+							nextToken2.hidden = true; // Required on the closing token!
+
+							return '';
 						}
 					}
+				}
 
-					return defaultRenderer(tokens, idx, options, env, self);
-				};
+				// If the paragraph was not a filename, just return a normal render
+				return defaultRenderer(tokens, idx, options, env, self);
+			}
 
-			md.renderer.rules.paragraph_open = customRenderer(defaultRenderer);
+			// Apply the custom renderer just to opening paragraph tokens
+			md.renderer.rules.paragraph_open = customRenderer;
 		})
 		.use(markdownItCodeWrap, markdownItCodeWrapOptions);
 
 	// Configure the markdown-it library to use
-	eleventyConfig.setLibrary('md', md);
+	eleventyConfig.setLibrary('md', mdit);
 
 	/** Take markup content and automatically create anchors for headings. Should only be used when content is not Markdown. */
 	eleventyConfig.addFilter('assignHeadingAnchors', (markup, includeH1 = false) => {
@@ -273,5 +283,5 @@ export default function (eleventyConfig, options = {}) {
 	});
 
 	/** Converts a Markdown string into markup. */
-	eleventyConfig.addFilter('markdown', (content, inline = false) => (inline ? md.renderInline(content) : md.render(content)));
+	eleventyConfig.addFilter('markdown', (content, inline = false) => (inline ? mdit.renderInline(content) : mdit.render(content)));
 }
