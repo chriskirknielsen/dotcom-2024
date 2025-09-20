@@ -39,6 +39,8 @@
 	}
 
 	&:any-link {
+		--LINK-underline-offset: clamp(1.5px, 0.0875em, 3px);
+		--LINK-decoration-thickness: clamp(1.5px, 0.0875em, 3px);
 		text-decoration-color: currentColor;
 
 		&:is(:hover, :focus-visible) {

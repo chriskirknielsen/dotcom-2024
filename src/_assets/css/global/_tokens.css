@@ -73,11 +73,11 @@
 --_link-color-active: var(--link-color-active, var(--C-heading));
 --_link-underline-color: var(--link-underline-color, var(--C-accent));
 --_link-underline-color-active: var(--link-underline-color-active, var(--C-surface));
---_link-underline-offset: var(--link-underline-offset, auto);
+--_link-underline-offset: var(--link-underline-offset, 0.25em);
 --_link-underline-offset-active: var(--link-underline-offset-active, -0.25em);
 --_link-skip-ink: var(--link-skip-ink, auto);
 --_link-skip-ink-active: var(--link-skip-ink-active, none);
---_link-decoration-thickness: var(--link-decoration-thickness, auto);
+--_link-decoration-thickness: var(--link-decoration-thickness, clamp(2px, 0.125em, 4px));
 --_link-decoration-thickness-active: var(--link-decoration-thickness-active, 0.5em);
 --_cta-padding-block: var(--cta-padding-block, var(--size-2xs));
 --_cta-padding-inline: var(--cta-padding-inline, var(--size-s));
