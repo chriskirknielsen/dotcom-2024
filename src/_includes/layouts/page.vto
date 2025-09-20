@@ -22,7 +22,7 @@
             </div>
         {{ /if }}
 
-        {{ if autoToc || autoHeadingAnchors }}
+        {{ if runAutoToc || autoHeadingAnchors }}
             {{ content |> assignHeadingAnchors }}
         {{ else }}
             {{ content }}

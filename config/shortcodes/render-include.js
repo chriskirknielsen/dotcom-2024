@@ -180,7 +180,7 @@ export default function (eleventyConfig, options = {}) {
 		}
 
 		// Get a deduplicated list of all SVG <use> references to inject
-		const useRegExp = new RegExp(`<use xlink:href="#${getSpriteId()}([^"]+)"+`, 'g');
+		const useRegExp = new RegExp(`<use xlink:href="#${getSpriteId()}([^"]+)"+`, 'g'); // Find all references to the sprite ID prefix plus anything ≠string that doesn't close en attribute
 		const useReferences = Array.from(new Set([...content.matchAll(useRegExp)].map((m) => m[1])));
 
 		// No SVG sprite, no more processing
