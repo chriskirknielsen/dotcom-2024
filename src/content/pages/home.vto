@@ -333,9 +333,10 @@
 </div>
 
 <p>
-	If you want to see all I’ve written, I have
+	If you want to see all I’ve written, the
 	{{ component 'cta', {
 		url: '/blog/',
-		label: `${collections['_posts'].length} blogposts`
-	} }} available in the Bloggy Corner!
+		label: 'Bloggy Corner',
+	} }}
+	has {{ collections['_posts'].length }} blogposts available!
 </p>
