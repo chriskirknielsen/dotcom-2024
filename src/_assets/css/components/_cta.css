@@ -24,7 +24,7 @@
 	box-shadow: var(--CTA-box-shadow);
 
 	@media (--accept-motion) {
-		transition-property: color, text-decoration-color, background-color, border-color, box-shadow, opacity, filter;
+		transition-property: color, text-decoration-color, text-underline-offset, text-decoration-thickness, background-color, border-color, box-shadow, opacity, filter;
 		transition-duration: var(--anim-short);
 		transition-timing-function: var(--easing-in-out);
 	}
@@ -46,8 +46,7 @@
 		&:is(:hover, :focus-visible) {
 			/* Avoid link style overrides flash */
 			--LINK-skip-ink: var(--_link-skip-ink);
-			--LINK-underline-offset: var(--_link-underline-offset);
-			--LINK-decoration-thickness: var(--_link-decoration-thickness);
+			--LINK-decoration-thickness: 0px;
 			text-decoration-color: transparent;
 		}
 	}
