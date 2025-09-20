@@ -57,7 +57,7 @@ const mdit = new markdownIt(markdownItOptions)
 		const proxy = (tokens, idx, options, env, self) => self.renderToken(tokens, idx, options);
 		const defaultRenderer = md.renderer.rules.paragraph_open || proxy;
 		// Captures everything between square brackets so long as it's the only content and has a dot and extension
-		//? e.g.: `logo.svg`, `darude/sandstorm.js`, `.git`, etc.
+		//? e.g.: `logo.svg`, `darude/sandstorm.js`, `.gitignore`, etc.
 		const filenameRegex = /^\[(([/.a-zA-Z0-9_-]+)?\.[a-zA-Z0-9_-]+)\]$/;
 
 		// The markdown rendering function that handles extracting filenames if found
