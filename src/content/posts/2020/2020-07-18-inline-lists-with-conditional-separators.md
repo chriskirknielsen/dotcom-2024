@@ -24,12 +24,12 @@ Here’s the whole setup, using a pipe as a separator, similar to what I use on 
 
 ```css
 /*
-    1: Not essential but good to do to if your list lives alongside other content
-    2: If you don't have a reset in place, this will remove the user-agent stylesheet default padding
-    3: This is required to ensure all items flow next to each other
-    4: The whitespace required for this trick to work — no other character should be used
-    5: Setting a larger letter-spacing effectively provides a wider whitespace
-    6: Apply a background image to fake any kind of bullet or pipe character, or any other separator you can think of
+	1: Not essential but good to do to if your list lives alongside other content
+	2: If you don't have a reset in place, this will remove the user-agent stylesheet default padding
+	3: This is required to ensure all items flow next to each other
+	4: The whitespace required for this trick to work — no other character should be used
+	5: Setting a larger letter-spacing effectively provides a wider whitespace
+	6: Apply a background image to fake any kind of bullet or pipe character, or any other separator you can think of
 */
 
 .inline-list {
@@ -78,8 +78,8 @@ The line break and tab between `</a>` and `</li>` will be counted as whitespace 
 <ul class="inline-list">
 	<li><a href="/en">English</a></li>
 	<li><!--
-        --><a href="/fr">Français</a><!--
-    --></li>
+		--><a href="/fr">Français</a><!--
+	--></li>
 	<li
 		><a href="/da"
 		>Dansk</a

@@ -11,9 +11,9 @@ Have you ever wanted just one value from an array of JavaScript objects? Gently 
 
 ```php
 $array = [
-    'one' => ['fr' => 'un', 'ja' => 'ichi'],
-    'two' => ['fr' => 'deux', 'ja' => 'ni'],
-    'three' => ['fr' => 'trois', 'ja' => 'san'],
+	'one' => ['fr' => 'un', 'ja' => 'ichi'],
+	'two' => ['fr' => 'deux', 'ja' => 'ni'],
+	'three' => ['fr' => 'trois', 'ja' => 'san'],
 ];
 $french = array_column($array, 'fr'); // ['un', 'deux', 'trois'], and note the keys have disappeared.
 ```

@@ -37,64 +37,64 @@ const markdownIt = require('markdown-it');
 const markdownItCodeWrap = require('markdown-it-codewrap');
 
 module.exports = function(eleventyConfig, options = {}) {
-    let markdownItOptions = {
-        html: true,
-        breaks: true,
-        linkify: true,
-    };
-    
-    let markdownItCodeWrapOptions = {
-        wrapTag: 'figure',
-        wrapClass: 'codeblock-wrap | content-wide',
-        hasToolbar: true,
-        hasCopyButton: true,
-        toolbarTag: 'figcaption',
-        toolbarClass: 'codeblock-toolbar',
-        toolbarLabel: (tokens, idx, options, env, self) => {
-            // If a "filename" is provided, isolate it
-            if (tokens[idx].info.includes(':')) {
-                const [lang, filename] = tokens[idx].info.split(':');
-                tokens[idx].info = lang || 'text'; // Reset to a "normal" type
-                tokens[idx]._filename = filename; // Create a private property
-            }
+	let markdownItOptions = {
+		html: true,
+		breaks: true,
+		linkify: true,
+	};
+	
+	let markdownItCodeWrapOptions = {
+		wrapTag: 'figure',
+		wrapClass: 'codeblock-wrap | content-wide',
+		hasToolbar: true,
+		hasCopyButton: true,
+		toolbarTag: 'figcaption',
+		toolbarClass: 'codeblock-toolbar',
+		toolbarLabel: (tokens, idx, options, env, self) => {
+			// If a "filename" is provided, isolate it
+			if (tokens[idx].info.includes(':')) {
+				const [lang, filename] = tokens[idx].info.split(':');
+				tokens[idx].info = lang || 'text'; // Reset to a "normal" type
+				tokens[idx]._filename = filename; // Create a private property
+			}
 
-            let toolbarLabel = '';
-            let syntaxType = tokens[idx].info;
+			let toolbarLabel = '';
+			let syntaxType = tokens[idx].info;
 
-            if (!syntaxType || syntaxType === 'text') {
-                toolbarLabel = tokens[idx]?._filename || '';
-            } else if (tokens[idx]?._filename) {
-                toolbarLabel = tokens[idx]._filename.includes('.') ? tokens[idx]._filename : tokens[idx]._filename + '.' + syntaxType;
-            } else {
-                switch (syntaxType) {
-                    case 'js': {
-                        toolbarLabel = 'JavaScript';
-                        break;
-                    }
-                    default: {
-                        toolbarLabel = syntaxType.toUpperCase();
-                        break;
-                    }
-                }
-            }
+			if (!syntaxType || syntaxType === 'text') {
+				toolbarLabel = tokens[idx]?._filename || '';
+			} else if (tokens[idx]?._filename) {
+				toolbarLabel = tokens[idx]._filename.includes('.') ? tokens[idx]._filename : tokens[idx]._filename + '.' + syntaxType;
+			} else {
+				switch (syntaxType) {
+					case 'js': {
+						toolbarLabel = 'JavaScript';
+						break;
+					}
+					default: {
+						toolbarLabel = syntaxType.toUpperCase();
+						break;
+					}
+				}
+			}
 
-            return `<span class="codeblock-lang">${toolbarLabel}</span>`;
-        },
-        isButtonInToolbar: true,
-        copyButtonAttrs: {
-            class: 'codeblock-copy',
-            'data-codewrap-copy-button': '',
-        },
-        copyButtonLabel: (tokens, idx, options, env, self) => {
-            return `<span class="codeblock-copy__idle">📋 ${env?.i18n?.codeBlock?.copyLabel || 'Copy'}</span>
-            <span class="codeblock-copy__copied">👍 ${env?.i18n?.codeBlock?.copiedLabel || 'OK'}</span>`;
-        },
-        inlineCopyHandler: false,
-    };
+			return `<span class="codeblock-lang">${toolbarLabel}</span>`;
+		},
+		isButtonInToolbar: true,
+		copyButtonAttrs: {
+			class: 'codeblock-copy',
+			'data-codewrap-copy-button': '',
+		},
+		copyButtonLabel: (tokens, idx, options, env, self) => {
+			return `<span class="codeblock-copy__idle">📋 ${env?.i18n?.codeBlock?.copyLabel || 'Copy'}</span>
+			<span class="codeblock-copy__copied">👍 ${env?.i18n?.codeBlock?.copiedLabel || 'OK'}</span>`;
+		},
+		inlineCopyHandler: false,
+	};
 
-    eleventyConfig.setLibrary('md',
-        markdownIt(markdownItOptions).use(markdownItCodeWrap, markdownItCodeWrapOptions)
-    );
+	eleventyConfig.setLibrary('md',
+		markdownIt(markdownItOptions).use(markdownItCodeWrap, markdownItCodeWrapOptions)
+	);
 }
 ```
 
@@ -106,41 +106,41 @@ Given I set `inlineCopyHandler: false`, the `onclick` handler on the button is g
 ```js
 // Add this within the existing module.exports!
 eleventyConfig.addTransform('mdit-codewrap-click-handler', function(content, outputPath) {
-    if (!outputPath.endsWith('.html') || !content.includes(' data-codewrap-copy-button=')) {
-        return content; // Not HTML, or no codeblocks with a copy button: return raw content
-    }
-    
-    // Create a script tab with the click handler (yes, JS-in-JS is a little wild, I agree)
-    const codeCopyHandler = `<script>
-    if (navigator.clipboard.writeText) {
-        document.addEventListener('click', function (e) {
-            const copyButton = e.target.closest('.codeblock-copy');
-            if (!copyButton) {
-                return;
-            }
-            const codeBlock = copyButton.closest('.codeblock-wrap').querySelector('code');
-            if (!codeBlock) {
-                return;
-            }
-            const copyAction = navigator.clipboard.writeText(codeBlock.innerText);
-            copyButton.classList.add('is-copied');
-            copyAction.then(() => {
-                setTimeout(() => {
-                    copyButton.classList.remove('is-copied');
-                    copyButton.blur();
-                }, 2000);
-            });
-        });
-    } else {
-        Array.from(document.querySelectorAll('.codeblock-copy')).forEach((btn) => (btn.hidden = true));
-    }
-    </script>`;
+	if (!outputPath.endsWith('.html') || !content.includes(' data-codewrap-copy-button=')) {
+		return content; // Not HTML, or no codeblocks with a copy button: return raw content
+	}
+	
+	// Create a script tab with the click handler (yes, JS-in-JS is a little wild, I agree)
+	const codeCopyHandler = `<script>
+	if (navigator.clipboard.writeText) {
+		document.addEventListener('click', function (e) {
+			const copyButton = e.target.closest('.codeblock-copy');
+			if (!copyButton) {
+				return;
+			}
+			const codeBlock = copyButton.closest('.codeblock-wrap').querySelector('code');
+			if (!codeBlock) {
+				return;
+			}
+			const copyAction = navigator.clipboard.writeText(codeBlock.innerText);
+			copyButton.classList.add('is-copied');
+			copyAction.then(() => {
+				setTimeout(() => {
+					copyButton.classList.remove('is-copied');
+					copyButton.blur();
+				}, 2000);
+			});
+		});
+	} else {
+		Array.from(document.querySelectorAll('.codeblock-copy')).forEach((btn) => (btn.hidden = true));
+	}
+	</script>`;
 
-    // Find the </head> tag index
-    const headEndIndex = content.indexOf('</head>');
+	// Find the </head> tag index
+	const headEndIndex = content.indexOf('</head>');
 
-    // Inject the copy handler function right before </head>
-    return content.substr(0, headEndIndex) + codeCopyHandler + content.substr(headEndIndex);
+	// Inject the copy handler function right before </head>
+	return content.substr(0, headEndIndex) + codeCopyHandler + content.substr(headEndIndex);
 });
 ```
 

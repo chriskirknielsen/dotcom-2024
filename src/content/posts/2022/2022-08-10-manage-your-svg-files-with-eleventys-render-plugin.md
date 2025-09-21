@@ -91,11 +91,11 @@ Turns out you can access the compiler within the Eleventy config file thanks to 
 
 ```js
 eleventyConfig.addAsyncShortcode('svg', async function (filename, svgOptions = {}) {
-    const isNjk = svgOptions.hasOwnProperty('isNjk') ? svgOptions.isNjk : true;
-    const filePath = `./src/_includes/assets/svg/${filename}.svg${isNjk ? '.njk' : ''}`;
-    const engine = svgOptions.hasOwnProperty('engine') ? svgOptions.engine : (isNjk ? 'njk' : 'html'); // HTML engine for vanilla SVG if none is provided
-    const content = eleventyConfig.nunjucksAsyncShortcodes.renderFile(filePath, svgOptions, engine);
-    return content;
+	const isNjk = svgOptions.hasOwnProperty('isNjk') ? svgOptions.isNjk : true;
+	const filePath = `./src/_includes/assets/svg/${filename}.svg${isNjk ? '.njk' : ''}`;
+	const engine = svgOptions.hasOwnProperty('engine') ? svgOptions.engine : (isNjk ? 'njk' : 'html'); // HTML engine for vanilla SVG if none is provided
+	const content = eleventyConfig.nunjucksAsyncShortcodes.renderFile(filePath, svgOptions, engine);
+	return content;
 });
 ```
 

@@ -20,16 +20,16 @@ Instead of using `@container` style queries to detect which theme is used, we ca
 
 ```css
 :root {
-    --theme: light;
-    @media (prefers-color-scheme: dark) {
-        --theme: dark;
-    }
+	--theme: light;
+	@media (prefers-color-scheme: dark) {
+		--theme: dark;
+	}
 
-    --bg: if(
-        style(--theme: dark): midnightblue;
-        else: ghostwhite
-    );
-    background: var(--bg);
+	--bg: if(
+		style(--theme: dark): midnightblue;
+		else: ghostwhite
+	);
+	background: var(--bg);
 }
 ```
 
@@ -42,36 +42,36 @@ While very basic, this example becomes a lot more interesting with the DRY appro
 ```css
 /* No-JS defaults */
 html:not([data-theme]) {
-    --theme: light;
-    @media (prefers-color-scheme: dark) {
-        --theme: dark;
-    }
+	--theme: light;
+	@media (prefers-color-scheme: dark) {
+		--theme: dark;
+	}
 }
 
 /* JavaScript-driven data attribute */
 :root[data-theme=dark] {
-  --theme: dark;
+	--theme: dark;
 }
 :root[data-theme=light] {
-  --theme: light;
+	--theme: light;
 }
 :root[data-theme=pastel] {
-  --theme: pastel;
+	--theme: pastel;
 }
 
 /* Theme tokens setup, probably automated */
 :root {
-    --bg: if(
-        style(--theme: pastel): lightpink;
-        style(--theme: dark): midnightblue;
-        else: ghostwhite
-    );
-    /* And so on ... */
+	--bg: if(
+		style(--theme: pastel): lightpink;
+		style(--theme: dark): midnightblue;
+		else: ghostwhite
+	);
+	/* And so on ... */
 }
 
 /* Then start styling the page */
 html {
-    background: var(--bg);
+	background: var(--bg);
 }
 ```
 
@@ -89,28 +89,28 @@ Honestly this depends on your preference, both are valid and ultimately do the s
 
 ```css
 :root {
-    /* Option #1 */
-    --font-size: if(
-        style(--theme: pastel): 1.1rem;
-        style(--theme: dark): 0.9rem;
-        else: 1rem
-    );
-     --font-family: if(
-        style(--theme: pastel): serif;
-        else: sans-serif
-    );
+	/* Option #1 */
+	--font-size: if(
+		style(--theme: pastel): 1.1rem;
+		style(--theme: dark): 0.9rem;
+		else: 1rem
+	);
+	 --font-family: if(
+		style(--theme: pastel): serif;
+		else: sans-serif
+	);
 
-    /* Option #2 */
-    --_font-size: if(
-        style(--theme: pastel): 1.1rem;
-        style(--theme: dark): 0.9rem;
-    ); /* else: initial is implied */
-    --_font-family: if(
-        style(--theme: pastel): serif;
-    ); /* Only one of three themes is checked */
+	/* Option #2 */
+	--_font-size: if(
+		style(--theme: pastel): 1.1rem;
+		style(--theme: dark): 0.9rem;
+	); /* else: initial is implied */
+	--_font-family: if(
+		style(--theme: pastel): serif;
+	); /* Only one of three themes is checked */
 
-    --font-size: var(--_font-size, 1rem);
-    --font-family: var(--_font-family, sans-serif);
+	--font-size: var(--_font-size, 1rem);
+	--font-family: var(--_font-family, sans-serif);
 }
 ```
 

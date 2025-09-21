@@ -50,8 +50,8 @@ You’re then free to use the utilities in a shortcode definition, like a callou
 ```js
 eleventyConfig.addPairedShortcode('callout', function (content) {
 	return `<div class="${utilities.callout}">
-        <p>${content}</p>
-    </div>`;
+		<p>${content}</p>
+	</div>`;
 });
 ```
 

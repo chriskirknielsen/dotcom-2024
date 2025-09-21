@@ -426,7 +426,7 @@ There are good articles on how to build a theme switcher ([Lea Rosema](https://c
 
 ### Light theme by default
 
-We could bypass the `style()` query wrapped around the body for our light theme, for example, if we wanted to offer a styled theme in browsers without support for container style queries. But to ensure that browsers which do support it don’t apply it over the dark theme (in the case of having `prefers-color-scheme: dark` and not having an override), we can  keep specificity at an all-time low with `:where(body)`. This way, we don’t need to re-arrange our output order in the `jsonTokensToCss` function (as `@media` or `@container` query wrappers do not add any specificity). You could also, quite radically, make the light theme be the default theme with a few tweaks to the code above. I feel that’s a fairly common approach to light/dark mode, so why not for a collection of themes as well?
+We could bypass the `style()` query wrapped around the body for our light theme, for example, if we wanted to offer a styled theme in browsers without support for container style queries. But to ensure that browsers which do support it don’t apply it over the dark theme (in the case of having `prefers-color-scheme: dark` and not having an override), we can keep specificity at an all-time low with `:where(body)`. This way, we don’t need to re-arrange our output order in the `jsonTokensToCss` function (as `@media` or `@container` query wrappers do not add any specificity). You could also, quite radically, make the light theme be the default theme with a few tweaks to the code above. I feel that’s a fairly common approach to light/dark mode, so why not for a collection of themes as well?
 
 But a caveat to this caveat… this has a side-effect of not respecting a user’s preferred colour scheme, and that is why I don’t *really* like this approach. You can certainly do it! But I want to respect user settings, so instead, what you could do is set defaults with the browser’s user agent colours. Jim Nielsen (no relation!) has [a neat article](https://blog.jim-nielsen.com/2021/css-system-colors/) about this, and the [spec for system colours](https://drafts.csswg.org/css-color/#css-system-colors) lists what we’ll need: `Canvas`, `CanvasText`, `LinkText`, and all their friends (so our JSON file would have `default.background = "Canvas"` and `default.color = "CanvasText"`). Keep it simple and predictable and it should provide a graceful “unthemed” style!
 
@@ -442,7 +442,7 @@ And one final note on this, you could declare a `@property` with a default value
 
 ### Background defined in the body
 
-You may notice that doing this defines all our theme-specific properties into the `<body>` element, namely the `--background` custom property, which is then used to define the  `background` property. If you don’t already know this, there is a legacy behaviour where the `<body>` element’s background gets propagated upwards to the `html` element. It’s not a best practice by any means, but it was defined like this decades ago, and on the web, we avoid breaking things, so this behaviour, while deprecated, will keep working for the foreseeable future. We can therefore take advantage of this and set the background colour on the `<body>` element to affect the `<html>` element. (we should still feel shame doing it, but it won’t stop us!)
+You may notice that doing this defines all our theme-specific properties into the `<body>` element, namely the `--background` custom property, which is then used to define the `background` property. If you don’t already know this, there is a legacy behaviour where the `<body>` element’s background gets propagated upwards to the `html` element. It’s not a best practice by any means, but it was defined like this decades ago, and on the web, we avoid breaking things, so this behaviour, while deprecated, will keep working for the foreseeable future. We can therefore take advantage of this and set the background colour on the `<body>` element to affect the `<html>` element. (we should still feel shame doing it, but it won’t stop us!)
 
 ### Defining color-scheme
 
@@ -471,7 +471,7 @@ While the `background` property will propagate from `body` to `html`, `color-sch
 	"pastel": {
 		"_colorScheme": "light",
 		"color": "maroon",
-    "background": "lightpink"
+	"background": "lightpink"
 	}
 }
 ```

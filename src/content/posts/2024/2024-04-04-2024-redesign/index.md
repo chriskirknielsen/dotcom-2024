@@ -155,7 +155,7 @@ I am running Safari on version 16.5, as I like to stay a little behind to experi
 ```css
 /* Running this code may crash your Safari tab! */
 p {
-  text-shadow: 0 0 0 color-mix(in hsl, currentColor, black);
+	text-shadow: 0 0 0 color-mix(in hsl, currentColor, black);
 }
 ```
 

@@ -47,7 +47,7 @@ Includes are super practical. The plugin for Eleventy has an option to set your 
 
 One feature I like from JS is trailing commas. It lets you rearrange objects pretty easily, so I aim to always add them (if Prettier doesn’t already!). Nunjucks will tell you to take a hike if you use them (though hikes are nice), but Vento’s happy to have them. Another cool thing? That last pagination example didn’t say `{ pagination: pagination }` because in JavaScript, you can omit the object value if its key matches an existing variable (I worded that poorly but you get it, right?), that makes it slightly more readable, though I don’t mind the verbosity, to be honest. Oh and another thing: ternaries! Nunjucks kinda has it with `trueValue if trueCondition else falseValue` but I like the expressive and succinct JS ternaries of `trueCondition ? trueValue : falseValue`. Vento’s fine with that, too. Speaking of conditions: `||` and `&&` are welcome!
 
-I also have to say how nice it is to use template literals. ``{{ set permalink = `/tags/${tag}/page/${p}/index.html` }}`` instead of `{% set permalink = '/tags/'+tag+'/page/'+p+'/index.html' %}` is just such  a small yet incredible difference. I may be repeating myself here, but using a familiar syntax from JS just makes it feel cleaner (though I am fully aware the Nunjucks version shown here is valid JS as well, it’s just not as _nice_).
+I also have to say how nice it is to use template literals. ``{{ set permalink = `/tags/${tag}/page/${p}/index.html` }}`` instead of `{% set permalink = '/tags/'+tag+'/page/'+p+'/index.html' %}` is just such a small yet incredible difference. I may be repeating myself here, but using a familiar syntax from JS just makes it feel cleaner (though I am fully aware the Nunjucks version shown here is valid JS as well, it’s just not as _nice_).
 
 You can also run literal JavaScript with the `{{> ... }}` tag, should you need it. And `await` is allowed!
 
@@ -61,7 +61,7 @@ If `{{ layout }}` is `{% extends %}`, then `{{ function }}` is `{% macro %}` (th
 
 **Update: _Good news everyone!_ See the updates at the end of this section.**
 
-I’ve sung praises, I know, but it’s not *perfect*. I ran into issues that may be more related to the Eleventy plugin that Vento itself, but I think it is a problem with the templating engine: error reporting is sometimes opaque.  It won’t always tell you what’s wrong, and might point at something unhelpful as the error, when it is actually somewhere else. This requires you to be a little more diligent about what you write, which can be difficult when you’re converting code from one templating language to another. [It’s acknowledged by both Óscar and Noel in this thread by (11ty superuser) uncenter](https://github.com/ventojs/vento/issues/85), so it’s at least on their minds, which is nice to see, but it’s hard to address.
+I’ve sung praises, I know, but it’s not *perfect*. I ran into issues that may be more related to the Eleventy plugin that Vento itself, but I think it is a problem with the templating engine: error reporting is sometimes opaque. It won’t always tell you what’s wrong, and might point at something unhelpful as the error, when it is actually somewhere else. This requires you to be a little more diligent about what you write, which can be difficult when you’re converting code from one templating language to another. [It’s acknowledged by both Óscar and Noel in this thread by (11ty superuser) uncenter](https://github.com/ventojs/vento/issues/85), so it’s at least on their minds, which is nice to see, but it’s hard to address.
 
 On my other blog, I migrated from Hugo, which isn’t too far off from either Nunjucks or Vento, but I missed a `| filterName` that needed to be `|> filterName` a couple of times, and the error doesn’t point at that directly (which may be due to the fact that `|` is valid JavaScript as a [bitwise OR operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_OR)?).
 
@@ -88,7 +88,7 @@ The last thing that sucks is specifically for the Eleventy plugin (I think): if 
 ```
 [11ty] File changed: .eleventy.js
 src/content/pages/index.vto undefined 63 [NotFound [Error]: ENOENT: no such file or directory, open 'src/src/_includes/parts/paginator.vto'] {
-  code: 'ENOENT'
+	code: 'ENOENT'
 }
 [11ty] Problem writing Eleventy templates:
 [11ty] 1. Having trouble rendering vto template ./src/content/pages/index.vto (via TemplateContentRenderError)

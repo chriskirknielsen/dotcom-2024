@@ -58,14 +58,14 @@ It kind of looks like "doughnut/donut scoping" when I think about it. If we want
 ```css
 /* Using this trick */
 .card a:not(.card-content *) {
-    color: var(--accent);
+	color: var(--accent);
 }
 
 /* Using CSS Scope */
 @scope (.card) to (.card-content) {
-    a {
-        color: var(--accent);
-    }
+	a {
+		color: var(--accent);
+	}
 }
 ```
 

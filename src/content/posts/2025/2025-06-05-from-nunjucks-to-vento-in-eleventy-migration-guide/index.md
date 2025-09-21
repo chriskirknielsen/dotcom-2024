@@ -106,7 +106,7 @@ There is some overlap between Nunjucks and Vento’s blocks (or [tags](https://m
 {{ set icon = 'arrow-right' |> await getIconSvg }}
 
 {{ for await item of getItems() }}
-  {{ item }}
+	{{ item }}
 {{ /for }}
 ```
 {{ /echo }}
@@ -177,8 +177,8 @@ Another big deal of a block is `macro` — this is basically a function, which c
 ```njk
 {% macro myFigCaptionator(caption = '') %}
 <figure class="media">
-  {{ caller() }}
-  <figcaption>{{ caption }}</figcaption>
+	{{ caller() }}
+	<figcaption>{{ caption }}</figcaption>
 </figure>
 {% endmacro %}
 
@@ -192,8 +192,8 @@ Another big deal of a block is `macro` — this is basically a function, which c
 ```vto
 {{ function myFigCaptionator(content, caption = '') }}
 <figure class="media">
-  {{ content }}
-  <figcaption>{{ caption }}</figcaption>
+	{{ content }}
+	<figcaption>{{ caption }}</figcaption>
 </figure>
 {{ /function }}
 
@@ -280,7 +280,7 @@ Nunjucks does offer some nice syntactical sugar, and generally speaking, good fe
 
 Nunjucks has a bunch of filters that aren’t necessarily 1:1 matches of native JavaScript functions, so we need to re-create those, and add them to our Eleventy configuration. I can’t go over [all 41 of them](https://mozilla.github.io/nunjucks/templating.html#builtin-filters), but the good news is that some *do have* 1:1 JavaScript equivalents, and that Nunjucks it is already implemented in JavaScript, so if there’s a filter we aren’t quite sure how to recreate, we can copy the code from `node_modules/nunjucks/src/filters.js` (with a few adjustments, most likely).
 
-Below, you will find partial implementations of Nunjucks’s `sort` and `groupby` filters, which use a `getDeepProp` helper function I wrote. This will let us bulk replace any “complex” sort (i.e. any `sort` filter with additional parameters) with `sortBy`, and because I like camelCasing, `groupby` with  `groupBy`. I opted to remove the sorting option as it wasn’t being kept in place, more on that later.
+Below, you will find partial implementations of Nunjucks’s `sort` and `groupby` filters, which use a `getDeepProp` helper function I wrote. This will let us bulk replace any “complex” sort (i.e. any `sort` filter with additional parameters) with `sortBy`, and because I like camelCasing, `groupby` with `groupBy`. I opted to remove the sorting option as it wasn’t being kept in place, more on that later.
 
 ```js
 function getDeepProp(obj, prop = null) {
@@ -384,7 +384,7 @@ Okay… now we’re done fixing our loops, right? Well, almost. I ran into a pec
 … became:
 {{ echo }}
 ```vto
-{{ set postsByYear =  postList |> groupBy('date.year') }}
+{{ set postsByYear = postList |> groupBy('date.year') }}
 {{ for year of postsByYear |> Object.keys |> sort |> reverse }}
 	{{ set posts = postsByYear[year] }}
 	{{# More stuff ... #}}
@@ -436,10 +436,10 @@ I haven’t looked too much into it, but you cannot inject filters mid-way into 
 {{ echo }}
 ```vto
 {{ set trophiesByLevel = {
-    bronze: trophies |> pluck('bronze') |> sum,
-    silver: trophies |> pluck('silver') |> sum,
-    gold: trophies |> pluck('gold') |> sum,
-    platinum: trophies |> pluck('platinum') |> sum
+	bronze: trophies |> pluck('bronze') |> sum,
+	silver: trophies |> pluck('silver') |> sum,
+	gold: trophies |> pluck('gold') |> sum,
+	platinum: trophies |> pluck('platinum') |> sum
 } }}
 ```
 {{ /echo }}
@@ -449,11 +449,11 @@ That throws an error: `Invalid filter: sum`. But this works:
 {{ echo }}
 ```vto
 {{ component 'hero', {
-    ext: 'vto',
-    heroTags: tags |> sort((a,b) => a.localeCompare(b)),
-    heroTitle: title,
-    heroSup: dateInfo,
-    pageContext: page
+	ext: 'vto',
+	heroTags: tags |> sort((a,b) => a.localeCompare(b)),
+	heroTitle: title,
+	heroSup: dateInfo,
+	pageContext: page
 } }}
 ```
 {{ /echo }}
