@@ -232,7 +232,10 @@ export default async function (eleventyConfig) {
 			}
 
 			if (toolbarIconRef) {
-				toolbarIcon = eleventyConfig.getShortcode('svg')(`${toolbarIconRef}-icon`, { class: 'inline-icon inline-icon--center' });
+				toolbarIcon = eleventyConfig.getShortcode('svg')(`${toolbarIconRef}-icon`, {
+					class: 'inline-icon inline-icon--center',
+					title: token?._filename ? toolbarLabel : null,
+				});
 			}
 
 			// If a filename was provided, use that as a label instead

@@ -99,7 +99,11 @@ export default function (eleventyConfig, options = {}) {
 				svg.attr('aria-label', svgOptions.ariaLabel);
 			}
 
-			if (!svgOptions.hasOwnProperty('title') && !svgOptions.hasOwnProperty('ariaLabel') && svg.find('title').length === 0) {
+			if (
+				(!svgOptions.hasOwnProperty('title') || !svgOptions.title) &&
+				(!svgOptions.hasOwnProperty('ariaLabel') || !svgOptions.ariaLabel) &&
+				svg.find('title').length === 0
+			) {
 				svgOptions.ariaHidden = true; // Ensure SVGs are hidden from the a11y tree if no title or label is provided
 			}
 
