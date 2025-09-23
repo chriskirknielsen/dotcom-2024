@@ -9,6 +9,8 @@ time: 03:51:00
 updated: 2025-04-28
 ---
 
+_**Update:** I have written a sort of [guide for migrating to Vento](/blog/from-nunjucks-to-vento-in-eleventy-migration-guide/), from Nunjucks, if you're interested in that!_
+
 In a recent rebuild for another blog of mine, where I switched from Hugo to Eleventy, I decided to give [VentoJS](https://vento.js.org/) a try, which is the new kid on the block, as far as templating languages go. There are [IDE integrations](https://vento.js.org/editor-integrations/) that make it feel right at home in VS Code (for me), and an [Eleventy plugin](https://github.com/noelforte/eleventy-plugin-vento) to make it painless to start using with my favourite static site generator. Thanks to both Óscar Otero for making Vento, and Noel Forte for the Eleventy plugin!
 
 Vento might seem like a variation on the “JavaScript framework of the week” meme, but I assure you it packs a punch!
