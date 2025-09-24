@@ -4,7 +4,6 @@ summary: Precompiled Sass and JS files that become part of the source folder.
 tags:
     - snippet
     - git
-templateEngineOverride: vto,md
 ---
 
 I aliased a git command to move commits from one branch to another (usually `main` to `dev`). A bad idea? 🤷

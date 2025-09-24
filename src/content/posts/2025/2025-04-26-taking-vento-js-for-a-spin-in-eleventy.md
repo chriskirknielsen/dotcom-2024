@@ -3,13 +3,14 @@ title: Taking VentoJS for a spin in Eleventy
 summary: "There’s a new kid on the templating block."
 tags: [javascript, eleventy, vento]
 toc: true
-templateEngineOverride: md # Ensure the Vento/Nunjucks isn't processed
 layout: 'post.vto'
 time: 03:51:00
 updated: 2025-04-28
 ---
 
-_**Update:** I have written a sort of [guide for migrating to Vento](/blog/from-nunjucks-to-vento-in-eleventy-migration-guide/), from Nunjucks, if you're interested in that!_
+{{ callout "Update" }}
+I have written a sort of [guide for migrating to Vento](/blog/from-nunjucks-to-vento-in-eleventy-migration-guide/), from Nunjucks, if you're interested in that!
+{{ /callout }}
 
 In a recent rebuild for another blog of mine, where I switched from Hugo to Eleventy, I decided to give [VentoJS](https://vento.js.org/) a try, which is the new kid on the block, as far as templating languages go. There are [IDE integrations](https://vento.js.org/editor-integrations/) that make it feel right at home in VS Code (for me), and an [Eleventy plugin](https://github.com/noelforte/eleventy-plugin-vento) to make it painless to start using with my favourite static site generator. Thanks to both Óscar Otero for making Vento, and Noel Forte for the Eleventy plugin!
 
@@ -37,27 +38,28 @@ The double curly braces used for everything is a nice simplification, as I have 
 
 The filter pipe operator `|>` is nice, though coming from Nunjucks I did use `|` more than once before realising why the template wasn’t building, but I do like the aesthetics of it, it feels expressive. It is also a [proposed JavaScript feature](https://github.com/tc39/proposal-pipeline-operator) but it’s not there yet.
 
-More importantly, the ability to write actual JS is a gamechanger — no need to create new filters or whatnot: it can all be executed right there! You can use filters, inline JS, or mix-and-match, so for example this is valid: `{{ posts |> getAuthors |> sort((a, b) => a.localeCompare(b)) |> join(', ') }}`. I like that freedom because that means a special operation I only plan on using once can be declared in-context, instead of creating a global filter (which is far from being an actual problem, but still nice to have a choice). Nunjucks does offer *some* JavaScript syntax here and there but it’s never guaranteed it’ll work, whereas Vento embraces it fully. I guess I like sprinkling JavaScript into my templates in a way — I don’t mind using other syntaxes but as a front-end developer, I use JS a lot, so not needing that “context switching” is nice.
+More importantly, the ability to write actual JS is a gamechanger — no need to create new filters or whatnot: it can all be executed right there! You can use filters, inline JS, or mix-and-match, so for example this is valid: {{ echo }}`{{ posts |> getAuthors |> sort((a, b) => a.localeCompare(b)) |> join(', ') }}`{{ /echo }}. I like that freedom because that means a special operation I only plan on using once can be declared in-context, instead of creating a global filter (which is far from being an actual problem, but still nice to have a choice). Nunjucks does offer *some* JavaScript syntax here and there but it’s never guaranteed it’ll work, whereas Vento embraces it fully. I guess I like sprinkling JavaScript into my templates in a way — I don’t mind using other syntaxes but as a front-end developer, I use JS a lot, so not needing that “context switching” is nice.
 
-One extra nice thing is that you can pipe any content, so if you wanted to write a bit of Markdown, you could use `{{ echo |> md }}Now *this* is **neat**!{{ /echo }}` (you’d need to define a `md` filter, though!), or even more wild, a layout or an include, but let’s talk about those.
+One extra nice thing is that you can pipe any content, so if you wanted to write a bit of Markdown, you could use {{ echo }}`{​{ echo |> md }​}Now *this* is **neat**!{​{ /echo }​}`{{ /echo }} <!-- I used a &zwnj; between the twin curly braces to wrap my echo in an echo !--> (you’d need to define a `md` filter, though!), or even more wild, a layout or an include, but let’s talk about those.
+
 
 ## Powerful includes
 
-Includes are super practical. The plugin for Eleventy has an option to set your include path, by the way! You can include a file like `{{ include "my/nice/component.vto" }}` but what if you wanted to include a Markdown file? Not a problem: `{{ include "my/sweet/content.md" |> md }}`. Another thing I miss from Liquid that [Nunjucks really needs](https://github.com/mozilla/nunjucks/issues/539), is context! With Vento you can pass the context as a second argument: `{{ include "my/cool/paginator.vto" { pagination } }}` — just like that.
+Includes are super practical. The plugin for Eleventy has an option to set your include path, by the way! You can include a file like {{ echo }}`{{ include "my/nice/component.vto" }}`{{ /echo }} but what if you wanted to include a Markdown file? Not a problem: {{ echo }}`{{ include "my/sweet/content.md" |> md }}`{{ /echo }}. Another thing I miss from Liquid that [Nunjucks really needs](https://github.com/mozilla/nunjucks/issues/539), is context! With Vento you can pass the context as a second argument: {{ echo }}`{{ include "my/cool/paginator.vto" { pagination } }}`{{ /echo }} — just like that.
 
 ## With some sugar
 
 One feature I like from JS is trailing commas. It lets you rearrange objects pretty easily, so I aim to always add them (if Prettier doesn’t already!). Nunjucks will tell you to take a hike if you use them (though hikes are nice), but Vento’s happy to have them. Another cool thing? That last pagination example didn’t say `{ pagination: pagination }` because in JavaScript, you can omit the object value if its key matches an existing variable (I worded that poorly but you get it, right?), that makes it slightly more readable, though I don’t mind the verbosity, to be honest. Oh and another thing: ternaries! Nunjucks kinda has it with `trueValue if trueCondition else falseValue` but I like the expressive and succinct JS ternaries of `trueCondition ? trueValue : falseValue`. Vento’s fine with that, too. Speaking of conditions: `||` and `&&` are welcome!
 
-I also have to say how nice it is to use template literals. ``{{ set permalink = `/tags/${tag}/page/${p}/index.html` }}`` instead of `{% set permalink = '/tags/'+tag+'/page/'+p+'/index.html' %}` is just such a small yet incredible difference. I may be repeating myself here, but using a familiar syntax from JS just makes it feel cleaner (though I am fully aware the Nunjucks version shown here is valid JS as well, it’s just not as _nice_).
+I also have to say how nice it is to use template literals. {{ echo }}``{{ set permalink = `/tags/${tag}/page/${p}/index.html` }}``{{ /echo }} instead of `{% set permalink = '/tags/'+tag+'/page/'+p+'/index.html' %}` is just such a small yet incredible difference. I may be repeating myself here, but using a familiar syntax from JS just makes it feel cleaner (though I am fully aware the Nunjucks version shown here is valid JS as well, it’s just not as _nice_).
 
-You can also run literal JavaScript with the `{{> ... }}` tag, should you need it. And `await` is allowed!
+You can also run literal JavaScript with the {{ echo }}`{{> ... }}`{{ /echo }} tag, should you need it. And `await` is allowed!
 
 ## Layouts and functions
 
 Layouts are kind of like Nunjucks’ `{% extends ... %}` but they offer more control in my eyes, as you can pass up data from the content to the layout, the same way you do as includes. There’s one particular issue I have in my current website with that which would be fixed with Vento’s approach so… Oh no, I am talking myself into a full refactor, aren’t I?
 
-If `{{ layout }}` is `{% extends %}`, then `{{ function }}` is `{% macro %}` (though I haven’t used a whole lot of macros in Nunjucks, so I may be off, here). With functions, you can write reusable bits of code, and they can be `export`-ed then `import`-ed in another template, it’s really nice how flexible Vento is!
+If {{ echo }}`{{ layout }}`{{ /echo }} is `{% extends %}`, then {{ echo }} `{{ function }}`{{ /echo }} is `{% macro %}` (though I haven’t used a whole lot of macros in Nunjucks, so I may be off, here). With functions, you can write reusable bits of code, and they can be `export`-ed then `import`-ed in another template, it’s really nice how flexible Vento is!
 
 ## The rough edges
 
@@ -69,14 +71,14 @@ On my other blog, I migrated from Hugo, which isn’t too far off from either Nu
 
 The other trouble I ran into was a nested shortcode scenario: I have a shortcode for displaying images, and a *paired* shortcode for creating a gallery (a glorified `display: flex` wrapper). However, no matter what I tried, the closing tag on my gallery shortcode consistently threw an error which, as you can see, is not very helpful:
 
-```
+{{ echo }}```
 [11ty] Problem writing Eleventy templates:
 [11ty] 1. Having trouble rendering vto template ./src/content/posts/some-cool-post.md (via TemplateContentRenderError)
 some-cool-post.md:32:1
 [11ty] {{ /gallery }} (via TemplateError)
 [11ty] Original error stack trace: TemplateError: Error in template src/content/posts/some-cool-post.md:32:1
 [11ty] {{ /gallery }}
-```
+```{{ /echo }}
 
 Modifying the Eleventy plugin to log errors before throwing them helped me discover the engine thinks this is an incomplete regular expression — well, dang.
 
