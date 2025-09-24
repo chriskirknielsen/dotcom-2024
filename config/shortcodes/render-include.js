@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import pluginImage from '@11ty/eleventy-img';
 import * as cheerio from 'cheerio';
+const svgCacheFolder = `.cache/svg/`;
 
 /**
  * Quickly hash a string in an unsecure way.
@@ -238,7 +239,7 @@ export default function (eleventyConfig, options = {}) {
 		const returnValue = pluginImage(svgSrc, {
 			urlPath: `/assets/svg/`,
 			// outputDir: `./_site/assets/svg/`,
-			outputDir: `.cache/svg/`,
+			outputDir: svgCacheFolder,
 			widths: [1200],
 			formats: ['svg'],
 			svgShortCircuit: true,
@@ -258,7 +259,7 @@ export default function (eleventyConfig, options = {}) {
 
 	/** Sync the cached SVGs. */
 	eleventyConfig.on('eleventy.after', () => {
-		fs.cpSync('.cache/svg/', path.join(eleventyConfig.directories.output, '/assets/svg/'), {
+		fs.cpSync(svgCacheFolder, path.join(eleventyConfig.directories.output, '/assets/svg/'), {
 			recursive: true,
 		});
 	});
