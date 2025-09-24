@@ -2,9 +2,7 @@
 title: "Removing link underline styles between icons and text"
 summary: "Fixing the tiny underline is nearly effortless with CSS variables."
 time: '19:10:00'
-tags:
-    - css
-    - quick-tip
+tags: [css, quick-tip]
 ---
 
 I recently made a little update to my site with a [blogroll](/blogroll/) that includes the linked site’s favicon. I think it’s good to have that icon be clickable, so I wrapped icon and label within a standard link. It looked… okay.

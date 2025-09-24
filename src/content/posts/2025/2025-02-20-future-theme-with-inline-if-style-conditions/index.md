@@ -1,9 +1,7 @@
 ---
 title: "A Future of Themes with CSS Inline if() Conditions"
 summary: 'Another way to implement themes on a website with style conditions.'
-tags:
-    - css
-    - themes
+tags: [css, themes]
 toc: true
 featured: true
 ---

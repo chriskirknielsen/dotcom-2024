@@ -1,11 +1,7 @@
 ---
 title: "My plugin for Markdown-It: CodeWrap"
 summary: 'My solution to adding "Copy" to markdown code blocks (and other things).'
-tags:
-    - markdown
-    - plugin
-    - oss
-    - eleventy
+tags: [markdown, plugin, oss, eleventy]
 toc: true
 ---
 

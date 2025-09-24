@@ -4,9 +4,7 @@ title: 'Manage your SVG files with Eleventy’s Render plugin'
 summary: Using renderFile to keep things tidy.
 date: 2022-08-10
 updated: 2022-10-02
-tags:
-    - eleventy
-    - svg
+tags: [eleventy, svg]
 toc: true
 ---
 

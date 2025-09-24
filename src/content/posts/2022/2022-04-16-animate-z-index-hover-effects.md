@@ -3,10 +3,7 @@ slug: animate-z-index-hover-effects
 title: Animate your z-index for cleaner hover effects
 summary: Clean up overlap animations on hovered elements.
 date: 2022-04-16
-tags:
-    - css
-    - quick-tip
-    - z-index
+tags: [css, quick-tip, z-index]
 ---
 
 I wanted to share a quick tip I’ve been using for a while — it’s nothing new but hey I felt like writing about it!

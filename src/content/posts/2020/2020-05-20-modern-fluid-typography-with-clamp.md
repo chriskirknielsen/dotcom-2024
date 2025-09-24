@@ -3,11 +3,7 @@ slug: modern-fluid-typography-with-clamp
 title: Modern Fluid Typography with clamp()
 summary: Get a more consistent sizing with viewport-based font sizing.
 date: 2020-05-20
-tags:
-    - css
-    - sass
-    - typography
-    - quick-tip
+tags: [css, sass, typography, quick-tip]
 ---
 
 Recently, CSS introduced `min()` and `max()` which are now available in every major browser. Along with those two came `clamp()`, which is basically a wrapper for the combination of the two aforementioned functions, but easier to read: `clamp(MIN, VAL, MAX)` (where `VAL` would usually be a responsive unit). Here’s a quick tip to go along with its use!

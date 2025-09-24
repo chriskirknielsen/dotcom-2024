@@ -4,8 +4,7 @@ title: Le petit guide sur var, let et const
 summary: Comment distinguer ces mots-clés JavaScript.
 date: 2021-08-07
 lang: fr
-tags:
-    - javascript
+tags: [javascript]
 toc: true
 ---
 

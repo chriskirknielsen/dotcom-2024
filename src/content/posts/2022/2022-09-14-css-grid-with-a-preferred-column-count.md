@@ -2,9 +2,7 @@
 title: 'CSS Grid with a preferred column count'
 summary: Set up a CSS grid with a specific ideal number of columns.
 date: 2022-09-13
-tags:
-    - quick-tip
-    - css
+tags: [quick-tip, css]
 ---
 
 Have you ever had to create a neat little grid of logos on a page? CSS can help you with grid and its `grid-template-columns` property. Using `auto-fill` and `minmax` you can say “Take up as much space as possible but I want each item to be between X and Y wide!” Legitimately powerful stuff in its own right.

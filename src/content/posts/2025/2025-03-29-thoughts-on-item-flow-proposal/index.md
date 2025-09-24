@@ -1,8 +1,7 @@
 ---
 title: "Some thoughts on the item-flow proposal"
 summary: 'Solving for masonry could have beneficial side effects for other layout methods.'
-tags:
-    - css
+tags: [css]
 toc: true
 ---
 

@@ -2,9 +2,7 @@
 title: "“Simple” Table of Contents Highlighter"
 summary: "Highlight your TOC in a tick."
 time: '19:19:19'
-tags:
-    - quick-tip
-    - javascript
+tags: [quick-tip, javascript]
 toc: true
 ogBackground: "./toc-intersection-observer.png"
 ---

@@ -1,9 +1,7 @@
 ---
 title: '2024 redesign'
 summary: Some notes about this 2024 redesign.
-tags:
-    - eleventy
-    - meta
+tags: [eleventy, meta]
 toc: true
 time: '16:04:24'
 ---

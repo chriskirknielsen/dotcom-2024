@@ -2,9 +2,7 @@
 title: "Conditional favicon in Eleventy using passthrough copy"
 time: 00:00:00
 summary: 'Never mix up dev and prod again! (due to identical icons, at least)'
-tags:
-    - eleventy
-    - quick-tip
+tags: [eleventy, quick-tip]
 ogBackground: "./new-tab-icons.png"
 ---
 

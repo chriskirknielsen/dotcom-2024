@@ -2,9 +2,7 @@
 title: "Vertical slider fitting the tallest element in pure CSS"
 summary: "Using transforms to create overflow."
 time: '00:25:00'
-tags:
-    - css
-    - quick-tip
+tags: [css, quick-tip]
 ---
 
 I was working on a project requiring this kind of vertical slider. Each slide needed to have the same height so it wouldn’t look jarring as you scrolled, and I just knew I was going to use the trusty `grid-area: 1 / 1 / -1 / -1;` solution to make all the slides fit the same space in the slider. I suspect a column-oriented flexbox solution with `flex: 1 0 0` is equally viable.

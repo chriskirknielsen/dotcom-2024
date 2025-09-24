@@ -1,10 +1,7 @@
 ---
 title: "Grouping posts by year with Nunjucks in Eleventy"
 summary: "Group by year in a clear and readable manner."
-tags:
-    - eleventy
-    - nunjucks
-    - quick-tip
+tags: [eleventy, nunjucks, quick-tip]
 ---
 
 My blog has a list of all the posts I’ve published on a single page since I don’t post a whole lot. I had been asked in the past how I managed to group my posts by year. As I’ve recently updated that, I figured I’d explain a couple of methods.

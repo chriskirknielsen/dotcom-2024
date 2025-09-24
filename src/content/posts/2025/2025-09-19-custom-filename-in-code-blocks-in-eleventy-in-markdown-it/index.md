@@ -1,9 +1,7 @@
 ---
 title: "Adding a custom filename to a code block in Eleventy with markdown-it"
 summary: "Making those code blocks a little more personal."
-tags:
-    - markdown
-    - eleventy
+tags: [markdown, eleventy]
 time: 03:30:00
 ---
 

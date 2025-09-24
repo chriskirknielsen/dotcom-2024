@@ -1,10 +1,7 @@
 ---
 title: 'Eleventy Asset Pipeline: Precompiled Assets without Gulp'
 summary: Precompiled Sass and JS files that become part of the source folder.
-tags:
-    - eleventy
-    - javascript
-    - css
+tags: [eleventy, javascript, css]
 toc: true
 updated: 2023-05-21
 ---

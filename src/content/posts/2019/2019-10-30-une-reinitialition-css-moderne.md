@@ -6,8 +6,7 @@ date: 2019-10-30
 originalUrl: https://piccalil.li/blog/a-modern-css-reset/
 originalTitle: Andy Bell - A Modern CSS Reset
 lang: fr
-tags:
-    - css
+tags: [css]
 ---
 
 J'utilise constamment une feuille de style pour réinitialiser de nombreux éléments dans mes projets ("_CSS reset_" ou "_reset_"). Je suis sûr que de nombreux développeur·euses le font également, sans trop s'attarder sur le contenu : "J'ai importé `normalize.css`, c'est bon !" Il est donc agréable de voir que certaines personnes se penchent sur cette question dans le contexte de nos navigateurs actuels. Une de ces personnes est Andy Bell, qui propose un _reset_ moderne. Il nous explique chaque choix et j'ai pensé qu'une traduction en français pourrait servir la communauté francophone.

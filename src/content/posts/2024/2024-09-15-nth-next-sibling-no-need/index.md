@@ -3,9 +3,7 @@ title: ":nth-next-sibling? No need."
 summary: "Target N elements after an arbitrary element in CSS."
 time: '19:00:00'
 updated: 2024-09-23
-tags:
-    - css
-    - quick-tip
+tags: [css, quick-tip]
 ---
 
 Yesterday, I discovered a new wish I had in CSS: when selecting the next few siblings of an element, instead of having to do `.el + *, .el + * + *, .el + * + * + *`, I’d love to have something like `:nth-next-sibling(-n + 3 of .el)`. But writing that down, the `of` made me think “Oh bother, that syntax would be confusing with `:nth-child(n of .el)`" *and then* the epiphany followed: I can already achieve my goal with `:nth-child`.

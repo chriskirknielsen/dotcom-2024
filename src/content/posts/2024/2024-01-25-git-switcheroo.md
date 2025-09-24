@@ -1,9 +1,7 @@
 ---
 title: 'Snippet: git switcheroo'
 summary: Precompiled Sass and JS files that become part of the source folder.
-tags:
-    - snippet
-    - git
+tags: [snippet, git]
 ---
 
 I aliased a git command to move commits from one branch to another (usually `main` to `dev`). A bad idea? 🤷

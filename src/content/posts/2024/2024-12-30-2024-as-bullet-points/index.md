@@ -2,8 +2,7 @@
 title: "2024 as bullet points"
 summary: "Kind of a year in review."
 time: '00:04:04'
-tags:
-    - personal
+tags: [personal]
 toc: true
 featured: true
 ---

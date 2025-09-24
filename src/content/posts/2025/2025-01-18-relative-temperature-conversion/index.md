@@ -2,9 +2,7 @@
 title: "Relative Temperature Conversion"
 summary: "So this is how I can explain temperature fluctuations outside the US!"
 time: '01:45:00'
-tags:
-    - personal
-    - today-i-learned
+tags: [personal, today-i-learned]
 ---
 
 As a European living in the US, besides the incoming four-year shitshow (or will it be longer?), I’ve been getting accustomed to things like units. (though I _still_ don’t know how many ounces are in a mile)

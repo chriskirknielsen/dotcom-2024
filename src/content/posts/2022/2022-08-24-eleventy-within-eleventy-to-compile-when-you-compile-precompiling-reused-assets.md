@@ -4,9 +4,7 @@ title: 'Eleventy within Eleventy to compile when you compile: precompiling reuse
 summary: Pre-compile some reused assets to avoid repeating the same operation.
 date: 2022-08-25
 updated: 2022-08-25
-tags:
-    - eleventy
-    - javascript
+tags: [eleventy, javascript]
 toc: true
 ---
 

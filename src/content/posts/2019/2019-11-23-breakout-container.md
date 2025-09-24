@@ -4,9 +4,7 @@ title: Breakout Container
 summary: Make a contained element span the entire horizontal space.
 date: 2019-11-23
 toc: true
-tags:
-    - css
-    - quick-tip
+tags: [css, quick-tip]
 ---
 
 Here’s a quick tip if you have your content limited to a certain width but you want an element to "break out".

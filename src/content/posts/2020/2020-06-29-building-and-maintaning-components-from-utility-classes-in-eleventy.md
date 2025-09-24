@@ -3,10 +3,7 @@ slug: building-and-maintaning-components-from-utility-classes-in-eleventy
 title: Building and maintaining components from utility classes in Eleventy
 summary: Use a collection of utilities to form components without additional CSS.
 date: 2020-06-29
-tags:
-    - css
-    - quick-tip
-    - eleventy
+tags: [css, quick-tip, eleventy]
 ---
 
 I’m a big fan of Eleventy (this site is built with it), and also a big fan of utility-first CSS. ~~You can check this site’s source code in your browser or on GitHub: component classes are rarely used.~~ *(update: this version now uses a mixed approach)* That said, it can be quite frustrating to constantly have to find the same classes you want to use for a component in different situations — components that are at a low enough level that they shouldn’t be their own template file, like a styled link or button. Take this example (the `u-` prefix stands for `utility`):

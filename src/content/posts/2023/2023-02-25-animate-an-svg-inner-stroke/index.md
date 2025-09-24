@@ -1,10 +1,7 @@
 ---
 title: "Animate an SVG shape’s inner stroke"
 summary: 'Grow a stroke on an SVG shape but only covering the inner part.'
-tags:
-    - quick-tip
-    - svg
-    - css
+tags: [quick-tip, svg, css]
 ---
 
 If you have any theme besides "**Dusk**" selected on my website, you’ll see a little animation on hover that fills in each letter of my logo. In case you _are_ using that theme, here’s what that looks like:

@@ -3,9 +3,7 @@ slug: inline-lists-with-conditional-separators
 title: Inline lists with conditional separators
 summary: Only show a separator when two items are next to each other, and skip for new lines.
 date: 2020-07-18
-tags:
-    - css
-    - quick-tip
+tags: [css, quick-tip]
 ---
 
 Here’s a quick tip that my manager shared with me (thanks Matthew! — and you can find a version of it on [StackOverflow](https://stackoverflow.com/questions/15306108/css-styling-for-horizontal-list-with-bullet-only-between-elements/40162380#40162380), by Tom Robinson from 2016!). I always keep coming back to it, looking in repositories for old projects: I figured it’s about time I had an easy way to find it.

@@ -1,8 +1,7 @@
 ---
 title: "Double-Pagination in Eleventy"
 summary: 'Yo dawg, I heard you liked pagination, so I added pagination inside your paginated pages, so you can paginate while you paginate.'
-tags:
-    - eleventy
+tags: [eleventy]
 toc: true
 time: 05:00:00
 ogBackground: "./yodawg.jpg"

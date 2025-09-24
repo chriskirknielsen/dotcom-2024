@@ -1,11 +1,7 @@
 ---
 title: 'Leveraging APIs like Notion with a nice caching system'
 summary: How I implemented Notion and PSN APIs in my Eleventy build for my Now and Gaming pages.
-tags:
-    - eleventy
-    - notion
-    - api
-    - cache
+tags: [eleventy, notion, api, cache]
 toc: true
 time: '03:00:00'
 featured: true

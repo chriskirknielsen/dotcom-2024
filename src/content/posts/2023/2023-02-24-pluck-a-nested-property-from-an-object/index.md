@@ -1,9 +1,7 @@
 ---
 title: 'Plucking a nested property from an object'
 summary: 'Retrieving a property of an object which is also in an object in JavaScript.'
-tags:
-    - quick-tip
-    - javascript
+tags: [quick-tip, javascript]
 toc: true
 ---
 
