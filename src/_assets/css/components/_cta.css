@@ -6,6 +6,7 @@
 	--CTA-border-radius: var(--_cta-border-radius);
 	--CTA-box-shadow: var(--_cta-box-shadow);
 	--CTA-padding: var(--_cta-padding-block) var(--_cta-padding-inline);
+	--CTA-transition-properties: color, text-decoration-color, text-underline-offset, text-decoration-thickness, background-color, border-color, box-shadow, opacity, filter;
 
 	position: relative;
 	flex-shrink: 0;
@@ -24,7 +25,7 @@
 	box-shadow: var(--CTA-box-shadow);
 
 	@media (--accept-motion) {
-		transition-property: color, text-decoration-color, text-underline-offset, text-decoration-thickness, background-color, border-color, box-shadow, opacity, filter;
+		transition-property: var(--CTA-transition-properties);
 		transition-duration: var(--anim-short);
 		transition-timing-function: var(--easing-in-out);
 	}
@@ -61,6 +62,7 @@
 	:checked + &.button--cbox,
 	&.button--cbox:has(input:checked),
 	&[data-persist-pressed-style][aria-pressed='true'],
+	details[open] > &,
 	&[aria-current='page'] {
 		--CTA-text-color: var(--_cta-text-color-pressed);
 		--CTA-bg-color: var(--_cta-bg-color-pressed);
