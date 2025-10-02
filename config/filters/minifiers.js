@@ -1,5 +1,5 @@
 import esbuild from 'esbuild';
-import { transform } from 'lightningcss';
+import { transform, Features } from 'lightningcss';
 
 let CACHE = { js: {}, css: {} };
 
@@ -33,7 +33,7 @@ async function cachedJsmin(code, cacheKey = null) {
 }
 
 async function cachedCssmin(code, cacheKey = null) {
-	const transformer = (code) => transform({ code: Buffer.from(code), minify: true, sourceMap: false });
+	const transformer = (code) => transform({ code: Buffer.from(code), minify: true, sourceMap: false, include: Features.Nesting });
 	return cachedMinify(code, cacheKey, 'css', transformer);
 }
 
