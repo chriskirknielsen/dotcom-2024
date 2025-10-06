@@ -28,7 +28,7 @@ If we want to select a link (`<a>` element) that is not a direct descendant of a
 </article>
 ```
 
-However, if we do not know how many elements sit between our negated selector ``.archived`` and our target element `a`, then we’re out of luck if we try to use `:not(.archived) a`, as every `a` will match. Consider the following markup:
+However, if we do not know how many elements sit between our negated selector `.archived` and our target element `a`, then we’re out of luck if we try to use `:not(.archived) a`, as every `a` will match. Consider the following markup:
 
 ```html
 <body>
