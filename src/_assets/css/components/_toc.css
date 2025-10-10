@@ -49,6 +49,7 @@
 	.toc {
 		position: sticky;
 		inset-block-start: var(--layout-gutter);
+		z-index: 1; /* If there is content in the full bleed area, z-index ensures the TOC is placed above the content */
 
 		/* Large-ish negative number (-9 should cover most cases since having a TOC means there's at least a moderate amount of content)
 			fills up all the rows since `1 / -1` makes the first item in the main column take up as much space as just this TOC row… */
