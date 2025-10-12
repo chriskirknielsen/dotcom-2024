@@ -123,6 +123,7 @@ const designs = [
 			TeePublic: 'https://www.teepublic.com/sticker/67983005-css-logo-solid',
 			RedBubble: 'https://www.redbubble.com/i/sticker/CSS-Logo-solid-by-ckirknielsen/166040147.EJUG5',
 			CottonBureau: 'https://cottonbureau.com/p/D6EHDP/shirt/css-is-awesome',
+			'CottonBureau (pocket variant)': 'https://cottonbureau.com/p/GVRUAT/shirt/css-is-awesome-pocket',
 		},
 		tags: ['dev', 'css'],
 		date: '2024-11-02',

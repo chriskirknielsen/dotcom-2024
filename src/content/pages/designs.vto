@@ -61,13 +61,15 @@
 			{{ set designLinks }}
 				<ul role="list" class="flex-list | marginBlockStart-auto" {{ if enableViewTransitions }}style="view-transition-name:{{ design.slug }}-list;"{{ /if }}>
 					{{- for site, url of design.links }}
-					{{ set siteIconId }}store-icon-{{ site |> toLowerCase }}{{ /set }}
-					<li>
-						<a href="{{ url }}" class="store-icon-linkwrap | display-block">
-							<span class="visually-hidden">Get on {{ site }}</span>
-							{{ svg siteIconId, { class: 'store-icon-inline', width: 24, height: 24 } }}
-						</a>
-					</li>
+						{{ if site.includes('(') == false }}
+							{{ set siteIconId }}store-icon-{{ site |> toLowerCase }}{{ /set }}
+							<li>
+								<a href="{{ url }}" class="store-icon-linkwrap | display-block">
+									<span class="visually-hidden">Get on {{ site }}</span>
+									{{ svg siteIconId, { class: 'store-icon-inline', width: 24, height: 24 } }}
+								</a>
+							</li>
+						{{ /if -}}
 					{{ /for -}}
 				</ul>
 			{{ /set }}
