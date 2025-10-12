@@ -6,23 +6,6 @@
 	container: --searchResults / inline-size;
 }
 
-.search-results {
-	inline-size: 100%;
-
-	border-collapse: collapse;
-}
-
-.search-results-item > td {
-	padding-block: var(--size-2xs);
-}
-
-.search-results-header :where(th) {
-	text-align: start;
-	font-size: 0.625em;
-	font-weight: normal;
-	text-transform: uppercase;
-	color: var(--C-accent);
-}
 .search-results-col-type {
 	inline-size: max-content;
 	padding-inline-start: var(--size-s);
@@ -48,9 +31,6 @@
 }
 .search-results:not(:has(.search-results-item:not([hidden]) > .search-results-col-date:not(:empty))) .search-results-col-date {
 	display: none; /* When displaying a list of results that are all without a date, hide the date column */
-}
-.search-results .search-results-item:nth-child(odd of :not([hidden])) {
-	background: color-mix(in oklch, transparent 90%, var(--C-accent));
 }
 
 @container --searchResults (max-inline-size: 400px) {

@@ -1,0 +1,26 @@
+table {
+	inline-size: 100%;
+
+	border-collapse: collapse;
+}
+
+tbody > tr > td {
+	padding-block: var(--size-2xs);
+}
+
+thead > tr > th {
+	text-align: start;
+	font-size: 0.625em;
+	font-weight: normal;
+	text-transform: uppercase;
+	color: var(--C-accent);
+}
+tr > :is(td, th) {
+	padding-inline: var(--size-s);
+
+	text-wrap: pretty;
+}
+
+tbody > tr:where(:nth-child(odd of :not([hidden]))) {
+	background: color-mix(in oklch, transparent 90%, var(--C-accent));
+}

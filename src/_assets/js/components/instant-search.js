@@ -134,6 +134,10 @@ class InstantSearch extends HTMLElement {
 			}, 100); // Fake a loading period
 		};
 
+		inputEl.addEventListener('blur', function (e) {
+			runQuery();
+		});
+
 		formEl.addEventListener('submit', function (e) {
 			e.preventDefault();
 
