@@ -71,11 +71,11 @@ export default function (eleventyConfig) {
 	/** Converts an integer to its modern Roman numeral counterpart. */
 	eleventyConfig.addFilter('toRomanNumeral', (num) => toRomanNumeral(num));
 
-	/** Formats a number into. */
+	/** Formats a number into a standard English-formatted string (e.g. 1,234.567). */
 	eleventyConfig.addFilter('formatNumber', (num) => new Intl.NumberFormat('en-US').format(num));
 
 	/** Sums an array of numbers. */
-	eleventyConfig.addFilter('sum', (nums) => nums.reduce((sum, num) => sum + num || 0, 0));
+	eleventyConfig.addFilter('sum', (nums) => nums.reduce((sum, num) => sum + num || 0, 0)); // In the future, Math.sumPrecise would be best
 
 	/** Rounds a number to the preferred integer. */
 	eleventyConfig.addFilter('toRound', (num, precision = 0, method = 'round') => {

@@ -2,6 +2,10 @@
 	& > ol {
 		columns: 150px 2;
 		column-gap: var(--layout-gutter);
+
+		&:has(> :nth-child(10)) {
+			--toc-marker-type: decimal-leading-zero;
+		}
 	}
 
 	/*
