@@ -16,5 +16,5 @@ Usage: `git switcheroo {COMMIT HASH} {SOURCE BRANCH} {TARGET BRANCH}`
 ➡️ e.g: `git switcheroo 7edaf7 main dev`
 
 {{ callout }}
-Originally posted on Twitter on 23 September 2022. Figured it'd be worth its own post here.
+Originally posted on Twitter on 23 September 2022. Figured it’d be worth its own post here.
 {{ /callout }}

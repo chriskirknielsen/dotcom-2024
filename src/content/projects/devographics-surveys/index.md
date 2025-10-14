@@ -13,7 +13,7 @@ toc: true
 
 This project is an ongoing collaboration between myself and Sacha Greif, the maintainer of the various _State of `{web tech}`_ surveys, which is collected under the Devographics project.
 
-For each of these designs, while Sacha reached out for my design skills, he is himself capable and so these logos and shirt designs are collaborative, bouncing ideas of each other, and as such I can't take full credit but will say it is a fun process, from idea to final design. Below you’ll find the various "branding" projects I’ve worked on for the Devographics surveys.
+For each of these designs, while Sacha reached out for my design skills, he is himself capable and so these logos and shirt designs are collaborative, bouncing ideas of each other, and as such I can’t take full credit but will say it is a fun process, from idea to final design. Below you’ll find the various "branding" projects I’ve worked on for the Devographics surveys.
 
 ## State of CSS
 
@@ -32,7 +32,7 @@ I also animated it for the survey landing page, because animations are fun! Clic
 
 ### The State of Ass
 
-When the survey was first opened, it had been pointed out to us that the logo didn't necessarily read as "CSS"… and while Sacha and I had seen it, we thought "No way anyone will read this as anything but CSS, right?".
+When the survey was first opened, it had been pointed out to us that the logo didn’t necessarily read as "CSS"… and while Sacha and I had seen it, we thought "No way anyone will read this as anything but CSS, right?".
 
 We were wrong. So I adjusted the logo, but for your entertainment, here is the logo for… State of Ass:
 

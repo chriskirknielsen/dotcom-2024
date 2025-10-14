@@ -97,7 +97,7 @@ On a similar note, I wish that shorthand properties like `margin` would resolve 
 
 **TL;DR:** Gimme a way to scale things based on an absolute value (e.g.: `transform: scale(4rem, 50px)`).
 
-I wrote [a proposal in 2020](https://github.com/w3c/csswg-drafts/issues/5273) but it didn't pick up, and granted it’s a niche need, but I’d love to be able to run a transform on an element without knowing its original size while needing a specific final size. This is a little FLIP-like, I suppose, minus having to do any math, but the idea would be to define an element’s scaled size by absolute values, not relative to the base element:
+I wrote [a proposal in 2020](https://github.com/w3c/csswg-drafts/issues/5273) but it didn’t pick up, and granted it’s a niche need, but I’d love to be able to run a transform on an element without knowing its original size while needing a specific final size. This is a little FLIP-like, I suppose, minus having to do any math, but the idea would be to define an element’s scaled size by absolute values, not relative to the base element:
 
 ```css
 .resized {

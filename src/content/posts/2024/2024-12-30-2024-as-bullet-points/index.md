@@ -12,7 +12,7 @@ A little look back at what I have consumed in media this year, and a few bonus "
 ## Personal
 - I launched a [**new version** of this site](https://chriskirknielsen.com/blog/2024-redesign/) in April, with more themes and more fonts. Lots of fun with CSS! I think my favourite themes are Quill and Campfire. I have made myriad changes since launch; this is my [worry stone](https://ethanmarcotte.com/wrote/let-a-website-be-a-worry-stone/).
 - I ran a **half-marathon** in May. My feet were obliterated. People run double this distance? (or more!) Absolutely unhinged, and incredibly impressive. I also noticed my running frequency has dramatically decreased this year… bad Chris, bad!
-- We moved to a **new apartment** in July. The landlady is nice and very responsive, unlike the previous place… and water doesn't leak from the ceiling during storms!
+- We moved to a **new apartment** in July. The landlady is nice and very responsive, unlike the previous place… and water doesn’t leak from the ceiling during storms!
 - I gained the title of **"Uncle Chris"** twice more this year, though I sadly live very far from all my [niblings](https://en.wiktionary.org/wiki/nibling).
 - I **gave blood** and nearly passed out. I should give blood more often. (a decent new year resolution)
 
@@ -30,12 +30,12 @@ I saw a total of 29 movies this year, a few are rewatches (old comforts and all 
 - **The Super Mario Bros. Movie**: I’m not a huge Mario fan but this was okay ("okay" video game adaptations are worth highlighting!), though the cast was a little too star-powered. (Chris Pratt? Ugh…)
 - **Bullet Train**: There were some parts I thought were weird but overall this was entertaining.
 - **Kiss Kiss Bang Bang**: Another rewatch, another Val Kilmer movie. The banter between Kilmer and Downey is great. "_Look up “idiot” in the dictionary, you know what you will find?_"
-- **Dune: Part Two**: Lovely design, great music, but besides riding a sandworm, I can't recall what happens.
+- **Dune: Part Two**: Lovely design, great music, but besides riding a sandworm, I can’t recall what happens.
 - **Godzilla Minus One**: This deserved every praise, I really enjoyed it.
 - **Poor Things**: This is a fever dream through and through. Well acted and not without its comedy bits. Emma Stone crushed it and Willem Dafoe is brilliant as always.
-- **Jumanji: Welcome to the Jungle**: Starring The Rock playing The Rock and Kevin Hart playing Kevin Hart, I liked that it didn't try to copy the original movie. Didn't finish watching the _Next Level_ sequel…
+- **Jumanji: Welcome to the Jungle**: Starring The Rock playing The Rock and Kevin Hart playing Kevin Hart, I liked that it didn’t try to copy the original movie. Didn’t finish watching the _Next Level_ sequel…
 - **Mission: Impossible - Dead Reckoning Part One**: Tom Cruise is a scientologist, and that is one fucked-up cult. As a perhaps pointless form of protest, I stream those movies on services where it’s included so I don’t give out extra money to him and his cult. This was very entertaining, but the motorcycle jump scene kind of seemed pointless despite all the buzz around it.
-- **Hit Man**: An overhyped Netflix movie, why not… The premise is fun but halfway through the tone shifts to not-fun and I didn't vibe with that.
+- **Hit Man**: An overhyped Netflix movie, why not… The premise is fun but halfway through the tone shifts to not-fun and I didn’t vibe with that.
 - **Doctor Strange in the Multiverse of Madness**: Honestly it could have been worse but I thought it was supposed to be kinda horror-ish and felt like yet another Marvel movie instead with a couple of darker tones. Also can we be done with all this multiverse stuff?
 - **Thor: Love and Thunder**: Another Marvel, I know… This movie has its moments, but sometimes you get these quips in the middle of serious scenes and it ruins it. Christian Bale did a fantastic job at being creepy though!
 - **Black Widow**: This is your typical spy-against-previous-agency action movie, with a triple-shot of that Marvel formula. Scarlett Johansson’s character deserved better than this to close Black Widow’s storyline, but it was okay otherwise. David Harbour is a lot of fun, and it’s even made me consider watching that _Thunderbolts_ spin-off (one day… maybe).
@@ -44,15 +44,15 @@ I saw a total of 29 movies this year, a few are rewatches (old comforts and all 
 - **Deadpool & Wolverine**: Some highs and lows. Could have done without Wesley Snipe and other (cliché) things, but also had a few good laughs.
 - **National Lampoon’s Christmas Vacation**: A classic! It makes very little sense after rewatching it so many times and being more analytical, but it was good to have in the background while preparing the Christmas dinner (Danish frikadeller with brown sauce, and red cabbage: easy to make, easy to enjoy, especially as leftovers).
 - **Jingle All the Way**: This movie has so much going on. Nothing is really addressed, and Schwarzenegger’s character just lucks out in making his family not hate him. Also reindeer shouldn’t drink beer… right?
-- **Despicable Me**: I didn't see the full movie but I’d already seen it before. I should watch the sequels… I really like this kind of animated movie.
+- **Despicable Me**: I didn’t see the full movie but I’d already seen it before. I should watch the sequels… I really like this kind of animated movie.
 - **Despicable Me 2**: Edited to add this one. It was pretty fun! A few things were a little iffy (the sushi shack thing!) but I liked it. Steve Carell’s way of saying "girls" is quite something.
 
 ## TV shows
-Shows are obviously a bigger time investment than movies, so I didn't get through a lot, especially since I’m catching up on existing shows with many seasons readily available…
-- **Taskmaster**: Got through series 12 to 16 this year (started at season 7, haven't caught up backwards). This nonsensical task-based show is usually quite hilarious and you quickly grow fond of the contestants (5 new comedians every series). The original show is available on YouTube outside the UK, by the way!
+Shows are obviously a bigger time investment than movies, so I didn’t get through a lot, especially since I’m catching up on existing shows with many seasons readily available…
+- **Taskmaster**: Got through series 12 to 16 this year (started at season 7, haven’t caught up backwards). This nonsensical task-based show is usually quite hilarious and you quickly grow fond of the contestants (5 new comedians every series). The original show is available on YouTube outside the UK, by the way!
 - **Better Call Saul**: I saw season 2, started 3x01, and just stopped. I really need to get back into it, I think it’s a fantastic show.
 - **Bob’s Burgers**: It took me 7 years (yes) to see all of season 1, then a year to get to season 8. It’s a pretty wholesome show, all the characters are lovable goofs, despite their many, many flaws.
-- **Andor**: I liked this show, but it didn't feel super Star Wars-y because there is like one robot, maybe two aliens, and about fourty million humans throughout. (and that Syril is so damn annoying!) Still, pretty good.
+- **Andor**: I liked this show, but it didn’t feel super Star Wars-y because there is like one robot, maybe two aliens, and about fourty million humans throughout. (and that Syril is so damn annoying!) Still, pretty good.
 - **Detroiters**: Thanks to some co-workers, I have been pulled into the _I Think You Should Leave_ universe. Having watched all three seasons of _ITYSL_, I started Detroiters when it landed on Netflix. I’ve only seen a few episodes but it’s definitely the same brand of humor. Like _Bob’s Burgers_, the characters are flawed but loveable.
 
 ## Music
@@ -65,7 +65,7 @@ Not a lot of stuff going on here for me this year. _Bring Me the Horizon_ releas
 ## Books
 I really wanted to try to read one book a month this year (a lofty goal for me!) but after a couple of books I lost steam. I read before going to sleep, and get sleepy very fast, so I end up reading the 26th letter of the alphabet the most: zzZzzZzz…
 - **The Invincible** (Stanisław Lem): I played the game of the same name then read the book. I enjoyed both, great atompunk vibes.
-- **In Truth and Claw** (Ari Marmell): I haven't read the previous books and will likely not read the rest. This was okay but I didn't get hooked on the universe.
+- **In Truth and Claw** (Ari Marmell): I haven’t read the previous books and will likely not read the rest. This was okay but I didn’t get hooked on the universe.
 - **Early Riser** (Jasper Fforde): Sara Joy talked about this — perhaps on Mastodon? — and I got intrigued. It was good! Worldbuilding was on point even when it sounded ludicrous.
 - **The Wager: A Tale of Shipwreck, Mutiny and Murder** (David Grann): My friend Clément told me to read this last year and I finally did! Super interesting, but given it’s based on a true story, also frightening.
 - **Moonbound** (Robin Sloan): I heard about it via Robin Rendle and it piqued my interest. It took me months but I liked this one a lot: it mixes science-fiction and fantasy in a coherent story, good stuff.
@@ -97,8 +97,8 @@ I splurged a little bit here and there but definitely needed these things, and i
 - **iPhone 13 Mini** (refurbished): I replaced my Android Pixel 3a phone as it was getting buggy and slow, and was also a tad too big. I am now fully invested into the Apple ecosystem, for better or worse.
 
 ## That’s about it
-And those are all the bullet points to sum up my media diet and a little bit of personal stuff this year. I don’t mention my job as nothing really changed there, but on the side, I created some more [Designs](/designs/), including a CSS logo that wasn’t selected for the new official rebrand (though I did help find a font, so I’m super happy I could contribute a tiny bit to it!). While I don’t make much from those, I can't tell you how lovely it is for me every time I get an email letting me know somebody bought something I designed!
+And those are all the bullet points to sum up my media diet and a little bit of personal stuff this year. I don’t mention my job as nothing really changed there, but on the side, I created some more [Designs](/designs/), including a CSS logo that wasn’t selected for the new official rebrand (though I did help find a font, so I’m super happy I could contribute a tiny bit to it!). While I don’t make much from those, I can’t tell you how lovely it is for me every time I get an email letting me know somebody bought something I designed!
 
-That’s all I got… happy new year to y'all!
+That’s all I got… happy new year to y’all!
 
 {{ if !metadata.nakedCss }}<style>main li { text-wrap: pretty; }</style>{{ /if }}

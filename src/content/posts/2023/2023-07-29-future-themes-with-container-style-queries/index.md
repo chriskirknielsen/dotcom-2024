@@ -78,7 +78,7 @@ html:where(:not([data-theme])),
 	/* … and all your other "variables" */
 }
 
-/* Apply dark mode if user preferences call for it, and if the user hasn't selected a theme override */
+/* Apply dark mode if user preferences call for it, and if the user hasn’t selected a theme override */
 @media (prefers-color-scheme: dark) {
 	html:where(:not([data-theme])) {
 		--color: ghostwhite;

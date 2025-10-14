@@ -42,7 +42,7 @@ function array_pluck($list, $prop) {
 $japanese = array_pluck($array, 'ja'); // ['one' => 'ichi', 'two' => 'ni', 'three' => 'san']
 ```
 
-It feels a little convoluted but it still makes sense, I think. Now, we need to do the same in JavaScript, and we have different approaches. Here’s what I came up with (that doesn't require additional blocks like a `for` loop), with the magic of `Object.fromEntries`.
+It feels a little convoluted but it still makes sense, I think. Now, we need to do the same in JavaScript, and we have different approaches. Here’s what I came up with (that doesn’t require additional blocks like a `for` loop), with the magic of `Object.fromEntries`.
 
 ## Keys and values
 
@@ -86,7 +86,7 @@ In the `map`, you could do `.map((item) => { item[1] = item[1][prop]; return ite
 
 Our top-level keys are preserved, and now each object has been replaced with a single property it contained.
 
-I honestly think both ways are nearly identical. I assume the first method with `Object.keys` has the advantage of only creating one array with keys, and no additional objects, however I haven't run benchmark tests against it, and unless you have a lot of items, I don’t think it'll make much of a difference. Just pick the one that makes the most sense to you!
+I honestly think both ways are nearly identical. I assume the first method with `Object.keys` has the advantage of only creating one array with keys, and no additional objects, however I haven’t run benchmark tests against it, and unless you have a lot of items, I don’t think it’ll make much of a difference. Just pick the one that makes the most sense to you!
 
 ## One function to rule them all
 

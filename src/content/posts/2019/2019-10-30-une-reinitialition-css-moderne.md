@@ -9,17 +9,17 @@ lang: fr
 tags: [css]
 ---
 
-J'utilise constamment une feuille de style pour réinitialiser de nombreux éléments dans mes projets ("_CSS reset_" ou "_reset_"). Je suis sûr que de nombreux développeur·euses le font également, sans trop s'attarder sur le contenu : "J'ai importé `normalize.css`, c'est bon !" Il est donc agréable de voir que certaines personnes se penchent sur cette question dans le contexte de nos navigateurs actuels. Une de ces personnes est Andy Bell, qui propose un _reset_ moderne. Il nous explique chaque choix et j'ai pensé qu'une traduction en français pourrait servir la communauté francophone.
+J’utilise constamment une feuille de style pour réinitialiser de nombreux éléments dans mes projets ("_CSS reset_" ou "_reset_"). Je suis sûr que de nombreux développeur·euses le font également, sans trop s’attarder sur le contenu : "J’ai importé `normalize.css`, c’est bon !" Il est donc agréable de voir que certaines personnes se penchent sur cette question dans le contexte de nos navigateurs actuels. Une de ces personnes est Andy Bell, qui propose un _reset_ moderne. Il nous explique chaque choix et j’ai pensé qu’une traduction en français pourrait servir la communauté francophone.
 
 <!-- excerpt -->
 
 Andy pense bien trop souvent à des choses liées au CSS qui sont… ennuyeuses. Une de ces choses sur laquelle il estime avoir passé trop de temps au fil des années est la réinitialisation de CSS.
 
-Dans cette ère moderne de développement web, nous n'avons pas réellement besoin d'une réinitialisation complète — ou même du tout — car les problèmes de compatibilité entre navigateurs sont bien moindres comparés aux jours où Internet Explorer 6 dominait. Cette ère avait vu naître des réinitialisations comme `normalize.css` qui nous avait évité de nombreux maux de têtes. Ces jours sont loin derrière nous et nous pouvons désormais faire bien plus confiance à nos navigateurs. Les réinitialisations comme cela sont donc, pour la plupart, redondantes.
+Dans cette ère moderne de développement web, nous n’avons pas réellement besoin d’une réinitialisation complète — ou même du tout — car les problèmes de compatibilité entre navigateurs sont bien moindres comparés aux jours où Internet Explorer 6 dominait. Cette ère avait vu naître des réinitialisations comme `normalize.css` qui nous avait évité de nombreux maux de têtes. Ces jours sont loin derrière nous et nous pouvons désormais faire bien plus confiance à nos navigateurs. Les réinitialisations comme cela sont donc, pour la plupart, redondantes.
 
 ## Une réinitialisation avec des valeurs par défaut raisonnables
 
-Andy est un grand adepte de _reset CSS_ donc il a petit à petit assemblé son propre groupe de règles, avec une approche de "code golf" (le moins de code possible). Avant d'analyser chaque règle, voici le _reset_ proposé par Andy dans son intégralité :
+Andy est un grand adepte de _reset CSS_ donc il a petit à petit assemblé son propre groupe de règles, avec une approche de "code golf" (le moins de code possible). Avant d’analyser chaque règle, voici le _reset_ proposé par Andy dans son intégralité :
 
 ```css
 /* Règles de dimensionnement des boîtes */
@@ -157,7 +157,7 @@ body {
 
 Ensuite : styles du corps. Il est pratique que `<body>` prenne toute la hauteur de l'écran, même vide donc il a une hauteur minimale de `100vh`. Question de goûts, le défilement doux vers les ancres est agréable donc `scroll-behavior: smooth` est également défini.
 
-Seuls deux styles texte sont définis. La hauteur d'une ligne est ajustée à `1.5` car le défaut de `1.2` n'est juste pas suffisant pour avoir un texte accessible et lisible. Aussi, le rendu du texte est `optimizeSpeed`. Utiliser `optimizeLegibility` rend le texte plus agréable à voir mais peut avoir un sérieux impact de performance avec des délais de chargement jusqu'à 30 secondes de long. Cependant, nous pouvons nous permettre de l'utiliser pour certaines micro-sections de texte.
+Seuls deux styles texte sont définis. La hauteur d’une ligne est ajustée à `1.5` car le défaut de `1.2` n’est juste pas suffisant pour avoir un texte accessible et lisible. Aussi, le rendu du texte est `optimizeSpeed`. Utiliser `optimizeLegibility` rend le texte plus agréable à voir mais peut avoir un sérieux impact de performance avec des délais de chargement jusqu'à 30 secondes de long. Cependant, nous pouvons nous permettre de l’utiliser pour certaines micro-sections de texte.
 
 ```css
 ul[class],
@@ -174,7 +174,7 @@ a:not([class]) {
 }
 ```
 
-Pour les liens sans classe, `text-decoration-skip-ink: auto` est défini pour que le soulignent n'impacte pas la lisibilité. Ceci pourrait être assigné à tous les liens mais cela a provoqué quelques conflits par le passé donc Andy ne préfère pas généraliser.
+Pour les liens sans classe, `text-decoration-skip-ink: auto` est défini pour que le soulignent n’impacte pas la lisibilité. Ceci pourrait être assigné à tous les liens mais cela a provoqué quelques conflits par le passé donc Andy ne préfère pas généraliser.
 
 ```css
 img {
@@ -183,7 +183,7 @@ img {
 }
 ```
 
-C'est au tour de la bonne vieille méthode d'images fluides. Les images sont définies comme un élément de type bloc car honnêtement, la vie est trop courte pour se soucier du petit espace en-dessous. Qui plus est, si on regarde ceci d'un point de vue réaliste, les images ont tendance à se comporter comme des éléments blocs. Créer une classe comme `.inline` sera plus souvent l'exception que la règle.
+C’est au tour de la bonne vieille méthode d’images fluides. Les images sont définies comme un élément de type bloc car honnêtement, la vie est trop courte pour se soucier du petit espace en-dessous. Qui plus est, si on regarde ceci d’un point de vue réaliste, les images ont tendance à se comporter comme des éléments blocs. Créer une classe comme `.inline` sera plus souvent l’exception que la règle.
 
 ```css
 article > * + * {
@@ -191,7 +191,7 @@ article > * + * {
 }
 ```
 
-Andy a hésité avec ce bout de code mais pense qu'il est temps de l'implémenter, étant ce qu'il utilise le plus souvent ces jours-ci. [Le sélecteur de hibou lobotomisé](https://alistapart.com/article/axiomatic-css-and-lobotomized-owls/) cible les descendants directs d'un `<article>` et leur ajoute une marge supérieure de `1em`. Ceci donne un rythme consistant au flux d'un article. De manière moins générale, Andy utilise plutôt une classe `.flow` dans ses projets pour le même résultat. Vous pouvez [en lire plus sur 24 Ways](https://24ways.org/2018/managing-flow-and-rhythm-with-css-custom-properties/).
+Andy a hésité avec ce bout de code mais pense qu’il est temps de l’implémenter, étant ce qu’il utilise le plus souvent ces jours-ci. [Le sélecteur de hibou lobotomisé](https://alistapart.com/article/axiomatic-css-and-lobotomized-owls/) cible les descendants directs d’un `<article>` et leur ajoute une marge supérieure de `1em`. Ceci donne un rythme consistant au flux d’un article. De manière moins générale, Andy utilise plutôt une classe `.flow` dans ses projets pour le même résultat. Vous pouvez [en lire plus sur 24 Ways](https://24ways.org/2018/managing-flow-and-rhythm-with-css-custom-properties/).
 
 ```css
 input,
@@ -215,10 +215,10 @@ Une autre chose que Andy a finalement choisi de définir comme valeur par défau
 }
 ```
 
-Dernièrement mais loin d'être triviale, est une règle `@media` qui réinitialise les transitions, animations et comportement du défilement si l'utilisateur préfère les mouvements réduits. Ceci est une addition utile — notamment avec les marqueurs `!important` qui donnent la priorité en termes d'origine — puisque maintenant, si une utilisatrice ne veut pas de mouvement, elle n'en verra pas, quel que soit le CSS qui suit cette réinitialisation.
+Dernièrement mais loin d'être triviale, est une règle `@media` qui réinitialise les transitions, animations et comportement du défilement si l’utilisateur préfère les mouvements réduits. Ceci est une addition utile — notamment avec les marqueurs `!important` qui donnent la priorité en termes d’origine — puisque maintenant, si une utilisatrice ne veut pas de mouvement, elle n’en verra pas, quel que soit le CSS qui suit cette réinitialisation.
 
 _Note :_ Merci à [@atomiks](https://github.com/atomiks), désormais ceci ne cassera pas les écouteurs d'événements JavaScript sur `animationend` et `transitionend`.
 
 ## En conclusion
 
-C'est tout, une toute petite réinitialisation qui simplifie grandement la vie. Si vous l'aimez, vous pouvez l'utiliser aussi ! Vous trouverez ce _reset_ sur [GitHub](https://github.com/hankchizljaw/modern-css-reset) ou [npm](https://www.npmjs.com/package/modern-css-reset).
+C’est tout, une toute petite réinitialisation qui simplifie grandement la vie. Si vous l’aimez, vous pouvez l’utiliser aussi ! Vous trouverez ce _reset_ sur [GitHub](https://github.com/hankchizljaw/modern-css-reset) ou [npm](https://www.npmjs.com/package/modern-css-reset).

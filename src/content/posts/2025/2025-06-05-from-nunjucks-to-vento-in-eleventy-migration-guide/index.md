@@ -473,7 +473,7 @@ const renderer = eleventyConfig.getShortcode('renderFile').bind(this);
 const content = renderer(filePath, componentOptions, ext);
 ```
 
-You may need to do something similar if you have any code making use of Nunjucks's `this.ctx`, but that all depends on your custom shortcode or filter.
+You may need to do something similar if you have any code making use of Nunjucks’s `this.ctx`, but that all depends on your custom shortcode or filter.
 
 ### Render plugin with limited availability
 

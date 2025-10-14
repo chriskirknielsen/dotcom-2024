@@ -9,7 +9,7 @@ updated: 2025-04-28
 ---
 
 {{ callout "Update" }}
-I have written a sort of [guide for migrating to Vento](/blog/from-nunjucks-to-vento-in-eleventy-migration-guide/), from Nunjucks, if you're interested in that!
+I have written a sort of [guide for migrating to Vento](/blog/from-nunjucks-to-vento-in-eleventy-migration-guide/), from Nunjucks, if you’re interested in that!
 {{ /callout }}
 
 In a recent rebuild for another blog of mine, where I switched from Hugo to Eleventy, I decided to give [VentoJS](https://vento.js.org/) a try, which is the new kid on the block, as far as templating languages go. There are [IDE integrations](https://vento.js.org/editor-integrations/) that make it feel right at home in VS Code (for me), and an [Eleventy plugin](https://github.com/noelforte/eleventy-plugin-vento) to make it painless to start using with my favourite static site generator. Thanks to both Óscar Otero for making Vento, and Noel Forte for the Eleventy plugin!
@@ -103,7 +103,7 @@ src/content/pages/index.vto undefined 63 [NotFound [Error]: ENOENT: no such file
 
 I haven’t figured out exactly why these problems occur, but I will report them on GitHub once I create a repo with a test case, I promise!
 
-🚨 **Update #1:** I filed an [issue for the first shortcode bug](https://github.com/ventojs/vento/issues/103) on Vento's repo, and another [issue for the second bug](https://github.com/noelforte/eleventy-plugin-vento/issues/216) on the eleventy-plugin-vento repo.
+🚨 **Update #1:** I filed an [issue for the first shortcode bug](https://github.com/ventojs/vento/issues/103) on Vento’s repo, and another [issue for the second bug](https://github.com/noelforte/eleventy-plugin-vento/issues/216) on the eleventy-plugin-vento repo.
 
 🚨 **Update #2:** The shortcode issue actually stemmed from the plugin and has been fixed, with both Óscar and Noel taking a look. The second bug was seemingly due to a bug in Eleventy itself, and Noel helped me figure out what was going on! I guess I now have no excuse not to refactor this site… Cherry on top: Noel found out that error reporting gets way better in Eleventy `3.1.0-beta.1`, should that influence your decision (I was running 3.0.0 stable).
 

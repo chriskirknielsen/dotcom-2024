@@ -30,7 +30,7 @@ My Notion setup is extremely manual for both Gaming Library and Now pages. I won
 
 As you can see, this logic can be applied to more than just one API. Aside from the properties to check in the `info` response, and the data processing itself, it’s generic. As such, I have created a helper function in my `api-cache` file that does all this — greatly reducing code duplication.
 
-By getting that `info` first, I can avoid querying 300 items from the PSN API if the `data` didn't change, for example. I don’t think I’ll be hitting a rate limit any time soon, but this "sampling" method makes it quick to check if the entire data is stale or not.
+By getting that `info` first, I can avoid querying 300 items from the PSN API if the `data` didn’t change, for example. I don’t think I’ll be hitting a rate limit any time soon, but this "sampling" method makes it quick to check if the entire data is stale or not.
 
 ## The Abstractions
 
@@ -274,7 +274,7 @@ My Gaming Library is an old spreadsheet that I moved into Notion last year (thou
 
 This page collects PSN and Notion data in two steps: grab PSN titles first, then match them to Notion items. It skips some platforms like GameBoy and PC (but you best believe I played the shit out of _Pokémon Red_ and _RollerCoaster Tycoon_), filters out hidden rows and irrelevant properties, and includes data for each game within compilations, such as the _Mass Effect Trilogy_, to get a fuller picture. Then, cache and serve! (side note: I’m only including PSN stuff because I have always been in House PlayStation since the PS1 — if I had some Xbox consoles or played regularly on PC, I’d have loved to include those too)
 
-All in all, it’s a very nerdy thing. Not many people care about this level of information, but it was a great opportunity to use some APIs. (also, I might as well have personal stuff on my personal website!) You’ll note I didn't provide a full breakdown of how these abstractions are used in my `now.js` and `gameslibrary.js` data files as it’s very specific to my setup and might not be useful to everybody, but [my website has a public repository](https://github.com/chriskirknielsen/dotcom-2024/), so you can go digging there (this post is long enough without two additional walls of code!).
+All in all, it’s a very nerdy thing. Not many people care about this level of information, but it was a great opportunity to use some APIs. (also, I might as well have personal stuff on my personal website!) You’ll note I didn’t provide a full breakdown of how these abstractions are used in my `now.js` and `gameslibrary.js` data files as it’s very specific to my setup and might not be useful to everybody, but [my website has a public repository](https://github.com/chriskirknielsen/dotcom-2024/), so you can go digging there (this post is long enough without two additional walls of code!).
 
 ## Notion Markdown Converter
 

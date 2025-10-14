@@ -357,7 +357,7 @@ In Nunjucks, a ternary expression looks like `ifValue if (trueCondition) else el
 
 Whew, what a ride. I should write about VentoJS because it is cool. I should also write some sort of helper to paginate… a plugin might be cool, but the configuration would need to be very customisable… ah well, an idea for another day. For now, I hope this helped you in one way or another!
 
-Go forth and paginate! Also here's a meme from yesteryear because I am a cool and hip.
+Go forth and paginate! Also here’s a meme from yesteryear because I am a cool and hip.
 
 {{ set imageUrl = "./yodawg.jpg" |> toRoot }}
 {{ image imageUrl, "A terribly old meme of famous rapper Xzibit laughing, captioned: Yo dawg, I heard you liked pagination, so I added pagination inside your paginated pages, so you can paginate while you paginate.", null, { ratio: 500/320 } }}

@@ -8,7 +8,7 @@ If you have any theme besides "**Dusk**" selected on my website, you’ll see a 
 
 {{ video "./ckn-logo-anim.mp4", "The CKN logo letters each fill in from the edges one after another", "", { width: 660, height: 364 } }}
 
-Users of software like Adobe Illustrator will know that you can determine on which edge the stroke sits. By default, it’s in the centre, shared across both (so a 2px stroke wil have 1px inside the shape, 1px outside), but you can also select either to have it only "outside" or "inside". The issue is that you can't export an SVG with that feature (well, you can but it will offset the path or convert it to a shape instead): SVG only supports the centre stroke (for now).
+Users of software like Adobe Illustrator will know that you can determine on which edge the stroke sits. By default, it’s in the centre, shared across both (so a 2px stroke wil have 1px inside the shape, 1px outside), but you can also select either to have it only "outside" or "inside". The issue is that you can’t export an SVG with that feature (well, you can but it will offset the path or convert it to a shape instead): SVG only supports the centre stroke (for now).
 
 I thought it would be cool to have the letters fill in from the sides instead of simply changing the fill colour. Easy, right? Animate the `stroke-width` from `0` to whichever value covers the full shape (`16` in my case). Let’s take a look (hover to trigger the animation):
 
@@ -35,7 +35,7 @@ Anyways, so I have my clips defined, now I need to add the shapes. Easy enough, 
 ```
 
 {{ callout }}
-I’m being a little lazy and using SVG 2.0's spec where you don’t prefix the attribute with `xlink:`, but if backward browser compatibility is of concern, make sure to use `xlink:href` and to add the corresponding namespace definition on your `<svg>` element.
+I’m being a little lazy and using SVG 2.0’s spec where you don’t prefix the attribute with `xlink:`, but if backward browser compatibility is of concern, make sure to use `xlink:href` and to add the corresponding namespace definition on your `<svg>` element.
 {{ /callout }}
 
 Now all I need is to set the adjusted CSS to change the stroke width on `use` instead (though there are many ways to do this, e.g.: assign a `data-letter="c"` attribute and select `[data-letter]`).

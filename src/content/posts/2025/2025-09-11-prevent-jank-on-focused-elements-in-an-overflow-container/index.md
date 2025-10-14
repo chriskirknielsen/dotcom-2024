@@ -21,7 +21,7 @@ Here’s where a newer, better option comes into play: `overflow: clip`. For gen
 {{ video "./tabby.mp4", "A showcase of the issue on a webpage, with a card element getting its title focused which reveals it by sliding in from the bottom, shifting all the contents several times during the animation. Another card is focused in a similar fashion but everything remains in the right place while the title is revealed.", "", { width: 1280 , height:  696, poster: "./tabby.jpg" } }}
 {{ /expander }}
 
-You might also notice in that demo that once you've focused away from the janky card, the image has a gap below which definitely wasn’t there before: that’s also due to the scroll. The container was scrolled to reveal the contents, but the link was visible before reaching back to the edge, so it just stays there… not great.
+You might also notice in that demo that once you’ve focused away from the janky card, the image has a gap below which definitely wasn’t there before: that’s also due to the scroll. The container was scrolled to reveal the contents, but the link was visible before reaching back to the edge, so it just stays there… not great.
 
 Note that Firefox is the worst offender, causing several “catch up” jumps during the transition, whereas Chrome and Safari seem to do a single jump at the start, and settle once the transition is over (which is also jarring as the image just disappears for a moment). I’m not sure how much the transition duration affects this but that’s a rabbit hole for another time.
 

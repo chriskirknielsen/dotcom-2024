@@ -16,7 +16,7 @@ Admittedly, a single line is a little optimistic, but that’s the gist of it. T
 
 By placing it before any `link` or `style` element, it avoids any flash of inaccurate color theme (a.k.a. [FART](https://css-tricks.com/flash-of-inaccurate-color-theme-fart/)), since it’s not waiting for anything — it’s inline, which should be as fast as it can possibly be.
 
-I like to put the background colour on the `html` element ([you probably shouldn’t set it on the `body`](https://chriskirknielsen.com/blog/future-themes-with-container-style-queries/#background-defined-in-the-body)), so I want this bit of JS to run before my styles load so it doesn't go from `Canvas`, to the default theme, then to the selected theme (fast at that might be).
+I like to put the background colour on the `html` element ([you probably shouldn’t set it on the `body`](https://chriskirknielsen.com/blog/future-themes-with-container-style-queries/#background-defined-in-the-body)), so I want this bit of JS to run before my styles load so it doesn’t go from `Canvas`, to the default theme, then to the selected theme (fast at that might be).
 
 This means the timeline looks like so: Page is requested and loads → Theme hook is applied to `<head>` from `localStorage` → CSS is loaded → Contents start loading and rendering begins.
 
@@ -57,4 +57,4 @@ I use this idea on my own site right here: it is a little more involved since it
 
 But this right here? **Now that’s a nice FART-stopper.** 💨
 
-**PS:** This is in no way a “I’ve found a new way to do things! I am very smart!” kind of article; however I’ve been using this for some years and I haven't found anything better. I guess it’s a good reminder that you don’t need a ton of JavaScript, maybe?
+**PS:** This is in no way a “I’ve found a new way to do things! I am very smart!” kind of article; however I’ve been using this for some years and I haven’t found anything better. I guess it’s a good reminder that you don’t need a ton of JavaScript, maybe?

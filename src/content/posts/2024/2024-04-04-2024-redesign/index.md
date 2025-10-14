@@ -102,7 +102,7 @@ For this version, I’ve removed the localised French and Danish parts of my sit
 
 ### Calculating hero heading scales
 
-My global Hero component can accept any title, and is used everywhere except the homepage, meaning titles can be vastly different. To ensure I don’t hardcode it to a specific size, my component runs the title through a filter which returns a scale, passed on to CSS. If a title has only a couple words, the scale remains at `1`, but if it’s basically a sentence, that number is lowered so the hero component doesn't take up the entire page.
+My global Hero component can accept any title, and is used everywhere except the homepage, meaning titles can be vastly different. To ensure I don’t hardcode it to a specific size, my component runs the title through a filter which returns a scale, passed on to CSS. If a title has only a couple words, the scale remains at `1`, but if it’s basically a sentence, that number is lowered so the hero component doesn’t take up the entire page.
 
 The logic is rather simple as it takes in the number of letters and words, maps them both on separate min/max scales, then averages the results and returns a number between `0.75` (long titles) and `1` (short titles). It’s running both because you can have a lot of short words, or very few long words — with this average, it’s kind of safe either way. It’s not scientific but it works! Here’s the code if you’re curious (or if you have a better algorithm to suggest):
 
@@ -138,7 +138,7 @@ I wanted to wrap my code blocks in a custom element instead of some hardcoded me
 
 ### Smarter SVGs
 
-I went all in for this version to use the [Cheerio library](https://cheerio.js.org/). This allows me to write standard SVG files instead of NJK with conditionally injected attributes. It’s a lot cleaner, and doesn't require any code edits after I’m done optimising the SVG. I can provide all the attributes I need to the bespoke `svg` shortcode I made (see [my article about SVGs in Eleventy](/blog/manage-your-svg-files-with-eleventys-render-plugin/), though note that Cheerio wasn’t used at that time) and not worry about the right format and whatnot.
+I went all in for this version to use the [Cheerio library](https://cheerio.js.org/). This allows me to write standard SVG files instead of NJK with conditionally injected attributes. It’s a lot cleaner, and doesn’t require any code edits after I’m done optimising the SVG. I can provide all the attributes I need to the bespoke `svg` shortcode I made (see [my article about SVGs in Eleventy](/blog/manage-your-svg-files-with-eleventys-render-plugin/), though note that Cheerio wasn’t used at that time) and not worry about the right format and whatnot.
 
 It is more costly to run Cheerio instead of inlining NJK instructions, but I don’t use a lot of SVGs, and also, if the options are identical, I cache the processed result so that if two different pages use the same SVG, it only gets run once, saving a little bit of time.
 

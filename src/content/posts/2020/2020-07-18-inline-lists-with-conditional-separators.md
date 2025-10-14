@@ -12,9 +12,9 @@ Say you have an inline list of items that are next to each other, but the list i
 
 Not quite.
 
-If your list wraps, you will see your separator at the end of a line (or in some cases, even at the start of the next one!), which doesn't look all that great. Let’s try to fix that!
+If your list wraps, you will see your separator at the end of a line (or in some cases, even at the start of the next one!), which doesn’t look all that great. Let’s try to fix that!
 
-The heart of this trick is the following idea, a very clever one: whitespace is collapsed between words if it’s at a line break. However, if that pseudo-element has a `display` value other than `inline`, it won’t collapse, so you can't use regular sizing properties like `width` or `padding`, but you can use text-related ones… like `letter-spacing`!
+The heart of this trick is the following idea, a very clever one: whitespace is collapsed between words if it’s at a line break. However, if that pseudo-element has a `display` value other than `inline`, it won’t collapse, so you can’t use regular sizing properties like `width` or `padding`, but you can use text-related ones… like `letter-spacing`!
 
 By defining a rather high letter spacing, we can adjust the length of our whitespace so that there is enough room for our separator. We’ll add that via a background-image, since we need the `content` to be a whitespace (`" "`) and nothing else.
 
@@ -54,7 +54,7 @@ Here I’m setting a very thin line at the centre of the space, but you could us
 
 ## Caveat
 
-If you try this and the effect doesn't work, you might want to check that your text content isn’t surrounded by whitespace inside the list item — for example, here the links have whitespace around them due to indentation:
+If you try this and the effect doesn’t work, you might want to check that your text content isn’t surrounded by whitespace inside the list item — for example, here the links have whitespace around them due to indentation:
 
 ```html
 <ul class="inline-list">

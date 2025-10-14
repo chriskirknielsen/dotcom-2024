@@ -12,7 +12,7 @@ For the past few years, I’ve been using Gulp to convert my JSON tokens to Sass
 
 ## Not exactly a new idea from me
 
-First off, I want to acknowledge that most folks can use a regular [assets pipeline like Max Böck’s](https://mxb.dev/blog/eleventy-asset-pipeline/) or even push it further like [Vadim Makeev’s recent solution](https://pepelsbey.dev/articles/eleventy-css-js/). These are smart and effective solutions that I’d likely use if I weren’t inlining. In my case, the CSS gets inlined as a transform via PurgeCSS, so I want the global stylesheet to be available as a source file (so it doesn't compile for every page, though [that could likely be cached](/blog/eleventy-within-eleventy-precompiling-reused-assets/#quick-update)), and not as an output file with its own permalink. Additionally, I have a JSON file with design tokens that needs to get converted into a Sass file. Fun!
+First off, I want to acknowledge that most folks can use a regular [assets pipeline like Max Böck’s](https://mxb.dev/blog/eleventy-asset-pipeline/) or even push it further like [Vadim Makeev’s recent solution](https://pepelsbey.dev/articles/eleventy-css-js/). These are smart and effective solutions that I’d likely use if I weren’t inlining. In my case, the CSS gets inlined as a transform via PurgeCSS, so I want the global stylesheet to be available as a source file (so it doesn’t compile for every page, though [that could likely be cached](/blog/eleventy-within-eleventy-precompiling-reused-assets/#quick-update)), and not as an output file with its own permalink. Additionally, I have a JSON file with design tokens that needs to get converted into a Sass file. Fun!
 
 ## From Gulp to eleventy.before
 
@@ -420,7 +420,7 @@ module.exports = function (eleventyConfig) {
 
 ## Update: Inlined PurgeCSS transform
 
-I realised I didn't provide the logic for the PurgeCSS stuff I mentioned at the top, so here’s that as a bonus!
+I realised I didn’t provide the logic for the PurgeCSS stuff I mentioned at the top, so here’s that as a bonus!
 
 My `head.njk` file has this line, a comment used as a placeholder to dictate where the final CSS will be inserted (the comment is the important bit, the `id` attribute is optional):
 

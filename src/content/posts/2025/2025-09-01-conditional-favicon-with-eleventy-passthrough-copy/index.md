@@ -31,7 +31,7 @@ import 'dotenv/config'; // Not sure this is still necessary in recent Node versi
 const BUILD_CONTEXT = process.env.BUILD_CONTEXT || 'LIVE'; // No var? We're doing it LIVE
 ```
 
-{{ callout "A little simpler" }}As pointed out by uncenter (an 11ty MVP!) on Eleventy's Discord, we can use a [built-in variable from Eleventy](https://www.11ty.dev/docs/environment-vars/#eleventy-supplied) — way simpler! Reading `process.env.ELEVENTY_RUN_MODE` will output one of `build`, `serve`, or `watch`. So you can do `const BUILD_CONTEXT = process.env.ELEVENTY_RUN_MODE === 'build' ? 'LIVE' : 'DEV';`. This requires less setup, which is always a plus!{{ /callout }}
+{{ callout "A little simpler" }}As pointed out by uncenter (an 11ty MVP!) on Eleventy’s Discord, we can use a [built-in variable from Eleventy](https://www.11ty.dev/docs/environment-vars/#eleventy-supplied) — way simpler! Reading `process.env.ELEVENTY_RUN_MODE` will output one of `build`, `serve`, or `watch`. So you can do `const BUILD_CONTEXT = process.env.ELEVENTY_RUN_MODE === 'build' ? 'LIVE' : 'DEV';`. This requires less setup, which is always a plus!{{ /callout }}
 
 ## Hue spin me right round
 

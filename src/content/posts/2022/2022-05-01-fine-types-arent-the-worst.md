@@ -34,7 +34,7 @@ This saves a lot of time as you avoid having to jump around between definitions 
 
 The trick for me is to not go down a rabbit hole and define a type with JSDoc for every kind of object, or else I might end up with way too many custom types which, while potentially helpful, might just be a bit excessive. My rule of thumb is: if I keep needing to look at the API output to know what it returns, then I should define a custom type. It also makes my code feel more organised. Organisation is neat!
 
-This isn’t _exactly_ what TypeScript offers, I know, but it’s a similar idea and, well, I guess I’m saying I kind of like it. Having control about when to add details to a piece of code, and being able to execute it without transforming it from TS to JS — all pros, no cons. And hey, if you like TypeScript, cool, I ain't a hater! All the more power to you!
+This isn’t _exactly_ what TypeScript offers, I know, but it’s a similar idea and, well, I guess I’m saying I kind of like it. Having control about when to add details to a piece of code, and being able to execute it without transforming it from TS to JS — all pros, no cons. And hey, if you like TypeScript, cool, I ain’t a hater! All the more power to you!
 
 On this topic, [this TC39 proposal for type annotations](https://github.com/tc39/proposal-type-annotations) has got me a little excited (which is rare, I’m usually more excited by CSS stuff)!
 
