@@ -7,6 +7,7 @@ date: 2025-10-13
 projectButtonLabel: View shirt
 projectImportance: 2
 projectOrder: 4
+extraCta: [{ label: 'Course', url: 'https://piccalil.li/javascript-for-everyone' }]
 ---
 
 {{ set shirtData = designs |> findBy('slug', 'javascript-for-everyone') }}
