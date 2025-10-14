@@ -11,7 +11,7 @@ extraCta: [{ label: 'Course', url: 'https://piccalil.li/javascript-for-everyone'
 ---
 
 {{ set shirtData = designs |> findBy('slug', 'javascript-for-everyone') }}
-Mat Marquis, a.k.a. [Wilto](https://wil.to/), reached out to me to come up with a t-shirt design that’d fit right alongside the launch of [JavaScript for Everyone](https://piccalil.li/javascript-for-everyone). Right away, I could tell Mat knew what he wanted, and that was to nerd out with this design. After some back and forth, we settled on this lil’ thing: a retro-y look with a few nods here and there, and in the end, a very fun design. That ``(`#${!+[]+![]} since 1995!`)`` tagline below the main shape is actual JS you can run… But why does it run? You will have to take the course to find out!
+Mat Marquis, a.k.a. [Wilto](https://wil.to/), reached out to me to come up with a t-shirt design that would coincide with the launch of [JavaScript for Everyone](https://piccalil.li/javascript-for-everyone). Right away, I could tell Mat knew what he wanted, and that was to nerd out with this design. We explored several ideas, and ended up with this lil’ thing: a retro-y look with a few nods here and there, and in the end, a very fun design. That ``(`#${!+[]+![]} since 1995!`)`` tagline below the main shape is actual JS you can run… But why does it run? You will have to take the course to find out!
 
 {{ gallery }}
 {{ image '/' + assets.images + '/designs/' + shirtData.img, "A blank VHS inspired light shirt", '<a href="'+shirtData.links.CottonBureau+'">JavaScript for Everyone design on CottonBureau</a>', { ratio: "600/600", group: true } }}
