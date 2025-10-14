@@ -117,7 +117,7 @@ const designs = [
 		slug: 'css-logo-solid',
 		name: 'CSS Logo (solid)',
 		description: `CSS is awesome.`,
-		note: `For a mug with the design on both sides, use RedBubble. Note this uses [my custom CSS logo](/css-logo/) that sadly didn't make the cut as a candidate for a [new official CSS logo](https://github.com/CSS-Next/css-next/issues/105)!`,
+		note: `For a mug with the design on both sides, use RedBubble. Note this uses [my custom CSS logo](/css-logo/) that sadly didn’t make the cut as a candidate for a [new official CSS logo](https://github.com/CSS-Next/css-next/issues/105)!`,
 		img: 'css-logo-solid.png',
 		links: {
 			TeePublic: 'https://www.teepublic.com/sticker/67983005-css-logo-solid',
@@ -136,7 +136,7 @@ const designs = [
 		slug: 'css-logo-transparent',
 		name: 'CSS Logo (transparent)',
 		description: `CSS is awesome.`,
-		note: `For a mug with the design on both sides, or actual transparent stickers, use RedBubble. Note this uses [my custom CSS logo](/css-logo/) that sadly didn't make the cut as a candidate for a [new official CSS logo](https://github.com/CSS-Next/css-next/issues/105)!`,
+		note: `For a mug with the design on both sides, or actual transparent stickers, use RedBubble. Note this uses [my custom CSS logo](/css-logo/) that sadly didn’t make the cut as a candidate for a [new official CSS logo](https://github.com/CSS-Next/css-next/issues/105)!`,
 		img: 'css-logo-transparent.png',
 		links: {
 			TeePublic: 'https://www.teepublic.com/sticker/67983004-css-logo-transparent',
@@ -150,7 +150,7 @@ const designs = [
 	{
 		slug: 'css-fact-sheet',
 		name: 'CSS Fact Sheet',
-		description: "A compact fact sheet for CSS that wouldn't be out of place on a crate in a cyberpunk world…",
+		description: 'A compact fact sheet for CSS that wouldn’t be out of place on a crate in a cyberpunk world…',
 		img: 'css-fact-sheet.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/sticker/CSS-Fact-Sheet-by-ckirknielsen/58082119.EJUG5',
@@ -207,7 +207,7 @@ const designs = [
 	{
 		slug: 'legacy-code',
 		name: 'Legacy Code',
-		description: `It's a UNIX system! I know this!`,
+		description: `It’s a UNIX system! I know this!`,
 		img: 'legacy-code.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/sticker/Legacy-Code-by-ckirknielsen/165189071.EJUG5?asc=u',
@@ -221,7 +221,7 @@ const designs = [
 	{
 		slug: 'git-revert',
 		name: 'git revert',
-		description: `Wait a minute Doc. You're telling me you built a time machine out of a command?`,
+		description: `Wait a minute Doc. You’re telling me you built a time machine out of a command?`,
 		img: 'git-revert.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/sticker/git-revert-by-ckirknielsen/165189292.EJUG5?asc=u',
@@ -237,7 +237,7 @@ const designs = [
 		showInGallery: false,
 		slug: 'git-reset-hard',
 		name: 'git reset hard',
-		description: `Wait a minute Doc. You're telling me you built a time machine out of a command?`,
+		description: `Wait a minute Doc. You’re telling me you built a time machine out of a command?`,
 		img: 'git-reset-hard.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/sticker/git-reset-hard-by-ckirknielsen/165189335.EJUG5?asc=u',
@@ -477,7 +477,7 @@ const designs = [
 	{
 		slug: 'css-retro-vhs',
 		name: 'State of CSS',
-		description: "Show your appreciation for everybody's favourite way to style the web with this retro shirt inspired by '90s blank VHS tapes",
+		description: "Show your appreciation for everybody’s favourite way to style the web with this retro shirt inspired by '90s blank VHS tapes",
 		note: 'Commission for the State of CSS survey',
 		img: 'css-retro-vhs.png',
 		links: {
@@ -568,7 +568,7 @@ const designs = [
 	{
 		slug: 'kevin-powell-color-space',
 		name: 'Explore Color Space',
-		description: "Color spaces have really taken off in CSS (pun intended), and we think that's worth celebrating!",
+		description: 'Color spaces have really taken off in CSS (pun intended), and we think that’s worth celebrating!',
 		note: 'Commission for Kevin Powell',
 		img: 'kevin-powell-color-space.png',
 		links: {
@@ -578,6 +578,21 @@ const designs = [
 		similar: ['kevin-powell-color-space', 'kevin-powell-css'],
 		date: '2023-12-31',
 		accent: '#43b1a5',
+		isCommission: true,
+	},
+	{
+		slug: 'javascript-for-everyone',
+		name: 'JavaScript for Everyone',
+		description:
+			'Every day we build the modern web on the foundation of a future imagined in the 90s, evolved through countless authors and decisions good, bad, and deeply weird. A little grit on the lens is all part of the charm.',
+		note: 'Commission for Mat “Wilto” Marquis’s [JavaScript for Everyone course](https://piccalil.li/javascript-for-everyone)',
+		img: 'javascript-for-everyone.png',
+		links: {
+			CottonBureau: 'https://cottonbureau.com/p/NHCZJK/shirt/javascript-for-everyone#/29933216/tee-men-premium-lightweight-natural-100percent-cotton-m',
+		},
+		tags: ['dev', 'js', 'vhs', 'retro', 'commission'],
+		date: '2025-10-13',
+		accent: '#e1665e',
 		isCommission: true,
 	},
 ];

@@ -5,7 +5,7 @@ customMetaImage: visubezier-cover.png
 externalUrl: https://marketplace.visualstudio.com/items?itemName=chriskirknielsen.visubezier
 date: 2018-09-03
 projectButtonLabel: Get the extension
-projectImportance: 2
+projectImportance: 3
 projectOrder: 2
 ---
 

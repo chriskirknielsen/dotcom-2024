@@ -175,11 +175,23 @@
 				aspect-ratio: 1;
 			}
 			&[data-importance='2'] {
+				--CARD-cols: 1;
+				--CARD-rows: 2;
+				block-size: 0;
+				min-block-size: 100%;
+			}
+			&[data-importance='3'] {
 				--CARD-cols: 2;
 				--CARD-rows: 2;
 				aspect-ratio: 1.5;
 			}
-			&[data-importance='3'] {
+			&[data-importance='4'] {
+				--CARD-cols: 2;
+				--CARD-rows: 2;
+				block-size: 0;
+				min-block-size: 100%;
+			}
+			&[data-importance='5'] {
 				--CARD-cols: 3;
 				--CARD-rows: 2;
 				block-size: 0;
@@ -212,6 +224,7 @@
 			}
 
 			& img {
+				block-size: 100%;
 				max-block-size: 100%;
 			}
 		}

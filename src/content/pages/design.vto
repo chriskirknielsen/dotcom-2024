@@ -15,7 +15,7 @@
 	eleventyComputed: {
 		pageTitle: (data) => data.design.name,
 		title: (data) => data.design.name,
-		summary: (data) => data.design.description,
+		summary: function (data) { return this.markdown(data.design.description, true); },
 		date: (data) => new Date(data.design.date),
 		metaExtra: function (data) { return `<link rel="preload" as="image" href="${this.toNetlifyImage(this.toPath([data.assets.images, 'designs', data.design.img]))}">`; },
 		ogBackground: function (data) { return this.toPath([data.assets.images, 'designs', data.design.img]); },

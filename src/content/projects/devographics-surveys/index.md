@@ -5,8 +5,8 @@ customMetaImage: devographics-cover.jpg
 externalUrl: https://www.devographics.com/
 date: 2024-07-19
 projectButtonLabel: Visit site
-projectImportance: 3
-projectOrder: 8
+projectImportance: 5
+projectOrder: 9
 extraCta: [{ label: 'Get shirts', url: 'https://cottonbureau.com/people/state-of-js' }]
 toc: true
 ---

@@ -21,7 +21,7 @@
 		{{ set customMetaImage800 = project.data.customMetaImage |> toNetlifyImage({ w: 800 }) }}
 		{{ set customMetaImage400 = project.data.customMetaImage |> toNetlifyImage({ w: 400 }) }}
 		<li class="card-wrapper"{{ if project.data.projectImportance }} data-importance="{{ project.data.projectImportance }}"{{ /if }}>
-			{{ if project.data.projectImportance == 3 }}{{ set cardImageSizeSet = {
+			{{ if project.data.projectImportance == 5 }}{{ set cardImageSizeSet = {
 				srcset: `${customMetaImage800} 800w, ${customMetaImage400}`,
 				sizes: "(min-width: 60em) 800px, 400px"
 			} }}{{ else }}{{ set cardImageSizeSet = {} }}{{ /if }}

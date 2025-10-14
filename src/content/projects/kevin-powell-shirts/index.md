@@ -5,14 +5,16 @@ customMetaImage: front-end-friends-shirts.jpg
 externalUrl: https://cottonbureau.com/people/kevin-powell
 date: 2023-12-31
 projectButtonLabel: View shirts
-projectImportance: 3
-projectOrder: 4
+projectImportance: 4
+projectOrder: 5
 ---
 
 {{ set shirtData1 = designs |> findBy('slug', 'kevin-powell-grid') }}
 {{ set shirtData2 = designs |> findBy('slug', 'kevin-powell-css') }}
 {{ set shirtData3 = designs |> findBy('slug', 'kevin-powell-color-space') }}
-Kevin Powell, a brilliant CSS educator on YouTube, needed to refresh his merchandise, and I was very happy to help! CSS is a subject that is very dear to me, and having the opportunity to work on designs on the topic was a lot of fun. Kevin wanted to celebrate CSS, with a retro feeling — to avoid monotone designs, I opted for a different style for each: neon, Swiss (ish?), and retrofuturism.
+Kevin Powell, a brilliant CSS educator on YouTube, needed to refresh his merchandise, and I was very happy to help! CSS is a subject that is very dear to me, and having the opportunity to work on designs on the topic was a lot of fun.
+
+Kevin wanted to celebrate CSS, with a retro feeling — to avoid monotone designs, I opted for a different style for each: neon, Swiss (ish?), and retrofuturism. Because Kevin starts his videos with “Hello my front-end friend”, I created a Front-End Friends brand banner at the top. And I just couldn’t pass up the opportunity to create an ambigram for the “fef” symbol!
 
 {{ gallery }}
 {{ image '/' + assets.images + '/designs/' + shirtData1.img, "A TRON-inspired design on a black shirt with a cyan blue grid and a large GRID logo above, and some abstract shapes in some of the grid cells.", '<a href="'+shirtData1.links.CottonBureau+'">Grid Layout design on CottonBureau</a>', { ratio: "600/600", group: true } }}

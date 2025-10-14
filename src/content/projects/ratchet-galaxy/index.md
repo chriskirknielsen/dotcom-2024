@@ -4,7 +4,7 @@ summary: A full redesign for a Ratchet & Clank fansite
 customMetaImage: ratchet-galaxy-cover.jpg
 externalUrl: https://ratchet-galaxy.com/
 date: 2017-08-25
-projectImportance: 2
+projectImportance: 3
 projectOrder: 1
 ---
 
