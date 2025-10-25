@@ -272,6 +272,7 @@ const designs = [
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Vaporwave-CSS-by-ckirknielsen/110853198.Y4WIZ',
 			TeePublic: 'https://www.teepublic.com/t-shirt/30315700-vaporwave-css',
+			CottonBureau: 'https://cottonbureau.com/p/D8VJEV/shirt/vaporwave-css#/30043301/tee-men-premium-heavyweight-crunchberry-100percent-cotton-m',
 		},
 		tags: ['dev', 'css', 'retro'],
 		date: '2022-05-15',
