@@ -29,3 +29,7 @@ hr.hero-like {
 	font-size: var(--typeScale-n1);
 	line-height: 1.1;
 }
+
+.hero-sub {
+	text-wrap: balance;
+}
