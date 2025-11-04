@@ -2,7 +2,7 @@
 {{# By default, posts should be shown by year unless #}}
 <div class="postlist | flow">
     {{ if !groupByYear }}
-        <div class="postlist-group-list | flow">
+        <div class="postlist-group-list">
     {{ /if }}
     {{ set groupedPosts = postlist |> groupBy('data.year') }}
     {{ set years = groupedPosts |> Object.keys |> sort |> reverse }}
@@ -16,16 +16,16 @@
                     <span class="postlist-group-count">(&times;{{ posts.length }})</span>
                 </summary>
 
-                <div class="postlist-group-list | flow">
+                <div class="postlist-group-list">
         {{ /if }}
                 {{ for post of posts |> slice |> reverse }}
-                    <article class="postlist-post">
+                    {{# <article class="postlist-post">
                         <p class="fontSize-small">
                             <time datetime="{{ post.date |> dateFormat }}">{{ post.date |> dateFormat({ format: 'nice', lang: post.data.lang }) }}</time>
                             {{ if post.data.updated }}
                                 {{ set originalTime = post.date |> dateFormat('ms')}}
                                 {{ set updateTime = post.data.updated |> dateFormat('ms')}}
-                                (Updated{{ if updateTime != originalTime }}
+                                (updated{{ if updateTime != originalTime }}
                                 <time style="--t-datetime-color:var(--ctx-color)" datetime="{{ post.data.updated |> dateFormat }}">
                                     {{- post.data.updated |> dateFormat({ format: 'nice' }) -}}
                                 </time>
@@ -45,10 +45,40 @@
                         <p>
                             {{- post.data.summary || post.excerpt }}
                             {{ for t of (post.data.tags || post.tags) |> startsWith('_', false) }}
-                                <a href="/tags/{{ t }}/" class="link-label-anchor fontSize-smaller"><span class="color-accent fontSize-smaller">#&hairsp;</span><span class="link-label-text">{{ t }}</span></a>
+                                <a href="/tags/{{ t }}/" class="link-label-anchor | fontSize-smaller"><span class="link-label-prefix | color-accent fontSize-smaller">#&hairsp;</span><span class="link-label-text">{{ t }}</span></a>
                             {{ /for -}}
                         </p>
-                    </article>
+                    </article> #}}
+
+                    {{ set dateString }}
+                    <p>
+                        {{ post.date |> timeTag }}
+                        {{ if post.data.updated }}
+                            {{ set originalTime = post.date |> dateFormat('ms')}}
+                            {{ set updateTime = post.data.updated |> dateFormat('ms')}}
+                            (updated{{ if updateTime != originalTime }}
+                            <time style="--t-datetime-color:var(--ctx-color)" datetime="{{ post.data.updated |> dateFormat }}">
+                                {{- post.data.updated |> dateFormat({ format: 'nice' }) -}}
+                            </time>
+                            {{- /if }})
+                        {{ /if }}
+                    </p>
+                    {{ /set }}
+                    {{ set descriptionMarkup }}
+                    <p>
+                        {{- post.data.summary || post.excerpt }}
+                        {{ for t of (post.data.tags || post.tags) |> startsWith('_', false) }}
+                            <span class="icon-text-pair | fontSize-smaller"><span class="icon-text-icon | color-accent">#&hairsp;</span><span class="icon-text-text">{{ t }}</span></span>
+                        {{ /for -}}
+                    </p>
+                    {{ /set }}
+					{{ component 'card', {
+						link: post.url,
+						eyebrow: dateString,
+						heading: post.data.title,
+						headingTag: 'h2',
+						descriptionMarkup,
+					} }}
                 {{ /for }}
         {{ if groupByYear }}
                 </div>

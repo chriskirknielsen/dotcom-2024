@@ -16,10 +16,13 @@
 
 /* ? Sticky icon trick: https://medienbaecker.com/articles/inline-links-with-sticky-icons */
 .icon-text-pair,
-.link-label-anchor:has(svg, .inline-icon) {
-	white-space: nowrap; /* Keep the icon stuck against the text */
+.link-label-anchor:has(svg, .inline-icon, .link-label-prefix) {
+	white-space: nowrap; /* Keep the icon/prefix stuck against the text */
 }
-.icon-text-pair > :not(.inline-icon),
-.link-label-anchor:has(svg, .inline-icon) .link-label-text {
+.icon-text-pair > :not(.inline-icon, .icon-text-text),
+.link-label-anchor:has(svg, .inline-icon, .link-label-prefix) .link-label-text {
 	white-space: normal; /* Allow line breaking for the actual text */
+}
+.link-label-prefix {
+	display: inline-block;
 }

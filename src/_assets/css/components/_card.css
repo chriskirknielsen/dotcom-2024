@@ -65,6 +65,16 @@
 			transform: scale(1.05);
 		}
 	}
+
+	/* If the main heading is a link that's in focus, make the full card look focused */
+	&:has(.card-heading > a:is(:focus-visible)) {
+		outline: var(--_focus-outline);
+		outline-offset: var(--_focus-outline-offset);
+
+		& .card-heading > a:is(:focus-visible) {
+			outline: none;
+		}
+	}
 }
 
 .card-image {

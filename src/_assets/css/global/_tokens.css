@@ -98,7 +98,7 @@
 --_cta-box-shadow-pressed: var(--cta-box-shadow-pressed, inset 0 0 0 1px var(--C-surface));
 --_card-padding: var(--card-padding, var(--size-m));
 --_card-corner: var(--card-corner, calc(var(--_card-padding) + var(--_corner)));
---_card-heading-color: var(--card-heading-color, var(--C-accent));
+--_card-heading-color: var(--card-heading-color, var(--_link-color));
 --_card-heading-color-active: var(--card-heading-color-active, var(--C-heading));
 --_card-text-color: var(--card-text-color, var(--_cta-text-color));
 --_card-text-color-active: var(--card-text-color-active, var(--_cta-text-color-active));
@@ -161,6 +161,7 @@ html:not([data-theme]), html[data-theme="dawn"], [data-theme="dusk"] {
 --cta-box-shadow: var(--T-dawn, none) var(--T-dusk, 0 0.25em 0.5em -0.25em #0008);
 --cta-box-shadow-active: var(--T-dawn, inset 0 0 0 1px var(--C-accent)) var(--T-dusk, 0 0 0.5em var(--C-heading), inset 0 0 0.625em -0.125em var(--C-heading));
 --cta-box-shadow-pressed: var(--T-dawn, initial) var(--T-dusk, inset 0 0 0 1px var(--C-accent));
+--card-heading-color: var(--T-dawn, var(--C-accent)) var(--T-dusk, var(--_link-color));
 --card-border-color: var(--T-dawn, #c6c9b5) var(--T-dusk, initial);
 --card-border-color-active: var(--T-dawn, var(--C-accent)) var(--T-dusk, initial);
 --link-color-active: var(--T-dawn, initial) var(--T-dusk, var(--C-text));
@@ -309,6 +310,7 @@ html[data-theme="cyberpunk"] {
 --cta-border-color-pressed: #ffbc1f;
 --cta-box-shadow-active: inset 0 0 0.5em color-mix(in hsl, var(--C-heading), transparent);
 --cta-box-shadow-pressed: inset 0 0 0 1px var(--C-accent);
+--card-heading-color: var(--C-accent);
 --card-bg-color: #0e0e18;
 --card-bg-color-active: #2b0000;
 --signoff-border: 1px solid #c5413b;

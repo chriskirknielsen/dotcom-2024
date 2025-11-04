@@ -1,23 +1,31 @@
+.postlist {
+	--LIST-gap: var(--size-l);
+}
+
 .postlist-group-label {
-    position: sticky;
-    inset-block-start: 0;
-    z-index: 1;
+	position: sticky;
+	inset-block-start: 0;
+	z-index: 1;
 
-    margin-block-end: var(--size-xs);
-    padding-inline-start: var(--size-xs);
-    padding-block-end: var(--size-2xs);
+	margin-block-end: var(--LIST-gap);
+	padding-inline-start: var(--size-xs);
+	padding-block-end: var(--size-2xs);
 
-    color: var(--C-accent);
-    border-inline-start: 1px solid transparent;
-    border-block-end: 1px solid transparent;
-    background:
-        linear-gradient(to right, currentColor, transparent) no-repeat 0 100% / 100% 1px border-box,
-        linear-gradient(to top, currentColor, transparent) no-repeat 0 100% / 1px 100% border-box,
-        radial-gradient(farthest-side at 0 100%, var(--C-canvas), transparent);
+	color: var(--C-accent);
+	border-inline-start: 1px solid transparent;
+	border-block-end: 1px solid transparent;
+	background: linear-gradient(to right, currentColor, transparent) no-repeat 0 100% / 100% 1px border-box,
+		linear-gradient(to top, currentColor, transparent) no-repeat 0 100% / 1px 100% border-box, radial-gradient(farthest-side at 0 100%, var(--C-canvas), transparent);
 
-    cursor: pointer;
+	cursor: pointer;
 
-    &:is(:hover, :focus-visible) > .postlist-group-label__text {
-        text-decoration: underline;
-    }
+	&:is(:hover, :focus-visible) > .postlist-group-label__text {
+		text-decoration: underline;
+	}
+}
+
+.postlist-group-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+	gap: var(--LIST-gap);
 }
