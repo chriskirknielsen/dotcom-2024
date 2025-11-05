@@ -1,0 +1,32 @@
+{{ set safeSlug = (slug || '') |> slugify }}
+{{ set seed = slug ? Math.round(parseInt(safeSlug, 36) % 499 / 17) * 13 : Math.round(Math.random() * 99) }} {{# Ensures the seed is always the same from one build to the next #}}
+<div class="posterfloater" style="--PF-img-ratio: calc({{ w }} / {{ h }}); --PF-seed: {{ seed }};">
+	<ul class="posterfloater-list | flow">
+	{{ for i, item of items }}
+		<li class="posterfloater-item" style="--i: {{ i + 1 }};">
+			{{ if item.image }}
+				{{ set imageUrl = item.image |> toCloudinary('c_pad,w_250') }}
+				{{ if item.link }}<a href="{{ item.link }}" class="posterfloater-media">{{ else }}<div class="posterfloater-media">{{ /if }}
+					<img src="{{ imageUrl }}" alt="{{ item.title }}{{ item.detail ? `, ${item.detail}` : '' }}" class="posterfloater-image" width="{{ w }}" height="{{ h }}" loading="lazy">
+					{{ if item.praise }}<span class="posterfloater-praise" aria-hidden="true" title="{{ praiseLabel || 'Recommended' }}">{{ praiseIcon || '👍' }}</span>{{ /if }}
+				{{ if !item.link }}</div>{{ else }}</a>{{ /if }}
+			{{ /if }}
+			<div class="posterfloater-contents">
+				<h3 data-toc="false">
+					{{ item.title }}
+					{{ if item.praise }}<span class="visually-hidden">({{ praiseLabel || 'Recommended' }})</span>{{ /if }}
+				</h3>
+				
+				{{ if item.detail }}
+					<p class="fontWeight-bold fontSize-small color-heading">
+						{{ typeof detailPrefix == 'string' ? detailPrefix : '' }} {{ item.detail }}
+					</p>
+				{{ /if }}
+				<p class="fontSize-small">
+					{{ item.content |> markdown(true) }}
+				</p>
+			</div>
+		</li>
+	{{- /for -}}
+	</ul>
+</div>

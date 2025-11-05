@@ -13,7 +13,7 @@ class TableOfContents {
 		this.listClass = options.listClass || '';
 		this.listLabelledBy = options.listLabelledBy;
 		this.$ = cheerio.load(this.markup, null, false);
-		this.headings = this.$(this.selectors); // Find semantic headings
+		this.headings = this.$(`:is(${this.selectors}):not([data-toc="false"])`); // Find semantic headings, exclude specially marked elements
 		this.levels = this.selectors.split(',').map((h) => h.trim()); // Get an array of the heading selectors
 		this.hierarchy = {};
 	}
@@ -234,7 +234,7 @@ export default function (eleventyConfig, options = {}) {
 			return anchorifiedContentCache[markup]; // Return cached value
 		}
 
-		const selector = `${includeH1 ? 'h1,' : ''} h2, h3, h4, h5, h6`;
+		const selector = `:is(${includeH1 ? 'h1, ' : ''}h2, h3, h4, h5, h6):not([data-toc="false"])`;
 
 		const $ = cheerio.load(markup, null, false); // Load the contents into cheerio to get a DOM representation
 		const headings = $(selector); // Look for all semantic headings
@@ -258,7 +258,7 @@ export default function (eleventyConfig, options = {}) {
 			const text = h.text(); // Get the heading content
 			const slug = slugify(text); // Create a slug from the content
 			const id = h.attr('id') || slug;
-			const inner = `<a class="${anchorClass}" href="#${slug}">${text}</a>`;
+			const inner = `<a class="${anchorClass}" href="#${slug}">${h.html()}</a>`;
 			h.attr('id', id);
 			h.attr('tabindex', '-1');
 			h.html(inner);
