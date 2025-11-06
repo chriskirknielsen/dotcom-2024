@@ -17,10 +17,37 @@
 }
 
 .posterfloater-media {
+	--r: calc(sin(var(--i) * 199 + var(--PF-seed)) * var(--PF-angle, 4deg));
+
 	position: relative;
 
 	display: flex;
 	inline-size: min(33%, var(--PF-img-width));
+
+	transform: rotate(var(--r));
+
+	@media (prefers-reduced-motion: no-preference) {
+		transition: transform var(--easing-bounce) var(--anim-long);
+
+		@supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
+			animation-name: --PF-reveal;
+			animation-timing-function: linear;
+			animation-timeline: view();
+			animation-range: -10% 33%;
+		}
+	}
+
+	&:hover {
+		transform: rotate(calc(var(--r) + sign(var(--r)) * 1deg)) scale(1.05);
+	}
+}
+
+@keyframes --PF-reveal {
+	from {
+		opacity: 0;
+		scale: 0.5;
+		rotate: calc(var(--r, 0deg) * -1);
+	}
 }
 
 .posterfloater-image {
@@ -36,8 +63,9 @@
 	inset-inline-start: var(--PF-praise-inline-pos, 100%);
 
 	display: flex;
+	justify-content: center;
 	align-items: center;
-	block-size: 2em;
+	inline-size: 2em;
 	padding: 0.5em;
 	aspect-ratio: 1;
 
@@ -45,10 +73,10 @@
 	line-height: 1;
 	text-shadow: -1px -1px 2px #0008;
 	border: 0 solid transparent;
-	border-width: 1px 0 0 1px;
+	border-width: var(--PF-praise-border, 1px 0 0 1px);
 	border-radius: 50%;
 	background: linear-gradient(90deg, var(--C-surface), var(--C-canvas)) padding-box no-repeat,
-		linear-gradient(hsl(var(--_shadow-color)), hsl(var(--_shadow-color))) border-box no-repeat 0 0 / 50% 100%;
+		linear-gradient(hsl(var(--_shadow-color)), hsl(var(--_shadow-color))) border-box no-repeat 0 0 / var(--PF-praise-bg-border-size, 50% 100%);
 
 	translate: -50% -50%;
 }
@@ -61,49 +89,28 @@
 	}
 
 	.posterfloater-media {
-		--r: calc(sin(var(--i) * 199 + var(--PF-seed)) * 4deg);
 		flex: 0 0 auto;
-
-		transform: rotate(var(--r));
-
-		@media (prefers-reduced-motion: no-preference) {
-			transition: transform var(--easing-bounce) var(--anim-long);
-
-			@supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
-				animation-name: --PF-reveal;
-				animation-timing-function: linear;
-				animation-timeline: view();
-				animation-range: -10% 33%;
-			}
-		}
-
-		&:hover {
-			transform: rotate(calc(var(--r) + sign(var(--r)) * 1deg)) scale(1.05);
-		}
 	}
 
 	.posterfloater-contents {
 		flex: 1 1 0;
 	}
-
-	@keyframes --PF-reveal {
-		from {
-			opacity: 0;
-			scale: 0.5;
-			rotate: calc(var(--r, 0deg) * -1);
-		}
-	}
 }
 
 @container (inline-size <= 680px) {
 	.posterfloater-item {
+		--PF-angle: 1.5deg;
 		--PF-praise-inline-pos: 50%;
+		--PF-praise-border: 1px;
+		--PF-praise-bg-border-size: 100% calc(50% + 1px);
 
 		clear: both;
 	}
+
 	.posterfloater-contents {
 		display: contents;
 	}
+
 	.posterfloater-media {
 		float: left;
 		float: inline-start;
