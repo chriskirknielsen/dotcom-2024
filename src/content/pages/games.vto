@@ -297,7 +297,7 @@
 
 {{ for category, gamesByCategory of games |> groupBy('category') }}
     <h2>{{ category }}</h2>
-    {{ component 'posterfloater', {
+    {{ component 'floatster', {
         slug: category,
         items: gamesByCategory.map(g => ({
             title: g.title,

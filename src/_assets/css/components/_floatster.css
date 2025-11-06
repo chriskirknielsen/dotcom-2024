@@ -4,19 +4,19 @@
 	initial-value: 1;
 }
 
-.posterfloater {
+.floatster {
 	--PF-img-width: calc((var(--PF-img-ratio) + (1 - var(--PF-img-ratio)) / 2) * 200px); /* As the ratio decreases, the width decreases at a slower rate (x+(1-x)/2) */
 
 	container-type: inline-size;
 }
 
-.posterfloater-list {
+.floatster-list {
 	margin: 0;
 	padding: 0;
 	list-style-type: '';
 }
 
-.posterfloater-media {
+.floatster-media {
 	--r: calc(sin(var(--i) * 199 + var(--PF-seed)) * var(--PF-angle, 4deg));
 
 	position: relative;
@@ -50,14 +50,14 @@
 	}
 }
 
-.posterfloater-image {
+.floatster-image {
 	aspect-ratio: var(--PF-img-ratio);
 
 	border-radius: var(--_corner);
 	box-shadow: var(--_shadow);
 }
 
-.posterfloater-praise {
+.floatster-praise {
 	position: absolute;
 	inset-block-start: 100%;
 	inset-inline-start: var(--PF-praise-inline-pos, 100%);
@@ -82,23 +82,23 @@
 }
 
 @container (inline-size > 680px) {
-	.posterfloater-item {
+	.floatster-item {
 		display: flex;
 		gap: var(--size-l);
 		align-items: flex-start;
 	}
 
-	.posterfloater-media {
+	.floatster-media {
 		flex: 0 0 auto;
 	}
 
-	.posterfloater-contents {
+	.floatster-contents {
 		flex: 1 1 0;
 	}
 }
 
 @container (inline-size <= 680px) {
-	.posterfloater-item {
+	.floatster-item {
 		--PF-angle: 1.5deg;
 		--PF-praise-inline-pos: 50%;
 		--PF-praise-border: 1px;
@@ -107,11 +107,11 @@
 		clear: both;
 	}
 
-	.posterfloater-contents {
+	.floatster-contents {
 		display: contents;
 	}
 
-	.posterfloater-media {
+	.floatster-media {
 		float: left;
 		float: inline-start;
 		margin: 0 var(--size-s) var(--size-s) 0;
