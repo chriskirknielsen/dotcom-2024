@@ -1,6 +1,6 @@
 {{ set safeSlug = (slug || '') |> slugify }}
 {{ set seed = slug ? Math.round(parseInt(safeSlug, 36) % 499 / 17) * 13 : Math.round(Math.random() * 99) }} {{# Ensures the seed is always the same from one build to the next #}}
-<div class="floatster" style="--PF-img-ratio: calc({{ w }} / {{ h }}); --PF-seed: {{ seed }};">
+<div class="floatster" style="--FL-img-ratio: calc({{ w }} / {{ h }}); --FL-seed: {{ seed }};">
 	<ul class="floatster-list | flow">
 	{{ for i, item of items }}
 		<li class="floatster-item" style="--i: {{ i + 1 }};">
