@@ -45,6 +45,8 @@ main {
 		height: 1lh;
 
 		background: linear-gradient(transparent calc(50% - 0.5px), currentColor 0 calc(50% + 0.5px), transparent 0);
+
+		mask-image: linear-gradient(90deg, tan, transparent);
 	}
 }
 
@@ -79,6 +81,10 @@ h1,
 
 :where(main p) :is(em, var) {
 	font-family: var(--fontStack-serif);
+}
+
+ins {
+	text-decoration-style: double;
 }
 
 mark {
