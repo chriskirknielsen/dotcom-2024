@@ -1,5 +1,6 @@
 .postlist {
 	--LIST-gap: var(--size-l);
+	--LIST-group-border: 1;
 }
 
 .postlist-group-label {
@@ -12,9 +13,9 @@
 	padding-block-end: var(--size-2xs);
 
 	color: var(--C-accent);
-	border-inline-start: 1px solid transparent;
-	border-block-end: 1px solid transparent;
-	border-image: radial-gradient(100% 100% at 0 100%, currentColor, transparent) 1;
+	border-inline-start: calc(var(--LIST-group-border) * 1px) solid transparent;
+	border-block-end: calc(var(--LIST-group-border) * 1px) solid transparent;
+	border-image: radial-gradient(100% 100% at 0 100%, currentColor, transparent) var(--LIST-group-border);
 	background: radial-gradient(farthest-side at 0 100%, var(--C-canvas), transparent);
 
 	cursor: pointer;
