@@ -12,13 +12,16 @@
 				{{ if !item.link }}</div>{{ else }}</a>{{ /if }}
 			{{ /if }}
 			<div class="floatster-contents | flow" style="--flow-space: var(--size-s);">
+				{{ if item.eyebrow }}
+					<p class="eyebrow | fontWeight-bold fontSize-small color-heading">{{ item.eyebrow }}</p>
+				{{ /if }}
 				<h3 data-toc="false">
 					{{ item.title }}
 					{{ if item.praise }}<span class="visually-hidden">({{ praiseLabel || 'Recommended' }})</span>{{ /if }}
 				</h3>
 				
 				{{ if item.detail }}
-					<p class="fontWeight-bold fontSize-small color-heading">
+					<p class="fontSize-small color-heading">
 						{{ typeof detailPrefix == 'string' ? detailPrefix : '' }} {{ item.detail }}
 					</p>
 				{{ /if }}

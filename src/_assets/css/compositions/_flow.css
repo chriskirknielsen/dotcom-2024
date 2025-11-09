@@ -19,4 +19,9 @@
 	& > :where(:not(h1, h2, h3, h4) + :is(h1, h2, h3, h4)) {
 		--flow-space: var(--size-2xl);
 	}
+
+	/* Stick eyebrow to headings */
+	& > :where(.eyebrow + :is(h1, h2, h3, h4)) {
+		margin-block-start: 0;
+	}
 }
