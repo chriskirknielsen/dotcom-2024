@@ -14,8 +14,8 @@
 	color: var(--C-accent);
 	border-inline-start: 1px solid transparent;
 	border-block-end: 1px solid transparent;
-	background: linear-gradient(to right, currentColor, transparent) no-repeat 0 100% / 100% 1px border-box,
-		linear-gradient(to top, currentColor, transparent) no-repeat 0 100% / 1px 100% border-box, radial-gradient(farthest-side at 0 100%, var(--C-canvas), transparent);
+	border-image: radial-gradient(100% 100% at 0 100%, currentColor, transparent) 1;
+	background: radial-gradient(farthest-side at 0 100%, var(--C-canvas), transparent);
 
 	cursor: pointer;
 
