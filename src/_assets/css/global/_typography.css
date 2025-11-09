@@ -32,6 +32,22 @@ main {
 	}
 }
 
+.eyebrow {
+	display: flex;
+	gap: 1em;
+
+	&::after {
+		content: '';
+
+		flex: 1 0 0;
+		display: block;
+		height: 1.6em;
+		height: 1lh;
+
+		background: linear-gradient(transparent calc(50% - 0.5px), currentColor 0 calc(50% + 0.5px), transparent 0);
+	}
+}
+
 h4,
 .h4 {
 	font-size: var(--typeScale-0);

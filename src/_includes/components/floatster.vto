@@ -13,12 +13,16 @@
 			{{ /if }}
 			<div class="floatster-contents | flow" style="--flow-space: var(--size-s);">
 				{{ if item.eyebrow }}
+				<hgroup>
 					<p class="eyebrow | fontWeight-bold fontSize-small color-heading">{{ item.eyebrow }}</p>
 				{{ /if }}
 				<h3 data-toc="false">
 					{{ item.title }}
 					{{ if item.praise }}<span class="visually-hidden">({{ praiseLabel || 'Recommended' }})</span>{{ /if }}
 				</h3>
+				{{ if item.eyebrow }}
+				</hgroup>
+				{{ /if }}
 				
 				{{ if item.detail }}
 					<p class="fontSize-small color-heading">
