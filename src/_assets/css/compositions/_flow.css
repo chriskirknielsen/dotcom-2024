@@ -22,7 +22,7 @@
 
 	/* Stick eyebrow to headings */
 	& > :where(.eyebrow + :is(h1, h2, h3, h4)),
-	& > :where(:is(h1, h2, h3, h4) + .eyebag) {
+	& > :where(:is(h1, h2, h3, h4) + .eyeline) {
 		--flow-space: 0px;
 	}
 }
