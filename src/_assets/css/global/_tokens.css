@@ -3,8 +3,9 @@
 --OFF:  ;
 --sqrt2: 1.4142;
 --sqrt3: 1.7321;
---layout-breakpoint: 576px;
---layout-max-content: 960px;
+--layout-breakpoint: 36rem;
+--layout-max-content: 60rem;
+--layout-max-content-px: 960px;
 --layout-gutter: 24px;
 --layout-side-border: 3px;
 --size-2xs: 4px;
@@ -385,10 +386,10 @@ html[data-theme="director"] {
 --font-body-family: system-ui,sans-serif;
 			}
 			html[data-theme="director"] .hide-when-dark { display: none !important; }
-@custom-media --small-viewport (width <= 576px);
-@custom-media --large-viewport (width > 576px);
-@custom-media --has-gutter-space (width > calc(960px + 4 * 24px));
-@custom-media --toc-side (min-width: calc(960px + 2 * 300px)) and (min-height: 500px);
+@custom-media --small-viewport (width <= 36rem);
+@custom-media --large-viewport (width > 36rem);
+@custom-media --has-gutter-space (width > calc(60rem + 4 * 24px));
+@custom-media --toc-side (min-width: calc(60rem + 2 * 300px)) and (min-height: 500px);
 	
 	@media (--prefers-light) {
 		html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='dawn']) {
