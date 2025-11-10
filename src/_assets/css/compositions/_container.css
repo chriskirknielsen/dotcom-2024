@@ -70,3 +70,7 @@
 .container > :is(.callout, .image-gallery, .codeblock, .codeview, .cp_embed_wrapper) {
 	grid-column: --wide;
 }
+
+:where(main .container > p:not([class])) {
+	margin-inline-end: calc(min(2.5vi, var(--layout-gutter)) / -3); /* A subtle and neat idea from https://blog.kizu.dev/uneven-inline-paddings/ */
+}
