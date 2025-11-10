@@ -1,4 +1,6 @@
 .signoff {
+	--signoff-deco-size: 3rem;
+
 	position: relative;
 
 	grid-column: --wide;
@@ -19,8 +21,6 @@
 	}
 
 	&:has(.signoff-decorators) {
-		--signoff-deco-size: 3rem;
-
 		.signoff-body {
 			padding-inline-end: calc(var(--signoff-deco-size) * 1.5);
 		}
