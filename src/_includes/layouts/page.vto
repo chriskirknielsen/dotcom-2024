@@ -16,7 +16,7 @@
 
     <section class="container flow" aria-labelledby="hero-heading">
         {{ if toc }}
-            <div class="toc | flow">
+            <div class="toc | flow"{{ if staticToc }} data-static-toc{{ /if }}>
                 <p class="toc-title | h3" id="toc-title">Table of Contents</p>
                 {{ content |> assignHeadingAnchors |> autoToc('toc-list | fontSize-small', 'toc-title') }}
             </div>

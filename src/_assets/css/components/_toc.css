@@ -50,7 +50,8 @@
 }
 
 @media (--toc-side) {
-	.toc {
+	/* The [data-static-toc] is useful if the page has a lot of full-bleed content which the TOC would clash with. */
+	.toc:not([data-static-toc]) {
 		position: sticky;
 		inset-block-start: var(--layout-gutter);
 		z-index: 1; /* If there is content in the full bleed area, z-index ensures the TOC is placed above the content */
@@ -72,16 +73,15 @@
 	}
 
 	/* Using low specificity to ensure hover styles take priority */
-	:where(.toc-list li[data-current]) > :any-link {
+	:where(.toc:not([data-static-toc]) .toc-list li[data-current]) > :any-link {
 		--LINK-decoration-thickness: calc(var(--link-decoration-thickness, 1px) + 2px);
 	}
 
-	.toc-title,
-	.toc-list a {
+	:where(.toc:not([data-static-toc])) :is(.toc-title, .toc-list a) {
 		transition: opacity var(--anim-short) var(--easing-in-out);
 	}
 
-	.toc:not(:hover, :focus-within) :is(.toc-title, li:not([data-current]):not(:has(li[data-current])) > a) {
+	.toc:not([data-static-toc]):not(:hover, :focus-within) :is(.toc-title, li:not([data-current]):not(:has(li[data-current])) > a) {
 		opacity: 0.67;
 	}
 }
