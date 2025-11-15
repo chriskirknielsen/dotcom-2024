@@ -132,6 +132,8 @@
 
 			block-size: var(--TL-gap-x);
 			inline-size: calc(var(--TL-gap-x) + var(--TL-rule-thickness) / 2);
+
+			transform: translateY(-50%);
 		}
 
 		&:nth-child(2n-1) {
