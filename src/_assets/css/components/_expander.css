@@ -99,16 +99,20 @@ cycling-expander .expander[data-open='true'] .expander-content {
 				block-size: 0;
 				overflow-y: clip;
 
+				opacity: 0;
+
 				transition-property: content-visibility, opacity, block-size;
 				transition-behavior: allow-discrete;
-				transition-duration: var(--anim-short);
+				transition-duration: var(--anim-medium);
 				transition-timing-function: var(--easing-out);
 			}
 
 			&[open]::details-content {
 				block-size: auto;
 
-				transition-duration: var(--anim-medium);
+				opacity: 1;
+
+				transition-duration: var(--anim-long);
 			}
 		}
 	}

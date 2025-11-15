@@ -37,8 +37,8 @@
 			/*? Because of the default _expander.css styles having overflow-y: clip,
 			 * the cards stick outside this container on hover — this little trick ensures
 			 * they have enough room to grow without being cut off. */
-			margin-block: -8px;
-			padding-block: 8px;
+			margin-block: -2px -36px;
+			padding-block: 2px 36px;
 		}
 	}
 }
