@@ -30,3 +30,15 @@
 	grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
 	gap: var(--LIST-gap);
 }
+
+@media (--accept-motion) {
+	@supports (interpolate-size: allow-keywords) {
+		.postlist-group::details-content {
+			/*? Because of the default _expander.css styles having overflow-y: clip,
+			 * the cards stick outside this container on hover — this little trick ensures
+			 * they have enough room to grow without being cut off. */
+			margin-block: -8px;
+			padding-block: 8px;
+		}
+	}
+}
