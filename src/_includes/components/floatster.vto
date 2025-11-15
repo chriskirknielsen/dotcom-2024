@@ -3,11 +3,15 @@
 <div class="floatster" style="--FL-img-ratio: calc({{ w }} / {{ h }}); --FL-seed: {{ seed }};">
 	<ul class="floatster-list | flow">
 	{{ for i, item of items }}
-		<li class="floatster-item" style="--i: {{ i + 1 }};">
+		{{ set itemStyle = [`--i: ${i + 1}`] }}
+		{{ if item.width && item.height }}
+			{{> itemStyle.push(`--FL-img-ratio: calc(${item.width} / ${item.height})`) }}
+		{{ /if }}
+		<li class="floatster-item" style="{{ itemStyle |> join(';') }}">
 			{{ if item.image }}
 				{{ set imageUrl = item.image |> toCloudinary('c_pad,w_250') }}
 				{{ if item.link }}<a href="{{ item.link }}" class="floatster-media">{{ else }}<div class="floatster-media">{{ /if }}
-					<img src="{{ imageUrl }}" alt="{{ item.title }}{{ item.detail ? `, ${item.detail}` : '' }}" class="floatster-image" width="{{ w }}" height="{{ h }}" loading="lazy">
+					<img src="{{ imageUrl }}" alt="{{ item.title }}{{ item.detail ? `, ${item.detail}` : '' }}" class="floatster-image" width="{{ item.width || w }}" height="{{ item.height || h }}" loading="lazy">
 					{{ if item.praise }}<span class="floatster-praise" aria-hidden="true" title="{{ praiseLabel || 'Recommended' }}">{{ praiseIcon || '👍' }}</span>{{ /if }}
 				{{ if !item.link }}</div>{{ else }}</a>{{ /if }}
 			{{ /if }}
