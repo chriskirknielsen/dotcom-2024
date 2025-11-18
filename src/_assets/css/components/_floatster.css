@@ -55,6 +55,14 @@
 
 	border-radius: var(--_corner);
 	box-shadow: var(--_shadow);
+
+	@media (prefers-reduced-motion: no-preference) {
+		transition: box-shadow var(--easing-bounce) var(--anim-long);
+	}
+
+	.floatster-media:is(:hover, :focus) & {
+		box-shadow: var(--_shadow-active);
+	}
 }
 
 .floatster-praise {

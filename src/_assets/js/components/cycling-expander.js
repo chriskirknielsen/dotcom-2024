@@ -31,7 +31,7 @@ class CyclingExpander extends HTMLElement {
 		this.ctaButton = this.spawn('button', { className: ctaSummary.className });
 		this.ctaButton.style.setProperty('--btn-justify-content', ctaSummary.style.getPropertyValue('--btn-justify-content'));
 
-		// Find the fallbck
+		// Find the fallback
 		const contentWrap = this.querySelector('[data-expander="content"]');
 		this.outputContainer = this.spawn('div', {
 			className: contentWrap.className,

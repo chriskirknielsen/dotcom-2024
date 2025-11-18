@@ -70,7 +70,7 @@
             link: "https://www.igdb.com/games/outer-wilds",
             image: "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co65ac.jpg",
             developer: "Mobius Digital",
-            platform: "PS4/5",
+            platform: "PS4",
             year: 2019,
             blurb: "A 21-minute timeloop, and a mystery to solve in an alien solar system, all with a quaint art style and amazing music. I cannot express enough how much I love this game and the sense of awe it instilled in me. Play this! The DLC is really good, too.",
             goat: true
@@ -81,7 +81,7 @@
             link: "https://www.igdb.com/games/final-fantasy-ix",
             image: "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co2unc.jpg",
             developer: "Squaresoft",
-            platform: "PlayStation",
+            platform: "PS1",
             year: 2000,
             blurb: "I love old-school RPGs, especially Final Fantasy VII through X (XII kinda lost me…). FFIX has a gorgeous art style that’s a bit medieval/industrial, an eclectic cast, and engaging gameplay (turned-based!), you can bet I spent hundreds of hours playing this back in the day, so much so that my PlayStation stopped playing discs… Good times!",
             similar: ["Legend of Dragoon"]
@@ -295,6 +295,12 @@
 
 <hr aria-hidden="true">
 
+{{ set platformSvgs = {} }}
+{{ for platformName of games |> groupBy('platform') |> Object.keys }}
+    {{ set platformSlug = platformName |> slugify }}
+    {{ set platformSvg }}{{ svg `gaming-${platformSlug}`, { title: platformName, class: 'gaming-logo inline-icon inline-icon--center', width: ['ps1','pc'].includes(platformSlug) ? 16 : 32, height: 16 } }}{{ /set }}
+    {{> platformSvgs[platformName] = platformSvg }}
+{{ /for }}
 {{ for category, gamesByCategory of games |> groupBy('category') }}
     <h2>{{ category }}</h2>
     {{ component 'floatster', {
@@ -306,7 +312,7 @@
             image: g.image,
             width: g.width || null,
             height: g.height || null,
-            detail: `${ g.developer }, ${ g.year }, ${ g.platform }`,
+            detail: `${platformSvgs[g.platform]} ${g.developer} (${g.year})`,
             praise: g.goat,
         })),
         praiseLabel: 'Greatest of all time',
@@ -321,6 +327,25 @@
     <defs>
         {{ if !metadata.nakedCss }}
         <style>
+        .gaming-logo {
+            --ICON-size: 1.25em;
+            --fg: var(--C-canvas);
+            --bg: var(--C-text);
+
+            block-size: var(--ICON-size);
+
+            border-radius: var(--_corner);
+            color: var(--fg);
+            background: var(--bg);
+        }
+        .gaming-logo[width='16'] {
+            padding: 2px;
+        }
+        .gaming-logo[width='32'] {
+            margin-inline-end: 0.25em;
+            padding-inline: 4px;
+        }
+
         @media (prefers-reduced-motion: reduce) {
             #goat-indicator-outline { display: none; }
         }
