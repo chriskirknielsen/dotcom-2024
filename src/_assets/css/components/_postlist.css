@@ -9,6 +9,7 @@
 	z-index: 1;
 
 	margin-block-end: var(--LIST-gap);
+	margin-inline: calc(-1 * var(--layout-gutter));
 	padding-inline-start: var(--size-xs);
 	padding-block-end: var(--size-2xs);
 
@@ -20,7 +21,7 @@
 
 	cursor: pointer;
 
-	&:is(:hover, :focus-visible) > .postlist-group-label__text {
+	&:is(:hover, :focus-visible) > .postlist-group-label-text {
 		text-decoration: underline;
 	}
 }
