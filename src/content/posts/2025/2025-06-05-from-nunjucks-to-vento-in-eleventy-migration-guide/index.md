@@ -5,6 +5,7 @@ tags: [javascript, eleventy, nunjucks, vento]
 toc: true
 time: 04:51:23
 updated: 2025-07-20
+featured: true
 changelog: {
 	'2025-06-05': "Change plugin import demo to remove `autotrim` option as it is the default. Add link to plugin’s readme/docs.",
 	'2025-06-07': "Update to reflect new `eleventy-plugin-vento` version.",
