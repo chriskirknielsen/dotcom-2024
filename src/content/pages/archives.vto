@@ -22,6 +22,10 @@
 }
 ---
 
+<div class="textAlign-center">
+    <h2>Present</h2>
+    <p class="fontSize-smaller fontStyle-italic">(you are here)</p>
+</div>
 <ol class="timeline">
 {{ for loopIndex, versionYear of versionsInfo |> Object.keys |> sort |> reverse }}
     {{ set versionInfo = versionsInfo[versionYear] }}
