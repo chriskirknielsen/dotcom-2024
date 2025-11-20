@@ -15,7 +15,7 @@
         'PSP': 'PlayStation Portable',
         'Switch': 'Switch',
         'Dreamcast': 'Dreamcast',
-        'PC': 'PC',
+        'PC': 'Computer',
     },
     tags: ['_og'],
     eleventyComputed: {
@@ -61,12 +61,7 @@
     {{> loopIndex++ }}
     {{ set platformSlug = platform |> toLowerCase |> replace(' ', '-') }}
     {{ set expanderLabel }}
-        {{ if platformSlug == 'pc' }}
-            {{ svg 'device-desktop', { class: 'gaming-logo inline-icon' } }}
-            {{ injectsvg 'gaming-pc', { class: 'visually-hidden' } }}
-        {{ else }}
             {{ injectsvg `gaming-${platformSlug}`, { class: 'gaming-logo inline-icon' } }}
-        {{ /if }}
         {{ platformLabels[platform] }} ({{ games.length }})
     {{ /set }}
     {{ expander expanderLabel, { isExpanded: loopIndex === 1 } }}
@@ -179,7 +174,7 @@
         </ul>
         {{ if platformSlug === 'pc' }}
         <p class="textAlign-center textWrap-balance fontSize-smaller fontStyle-italic">
-            Only showing completed games, due to hundreds I have never played (and never will), mostly due to Epic Games Store’s weekly freebies.
+            Only showing completed games, due to hundreds I have never played (and never will), mostly thanks to the Epic Games Store’s weekly freebies.
         </p>
         {{ /if }}
     {{ /expander }}
