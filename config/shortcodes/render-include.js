@@ -177,6 +177,11 @@ export default function (eleventyConfig, options = {}) {
 		return output;
 	});
 
+	/** Converts an SVG slug into a spritesheet SVG reference. */
+	eleventyConfig.addFilter('slugToSvg', function (filename, svgOptions = {}) {
+		return eleventyConfig.getShortcode('svg')(filename, svgOptions);
+	});
+
 	/** Inject an SVG spritesheet at the bottom of the content. */
 	eleventyConfig.addTransform('svg', async (content, outputPath) => {
 		// It's not HTML? Get outta here!

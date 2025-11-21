@@ -11,7 +11,7 @@
 			{{ if item.image }}
 				{{ set imageUrl = item.image |> toCloudinary('c_pad,w_250') }}
 				{{ if item.link }}<a href="{{ item.link }}" class="floatster-media">{{ else }}<div class="floatster-media">{{ /if }}
-					<img src="{{ imageUrl }}" alt="{{ item.title |> escape }}" class="floatster-image" width="{{ item.width || w }}" height="{{ item.height || h }}" loading="lazy">
+					<img src="{{ imageUrl }}" alt="" class="floatster-image" width="{{ item.width || w }}" height="{{ item.height || h }}" loading="lazy">
 					{{ if item.praise }}<span class="floatster-praise" aria-hidden="true" title="{{ (praiseLabel || 'Recommended') |> escape }}">{{ praiseIcon || '👍' }}</span>{{ /if }}
 				{{ if !item.link }}</div>{{ else }}</a>{{ /if }}
 			{{ /if }}
@@ -20,10 +20,10 @@
 				<hgroup>
 					<p class="eyebrow | fontWeight-bold fontSize-small color-heading">{{ item.eyebrow }}</p>
 				{{ /if }}
-				<h3 data-toc="false">
-					{{ item.title }}
-					{{ if item.praise }}<span class="visually-hidden">({{ praiseLabel || 'Recommended' }})</span>{{ /if }}
-				</h3>
+					<h3 data-toc="false">
+						{{ item.title }}
+						{{ if item.praise }}<span class="visually-hidden">({{ praiseLabel || 'Recommended' }})</span>{{ /if }}
+					</h3>
 				{{ if item.eyebrow }}
 				</hgroup>
 				{{ /if }}
