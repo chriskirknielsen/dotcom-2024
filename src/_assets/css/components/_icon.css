@@ -26,3 +26,22 @@
 .link-label-prefix {
 	display: inline-block;
 }
+
+.icon-badge {
+	--ICON-size: 1.25em;
+	--fg: var(--C-canvas);
+	--bg: var(--C-text);
+
+	block-size: var(--ICON-size);
+	margin-inline-end: 0.25em;
+
+	border-radius: var(--_corner);
+	color: var(--fg);
+	background: var(--bg);
+}
+.icon-badge[width='16'] {
+	padding: 0.125em;
+}
+.icon-badge[width='32'] {
+	padding-inline: 0.25em;
+}

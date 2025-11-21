@@ -298,7 +298,7 @@
 {{ set platformSvgs = {} }}
 {{ for platformName of games |> groupBy('platform') |> Object.keys }}
     {{ set platformSlug = platformName |> slugify }}
-    {{ set platformSvg }}{{ svg `gaming-${platformSlug}`, { title: platformName, class: 'gaming-logo inline-icon inline-icon--center', width: ['ps1','pc'].includes(platformSlug) ? 16 : 32, height: 16 } }}{{ /set }}
+    {{ set platformSvg }}{{ svg `gaming-${platformSlug}`, { title: platformName, class: 'icon-badge inline-icon inline-icon--center', width: ['ps1','pc'].includes(platformSlug) ? 16 : 32, height: 16 } }}{{ /set }}
     {{> platformSvgs[platformName] = platformSvg }}
 {{ /for }}
 {{ for category, gamesByCategory of games |> groupBy('category') }}
@@ -327,25 +327,6 @@
     <defs>
         {{ if !metadata.nakedCss }}
         <style>
-        .gaming-logo {
-            --ICON-size: 1.25em;
-            --fg: var(--C-canvas);
-            --bg: var(--C-text);
-
-            block-size: var(--ICON-size);
-            margin-inline-end: 0.25em;
-
-            border-radius: var(--_corner);
-            color: var(--fg);
-            background: var(--bg);
-        }
-        .gaming-logo[width='16'] {
-            padding: 0.125em;
-        }
-        .gaming-logo[width='32'] {
-            padding-inline: 0.25em;
-        }
-
         @media (prefers-reduced-motion: reduce) {
             #goat-indicator-outline { display: none; }
         }
