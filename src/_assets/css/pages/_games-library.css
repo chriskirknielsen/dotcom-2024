@@ -1,3 +1,9 @@
+@property --p {
+	syntax: '<number>';
+	initial-value: 0;
+	inherits: true;
+}
+
 .gaming-platform-toggle {
 	--CTA-display: flex;
 }
@@ -65,7 +71,7 @@
 
 	@media (--accept-motion) {
 		transition: var(--anim-short) var(--easing-in-out);
-		transition-property: border-radius, box-shadow, transform;
+		transition-property: border-radius, box-shadow, transform, --p;
 	}
 
 	&:is(:hover, :focus-visible) {
@@ -77,6 +83,7 @@
 		/* Always transform the active item, and add a shadow to cover the previous sibling */
 		&:has(> .gaming-front) {
 			--GAME-hover-shadow-size: var(--size-2xs);
+			--p: 1;
 
 			border-start-end-radius: 0;
 			border-end-end-radius: 0;
@@ -122,8 +129,8 @@
 	/* Use a discrete animation to animate the visibility property */
 	@media (--accept-motion) {
 		transition-property: var(--discrete-transition-property, visibility), border-radius;
-		transition-duration: var(--anim-short);
-		transition-timing-function: var(--easing-in-out);
+		transition-duration: inherit;
+		transition-timing-function: inherit;
 		transition-behavior: allow-discrete;
 	}
 
@@ -147,12 +154,15 @@
 		content: '';
 
 		position: absolute;
-		inset: var(--box-cover-padding-block-start, 0px) 0 0;
+		inset-block: calc(var(--box-border-size-block, 0) * -1); /* Cover the border (box case plastic) */
+		inset-inline: 0;
 
 		/* prettier-ignore */
 		background-image:
-			linear-gradient(to bottom right, #fff2, #fff8, #fff3, #fff0 33%),
-			linear-gradient(90deg, transparent, #0004 67%);
+			linear-gradient(to bottom right, #fff2, #fff4, #fff6, #fff7, #fff6, #fff4, #fff3, #fff0 calc(var(--p) * 42%)),
+			linear-gradient(90deg, transparent, #000d calc(var(--p) * 67%));
+
+		opacity: 0.5;
 	}
 }
 
