@@ -65,7 +65,7 @@
 
 	@media (--accept-motion) {
 		transition: var(--anim-short) var(--easing-in-out);
-		transition-property: box-shadow, transform;
+		transition-property: border-radius, box-shadow, transform;
 	}
 
 	&:is(:hover, :focus-visible) {
@@ -78,7 +78,15 @@
 		&:has(> .gaming-front) {
 			--GAME-hover-shadow-size: var(--size-2xs);
 
+			border-start-end-radius: 0;
+			border-end-end-radius: 0;
+
 			transform: translateZ(24rem) translateX(-67%) rotateY(-10deg);
+
+			& > .gaming-front {
+				border-start-start-radius: 0;
+				border-end-start-radius: 0;
+			}
 		}
 	}
 }
@@ -97,8 +105,12 @@
 	border-block-style: solid;
 	border-block-width: var(--box-border-size-block);
 	border-color: var(--game-case-plastic);
-	border-radius: var(--box-radius-top-left, var(--game-spine-radius)) var(--box-radius-top-right, var(--game-spine-radius))
-		var(--box-radius-bottom-right, var(--game-spine-radius)) var(--box-radius-bottom-left, var(--game-spine-radius));
+	/* prettier-ignore */
+	border-radius:
+		var(--box-radius-top-left, var(--game-spine-radius))
+		var(--box-radius-top-right, var(--game-spine-radius))
+		var(--box-radius-bottom-right, var(--game-spine-radius))
+		var(--box-radius-bottom-left, var(--game-spine-radius));
 	background: linear-gradient(to bottom, var(--game-case-plastic) var(--box-cover-padding-block-start, 0px), #fff 0);
 	background-clip: padding-box;
 	box-shadow: var(--GAME-box-shadow);
@@ -109,7 +121,9 @@
 
 	/* Use a discrete animation to animate the visibility property */
 	@media (--accept-motion) {
-		transition: var(--discrete-transition-property, visibility) var(--anim-short) var(--easing-in-out);
+		transition-property: var(--discrete-transition-property, visibility), border-radius;
+		transition-duration: var(--anim-short);
+		transition-timing-function: var(--easing-in-out);
 		transition-behavior: allow-discrete;
 	}
 
@@ -135,7 +149,10 @@
 		position: absolute;
 		inset: var(--box-cover-padding-block-start, 0px) 0 0;
 
-		background-image: linear-gradient(to bottom right, #fff2, #fff8, #fff3, #fff0 33%), linear-gradient(90deg, transparent, #0004 67%);
+		/* prettier-ignore */
+		background-image:
+			linear-gradient(to bottom right, #fff2, #fff8, #fff3, #fff0 33%),
+			linear-gradient(90deg, transparent, #0004 67%);
 	}
 }
 
