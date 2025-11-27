@@ -1,6 +1,6 @@
 .postlist {
 	--LIST-gap: var(--size-l);
-	--LIST-group-border: 1;
+	--LIST-group-border: 2; /* Initially 1, but on standard DPI monitors, the border is sometimes skipped */
 }
 
 .postlist-group-label {
