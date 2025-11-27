@@ -7,7 +7,7 @@ const designs = [
 		img: 'vhs-css.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-Blank-VHS-CSS-by-ckirknielsen/72710420.6VDG0',
-			TeePublic: 'https://www.teepublic.com/t-shirt/19996533-retro-blank-vhs-css?store_id=49603',
+			TeePublic: 'https://www.teepublic.com/t-shirt/19996533-retro-blank-vhs-css',
 			CottonBureau: 'https://cottonbureau.com/p/JJG3CT/shirt/retro-blank-vhs-css',
 		},
 		tags: ['dev', 'www', 'css', 'vhs', 'retro'],
@@ -22,7 +22,7 @@ const designs = [
 		img: 'vhs-html.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-Blank-VHS-HTML-by-ckirknielsen/73662806.CW2C9.XYZ',
-			TeePublic: 'https://www.teepublic.com/t-shirt/20289562-retro-blank-vhs-html?store_id=49603',
+			TeePublic: 'https://www.teepublic.com/t-shirt/20289562-retro-blank-vhs-html',
 			CottonBureau: 'https://cottonbureau.com/p/DA377Y/shirt/retro-blank-vhs-html',
 		},
 		tags: ['dev', 'www', 'html', 'vhs', 'retro'],
@@ -37,7 +37,7 @@ const designs = [
 		img: 'vhs-svg.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-Blank-VHS-SVG-by-ckirknielsen/80893683.DYMRA',
-			TeePublic: 'https://www.teepublic.com/t-shirt/22687532-retro-blank-vhs-svg?store_id=49603',
+			TeePublic: 'https://www.teepublic.com/t-shirt/22687532-retro-blank-vhs-svg',
 			CottonBureau: 'https://cottonbureau.com/p/ZTH8KB/shirt/retro-blank-vhs-svg',
 		},
 		tags: ['dev', 'www', 'svg', 'vhs', 'retro'],
@@ -52,7 +52,7 @@ const designs = [
 		img: 'vhs-js.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-Blank-VHS-JavaScript-ECMAScript-by-ckirknielsen/85189202.CW2C9.XYZ',
-			TeePublic: 'https://www.teepublic.com/t-shirt/23606086-retro-blank-vhs-javascript-ecmascript?store_id=49603',
+			TeePublic: 'https://www.teepublic.com/t-shirt/23606086-retro-blank-vhs-javascript-ecmascript',
 			CottonBureau: 'https://cottonbureau.com/p/XRBVYQ/shirt/retro-blank-vhs-javascript-ecmascript',
 		},
 		tags: ['dev', 'www', 'js', 'vhs', 'retro'],
@@ -70,6 +70,7 @@ const designs = [
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-Blank-VHS-JavaScript-ECMAScript-Dark-Variant-by-ckirknielsen/132703092.FB110.XYZ',
 			TeePublic: 'https://www.teepublic.com/t-shirt/36698589-retro-blank-vhs-javascript-ecmascript-dark-variant',
+			CottonBureau: 'https://cottonbureau.com/p/2J365V/shirt/retro-blank-vhs-javascript-ecmascript-dark-variant',
 		},
 		tags: ['dev', 'www', 'js', 'vhs', 'retro'],
 		date: '2022-11-20',
@@ -85,6 +86,7 @@ const designs = [
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-Blank-VHS-A11Y-by-ckirknielsen/161318764.CW2C9?asc=u',
 			TeePublic: 'https://www.teepublic.com/t-shirt/60553454-retro-blank-vhs-a11y',
+			CottonBureau: 'https://cottonbureau.com/p/CV6C39/shirt/retro-blank-vhs-a11y',
 		},
 		tags: ['dev', 'www', 'vhs', 'retro'],
 		date: '2024-05-18',
@@ -111,7 +113,8 @@ const designs = [
 		img: 'retro-css.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Retro-CSS-by-ckirknielsen/58081555.DYMRA',
-			TeePublic: 'https://www.teepublic.com/t-shirt/14125152-retro-css?store_id=49603',
+			TeePublic: 'https://www.teepublic.com/t-shirt/14125152-retro-css',
+			CottonBureau: 'https://cottonbureau.com/p/HEVECR/shirt/retro-css',
 		},
 		tags: ['dev', 'css', 'retro'],
 		date: '2020-09-17',
@@ -127,7 +130,6 @@ const designs = [
 			TeePublic: 'https://www.teepublic.com/sticker/67983005-css-logo-solid',
 			RedBubble: 'https://www.redbubble.com/i/sticker/CSS-Logo-solid-by-ckirknielsen/166040147.EJUG5',
 			CottonBureau: 'https://cottonbureau.com/p/D6EHDP/shirt/css-is-awesome',
-			'CottonBureau (pocket variant)': 'https://cottonbureau.com/p/GVRUAT/shirt/css-is-awesome-pocket',
 		},
 		tags: ['dev', 'css'],
 		date: '2024-11-02',
@@ -158,7 +160,7 @@ const designs = [
 		img: 'css-fact-sheet.png',
 		links: {
 			RedBubble: 'https://www.redbubble.com/i/sticker/CSS-Fact-Sheet-by-ckirknielsen/58082119.EJUG5',
-			TeePublic: 'https://www.teepublic.com/t-shirt/14123881-css-fact-sheet?store_id=49603',
+			TeePublic: 'https://www.teepublic.com/t-shirt/14123881-css-fact-sheet',
 		},
 		tags: ['dev', 'css'],
 		date: '2020-09-17',
