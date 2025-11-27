@@ -1,6 +1,28 @@
 .flow {
 	--flow-space: var(--size-l);
 
+	&[data-flow-space='2xs'] {
+		--flow-space: var(--size-2xs);
+	}
+	&[data-flow-space='xs'] {
+		--flow-space: var(--size-xs);
+	}
+	&[data-flow-space='s'] {
+		--flow-space: var(--size-s);
+	}
+	&[data-flow-space='m'] {
+		--flow-space: var(--size-m);
+	}
+	&[data-flow-space='l'] {
+		--flow-space: var(--size-l);
+	}
+	&[data-flow-space='xl'] {
+		--flow-space: var(--size-xl);
+	}
+	&[data-flow-space='2xl'] {
+		--flow-space: var(--size-2xl);
+	}
+
 	& > * {
 		margin-block-end: 0;
 	}
