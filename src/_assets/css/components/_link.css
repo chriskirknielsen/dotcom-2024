@@ -5,6 +5,10 @@
 	--LINK-decoration-thickness: var(--_link-decoration-thickness);
 	--LINK-underline-offset: var(--_link-underline-offset);
 
+	:where(main &:not(.button, .toc a)) {
+		font-weight: 550; /* Inspired by from https://blog.kizu.dev/bolder-links/ */
+	}
+
 	&:is(:hover, :focus-visible) {
 		--LINK-color: var(--_link-color-active);
 		--LINK-underline-color: var(--_link-underline-color-active);
