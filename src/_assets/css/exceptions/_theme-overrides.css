@@ -800,7 +800,10 @@ html[data-theme='director'] {
 			transparent calc(100% - 2px)
 		);
 
-		padding-inline: 0.25em;
+		&::before,
+		&::after {
+			font-size: 1em;
+		}
 
 		&:nth-of-type(2n) {
 			--f: -1;

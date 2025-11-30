@@ -68,7 +68,7 @@ code-wrap {
 }
 
 :not(pre) > code {
-	padding: 0.0625em 0.125em;
+	padding-block: 0.0625em;
 
 	white-space: pre-wrap;
 	word-break: break-word;
@@ -76,6 +76,14 @@ code-wrap {
 	color: var(--C-heading);
 	border-radius: var(--_corner);
 	background: var(--CODE-bg, var(--C-surface));
+
+	&::before,
+	&::after {
+		content: '\2060\200a\2060';
+		user-select: none;
+
+		font-size: 0.5em;
+	}
 }
 
 kbd {
