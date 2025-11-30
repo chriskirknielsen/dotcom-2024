@@ -1,4 +1,4 @@
-{{ export function getPlatformIcon(platformName) }}
+{{ export function getPlatformIcon(platformName, baseSize = 16) }}
 	{{ set platformSlug = platformName |> slugify }}
-	{{ `gaming-${platformSlug}` |> slugToSvg({ title: platformName, class: 'icon-badge inline-icon inline-icon--center', width: ['ps1','pc'].includes(platformSlug) ? 16 : 32, height: 16 }) }}
+	{{ `gaming-${platformSlug}` |> slugToSvg({ title: platformName, class: 'icon-badge inline-icon inline-icon--center', width: baseSize * (['ps1','pc'].includes(platformSlug) ? 1 : 2), height: baseSize }) }}
 {{ /export }}
