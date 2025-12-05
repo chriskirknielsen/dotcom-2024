@@ -13,8 +13,14 @@ main {
 	background: color-mix(in hsl, var(--C-heading) 80%, transparent);
 }
 
+::target-text {
+	color: var(--C-surface);
+	text-shadow: none;
+	background: var(--C-accent);
+}
+
 /* Headings */
-:is(h1, h2, h3, h4),
+:is(h1, h2, h3, h4), /* `:heading` when? */
 :is(.h1, .h2, .h3, .h4) {
 	color: var(--C-heading);
 	font-family: var(--_font-heading-family);

@@ -31,7 +31,7 @@
 
 		@supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
 			animation-name: --FL-reveal;
-			animation-timing-function: var(--ease-circ-out);
+			animation-timing-function: var(--easing-out);
 			animation-timeline: view();
 			animation-range: -10% 33%;
 		}
