@@ -438,17 +438,24 @@
 	isolation: isolate;
 
 	font-size: var(--s);
-	/* line-height: calc(1.6 * var(--s)); */
 }
 
 .about-icons-list-item {
+	user-select: none;
+
+	position: relative;
+
 	line-height: 1;
+
+	will-change: opacity; /* Prevents a sub-pixel jump in Safari when switching from non-GPU to GPU mode (due to 50% opacity when a sibling element is expanded) */
+
+	&:has([open]) {
+		z-index: 1;
+	}
 }
 
 .about-icons-list-icon {
 	--ICON-size: var(--s);
-
-	will-change: opacity; /* Prevents a sub-pixel jump in Safari when switching from non-GPU to GPU mode (due to 50% opacity when a sibling element is expanded) */
 }
 
 .about-icons-list-details {
@@ -505,16 +512,17 @@
 	z-index: 1;
 
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
 	gap: var(--size-2xs);
-	inline-size: fit-content;
+	inline-size: max-content;
 	min-inline-size: 100%;
+	max-inline-size: 300%;
 	margin: 0 auto;
 	padding: var(--size-2xs);
 
 	text-align: center;
 
-	background: var(--C-canvas);
 	background: color-mix(in hsl, var(--C-canvas), transparent 25%);
 
 	translate: -50% 0;

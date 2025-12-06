@@ -78,7 +78,7 @@ I grew up in Lyon, France, born to **Danish** parents. Australia was my home fo
 
 ## Skills, a.k.a. The Professional Section {$#resume$}
 
-I’m a creative developer, or “design engineer”, meaning I can code and design, keeping an eye on details (including fonts!). I especially shine with my front-end fluency with **HTML** (the semantic kind), **CSS** (I’m a nerd for it), and **JavaScript** (not React!), but I don’t shy away from **PHP and MySQL** (mainly for **WordPress** projects) or **Webflow**. I use **git** (any of GitHub, GitLab, or Bitbucket) to keep my projects neatly tracked, and like to write commented, squeaky-cleanish code. The **Adobe Creative Suite** and I go _way_ back (2005!), specifically **Photoshop, Illustrator, and After Effects**, though I’ve also gotten on the **Figma** train (sorry, Sketch!).
+I’m a creative developer, or “design engineer”, meaning I can code and design, keeping an eye on details (including fonts!). I especially shine with my front-end fluency with **HTML** (the semantic kind), **CSS** (I’m a nerd for it), and **JavaScript** (not React!), but I don’t shy away from **PHP and MySQL** (mainly for **WordPress** projects), **Shopify**, or **Webflow**. I use **git** (any of GitHub, GitLab, or Bitbucket) to keep my projects neatly tracked, and like to write commented, squeaky-cleanish code. The **Adobe Creative Suite** and I go _way_ back (2005!), specifically **Photoshop, Illustrator, and After Effects**, though I’ve also gotten on the **Figma** train (sorry, Sketch!).
 {{ /echo }}
 
 {{ set icons = {
@@ -86,32 +86,33 @@ I’m a creative developer, or “design engineer”, meaning I can code and des
     css: { label: 'Cascading Stylesheets', sub: { sass: 'Sass/SCSS' } },
     js: { label: 'JavaScript', sub: { nodejs: 'NodeJS', npm: 'npm' } },
     git: { label: 'git', sub: { github: 'GitHub', gitlab: 'GitLab', bitbucket: 'Bitbucket' } },
-    eleventy: { label: 'Eleventy', sub: { nunjucks: 'Nunjucks Templating', vento: 'Vento Templating', netlify: 'Netlify Deploys' } },
+    jamstack: { label: 'JAMstack', sub: { nunjucks: 'Nunjucks', vento: 'Vento', liquid: 'Liquid', eleventy: 'Eleventy', netlify: 'Netlify Deploys' } },
     php: { label: 'PHP', sub: { wordpress: 'WordPress' } },
+    shopify: { label: 'Shopify' },
     webflow: { label: 'Webflow' },
     figma: { label: 'Figma' },
     adobecs: { label: 'Adobe Creative Suite', sub: { photoshop: 'Photoshop', illustrator: 'Illustrator', aftereffects: 'After Effects' } }
 } }}
 <ul class="inline-list unstuck-list textAlign-center | about-icons-list" style="--c: {{ icons | keys | length }};">
-    {{ for iconKey, iconInfo of icons }}
+    {{ for iconKey, iconInfo of icons -}}
         <li class="about-icons-list-item">
         {{- if iconInfo.sub -}}
             <details name="about-language-icon" class="about-icons-list-details">
                 <summary class="about-icons-list-summary">
-                    {{ svg iconKey+'-icon', { title: iconInfo.label, class: 'about-icons-list-icon inline-icon inline-icon--center' } }}
+                    {{ svg `${iconKey}-icon`, { title: iconInfo.label, class: 'about-icons-list-icon inline-icon inline-icon--center' } }}
                     <span class="visually-hidden">(and more)</span>
                 </summary>
                 <div class="about-icons-list-extra">
                 {{ for subIconKey, subIconLabel of iconInfo.sub }}
-                    {{ svg subIconKey+'-icon', { title: subIconLabel, class: 'about-icons-list-icon inline-icon inline-icon--center' } }}
+                    {{ svg `${subIconKey}-icon`, { title: subIconLabel, class: 'about-icons-list-icon inline-icon inline-icon--center' } }}
                 {{ /for }}
                 </div>
             </details>
         {{- else -}}
-            {{- svg iconKey+'-icon', { title: iconInfo.label, class: 'about-icons-list-icon inline-icon inline-icon--center' } -}}
+            {{- svg `${iconKey}-icon`, { title: iconInfo.label, class: 'about-icons-list-icon inline-icon inline-icon--center' } -}}
         {{- /if -}}
         </li>
-    {{ /for }}
+    {{- /for }}
 </ul>
 
 <p>If you were looking for a résumé, you’ll find what you need on <a href="https://www.linkedin.com/in/chriskirknielsen" class="link-label-anchor"><span class="link-label-text">my</span> {{ svg 'linkedin-icon', { class: 'inline-icon inline-icon--center' } }} <span class="link-label-text">LinkedIn profile</span></a>.</p>
