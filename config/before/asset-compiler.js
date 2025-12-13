@@ -1,6 +1,7 @@
 import path from 'node:path';
 import fs from 'node:fs';
-import { glob } from 'glob';
+import { promisify } from 'node:util';
+const glob = promisify(fs.glob);
 import esbuild from 'esbuild';
 import { bundle, transform, Features } from 'lightningcss';
 import through from 'through2';
@@ -65,8 +66,7 @@ function assetCompiler(settings, config) {
 					const outputFolder = parsed.dir
 						.split(inputFolder)
 						.pop()
-						.replace(/^(\/)+/, '')
-						.replace(/(\/)+$/, '')
+						.replace(/^(\/)+|(\/)+$/, '')
 						.trim();
 
 					// Compute the final output folder, checking if the output folder has a value to append a slash if needed
