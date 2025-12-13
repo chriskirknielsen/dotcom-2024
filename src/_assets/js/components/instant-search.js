@@ -44,8 +44,12 @@ class InstantSearch extends HTMLElement {
 		const runQuery = async () => {
 			let query = normalizeApostrophe(inputEl.value.toLowerCase().trim());
 			if (query.length < 1) {
+				inputEl.setCustomValidity('Please provide a non-blank search string.');
+				formEl.reportValidity();
 				return;
 			}
+
+			inputEl.setCustomValidity(''); // All clear
 
 			// Alias some search terms
 			switch (query) {
