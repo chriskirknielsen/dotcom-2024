@@ -25,11 +25,7 @@
                             {{ if post.data.updated }}
                                 {{ set originalTime = post.date |> dateFormat('ms')}}
                                 {{ set updateTime = post.data.updated |> dateFormat('ms')}}
-                                (updated{{ if updateTime != originalTime }}
-                                <time style="--t-datetime-color:var(--ctx-color)" datetime="{{ post.data.updated |> dateFormat }}">
-                                    {{- post.data.updated |> dateFormat({ format: 'nice' }) -}}
-                                </time>
-                                {{- /if }})
+                                (updated{{ if updateTime != originalTime }} {{ post.data.updated |> timeTag({ lang }) }}{{ /if }})
                             {{ /if }}
                         </p>
 
@@ -52,15 +48,11 @@
 
                     {{ set dateString }}
                     <p>
-                        {{ post.date |> timeTag }}
+                        {{ post.date |> timeTag({ lang }) }}
                         {{ if post.data.updated }}
                             {{ set originalTime = post.date |> dateFormat('ms')}}
                             {{ set updateTime = post.data.updated |> dateFormat('ms')}}
-                            (updated{{ if updateTime != originalTime }}
-                            <time style="--t-datetime-color:var(--ctx-color)" datetime="{{ post.data.updated |> dateFormat }}">
-                                {{- post.data.updated |> dateFormat({ format: 'nice' }) -}}
-                            </time>
-                            {{- /if }})
+                            (updated{{ if updateTime != originalTime }} {{ post.data.updated |> timeTag({ lang }) }}{{ /if }})
                         {{ /if }}
                     </p>
                     {{ /set }}
