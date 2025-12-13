@@ -26,11 +26,11 @@ class InstantSearch extends HTMLElement {
 		super();
 
 		this.database = fetch('/search.json').then((response) => response.json()); // Immediately fetch the "database"
+		this.lastSearch = '';
 	}
 
 	connectedCallback() {
 		const searchInputId = this.dataset.searchInput;
-		// https://daily-dev-tips.com/posts/eleventy-creating-a-static-javascript-search/
 		const formEl = this.querySelector('form');
 		const inputEl = this.querySelector(`[name="${searchInputId}"]`);
 		const resultsEl = this.querySelector('[data-results-list]');
@@ -57,6 +57,10 @@ class InstantSearch extends HTMLElement {
 					break;
 			}
 
+			if (this.lastSearch === query) {
+				return; // No change, no faked reload
+			}
+
 			// First time?
 			if (!this.hasRunOnce) {
 				this.firstRunCallback();
@@ -72,6 +76,8 @@ class InstantSearch extends HTMLElement {
 					normalizeApostrophe(item.summary.toLowerCase()).includes(query) ||
 					normalizeApostrophe(item.tags.join(' ').toLowerCase()).includes(query)
 			);
+
+			this.lastSearch = query; // Track the latest query to avoid running it again on blur
 
 			setTimeout(() => {
 				resultFilterEl.disabled = result.length === 0;
@@ -109,7 +115,6 @@ class InstantSearch extends HTMLElement {
 						dateEl.setAttribute('datetime', dateInIso);
 						dateEl.innerText = dateInIso;
 					} else {
-						console.log();
 						dateEl.parentElement.innerHTML = ''; // Remove the date element altogether
 					}
 
