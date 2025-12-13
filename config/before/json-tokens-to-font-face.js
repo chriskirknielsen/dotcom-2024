@@ -25,15 +25,15 @@ export default function (string, fontsDir) {
 			.map(([prop, fontDataKey]) => (themeHeadingFont.hasOwnProperty(fontDataKey) ? `${prop}: ${themeHeadingFont[fontDataKey]};` : ''))
 			.filter(Boolean);
 		const fontFaceDeclaration = `
-		@font-face {
-			font-family: "${themeHeadingFont.family}";
-			src: ${fontSrcList.join(', ')};
-			${extraProps.join(`
-			`)}
-			font-display: swap;
-		}`;
+@font-face {
+	font-family: "${themeHeadingFont.family}";
+	src: ${fontSrcList.join(', ')};
+	${extraProps.join(`
+	`)}
+	font-display: swap;
+}`;
 		outputRoot += fontFaceDeclaration;
 	}
 
-	return outputRoot;
+	return outputRoot.trim();
 }

@@ -2,9 +2,9 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { promisify } from 'node:util';
 const glob = promisify(fs.glob);
+import { Transform as TransformStream } from 'node:stream';
 import esbuild from 'esbuild';
-import { bundle, transform, Features } from 'lightningcss';
-import through from 'through2';
+import { bundle as cssBundle, transform as cssTransform, Features as CSSFeatures } from 'lightningcss';
 import jsonTokensToCss from './json-tokens-to-css.js';
 import jsonTokensToFontFace from './json-tokens-to-font-face.js';
 
@@ -105,17 +105,14 @@ function assetCompiler(settings, config) {
 }
 
 function tokensToFile(fileInput, fileOutput, handler) {
-	return new Promise((resolve, reject) =>
-		fs
-			.createReadStream(fileInput)
-			.pipe(
-				through(function (json, enc, callback) {
-					this.push(handler(json));
-					callback();
-				})
-			)
-			.pipe(fs.createWriteStream(fileOutput).on('finish', resolve).on('error', reject))
-	);
+	const transform = new TransformStream({
+		objectMode: true,
+		transform: function (json, enc, callback) {
+			this.push(handler(json));
+			callback();
+		},
+	});
+	return new Promise((resolve, reject) => fs.createReadStream(fileInput).pipe(transform).pipe(fs.createWriteStream(fileOutput).on('finish', resolve).on('error', reject)));
 }
 
 export default function (eleventyConfig, options) {
@@ -143,13 +140,13 @@ export default function (eleventyConfig, options) {
 				outExt: 'css',
 				filterFn: (inputPath) => !inputPath.split('/').pop().startsWith('_'),
 				compileFn: async function (parsed) {
-					const bundled = bundle({
+					const bundled = cssBundle({
 						filename: `${parsed.dir}/${parsed.base}`,
 						minify: false,
 					});
-					const transformed = transform({
+					const transformed = cssTransform({
 						code: new TextEncoder().encode(bundled.code),
-						include: Features.Nesting | Features.MediaQueries,
+						include: CSSFeatures.Nesting | CSSFeatures.MediaQueries,
 						drafts: { customMedia: true },
 						minify: true,
 					});

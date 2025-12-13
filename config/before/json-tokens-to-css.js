@@ -240,5 +240,5 @@ export default function (string) {
 		.join('\n');
 
 	// Join all the outputs together
-	return [rootOutput, defaultOutput, extrasOutput, toolsOutput].join('\n');
+	return [rootOutput, defaultOutput, extrasOutput, toolsOutput].join('\n').trim();
 }
