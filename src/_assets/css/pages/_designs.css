@@ -70,7 +70,7 @@
 	& > img {
 		--MOCKUP-img-frame: var(--media-bg, transparent);
 		background: var(--MOCKUP-img-frame);
-		box-shadow: 0 0 0 50vw var(--MOCKUP-img-frame);
+		box-shadow: 0 0 0 50vw var(--MOCKUP-img-frame); /* Extends the background when zooming out so the blend to the photo is seamless */
 	}
 
 	@media (--accept-motion) {
@@ -93,10 +93,11 @@
 
 	&[data-mockup='poster'] {
 		--MOCKUP-scale: 2;
+
 		& > img,
 		&::before,
 		&::after {
-			transform-origin: 50% 27.5%; /* Magic number matching the center of the laptop in the mockup photo */
+			transform-origin: 50% 27.5%; /* Magic number matching the center of the poster area in the mockup photo */
 		}
 	}
 

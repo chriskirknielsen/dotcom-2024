@@ -466,6 +466,21 @@ const designs = [
 		tags: ['tv-movies'],
 		date: '2022-05-09',
 		accent: '#e8c025',
+		showInGallery: false,
+	},
+	{
+		slug: 'nandor-fucking-guy',
+		name: 'Nandor: Fucking Guy (WWDITS)',
+		description: 'One of my favourite quotes from Nandor in What We Do In The Shadows…',
+		img: 'nandor-fucking-guy.png',
+		links: {
+			TeePublic: 'https://www.teepublic.com/sticker/84954953-what-we-do-in-the-shadows-nandor-f-cking-guy',
+			RedBubble: 'https://www.redbubble.com/i/sticker/What-We-Do-In-The-Shadows-Nandor-F-cking-Guy-by-ckirknielsen/176769799.EJUG5',
+		},
+		tags: ['tv-movies'],
+		date: '2025-12-14',
+		accent: '#00b012',
+		mockup: 'sticker',
 	},
 	{
 		slug: 'cartridge-world',
