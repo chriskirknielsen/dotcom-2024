@@ -29,7 +29,7 @@
 	@media (prefers-reduced-motion: no-preference) {
 		transition: transform var(--easing-bounce) var(--anim-long);
 
-		@supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
+		@supports ((animation-timeline: scroll()) and (animation-range: -1% 1%)) {
 			animation-name: --FL-reveal;
 			animation-timing-function: var(--easing-out);
 			animation-timeline: view();

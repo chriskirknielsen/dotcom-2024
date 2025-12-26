@@ -13,4 +13,5 @@ export default {
 	Directory: 'Direct&shy;ory',
 	Gaming: 'Gam&shy;ing',
 	Collection: 'Collec&shy;tion',
+	Yearnotes: 'Year&shy;notes',
 };

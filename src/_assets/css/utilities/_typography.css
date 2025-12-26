@@ -45,6 +45,12 @@
 	line-height: 1;
 }
 
+/** Font family */
+.fontFamily-monospace {
+	font-size-adjust: 0.45;
+	font-family: var(--fontStack-monospace);
+}
+
 /** Font weights */
 .fontWeight-bold {
 	font-weight: bold;

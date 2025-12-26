@@ -34,7 +34,7 @@
 {{ set classList }}button {{ if (icon || iconStack) && emptyLabel }}button--icon-only{{ /if }} {{ ctaClass || '' }}{{ /set }}
 <{{ctaType}}
     {{ if href }}
-        href="{{href}}"
+        href="{{ href }}"
         {{ if pageContext && href === pageContext.url }}aria-current="page"{{ /if }}
     {{ else }}
         type="{{ type || 'button' }}"{{# In case type=submit is needed #}}

@@ -1,13 +1,17 @@
 .cellstack {
-    display: grid;
-    grid-template: auto / auto;
+	display: grid;
+	grid-template: auto / auto;
 
-    & > * {
-        grid-column: 1 / -1;
-        grid-row: 1 / -1;
-    }
+	& > * {
+		grid-column: 1 / -1;
+		grid-row: 1 / -1;
+	}
 }
 
 .cellstack--center {
-    place-items: center;
+	place-items: center;
+}
+
+.cellstack--inline {
+	display: inline-grid;
 }

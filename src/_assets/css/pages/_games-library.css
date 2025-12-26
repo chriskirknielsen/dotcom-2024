@@ -1,4 +1,4 @@
-@property --p {
+@property --gaming-progress {
 	syntax: '<number>';
 	initial-value: 0;
 	inherits: true;
@@ -71,7 +71,7 @@
 
 	@media (--accept-motion) {
 		transition: var(--anim-short) var(--easing-in-out);
-		transition-property: border-radius, box-shadow, transform, --p;
+		transition-property: border-radius, box-shadow, transform, --gaming-progress;
 	}
 
 	&:is(:hover, :focus-visible) {
@@ -83,7 +83,7 @@
 		/* Always transform the active item, and add a shadow to cover the previous sibling */
 		&:has(> .gaming-front) {
 			--GAME-hover-shadow-size: var(--size-2xs);
-			--p: 1;
+			--gaming-progress: 1;
 
 			border-start-end-radius: 0;
 			border-end-end-radius: 0;
@@ -159,8 +159,8 @@
 
 		/* prettier-ignore */
 		background-image:
-			linear-gradient(to bottom right, #fff2, #fff4, #fff6, #fff7, #fff6, #fff4, #fff3, #fff0 calc(var(--p) * 42%)),
-			linear-gradient(90deg, transparent, #000d calc(var(--p) * 67%));
+			linear-gradient(to bottom right, #fff2, #fff4, #fff6, #fff7, #fff6, #fff4, #fff3, #fff0 calc(var(--gaming-progress) * 42%)),
+			linear-gradient(90deg, transparent, #000d calc(var(--gaming-progress) * 67%));
 
 		opacity: 0.5;
 	}
