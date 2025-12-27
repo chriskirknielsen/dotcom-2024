@@ -29,7 +29,7 @@
 		"@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
 		"@notionhq/client": "^5.0.0",
 		"cheerio": "^1.0.0",
-		"colorjs.io": "^0.5.0",
+		"colorjs.io": "^0.6.0",
 		"dotenv": "^16.4.5",
 		"eleventy-plugin-page-assets": "github:chriskirknielsen/eleventy-plugin-page-assets#patch-1",
 		"eleventy-plugin-robotstxt": "^0.0.4",
