@@ -1132,6 +1132,9 @@ If you are a dork like me, here are the fonts (yay, fonts!), and inspiration for
 	}
 
 	.fullsection-illustration {
+		-webkit-user-select: none;
+		user-select: none;
+	
 		grid-area: --illu;
 	}
 
@@ -1173,7 +1176,7 @@ If you are a dork like me, here are the fonts (yay, fonts!), and inspiration for
 	}
 	
 	html[data-js="true"] .fullsection-illustration-button {
-		position: relative;
+		position: fixed; /* Relative would be fine but Safari fails to create the correct element without fixed */
 
 		display: block;
 		inline-size: 100%;
@@ -1246,12 +1249,13 @@ If you are a dork like me, here are the fonts (yay, fonts!), and inspiration for
 	@media screen and (prefers-reduced-motion: no-preference) {
 		[data-interacted="tv-power"][data-power] [data-illu-part="tv-screen"] {
 			transition-duration: 250ms;
-			transition-timing-function: ease-out, cubic-bezier(0.25,1,0,1);
-			transition-property: filter, transform;
+			transition-timing-function: ease-out, ease-out, cubic-bezier(0.25,1,0,1);
+			transition-property: opacity, filter, transform;
 		}
 	}
 	[data-interacted="tv-power"][data-power="off"] [data-illu-part="tv-screen"] {
-		filter: opacity(0) brightness(500%);
+		opacity: 0;
+		filter: brightness(500%);
 		transform: scaleY(0.01);
 	}
 
