@@ -29,7 +29,7 @@
 				{{ /if }}
 				
 				{{ if item.detail }}
-					<p class="eyeline | fontSize-small color-heading">
+					<p class="eyeline | fontSize-small color-heading {{ item.detailClass || '' }}">
 						{{ typeof detailPrefix == 'string' ? detailPrefix : '' }} {{ item.detail }}
 					</p>
 				{{ /if }}

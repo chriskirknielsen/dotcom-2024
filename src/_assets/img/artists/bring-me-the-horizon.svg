@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200">
-    <title>Bring Me The Horizon logo</title>
-    <path fill="#3a180e" stroke="#e00e4f" stroke-width="20" d="M1190 10v1180H10V10z" />
-    <g fill="none" stroke="#e00e4f" stroke-width="10" stroke-miterlimit="10">
-        <path d="M662.4 568.7 600 327.4l-62.4 241.3-155.5 138.2 280.3-138.2 154.1-76L662 630.1 600 871l-62-240.9-154.5-137.4 434.4 214.2-155.5-138.2" />
-        <circle cx="600" cy="600" r="340.4" />
-    </g>
-</svg>
