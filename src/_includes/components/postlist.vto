@@ -19,33 +19,6 @@
                 <div class="postlist-group-list">
         {{ /if }}
                 {{ for post of posts |> slice |> reverse }}
-                    {{# <article class="postlist-post">
-                        <p class="fontSize-small">
-                            <time datetime="{{ post.date |> dateFormat }}">{{ post.date |> dateFormat({ format: 'nice', lang: post.data.lang }) }}</time>
-                            {{ if post.data.updated }}
-                                {{ set originalTime = post.date |> dateFormat('ms')}}
-                                {{ set updateTime = post.data.updated |> dateFormat('ms')}}
-                                (updated{{ if updateTime != originalTime }} {{ post.data.updated |> timeTag({ lang }) }}{{ /if }})
-                            {{ /if }}
-                        </p>
-
-                        <h2 class="h3">
-                            {{ if post.data.lang && post.data.lang != 'en' }}
-                                <span class="color-text fontSize-smaller">({{ post.data.lang }})</span>
-                            {{ /if }}
-                            <a href="{{ post.url }}" class="heading-anchor">
-                                {{- post.data.title || '(oops, untitled post)' -}}
-                            </a>
-                        </h2>
-
-                        <p>
-                            {{- post.data.summary || post.excerpt }}
-                            {{ for t of (post.data.tags || post.tags) |> startsWith('_', false) }}
-                                <a href="/tags/{{ t }}/" class="link-label-anchor | fontSize-smaller"><span class="link-label-prefix | color-accent fontSize-smaller">#&hairsp;</span><span class="link-label-text">{{ t }}</span></a>
-                            {{ /for -}}
-                        </p>
-                    </article> #}}
-
                     {{ set dateString }}
                     <p>
                         {{ post.date |> timeTag({ lang }) }}
