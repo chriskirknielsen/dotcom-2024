@@ -30,6 +30,10 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
 	gap: var(--LIST-gap);
+
+	@supports (display: grid-lanes) {
+		display: grid-lanes; /* Masonry */
+	}
 }
 
 @media (--accept-motion) {
