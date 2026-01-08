@@ -31,8 +31,15 @@
 	grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
 	gap: var(--LIST-gap);
 
+	@supports (grid-template-rows: masonry) and (not (display: grid-lanes)) {
+		grid-template-rows: masonry; /* Firefox: Old masonry implementation */
+	}
+
+	@supports (display: masonry) {
+		display: masonry; /* Chrome: Rejected masonry implementation */
+	}
 	@supports (display: grid-lanes) {
-		display: grid-lanes; /* Masonry */
+		display: grid-lanes; /* Modern masonry implementation */
 	}
 }
 
