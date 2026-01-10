@@ -38,6 +38,7 @@
 	@supports (display: masonry) {
 		display: masonry; /* Chrome: Rejected masonry implementation */
 	}
+
 	@supports (display: grid-lanes) {
 		display: grid-lanes; /* Modern masonry implementation */
 	}
