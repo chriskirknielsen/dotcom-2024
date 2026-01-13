@@ -45,7 +45,7 @@ const purgeCssList = {
 	about: { safe: ['data-section=about'], block: ['data-section=home'] },
 };
 
-/** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
+/** @param {import('@11ty/eleventy/UserConfig').default} eleventyConfig */
 export default async function (eleventyConfig) {
 	//* Plugins
 	eleventyConfig.addPlugin(EleventyRenderPlugin, { accessGlobalData: true });
