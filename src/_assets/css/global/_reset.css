@@ -10,8 +10,6 @@
 /* Prevent font size inflation */
 html {
 	block-size: 100%;
-	-moz-text-size-adjust: none;
-	-webkit-text-size-adjust: none;
 	text-size-adjust: none;
 	font-synthesis: small-caps;
 }
@@ -108,6 +106,5 @@ summary {
 	background: none;
 
 	-webkit-appearance: none;
-	-moz-appearance: none;
 	appearance: none;
 }

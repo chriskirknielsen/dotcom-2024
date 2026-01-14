@@ -40,7 +40,7 @@ const assetsDir = `_assets`; // Assets folder
 const BUILD_CONTEXT = ['serve', 'watch'].includes(process.env.ELEVENTY_RUN_MODE) ? 'DEV' : 'LIVE';
 const md = new markdownIt({ html: true, breaks: true, linkify: true }).disable('code');
 const purgeCssList = {
-	_global: { safe: [/^\:[-a-z]+$/, 'translated-rtl', 'data-tooltip-pos'], block: [] }, // Preserve any pseudo-class for now (thanks laurentpayot; still broken in 6.0 https://github.com/FullHuman/purgecss/issues/978)
+	_global: { safe: [/^\:[-a-z]+$/, 'translated-rtl', 'data-tooltip-pos'], block: [] }, // Preserve any pseudo-class for now (thanks laurentpayot; still broken in 7.0 https://github.com/FullHuman/purgecss/issues/978)
 	home: { safe: ['data-section=home'], block: ['data-section=about'] },
 	about: { safe: ['data-section=about'], block: ['data-section=home'] },
 };

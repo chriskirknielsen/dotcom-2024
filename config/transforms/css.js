@@ -27,7 +27,7 @@ export default function (eleventyConfig, options = {}) {
 	const { pathToCss, placeholder, keyframes, getPageList, dynamicAttributes } = options;
 
 	eleventyConfig.addTransform('purge-and-inline-css', async (content, outputPath) => {
-		if (!outputPath || !outputPath.endsWith('.html')) {
+		if (!outputPath || !outputPath.endsWith('.html') || content.includes(placeholder) === false) {
 			return content;
 		}
 

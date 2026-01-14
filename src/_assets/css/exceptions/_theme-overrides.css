@@ -821,7 +821,9 @@ html[data-theme='director'] {
 
 		block-size: var(--h);
 
-		background: linear-gradient(90deg, transparent, var(--c) calc(50% - var(--w) * 1.25), transparent 0, transparent calc(50% + var(--w) * 1.25), var(--c) 0, transparent)
+		/* prettier-ignore */
+		background:
+			linear-gradient(90deg, transparent, var(--c) calc(50% - var(--w) * 1.25), transparent 0, transparent calc(50% + var(--w) * 1.25), var(--c) 0, transparent)
 				no-repeat 50% 25% / 100% 1px,
 			linear-gradient(90deg, transparent 10%, var(--c) calc(50% - var(--w)), transparent 0, transparent calc(50% + var(--w)), var(--c) 0, transparent 90%) no-repeat 50% 50% /
 				100% 1px,
@@ -835,8 +837,10 @@ html[data-theme='director'] {
 				calc(100% * var(--s)),
 			linear-gradient(120deg, var(--b) 50%, transparent calc(50% + 0.5px)) no-repeat calc(50% + var(--w) / 2 * var(--s)) var(--g) / calc(var(--w) * var(--s))
 				calc(100% * var(--s)),
-			linear-gradient(-120deg, var(--c) 50%, transparent calc(50% + 0.5px)) no-repeat calc(50% - var(--w) / 2) 50% / var(--w) 100%,
-			linear-gradient(120deg, var(--c) 50%, transparent calc(50% + 0.5px)) no-repeat calc(50% + var(--w) / 2) 50% / var(--w) 100%;
+			linear-gradient(-120deg, var(--c) 50%, transparent calc(50% + 0.5px)) no-repeat calc(50% - var(--w) / 2)
+				50% / var(--w) 100%,
+			linear-gradient(120deg, var(--c) 50%, transparent calc(50% + 0.5px)) no-repeat calc(50% + var(--w) / 2)
+				50% / var(--w) 100%;
 	}
 }
 
