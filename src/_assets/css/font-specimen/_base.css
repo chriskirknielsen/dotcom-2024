@@ -483,7 +483,7 @@ html:not(.no-js) button.glyph {
 			grid-column: fullbleed-start / container-left-end;
 			align-self: start;
 			max-inline-size: 46rem;
-			margin-left: auto;
+			margin-inline-start: auto;
 			padding: 0;
 
 			font-size: var(--fs);
