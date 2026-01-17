@@ -6,8 +6,13 @@
 .grouper--wrap {
 	flex-wrap: wrap;
 }
+
 .grouper--baseline {
 	align-items: baseline;
+}
+
+.grouper--center {
+	align-items: center;
 }
 
 .grouper--vertical {

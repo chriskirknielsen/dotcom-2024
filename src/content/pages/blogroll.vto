@@ -534,8 +534,8 @@
 {{ set blogIconSize = 32 }}
 {{> let isFirstLoop = true }}
 {{ for group, blogs of blogroll }}
-    <h2 data-blogroll="{{ group }}">{{ group }} &times;{{ blogs.length }}</h2>
-    <ul class="blogroll" style="--_tooltip-offset: 0px;">
+    <div class="grouper grouper--center"><h2 data-blogroll="{{ group }}">{{ group }} &times;{{ blogs.length }}</h2></div>
+    <ul class="blogroll" style="--_tooltip-offset: 0px; --flow-space: var(--size-xs);">
         {{ for loopIndex, blog of blogs |> sortBy(false, false, 'title') }}
             <li class="blogroll-item">
                 <a
@@ -574,6 +574,7 @@
 
 {{ if !metadata.nakedJs }}
 <script>(function(){
+    const downloadIcon = `{{ svg 'arrow-download', { width: 24, height: 24 } }}`;
     const blogroll = {{ blogroll |> JSON.stringify }};
     const safeAttrUrl = (url) => url.replace(/(&)+/g, '&amp;').replace(/(")+/g, '&quot;');
     Array.from(document.querySelectorAll('[data-blogroll]')).forEach((h2) => {
@@ -586,8 +587,14 @@
                 ${groupBlogs.map((b) => `<outline text="${safeAttrUrl(b.title)}" title="${safeAttrUrl(b.title)}" type="${safeAttrUrl(b.type)}" xmlUrl="${safeAttrUrl(b.xmlUrl)}" htmlUrl="${safeAttrUrl(b.htmlUrl)}" />`).join('')}
             </body>
         </opml>`;
-        const download = Object.assign(document.createElement('a'), { href: `data:text/xml,${encodeURI(xml)}`, download: `chriskirknielsen-blogroll-${groupLabel.toLowerCase()}.opml`, innerText: '(.opml)', ariaLabel: 'download as OPML file' });
-        h2.append(' ', download);
+        const download = Object.assign(document.createElement('a'), {
+            href: `data:text/xml,${encodeURI(xml)}`,
+            download: `chriskirknielsen-blogroll-${groupLabel.toLowerCase()}.opml`, 
+            className: 'button',
+            ariaLabel: 'download as OPML file',
+            innerHTML: `${downloadIcon} (.opml)`,
+        });
+        h2.after(download);
     });
 })();</script>
 {{ /if }}
