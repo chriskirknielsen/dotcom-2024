@@ -50,15 +50,7 @@ First off, the homepage wordmark for my name is a custom edit of the [Sprat type
     <span class="icon-text-pair">{{ svg name, { class: 'inline-icon inline-icon--center linecap-auto' } }} <code>{{ icon }}</code></span>
     {{- if loopIndex === Object.keys(tokens._meta.icons.lucide.used).length }}.{{ else }},{{ /if }}
 {{ /for }}
-I also took a few from <a href="https://iconsvg.xyz/">IconSVG.xyz</a>:
-{{> loopIndex = 0 }}
-{{ for name, icon of tokens._meta.icons.iconsvgxyz.used }}
-    {{> loopIndex++ }}
-    {{ if loopIndex === Object.keys(tokens._meta.icons.iconsvgxyz.used).length }}and {{ /if }}
-    <span class="icon-text-pair">{{ svg name, { class: 'inline-icon inline-icon--center linecap-auto' } }} <code>{{ icon }}</code></span>
-    {{- if loopIndex === Object.keys(tokens._meta.icons.iconsvgxyz.used).length }}.{{ else }},{{ /if }}
-{{ /for }}
-(other icons like themes or the super complicated hamburger menu, I made myself)
+(the themes icons are custom, and “brand” icons belong to their respective owners)
 </p>
 
 {{ callout "Keyboard user?", "⌨️", { mode: 'markup', class: 'hide-when-nojs' } }}
