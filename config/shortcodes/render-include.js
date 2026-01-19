@@ -210,13 +210,15 @@ export default function (eleventyConfig, options = {}) {
 			if (!isSvgCached || svgCache.hasOwnProperty(cacheKey) === false) {
 				svgCache[cacheKey] = loadSvg(ref); // Cache the raw SVG markup in a promise
 			}
-			const svg = await svgCache[cacheKey]; // Get the raw cache contents
-			const symbol = svg.replace('<svg', `<symbol`).replace('</svg>', '</symbol>'); // Convert SVGs to symbols (gross but it works, and doesn't require another Cheerio pass)
-			const $symbol = $(symbol); // Make the symbol into a cheerio instance
-			$symbol.attr('id', getSpriteId(ref)); // Attach the unique ID
-			$symbol.removeAttr('xmlns'); // Remove unnecessary attribute
-			$symbol.appendTo($svgSprite);
-			return;
+			// Get the raw cache contents promise and return it (we don't read the value in the await Promise.all so we can return an undefined value, just to signal the promise is fulfilled)
+			return svgCache[cacheKey].then((svg) => {
+				const symbol = svg.replace('<svg', `<symbol`).replace('</svg>', '</symbol>'); // Convert SVGs to symbols (gross but it works, and doesn't require another Cheerio pass)
+				const $symbol = $(symbol); // Make the symbol into a cheerio instance
+				$symbol.attr('id', getSpriteId(ref)); // Attach the unique ID
+				$symbol.removeAttr('xmlns'); // Remove unnecessary attribute
+				$symbol.appendTo($svgSprite);
+				return;
+			});
 		});
 		await Promise.all(symbols);
 
