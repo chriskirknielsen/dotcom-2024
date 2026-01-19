@@ -314,7 +314,7 @@ export default async function (eleventyConfig) {
 	eleventyConfig.addPassthroughCopy({
 		[`${rootDir}/_assets/img/${getEnvVersion('icon')}.svg`]: '/assets/img/icon.svg',
 		[`${rootDir}/_assets/img/${getEnvVersion('apple-touch-icon')}.png`]: '/assets/img/apple-touch-icon.png',
-		[`${rootDir}/_includes/assets/svg/no-ai.svg`]: '/assets/svg/no-ai.svg', // Linked from its use in the footer for easy sharing
+		[`${rootDir}/_includes/assets/svg/no-ai.svg`]: '/assets/img/no-ai.svg', // Linked from its use in the footer for easy sharing
 		[`${rootDir}/${getEnvVersion('favicon')}.ico`]: '/favicon.ico',
 	});
 
