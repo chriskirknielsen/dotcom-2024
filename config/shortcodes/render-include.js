@@ -220,6 +220,12 @@ export default function (eleventyConfig, options = {}) {
 		});
 		await Promise.all(symbols);
 
+		// Remove all comments
+		function isComment() {
+			return this.type === 'comment';
+		}
+		$.root().find('*').contents().filter(isComment).remove(); // Traverse DOM, per https://github.com/cheeriojs/cheerio/issues/214#issuecomment-62060708
+
 		// Retrieve the final SVG spritesheet
 		const svgOutput = $.root().html();
 		const bodyCloseIndex = content.lastIndexOf('</body>');

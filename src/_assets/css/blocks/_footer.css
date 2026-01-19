@@ -43,6 +43,10 @@
 	position: relative;
 }
 
+.footer-meta-ai {
+	color: currentColor;
+}
+
 .footer-message {
 	position: relative;
 

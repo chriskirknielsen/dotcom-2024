@@ -1,14 +1,18 @@
 <footer class="footer-wrap | container">
     <div class="footer | grouper grouper--vertical">
-        <div class="footer-meta | flow" style="--flow-space: 1em;">
-            <p class="textWrap-balance">
-                <strong class="p-name">{{ metadata.author.name }}</strong>
-                &copy;&nbsp;<span aria-hidden="true">{{ metadata.currentYear |> toRomanNumeral }}</span>
-                <span class="visually-hidden">{{ metadata.currentYear }}</span>
-                &mdash;
-                100% human-made.
-            </p>
-        </div>
+        <p class="textWrap-balance fontSize-larger">
+            <strong class="p-name">{{ metadata.author.name }}</strong>
+
+            <wbr>
+
+            &copy;&nbsp;<span aria-hidden="true">{{ metadata.currentYear |> toRomanNumeral }}</span>
+            <span class="visually-hidden">{{ metadata.currentYear }}</span>
+
+            <wbr>
+
+            <a href="/assets/svg/no-ai.svg" download class="footer-meta-ai">{{ svg 'no-ai', { class: 'inline-icon inline-icon--center', ariaHidden: true } }}</a>
+            100% human-made.
+        </p>
         
         <nav class="footer-nav" aria-label="Footer navigation">
             {{ for footerNav of nav.footerGroups }}
