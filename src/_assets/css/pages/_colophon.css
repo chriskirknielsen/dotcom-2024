@@ -1,3 +1,7 @@
 .img-88x31-list img {
-    image-rendering: pixelated;
+	image-rendering: pixelated;
+
+	&:hover {
+		scale: 1.5;
+	}
 }
