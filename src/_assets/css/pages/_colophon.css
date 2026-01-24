@@ -1,4 +1,5 @@
 .img-88x31-list {
+	--gap: calc(max(8px, var(--size-s)) / 2);
 	list-style-type: '';
 	display: block;
 	text-align: center;
@@ -6,7 +7,7 @@
 
 	li {
 		display: inline-flex;
-		margin: calc(max(8px, var(--size-s)) / 2);
+		margin: var(--gap) calc(var(--gap) - 0.125ch); /* Because we have (and need?) the whitespace, using about quarter of a character width as a space width seems fine, which is then divided by two to share the space between each <li> */
 	}
 
 	img {
