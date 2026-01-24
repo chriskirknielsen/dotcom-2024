@@ -1,7 +1,19 @@
-.img-88x31-list img {
-	image-rendering: pixelated;
+.img-88x31-list {
+	list-style-type: '';
+	display: block;
+	text-align: center;
+	text-wrap: balance;
 
-	&:hover {
-		scale: 2;
+	li {
+		display: inline-flex;
+		margin: calc(max(8px, var(--size-s)) / 2);
+	}
+
+	img {
+		image-rendering: pixelated;
+
+		&:hover {
+			scale: 2;
+		}
 	}
 }
