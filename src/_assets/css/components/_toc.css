@@ -30,6 +30,7 @@
 	li {
 		counter-increment: tocList;
 
+		margin-block-end: max(8px, var(--size-xs));
 		break-inside: avoid;
 
 		&::before {
