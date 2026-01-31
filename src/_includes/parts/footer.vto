@@ -17,14 +17,13 @@
         <nav class="footer-nav" aria-label="Footer navigation">
             {{ for footerNav of nav.footerGroups }}
                 <ul class="inline-list">
-                    {{ for navItem of footerNav }}
-                        {{ set linkHref = navItem.isRepoFileLink ? `${metadata.repo}/blob/main/${page.inputPath}` : navItem.path }}
+                    {{ for navItem of footerNav -}}
                         <li><a
-                            href="{{ linkHref }}"
+                            href="{{ navItem.isRepoFileLink ? `${metadata.repo}/blob/main/${page.inputPath}` : navItem.path }}"
                             {{ navItem.path |> getIsCurrentPage(page) }}
                             {{ if navItem.path.includes('mailto:') }}id="footer-email-link" class="u-email"{{ /if }}
                         >{{ navItem.label }}</a></li>
-                    {{ /for }}
+                    {{ /for -}}
                 </ul>
             {{ /for }}
         </nav>

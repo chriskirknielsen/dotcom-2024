@@ -20,7 +20,7 @@ import mediaGallery from './config/shortcodes/media-gallery.js';
 
 import markdownLibrary from './config/libraries/markdown.js';
 
-import cssTransforms from './config/transforms/css.js';
+import htmlTransforms from './config/transforms/html.js';
 
 import markdownIt from 'markdown-it';
 import { EleventyRenderPlugin, BundlePlugin } from '@11ty/eleventy';
@@ -271,18 +271,20 @@ export default async function (eleventyConfig) {
 	});
 
 	//* Transforms
-	eleventyConfig.addPlugin(cssTransforms, {
-		placeholder: assets.inlineCssPlaceholder,
-		pathToCss: [`./${rootDir}/${includesDir}/assets/css/style.css`],
-		dynamicAttributes: ['data-theme', 'aria-pressed', 'href'],
-		safelist: purgeCssList._global.safe,
-		blocklist: purgeCssList._global.block,
-		getPageList: function (outputPath) {
-			if (outputPath === `${outputDir}/index.html`) {
-				return purgeCssList.home;
-			} else if (outputPath === `${outputDir}/about/index.html`) {
-				return purgeCssList.about;
-			}
+	eleventyConfig.addPlugin(htmlTransforms, {
+		css: {
+			placeholder: assets.inlineCssPlaceholder,
+			pathToCss: [`./${rootDir}/${includesDir}/assets/css/style.css`],
+			dynamicAttributes: ['data-theme', 'aria-pressed', 'href'],
+			safelist: purgeCssList._global.safe,
+			blocklist: purgeCssList._global.block,
+			getPageList: function (outputPath) {
+				if (outputPath === `${outputDir}/index.html`) {
+					return purgeCssList.home;
+				} else if (outputPath === `${outputDir}/about/index.html`) {
+					return purgeCssList.about;
+				}
+			},
 		},
 	});
 

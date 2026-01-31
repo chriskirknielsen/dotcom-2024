@@ -138,7 +138,7 @@ export default function (eleventyConfig, options) {
 				inExt: 'css',
 				outFolder: 'css',
 				outExt: 'css',
-				filterFn: (inputPath) => !inputPath.split('/').pop().startsWith('_'),
+				filterFn: (inputPath) => inputPath.split('/').pop().startsWith('_') === false,
 				compileFn: async function (parsed) {
 					const bundled = cssBundle({
 						filename: `${parsed.dir}/${parsed.base}`,
@@ -148,7 +148,7 @@ export default function (eleventyConfig, options) {
 						code: new TextEncoder().encode(bundled.code),
 						include: CSSFeatures.Nesting | CSSFeatures.MediaQueries,
 						drafts: { customMedia: true },
-						minify: true,
+						minify: false,
 					});
 					return transformed.code;
 				},

@@ -18,9 +18,11 @@
 		{{- /if }}
 
 		{{- if !metadata.nakedCss }}
-		<!-- Want to see the full stylesheet? Load up the following URL: /assets/css/style.css (it's minified sorry, ~15% savings aren't nothing!) -->
 		{{# <link href="/assets/css/style.css" rel="stylesheet"> #}}
-		<style>{{ assets.inlineCssPlaceholder }}</style>
+		<style>
+			/* Want to see the full stylesheet? Load up the following URL: {{metadata.url}}/assets/css/style.css */
+			{{ assets.inlineCssPlaceholder }}
+		</style>
 		{{ /if -}}
 
 		{{# Print styles -#}}
