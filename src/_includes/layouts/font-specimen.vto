@@ -130,12 +130,13 @@
                 const glyphDetailBaseClass = glyphDetail.className;
 
                 glyphDetail.hidden = false;
-                Array.from(document.querySelectorAll('.glyph')).forEach(function(g) {
+                Array.from(document.querySelectorAll('.glyph')).forEach(function(g, i) {
                     const button = Object.assign(document.createElement('button'), {
                         type: 'button',
                         className: g.className,
                         innerText: g.innerText.trim(),
                         ariaLabel: `Detail for glyph ${g.innerText.trim()}`,
+                        ariaPressed: i === 0,
                     });
                     button.setAttribute('data-base-class', g.className);
                     if (g.hasAttribute('data-variant')) {
@@ -149,8 +150,15 @@
                     if (!glyphButton) {
                         return;
                     }
+
+                    const activeGlyph = document.querySelector('button.glyph[aria-pressed="true"]');
+                    if (activeGlyph && activeGlyph !== glyphButton) {
+                        activeGlyph.ariaPressed = false;
+                    }
+
                     glyphDetail.innerText = glyphButton.innerText.trim();
                     glyphDetail.className = (glyphButton.getAttribute('data-variant') || '').split(' ').filter(Boolean).concat([glyphDetailBaseClass, glyphButton.getAttribute('data-base-class')].filter(Boolean)).join(' ');
+                    glyphButton.ariaPressed = true;
                 })
             });
         {{ /js }};

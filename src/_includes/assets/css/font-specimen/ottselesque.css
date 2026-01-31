@@ -414,6 +414,12 @@ html:not(.no-js) button.glyph {
   border: none;
 }
 
+html:not(.no-js) button.glyph[aria-pressed="true"] {
+  --bg: color-mix(in hsl, var(--color-alt, var(--palette-02)) 20%, transparent);
+  background: var(--bg);
+  box-shadow: 0 0 0 calc(var(--gap) / 4) var(--bg);
+}
+
 .glyph-split > * {
   padding-inline: var(--layout-gutter);
   grid-column: container;
