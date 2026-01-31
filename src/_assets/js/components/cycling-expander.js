@@ -76,27 +76,36 @@ class CyclingExpander extends HTMLElement {
 				return true;
 			};
 
-			if (!prefersReducedMotion && document.startViewTransition) {
+			if (!prefersReducedMotion && document.startViewTransition && typeof ViewTransitionTypeSet === 'function') {
 				emojiEl.style.viewTransitionName = 'emoji';
+				emojiEl.style.viewTransitionClass = 'cyclingExpander';
 				contentEl.style.viewTransitionName = 'content';
+				contentEl.style.viewTransitionClass = 'cyclingExpander';
 
 				// Disable root view transition
 				if (document.startViewTransition && !this._noAnimRootStyle) {
 					const viewTransitionCSS = this.spawn('style', {
 						textContent:
-							`:root:not(.expander-changing)::view-transition-group(emoji), :root:not(.expander-changing)::view-transition-group(content) { animation: none; }` +
+							`html:not(:active-view-transition-type(--cycling-expander))::view-transition-group(.cyclingExpander) {
+								animation: none;
+							}` +
 							// Simple trick to keep aspect ratio acceptable from https://jakearchibald.com/2024/view-transitions-handling-aspect-ratio-changes/
-							`:root.expander-changing::view-transition-old(content), ::view-transition-new(content) { height: 100%; object-fit: none; overflow: clip; }` +
+							`html:active-view-transition-type(--cycling-expander)::view-transition-old(content),
+							html:active-view-transition-type(--cycling-expander)::view-transition-new(content) {
+								height: 100%;
+								object-fit: none;
+								overflow: clip;
+							}` +
 							// Set the transition duration
-							`:root.expander-changing::view-transition-group(emoji), ::view-transition-group(content) { animation-duration: ${this.transitionTime}ms; }`,
+							`html:active-view-transition-type(--cycling-expander)::view-transition-group(.cyclingExpander) {
+								animation-duration: ${this.transitionTime}ms;
+							}`,
 					});
 					document.head.append(viewTransitionCSS);
 				}
 			}
 
-			if (!prefersReducedMotion && document.startViewTransition && this.currentItemIndex > -1) {
-				document.documentElement.classList.add('expander-changing');
-
+			if (!prefersReducedMotion && document.startViewTransition && typeof ViewTransitionTypeSet === 'function' && this.currentItemIndex > -1) {
 				// Disable root view transition
 				if (!this._noAnimRootStyle) {
 					this._noAnimRootStyle = this.spawn('style', {
@@ -110,16 +119,16 @@ class CyclingExpander extends HTMLElement {
 				}
 
 				requestAnimationFrame(() => {
-					this._viewTransition = document.startViewTransition(() => setContent());
-					this._viewTransition.finished.then(() => {
+					document.startViewTransition({ update: setContent, types: ['--cycling-expander'] }).finished.then(() => {
 						if (this._noAnimRootStyle) {
 							this._noAnimRootStyle.remove();
 							this._noAnimRootStyle = null;
-							document.documentElement.classList.remove('expander-changing');
 						}
 
 						emojiEl.style.viewTransitionName = '';
+						emojiEl.style.viewTransitionClass = '';
 						contentEl.style.viewTransitionName = '';
+						contentEl.style.viewTransitionClass = '';
 					});
 				});
 			} else {

@@ -109,10 +109,15 @@ class ThemePicker extends HTMLElement {
 		const isDefaultSameTarget = !theme && document.documentElement.getAttribute('data-theme') === this.defaults[this.getPreferredScheme()];
 		const isDefaultSameSource = !document.documentElement.getAttribute('data-theme') && theme === this.defaults[this.getPreferredScheme()];
 		const isSameTheme = isSameThemeKey || isDefaultSameTarget || isDefaultSameSource;
-		const useFallback = isSameTheme || !runViewTransition || !document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const useFallback =
+			isSameTheme ||
+			!runViewTransition ||
+			!document.startViewTransition ||
+			typeof ViewTransitionTypeSet !== 'function' ||
+			window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 		// Prevent weird transition between theme styles for a brief instant
-		document.documentElement.style.setProperty('--anim-f', useFallback ? '0' : '0.000000001');
+		// document.documentElement.style.setProperty('--anim-f', useFallback ? '0' : '0.000000001');
 
 		const applyTheme = async () => {
 			if (theme) {
@@ -122,7 +127,6 @@ class ThemePicker extends HTMLElement {
 				document.documentElement.removeAttribute('data-theme');
 				localStorage.removeItem(this.store);
 			}
-			document.documentElement.classList.add('theme-changing');
 			document.querySelectorAll('[data-theme-set]').forEach(function (btn) {
 				btn.setAttribute('aria-pressed', (btn.getAttribute('data-theme-set') === theme).toString());
 			});
@@ -134,14 +138,13 @@ class ThemePicker extends HTMLElement {
 			}
 
 			// Once the theme's updated, allow transitions again
-			document.documentElement.style.removeProperty('--anim-f');
-			document.documentElement.classList.remove('theme-changing');
+			// document.documentElement.style.removeProperty('--anim-f');
 		};
 
 		if (useFallback) {
 			updatedPromised = applyTheme();
 		} else {
-			updatedPromised = document.startViewTransition(applyTheme).finished;
+			updatedPromised = document.startViewTransition({ update: applyTheme, types: ['--theme'] }).finished;
 		}
 
 		return updatedPromised.then(restoreAnim).then((x) => {
