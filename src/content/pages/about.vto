@@ -94,28 +94,28 @@ I’m a creative developer, or “design engineer”, meaning I can code and des
     adobecs: { label: 'Adobe Creative Suite', sub: { photoshop: 'Photoshop', illustrator: 'Illustrator', aftereffects: 'After Effects' } }
 } }}
 <ul class="inline-list unstuck-list textAlign-center | about-icons-list" style="--c: {{ icons | keys | length }};">
-    {{ for iconKey, iconInfo of icons -}}
-        <li class="about-icons-list-item">
-        {{- if iconInfo.sub -}}
-            <details name="about-language-icon" class="about-icons-list-details">
-                <summary class="about-icons-list-summary">
-                    {{ svg `${iconKey}-icon`, { title: iconInfo.label, class: 'about-icons-list-icon inline-icon inline-icon--center' } }}
-                    <span class="visually-hidden">(and more)</span>
-                </summary>
-                <div class="about-icons-list-extra">
-                {{ for subIconKey, subIconLabel of iconInfo.sub }}
-                    {{ svg `${subIconKey}-icon`, { title: subIconLabel, class: 'about-icons-list-icon inline-icon inline-icon--center' } }}
-                {{ /for }}
-                </div>
-            </details>
-        {{- else -}}
-            {{- svg `${iconKey}-icon`, { title: iconInfo.label, class: 'about-icons-list-icon inline-icon inline-icon--center' } -}}
-        {{- /if -}}
-        </li>
-    {{- /for }}
+{{ for iconKey, iconInfo of icons -}}
+    <li class="about-icons-list-item">
+    {{- if iconInfo.sub -}}
+        <details name="about-language-icon" class="about-icons-list-details">
+            <summary class="about-icons-list-summary">
+                {{ svg `${iconKey}-icon`, { title: iconInfo.label, class: 'about-icons-list-icon inline-icon inline-icon--center' } }}
+                <span class="visually-hidden">(and more)</span>
+            </summary>
+            <div class="about-icons-list-extra">
+            {{ for subIconKey, subIconLabel of iconInfo.sub }}
+                {{ svg `${subIconKey}-icon`, { title: subIconLabel, class: 'about-icons-list-icon inline-icon inline-icon--center' } }}
+            {{ /for }}
+            </div>
+        </details>
+    {{- else -}}
+        {{- svg `${iconKey}-icon`, { title: iconInfo.label, class: 'about-icons-list-icon inline-icon inline-icon--center' } -}}
+    {{- /if -}}
+    </li>
+{{- /for }}
 </ul>
 
-<p>If you were looking for a résumé, you’ll find what you need on my <a href="https://www.linkedin.com/in/chriskirknielsen" class="link-label-anchor">{{ svg 'linkedin-icon', { class: 'inline-icon inline-icon--center' } }} <span class="link-label-text">LinkedIn profile</span></a>.</p>
+<p>If you were looking for a résumé, you may find what you need on my <a href="https://www.linkedin.com/in/chriskirknielsen" class="link-label-anchor">{{ svg 'linkedin-icon', { class: 'inline-icon inline-icon--center' } }} <span class="link-label-text">LinkedIn profile</span></a>.</p>
 
 <hr>
 

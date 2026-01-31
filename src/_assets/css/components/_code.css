@@ -79,7 +79,7 @@ code-wrap {
 
 	&::before,
 	&::after {
-		content: '\2060\200a\2060';
+		content: '\2060\200a\2060'; /* zero-width joiner + hairspace + zero-width joiner */
 		user-select: none;
 
 		font-size: 0.5em;
