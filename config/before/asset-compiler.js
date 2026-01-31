@@ -148,7 +148,7 @@ export default function (eleventyConfig, options) {
 						code: new TextEncoder().encode(bundled.code),
 						include: CSSFeatures.Nesting | CSSFeatures.MediaQueries,
 						drafts: { customMedia: true },
-						minify: true,
+						minify: false,
 					});
 					return transformed.code;
 				},
