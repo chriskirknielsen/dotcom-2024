@@ -68,8 +68,4 @@
     </div>
 </instant-search>
 
-{{ if !metadata.nakedJs }}
-<script>
-{{ include 'assets/js/components/instant-search.js' }}
-</script>
-{{ /if }}
+{{ js 'foot-instantsearch' }}{{ include 'assets/js/components/instant-search.js' }}{{ /js }}

@@ -5,6 +5,14 @@ function filterTiles(context, inputName) {
 	let list = context.querySelector('[data-filtered-list]');
 	const storageKey = 'designFilter';
 
+	// Helper to apply several inline styles at once
+	function setStyles(item, styles) {
+		for (let prop in styles) {
+			item.style[prop] = styles[prop];
+		}
+	}
+
+	// Item reset function to ensure an idle starting point
 	function resetItem(item) {
 		item.style.width = '';
 		item.style.height = '';
@@ -16,7 +24,9 @@ function filterTiles(context, inputName) {
 	function filterTo(filter, skipAnim = false) {
 		let isShowAll = filter === '';
 		let filterHash = filter ? '#' + hashIndicator + filter : './';
-		let prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const doAnim = !skipAnim && !prefersReducedMotion;
+		const useVT = Boolean(document.startViewTransition && typeof ViewTransitionTypeSet === 'function');
 
 		history.replaceState(undefined, '', filterHash);
 		if (filter) {
@@ -25,34 +35,68 @@ function filterTiles(context, inputName) {
 			sessionStorage.removeItem(storageKey);
 		}
 
-		// Don't animate in certain conditions
-		if (skipAnim || prefersReducedMotion || !Element.prototype.animate) {
+		// Don't run the FLIP animation in certain conditions
+		if (useVT || !doAnim || !Element.prototype.animate) {
 			// const visibleWidth = items.find((i) => i.getAttribute('aria-hidden') !== 'true').getBoundingClientRect().width;
-			items.forEach(function (item) {
-				let tags = item.getAttribute('data-tags').split(',');
-				let wasShown = item.getAttribute('aria-hidden') === 'false';
-				let isShown = tags.indexOf(filter) > -1 || isShowAll;
+			function updateDOM() {
+				items.forEach(function (item) {
+					let tags = item.getAttribute('data-tags').split(',');
+					let wasShown = item.getAttribute('aria-hidden') === 'false';
+					let isShown = tags.indexOf(filter) > -1 || isShowAll;
 
-				item.hidden = true;
-				let afterHidden = () => {
-					item.setAttribute('aria-hidden', (!isShown).toString());
-					item.hidden = false;
-				};
+					item.hidden = true;
+					let afterHidden = () => {
+						item.setAttribute('aria-hidden', (!isShown).toString());
+						item.hidden = false;
+					};
 
-				if (skipAnim || prefersReducedMotion) {
-					// RAF avoids a flash of positioned blocks when there is a filter on page load
-					requestAnimationFrame(afterHidden);
-				} else {
-					afterHidden();
-				}
+					if (skipAnim || prefersReducedMotion) {
+						// RAF avoids a flash of positioned blocks when there is a filter on page load
+						requestAnimationFrame(afterHidden);
+					} else {
+						afterHidden();
+					}
+				});
+			}
+
+			// No VT or animation: instantly update the DOM
+			if (!useVT || !doAnim) {
+				return updateDOM();
+			}
+
+			// View transitions below
+			list.setAttribute('data-view-transition-type', '');
+
+			items.forEach((item) => {
+				setStyles(item, {
+					viewTransitionName: `--vt-${item.id}`,
+					viewTransitionClass: 'filteredTileItem',
+				});
 			});
 
-			return; // No animation: stop here!
+			requestAnimationFrame(() => {
+				document
+					.startViewTransition({
+						update: updateDOM,
+						types: ['--filtered-tiles'],
+					})
+					.finished.then(() => {
+						items.forEach((item) => {
+							setStyles(item, {
+								viewTransitionName: '',
+								viewTransitionClass: '',
+							});
+						});
+					});
+			});
+
+			// No FLIP animation: stop here!
+			return;
 		}
 
 		// Set up the FLIP (First-Last-Invert-Play) animation
 		const animateOptions = {
-			duration: 300,
+			duration: getComputedStyle(items[0]).transitionDuration || 300,
 			easing: getComputedStyle(items[0]).transitionTimingFunction || 'ease-in-out',
 		};
 		const listGeometry = list.getBoundingClientRect();

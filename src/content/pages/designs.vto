@@ -34,10 +34,9 @@
 			<li class="card-wrapper" id="{{ design.slug }}"
 				data-tags="{{ design.tags |> join(',') }}"
 				aria-hidden="false"
-				{{ if enableViewTransitions || design.accent -}}
+				{{ if design.accent -}}
 					style="
-						{{- if enableViewTransitions }}view-transition-name:{{ design.slug }};{{ /if -}}
-						{{- if design.accent }}--CARD-accent:{{ design.accent }};{{ /if -}}
+						{{- if design.accent }}--CARD-accent: {{ design.accent }};{{ /if -}}
 					"
 				{{- /if }}
 			>
@@ -59,7 +58,7 @@
 				{{ /if }}
 			{{- /set }}
 			{{ set designLinks }}
-				<ul role="list" class="flex-list | marginBlockStart-auto" {{ if enableViewTransitions }}style="view-transition-name:{{ design.slug }}-list;"{{ /if }}>
+				<ul role="list" class="flex-list | marginBlockStart-auto">
 					{{- for site, url of design.links }}
 						{{ if site.includes('(') == false }}
 							{{ set siteIconId }}store-icon-{{ site |> toLowerCase }}{{ /set }}
@@ -80,13 +79,14 @@
 					src: cardImageSrc,
 					width: 600,
 					height: 600,
-					lazy: loopIndex >= 7
+					lazy: loopIndex >= 7,
 				},
 				link: designPermalink,
 				heading: design.name,
 				descriptionMarkup: designLinks,
 				classes: 'card--design',
-				containsLinks: true
+				containsLinks: true,
+				viewTransitionSlug: design.slug,
 			} }}
 			</li>
 		{{ /for }}
@@ -115,8 +115,4 @@
 	</ul>
 </div>
 
-{{ if !metadata.nakedJs }}
-<script>
-{{ include 'assets/js/components/filtered-tiles.js' }}
-</script>
-{{ /if }}
+{{ js 'foot-filteredtiles' }}{{ include 'assets/js/components/filtered-tiles.js' }}{{ /js }}

@@ -1,4 +1,5 @@
-{{ set attrs }}class="{{ `card ${classes || ''}` |> trim }}" {{ cardAttrs || '' }}{{ /set }}
+{{ set extendedCardAttrs = cardAttrs || {} }}
+{{ set attrs }}class="{{ `card ${classes || ''}` |> trim }}" {{ Object.entries(extendedCardAttrs).map((e) => `${e[0]}="${e[1]}"`).join(' ') }}{{ /set }}
 {{ set imageLink = (image ? image.link : null) || link }}
 {{ set isImageAriaHidden = image && (image.isAriaHidden || (!image.alt && heading) || imageLink == link) }}
 <article {{ attrs |> trim }}>
@@ -13,11 +14,18 @@
 					width="{{ image.width }}"
 					height="{{ image.height }}"
 					{{ if image.lazy }}loading="lazy"{{ /if }}
-					{{ if image.focusPoint }}style="--CARD-image-focus-point: {{ image.focusPoint }};"{{ /if }}
+					{{ if image.focusPoint || image.style -}}
+					style="
+						{{- if image.focusPoint }}--CARD-image-focus-point: {{ image.focusPoint }};{{ /if -}}
+						{{- if extraStyle }}{{ image.style }}{{ /if -}}
+					"
+					{{- /if }}
 				>
 			</a>
 			{{ if image.decorator }}
-				<div class="card-decorator | fontSize-tiny">{{ image.decorator }}</div>
+				<div
+					class="card-decorator | fontSize-tiny"
+				>{{ image.decorator }}</div>
 			{{ /if }}
 		</div>
 	{{ /if }}
@@ -35,10 +43,12 @@
 			</{{ headingTag || 'h2' }}>
 		{{ /if }}
 		
+		<div>
 		{{ if descriptionMarkup }}
 			{{ descriptionMarkup }}
 		{{ else if description }}
 			<p class="card-description | textWrap-balance">{{ description }}</p>
 		{{ /if }}
+		</div>
 	</div>
 </article>

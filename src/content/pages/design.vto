@@ -35,7 +35,7 @@
 	{{ set designImagePath = [assets.images, 'designs', design.img] |> toPath |> toNetlifyImage }}
 	{{ if design.img }}
 	<div class="single-media" {{ if design.mockup }}data-mockup="{{ design.mockup }}" style="--MOCKUP-image: url({{ designImagePath }}); --MOCKUP-bg: url({{ [assets.images, 'mockup-'+design.mockup+'.jpg'] |> toPath |> toNetlifyImage }});"{{ /if }}>
-		<img src="{{ designImagePath }}" alt="" width="600" height="600" class="inline-size-100pc">
+		<img src="{{ designImagePath }}" alt="" width="600" height="600" class="inline-size-100pc" loading="eager" fetchpriority="high">
 	</div>
 	{{ /if }}
 

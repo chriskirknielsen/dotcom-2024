@@ -22,8 +22,13 @@
 	position: relative;
 }
 
+[data-filtered-tiles-group] {
+	position: relative;
+}
+
 [data-filtered-item] {
 	position: relative;
+
 	transition: all var(--anim-medium) var(--easing-in-out);
 	transition-property: visibility, z-index;
 
@@ -40,10 +45,71 @@
 	}
 
 	&[aria-hidden='true'] {
+		pointer-events: none;
+
 		position: absolute;
 		z-index: 0;
 
 		visibility: hidden;
-		pointer-events: none;
+		scale: 0;
+	}
+
+	[data-view-transition-type] & {
+		& {
+			position: relative;
+
+			visibility: visible;
+
+			transition: none;
+		}
+
+		&[aria-hidden='true'] {
+			display: none;
+		}
+	}
+}
+
+/* View transition support */
+@supports (view-transition-class: --a) {
+	html:active-view-transition-type(--filtered-tiles) {
+		view-transition-name: none;
+
+		&::view-transition(root) {
+			animation: none;
+		}
+
+		&::view-transition,
+		&::view-transition-group(root) {
+			pointer-events: none;
+		}
+
+		&::view-transition-group(.filteredTileItem),
+		&::view-transition-old(.filteredTileItem),
+		&::view-transition-new(.filteredTileItem) {
+			animation-duration: var(--anim-medium, 500ms);
+			animation-timing-function: var(--easing-in-out, ease-in-out);
+		}
+
+		&::view-transition-old(.filteredTileItem):only-child,
+		&::view-transition-new(.filteredTileItem):only-child {
+			animation-name: scale;
+		}
+
+		&::view-transition-old(.filteredTileItem):only-child {
+			z-index: -1;
+		}
+		&::view-transition-new(.filteredTileItem):only-child {
+			--a: -1;
+			animation-direction: reverse;
+		}
+	}
+
+	@keyframes scale {
+		to {
+			scale: 0.5;
+			rotate: calc(7deg * var(--a, 1));
+			opacity: 0;
+			filter: blur(16px);
+		}
 	}
 }
