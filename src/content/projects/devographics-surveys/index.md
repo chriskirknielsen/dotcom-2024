@@ -7,7 +7,7 @@ date: 2024-07-19
 projectButtonLabel: Visit site
 projectImportance: 5
 projectOrder: 9
-extraCta: [{ label: 'Get shirts', url: 'https://cottonbureau.com/people/state-of-js' }]
+extraCta: [{ label: 'Get shirts', url: 'https://cottonbureau.com/people/devographics' }]
 toc: true
 ---
 
