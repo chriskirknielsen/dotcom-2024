@@ -13,6 +13,7 @@
 		<title>{{ post.data.title }}</title>
 		<link rel="stylesheet" href="{{ [assets.css, 'font-face.css'] |> toPath }}">
 		<link rel="preload" href="{{ [assets.fonts, `${tokens.themes.dusk.font.heading.filename}.woff2`] |> toPath }}" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" as="image" href="{{ imageUrl }}" fetchpriority="high">
 		<style>
 		{{- css 'opengraph' }}
 			* {
