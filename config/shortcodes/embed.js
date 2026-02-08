@@ -12,7 +12,7 @@ export default function (eleventyConfig, options = {}) {
 		const path = new URL(url).pathname;
 		const id = path.split('/')[3];
 		const shotThumbnail = `https://shots.codepen.io/username/pen/${id}-512.webp?version=${Date.now()}`;
-		let markup = `<div class="codepen | cellstack cellstack--center" data-height="${height}" data-theme-id="${theme}" data-default-tab="${tabs}" data-slug-hash="${id}">
+		let markup = `<div class="cp_embed_wrapper codepen | cellstack cellstack--center" data-height="${height}" data-theme-id="${theme}" data-default-tab="${tabs}" data-slug-hash="${id}">
 			<div class="single-media">
 				<img src="${toCloudinary(shotThumbnail)}" alt="" class="codepen-thumbnail" width="512" height="288" loading="lazy" decoding="async" style="height: ${height}px;">
 			</div>
