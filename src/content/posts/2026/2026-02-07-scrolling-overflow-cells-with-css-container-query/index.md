@@ -16,13 +16,13 @@ With CSS container query units, we can know the size of the cell (`100cqi`), and
 
 ## The idea
 
-In this example, we are working with a table, and to make this effect work, I had to ensure the container was set to `display: block`. Table cells have a bespoke `display` value of `table-cell` (shocker!), so to avoid breaking the table layout, the text (`span`) must be wrapped in a container element (`div`), which will be inside the cell (`td`). Maybe there’s a way to remove one layer, but I’m just playing around — optimise as your own leisure!
+In this example, we are working with a table, and to make this effect work, I had to ensure the container was set to `display: block`. Table cells have a bespoke `display` value of `table-cell` (shocker!), so to avoid breaking the table layout, the text (`span`) must be wrapped in a container element (`div`), which will be inside the cell (`td`). Maybe there’s a way to remove one layer, but I’m just playing around — optimise at your own leisure!
 
 So, to get all of this right, we need:
 
 ```html
 <table>
-	<!-- For brievety, I am skipping the thead section and the tbody wrapper -->
+	<!-- For brevity, I am skipping the thead section and the tbody wrapper -->
 	<tr>
 		<td class="cell">
 			<div class="container">
