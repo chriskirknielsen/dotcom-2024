@@ -3,14 +3,18 @@ class CodeWrap extends HTMLElement {
 		super();
 
 		// Add copy button
+		this.nbsp = ' ';
 		this.copyLabel = this.getAttribute('copy-label') || 'Copy';
 		this.copyDoneLabel = this.getAttribute('copy-done-label') || 'Done';
 		this.copyClass = this.getAttribute('copy-class') || '';
 		this.toolbar = this.querySelector('.codeblock-toolbar');
+		this.actionWrapper = Object.assign(document.createElement('div'), { className: this.getAttribute('actionwrap-class') || '' });
 		this.copyButton = Object.assign(document.createElement('button'), { type: 'button', className: this.copyClass, innerText: this.copyLabel });
+		this.alertEl = Object.assign(document.createElement('div'), { role: 'alert', innerText: this.nbsp, ariaHidden: true });
 		this.copyButtonTimeout = null;
 		this.copyButton.setAttribute('data-codewrap-copy', '');
-		this.toolbar.append(this.copyButton);
+		this.toolbar.append(this.actionWrapper);
+		this.actionWrapper.append(this.copyButton, this.alertEl);
 		this.clipboard = Boolean(navigator.clipboard.writeText);
 
 		// Events handlers
@@ -43,15 +47,23 @@ class CodeWrap extends HTMLElement {
 				const copyAction = navigator.clipboard.writeText(codeBlock.innerText);
 				copyAction
 					.then(() => {
-						this.copyButton.innerText = this.copyDoneLabel; // Update successful label
+						this.alertEl.innerText = this.copyDoneLabel; // Update successful label
 					})
 					.catch((e) => {
 						console.error(e);
-						this.copyButton.innerText = '❌ Error!'; // Update error label
+						this.alertEl.innerText = '❌ Error!'; // Update error label
 					})
 					.finally(() => {
+						this.alertEl.ariaHidden = false;
 						this.copyButtonTimeout = setTimeout(() => {
-							this.copyButton.innerText = this.copyLabel; // After a time, revert to original label
+							this.alertEl.addEventListener(
+								'transitionend',
+								() => {
+									this.alertEl.innerText = this.nbsp; // After the animation is over, revert to original label
+								},
+								{ once: true }
+							);
+							this.alertEl.ariaHidden = true;
 						}, 2000);
 					});
 			}

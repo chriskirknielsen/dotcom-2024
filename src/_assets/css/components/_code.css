@@ -7,6 +7,42 @@ code {
 code-wrap {
 	display: block;
 }
+.codewrap-action {
+	isolation: isolate;
+}
+
+.codewrap-action > [data-codewrap-copy] {
+	position: relative;
+	z-index: 1;
+
+	:where(&) {
+		transition: transform var(--anim-short) var(--easing-in-out); /* Prevent overriding the default .button if motion is allowed */
+	}
+}
+.codewrap-action > [role='alert'] {
+	transition: transform var(--anim-short) var(--easing-in-out);
+
+	@media (--reduce-motion) {
+		transition: transform linear 0.1ms;
+	}
+}
+.codewrap-action > * {
+	@media (--reduce-motion) {
+		transition-duration: 0.1ms;
+	}
+}
+.codewrap-action > [data-codewrap-copy],
+.codewrap-action:has(> [role='alert']:not([aria-hidden='true'])) > * {
+	transform-origin: 0% 100%;
+}
+.codewrap-action > [role='alert']:not([aria-hidden='false']),
+.codewrap-action:has(> [role='alert']:not([aria-hidden='true'])) > [data-codewrap-copy] {
+	transform-origin: 100% 100%;
+}
+.codewrap-action:has(> [role='alert']:not([aria-hidden='true'])) [data-codewrap-copy],
+.codewrap-action > [role='alert']:not([aria-hidden='false']) {
+	transform: scale(0, 0.5);
+}
 
 .codeblock,
 .codeview {

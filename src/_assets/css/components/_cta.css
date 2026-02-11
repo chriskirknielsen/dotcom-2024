@@ -6,7 +6,8 @@
 	--CTA-border-radius: var(--_cta-border-radius);
 	--CTA-box-shadow: var(--_cta-box-shadow);
 	--CTA-padding: var(--_cta-padding-block) var(--_cta-padding-inline);
-	--CTA-transition-properties: color, text-decoration-color, text-underline-offset, text-decoration-thickness, background-color, border-color, box-shadow, opacity, filter;
+	--CTA-transition-properties: color, text-decoration-color, text-underline-offset, text-decoration-thickness, background-color, border-color, box-shadow, opacity, filter,
+		transform;
 
 	position: relative;
 	flex-shrink: 0;
