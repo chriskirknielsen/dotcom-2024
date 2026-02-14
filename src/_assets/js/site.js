@@ -1,5 +1,5 @@
 function toggleInertForMenu(newState = false) {
-	// Array.from(document.body.querySelectorAll(':scope > :not(header,script,style)')).forEach((el) => (el.inert = newState));
+	Array.from(document.body.querySelectorAll(':scope > :not(header, script, style)')).forEach((el) => (el.inert = newState));
 }
 
 document.addEventListener('click', function (e) {
@@ -33,7 +33,32 @@ document.addEventListener('click', function (e) {
 	}
 });
 
+document.addEventListener('keydown', function (e) {
+	// Asks users for a query and direct them right away to the search page with their query filled and executed
+	if (!e.target.closest('input, textarea, button')) {
+		const modifierKey = window.navigator.platform ? (/Mac|iPod|iPhone|iPad/.test(window.navigator.platform) ? e.metaKey : e.ctrlKey) : e.metaKey || e.ctrlKey;
+		if ((e.key === 'k' || e.keyCode == 75) && modifierKey) {
+			e.preventDefault();
+
+			if (window.location.href.includes('/search/')) {
+				const searchField = document.getElementById('q');
+				if (searchField) {
+					searchField.focus();
+				}
+				return;
+			}
+
+			const searchQuery = prompt('Quick search:');
+			if (searchQuery) {
+				const queryString = new URLSearchParams({ q: searchQuery }).toString();
+				window.location.href = `/search/?${queryString}`;
+			}
+		}
+	}
+});
+
 document.addEventListener('keyup', function (e) {
+	// Close the menu on ESC
 	const pressedToggle = document.querySelector('[data-toggle-pressed][aria-pressed="true"]');
 	if (pressedToggle && (e.key === 'Escape' || e.keyCode === 27)) {
 		pressedToggle.setAttribute('aria-pressed', 'false');
@@ -45,6 +70,7 @@ document.addEventListener('keyup', function (e) {
 document.addEventListener(
 	'mouseenter',
 	function (e) {
+		// Keep the footer message animation running even after unhovering it
 		let target = e?.target?.closest?.('.footer-message');
 		if (target) {
 			target.classList.add('activated');

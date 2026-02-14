@@ -21,6 +21,7 @@
 	padding-inline-end: var(--size-s);
 
 	text-align: end;
+	white-space: nowrap;
 }
 
 .search-results-item > .search-results-col-date:empty::before {

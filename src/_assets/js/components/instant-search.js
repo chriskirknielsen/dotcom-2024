@@ -27,6 +27,7 @@ class InstantSearch extends HTMLElement {
 
 		this.database = fetch('/search.json').then((response) => response.json()); // Immediately fetch the "database"
 		this.lastSearch = '';
+		this.initialSearch = window.location.search ? new URLSearchParams(window.location.search).get('q') : null;
 	}
 
 	connectedCallback() {
@@ -42,6 +43,7 @@ class InstantSearch extends HTMLElement {
 
 		// Based on https://daily-dev-tips.com/posts/eleventy-creating-a-static-javascript-search/
 		const runQuery = async () => {
+			const delay_ms = !this.hasRunOnce && this.initialSearch ? 0 : 100; // Make the search feel natural with a little delay
 			let query = normalizeApostrophe(inputEl.value.toLowerCase().trim());
 			if (query.length < 1) {
 				inputEl.setCustomValidity('Please provide a non-blank search string.');
@@ -82,6 +84,8 @@ class InstantSearch extends HTMLElement {
 			);
 
 			this.lastSearch = query; // Track the latest query to avoid running it again on blur
+			const newSearchParam = new URLSearchParams({ q: query }).toString();
+			history.replaceState(undefined, '', `${window.location.pathname}?${newSearchParam.toString()}`);
 
 			setTimeout(() => {
 				resultFilterEl.disabled = result.length === 0;
@@ -140,7 +144,7 @@ class InstantSearch extends HTMLElement {
 					const opt = Object.assign(document.createElement('option'), { value: type, innerText: getTypeLabel(type) });
 					resultFilterEl.appendChild(opt);
 				});
-			}, 100); // Fake a loading period
+			}, delay_ms);
 		};
 
 		inputEl.addEventListener('blur', function (e) {
@@ -161,6 +165,11 @@ class InstantSearch extends HTMLElement {
 				result.hidden = selection !== '*' && result.getAttribute('data-result-type') !== selection;
 			});
 		});
+
+		if (this.initialSearch) {
+			inputEl.value = this.initialSearch;
+			runQuery();
+		}
 	}
 
 	firstRunCallback() {
