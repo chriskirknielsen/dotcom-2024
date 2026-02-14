@@ -14,6 +14,7 @@
             link: 'https://www.youtube.com/watch?v=_Lz37ItZRqg&list=OLAK5uy_nbmBQwpCB42jaP-DrFrDDs5ng_iCFREp0&index=1',
             image: 'https://lastfm.freetls.fastly.net/i/u/770x0/ac89c7f01f0e9089c3654f08150219b1.jpg',
             blurb: "Hard to pick just one album from Thrice, they have evolved their sound and I think most of their albums are fantastic but this one is probably the one that made me realise how much I love their music. _[Palms](https://officialthrice.bandcamp.com/album/palms)_ is another excellent release.",
+            intro: 'Red Sky',
         },
         {
             artist: 'Sleep Token',
@@ -22,6 +23,7 @@
             link: 'https://www.youtube.com/watch?v=-UUSUrr6zyo&list=OLAK5uy_kR2XaVymdtE2e0WXdnqYIViBNemh6_wT4',
             image: 'https://lastfm.freetls.fastly.net/i/u/770x0/e7b531006b41eb9bb864362291962f39.jpg',
             blurb: "This album was my gateway into fully appreciating the band but I enjoyed their stuff (shortly) prior to that, and have kept thoroughly enjoying all they’ve put out since. They experiment with a lot of styles (while keeping a metal-ish foundation) and I’m here for it.",
+            intro: 'The Summoning',
         },
         {
             artist: 'Architects',
@@ -30,6 +32,7 @@
             link: 'https://architects.bandcamp.com/album/for-those-that-wish-to-exist',
             image: 'https://lastfm.freetls.fastly.net/i/u/770x0/f6de1da1f5346edbd6c7f05642d44d7e.jpg',
             blurb: "I discovered the band via the track Doomsday but this album was my first start-to-finish experience and I got hooked from there on out. I’d also heavily recommend the more recent _[The Sky, The Earth & All Between](https://architects.bandcamp.com/album/the-sky-the-earth-all-between)_.",
+            intro: 'Doomsday',
         },
         {
             artist: 'Linkin Park',
@@ -38,6 +41,7 @@
             link: 'https://www.youtube.com/watch?v=oCgqH3FxA1o',
             image: 'https://lastfm.freetls.fastly.net/i/u/770x0/7135e01b8a5e3179851d660d81a09c48.jpg',
             blurb: "I love Hybrid Theory and Meteora, they are top tier albums, but Reanimation just takes it up a notch with all the favourites reworked into something. Seriously an album I could listen to every day.",
+            intro: 'Numb',
         },
         {
             artist: 'Pendulum',
@@ -46,6 +50,7 @@
             link: 'https://www.youtube.com/watch?v=yeGJ9B6K8JY&list=OLAK5uy_mDV0g1wgspqHRB9skvBNApzlAi5sB7S10',
             image: 'https://lastfm.freetls.fastly.net/i/u/770x0/506135e8489b451ba53cd6aa0c6ff430.jpg',
             blurb: "While I really enjoy In Silico and Immersion, this album is my go-to for some neurofunky drum-and-bass. Its atmosphere is just so on point.",
+            intro: 'Hold Your Colour',
         },
         {
             artist: 'Innerpartysystem',
@@ -54,6 +59,7 @@
             link: 'https://www.youtube.com/watch?v=Q1GIT44jjkE&list=OLAK5uy_ndAk6v1JCQZCSFaNebz2XNM8s-Ao0BwF4',
             image: 'https://lastfm.freetls.fastly.net/i/u/770x0/6a1cc6a2af214796827f917b930408f5.jpg',
             blurb: "This reminds me of being in the backseat of a car driving at night. While they released an alright EP some years after, this is kind of a one-hit wonder album, which is a shame… I’d love more of this music, it is so good.",
+            intro: 'Structure',
         },
         {
             artist: 'Underoath',
@@ -62,6 +68,7 @@
             link: 'https://www.youtube.com/watch?v=7vRIm_wDXr4&list=PL52862682CFA41AF0',
             image: 'https://lastfm.freetls.fastly.net/i/u/770x0/02eaf41d1d0741e781ebf4d57e9b460b.jpg',
             blurb: "There’s something about this album that I just keep coming back to. It’s well-balanced and probably reminds me of my teenage years, too, so it’s extra special.",
+            intro: 'A Moment Suspended In Time',
         },
         {
             artist: 'Audioslave',
@@ -70,6 +77,7 @@
             link: 'https://www.youtube.com/watch?v=MVl7taUQVLw&list=PL1Zw2Z8NKVUw-TRG8rTXDVZLWkSwJJv46',
             image: 'https://lastfm.freetls.fastly.net/i/u/770x0/ed071004b3a64afb8b2a8397aad1bed4.jpg',
             blurb: "Chris Cornell’s voice was spectacular, and I think it shows the most with this album. Every song is fantastic in its own way, but it doesn’t hurt that _Like a Stone_ and _I Am a Highway_ are on here…",
+            intro: 'Like a Stone',
         },
         {
             artist: 'deadmau5',
@@ -78,6 +86,7 @@
             link: 'https://deadmau5.bandcamp.com/album/for-lack-of-a-better-name-the-extended-mixes',
             image: 'https://lastfm.freetls.fastly.net/i/u/770x0/8aefc5606df3460dc6f5e131398a93f3.jpg',
             blurb: "My discovery of electronica aptly dates back to Daft Punk’s _Discovery_, but deadmau5 got me into the EDM genre (ew I know). _Strobe_ is undoubtedly his magnum opus. This eventually led me to try my hand at writing my own music!",
+            intro: 'Ghosts’n’Stuff',
         },
     ],
     eleventyComputed: {
@@ -108,7 +117,7 @@
     slug: 'music',
     items: albums.map((g) => ({
         title: g.title,
-        content: g.blurb,
+        content: `${g.blurb}<br>**Appetizer track for this artist:** ${g.intro}`,
         detail: `<em class="fontSize-smaller">${g.genre}</em>`,
         detailClass: 'lineHeight-tight',
         link: g.link,
