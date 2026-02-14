@@ -12,6 +12,7 @@
 		"debug": "DEBUG=Eleventy* npx @11ty/eleventy --dryrun",
 		"bench": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy --dryrun",
 		"draft": "dir=./src/content/posts/`date \"+%Y\"`/`date \"+%Y-%m-%d\"` && file=$dir/index.md && mkdir -p $dir && touch -f $file && echo \"---\\ntitle: \\\"\\\"\\nsummary: \\\"\\\"\\ntags: []\\ntime: '00:00:00'\\n---\" > $file && code -r $file",
+		"clear": "find .cache/ -name '11tycache-*' -delete",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
