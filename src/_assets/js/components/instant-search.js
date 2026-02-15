@@ -36,6 +36,7 @@ class InstantSearch extends HTMLElement {
 		const inputEl = this.querySelector(`[name="${searchInputId}"]`);
 		const resultsEl = this.querySelector('[data-results-list]');
 		const resultItemTemplate = this.querySelector('template');
+		const resultWrapper = this.querySelector('[data-results-wrapper]');
 		const resultCountEl = this.querySelector('[data-results-count]');
 		const resultFilterEl = this.querySelector('[data-results-filter]');
 
@@ -87,64 +88,68 @@ class InstantSearch extends HTMLElement {
 			const newSearchParam = new URLSearchParams({ q: query }).toString();
 			history.replaceState(undefined, '', `${window.location.pathname}?${newSearchParam.toString()}`);
 
-			setTimeout(() => {
-				resultFilterEl.disabled = result.length === 0;
+			return new Promise((res, _) => {
+				setTimeout(() => {
+					resultFilterEl.disabled = result.length === 0;
 
-				if (result.length === 0) {
-					resultCountEl.innerText = `(0)`;
-					resultsEl.innerHTML = `<tr><td colspan="3">No results found 😢</td></tr>`;
-					return;
-				}
-
-				const resultsFragment = new DocumentFragment();
-				resultsEl.innerHTML = '';
-				let resultsTypes = new Set();
-
-				result.forEach((page) => {
-					const type = page.type;
-					const tpl = resultItemTemplate.content.cloneNode(true);
-					const listItemEl = tpl.querySelector('[data-result-type]');
-					const typeEl = tpl.querySelector('[data-result-slot="type"]');
-					const dateEl = tpl.querySelector('[data-result-slot="date"]');
-					const anchorEl = tpl.querySelector('[data-result-slot="link"]');
-					const langEl = tpl.querySelector('[data-result-slot="lang"]');
-
-					const dateInIso = new Date(page.date).toISOString().split('T').shift();
-					const typePretty = getTypeLabel(type);
-					resultsTypes.add(type);
-
-					listItemEl.setAttribute('data-result-type', type);
-					typeEl.innerText = `${typePretty}`;
-					anchorEl.setAttribute('href', page.url);
-					anchorEl.setAttribute('hreflang', page.lang);
-					anchorEl.innerHTML = page.title;
-
-					if (['_posts', '_designs'].includes(type)) {
-						dateEl.setAttribute('datetime', dateInIso);
-						dateEl.innerText = dateInIso;
-					} else {
-						dateEl.parentElement.innerHTML = ''; // Remove the date element altogether
+					if (result.length === 0) {
+						resultCountEl.innerText = `(0)`;
+						resultsEl.innerHTML = `<tr><td colspan="3"><p>No results found 😢</p></td></tr>`;
+						return;
 					}
 
-					// If the result is not in English, indicate it
-					if (page.lang !== 'en') {
-						langEl.innerText = `(${page.lang})`;
-					} else {
-						langEl.hidden = true;
-					}
+					const resultsFragment = new DocumentFragment();
+					resultsEl.innerHTML = '';
+					let resultsTypes = new Set();
 
-					resultsFragment.append(tpl);
-				});
+					result.forEach((page) => {
+						const type = page.type;
+						const tpl = resultItemTemplate.content.cloneNode(true);
+						const listItemEl = tpl.querySelector('[data-result-type]');
+						const typeEl = tpl.querySelector('[data-result-slot="type"]');
+						const dateEl = tpl.querySelector('[data-result-slot="date"]');
+						const anchorEl = tpl.querySelector('[data-result-slot="link"]');
+						const langEl = tpl.querySelector('[data-result-slot="lang"]');
 
-				resultCountEl.innerText = `(${result.length})`;
-				resultsEl.append(resultsFragment);
+						const dateInIso = new Date(page.date).toISOString().split('T').shift();
+						const typePretty = getTypeLabel(type);
+						resultsTypes.add(type);
 
-				const availableTypes = Array.from(resultsTypes).sort();
-				availableTypes.forEach((type) => {
-					const opt = Object.assign(document.createElement('option'), { value: type, innerText: getTypeLabel(type) });
-					resultFilterEl.appendChild(opt);
-				});
-			}, delay_ms);
+						listItemEl.setAttribute('data-result-type', type);
+						typeEl.innerText = `${typePretty}`;
+						anchorEl.setAttribute('href', page.url);
+						anchorEl.setAttribute('hreflang', page.lang);
+						anchorEl.innerHTML = page.title;
+
+						if (['_posts', '_designs'].includes(type)) {
+							dateEl.setAttribute('datetime', dateInIso);
+							dateEl.innerText = dateInIso;
+						} else {
+							dateEl.parentElement.innerHTML = ''; // Remove the date element altogether
+						}
+
+						// If the result is not in English, indicate it
+						if (page.lang !== 'en') {
+							langEl.innerText = `(${page.lang})`;
+						} else {
+							langEl.hidden = true;
+						}
+
+						resultsFragment.append(tpl);
+					});
+
+					resultCountEl.innerText = `(${result.length})`;
+					resultsEl.append(resultsFragment);
+
+					const availableTypes = Array.from(resultsTypes).sort();
+					availableTypes.forEach((type) => {
+						const opt = Object.assign(document.createElement('option'), { value: type, innerText: getTypeLabel(type) });
+						resultFilterEl.appendChild(opt);
+					});
+
+					res();
+				}, delay_ms);
+			});
 		};
 
 		inputEl.addEventListener('blur', function (e) {
@@ -167,8 +172,9 @@ class InstantSearch extends HTMLElement {
 		});
 
 		if (this.initialSearch) {
+			resultWrapper.tabIndex = '-1';
 			inputEl.value = this.initialSearch;
-			runQuery();
+			runQuery().then(() => resultWrapper.focus());
 		}
 	}
 
