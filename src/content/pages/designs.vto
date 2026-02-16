@@ -61,7 +61,7 @@
 				<ul role="list" class="flex-list | marginBlockStart-auto">
 					{{- for site, url of design.links }}
 						{{ if site.includes('(') == false }}
-							{{ set siteIconId }}store-icon-{{ site |> toLowerCase }}{{ /set }}
+							{{ set siteIconId }}{{ site |> toLowerCase }}-icon{{ /set }}
 							<li>
 								<a href="{{ url }}" class="store-icon-linkwrap | display-block">
 									<span class="visually-hidden">Get on {{ site }}</span>
@@ -104,7 +104,7 @@
 	<h2 class="visually-hidden" id="designs-shops-label">Shops</h2>
 	<ul class="designs-stores | flex-list justifyContent-center | fontSize-small" aria-labelledby="designs-shops-label" style="--list-gap: var(--size-m);">
 		{{ for merchStore, merchUrl of metadata.merch }}
-			{{ set storeIconName }}store-icon-{{ merchStore |> toLowerCase }}{{ /set }}
+			{{ set storeIconName }}{{ merchStore |> toLowerCase }}-icon{{ /set }}
 			<li>
 				<a href="{{ merchUrl }}">
 					{{ svg storeIconName, { class: 'store-icon', width: 32, height: 32 } }}
