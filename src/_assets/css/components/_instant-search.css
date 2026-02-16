@@ -9,6 +9,8 @@
 .search-results-col-type {
 	inline-size: max-content;
 	padding-inline-start: var(--size-s);
+
+	white-space: nowrap;
 }
 .search-results-col-title {
 	inline-size: auto;

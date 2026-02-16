@@ -15,7 +15,7 @@ function getTypeLabel(type) {
 			return 'Page';
 		case '_posts':
 		default:
-			return 'Blogpost';
+			return 'Post';
 	}
 }
 
@@ -35,7 +35,8 @@ class InstantSearch extends HTMLElement {
 		const formEl = this.querySelector('form');
 		const inputEl = this.querySelector(`[name="${searchInputId}"]`);
 		const resultsEl = this.querySelector('[data-results-list]');
-		const resultItemTemplate = this.querySelector('template');
+		const resultItemTemplate = this.querySelector('template[data-for="result-row"]');
+		const resultIconTemplate = this.querySelector('template[data-for="result-icon"]');
 		const resultWrapper = this.querySelector('[data-results-wrapper]');
 		const resultCountEl = this.querySelector('[data-results-count]');
 		const resultFilterEl = this.querySelector('[data-results-filter]');
@@ -110,13 +111,20 @@ class InstantSearch extends HTMLElement {
 						const dateEl = tpl.querySelector('[data-result-slot="date"]');
 						const anchorEl = tpl.querySelector('[data-result-slot="link"]');
 						const langEl = tpl.querySelector('[data-result-slot="lang"]');
+						const svgTpl = Array.from(resultIconTemplate.content.children).find((node) => node.dataset.type === type);
+						const iconSvg = svgTpl ? svgTpl.cloneNode(true) : '';
 
 						const dateInIso = new Date(page.date).toISOString().split('T').shift();
 						const typePretty = getTypeLabel(type);
 						resultsTypes.add(type);
 
 						listItemEl.setAttribute('data-result-type', type);
-						typeEl.innerText = `${typePretty}`;
+						if (iconSvg) {
+							const typeLabel = Object.assign(document.createElement('span'), { textContent: typePretty });
+							typeEl.append(iconSvg, typeLabel);
+						} else {
+							typeEl.innerText = typePretty;
+						}
 						anchorEl.setAttribute('href', page.url);
 						anchorEl.setAttribute('hreflang', page.lang);
 						anchorEl.innerHTML = page.title;

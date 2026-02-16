@@ -54,9 +54,11 @@
                 <tbody data-results-list role="rowgroup"></tbody>
             </table>
 
-            <template>
+            <template data-for="result-row">
                 <tr class="search-results-item" data-result-type role="row">
-                    <td class="search-results-col-type fontSize-smaller" data-result-slot="type" role="cell"></td>
+                    <td class="search-results-col-type fontSize-smaller" role="cell">
+                        <div class="grouper grouper--icon-text-pair" data-result-slot="type"></div>
+                    </td>
                     <td class="search-results-col-title" role="cell">
                         <a href="/" hreflang="" data-result-slot="link"></a>
                         <span class="fontSize-smaller" data-result-slot="lang"></span>
@@ -65,6 +67,14 @@
                         <time datetime="" data-result-slot="date" class="fontVariant-tabularNums"></time>
                     </td>
                 </tr>
+            </template>
+            <template  data-for="result-icon">
+                {{ svg 'asterisk', { class: 'inline-icon inline-icon--center', 'data-type': '*' } }}
+                {{ svg 'font-file', { class: 'inline-icon inline-icon--center', 'data-type': '_fonts' } }}
+                {{ svg 'shirt', { class: 'inline-icon inline-icon--center', 'data-type': '_designs' } }}
+                {{ svg 'hammer', { class: 'inline-icon inline-icon--center', 'data-type': '_projects' } }}
+                {{ svg 'page', { class: 'inline-icon inline-icon--center', 'data-type': '_pages' } }}
+                {{ svg 'note', { class: 'inline-icon inline-icon--center', 'data-type': '_posts' } }}
             </template>
         </div>
     </div>

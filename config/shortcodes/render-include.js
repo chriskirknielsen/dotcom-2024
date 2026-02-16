@@ -131,6 +131,11 @@ export default function (eleventyConfig, options = {}) {
 				svg.attr('preserveAspectRatio', svgOptions.preserveAspectRatio);
 			}
 
+			// Custom data attributes
+			Object.keys(svgOptions)
+				.filter((k) => k.startsWith('data-'))
+				.forEach((k) => svg.attr(k, svgOptions[k]));
+
 			const output = $.root().html();
 			if (key) {
 				cheerioCache[key] = output;
