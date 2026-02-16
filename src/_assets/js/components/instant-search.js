@@ -6,7 +6,7 @@ function getTypeLabel(type) {
 		case '*':
 			return 'All';
 		case '_fonts':
-			return 'Typeface';
+			return 'Font';
 		case '_designs':
 			return 'Design';
 		case '_projects':

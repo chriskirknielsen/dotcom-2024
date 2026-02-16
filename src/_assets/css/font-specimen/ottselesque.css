@@ -206,6 +206,10 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 	box-decoration-break: clone;
 
 	filter: drop-shadow(0 calc(min(1.5px, var(--s)) * -1) 0 var(--palette-01)) drop-shadow(var(--s) var(--s) 0 #300602) drop-shadow(var(--s) var(--s) 0 #30060280);
+
+	&::selection {
+		text-shadow: 0 0 0 var(--palette-04);
+	}
 }
 
 .sentence-sample {
