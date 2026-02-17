@@ -14,4 +14,5 @@ export default {
 	Gaming: 'Gam&shy;ing',
 	Collection: 'Collec&shy;tion',
 	Yearnotes: 'Year&shy;notes',
+	réinitialisation: 'réinitial&shy;isation',
 };
