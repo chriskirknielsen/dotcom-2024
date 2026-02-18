@@ -168,18 +168,12 @@ dl {
 	display: grid;
 	grid-template-columns: auto 1fr;
 	gap: var(--size-s) var(--size-m);
-	/* align-content: baseline; */
 }
 
 dt {
-	/* grid-column: 1; */
 	align-self: baseline;
 
 	font-weight: bold;
-}
-
-dd {
-	/* grid-column: 2; */
 }
 
 /* Adjustments for alt text to be a little more usable */

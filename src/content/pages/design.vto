@@ -1,6 +1,5 @@
 ---js
 {
-	tags: ['_designs', '_og'],
 	pagination: {
 		data: 'designs',
 		size: 1,
@@ -13,6 +12,7 @@
 	},
 	permalink: `designs/{{ design.slug |> slugify }}/index.html`,
 	eleventyComputed: {
+		tags: ['_designs', '_og'],
 		pageTitle: (data) => data.design.name,
 		title: (data) => data.design.name,
 		summary: function (data) { return this.markdown(data.design.description, true); },

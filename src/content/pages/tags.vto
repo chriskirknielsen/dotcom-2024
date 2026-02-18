@@ -2,6 +2,8 @@
 title: Tags
 summary: A thrilling list of the tags I’ve used on my blog posts (larger tag = more posts!)
 heroCta: [{ label: "Blog", url: "/Blog/" }]
+eleventyComputed:
+    tags: []
 ---
 
 {{- set tagList = collections |> Object.keys |> startsWith('_', false) }}

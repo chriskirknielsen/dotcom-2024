@@ -59,3 +59,141 @@ ol > li > ol {
 [data-list] > li + li {
 	margin-block-start: 1em;
 }
+
+.dl-container {
+	container: --dl / inline-size;
+
+	& > dl {
+		@container (inline-size < 20em) {
+			grid-template-columns: 1fr;
+			gap: 0 var(--size-m);
+
+			& > :is(dt:where(:not(:first-of-type)), .dl-item-wrap) {
+				margin-block-start: var(--size-m);
+			}
+		}
+	}
+}
+
+.dl-item-wrap {
+	grid-column: 1 / -1;
+}
+
+.dl-tiles {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	flex-wrap: balance;
+	justify-content: center;
+
+	text-align: center;
+}
+
+.dl-tile {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	max-inline-size: 12ch;
+	padding: var(--size-s) var(--size-m);
+
+	border-radius: var(--_corner);
+	background: var(--C-surface);
+	box-shadow: var(--_shadow);
+
+	& > dt {
+		align-self: center;
+	}
+
+	.dl-tiles--flipped & {
+		dd {
+			order: -1;
+		}
+	}
+}
+
+.progress-list {
+	isolation: isolate;
+
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: var(--size-s) 0;
+	padding: 0;
+
+	list-style: '';
+}
+
+.progress-list-item {
+	--BAR-track: var(--C-surface);
+	--BAR-fill: color-mix(in oklch, var(--C-accent) 10%, var(--C-surface));
+	--BAR-text: var(--C-text);
+
+	position: relative;
+
+	display: grid;
+	grid-column: 1 / -1;
+	grid-template-columns: subgrid;
+	inline-size: 100%;
+	overflow: clip;
+
+	border-radius: var(--_corner);
+	background: var(--BAR-track);
+	box-shadow: var(--_shadow);
+}
+
+.progress-list-label {
+	grid-column: 1;
+	padding-inline-start: var(--size-s);
+
+	background: var(--BAR-fill);
+}
+
+.progress-list-bar {
+	container-type: inline-size;
+
+	content: '';
+
+	grid-column: 2;
+
+	block-size: 100%;
+	inline-size: calc(var(--progress) * 100%);
+	padding-inline-end: var(--size-xs);
+
+	text-align: end;
+	background: linear-gradient(to right, transparent, currentColor) var(--BAR-fill);
+	background: linear-gradient(to right in oklch, var(--BAR-fill), currentColor) var(--BAR-fill);
+
+	@container (inline-size > 0px) {
+		background-size: 100cqi; /* 100cqi is not exactly right since the first column also takes up space but it looks fine so I'm keeping it simple */
+		background-position: 0 0;
+		background-repeat: no-repeat;
+	}
+}
+
+.progress-list-number {
+	position: relative;
+
+	padding-inline: 0.5ch;
+
+	font-family: var(--fontStack-monospace);
+	font-size-adjust: 0.5;
+	white-space: nowrap;
+
+	color: var(--BAR-track);
+	border-radius: var(--_corner);
+	background: var(--BAR-text);
+
+	&::before {
+		content: '';
+		position: absolute;
+
+		inset-block: 42%;
+		inset-inline-end: 100%;
+
+		display: block;
+		inline-size: calc(100cqi - 100%);
+
+		background: linear-gradient(to right, transparent, color-mix(in oklch, var(--C-accent), transparent));
+	}
+}

@@ -28,11 +28,12 @@ export default {
 		[...navbar],
 		[...slashPages],
 		[
+			{ path: '/fonts/', label: 'Fonts' },
 			{ path: '/colophon/', label: 'Colophon' },
-			{ path: '/search/', label: 'Search' },
-			{ path: '/fonts/', label: 'Custom Fonts' },
+			{ path: '/stats/', label: 'Stats' },
 			{ path: '/blogroll/', label: 'Blogroll' },
 			{ path: '/webring/', label: 'Webring' },
+			{ path: '/search/', label: 'Search' },
 		],
 		[
 			gamesLibrary,

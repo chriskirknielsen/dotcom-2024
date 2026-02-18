@@ -1,0 +1,122 @@
+---js
+{
+    title: "Stats",
+    summary: 'Number for nerds',
+    permalink: '/stats/',
+    tags: ['_og'],
+    eleventyComputed: {
+        ogImageSummary: 'Just stats',
+        customMetaImage: function (data) {
+            if (data.permalink) {
+                return this.toOgImage(data);
+            }
+            return this.toPath([data.assets.images, 'metaimage.jpg']);
+        }
+    },
+}
+---
+<h2>The Big Picture</h2>
+<div style="--flow-space: var(--size-m);">
+    <dl class="dl-tiles dl-tiles--flipped">
+        <div class="dl-tile">
+            <dt>Posts</dt>
+            <dd class="h3">{{ collections._posts.length |> formatNumber }}</dd>
+        </div>
+        <div class="dl-tile">
+            <dt>Pages</dt>
+            <dd class="h3">{{ collections._pages.length |> formatNumber }}</dd>
+        </div>
+        <div class="dl-tile">
+            <dt>Designs</dt>
+            <dd class="h3">{{ collections._designs.length |> formatNumber }}</dd>
+        </div>
+        <div class="dl-tile">
+            <dt>Projects</dt>
+            <dd class="h3">{{ collections._projects.length |> formatNumber }}</dd>
+        </div>
+        <div class="dl-tile">
+            <dt>Fonts</dt>
+            <dd class="h3">{{ collections._fonts.length |> formatNumber }}</dd>
+        </div>
+    </dl>
+</div>
+
+<h2>Blogging Numbers</h2>
+{{>
+    const posts = collections._posts;
+    const postsByDate = posts.map(p => new Date(p.date)).sort((a, b) => a.getTime() - b.getTime());
+    const firstPostDate = postsByDate[0];
+    const lastPostDate = postsByDate[postsByDate.length - 1];
+    const postDateDelta = lastPostDate.getTime() - firstPostDate.getTime(); // milliseconds between first and last post
+    const monthDelta = postDateDelta / 1000 / 3600 / 24 / (365.25/12); // milliseconds by second / seconds by hour / hours by day / days by month (on average taking into account leap years)
+    const averagePerMonth = monthDelta / postsByDate.length;
+    const averagePerMonthRounded = averagePerMonth.toFixed(2);
+    const averageMonthsPerPost = postsByDate.length / monthDelta;
+    const averageMonthsPerPostRounded = averageMonthsPerPost.toFixed(2);
+    const postsByWeekday = postsByDate
+        .map(p => new Intl.DateTimeFormat('en-GB', { weekday: 'long' }).format(p))
+        .reduce((p, c) => {
+            if (!(c in p)) { p[c] = 0; }
+            p[c]++;
+            return p;
+    }, {});
+    const maxPostInWeekday = Math.max.apply(null, Object.values(postsByWeekday));
+    const weekdayList = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']; // Needed to be in order
+    const postsByYear = postsByDate
+        .map(p => new Intl.DateTimeFormat('en-GB', { year: 'numeric' }).format(p))
+        .reduce((p, c) => {
+            if (!(c in p)) { p[c] = 0; }
+            p[c]++;
+            return p;
+    }, {});
+    const maxPostInYear = Math.max.apply(null, Object.values(postsByYear));
+    const yearsList = Object.keys(postsByYear).sort();
+    const wordsByPost = posts.map(p => p.rawInput.replace(/```.+```/gs, '').split(' ').length); // Try to remove code blocks, probably misses a bit, but it's an average anyways, who cares?
+    const wordCountAverage = Math.round(wordsByPost.reduce((p, c) => p + c, 0) / posts.length);
+}}
+<div class="dl-container | fontVariant-tabularNums">
+    <dl>
+        <dt>Word count average</dt>
+        <dd>
+            {{ wordCountAverage |> formatNumber }} words <em>(excludes code blocks)</em>
+        </dd>
+
+        <dt>Overall frequency</dt>
+        <dd>
+            Every {{ if averagePerMonthRounded != 1 }}{{ averagePerMonthRounded }} months{{ else }}month{{ /if }}
+            <em>(or {{ averageMonthsPerPostRounded }} posts per month)</em>
+        </dd>
+        
+        <div class="dl-item-wrap">
+            <dt>Frequency by weekday</dt>
+            <dd>
+                <ol class="progress-list">
+                    {{ for day of weekdayList }}
+                        <li class="progress-list-item" style="--progress: {{ postsByWeekday[day] / maxPostInWeekday |> toRound(3) }}">
+                            <span class="progress-list-label">{{ day }}</span>
+                            <div class="progress-list-bar">
+                                <span class="progress-list-number">{{ postsByWeekday[day] |> formatNumber }} <span class="visually-hidden">posts</span></span>
+                            </div>
+                        </li>
+                    {{ /for }}
+                </ol>
+            </dd>
+        </div>
+
+        <div class="dl-item-wrap">
+            <dt>Frequency by year</dt>
+            <dd>
+                <ol class="progress-list">
+                    {{ for year of yearsList }}
+                        <li class="progress-list-item" style="--progress: {{ postsByYear[year] / maxPostInYear |> toRound(3) }}">
+                            <span class="progress-list-label">{{ year }}</span>
+                            <div class="progress-list-bar">
+                                <span class="progress-list-number">{{ postsByYear[year] |> formatNumber }} <span class="visually-hidden">posts</span></span>
+                            </div>
+                        </li>
+                    {{ /for }}
+                </ol>
+            </dd>
+        </div>
+    </dl>
+</div>
