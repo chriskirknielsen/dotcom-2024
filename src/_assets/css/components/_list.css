@@ -29,7 +29,17 @@ ol > li > ol {
 			content: ' ';
 
 			letter-spacing: var(--item-gap);
-			background: var(--separator, radial-gradient(circle at center, currentColor 2px, transparent 0));
+			background: currentColor;
+			-webkit-mask: var(
+				--separator,
+				url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Ccircle cx='4' cy='4' r='2'%3E%3C/circle%3E%3C/svg%3E")
+					no-repeat center center
+			);
+			mask: var(
+				--separator,
+				url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Ccircle cx='4' cy='4' r='2'%3E%3C/circle%3E%3C/svg%3E")
+					no-repeat center center
+			);
 			opacity: 0.75;
 		}
 	}
