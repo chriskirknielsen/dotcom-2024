@@ -136,7 +136,7 @@ ol > li > ol {
 	overflow: clip;
 
 	border-radius: var(--_corner);
-	background: var(--BAR-track);
+	background: repeating-linear-gradient(-45deg, transparent 0 4px, color-mix(in hsl, currentColor 20%, transparent) 4.1px 5.9px, transparent 6px 8px) var(--BAR-track);
 	box-shadow: var(--_shadow);
 }
 
