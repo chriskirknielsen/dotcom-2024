@@ -53,7 +53,7 @@
     const firstPostDate = postsByDate[0];
     const lastPostDate = postsByDate[postsByDate.length - 1];
     const postDateDelta = lastPostDate.getTime() - firstPostDate.getTime(); // milliseconds between first and last post
-    const dayDelta = postDateDelta / 1000 / 3600 / 24; // milliseconds by second / seconds by hour / hours by day
+    const dayDelta = postDateDelta / 1000 / 3600 / 24; // milliseconds between first and last post / milliseconds by second / seconds by hour / hours by day
     const averagePerDay = dayDelta / postsByDate.length;
     const averagePerDayExpo = mathExpo(averagePerDay);
     const averagePerDayMaxDecimals = 2;
@@ -83,6 +83,7 @@
     const wordCountByPost = wordsByPost.map(p => p.length);
     const wordCountTotal = wordCountByPost.reduce((p, c) => p + c, 0);
     const wordCountAverage = Math.round(wordCountTotal / posts.length);
+    // const allWords = wordsByPost.flat(1).map(w => w.trim().replace(/(['"’“”`.,;:?!\[\]\(\)\{\}]|\n)+/g, ''));
     const cssCount = wordsByPost.flat(1).filter(w => w.trim().replace(/(['"’“”`.,;:?!\[\]\(\)\{\}]|\n)+/g, '') === 'CSS').length;
     const cssCountOverTotal = cssCount / wordCountTotal; // Given the word CSS is going to be less frequent than all words, this number will always be under 1
     const cssCountExpo = mathClamp(2, mathExpo(cssCountOverTotal), 3); // Clamp to 2 or 3
