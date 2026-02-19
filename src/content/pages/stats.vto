@@ -46,16 +46,21 @@
 
 <h2>Blogging Numbers</h2>
 {{>
+    const mathClamp = (min,num,max) => Math.min(max, Math.max(min, num));
+    const mathExpo = (num) => parseInt(num.toExponential().split('e').pop().replace('-', ''), 10);
     const posts = collections._posts;
     const postsByDate = posts.map(p => new Date(p.date)).sort((a, b) => a.getTime() - b.getTime());
     const firstPostDate = postsByDate[0];
     const lastPostDate = postsByDate[postsByDate.length - 1];
     const postDateDelta = lastPostDate.getTime() - firstPostDate.getTime(); // milliseconds between first and last post
-    const monthDelta = postDateDelta / 1000 / 3600 / 24 / (365.25/12); // milliseconds by second / seconds by hour / hours by day / days by month (on average taking into account leap years)
-    const averagePerMonth = monthDelta / postsByDate.length;
-    const averagePerMonthRounded = averagePerMonth.toFixed(2);
-    const averageMonthsPerPost = postsByDate.length / monthDelta;
-    const averageMonthsPerPostRounded = averageMonthsPerPost.toFixed(2);
+    const dayDelta = postDateDelta / 1000 / 3600 / 24; // milliseconds by second / seconds by hour / hours by day
+    const averagePerDay = dayDelta / postsByDate.length;
+    const averagePerDayExpo = mathExpo(averagePerDay);
+    const averagePerDayMaxDecimals = 2;
+    const averagePerDayDecimals = mathClamp(0, averagePerDayMaxDecimals - averagePerDayExpo, averagePerDayMaxDecimals);
+    const averagePerDayRounded = averagePerDay.toFixed(averagePerDayDecimals);
+    const averageDaysPerPost = postsByDate.length / dayDelta;
+    const averageDaysPerPostRounded = averageDaysPerPost.toFixed(2);
     const postsByWeekday = postsByDate
         .map(p => new Intl.DateTimeFormat('en-GB', { weekday: 'long' }).format(p))
         .reduce((p, c) => {
@@ -74,8 +79,15 @@
     }, {});
     const maxPostInYear = Math.max.apply(null, Object.values(postsByYear));
     const yearsList = Object.keys(postsByYear).sort();
-    const wordsByPost = posts.map(p => p.rawInput.replace(/```.+```/gs, '').split(' ').length); // Try to remove code blocks, probably misses a bit, but it's an average anyways, who cares?
-    const wordCountAverage = Math.round(wordsByPost.reduce((p, c) => p + c, 0) / posts.length);
+    const wordsByPost = posts.map(p => p.rawInput.replace(/```.+```/gs, '').split(' ')); // Try to remove code blocks, probably misses a bit, but it's an average anyways, who cares?
+    const wordCountByPost = wordsByPost.map(p => p.length);
+    const wordCountTotal = wordCountByPost.reduce((p, c) => p + c, 0);
+    const wordCountAverage = Math.round(wordCountTotal / posts.length);
+    const cssCount = wordsByPost.flat(1).filter(w => w.trim().replace(/(['"’“”`.,;:?!\[\]\(\)\{\}]|\n)+/g, '') === 'CSS').length;
+    const cssCountOverTotal = cssCount / wordCountTotal; // Given the word CSS is going to be less frequent than all words, this number will always be under 1
+    const cssCountExpo = mathClamp(2, mathExpo(cssCountOverTotal), 3); // Clamp to 2 or 3
+    const cssCountPerSign = cssCountExpo === 3 ? '‰' : '%'; // permille or percent
+    const cssCountFormatted = (cssCountOverTotal * Math.pow(10, cssCountExpo)).toFixed(cssCountExpo);
 }}
 <div class="dl-container | fontVariant-tabularNums">
     <dl>
@@ -84,10 +96,15 @@
             {{ wordCountAverage |> formatNumber }} words <em>(excludes code blocks)</em>
         </dd>
 
+        <dt>Mentions of “CSS”</dt>
+        <dd>
+            {{ cssCount |> formatNumber }} occurrences <em>({{ cssCountFormatted }}{{ cssCountPerSign }} of all words)</em>
+        </dd>
+
         <dt>Overall frequency</dt>
         <dd>
-            Every {{ if averagePerMonthRounded != 1 }}{{ averagePerMonthRounded }} months{{ else }}month{{ /if }}
-            <em>(or {{ averageMonthsPerPostRounded }} posts per month)</em>
+            Every {{ if averagePerDayRounded != 1 }}{{ averagePerDayRounded }} days{{ else }}day{{ /if }}
+            <em>(or {{ averageDaysPerPostRounded }} posts per day)</em>
         </dd>
         
         <div class="dl-item-wrap">
