@@ -26,20 +26,18 @@ ol > li > ol {
 
 	& > li:not(:last-child) {
 		&::after {
+			--mask: var(
+				--separator,
+				/* Safari fix */ conic-gradient(#0000, #0000),
+				url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Ccircle cx='4' cy='4' r='2'%3E%3C/circle%3E%3C/svg%3E")
+					no-repeat center center
+			);
 			content: ' ';
 
 			letter-spacing: var(--item-gap);
 			background: currentColor;
-			-webkit-mask: var(
-				--separator,
-				url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Ccircle cx='4' cy='4' r='2'%3E%3C/circle%3E%3C/svg%3E")
-					no-repeat center center
-			);
-			mask: var(
-				--separator,
-				url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Ccircle cx='4' cy='4' r='2'%3E%3C/circle%3E%3C/svg%3E")
-					no-repeat center center
-			);
+			-webkit-mask: var(--mask);
+			mask: var(--mask);
 			opacity: 0.75;
 		}
 	}
