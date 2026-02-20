@@ -131,7 +131,7 @@
 .synth-speaker {
 	width: 100%;
 	height: 100%;
-	background: repeating-linear-gradient(-45deg, var(--case-text-color), var(--case-text-color) 0.124em, transparent 0.125em, transparent 0.25em) 50% 50%;
+	background: repeating-linear-gradient(-45deg, var(--case-text-color), var(--case-text-color) calc(0.125em - 1px), transparent 0.125em, transparent 0.25em) 50% 50%;
 }
 
 .synth-speaker-wrap {

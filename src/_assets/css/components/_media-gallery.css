@@ -45,6 +45,13 @@
 			color: var(--C-text);
 			background-color: var(--C-surface-alt, var(--C-surface));
 		}
+
+		/* Ensure sibling items aren't stretched and instead keep their original ratio by layering the caption on top of the image,
+		so long as it is an image (for videos it would cover the controls, iframes might have fixed content, etc.) */
+		&:not(:only-child) > :is(img, a:has(> img)) + figcaption {
+			position: absolute;
+			inset: auto 0 0;
+		}
 	}
 
 	& > :is(figure, picture, a, img, video) {
