@@ -79,10 +79,6 @@ h1,
 }
 
 /* Inline */
-:where(main p) strong {
-	color: color-mix(in hsl, currentColor, var(--C-accent) 25%);
-}
-
 :where(main p) :is(em, var) {
 	font-family: var(--fontStack-serif);
 }
