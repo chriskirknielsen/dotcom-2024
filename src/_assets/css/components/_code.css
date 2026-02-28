@@ -108,6 +108,7 @@ code-wrap {
 
 	white-space: pre-wrap;
 	word-break: break-word;
+	line-height: 1;
 
 	color: var(--C-heading);
 	border-radius: var(--_corner);
