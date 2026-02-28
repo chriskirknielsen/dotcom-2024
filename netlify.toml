@@ -21,6 +21,12 @@ package = "netlify-plugin-debug-cache"
     cache-control = '''
     public,
     max-age=31536000'''
+## CORS for RSS, see https://www.blogsareback.com/guides/enable-cors?platform=Netlify 
+[[headers]]
+  for = "/rss.xml"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, HEAD, OPTIONS"
 
 ## Special page redirects
 ### Designs aliases
