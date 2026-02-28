@@ -133,9 +133,7 @@ blockquote {
 	position: relative;
 	isolation: isolate;
 
-	grid-column: --wide;
 	padding-inline-start: calc(var(--layout-gutter) - var(--layout-side-border));
-	padding-inline-end: var(--layout-gutter);
 
 	border-inline-start: var(--layout-side-border) solid var(--C-text, currentColor);
 
