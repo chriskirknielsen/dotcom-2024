@@ -22,6 +22,7 @@
 	& :is(picture, a:not(figcaption > a)) {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 
 		& > :is(img, video) {
 			flex-grow: 1;
@@ -65,7 +66,7 @@
 	}
 }
 
-.image-gallery > :is(figure, picture, a, img, video),
+.image-gallery:not(.image-gallery--nofx) > :is(figure, picture, a, img, video),
 .single-media {
 	--media-text: #222;
 	--media-bg: #eee;

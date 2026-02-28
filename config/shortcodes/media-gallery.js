@@ -148,5 +148,5 @@ export default function (eleventyConfig, options = {}) {
 
 	eleventyConfig.addShortcode('image', mediaHandler('image'));
 	eleventyConfig.addShortcode('video', mediaHandler('video'));
-	eleventyConfig.addPairedShortcode('gallery', (pictures) => imageGalleryShortcode(pictures, galleryClasses));
+	eleventyConfig.addPairedShortcode('gallery', (pictures, extraClass = '') => imageGalleryShortcode(pictures, [galleryClasses, extraClass].filter(Boolean).join(' ')));
 }
