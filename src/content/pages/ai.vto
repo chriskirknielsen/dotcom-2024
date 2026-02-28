@@ -1,0 +1,94 @@
+---js
+{
+    title: "A.I. Policy",
+    summary: 'My approach to artificial intelligence: 180 degrees',
+    permalink: '/ai-policy/',
+    tags: ['_og'],
+    toc: true,
+    eleventyComputed: {
+        customMetaImage: function (data) {
+            if (data.permalink) {
+                return this.toOgImage(data);
+            }
+            return this.toPath([data.assets.images, 'metaimage.jpg']);
+        }
+    },
+}
+---
+
+<p><a href="/blog/no-ai-icon-for-humans/">I wrote a bit about why I created the icon below</a> but I wanted to outline my take on “artificial intelligence” on this page as a more “pinned statement”, albeit non-exhaustive. While “A.I.” is a misnomer (which tends to amalgamate large language models, neural networks, and machine learning), that ship has sailed, so I will refer to it as such from here on out.</p>
+
+{{ gallery 'image-gallery--nofx' }}
+    {{ svg 'no-ai', { width: 320, height: 320, title: 'no A.I.' } }}
+{{ /gallery }}
+
+<p class="textAlign-center">{{ component 'cta', {
+    url: "/assets/img/no-ai.svg",
+    label: 'Download “No A.I." SVG file',
+    icon: 'arrow-download',
+    iconBefore: true,
+    ctaAttr: 'download'
+} }}</p>
+
+{{ callout "tl;dr"}}My stance is simple: **I avoid any direct use A.I., or interactions with A.I.-generated content.** Every thing I claim to make is indeed made by my hands, be it code, design, or words you’ve kindly decided to read.{{ /callout }}
+
+{{ echo |> markdown }}
+I will not be attempting to change your mind here if you are an A.I. tinkerer, enthusiast, or power-user who unironically uses the word “compute” as a noun. I will not pass judgement onto you if you are *forced* to use A.I. in the context of your job, under threat of “being left behind” (i.e., fired), especially if you work as a developer.
+
+I know that A.I. has had a incredibly negative impact on the professional landscape, and keeping your job to pay your rent/mortgage, bills, and groceries, is not optional — I hate that this is a real thing, but I wouldn't fault somebody for using A.I. tools just to make rent —, especially in countries where a social safety net exists only as a potential GoFundMe campaign. **If you use A.I. to code small personal projects because you lack some knowledge, I hope you use that opportunity to learn from whatever code you generate,** so you can make up your own in the future and reduce your reliance on A.I.
+
+I originally wrote several thousands of words about this, but if you’re all-in on A.I., I doubt I’d be the one changing your mind, and if you are already weary of A.I., I don’t think I will steer your opinion any further into the anti-A.I. camp. So let me go over why I don’t want to use that kind of tool. (content warning: it’s bleak)
+
+## Morals, Ethics, and Harm
+
+All the data needed to train these A.I.s was, for the vast majority, slurped up from sources who never opted in, and were never given a way to opt-out (with `robots.txt` files being [repeatedly ignored](https://www.businessinsider.com/openai-anthropic-ai-ignore-rule-scraping-web-contect-robotstxt?op=1)) — a blatant lack of consent, which sadly does not surprise me in the least with the techbro culture. All this data is not only our favourite author’s or artist’s work, it’s also all the hateful content on the internet. A.I. can spew all of this up in one form or another, or even sprinkle racism/misogyny/ableism/homophobia/transphobia into your favourite work of art.
+
+Deepfakes are another troubling avenue for these tools, which can spread lies like wildfire, especially in times of crises, or which can be used to produce non-consensual and illegal pornography, such as [Grok unclothing](https://www.bbc.com/news/articles/cwy875j28k0o) ~~adults~~ women and children alike. This is not on the dark web: this is on the website formally known as Twitter, sadly still very popular. [Violence against women](https://www.independent.co.uk/news/uk/home-news/google-ai-violence-women-youtube-b2837144.html) was another disturbing “trend” in A.I.-generated videos. So “putting ethics aside” just doesn’t work.
+
+## Environmental Damage
+
+The A.I. data centres need so much energy that [coal plants are going back online](https://www.theverge.com/science/882288/trump-ai-data-center-power-plant-pollution-mercury-mats) to meet the demand, with [no signs of slowing down](https://www.pewresearch.org/short-reads/2025/10/24/what-we-know-about-energy-use-at-us-data-centers-amid-the-ai-boom/sr_25-10-24_data-center_2/), and cooling those data centres is using up a lot of clean water, to say nothing of the noise and air pollution incurred. We’ve been told for decade climate change is an emergency, and these A.I.s are making things undeniably worse. I know there are other bad things going on that are causing irreparable harm to our planet, but A.I. sure ain’t helpin’ our case. And [it’s not even profitable](https://www.youtube.com/watch?v=tAXKxKTGWFQ)!
+
+## Massive Deskilling
+
+A lot of creative work is at risk of being replaced, or already has been. You see encouragement to use A.I. tools, which, surprise, are controlled by large companies who can charge you for the privilege. When we become fully dependent, they’ll have all the power. This ultimately causes entire fields to lose valuable people both at entry levels (they never gain knowledge) and senior levels (they never get to transfer knowledge). What we know isn’t just how to accomplish a task, but also how to create (not regurgitate!), anticipate, ideate, criticise, empathise… in other words, using our brains and our hearts.
+
+In my field, it’s a common joke that all we do it take move JSON data into rectangles. However, there’s also so many challenges integrating a design, making it accessible and responsive. If my job was to prompt an A.I. all day to do this, I would find another line of work — how bleak it would be. I love tackling challenges *with my brain*, like integrating a gnarly CSS subgrid with container queries, though yes… sometimes, it’s just moving JSON into rectangles.
+
+## Quality & Security
+
+The quality that comes out of these tools is, at best, average, because that’s what they know: take everything, turn it into a slurry, and spit it back out. A statistically close-enough result for what you ask, with the occasional hallucinated detail or three (also known as *lies*), all working in a black box that gives you a non-deterministic response. Unreliable results are way below acceptable standards, and anything halfway decent may have been stolen from someone else’s work. As a sidenote, A.I. has also co-opted the sparkle ✨ emoji and the em-dash, which is now used as a detection method… which makes me sad because I love em-dashes.
+
+That’s bad enough with something like copywriting or art, but in my field of web development, having unreliable code? That’s a huge security risk that you cannot simply prompt your way our of. I haven’t built an LLM, but because of what I do for a living, I have a slightly better understanding of what’s going on, I’d wager (though not much), and it is terrifying that people launch paid products in a couple of days after [vibe-coding](https://en.wikipedia.org/wiki/Vibe_coding) something together that they cannot even make sense of.
+
+If that wasn’t enough, people unleashing “agents” on their computers, throwing caution to the wind, is not going to end well. It may [delete your emails](https://www.fastcompany.com/91497841/meta-superintelligence-lab-ai-safety-alignment-director-lost-control-of-agent-deleted-her-emails) or it may [delete your server environment](https://gizmodo.com/amazon-reportedly-pins-the-blame-for-ai-caused-outage-on-humans-2000724681), but if a computer can never be held accountable, a computer must never make a decision. (paraphrasing [a popular IBM slide](https://knowyourmeme.com/memes/a-computer-can-never-be-held-accountable))
+
+## **And For Those Reasons**
+
+I’m Out.
+
+## Some Acknowledgements
+
+First off, it *is* impressive technology. Typing in a box "make an image of Jesus Christ made of shrimp" and you get exactly that… on its face, yeah, sure, that's impressive (I know it’s a terrible example but come on, can I get an “amen”?).
+
+There are some medical advances that seem exciting: I remember hearing about [protein unfolding techniques](https://www.conncoll.edu/news/cc-magazine/past-issues/2025-issues/winter-2025/how-ai-solved-biologys-biggest-mystery/) exploding in the number of viable simulations, though I know this is highly specialised machine learning applied to a field, so it's not exactly comparable. Or heck, if it helps people who have lost (some of) their sight to be described things with high accuracy, that's pretty cool. But as a complete replacement assistive technology? I remain skeptical.
+
+I’d also like to acknowledge that I have used A.I., three times that I can remember, when you still needed an OpenAI invite to use ChatGPT. (I probably tried a few times upon getting access, but it was not notable enough to remember)
+
+1. I tried giving ChatGPT a list of hexadecimal colours to convert to HSL, and to sort by lightness. It failed miserably by not sorting correctly, and by repeating some values.
+2. I asked ChatGPT to provide me with some synonyms that rhymed with a particular word. To its credit, it did okay.
+3. I used DALL-E, an image generation tool, to create a funny profile picture for work during the holidays. It was nightmare fuel before I did some Photoshop on it.
+
+I know it has likely improved since then, and can count fingers better (probably?), but I am telling you this so you know I am not hating this without trying it. I did, however, quickly conclude that it was not for me, and this opinion has only been reinforced over time with the points I have made above: *how* it gets made and used is where the real issue lies.
+
+I am also guilty of unwillingly using A.I. shoved down my throat. This means Google Search’s summary (before [I disabled it](https://www.popsci.com/diy/how-to-remove-ai-google-search/)), Amazon’s “Rufus” when I was trying to look for product details, and the innumerable chatbots-as-customer-service you often need to talk to before getting connected to a human. I do everything I can to opt out whenever possible (e.g. turning off all A.I. for Notion, or toggling Firefox’s A.I. kill-switch), or to avoid using products that offer no clear path to an A.I.-free experience.
+
+I have to imagine Google Translate has baked in some LLM-based translation, as well, though I think it worked very well all the years beforehand and didn’t need A.I. back then… so I’m not sure how I’m doing on that front.
+
+I may not always succeed, but I’m trying my best to avoid these tools, because beyond the surface-level “oh neat” reaction, I find them to go against what I stand for. I like how Miriam Suzanne frames her views as being a “web luddite”. I think [I’m a Luddite](https://thenib.com/im-a-luddite/), too.
+
+## Conclusion
+
+In the words of Alex Falcone:
+> So A.I. is a lying machine made out of crimes that’s destroying the Earth and costs a fortune, is being deployed recklessly everywhere without any consideration for your safety, but [is it scam? Yep.](https://www.youtube.com/watch?v=BFzphfgwv8E)
+{{ /echo }}
