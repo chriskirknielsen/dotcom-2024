@@ -519,6 +519,15 @@ html[data-theme='cyberpunk'] {
 			}
 		}
 	}
+
+	.postlist-group-label {
+		padding-block: var(--size-2xs);
+
+		border: 0px;
+		border-block-start: 1px solid currentColor;
+		border-image: initial;
+		background: color-mix(in hsl, var(--C-surface), transparent);
+	}
 }
 
 @keyframes cyberpunkCta {
