@@ -190,7 +190,11 @@ const hideOpenGame = () => {
 };
 
 document.addEventListener('DOMContentLoaded', function (e) {
-	document.querySelector('[data-gaming-toolbar]').hidden = false; // Reveal the toolbar now that JS is enabled
+	// Reveal the toolbar now that JS is enabled
+	document.querySelector('[data-gaming-toolbar]').hidden = false;
+
+	// Reset saved form selection on page load
+	eachDom('[data-games-sizing], [data-games-completed]', (select) => (select.value = select.querySelector('option[selected]').value));
 
 	eachDom('.gaming-box', (spine) => {
 		const button = document.createElement('button');
@@ -285,6 +289,10 @@ document.addEventListener('change', function (e) {
 		const selectedValue = target.value || 'md';
 		const sizeMap = { sm: '0.75em', md: '1em', lg: '1.25em' };
 		eachDom('[data-gaming-platform]', (g) => (g.style.fontSize = sizeMap[selectedValue]));
+	} else if ((target = e.target.closest('[data-games-completed]'))) {
+		const selectedValue = target.value || 'any';
+		console.log(selectedValue);
+		eachDom('[data-gaming-completed]', (g) => (g.hidden = selectedValue !== 'any' && g.getAttribute('data-gaming-completed') !== selectedValue));
 	}
 });
 

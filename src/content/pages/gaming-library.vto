@@ -44,6 +44,17 @@
     </button>
     
     <div class="form-label-wrap">
+        <label for="completed-status" class="fontWeight-bold">Completed:</label>
+        <div class="button button--select">
+            <select id="completed-status" data-games-completed>
+                <option value="any" selected>Any</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-label-wrap">
         <label for="spine-sizing" class="fontWeight-bold">Size:</label>
         <div class="button button--select">
             <select id="spine-sizing" data-games-sizing>
@@ -70,6 +81,7 @@
                 <li
                     class="gaming-box-wrap"
                     {{ if ['Essentials', 'Platinum'].includes(game.edition) }}data-gaming-edition="{{ game.edition |> toLowerCase |> replace(' ', '-') }}"{{ /if }}
+                    data-gaming-completed="{{ game.completed |> toString }}"
                     {{ if platformSlug === 'ps3' }}data-gaming-branding="{{ game.year < 2009 ? 'old' : 'new' }}"{{ /if }}
                     data-game="{{ game |> JSON.stringify |> escape }}"
                 >
