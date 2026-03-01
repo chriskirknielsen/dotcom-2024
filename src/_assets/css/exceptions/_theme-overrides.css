@@ -470,6 +470,7 @@ html[data-theme='cyberpunk'] {
 
 	.hero-heading {
 		text-transform: uppercase;
+		text-shadow: 0 0.0125em 0.25em color-mix(in hsl, var(--C-heading), transparent);
 	}
 
 	hr:where(:not(.hero-like)) {

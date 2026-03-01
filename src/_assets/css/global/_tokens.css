@@ -291,7 +291,6 @@ html[data-theme="cyberpunk"] {
 --logo-color: var(--C-accent);
 --logo-color-active: var(--C-heading);
 --font-heading-tracking: -0.025em;
---font-heading-shadow: 0 0.0125em 0.5em color-mix(in hsl, var(--C-heading) 33%, transparent);
 --font-heading-size-adjust: 0.63;
 --footer-special-char: '⌬';
 --link-color: var(--C-heading);
