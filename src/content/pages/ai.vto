@@ -1,11 +1,15 @@
 ---js
 {
     title: "A.I. Policy",
-    summary: 'My approach to artificial intelligence: 180 degrees',
+    metaDescriptionOverride: 'My approach to artificial intelligence',
     permalink: '/ai-policy/',
     tags: ['_og'],
     toc: true,
+    date: 'Last Modified',
     eleventyComputed: {
+        summary: function (data) {
+            return `My approach to artificial intelligence (last updated ${this.dateFormat(data.page.date, { format: 'nice' })})`;
+        },
         customMetaImage: function (data) {
             if (data.permalink) {
                 return this.toOgImage(data);
