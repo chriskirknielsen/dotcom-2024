@@ -151,6 +151,10 @@ html[data-theme='dawn'] {
 				border-radius: 50%;
 			}
 		}
+
+		.hero-heading {
+			text-shadow: 0 0.03125em 0.0625em color-mix(in hsl, var(--C-heading) 33%, black);
+		}
 	}
 }
 
@@ -234,6 +238,10 @@ html[data-theme='dusk'] {
 				repeating-linear-gradient(transparent 0, transparent 2px, hotpink 0, hotpink 4px) no-repeat 50% 100% / 100% 100%;
 			border-radius: 50%;
 		}
+	}
+
+	.hero-heading {
+		text-shadow: 0 0.03125em 0.0625em color-mix(in hsl, var(--C-heading) 33%, black);
 	}
 }
 

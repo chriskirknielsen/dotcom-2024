@@ -151,7 +151,6 @@ html:not([data-theme]), html[data-theme="dawn"], [data-theme="dusk"] {
 --font-heading-tracking: var(--T-dawn, -0.00625em) var(--T-dusk, 0.025em);
 --font-heading-size-adjust: var(--T-dawn, 0.5) var(--T-dusk, 0.495);
 --font-heading-features: var(--T-dawn, 'liga' on) var(--T-dusk, 'cv06' on,'cv09' on,'cv03' on,'ss02' on,'calt' off);
---font-heading-shadow: var(--T-dawn, none) var(--T-dusk, 0 0.03125em 0.0625em color-mix(in hsl, var(--C-heading) 33%, black));
 --link-underline-color: var(--T-dawn, var(--C-heading)) var(--T-dusk, initial);
 --cta-text-color: var(--T-dawn, var(--C-text)) var(--T-dusk, var(--C-text));
 --cta-bg-color: var(--T-dawn, var(--C-surface-alt)) var(--T-dusk, var(--C-surface-alt));
