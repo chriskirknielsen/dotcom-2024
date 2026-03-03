@@ -663,18 +663,36 @@ html[data-theme='campfire'] {
 
 	.callout {
 		--flow-space: var(--size-xl);
-		--CALLOUT-border-color: var(--C-heading);
-		--CALLOUT-nail: #56482d 2px, transparent 3px;
+		--CTX-u: var(--CALLOUT-padding); /* Contextual "unit" */
+		--CTX-nail: #56482d 2px, transparent 3px;
 
 		position: relative;
 
-		border-width: calc(var(--CALLOUT-padding) / 4) 0 0;
-		background-image: radial-gradient(circle at calc((var(--CALLOUT-padding) / 2)) calc((var(--CALLOUT-padding) / 2)), var(--CALLOUT-nail)),
-			radial-gradient(circle at calc(100% - (var(--CALLOUT-padding) / 2)) calc((var(--CALLOUT-padding) / 2)), var(--CALLOUT-nail)),
-			radial-gradient(circle at calc((var(--CALLOUT-padding) / 2)) calc(100% - (var(--CALLOUT-padding) / 2)), var(--CALLOUT-nail)),
-			radial-gradient(circle at calc(100% - (var(--CALLOUT-padding) / 2)) calc(100% - (var(--CALLOUT-padding) / 2)), var(--CALLOUT-nail));
+		border: 0;
+		/* border-shape: shape(
+			from 0 0,
+			vline to 100%,
+			line by 10% calc(var(--CTX-u) * -0.2),
+			line by 10% calc(var(--CTX-u) * 0.1),
+			line by 10% calc(var(--CTX-u) * -0.2),
+			line by 10% calc(var(--CTX-u) * 0.3),
+			line by 10% calc(var(--CTX-u) * -0.2),
+			line by 10% calc(var(--CTX-u) * 0.1),
+			line by 10% calc(var(--CTX-u) * -0.2),
+			line by 10% calc(var(--CTX-u) * 0.3),
+			line by 10% calc(var(--CTX-u) * -0.2),
+			line by 10% calc(var(--CTX-u) * 0.1),
+			line to 100% 100%,
+			vline to 0,
+			hline to 0
+		); */
+
+		background-image: radial-gradient(circle at calc(var(--CTX-u) / 2) calc(var(--CTX-u) / 2), var(--CTX-nail)),
+			radial-gradient(circle at calc(100% - (var(--CTX-u) / 2)) calc(var(--CTX-u) / 2), var(--CTX-nail)),
+			radial-gradient(circle at calc(var(--CTX-u) / 2) calc(100% - (var(--CTX-u) / 2)), var(--CTX-nail)),
+			radial-gradient(circle at calc(100% - (var(--CTX-u) / 2)) calc(100% - (var(--CTX-u) / 2)), var(--CTX-nail));
 		background-repeat: no-repeat;
-		box-shadow: var(--_shadow);
+		box-shadow: 0 calc(var(--CTX-u) / 4 * -1) 0 var(--C-heading), var(--_shadow);
 	}
 
 	.callout-label {
