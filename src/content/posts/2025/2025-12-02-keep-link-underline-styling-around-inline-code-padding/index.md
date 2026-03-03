@@ -6,7 +6,7 @@ time: '04:00:00'
 ogBackground: "./underline-gap-examples.jpg"
 ---
 
-Recently, ~~`text-decoration-trim`~~ [`text-decoration-inset`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-decoration-inset) was added to Firefox behind a flag, and I was hoping it could fix a little visual thing that has bugged me on my website: the gap in underlines for inline code when it’s part of a link (e.g.: `<a href="...">A <code>special</code> link</a>`). You can see this happen on popular sites like GitHub or Notion, to name a couple.
+Recently, <del>`text-decoration-trim`</del> [`text-decoration-inset`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-decoration-inset) was added to Firefox behind a flag, and I was hoping it could fix a little visual thing that has bugged me on my website: the gap in underlines for inline code when it’s part of a link (e.g.: `<a href="...">A <code>special</code> link</a>`). You can see this happen on popular sites like GitHub or Notion, to name a couple.
 
 {{ set imageUrl = "./underline-gap-examples.jpg" |> toRoot }}
 {{ image imageUrl, "Some blocks of text with an underlined link, and within the text of each, a small code element with a slightly different background colour is visible, and around which the link underline is interrupted.", "GitHub, Notion, and this very website (previously)", { ratio: 614/432 } }}

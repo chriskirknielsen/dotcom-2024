@@ -71,7 +71,7 @@ return { ... };
 {{ /echo }}
 ```
 
-One thing of note: I am not using `eleventyComputed` for the permalinks as it seems to throw things off for the results of `pagination.href` (~~I may need to file an issue, yes~~ EDIT: Harris on the 11ty Discord mentioned the same problem, [filed an issue](https://github.com/11ty/eleventy/issues/3818), and it has been fixed!), so I am mixing in a template string to inject the category slug, but leaving the rest up to the “runtime” template parser!
+One thing of note: I am not using `eleventyComputed` for the permalinks as it seems to throw things off for the results of `pagination.href` (<del>I may need to file an issue, yes</del> <ins>Update: Harris on the 11ty Discord mentioned the same problem, [filed an issue](https://github.com/11ty/eleventy/issues/3818), and it has been fixed!</ins>), so I am mixing in a template string to inject the category slug, but leaving the rest up to the “runtime” template parser!
 
 That does the job. Since our `forEach` is our top level loop, Eleventy only needs to run the pagination engine once: it’s relatively short code that returns the desired behaviour. However, what about a not-so-static list? *There’s gotta be a better way!*
 

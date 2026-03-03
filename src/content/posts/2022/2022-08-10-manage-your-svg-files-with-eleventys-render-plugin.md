@@ -77,7 +77,7 @@ What’s this `Unknown engine for ./src/_includes/assets/svg/grid.svg`? A render
 
 I’m sure you could tell Eleventy to use the plain HTML engine instead in the configuration file but since this is a very rare case for me, I don’t mind handling the three parameters once in a while.
 
-~~I suppose there would be a way to pull in the plugin’s code and make a custom shortcode that wraps around this one to automate the path name and avoid adding the filter, but as you read before, I’m a bit lazy…~~ See the update below!
+<del>I suppose there would be a way to pull in the plugin’s code and make a custom shortcode that wraps around this one to automate the path name and avoid adding the filter, but as you read before, I’m a bit lazy…</del> <ins>See the update below!</ins>
 
 I hope this is helpful to more than just myself! I’m fairly certain there are dozens of ways to inject SVGs into templates in Eleventy. I just happen to like this one the best (for now).
 

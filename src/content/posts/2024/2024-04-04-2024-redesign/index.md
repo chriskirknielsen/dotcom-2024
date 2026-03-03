@@ -6,7 +6,7 @@ toc: true
 time: '16:04:24'
 ---
 
-It seems I’ve been doing a site refresh every even year, and started getting the itch for it in late 2023. A few months have passed, and here we are! I changed up ~~my CSS Zen Garden~~ *the themes* a little bit (even purchased some typefaces! I spent *money*!) and upgraded to Eleventy v3 (canary). If you’ve been here before, it will be feel pretty familiar (plus some new looks), as the content is globally the same, and I didn’t refactor anything that already worked well. This is especially true as [my website is a worry stone](https://ethanmarcotte.com/wrote/let-a-website-be-a-worry-stone/), so I’m always making changes between “versions” anyways. With that, I’d like to go over some of those updates, in case they should be useful for other people.
+It seems I’ve been doing a site refresh every even year, and started getting the itch for it in late 2023. A few months have passed, and here we are! I changed up <del>my CSS Zen Garden</del> <ins>the themes</ins> a little bit (even purchased some typefaces! I spent *money*!) and upgraded to Eleventy v3 (canary). If you’ve been here before, it will be feel pretty familiar (plus some new looks), as the content is globally the same, and I didn’t refactor anything that already worked well. This is especially true as [my website is a worry stone](https://ethanmarcotte.com/wrote/let-a-website-be-a-worry-stone/), so I’m always making changes between “versions” anyways. With that, I’d like to go over some of those updates, in case they should be useful for other people.
 
 ## Eleventy stuff
 ### Eleventy v3 canary

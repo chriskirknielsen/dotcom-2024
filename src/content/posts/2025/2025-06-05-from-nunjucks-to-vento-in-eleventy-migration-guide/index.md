@@ -429,7 +429,7 @@ Not exactly what I was after! So if you run into this, you can create a new vari
 
 If you also used `foo = foo or bar` here and there in Nunjucks… find the potential cases in your codebase with a handy named group RegExp: `\{\{ set (?<var>[a-zA-Z0-9_]+) = (\k<var>) or`. For the if-wrapped scenario, though, that all depends on the context of the file, so no RegExp can help us…
 
-I have reported [this bug on the Vento repository](https://github.com/ventojs/vento/issues/108), and **it has been fixed as of Vento v1.13.2**, ~~but not [merged into the plugin yet](https://github.com/noelforte/eleventy-plugin-vento/pull/262). If I happen to post this article before it gets merged, and you want to use the fix, you can force it in your npm package via [a package override](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#overrides)~~ and it has now been updated with `eleventy-plugin-vento` version 4.4.2!
+I have reported [this bug on the Vento repository](https://github.com/ventojs/vento/issues/108), and **it has been fixed as of Vento v1.13.2**, <del>but not [merged into the plugin yet](https://github.com/noelforte/eleventy-plugin-vento/pull/262). If I happen to post this article before it gets merged, and you want to use the fix, you can force it in your npm package via [a package override](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#overrides)</del> <ins>and it has now been updated with `eleventy-plugin-vento` version 4.4.2!</ins>
 
 ### Interjected filter rejection
 

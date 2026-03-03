@@ -83,8 +83,17 @@ h1,
 	font-family: var(--fontStack-serif);
 }
 
+del {
+	text-decoration-thickness: clamp(2px, 0.125em, 4px);
+	text-decoration-color: color-mix(in hsl, currentColor 67%, transparent);
+}
+
 ins {
 	text-decoration-style: double;
+	text-decoration-color: var(--C-heading);
+	text-decoration-skip-ink: var(--_link-skip-ink);
+	text-decoration-thickness: max(1px, var(--_link-decoration-thickness) / 3);
+	text-underline-offset: var(--_link-underline-offset);
 }
 
 mark {
