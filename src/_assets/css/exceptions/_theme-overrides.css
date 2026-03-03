@@ -663,32 +663,18 @@ html[data-theme='campfire'] {
 
 	.callout {
 		--flow-space: var(--size-xl);
-		--callout-border-color: transparent;
+		--CALLOUT-border-color: var(--C-heading);
 		--CALLOUT-nail: #56482d 2px, transparent 3px;
-		--CALLOUT-post: max(var(--size-l), var(--flow-space) * 0.8);
 
 		position: relative;
 
-		background-image: radial-gradient(circle at 50% calc((var(--CALLOUT-padding) * 0.75)), var(--CALLOUT-nail)),
-			radial-gradient(circle at 50% calc(100% - (var(--CALLOUT-padding) * 0.75)), var(--CALLOUT-nail)),
-			linear-gradient(var(--C-heading) calc(var(--CALLOUT-padding) * 0.25), transparent 0);
+		border-width: calc(var(--CALLOUT-padding) / 4) 0 0;
+		background-image: radial-gradient(circle at calc((var(--CALLOUT-padding) / 2)) calc((var(--CALLOUT-padding) / 2)), var(--CALLOUT-nail)),
+			radial-gradient(circle at calc(100% - (var(--CALLOUT-padding) / 2)) calc((var(--CALLOUT-padding) / 2)), var(--CALLOUT-nail)),
+			radial-gradient(circle at calc((var(--CALLOUT-padding) / 2)) calc(100% - (var(--CALLOUT-padding) / 2)), var(--CALLOUT-nail)),
+			radial-gradient(circle at calc(100% - (var(--CALLOUT-padding) / 2)) calc(100% - (var(--CALLOUT-padding) / 2)), var(--CALLOUT-nail));
 		background-repeat: no-repeat;
 		box-shadow: var(--_shadow);
-
-		&::before {
-			content: '';
-
-			position: absolute;
-			inset-block: calc(var(--CALLOUT-post) * -1);
-			inset-inline: calc(50% - var(--CALLOUT-post) / 2);
-			z-index: -1;
-
-			border-radius: 0 0 50% 50% / 0 0 8px 8px;
-			background: linear-gradient(hsl(16, 31%, 24%), hsl(16, 31%, 14%)) no-repeat 50% 0 / 100% calc(var(--CALLOUT-post) / 2),
-				linear-gradient(90deg, hsl(16, 31%, 24%), hsl(16, 31%, 14%));
-
-			clip-path: polygon(50% 0, 100% calc(var(--CALLOUT-post) / 2), 100% 100%, 0 100%, 0 calc(var(--CALLOUT-post) / 2));
-		}
 	}
 
 	.callout-label {
