@@ -127,8 +127,8 @@ const designs = [
 		note: `For a mug with the design on both sides, use RedBubble. Note this uses [my custom CSS logo](/css-logo/) that sadly didn’t make the cut as a candidate for a [new official CSS logo](https://github.com/CSS-Next/css-next/issues/105)!`,
 		img: 'css-logo-solid.png',
 		links: {
-			TeePublic: 'https://www.teepublic.com/sticker/67983005-css-logo-solid',
 			RedBubble: 'https://www.redbubble.com/i/sticker/CSS-Logo-solid-by-ckirknielsen/166040147.EJUG5',
+			TeePublic: 'https://www.teepublic.com/sticker/67983005-css-logo-solid',
 			CottonBureau: 'https://cottonbureau.com/p/D6EHDP/shirt/css-is-awesome',
 		},
 		tags: ['dev', 'css'],
@@ -145,8 +145,8 @@ const designs = [
 		note: `For a mug with the design on both sides, or actual transparent stickers, use RedBubble. Note this uses [my custom CSS logo](/css-logo/) that sadly didn’t make the cut as a candidate for a [new official CSS logo](https://github.com/CSS-Next/css-next/issues/105)!`,
 		img: 'css-logo-transparent.png',
 		links: {
-			TeePublic: 'https://www.teepublic.com/sticker/67983004-css-logo-transparent',
 			RedBubble: 'https://www.redbubble.com/i/sticker/CSS-Logo-transparent-by-ckirknielsen/166040244.EJUG5',
+			TeePublic: 'https://www.teepublic.com/sticker/67983004-css-logo-transparent',
 		},
 		tags: ['dev', 'css'],
 		date: '2024-11-02',
@@ -389,8 +389,8 @@ const designs = [
 		description: 'A cross-over between The Fifth Element and synth waveforms.',
 		img: 'synth-element.png',
 		links: {
-			TeePublic: 'https://www.teepublic.com/t-shirt/19884473-the-synth-element-symbols',
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/The-Synth-Element-Symbols-by-ckirknielsen/108913348.DYMRA',
+			TeePublic: 'https://www.teepublic.com/t-shirt/19884473-the-synth-element-symbols',
 		},
 		tags: ['tv-movies'],
 		date: '2022-04-24',
@@ -403,8 +403,8 @@ const designs = [
 		description: 'A cross-over between The Fifth Element and synth waveforms.',
 		img: 'synth-element-stones.png',
 		links: {
-			TeePublic: 'https://www.teepublic.com/t-shirt/19884472-the-synth-element-stones',
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/The-Synth-Element-Stones-by-ckirknielsen/108914203.UHLBD',
+			TeePublic: 'https://www.teepublic.com/t-shirt/19884472-the-synth-element-stones',
 		},
 		tags: ['tv-movies'],
 		date: '2022-04-24',
@@ -460,8 +460,8 @@ const designs = [
 		description: 'One of my favourite quotes from Maurice Moss in the I.T. Crowd…',
 		img: 'it-crowd-four-five-fire.png',
 		links: {
-			TeePublic: 'https://www.teepublic.com/t-shirt/30106971-four-i-mean-five-i-mean-fire',
 			RedBubble: 'https://www.redbubble.com/i/t-shirt/Four-I-mean-Five-I-mean-Fire-by-ckirknielsen/110315180.1482B.XYZ',
+			TeePublic: 'https://www.teepublic.com/t-shirt/30106971-four-i-mean-five-i-mean-fire',
 		},
 		tags: ['tv-movies'],
 		date: '2022-05-09',
@@ -474,8 +474,8 @@ const designs = [
 		description: 'One of my favourite quotes from Nandor in What We Do In The Shadows…',
 		img: 'nandor-fucking-guy.png',
 		links: {
-			TeePublic: 'https://www.teepublic.com/sticker/84954953-what-we-do-in-the-shadows-nandor-f-cking-guy',
 			RedBubble: 'https://www.redbubble.com/i/sticker/What-We-Do-In-The-Shadows-Nandor-F-cking-Guy-by-ckirknielsen/176769799.EJUG5',
+			TeePublic: 'https://www.teepublic.com/sticker/84954953-what-we-do-in-the-shadows-nandor-f-cking-guy',
 		},
 		tags: ['tv-movies'],
 		date: '2025-12-14',
@@ -488,8 +488,8 @@ const designs = [
 		description: 'Memories of the thousands of worlds we held in our hands.',
 		img: 'cartridge-world.png',
 		links: {
-			TeePublic: 'https://www.teepublic.com/t-shirt/45538405-raised-in-a-cartridge-world',
 			// RedBubble: 'https://www.redbubble.com/i/sticker/Raised-in-a-Cartridge-World-by-ckirknielsen/145765578.EJUG5,
+			TeePublic: 'https://www.teepublic.com/t-shirt/45538405-raised-in-a-cartridge-world',
 		},
 		tags: ['games'],
 		date: '2023-05-20',
