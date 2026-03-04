@@ -1325,58 +1325,6 @@ If you are a dork like me, here are the fonts (yay, fonts!), and inspiration for
 		}
 	}
 
-	.legendary {
-		--LGD-border-width: 1px;
-		--LGD-border-color: var(--C-accent);
-		--LGD-corner-radius: var(--_corner);
-		--LGD-border-style: solid;
-		--LGD-padding: max(var(--LGD-corner-radius), var(--size-m));
-
-		position: relative;
-	}
-	
-	.legendary-label {
-		position: relative;
-
-		display: flex;
-		align-items: flex-end;
-		column-gap: calc(var(--LGD-padding) / 2);
-
-		&::before,
-		&::after {
-			content: '';
-
-			display: block;
-			flex-basis: var(--LGD-corner-radius);
-			flex-shrink: 0;
-			min-inline-size: calc(var(--LGD-padding) / 2);
-			block-size: clamp(var(--LGD-corner-radius), 0.5em, var(--LGD-padding));
-			
-			border-style: var(--LGD-border-style);
-			border-color: var(--LGD-border-color);
-		}
-
-		&::before {
-			flex-grow: 0;
-			border-width: var(--LGD-border-width) 0 0 var(--LGD-border-width);
-			border-start-start-radius: var(--LGD-corner-radius);
-		}
-		
-		&::after {
-			flex-grow: 1;
-			border-width: var(--LGD-border-width) var(--LGD-border-width) 0 0;
-			border-start-end-radius: var(--LGD-corner-radius);
-		}
-	}
-
-	.legendary-content {
-		padding: calc(var(--LGD-padding) / 2) var(--LGD-padding) var(--LGD-padding);
-
-		border: var(--LGD-border-width) var(--LGD-border-style) var(--LGD-border-color);
-		border-block-start-width: 0;
-		border-radius: 0 0 var(--LGD-corner-radius) var(--LGD-corner-radius);
-	}
-
 	.floatster[data-image-only] {
 		& .floatster-list {
 			display: block;
