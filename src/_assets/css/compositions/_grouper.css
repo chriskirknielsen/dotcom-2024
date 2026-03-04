@@ -5,14 +5,18 @@
 
 .grouper--wrap {
 	flex-wrap: wrap;
+	flex-wrap: balance;
 }
 
 .grouper--baseline {
 	align-items: baseline;
 }
 
-.grouper--center {
+.grouper--center-block {
 	align-items: center;
+}
+.grouper--center-inline {
+	justify-content: center;
 }
 
 .grouper--vertical {
