@@ -81,36 +81,58 @@ I grew up in Lyon, France, born to **Danish** parents. Australia was my home fo
 I’m a creative developer, or “design engineer”, meaning I can code and design, keeping an eye on details (including fonts!). I especially shine with my front-end fluency with **HTML** (the semantic kind), **CSS** (I’m a nerd for it), and **JavaScript** (not React!), but I don’t shy away from **PHP and MySQL** (mainly for **WordPress** projects), **Shopify**, or **Webflow**. I use **git** (any of GitHub, GitLab, or Bitbucket) to keep my projects neatly tracked, and like to write commented, squeaky-clean(ish) code. The **Adobe Creative Suite** and I go _way_ back (2005!), specifically **Photoshop, Illustrator, and After Effects**, though I’ve also gotten on the **Figma** train (sorry, Sketch!).
 {{ /echo }}
 
-{{ set icons = {
-    html: { label: 'HyperText Markup Language' },
-    css: { label: 'Cascading Stylesheets', sub: { sass: 'Sass/SCSS' } },
-    js: { label: 'JavaScript', sub: { nodejs: 'NodeJS', npm: 'npm' } },
-    git: { label: 'git', sub: { github: 'GitHub', gitlab: 'GitLab', bitbucket: 'Bitbucket' } },
-    jamstack: { label: 'JAMstack', sub: { nunjucks: 'Nunjucks', vento: 'Vento', liquid: 'Liquid', eleventy: 'Eleventy', netlify: 'Netlify Deploys' } },
-    php: { label: 'PHP', sub: { wordpress: 'WordPress' } },
-    shopify: { label: 'Shopify' },
-    webflow: { label: 'Webflow' },
-    figma: { label: 'Figma' },
-    adobecs: { label: 'Adobe Creative Suite', sub: { photoshop: 'Photoshop', illustrator: 'Illustrator', aftereffects: 'After Effects' } }
+{{ set tools = {
+    'Front-End': {
+        html: 'HTML',
+        css: 'CSS',
+        sass: 'Sass/SCSS',
+        js: 'JavaScript',
+    },
+    'Templating/Server-Side': {
+        nodejs: 'NodeJS',
+        eleventy: 'Eleventy',
+        nunjucks: 'Nunjucks',
+        vento: 'Vento',
+        liquid: 'Liquid',
+        php: 'PHP',
+        sql: 'SQL',
+    },
+    'Workflow': {
+        git: 'git',
+        github: 'GitHub',
+        gitlab: 'GitLab',
+        bitbucket: 'Bitbucket',
+        // netlify: 'Netlify Deploys',
+        npm: 'npm',
+    },
+    'CMS/Platforms': {
+        shopify: 'Shopify',
+        webflow: 'Webflow',
+        wordpress: 'WordPress',
+    },
+    // TODO Libraries? jQuery, DevExtreme
+    'Designing': {
+        figma: 'Figma',
+        photoshop: 'Photoshop',
+        illustrator: 'Illustrator',
+        aftereffects: 'After Effects',
+    },
 } }}
-<ul class="inline-list unstuck-list textAlign-center | about-icons-list" style="--c: {{ icons | keys | length }};">
-{{ for iconKey, iconInfo of icons -}}
-    <li class="about-icons-list-item">
-    {{- if iconInfo.sub -}}
-        <details name="about-language-icon" class="about-icons-list-details">
-            <summary class="about-icons-list-summary">
-                {{ svg `${iconKey}-icon`, { title: iconInfo.label, class: 'about-icons-list-icon inline-icon inline-icon--center' } }}
-                <span class="visually-hidden">(and more)</span>
-            </summary>
-            <div class="about-icons-list-extra">
-            {{ for subIconKey, subIconLabel of iconInfo.sub }}
-                {{ svg `${subIconKey}-icon`, { title: subIconLabel, class: 'about-icons-list-icon inline-icon inline-icon--center' } }}
-            {{ /for }}
-            </div>
-        </details>
-    {{- else -}}
-        {{- svg `${iconKey}-icon`, { title: iconInfo.label, class: 'about-icons-list-icon inline-icon inline-icon--center' } -}}
-    {{- /if -}}
+{{ async function aboutIcon(icon, label) }}
+<div class="about-icons-list-badge | grouper grouper--icon-text-pair">
+    {{ svg `${icon}-icon`, { class: 'inline-icon inline-icon--center' } }}
+    <span>{{ label }}</span>
+</div>
+{{ /function }}
+
+<ul class="about-icons-list | textAlign-start" style="--GAP: var(--size-s);">
+{{ for toolLabel, items of tools -}}
+    <li class="about-icons-list-item | inline-list unstuck-list ">
+        <strong>{{ toolLabel }}</strong>
+        <br>
+        {{ for icon, label of items }}
+            {{ await aboutIcon(icon, label) }}
+        {{ /for }}
     </li>
 {{- /for }}
 </ul>
