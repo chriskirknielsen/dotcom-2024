@@ -436,24 +436,17 @@
 	list-style-type: '';
 }
 .about-icons-list-item {
-	display: block;
-
-	text-indent: 1em hanging each-line;
-
-	& > * {
-		text-indent: 0;
-	}
-
 	& + & {
 		margin-block-start: var(--GAP, var(--size-s));
 	}
 }
 .about-icons-list-badge {
 	display: inline-flex;
-	border-radius: var(--_corner);
-	font-size: 0.875em;
 	padding: 0.25em 0.325em;
+
+	font-size: 0.875em;
 	line-height: 1;
 	color: var(--C-canvas);
+	border-radius: var(--_corner);
 	background: var(--C-text);
 }

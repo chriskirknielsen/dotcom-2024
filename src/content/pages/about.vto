@@ -88,7 +88,7 @@ I’m a creative developer, or “design engineer”, meaning I can code and des
         sass: 'Sass/SCSS',
         js: 'JavaScript',
     },
-    'Templating/Server-Side': {
+    'Templating + Server-Side': {
         nodejs: 'NodeJS',
         eleventy: 'Eleventy',
         nunjucks: 'Nunjucks',
@@ -102,15 +102,15 @@ I’m a creative developer, or “design engineer”, meaning I can code and des
         github: 'GitHub',
         gitlab: 'GitLab',
         bitbucket: 'Bitbucket',
-        // netlify: 'Netlify Deploys',
         npm: 'npm',
+        netlify: 'Netlify Deploys',
     },
     'CMS/Platforms': {
         shopify: 'Shopify',
         webflow: 'Webflow',
         wordpress: 'WordPress',
     },
-    // TODO Libraries? jQuery, DevExtreme
+    // TODO Libraries? jQuery, DevExtreme, maybe Vue?
     'Designing': {
         figma: 'Figma',
         photoshop: 'Photoshop',
@@ -119,17 +119,17 @@ I’m a creative developer, or “design engineer”, meaning I can code and des
     },
 } }}
 {{ async function aboutIcon(icon, label) }}
-<div class="about-icons-list-badge | grouper grouper--icon-text-pair">
+<span class="about-icons-list-badge | grouper grouper--icon-text-pair">
     {{ svg `${icon}-icon`, { class: 'inline-icon inline-icon--center' } }}
     <span>{{ label }}</span>
-</div>
+</span>
 {{ /function }}
 
+<p id="tools">Here’s a (non-exhaustive) list of tools and environments I frequently use:</p>
 <ul class="about-icons-list | textAlign-start" style="--GAP: var(--size-s);">
 {{ for toolLabel, items of tools -}}
-    <li class="about-icons-list-item | inline-list unstuck-list ">
-        <strong>{{ toolLabel }}</strong>
-        <br>
+    <li class="about-icons-list-item | inline-list">
+        <strong>{{ toolLabel }}:</strong>
         {{ for icon, label of items }}
             {{ await aboutIcon(icon, label) }}
         {{ /for }}
