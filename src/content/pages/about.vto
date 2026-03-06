@@ -86,9 +86,11 @@ I’m a creative developer, or “design engineer”, meaning I can code and des
         html: 'HTML',
         css: 'CSS',
         sass: 'Sass/SCSS',
+        svg: 'SVG',
         js: 'JavaScript',
+        // markdown: 'Markdown',
     },
-    'Templating + Server-Side': {
+    'Templating / Server-Side': {
         nodejs: 'NodeJS',
         eleventy: 'Eleventy',
         nunjucks: 'Nunjucks',
@@ -127,10 +129,10 @@ I’m a creative developer, or “design engineer”, meaning I can code and des
 
 <p id="tools">Here’s a (non-exhaustive) list of tools and environments I frequently use:</p>
 <ul class="about-icons-list | textAlign-start" style="--GAP: var(--size-s);">
-{{ for toolLabel, items of tools -}}
+{{ for toolLabel, toolItems of tools -}}
     <li class="about-icons-list-item | inline-list">
         <strong>{{ toolLabel }}:</strong>
-        {{ for icon, label of items }}
+        {{ for icon, label of toolItems }}
             {{ await aboutIcon(icon, label) }}
         {{ /for }}
     </li>
