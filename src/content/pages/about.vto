@@ -107,7 +107,7 @@ I’m a creative developer, or “design engineer”, meaning I can code and des
         npm: 'npm',
         netlify: 'Netlify Deploys',
     },
-    'CMS/Platforms': {
+    'CMS / Platforms': {
         shopify: 'Shopify',
         webflow: 'Webflow',
         wordpress: 'WordPress',
@@ -121,9 +121,9 @@ I’m a creative developer, or “design engineer”, meaning I can code and des
     },
 } }}
 {{ async function aboutIcon(icon, label) }}
-<span class="about-icons-list-badge | grouper grouper--icon-text-pair">
-    {{ svg `${icon}-icon`, { class: 'inline-icon inline-icon--center' } }}
-    <span>{{ label }}</span>
+<span class="about-icons-list-badge">
+    <span class="about-icons-list-icon">{{ svg `${icon}-icon`, { class: 'inline-icon inline-icon--center' } }}</span>
+    <span class="about-icons-list-label">{{ label }}</span>
 </span>
 {{ /function }}
 

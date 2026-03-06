@@ -436,17 +436,39 @@
 	list-style-type: '';
 }
 .about-icons-list-item {
-	& + & {
+	&:not(:first-child) {
 		margin-block-start: var(--GAP, var(--size-s));
 	}
 }
 .about-icons-list-badge {
-	display: inline-flex;
-	padding: 0.25em 0.325em;
+	--stroke: 1px;
+	--pad: max(2 * var(--stroke), 3px);
 
-	font-size: 0.875em;
+	display: inline-flex;
+	align-items: center;
+	min-inline-size: 80px; /* Just like old school 80x15px buttons */
+	padding: var(--stroke);
+
 	line-height: 1;
+	border: 1px solid var(--C-text);
+	background: var(--C-canvas);
+}
+.about-icons-list-icon {
+	& > svg {
+		--ICON-size: 1em;
+	}
+
+	flex: 0 0 auto;
+	padding: var(--pad);
+	aspect-ratio: 1;
+
 	color: var(--C-canvas);
-	border-radius: var(--_corner);
 	background: var(--C-text);
+}
+.about-icons-list-label {
+	flex-grow: 1;
+	padding: 0 calc(var(--pad) * 2);
+
+	text-align: center;
+	white-space: nowrap;
 }
