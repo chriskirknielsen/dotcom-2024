@@ -433,6 +433,9 @@
 }
 
 .about-icons-list {
+	--stroke: 1px;
+	--pad: max(2 * var(--stroke), 3px);
+
 	list-style-type: '';
 }
 .about-icons-list-item {
@@ -441,12 +444,10 @@
 	}
 }
 .about-icons-list-badge {
-	--stroke: 1px;
-	--pad: max(2 * var(--stroke), 3px);
-
 	display: inline-flex;
 	align-items: center;
 	min-inline-size: 80px; /* Just like old school 80x15px buttons */
+	margin: var(--stroke);
 	padding: var(--stroke);
 
 	line-height: 1;
