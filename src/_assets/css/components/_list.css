@@ -169,7 +169,7 @@ ol > li > ol {
 	}
 
 	@media (--accept-motion) {
-		transition: inline-size calc(var(--progress) * var(--anim-eternity)) var(--easing-in-out);
+		transition: inline-size calc((1 - var(--progress) / 2) * var(--anim-eternity)) var(--easing-in-out);
 
 		@starting-style {
 			inline-size: 0;
