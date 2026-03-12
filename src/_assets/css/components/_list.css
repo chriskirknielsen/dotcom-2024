@@ -167,6 +167,14 @@ ol > li > ol {
 		background-position: 0 0;
 		background-repeat: no-repeat;
 	}
+
+	@media (--accept-motion) {
+		transition: inline-size calc(var(--progress) * var(--anim-eternity)) var(--easing-in-out);
+
+		@starting-style {
+			inline-size: 0;
+		}
+	}
 }
 
 .progress-list-number {
