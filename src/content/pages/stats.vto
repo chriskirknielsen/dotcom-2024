@@ -49,7 +49,7 @@
     const mathClamp = (min,num,max) => Math.min(max, Math.max(min, num));
     const mathExpo = (num) => parseInt(num.toExponential().split('e').pop().replace('-', ''), 10);
     const posts = collections._posts;
-    const postsByDate = posts.map(p => new Date(p.date)).sort((a, b) => a.getTime() - b.getTime());
+    const postsByDate = posts.map(p => new Date(p.date+'Z')); // Probably off, I need to review this!
     const firstPostDate = postsByDate[0];
     const lastPostDate = postsByDate[postsByDate.length - 1];
     const postDateDelta = lastPostDate.getTime() - firstPostDate.getTime(); // milliseconds between first and last post
