@@ -49,7 +49,7 @@
     const mathClamp = (min,num,max) => Math.min(max, Math.max(min, num));
     const mathExpo = (num) => parseInt(num.toExponential().split('e').pop().replace('-', ''), 10);
     const posts = collections._posts;
-    const postsByDate = posts.map(p => new Date(p.date+'Z')); // Probably off, I need to review this!
+    const postsByDate = posts.map(p => p.date);
     const firstPostDate = postsByDate[0];
     const lastPostDate = postsByDate[postsByDate.length - 1];
     const postDateDelta = lastPostDate.getTime() - firstPostDate.getTime(); // milliseconds between first and last post
@@ -61,17 +61,17 @@
     const averagePerDayRounded = averagePerDay.toFixed(averagePerDayDecimals);
     const averageDaysPerPost = postsByDate.length / dayDelta;
     const averageDaysPerPostRounded = averageDaysPerPost.toFixed(2);
+    const weekdayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const postsByWeekday = postsByDate
-        .map(p => new Intl.DateTimeFormat('en-GB', { weekday: 'long' }).format(p))
+        .map((d) => weekdayList[(d.getUTCDay() || 7) - 1]) // Sunday returns 0, so `n = 0 || 7` returns 7, and then `n - 1` ensures Monday is 0 and Sunday is 6
         .reduce((p, c) => {
             if (!(c in p)) { p[c] = 0; }
             p[c]++;
             return p;
     }, {});
     const maxPostInWeekday = Math.max.apply(null, Object.values(postsByWeekday));
-    const weekdayList = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']; // Needed to be in order
     const postsByYear = postsByDate
-        .map(p => new Intl.DateTimeFormat('en-GB', { year: 'numeric' }).format(p))
+        .map((p) => p.getUTCFullYear())
         .reduce((p, c) => {
             if (!(c in p)) { p[c] = 0; }
             p[c]++;
