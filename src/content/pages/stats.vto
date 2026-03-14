@@ -63,7 +63,7 @@
     const averageDaysPerPostRounded = averageDaysPerPost.toFixed(2);
     const weekdayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const postsByWeekday = postsByDate
-        .map((d) => weekdayList[(d.getUTCDay() || 7) - 1]) // Sunday returns 0, so `n = 0 || 7` returns 7, and then `n - 1` ensures Monday is 0 and Sunday is 6
+        .map((d) => weekdayList[(d.getUTCDay() || 7) - 1]) // Sunday returns 0, so `n = 0 || 7` returns 7, and then `n - 1` ensures Monday is 0 and Sunday is 6, matching common-sense ordering
         .reduce((p, c) => {
             if (!(c in p)) { p[c] = 0; }
             p[c]++;
