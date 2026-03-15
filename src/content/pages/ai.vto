@@ -5,10 +5,10 @@
     permalink: '/ai-policy/',
     tags: ['_og'],
     toc: true,
-    date: 'Last Modified',
+    date: 'git Last Modified',
     eleventyComputed: {
         summary: function (data) {
-            return `My approach to artificial intelligence (last updated ${this.dateFormat(data.page.date, { format: 'nice' })})`;
+            return `My approach to artificial intelligence (last updated ${this.dateFormat(data.page.date.toISOString(), { format: 'nice' })})`;
         },
         customMetaImage: function (data) {
             if (data.permalink) {
