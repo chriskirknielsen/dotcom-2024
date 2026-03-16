@@ -9,10 +9,8 @@ export default function (string, fontsDir) {
 	const allFonts = [].concat(themeFonts, extraFonts);
 
 	for (let themeHeadingFont of allFonts) {
-		const localFontNames = themeHeadingFont.local || [];
-		const localFontList = Array.from(new Set([themeHeadingFont.family].concat(localFontNames))).map((localName) => `local("${localName}")`);
 		const filename = themeHeadingFont.filename || themeHeadingFont.family;
-		const fontSrcList = [].concat(localFontList, [`url("${fontsDir}/${filename}.woff2") format("woff2")`]).filter(Boolean);
+		const fontSrcList = [`url("${fontsDir}/${filename}.woff2") format("woff2")`].filter(Boolean);
 		const extraPropsMap = {
 			'font-weight': 'weight',
 			'font-style': 'style',
