@@ -416,7 +416,7 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 
 @font-face {
 	font-family: Marhey;
-	src: local('Marhey'), url('./Marhey-SemiBold.woff2') format('woff2');
+	src: url('./Marhey-SemiBold.woff2') format('woff2');
 	font-weight: 600;
 	font-style: normal;
 	font-display: swap;
