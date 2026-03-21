@@ -15,3 +15,12 @@ I have recently seen articles that tackle fascinating topics, only to notice a c
 {{ /gallery }}
 
 It goes without saying I made it myself (ironically enough, in a programme whose initials are… A.I.). And if you want to use it? Feel free to do so! I made the footer icon into a link so you can download it with a simple click, or you can use [this link to the symbol’s SVG file](/assets/img/no-ai.svg) as well.
+
+## Other icons and badges
+You can find other icons and badges around the internet, here are a few:
+- [Human made content](https://ko-fi.com/s/4662b19f61), badge pack by [Andy Carolan](https://www.andycarolan.com/) (free/pay what you want)
+- [AIn’t](https://linguacelta.com/aint/) icon
+- [Human-Made](https://hinokodo.itch.io/human-made) icons
+- [The Human Made Project](https://thehumanmade.org/) icon
+- [No AI](https://godforsaken.website/@Shrigglepuss/116251985836578143) by Shrig
+- [Not By AI](https://notbyai.fyi/) badge pack (paid verification, or one-time fee to access)
