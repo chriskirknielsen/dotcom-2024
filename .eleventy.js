@@ -146,12 +146,13 @@ export default async function (eleventyConfig) {
 			}
 		},
 	});
+
 	eleventyConfig.addPlugin(pluginRss);
 	eleventyConfig.addPlugin(assetCompiler, { fontsDir: '/assets/fonts' });
 	eleventyConfig.addPlugin(mediaGallery, { galleryClasses: ['image-gallery'] });
 	eleventyConfig.addPlugin(callout, { markdownEngine: md });
-	eleventyConfig.addPlugin(codeview);
 	eleventyConfig.addPlugin(embed, { markdownEngine: md });
+	eleventyConfig.addPlugin(codeview);
 	eleventyConfig.addPlugin(expander);
 	eleventyConfig.addPlugin(markdownLibrary, {
 		attrsLeftDelimiter: '{$',

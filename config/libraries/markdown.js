@@ -167,57 +167,201 @@ export default function (eleventyConfig, options = {}) {
 		inlineCopyHandler: options.inlineCopyHandler,
 	};
 
+	/** Overwrite both start and end tag for the strikethrough `~~` delimiter to be `<del>` instead of `<s>`. */
+	function markdownItStrikethroughToDel(md) {
+		md.renderer.rules['s_open'] = md.renderer.rules['s_close'] = function (tokens, idx, options, env, self) {
+			tokens[idx].tag = 'del';
+			return self.renderToken(tokens, idx, options);
+		};
+	}
+
+	/** Adds a new `++` delimiter to create <ins> elements.
+	 * @see {@link https://github.com/markdown-it/markdown-it-ins/blob/master/index.mjs} Imported straight from the official plugin, I take zero credit.
+	 */
+	function markdownItIns(md) {
+		// Insert each marker as a separate text token, and add it to delimiter list
+		function tokenize(state, silent) {
+			const start = state.pos;
+			const marker = state.src.charCodeAt(start);
+
+			if (silent) {
+				return false;
+			}
+
+			if (marker !== 0x2b /* + */) {
+				return false;
+			}
+
+			const scanned = state.scanDelims(state.pos, true);
+			let len = scanned.length;
+			const ch = String.fromCharCode(marker);
+
+			if (len < 2) {
+				return false;
+			}
+
+			if (len % 2) {
+				const token = state.push('text', '', 0);
+				token.content = ch;
+				len--;
+			}
+
+			for (let i = 0; i < len; i += 2) {
+				const token = state.push('text', '', 0);
+				token.content = ch + ch;
+
+				if (!scanned.can_open && !scanned.can_close) {
+					continue;
+				}
+
+				state.delimiters.push({
+					marker,
+					length: 0, // disable "rule of 3" length checks meant for emphasis
+					jump: i / 2, // 1 delimiter = 2 characters
+					token: state.tokens.length - 1,
+					end: -1,
+					open: scanned.can_open,
+					close: scanned.can_close,
+				});
+			}
+
+			state.pos += scanned.length;
+
+			return true;
+		}
+
+		// Walk through delimiter list and replace text tokens with tags
+		function postProcess(state, delimiters) {
+			let token;
+			const loneMarkers = [];
+			const max = delimiters.length;
+
+			for (let i = 0; i < max; i++) {
+				const startDelim = delimiters[i];
+
+				if (startDelim.marker !== 0x2b /* + */) {
+					continue;
+				}
+
+				if (startDelim.end === -1) {
+					continue;
+				}
+
+				const endDelim = delimiters[startDelim.end];
+
+				token = state.tokens[startDelim.token];
+				token.type = 'ins_open';
+				token.tag = 'ins';
+				token.nesting = 1;
+				token.markup = '++';
+				token.content = '';
+
+				token = state.tokens[endDelim.token];
+				token.type = 'ins_close';
+				token.tag = 'ins';
+				token.nesting = -1;
+				token.markup = '++';
+				token.content = '';
+
+				if (state.tokens[endDelim.token - 1].type === 'text' && state.tokens[endDelim.token - 1].content === '+') {
+					loneMarkers.push(endDelim.token - 1);
+				}
+			}
+
+			// If a marker sequence has an odd number of characters, it's splitted
+			// like this: `~~~~~` -> `~` + `~~` + `~~`, leaving one marker at the
+			// start of the sequence.
+			//
+			// So, we have to move all those markers after subsequent s_close tags.
+			while (loneMarkers.length) {
+				const i = loneMarkers.pop();
+				let j = i + 1;
+
+				while (j < state.tokens.length && state.tokens[j].type === 'ins_close') {
+					j++;
+				}
+
+				j--;
+
+				if (i !== j) {
+					token = state.tokens[j];
+					state.tokens[j] = state.tokens[i];
+					state.tokens[i] = token;
+				}
+			}
+		}
+
+		md.inline.ruler.before('emphasis', 'ins', tokenize);
+		md.inline.ruler2.before('emphasis', 'ins', function (state) {
+			const tokens_meta = state.tokens_meta;
+			const max = (state.tokens_meta || []).length;
+
+			postProcess(state, state.delimiters);
+
+			for (let curr = 0; curr < max; curr++) {
+				if (tokens_meta[curr] && tokens_meta[curr].delimiters) {
+					postProcess(state, tokens_meta[curr].delimiters);
+				}
+			}
+		});
+	}
+
+	/** Moves any filename string before a code fence to the code fence's metadata, and hides the original filename paragraph. */
+	function markdownItCodeFenceFilename(md) {
+		// Custom code to extract any `[filename.ext]` before a codeblock, move it as meta data to the codeblock, and finally hide the paragraph itself
+		const proxy = (tokens, idx, options, env, self) => self.renderToken(tokens, idx, options);
+		const defaultRenderer = md.renderer.rules.paragraph_open || proxy;
+
+		// Finds [file.ext] exactly (allows for subfolders and dotfiles too!) by capturing everything inside square brackets that start and end the line
+		const filenameRegex = /^\[(([/.a-zA-Z0-9_-]+)?\.[a-zA-Z0-9_-]+)\]$/;
+
+		// The markdown rendering function that handles extracting filenames if found
+		function customRenderer(tokens, idx, options, env, self) {
+			if (tokens.length > 3) {
+				const currentToken = tokens[idx]; // The opening paragraph token (definitely)
+				const nextToken1 = tokens[idx + 1]; // The paragraph child contents token (likely)
+				const nextToken2 = tokens[idx + 2]; // The closing paragraph token (probably)
+				const nextToken3 = tokens[idx + 3]; // The code fence token (hopefully)
+
+				// If all the conditions are met via simple string operations, we can run the more intensive regular expression to find a filename
+				if (
+					currentToken?.type === 'paragraph_open' &&
+					nextToken1?.content?.startsWith('[') &&
+					nextToken1?.content?.endsWith(']') &&
+					nextToken2?.type === 'paragraph_close' &&
+					nextToken3?.type === 'fence'
+				) {
+					const previousParagraphFilenameMatch = nextToken1?.content.match(filenameRegex);
+					if (previousParagraphFilenameMatch) {
+						nextToken3.meta = nextToken3.meta || {};
+						nextToken3.meta.filename = previousParagraphFilenameMatch[1]; // Use everything captured between the square brackets (group 1)
+
+						// The paragraph's contents have been extracted, and it can now be hidden
+						currentToken.hidden = true; // Not required but it just feels cleaner to have both opening and closing tokens hidden
+						nextToken1.children = []; // If left as-is, this will render raw text, without the wrapping paragraph tag
+						nextToken2.hidden = true; // Required on the closing token!
+
+						return '';
+					}
+				}
+			}
+
+			// If the paragraph was not a filename, just return a normal render
+			return defaultRenderer(tokens, idx, options, env, self);
+		}
+
+		// Apply the custom renderer just to opening paragraph tokens
+		md.renderer.rules.paragraph_open = customRenderer;
+	}
+
 	// Configure the MarkdownIt instance
 	const mdit = new markdownIt(markdownItOptions)
 		.disable('code')
+		.use(markdownItStrikethroughToDel)
+		.use(markdownItIns)
 		.use(markdownItAttrs, markdownItAttrsOptions)
 		.use(markdownItAnchor, markdownItAnchorOptions)
-		.use(function (md) {
-			// Custom code to extra any `[filename.ext]` before a codeblock, move it as meta data to the codeblock, and finally hide the paragraph itself
-			const proxy = (tokens, idx, options, env, self) => self.renderToken(tokens, idx, options);
-			const defaultRenderer = md.renderer.rules.paragraph_open || proxy;
-
-			// Finds [file.ext] exactly (allows for subfolders too!) by capturing everything inside square brackets that start and end the line
-			const filenameRegex = /^\[(([/.a-zA-Z0-9_-]+)?\.[a-zA-Z0-9_-]+)\]$/;
-
-			// The markdown rendering function that handles extracting filenames if found
-			function customRenderer(tokens, idx, options, env, self) {
-				if (tokens.length > 3) {
-					const currentToken = tokens[idx]; // The opening paragraph token (definitely)
-					const nextToken1 = tokens[idx + 1]; // The paragraph child contents token (likely)
-					const nextToken2 = tokens[idx + 2]; // The closing paragraph token (probably)
-					const nextToken3 = tokens[idx + 3]; // The code fence token (hopefully)
-
-					// If all the conditions are met via simple string operations, we can run the more intensive regular expression to find a filename
-					if (
-						currentToken?.type === 'paragraph_open' &&
-						nextToken1?.content?.startsWith('[') &&
-						nextToken1?.content?.endsWith(']') &&
-						nextToken2?.type === 'paragraph_close' &&
-						nextToken3?.type === 'fence'
-					) {
-						const previousParagraphFilenameMatch = nextToken1?.content.match(filenameRegex);
-						if (previousParagraphFilenameMatch) {
-							nextToken3.meta = nextToken3.meta || {};
-							nextToken3.meta.filename = previousParagraphFilenameMatch[1]; // Use everything captured between the square brackets (group 1)
-
-							// The paragraph's contents have been extracted, and it can now be hidden
-							currentToken.hidden = true; // Not required but it just feels cleaner to have both opening and closing tokens hidden
-							nextToken1.children = []; // If left as-is, this will render raw text, without the wrapping paragraph tag
-							nextToken2.hidden = true; // Required on the closing token!
-
-							return '';
-						}
-					}
-				}
-
-				// If the paragraph was not a filename, just return a normal render
-				return defaultRenderer(tokens, idx, options, env, self);
-			}
-
-			// Apply the custom renderer just to opening paragraph tokens
-			md.renderer.rules.paragraph_open = customRenderer;
-		})
+		.use(markdownItCodeFenceFilename)
 		.use(markdownItCodeWrap, markdownItCodeWrapOptions);
 
 	// Configure the markdown-it library to use
