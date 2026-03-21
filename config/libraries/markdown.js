@@ -102,12 +102,15 @@ class TableOfContents {
 }
 
 export default function (eleventyConfig, options = {}) {
+	if (!options || !options.hasOwnProperty('markdownEngine')) {
+		throw new Error('The `options` argument expects a `markdownEngine` property to use as a Markdown renderer.');
+	}
 	if (['anchorClass'].some((key) => typeof options[key] !== 'string')) {
 		throw new Error('The `anchorClass` property must be provided on the `options` argument.');
 	}
 
 	const slugify = eleventyConfig.getFilter('slugify');
-	const { anchorClass } = options;
+	const { anchorClass, markdownEngine } = options;
 
 	let markdownItOptions = {
 		html: true,
@@ -354,18 +357,17 @@ export default function (eleventyConfig, options = {}) {
 		md.renderer.rules.paragraph_open = customRenderer;
 	}
 
-	// Configure the MarkdownIt instance
-	const mdit = new markdownIt(markdownItOptions)
-		.disable('code')
-		.use(markdownItStrikethroughToDel)
-		.use(markdownItIns)
-		.use(markdownItAttrs, markdownItAttrsOptions)
-		.use(markdownItAnchor, markdownItAnchorOptions)
-		.use(markdownItCodeFenceFilename)
-		.use(markdownItCodeWrap, markdownItCodeWrapOptions);
-
-	// Configure the markdown-it library to use
-	eleventyConfig.setLibrary('md', mdit);
+	// Configure the provided MarkdownIt instance
+	eleventyConfig.amendLibrary('md', (mdit) => {
+		mdit.set(markdownItOptions)
+			.disable('code')
+			.use(markdownItStrikethroughToDel)
+			.use(markdownItIns)
+			.use(markdownItAttrs, markdownItAttrsOptions)
+			.use(markdownItAnchor, markdownItAnchorOptions)
+			.use(markdownItCodeFenceFilename)
+			.use(markdownItCodeWrap, markdownItCodeWrapOptions);
+	});
 
 	/** Take markup content and automatically create anchors for headings. Should only be used when content is not Markdown. */
 	eleventyConfig.addFilter('assignHeadingAnchors', (markup, includeH1 = false) => {
@@ -427,5 +429,5 @@ export default function (eleventyConfig, options = {}) {
 	});
 
 	/** Converts a Markdown string into markup. */
-	eleventyConfig.addFilter('markdown', (content, inline = false) => (inline ? mdit.renderInline(content) : mdit.render(content)));
+	eleventyConfig.addFilter('markdown', (content, inline = false) => (inline ? markdownEngine.renderInline(content) : markdownEngine.render(content)));
 }

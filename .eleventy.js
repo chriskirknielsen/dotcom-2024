@@ -38,7 +38,6 @@ const partsDir = `${includesDir}/parts`; // Layout parts folder
 const layoutsDir = `${includesDir}/layouts`; // Layouts folder
 const assetsDir = `_assets`; // Assets folder
 const BUILD_CONTEXT = ['serve', 'watch'].includes(process.env.ELEVENTY_RUN_MODE) ? 'DEV' : 'LIVE';
-const md = new markdownIt({ html: true, breaks: true, linkify: true }).disable('code');
 const purgeCssList = {
 	_global: { safe: [/^\:[-a-z]+$/, 'translated-rtl', 'data-tooltip-pos'], block: [] }, // Preserve any pseudo-class for now (thanks laurentpayot; still broken in 7.0 https://github.com/FullHuman/purgecss/issues/978)
 	home: { safe: ['data-section=home'], block: ['data-section=about'] },
@@ -47,6 +46,10 @@ const purgeCssList = {
 
 /** @param {import('@11ty/eleventy/UserConfig').default} eleventyConfig */
 export default async function (eleventyConfig) {
+	//* Markdown library override to use across all MD operations
+	const mditInstance = new markdownIt();
+	eleventyConfig.setLibrary('md', mditInstance);
+
 	//* Plugins
 	eleventyConfig.addPlugin(EleventyRenderPlugin, { accessGlobalData: true });
 	eleventyConfig.addPlugin(BundlePlugin, {
@@ -147,14 +150,8 @@ export default async function (eleventyConfig) {
 		},
 	});
 
-	eleventyConfig.addPlugin(pluginRss);
-	eleventyConfig.addPlugin(assetCompiler, { fontsDir: '/assets/fonts' });
-	eleventyConfig.addPlugin(mediaGallery, { galleryClasses: ['image-gallery'] });
-	eleventyConfig.addPlugin(callout, { markdownEngine: md });
-	eleventyConfig.addPlugin(embed, { markdownEngine: md });
-	eleventyConfig.addPlugin(codeview);
-	eleventyConfig.addPlugin(expander);
 	eleventyConfig.addPlugin(markdownLibrary, {
+		markdownEngine: mditInstance,
 		attrsLeftDelimiter: '{$',
 		attrsRightDelimiter: '$}',
 		attrsAllowedAttributes: ['id'],
@@ -259,6 +256,13 @@ export default async function (eleventyConfig) {
 			return `<span class="codeblock-toolbar-label">${[toolbarIcon, toolbarLabel].join(' ').trim()}</span>`;
 		},
 	});
+	eleventyConfig.addPlugin(pluginRss);
+	eleventyConfig.addPlugin(assetCompiler, { fontsDir: '/assets/fonts' });
+	eleventyConfig.addPlugin(mediaGallery, { galleryClasses: ['image-gallery'] });
+	eleventyConfig.addPlugin(callout, { markdownEngine: mditInstance });
+	eleventyConfig.addPlugin(embed, { markdownEngine: mditInstance });
+	eleventyConfig.addPlugin(codeview);
+	eleventyConfig.addPlugin(expander);
 	eleventyConfig.addPlugin(EleventyPluginRobotsTxt, {
 		rules: new Map([['*', [{ disallow: '*/og.html$' }]]]),
 		shouldBlockAIRobots: 'true',
