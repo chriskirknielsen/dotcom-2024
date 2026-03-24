@@ -595,8 +595,12 @@ html[data-theme='vintage'] {
 		background: linear-gradient(90deg, goldenrod, gold 33%, goldenrod) no-repeat 50% 75% / 100% 0.125rem, linear-gradient(var(--C-heading) 75%, var(--C-text) 0);
 	}
 
-	@media (--small-viewport) {
-		.header-link {
+	.header-link {
+		&[aria-current='page'] {
+			--LINK-underline-color: currentColor;
+		}
+
+		@media (--small-viewport) {
 			--LINK-color: var(--C-accent);
 
 			&:is(:hover, :focus-visible) {

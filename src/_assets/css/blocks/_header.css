@@ -99,20 +99,27 @@ theme-picker button {
 	--LINK-color: var(--_header-link-color, var(--_link-color));
 
 	font-weight: bold;
-	text-decoration: none;
 
-	&:is(:hover, :focus-visible) {
-		text-decoration: underline;
+	&:not([aria-current='page']) {
+		--LINK-underline-color: transparent;
+	}
 
+	&:is(:hover, :focus) {
 		--LINK-color: var(--_header-link-color-active, var(--_link-color-active));
 		--LINK-underline-color: currentColor;
 		--LINK-skip-ink: auto;
-		--LINK-underline-offset: auto;
+		--LINK-underline-offset: calc(var(--_link-underline-offset) / 2);
 		--LINK-decoration-thickness: auto;
 	}
 
-	&[aria-current='page'] {
-		text-decoration: underline;
+	&[aria-current='page']:not(:hover, :focus) {
+		text-decoration-inset: 0.5ch;
+	}
+
+	@media (--accept-motion) {
+		transition-property: text-decoration-color, text-underline-offset, text-decoration-inset;
+		transition-duration: var(--anim-short);
+		transition-timing-function: var(--easing-out);
 	}
 }
 
