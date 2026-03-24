@@ -22,5 +22,5 @@ You can find other icons and badges around the internet, here are a few:
 - [AIn’t](https://linguacelta.com/aint/) icon
 - [Human-Made](https://hinokodo.itch.io/human-made) icons
 - [The Human Made Project](https://thehumanmade.org/) icon
-- [No AI](https://godforsaken.website/@Shrigglepuss/116251985836578143) by Shrig
+- [No AI](https://godforsaken.website/@Shrigglepuss/116251985836578143) icon by Shrig
 - [Not By AI](https://notbyai.fyi/) badge pack (paid verification, or one-time fee to access)
