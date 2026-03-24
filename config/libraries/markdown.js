@@ -1,4 +1,3 @@
-import markdownIt from 'markdown-it';
 import markdownItAnchor from 'markdown-it-anchor';
 import markdownItAttrs from 'markdown-it-attrs';
 import markdownItCodeWrap from 'markdown-it-codewrap';
