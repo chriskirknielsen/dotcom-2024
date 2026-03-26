@@ -102,6 +102,8 @@ ol > li > ol {
 
 	& > dt {
 		align-self: center;
+
+		line-height: 1.1;
 	}
 
 	.dl-tiles--flipped & {
