@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon';
+import { DateTime, Interval } from 'luxon';
 import metadata from '../../src/_data/metadata.js';
 
 const dateFormat = (date, opts = {}) => {
@@ -42,4 +42,11 @@ export default function (eleventyConfig, options = {}) {
 
 	/** Formats a date and wraps it in a <time> element with the appropriate attribute. */
 	eleventyConfig.addFilter('timeTag', (date, opts = {}) => `<time datetime="${dateFormat(date)}">${dateFormat(date, Object.assign({ format: 'nice' }, opts))}</time>`);
+
+	eleventyConfig.addFilter('dateDiff', (date1, date2, unit = 'days') => {
+		date1 = typeof date1 === 'string' ? DateTime.fromISO(date1) : DateTime.fromJSDate(date1);
+		date2 = typeof date2 === 'string' ? DateTime.fromISO(date2) : DateTime.fromJSDate(date2);
+		const diff = Interval.fromDateTimes(date1, date2);
+		return diff.length(unit);
+	});
 }

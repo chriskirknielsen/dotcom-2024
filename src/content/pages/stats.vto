@@ -102,7 +102,7 @@
             {{ cssCount |> formatNumber }} occurrences <em>({{ cssCountFormatted }}{{ cssCountPerSign }} of all words)</em>
         </dd>
 
-        <dt>Uses of “AI”</dt>
+        <dt>Uses of “A.I.”</dt>
         <dd>
             Zero, zilch, zip, nada, naught. <a href="/ai-policy/">Why?</a>
         </dd>
@@ -143,6 +143,24 @@
                     {{ /for }}
                 </ol>
             </dd>
+        </div>
+    </dl>
+</div>
+
+<h2>Personal</h2>
+<div style="--flow-space: var(--size-m);">
+    <dl class="dl-tiles dl-tiles--flipped">
+        <div class="dl-tile">
+            <dt>Years of Age</dt>
+            <dd class="h3">{{ new Date('1992-12-11') |> dateDiff(new Date(), 'years') |> Math.floor }}</dd>
+        </div>
+        <div class="dl-tile">
+            <dt>Spoken Languages</dt>
+            <dd class="h3">3</dd>
+        </div>
+        <div class="dl-tile">
+            <dt>Total Running Distance</dt>
+            <dd class="h3">1,415 Km</dd>
         </div>
     </dl>
 </div>
