@@ -147,20 +147,64 @@
     </dl>
 </div>
 
-<h2>Personal</h2>
+<h2>Running Totals</h2>
 <div style="--flow-space: var(--size-m);">
     <dl class="dl-tiles dl-tiles--flipped">
         <div class="dl-tile">
-            <dt>Years of Age</dt>
-            <dd class="h3">{{ new Date('1992-12-11') |> dateDiff(new Date(), 'years') |> Math.floor }}</dd>
+            <dt>Runs</dt>
+            <dd class="h3">{{ nike.totals.runs |> formatNumber }}</dd>
         </div>
         <div class="dl-tile">
-            <dt>Spoken Languages</dt>
+            <dt>Distance</dt>
+            <dd class="h3">{{ nike.totals.distance |> toRound |> formatNumber }} Km</dd>
+        </div>
+        <div class="dl-tile">
+            <dt>Hours</dt>
+            <dd class="h3">{{ nike.totals.time[0] }}</dd>
+        </div>
+        <div class="dl-tile">
+            <dt>Average Pace</dt>
+            {{>
+                let averagePace = nike.totals.timeSeconds / nike.totals.distance;
+                let averagePaceM = Math.floor(averagePace / 60);
+                let averagePaceS = averagePace % 60;
+            }}
+            <dd class="h3">
+                {{ averagePaceM }}<span aria-hidden="true">'</span><span class="visually-hidden">minutes</span>
+                {{ averagePaceS |> toRound |> toString |> padStart(2, '0') }}<span aria-hidden="true">"</span><span class="visually-hidden">seconds</span>
+            </dd>
+        </div>
+        <div class="dl-tile">
+            <dt>Half-Marathons</dt>
             <dd class="h3">3</dd>
         </div>
-        <div class="dl-tile">
-            <dt>Total Running Distance</dt>
-            <dd class="h3">1,415 Km</dd>
+        {{# <div class="dl-tile">
+            <dt>Elevation Gain</dt>
+            <dd class="h3">{{ nike.totals.elevation |> formatNumber }} m</dd>
+        </div> #}}
+    </dl>
+</div>
+
+<div class="dl-container | fontVariant-tabularNums">
+    <dl>
+        <div class="dl-item-wrap">
+            <dt>Hours spent running by year</dt>
+            <dd>
+                <ol class="progress-list">
+                    {{ set yearStat = 'timeSeconds' }}
+                    {{ set maxStatsInYear = Math.max.apply(null, Object.values(nike.years).map(y => (y[yearStat]))) }}
+                    {{ for year, yearData of nike.years }}
+                        <li class="progress-list-item" style="--progress: {{ yearData[yearStat] / maxStatsInYear |> toRound(3) }}">
+                            <span class="progress-list-label">{{ year }}</span>
+                            <div class="progress-list-bar">
+                                <span class="progress-list-number">{{ (yearData[yearStat] / 3600) |> toRound |> formatNumber }} <span class="visually-hidden">Km</span></span>
+                            </div>
+                        </li>
+                    {{ /for }}
+                </ol>
+            </dd>
         </div>
     </dl>
 </div>
+
+<p><em>Sadly there is no public API with Nike Running Club, and I cannot automate this data, so I will periodically update these numbers manually (and eventually give up). Maybe I should look into Strava’s API but I only started tracking runs on there since 2025, and don’t want to backfill data for over a hundred runs.</em></p>
