@@ -147,7 +147,7 @@
     </dl>
 </div>
 
-<h2>Running Totals</h2>
+<h2>Running Totals <span aria-hidden="true">🏃‍♂️</span></h2>
 <div style="--flow-space: var(--size-m);">
     <dl class="dl-tiles dl-tiles--flipped">
         <div class="dl-tile">
@@ -163,15 +163,13 @@
             <dd class="h3">{{ nike.totals.time[0] }}</dd>
         </div>
         <div class="dl-tile">
-            <dt>Average Pace</dt>
-            {{>
-                let averagePace = nike.totals.timeSeconds / nike.totals.distance;
-                let averagePaceM = Math.floor(averagePace / 60);
-                let averagePaceS = averagePace % 60;
-            }}
+            <dt>Average Pace (Km)</dt>
+            {{ set averagePace = nike.totals.timeSeconds / nike.totals.distance }}
+            {{ set averagePaceM = Math.floor(averagePace / 60) }}
+            {{ set averagePaceS = averagePace % 60 |> toRound |> toString |> padStart(2, '0') }}
             <dd class="h3">
                 {{ averagePaceM }}<span aria-hidden="true">'</span><span class="visually-hidden">minutes</span>
-                {{ averagePaceS |> toRound |> toString |> padStart(2, '0') }}<span aria-hidden="true">"</span><span class="visually-hidden">seconds</span>
+                {{ averagePaceS }}<span aria-hidden="true">"</span><span class="visually-hidden">seconds</span>
             </dd>
         </div>
         <div class="dl-tile">
