@@ -1,7 +1,6 @@
 import path from 'node:path';
 import fs from 'node:fs';
-import { promisify } from 'node:util';
-const glob = promisify(fs.glob);
+import { glob } from 'node:fs/promises';
 import { Transform as TransformStream } from 'node:stream';
 import esbuild from 'esbuild';
 import { bundle as cssBundle, transform as cssTransform, Features as CSSFeatures } from 'lightningcss';
@@ -47,7 +46,7 @@ function assetCompiler(settings, config) {
 	return new Promise((resolve, reject) => {
 		// Grab a list of all the files matching the folder and extension
 		const inputFolder = `${config.dir.input}/_assets/${settings.inFolder}`;
-		return glob(`${inputFolder}/**/*.${settings.inExt}`, { root: './' })
+		return Array.fromAsync(glob(`${inputFolder}/**/*.${settings.inExt}`, { root: './' }))
 			.catch((globError) => {
 				console.error(globError);
 				reject(globError);
