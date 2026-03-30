@@ -9,3 +9,4 @@ package-lock.json
 .cache
 src/_includes/assets/css/**/*.css
 src/_includes/assets/js/**/*.js
+strava.vto
