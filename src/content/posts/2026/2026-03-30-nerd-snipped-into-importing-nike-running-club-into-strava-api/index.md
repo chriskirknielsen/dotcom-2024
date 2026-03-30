@@ -264,7 +264,7 @@ body {
 }
 
 .button:where(:not([type='file'])),
-:where(input[type='file'].button)::file-selector-button {
+.button:where(input[type='file'])::file-selector-button {
 	padding: 0.125em 0.5em;
 
 	font-size: 1rem;
@@ -274,13 +274,9 @@ body {
 	border-radius: 0.25em;
 	color: white;
 	background-color: #fc5200;
-
-	&:is(:hover, :focus) {
-		background-color: #e34a00;
-		text-decoration: underline;
-	}
 }
-input[type='file'].button:is(:hover, :focus)::file-selector-button {
+.button:where(:not([type='file'])):is(:hover, :focus),
+.button:where(input[type='file']):is(:hover, :focus)::file-selector-button {
 	background-color: #e34a00;
 	text-decoration: underline;
 }
