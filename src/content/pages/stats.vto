@@ -4,6 +4,7 @@
     summary: 'Statistics for nerds',
     permalink: '/stats/',
     tags: ['_og'],
+    runAutoToc: true,
     eleventyComputed: {
         ogImageSummary: 'Just stats',
         customMetaImage: function (data) {
@@ -11,7 +12,7 @@
                 return this.toOgImage(data);
             }
             return this.toPath([data.assets.images, 'metaimage.jpg']);
-        }
+        },
     },
     eleventyImport: {
         collections: ['_posts', '_pages', '_designs', '_projects', '_fonts']
@@ -94,12 +95,12 @@
     <dl>
         <dt>Word count average</dt>
         <dd>
-            {{ wordCountAverage |> formatNumber }} words <em>(excludes code blocks)</em>
+            {{ wordCountAverage |> formatNumber }} words <span class="fontStyle-italic">(excludes code blocks)</span>
         </dd>
 
         <dt>Mentions of “CSS”</dt>
         <dd>
-            {{ cssCount |> formatNumber }} occurrences <em>({{ cssCountFormatted }}{{ cssCountPerSign }} of all words)</em>
+            {{ cssCount |> formatNumber }} occurrences <span class="fontStyle-italic">({{ cssCountFormatted }}{{ cssCountPerSign }} of all words)</span>
         </dd>
 
         <dt>Uses of “A.I.”</dt>
@@ -110,7 +111,7 @@
         <dt>Overall frequency</dt>
         <dd>
             Every {{ if averagePerDayRounded != 1 }}{{ averagePerDayRounded }} days{{ else }}day{{ /if }}
-            <em>(or {{ averageDaysPerPostRounded }} posts per day)</em>
+            <span class="fontStyle-italic">(or {{ averageDaysPerPostRounded }} posts per day)</span>
         </dd>
         
         <div class="dl-item-wrap">
@@ -147,24 +148,24 @@
     </dl>
 </div>
 
-<h2>Running Totals <span aria-hidden="true">🏃‍♂️</span></h2>
+<h2 class="running">Running <span aria-hidden="true">🏃‍♂️</span></h2>
 <div style="--flow-space: var(--size-m);">
     <dl class="dl-tiles dl-tiles--flipped">
         <div class="dl-tile">
             <dt>Runs</dt>
-            <dd class="h3">{{ nike.totals.runs |> formatNumber }}</dd>
+            <dd class="h3">{{ strava.count |> formatNumber }}</dd>
         </div>
         <div class="dl-tile">
             <dt>Distance</dt>
-            <dd class="h3">{{ nike.totals.distance |> toRound |> formatNumber }} Km</dd>
+            <dd class="h3">{{ strava.distance / 1000 |> toRound |> formatNumber }} Km</dd>
         </div>
         <div class="dl-tile">
             <dt>Hours</dt>
-            <dd class="h3">{{ nike.totals.time[0] }}</dd>
+            <dd class="h3">{{ strava.moving_time / 3600 |> toRound }}</dd>
         </div>
         <div class="dl-tile">
             <dt>Average Pace (Km)</dt>
-            {{ set averagePace = nike.totals.timeSeconds / nike.totals.distance }}
+            {{ set averagePace = strava.moving_time / (strava.distance / 1000) }}
             {{ set averagePaceM = Math.floor(averagePace / 60) }}
             {{ set averagePaceS = averagePace % 60 |> toRound |> toString |> padStart(2, '0') }}
             <dd class="h3">
@@ -174,28 +175,24 @@
         </div>
         <div class="dl-tile">
             <dt>Half-Marathons</dt>
-            <dd class="h3">3</dd>
+            <dd class="h3">{{ strava.activities.filter(a => a.distance >= 21_097.5).length }}</dd>
         </div>
-        {{# <div class="dl-tile">
-            <dt>Elevation Gain</dt>
-            <dd class="h3">{{ nike.totals.elevation |> formatNumber }} m</dd>
-        </div> #}}
     </dl>
 </div>
 
 <div class="dl-container | fontVariant-tabularNums">
     <dl>
         <div class="dl-item-wrap">
-            <dt>Hours spent running by year</dt>
+            <dt>Runs per year</dt>
             <dd>
                 <ol class="progress-list">
-                    {{ set yearStat = 'timeSeconds' }}
-                    {{ set maxStatsInYear = Math.max.apply(null, Object.values(nike.years).map(y => (y[yearStat]))) }}
-                    {{ for year, yearData of nike.years }}
-                        <li class="progress-list-item" style="--progress: {{ yearData[yearStat] / maxStatsInYear |> toRound(3) }}">
+                    {{ set runsByYear = strava.activities |> groupBy('year') }}
+                    {{ set maxStatsInYear = Math.max.apply(null, Object.values(runsByYear).map(y => (y.length))) }}
+                    {{ for year, yearData of runsByYear }}
+                        <li class="progress-list-item" style="--progress: {{ yearData.length / maxStatsInYear |> toRound(3) }}">
                             <span class="progress-list-label">{{ year }}</span>
                             <div class="progress-list-bar">
-                                <span class="progress-list-number">{{ (yearData[yearStat] / 3600) |> toRound |> formatNumber }} <span class="visually-hidden">Km</span></span>
+                                <span class="progress-list-number">{{ yearData.length |> toRound |> formatNumber }}</span>
                             </div>
                         </li>
                     {{ /for }}
@@ -205,4 +202,4 @@
     </dl>
 </div>
 
-<p><em>Sadly there is no public API with Nike Running Club, and I cannot automate this data, so I will periodically update these numbers manually (and eventually give up). Maybe I should look into Strava’s API but I only started tracking runs on there since 2025, and don’t want to backfill data for over a hundred runs.</em></p>
+<p class="fontStyle-italic">The info above is pulled from Strava (after some tedious Nike Running Club import) but manually saved periodically through <a href="https://developers.strava.com/docs/reference/">their API</a>.</p>
