@@ -118,7 +118,7 @@
     items: albums.map((g) => ({
         title: g.title,
         content: `${g.blurb}<br>**Appetizer track for this artist:** ${g.intro}`,
-        detail: `<em class="fontSize-smaller">${g.genre}</em>`,
+        detail: `<span class="fontStyle-italic fontSize-smaller">${g.genre}</span>`,
         detailClass: 'lineHeight-tight',
         link: g.link,
         image: g.image,
