@@ -1,7 +1,7 @@
 ---
 title: "How I nerd-sniped myself into importing Nike Running Club data via the Strava API"
 summary: "Taking legacy TCX data from Nike and importing it to Strava"
-tags: [api]
+tags: [personal, api]
 time: '13:37:00'
 ---
 
@@ -41,11 +41,11 @@ After creating a new “app” in the [unlisted API section](https://www.strava.
 
 Uploading a TCX file via the API yielded the same result (shocker), so I tried finding other posts of people affected by these inconsistencies, but the only real fix I read about was to use a GPX file. I tried exporting a “good” run’s GPX file from Strava but it wasn’t very similar to TCX, so my idea of using a good run as a template to convert the bad ones fell apart. Plus, I didn’t want to convert all the files. While The GPS data in those files is supposedly good, I didn’t want to spend a lot of time trying to fix something when I couldn’t even tell where the issue was.
 
-I saw in the API documentation there was a way to insert an activity as a plain object: date, distance, time… no GPS data, but at this point, I didn’t care. It’s kind of fun to have, yes, but not essential: accurate activity logs are more important that showing the same paths I take most of the time. So I’d need a list of all the activities to log, exported as JSON, without any other data.
+I saw in the API documentation there was a way to insert an activity as a plain object: date, distance, time… no GPS data, but at this point, I didn’t care. It’s kind of fun to have, yes, but not essential: accurate activity logs are more important than showing the same three paths I take most of the time. So I’d need a list of all the activities to log, exported as JSON, without any other data.
 
 I ended up creating a simple Node script that parses the XML files via [fast-xml-parser](https://www.npmjs.com/package/fast-xml-parser) (120 MB of data took a couple seconds, it is true to its name!), collects basic data for each file as an object, and spits out an array as a JSON file. I wanted to load the file into my app buy it’s all local, and it’s a one-time import operation, so I just copy-pasted the contents into the app as a variable, who cares? Work smarter, not harder!
 
-So the next part is to import each activity: it’s a single one per API call, so I looped over the array, and imported the data, with a few tweaks to make sure it was saved as a run. Once one file was done, I moved on to the next. I didn’t want to run into rate-limiting issues, and 151 files is relatively fast to go through.
+So the next part is to import each activity: it’s a single one per API call, so I looped over the array, and imported the data, with a few tweaks to make sure it was saved as a run. Once one file was done (using `await`), I moved on to the next. I didn’t want to run into rate-limiting issues, and 151 files is relatively fast to go through.
 
 I then refreshed my Strava activity page, and sure enough: a bunch of new activities appeared! All the distances seemed correct, so I am pretty happy with this. It’s historical, basic data, but it is more than enough to track my stats for running.
 
@@ -61,9 +61,9 @@ That's it for the long explanation, the code and basic steps are provided below.
 
 ## tl;dr
 
-[Ask Nike for your data](https://www.nike.com/help/privacy)
+[Ask Nike for your data](https://www.nike.com/help/privacy).
 
-Rename the TCX files to contain the activity date by running this script in the folder with all TCX files (optional)
+Rename the TCX files to contain the activity date by running this script in the folder with all TCX files (optional).
 
 ```bash
 # goal: append filenames with time
@@ -87,7 +87,7 @@ Create a new npm project in the folder containing all your TCX files, install `f
 npm init -y && npm i fast-xml-parser && touch index.js && open index.js
 ```
 
-Note: if you copy all this verbatim, you’ll likely need to add `"type": "module"` in your `package.json` file.
+{{ callout }}If you copy all this verbatim, you’ll likely need to add `"type": "module"` in your `package.json` file.{{ /callout }}
 
 Run a script to parse all the TCX files and save all the data as JSON:
 
@@ -619,7 +619,7 @@ document.addEventListener('click', function (e) {
 ```
 {{ /expander }}
 
-Run Eleventy and open `localhost:yourport/strava`
+Run Eleventy and open `localhost:####/strava`.
 
 Click “Authorize Strava”, selecting either `read_all` or `write` permissions (if you’re uploading or fetching multiple activities, `write` will be needed).
 
@@ -627,7 +627,7 @@ If you need to upload anything, copy the contents of your `strava.json` file whi
 
 Click Get Stats button, and watch every single piece of data appear.
 
-You can now copy this output into `_data/strava.json` and use it however you like. (note: the “Copy relevant stats” didn’t work for me, so manually copy-pasting was needed… ah well)
+You can now copy this output into `_data/strava.json` and use it however you like. (note: the “Copy relevant stats” didn’t work for me in Firefox despite being user-activated, so manually copy-pasting was needed… ah well)
 
 This is not amazingly well-written code (`onsubmit` Chris, really?), but it is, except for the bash script from _Efficient_Soft773_, code I have written myself, and for a weekend project, it ain’t too bad. It works and does what it should. It's probably not very accessible, but this was mainly built for myself.
 
