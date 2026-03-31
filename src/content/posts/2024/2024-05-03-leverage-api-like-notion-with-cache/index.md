@@ -37,7 +37,7 @@ By getting that `info` first, I can avoid querying 300 items from the PSN API if
 Here’s all my code split by file. This is fully commented but if something is unclear, let me know!
 
 {{ expander "api-cache.js" }}
-{{ echo |> markdown }}This is the high-level abstraction described above which takes in methods to query the API (`info` + `data`), process `data`, and handle caching via `eleventy-fetch`'s `AssetCache` (I don’t use the `EleventyFetch` function directly because I’m not requesting a specific URL, but using a package that does the fetching behind the scenes). This should be able to work with any standard API, though if there’s no endpoint to grab `info`, it’s not super useful and you should just use `eleventy-fetch` as-is with a short-ish cache duration!{{ /echo }}
+This is the high-level abstraction described above which takes in methods to query the API (`info` + `data`), process `data`, and handle caching via `eleventy-fetch`'s `AssetCache` (I don’t use the `EleventyFetch` function directly because I’m not requesting a specific URL, but using a package that does the fetching behind the scenes). This should be able to work with any standard API, though if there’s no endpoint to grab `info`, it’s not super useful and you should just use `eleventy-fetch` as-is with a short-ish cache duration!
 
 ```js
 import { AssetCache } from '@11ty/eleventy-fetch';
@@ -116,11 +116,11 @@ export default async function (settings) {
 }
 ```
 
-{{ echo |> markdown }}I don’t check the `settings` object thoroughly but you might want to. Also, the `skipLocalCache` option is there in case you never want to cache the data on your local development build. This function should be reusable with most APIs that return data — if you use it, I’d be curious to hear how it worked out for you!{{ /echo }}
+I don’t check the `settings` object thoroughly but you might want to. Also, the `skipLocalCache` option is there in case you never want to cache the data on your local development build. This function should be reusable with most APIs that return data — if you use it, I’d be curious to hear how it worked out for you!
 {{ /expander }}
 
 {{ expander "notion-db.js" }}
-{{ echo |> markdown }}This is my helper for Notion specifically, which requires a database to query as well as properties to retrieve and potential filters to pass in. It makes use of [Notion’s `client` package](https://www.npmjs.com/package/@notionhq/client) to make the API calls easy. This also handles normalising the data from Notion, as it is full of metadata, via the optional `dataPostProcess` function, which can process the result before it gets cached.{{ /echo }}
+This is my helper for Notion specifically, which requires a database to query as well as properties to retrieve and potential filters to pass in. It makes use of [Notion’s `client` package](https://www.npmjs.com/package/@notionhq/client) to make the API calls easy. This also handles normalising the data from Notion, as it is full of metadata, via the optional `dataPostProcess` function, which can process the result before it gets cached.
 
 ```js
 import 'dotenv/config';
@@ -191,11 +191,10 @@ export default async function (queryConfig) {
 	return cachedData;
 }
 ```
-
 {{ /expander }}
 
 {{ expander "psn-api.js" }}
-{{ echo |> markdown }}This is a one-off but keeping it out of my gaming library data file makes everything a little more organised. (and if the API changes in the future, it’s nice to keep the code decoupled) This uses [the `psn-api` package](https://www.npmjs.com/package/psn-api) to easily hit the appropriate endpoints; check out the [Get Started guide](https://psn-api.achievements.app/get-started)!{{ /echo }}
+This is a one-off but keeping it out of my gaming library data file makes everything a little more organised. (and if the API changes in the future, it’s nice to keep the code decoupled) This uses [the `psn-api` package](https://www.npmjs.com/package/psn-api) to easily hit the appropriate endpoints; check out the [Get Started guide](https://psn-api.achievements.app/get-started)!
 
 ```js
 // The PSN API is still in CommonJS while I use ES Modules, so this little hack allows to use require()
@@ -247,7 +246,7 @@ export default async function () {
 }
 ```
 
-{{ echo |> markdown }}I was pleasantly surprised to notice the `nextOffset` property was provided, making it very easy to grab every item. What’s also nice is that this API returns an icon for the game, so I was able to "decorate" the dialog box you see when clicking a game title!{{ /echo }}
+I was pleasantly surprised to notice the `nextOffset` property was provided, making it very easy to grab every item. What’s also nice is that this API returns an icon for the game, so I was able to “decorate” the dialog box you see when clicking a game title!
 {{ /expander }}
 
 And I keep all the tokens and database IDs secret in my `.env` file. 🤫
