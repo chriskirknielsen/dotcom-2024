@@ -55,9 +55,9 @@ I can now copy the contents of the stats and all activities, merged into a singl
 
 And with that: my stats page now contains some basic [running stats](/stats/#running). All in a weekend’s work!
 
-A couple drawbacks that I’ve noticed is that my total running distance is off by about 4 Kilometers, (which is less than a quarter of a percent over the total, I’m sure you’ll agree that’s negligible), and the aforementioned lack of GPS data, but I honestly don’t care about earlier data all that much. Beyond that, all the numbers match up between NRC and Strava. Neat!
+A couple drawbacks that I’ve noticed is that my total running distance is off by about 4 Kilometers, (which is about a quarter of a percent over the total, I’m sure you’ll agree that’s negligible), and the aforementioned lack of GPS data, but I honestly don’t care about earlier data all that much. Beyond that, all the numbers match up between NRC and Strava. Neat!
 
-That's it for the long explanation, the code and basic steps are provided below. Let me know if I messed something up or if you have questions!
+That’s it for the long explanation, the code and basic steps are provided below. Let me know if I messed something up or if you have questions!
 
 ## tl;dr
 
@@ -174,7 +174,7 @@ STRAVA_CLIENT_ID=######
 STRAVA_CLIENT_SECRET=########################################
 ```
 
-Create a small “app” to log into Strava via API and import files, which injects the secrets above into the paga's data cascade via `eleventyComputed`. I am providing HTML (in Nunjucks flavour but it should work exactly the same with Liquid or Vento), CSS, and JavaScript separately as the latter is over 300 lines.
+Create a small “app” to log into Strava via API and import files, which injects the secrets above into the page’s data cascade via `eleventyComputed`. I am providing HTML (in Nunjucks flavour but it should work exactly the same with Liquid or Vento), CSS, and JavaScript separately as the latter is over 300 lines.
 
 {{ expander 'strava-app.njk' }}
 [strava-app.njk]
@@ -629,6 +629,6 @@ Click Get Stats button, and watch every single piece of data appear.
 
 You can now copy this output into `_data/strava.json` and use it however you like. (note: the “Copy relevant stats” didn’t work for me in Firefox despite being user-activated, so manually copy-pasting was needed… ah well)
 
-This is not amazingly well-written code (`onsubmit` Chris, really?), but it is, except for the bash script from _Efficient_Soft773_, code I have written myself, and for a weekend project, it ain’t too bad. It works and does what it should. It's probably not very accessible, but this was mainly built for myself.
+This is not amazingly well-written code (`onsubmit` Chris, really?), but it is, except for the bash script from _Efficient_Soft773_, code I have written myself, and for a weekend project, it ain’t too bad. It works and does what it should. It’s probably not very accessible, but this was mainly built for myself.
 
-Oh and because this app to fetch my stats only runs locally, I have added `app-strava` files to `.gitignore` (initially to hide my hardcoded client secret, but with `.env` that's no problem). The callback URL will most likely not work on the production URL, though, so it's not really needed to keep around.
+Oh and because this app to fetch my stats only runs locally, I have added `app-strava` files to `.gitignore` (initially to hide my hardcoded client secret, but with `.env` that’s no problem). The callback URL will most likely not work on the production URL, though, so it’s not really needed to keep around.
