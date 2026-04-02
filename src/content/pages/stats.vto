@@ -209,10 +209,16 @@
                     const activities = strava.activities; // These should already be sorted by date in descending order (newest first)
                     const firstActivityDate = activities.at(-1).date;
                     const lastActivityDate = activities.at(0).date;
+                    const startingDateBase = new Date(`${getMonthAndYear(firstActivityDate)}-15T00:00:00Z`);
+                    const dataPointCoordinates = [];
+                    const allMonthsList = [];
                 }}
-                {{# Briefly exiting the JS block to run an Eleventy dateDiff filter #}}
+                {{# Briefly exiting the JS block to run the dateDiff filter #}}
                 {{ set activityMonthDeltaDiff = firstActivityDate |> dateDiff(lastActivityDate, 'months') |> Math.floor }}
-                {{ >
+                {{>
+                    const svgSize = { w: 960, h: 240, stroke: 2, font: 14 };
+                    const svgChartPadding = svgSize.font * 2;
+                    const yStepCount = 4;
                     const monthlyData = strava.activities.reduce((prev, curr) => {
                         const yearAndMonth = getMonthAndYear(curr.date);
                         if (!(yearAndMonth in prev)) { prev[yearAndMonth] = 0; }
@@ -223,74 +229,89 @@
                     const maxExpo = maxMetric.toExponential();
                     const [expoValue, expoMagnitude] = maxExpo.split('e').map(n => Math.ceil(Number(n)));
                     const maxGraphValue = Math.pow(10, expoMagnitude + 1);
-                    const svgSize = { w: 960, h: 240, stroke: 2, font: 14 };
-                    const svgChartPadding = svgSize.font * 2;
-                    const yStepCount = 4;
                     const graphStepValueX = maxGraphValue / yStepCount;
                     const graphStepSizeX = (svgSize.w - svgChartPadding) / activityMonthDeltaDiff;
                     const graphStepSizeY = (svgSize.h - svgChartPadding) / yStepCount;
                     const graphXAxisPosY = svgSize.h - svgChartPadding;
                     const graphYAxisPosX = svgChartPadding + svgSize.stroke / 2;
-                    const startingDateBase = new Date(`${getMonthAndYear(firstActivityDate)}-15T00:00:00Z`);
+                    for (let i = 0; i <= activityMonthDeltaDiff; i++) {
+                        const monthAndYearTick = new Date(startingDateBase);
+                        const monthOfTick = monthAndYearTick.getMonth();
+                        monthAndYearTick.setMonth(monthOfTick + i);
+                        const monthAndYearISO = monthAndYearTick.toISOString();
+                        const yearAndMonthLabel = getMonthAndYear(monthAndYearISO);
+                        const pointValue = monthlyData[yearAndMonthLabel] || 0;
+                        const pointPosX = svgChartPadding + graphStepSizeX * i;
+                        const pointPosY = svgSize.h - svgChartPadding - ((monthlyData[yearAndMonthLabel] || 0) / maxGraphValue * (svgSize.h - svgChartPadding));
+                        dataPointCoordinates.push([pointPosX, pointPosY, pointValue]);
+                        allMonthsList.push(yearAndMonthLabel);
+                    }
                 }}
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="{{ svgSize.w }}"
-                    height="{{ svgSize.h }}"
-                    viewBox="0 0 {{ svgSize.w }} {{ svgSize.h }}"
-                    style="overflow: visible; font-family: system-ui;"
-                    role="img"
-                    aria-label="A line graph showing the distance I have run each month since {{ getMonthAndYear(firstActivityDate) }} up till now, with a max of {{ maxMetric / 1000 |> toRound }} Km. The values vary wildly with no visible pattern, with a few months even reaching zero."
-                >
-                    {{# value lines + labels #}}
-                    {{ for y of (yStepCount + 1) }}
-                    <text font-size="{{ svgSize.font * 0.75 }}" x="{{ svgChartPadding - 2 }}" y="{{ (y - 1) * graphStepSizeY + svgSize.font * 0.25 }}" text-anchor="end" fill="currentColor">{{ graphStepValueX * (yStepCount - y + 1) / 1000 |> toRound }}</text>
-                    {{ if y <= yStepCount }}
-                    <line x1="{{ svgChartPadding }}" x2="{{ svgSize.w }}" y1="{{ (y - 1) * graphStepSizeY }}" y2="{{ (y - 1) * graphStepSizeY }}" fill="none" stroke="currentColor" stroke-opacity="0.5" stroke-width="{{ svgSize.stroke / 2 }}"/>
-                    {{ /if }}
-                    {{ /for }}
+                <div class="linechart-wrapper">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="{{ svgSize.w }}"
+                        height="{{ svgSize.h }}"
+                        viewBox="0 0 {{ svgSize.w }} {{ svgSize.h }}"
+                        class="linechart"
+                        role="img"
+                        aria-label="A line graph showing the distance I have run each month since {{ getMonthAndYear(firstActivityDate) }} up till now, with a maximum of {{ maxMetric / 1000 |> toRound }} Km. The values vary wildly with no visible pattern, with a few months even reaching zero."
+                    >
+                        {{# value lines + labels #}}
+                        {{ for y of (yStepCount + 1) }}
+                            <text font-size="{{ svgSize.font * 0.75 }}" x="{{ svgChartPadding - 2 }}" y="{{ (y - 1) * graphStepSizeY + svgSize.font * 0.25 }}" text-anchor="end" fill="currentColor">{{ graphStepValueX * (yStepCount - y + 1) / 1000 |> toRound }}</text>
+                            {{ if y <= yStepCount }}
+                                <line x1="{{ svgChartPadding }}" x2="{{ svgSize.w }}" y1="{{ (y - 1) * graphStepSizeY }}" y2="{{ (y - 1) * graphStepSizeY }}" fill="none" stroke="currentColor" stroke-opacity="0.5" stroke-width="{{ svgSize.stroke / 2 }}"/>
+                            {{ /if }}
+                        {{ /for }}
 
-                    {{# The data line #}}
-                    {{>
-                        const dataPointCoordinates = [];
-                        const allMonthsList = [];
-                    }}
-                    <polyline fill="none" stroke="var(--C-heading)" stroke-width="{{ svgSize.stroke }}" points="
-                        {{- for m of (activityMonthDeltaDiff + 1) }}
-                            {{> const monthAndYearTick = new Date(startingDateBase);
-                                const monthOfTick = monthAndYearTick.getMonth();
-                                monthAndYearTick.setMonth(monthOfTick + m - 1);
-                                const monthAndYearISO = monthAndYearTick.toISOString();
-                                const yearAndMonthLabel = getMonthAndYear(monthAndYearISO);
-                                const pointValue = monthlyData[yearAndMonthLabel] || 0;
-                                const pointPosX = svgChartPadding + graphStepSizeX * (m - 1);
-                                const pointPosY = svgSize.h - svgChartPadding - ((monthlyData[yearAndMonthLabel] || 0) / maxGraphValue * (svgSize.h - svgChartPadding));
-                                dataPointCoordinates.push([pointPosX, pointPosY, pointValue]);
-                                allMonthsList.push(yearAndMonthLabel);
-                            }}
-                            {{ pointPosX |> toRound(2) }},{{ pointPosY |> toRound(2) }}
-                        {{ /for -}}
-                    "/>
-                    {{# Or: create individual lines? (loop over dataPointCoordinates and use the index to find the current + previous point coord) That way they can animated from y1/y2="\{\{ (svgSize.h - svgChartPadding) \}\}" #}}
+                        {{# The data lines #}}
+                        <polyline fill="none" stroke="var(--C-heading)" stroke-width="{{ svgSize.stroke }}" points="
+                            {{ for [cx, cy, v] of dataPointCoordinates }}
+                                {{ cx |> toRound(2) }},{{ cy |> toRound(2) }}
+                            {{ /for -}}
+                        "/>
+                        
+                        {{# Or: create individual lines? (loop over dataPointCoordinates and use the index to find the current + previous point coord) That way they can animated from y1/y2="\{\{ (svgSize.h - svgChartPadding) \}\}" #}}
 
-                    {{# X-axis lines + labels #}}
-                    <line x1="{{ svgChartPadding }}" x2="{{ svgSize.w }}" y1="{{ graphXAxisPosY }}" y2="{{ graphXAxisPosY }}" fill="none" stroke="currentColor" stroke-width="{{ svgSize.stroke }}"/>
-                    
-                    {{# Y-axis line #}}
-                    <line x1="{{ graphYAxisPosX }}" x2="{{ graphYAxisPosX }}" y1="0" y2="{{ svgSize.h - svgChartPadding }}" fill="none" stroke="currentColor" stroke-width="{{ svgSize.stroke }}"/>
-                    
-                    {{ for [cx, cy, v] of dataPointCoordinates }}
-                        <circle cx="{{ cx }}" cy="{{ cy }}" r="{{ svgSize.stroke * 1.5 }}" fill="currentColor"/>
-                        <text font-size="{{ svgSize.font * 0.75 }}" x="{{ cx }}" y="{{ cy - svgSize.font * 0.75 }}" text-anchor="middle" fill="currentColor" stroke="var(--C-canvas)" stroke-width="2" paint-order="stroke">{{ v / 1000 |> toRound }}</text>
-                    {{ /for }}
+                        {{# X-axis lines + labels #}}
+                        <line x1="{{ svgChartPadding }}" x2="{{ svgSize.w }}" y1="{{ graphXAxisPosY }}" y2="{{ graphXAxisPosY }}" fill="none" stroke="currentColor" stroke-width="{{ svgSize.stroke }}"/>
+                        
+                        {{# Y-axis line #}}
+                        <line x1="{{ graphYAxisPosX }}" x2="{{ graphYAxisPosX }}" y1="0" y2="{{ svgSize.h - svgChartPadding }}" fill="none" stroke="currentColor" stroke-width="{{ svgSize.stroke }}"/>
+                        
+                        {{ for [cx, cy, v] of dataPointCoordinates }}
+                            <circle cx="{{ cx }}" cy="{{ cy }}" r="{{ svgSize.stroke * 1.5 }}" fill="currentColor"/>
+                            <text font-size="{{ svgSize.font * 0.75 }}" x="{{ cx }}" y="{{ cy - svgSize.font * 0.75 }}" text-anchor="middle" fill="currentColor" stroke="var(--C-canvas)" stroke-width="2" paint-order="stroke">{{ v / 1000 |> toRound }}</text>
+                        {{ /for }}
 
-                    <text font-size="{{ svgSize.font }}" x="{{ svgChartPadding }}" y="{{ svgSize.h - svgChartPadding + svgSize.font }}" fill="currentColor">{{ getMonthAndYear(firstActivityDate) }}</text>
-                    <text font-size="{{ svgSize.font }}" x="{{ (svgSize.w - svgChartPadding) / 2 }}" y="{{ svgSize.h - svgChartPadding + svgSize.font }}" text-anchor="middle" fill="currentColor">{{ allMonthsList[Math.floor(allMonthsList.length/2)] }}</text>
-                    <text font-size="{{ svgSize.font }}" x="{{ svgSize.w }}" y="{{ svgSize.h - svgChartPadding + svgSize.font }}" text-anchor="end" fill="currentColor">{{ getMonthAndYear(lastActivityDate) }}</text>
-                </svg>
+                        <text font-size="{{ svgSize.font }}" x="{{ svgChartPadding }}" y="{{ svgSize.h - svgChartPadding + svgSize.font }}" fill="currentColor">{{ getMonthAndYear(firstActivityDate) }}</text>
+                        <text font-size="{{ svgSize.font }}" x="{{ (svgSize.w - svgChartPadding) / 2 }}" y="{{ svgSize.h - svgChartPadding + svgSize.font }}" text-anchor="middle" fill="currentColor">{{ allMonthsList[Math.floor(allMonthsList.length/2)] }}</text>
+                        <text font-size="{{ svgSize.font }}" x="{{ svgSize.w }}" y="{{ svgSize.h - svgChartPadding + svgSize.font }}" text-anchor="end" fill="currentColor">{{ getMonthAndYear(lastActivityDate) }}</text>
+                    </svg>
+                </div>
             </dd>
         </dl>
     </div>
 </div>
 
 <p class="fontStyle-italic">The info above is pulled from Strava (after some tedious Nike Running Club import) but manually saved periodically through their API. <a href="/blog/nerd-snipped-into-importing-nike-running-club-into-strava-api/">Here’s how I did it.</a> But don’t ask how the hell I went running every 4 days in 2023 because it baffles me.</p>
+<style>
+.linechart {
+    padding: 0.25em 0.5em;
+    overflow: visible;
+    font-family: system-ui;
+}
+
+@media (max-width: {{ svgSize.w / 1.25 }}px) {
+    .linechart-wrapper {
+        inline-size: 0; /* Don't participate in the grid cell sizing */
+        min-inline-size: 100%; /* Occupy all the space */
+        overflow-inline: auto;
+    }
+    .linechart {
+        inline-size: {{ svgSize.w }}px; 
+        max-inline-size: unset;
+    }
+}
+</style>
