@@ -553,25 +553,6 @@ document.addEventListener('click', function (e) {
 
 	if (e.target.closest('#copy')) {
 		if (!stats) {
-			return alert('wtf');
-		}
-		const copyAction = navigator.clipboard.writeText(JSON.stringify(stats, null, 4));
-		copyAction
-			.then(() => {
-				const prevText = e.target.innerText;
-				e.target.innerText = 'Copied!';
-				setTimeout(() => {
-					e.target.innerText = prevText;
-				}, 2000);
-			})
-			.catch((err) => {
-				console.error(err);
-				alert('wtf!');
-			});
-	}
-
-	if (e.target.closest('#copy')) {
-		if (!stats) {
 			alert('wtf');
 		}
 		const copyAction = navigator.clipboard.writeText(JSON.stringify(stats, null, 4));
