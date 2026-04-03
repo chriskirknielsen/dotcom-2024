@@ -157,7 +157,7 @@ ol > li > ol {
 	grid-column: 2;
 
 	block-size: 100%;
-	inline-size: calc(var(--progress) * 100%);
+	inline-size: max(5%, 2rem, calc(var(--progress) * 100%)); /* Prevent it being stuck against the label */
 	padding-inline-end: var(--size-xs);
 
 	text-align: end;
