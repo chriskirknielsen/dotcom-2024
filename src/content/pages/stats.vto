@@ -184,7 +184,7 @@
     <dl>
         <div class="dl-item-wrap">
             <dt>Runs per year</dt>
-            <dd>
+            <dd class="flow" style="--flow-space: var(--size-xs);">
                 <ol class="progress-list">
                     {{ set runsByYear = strava.activities |> groupBy('year') }}
                     {{ set maxStatsInYear = Math.max.apply(null, Object.values(runsByYear).map(y => (y.length))) }}
@@ -197,6 +197,8 @@
                         </li>
                     {{ /for }}
                 </ol>
+
+                <p class="fontStyle-italic fontSize-smaller">Don’t ask how the hell I went running every 4 days in 2023 because it baffles me.</p>
             </dd>
         </div>
 
@@ -216,7 +218,7 @@
                 {{# Briefly exiting the JS block to run the dateDiff filter #}}
                 {{ set activityMonthDeltaDiff = firstActivityDate |> dateDiff(lastActivityDate, 'months') |> Math.floor }}
                 {{>
-                    const svgSize = { w: 960, h: 240, stroke: 2, font: 14 };
+                    const svgSize = { w: 960, h: 240, stroke: 2, font: 14, button: 8 };
                     const svgChartPadding = svgSize.font * 2;
                     const yStepCount = 4;
                     const monthlyData = strava.activities.reduce((prev, curr) => {
@@ -243,7 +245,7 @@
                         const pointValue = monthlyData[yearAndMonthLabel] || 0;
                         const pointPosX = svgChartPadding + graphStepSizeX * i;
                         const pointPosY = svgSize.h - svgChartPadding - ((monthlyData[yearAndMonthLabel] || 0) / maxGraphValue * (svgSize.h - svgChartPadding));
-                        dataPointCoordinates.push([pointPosX, pointPosY, pointValue]);
+                        dataPointCoordinates.push([pointPosX, pointPosY, pointValue, yearAndMonthLabel]);
                         allMonthsList.push(yearAndMonthLabel);
                     }
                 }}
@@ -266,11 +268,9 @@
                         {{ /for }}
 
                         {{# The data lines #}}
-                        <polyline fill="none" stroke="var(--C-heading)" stroke-width="{{ svgSize.stroke }}" points="
-                            {{ for [cx, cy, v] of dataPointCoordinates }}
-                                {{ cx |> toRound(2) }},{{ cy |> toRound(2) }}
-                            {{ /for -}}
-                        "/>
+                        {{ set points = dataPointCoordinates.map(([cx, cy, v, txt]) => `${cx},${cy}`).join(' ')}}
+                        <polyline fill="var(--C-heading)" fill-opacity="0.2" points="{{ points }} {{ svgSize.w }},{{ svgSize.h - svgChartPadding }} {{ svgChartPadding }},{{ svgSize.h - svgChartPadding }}"/>
+                        <polyline fill="none" stroke="var(--C-heading)" stroke-width="{{ svgSize.stroke }}" points="{{ points }}"/>
                         
                         {{# Or: create individual lines? (loop over dataPointCoordinates and use the index to find the current + previous point coord) That way they can animated from y1/y2="\{\{ (svgSize.h - svgChartPadding) \}\}" #}}
 
@@ -280,14 +280,17 @@
                         {{# Y-axis line #}}
                         <line x1="{{ graphYAxisPosX }}" x2="{{ graphYAxisPosX }}" y1="0" y2="{{ svgSize.h - svgChartPadding }}" fill="none" stroke="currentColor" stroke-width="{{ svgSize.stroke }}"/>
                         
-                        {{ for [cx, cy, v] of dataPointCoordinates }}
+                        {{ for [cx, cy, v, txt] of dataPointCoordinates }}
+                            <g>
                             <circle cx="{{ cx }}" cy="{{ cy }}" r="{{ svgSize.stroke * 1.5 }}" fill="currentColor"/>
-                            <text font-size="{{ svgSize.font * 0.75 }}" x="{{ cx }}" y="{{ cy - svgSize.font * 0.75 }}" text-anchor="middle" fill="currentColor" stroke="var(--C-canvas)" stroke-width="2" paint-order="stroke">{{ v / 1000 |> toRound }}</text>
+                                <text font-size="{{ svgSize.font * 0.75 }}" x="{{ cx }}" y="{{ cy - svgSize.font * 0.75 }}" text-anchor="middle" fill="currentColor" stroke="var(--C-canvas)" stroke-width="3" paint-order="stroke">{{ v / 1000 |> toRound }}</text>
+                            </g>
                         {{ /for }}
 
-                        <text font-size="{{ svgSize.font }}" x="{{ svgChartPadding }}" y="{{ svgSize.h - svgChartPadding + svgSize.font }}" fill="currentColor">{{ getMonthAndYear(firstActivityDate) }}</text>
-                        <text font-size="{{ svgSize.font }}" x="{{ (svgSize.w - svgChartPadding) / 2 }}" y="{{ svgSize.h - svgChartPadding + svgSize.font }}" text-anchor="middle" fill="currentColor">{{ allMonthsList[Math.floor(allMonthsList.length/2)] }}</text>
-                        <text font-size="{{ svgSize.font }}" x="{{ svgSize.w }}" y="{{ svgSize.h - svgChartPadding + svgSize.font }}" text-anchor="end" fill="currentColor">{{ getMonthAndYear(lastActivityDate) }}</text>
+                        {{ set xAxisLabelPosY = svgSize.h - (svgChartPadding - svgSize.font) / 2 }}
+                        <text font-size="{{ svgSize.font }}" y="{{ xAxisLabelPosY }}" x="{{ svgChartPadding }}" fill="currentColor">{{ getMonthAndYear(firstActivityDate) }}</text>
+                        <text font-size="{{ svgSize.font }}" y="{{ xAxisLabelPosY }}" x="{{ (svgSize.w - svgChartPadding) / 2 }}" text-anchor="middle" fill="currentColor">{{ allMonthsList[Math.floor(allMonthsList.length/2)] }}</text>
+                        <text font-size="{{ svgSize.font }}" y="{{ xAxisLabelPosY }}" x="{{ svgSize.w }}" text-anchor="end" fill="currentColor">{{ getMonthAndYear(lastActivityDate) }}</text>
                     </svg>
                 </div>
             </dd>
@@ -295,7 +298,8 @@
     </div>
 </div>
 
-<p class="fontStyle-italic">The info above is pulled from Strava (after some tedious Nike Running Club import) but manually saved periodically through their API. <a href="/blog/nerd-snipped-into-importing-nike-running-club-into-strava-api/">Here’s how I did it.</a> But don’t ask how the hell I went running every 4 days in 2023 because it baffles me.</p>
+<p class="fontStyle-italic">The info above is pulled from Strava (after some tedious Nike Running Club import) but manually saved periodically through their API. <a href="/blog/nerd-snipped-into-importing-nike-running-club-into-strava-api/">Here’s how I did it.</a></p>
+
 <style>
 .linechart {
     padding: 0.25em 0.5em;
@@ -307,10 +311,11 @@
     .linechart-wrapper {
         inline-size: 0; /* Don't participate in the grid cell sizing */
         min-inline-size: 100%; /* Occupy all the space */
-        overflow-inline: auto;
+        overflow-x: auto; /* Safari 18 doesn't support logical variant :( */
     }
+    
     .linechart {
-        inline-size: {{ svgSize.w }}px; 
+        inline-size: {{ svgSize.w / 1.25 }}px; 
         max-inline-size: unset;
     }
 }
