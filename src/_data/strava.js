@@ -1,10 +1,16 @@
 export default {
-	count: 185,
-	distance: 1422571.8999999994,
-	moving_time: 592478,
-	elapsed_time: 598307,
-	elevation_gain: 4081,
+	count: 186,
+	distance: 1435713.9999999995,
+	moving_time: 598003,
+	elapsed_time: 603922,
+	elevation_gain: 4252,
 	activities: [
+		{
+			year: 2026,
+			date: '2026-04-05T08:09:40Z',
+			distance: 13142.1,
+			duration: 5615,
+		},
 		{
 			year: 2026,
 			date: '2026-03-29T07:55:14Z',

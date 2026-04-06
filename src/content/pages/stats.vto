@@ -211,12 +211,17 @@
                     const activities = strava.activities; // These should already be sorted by date in descending order (newest first)
                     const firstActivityDate = activities.at(-1).date;
                     const lastActivityDate = activities.at(0).date;
-                    const startingDateBase = new Date(`${getMonthAndYear(firstActivityDate)}-15T00:00:00Z`);
+                    const startingDateBase = new Date(`${getMonthAndYear(firstActivityDate)}-15T00:00:00Z`); // Using the middle of the month to avoid any weirdness related to leap years
+                    function getNthMonthDateFromBase (n) {
+                        const nthMonthDate = new Date(startingDateBase); // Don't want to modify the original Date object!
+                        nthMonthDate.setMonth(startingDateBase.getMonth() + n); // The Date object will know that a 13th month means year+1 and month=1
+                        return nthMonthDate.toISOString();
+                    }
                     const dataPointCoordinates = [];
                     const allMonthsList = [];
                 }}
                 {{# Briefly exiting the JS block to run the dateDiff filter #}}
-                {{ set activityMonthDeltaDiff = firstActivityDate |> dateDiff(lastActivityDate, 'months') |> Math.floor }}
+                {{ set activityMonthDeltaDiff = firstActivityDate |> dateDiff(lastActivityDate, 'months') |> Math.ceil }}
                 {{>
                     const svgSize = { w: 960, h: 240, stroke: 2, font: 14, button: 8 };
                     const svgChartPadding = svgSize.font * 2;
@@ -227,6 +232,12 @@
                         prev[yearAndMonth] += curr[graphMetric];
                         return prev;
                     }, {});
+                    const lastMonthAndYearDate = getNthMonthDateFromBase(activityMonthDeltaDiff);
+                    const lastMonthAndYearByDelta = getMonthAndYear(lastMonthAndYearDate);
+                    const isLastDateEmpty = monthlyData.hasOwnProperty(lastMonthAndYearByDelta) === false || monthlyData[lastMonthAndYearByDelta] === 0;
+                    if (isLastDateEmpty) {
+                        activityMonthDeltaDiff -= 1; // Since the number is set with Math.ceil it might overshoot into an empty month, so it can be decreased if needed
+                    }
                     const maxMetric = Math.max.apply(null, Object.values(monthlyData));
                     const maxExpo = maxMetric.toExponential();
                     const [expoValue, expoMagnitude] = maxExpo.split('e').map(n => Math.ceil(Number(n)));
@@ -237,10 +248,7 @@
                     const graphXAxisPosY = svgSize.h - svgChartPadding;
                     const graphYAxisPosX = svgChartPadding + svgSize.stroke / 2;
                     for (let i = 0; i <= activityMonthDeltaDiff; i++) {
-                        const monthAndYearTick = new Date(startingDateBase);
-                        const monthOfTick = monthAndYearTick.getMonth();
-                        monthAndYearTick.setMonth(monthOfTick + i);
-                        const monthAndYearISO = monthAndYearTick.toISOString();
+                        const monthAndYearISO = getNthMonthDateFromBase(i);
                         const yearAndMonthLabel = getMonthAndYear(monthAndYearISO);
                         const pointValue = monthlyData[yearAndMonthLabel] || 0;
                         const pointPosX = svgChartPadding + graphStepSizeX * i;
