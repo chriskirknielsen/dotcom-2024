@@ -1,6 +1,6 @@
 ---
 title: 'Snippet: git switcheroo'
-summary: Precompiled Sass and JS files that become part of the source folder.
+summary: Move a commit from one branch to another.
 tags: [snippet, git]
 ---
 
