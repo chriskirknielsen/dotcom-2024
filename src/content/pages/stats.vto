@@ -253,7 +253,7 @@
                         const pointValue = monthlyData[yearAndMonthLabel] || 0;
                         const pointPosX = svgChartPadding + graphStepSizeX * i;
                         const pointPosY = svgSize.h - svgChartPadding - ((monthlyData[yearAndMonthLabel] || 0) / maxGraphValue * (svgSize.h - svgChartPadding));
-                        dataPointCoordinates.push([pointPosX, pointPosY, pointValue, yearAndMonthLabel]);
+                        dataPointCoordinates.push([Math.round(pointPosX * 100) / 100, Math.round(pointPosY * 100) / 100, pointValue, yearAndMonthLabel]);
                         allMonthsList.push(yearAndMonthLabel);
                     }
                 }}
@@ -290,7 +290,7 @@
                         
                         {{ for [cx, cy, v, txt] of dataPointCoordinates }}
                             <g>
-                            <circle cx="{{ cx }}" cy="{{ cy }}" r="{{ svgSize.stroke * 1.5 }}" fill="currentColor"/>
+                                <circle cx="{{ cx }}" cy="{{ cy }}" r="{{ svgSize.stroke * 1.5 }}" fill="currentColor"/>
                                 <text font-size="{{ svgSize.font * 0.75 }}" x="{{ cx }}" y="{{ cy - svgSize.font * 0.75 }}" text-anchor="middle" fill="currentColor" stroke="var(--C-canvas)" stroke-width="3" paint-order="stroke">{{ v / 1000 |> toRound }}</text>
                             </g>
                         {{ /for }}
