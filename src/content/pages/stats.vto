@@ -290,7 +290,7 @@
                         
                         {{ for [cx, cy, v, txt] of dataPointCoordinates }}
                             <g>
-                                <circle cx="{{ cx }}" cy="{{ cy }}" r="{{ svgSize.stroke * 1.5 }}" fill="currentColor"/>
+                                <circle cx="{{ cx }}" cy="{{ cy }}" r="{{ svgSize.stroke }}" fill="currentColor"/>
                                 <text font-size="{{ svgSize.font * 0.75 }}" x="{{ cx }}" y="{{ cy - svgSize.font * 0.75 }}" text-anchor="middle" fill="currentColor" stroke="var(--C-canvas)" stroke-width="3" paint-order="stroke">{{ v / 1000 |> toRound }}</text>
                             </g>
                         {{ /for }}
@@ -312,7 +312,7 @@
 .linechart {
     padding: 0.25em 0.5em;
     overflow: visible;
-    font-family: system-ui;
+    font-family: var(--font-body-family);
 }
 
 @media (max-width: {{ svgSize.w / 1.25 }}px) {
