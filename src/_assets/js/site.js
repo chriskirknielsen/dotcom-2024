@@ -21,14 +21,20 @@ document.addEventListener('click', function (e) {
 		}
 
 		// Clicked on ::before
-		target.querySelector('.header-menu-toggle').setAttribute('aria-pressed', false);
+		const toggleEl = target.querySelector('.header-menu-toggle');
+		if (toggleEl) {
+			target.querySelector('.header-menu-toggle').setAttribute('aria-pressed', false);
+		}
 		toggleInertForMenu(false);
-		target.querySelector('.header-menu-toggle').focus();
+		if (toggleEl) {
+			target.querySelector('.header-menu-toggle').focus();
+		}
 	} else {
 		target = e.target;
+		const toggleEl = document.querySelector('.header-themepicker-toggle');
 		// Auto-close the theme picker if clicking outside of its container
-		if (!target.closest('.header-themepicker')) {
-			document.querySelector('.header-themepicker-toggle').setAttribute('aria-pressed', 'false');
+		if (!target.closest('.header-themepicker') && toggleEl) {
+			toggleEl.setAttribute('aria-pressed', 'false');
 		}
 	}
 });
