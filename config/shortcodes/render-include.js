@@ -276,6 +276,12 @@ export default function (eleventyConfig, options = {}) {
 	});
 
 	/** Sync the cached SVGs. */
+	eleventyConfig.on('eleventy.before', () => {
+		if (!fs.existsSync(svgCacheFolder)) {
+			fs.mkdirSync(svgCacheFolder, { recursive: true });
+		}
+	});
+
 	eleventyConfig.on('eleventy.after', () => {
 		fs.cpSync(svgCacheFolder, path.join(eleventyConfig.directories.output, '/assets/svg/'), {
 			recursive: true,
