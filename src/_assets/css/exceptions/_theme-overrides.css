@@ -82,31 +82,31 @@ html[data-theme='dawn'] {
 
 		.callout {
 			padding: 0 0 var(--CALLOUT-padding) var(--CALLOUT-padding);
+
 			border-width: 0 0 0 var(--CALLOUT-border-width);
-			background: linear-gradient(90deg, transparent, var(--C-canvas)) repeat-y 100% 0,
-				repeating-linear-gradient(var(--C-accent) 0, var(--C-accent) 2px, transparent 2px, transparent 6px) repeat-x 0 0 / 100% 1em,
-				linear-gradient(90deg, var(--C-accent), var(--C-canvas)) no-repeat 0 100% / 100% 0.11em;
+			background: linear-gradient(90deg, var(--C-accent), transparent) no-repeat 0 100% / 100% 2px;
 		}
 
 		.callout-label {
 			position: relative;
-			inset-block-start: -0.125em; /* Cancel vertical offset caused by padding */
-			inset-inline-start: -0.325em; /* Cancel horizontal offset caused by padding */
+			inset-block-start: calc((1cap - 1em) / 2); /* Cancel horizontal offset caused by parent padding */
+			inset-inline-start: calc(var(--CALLOUT-padding) * -1 - var(--CALLOUT-border-width)); /* Cancel horizontal offset caused by parent padding */
 
-			inline-size: fit-content;
-			max-inline-size: 100%;
-			margin-block-end: -0.125em; /* Cancel vertical offset caused by padding */
-			padding: 0.125em 0.325em calc(0.125em + var(--size-xs)); /* Extra bottom padding matching the default margin-block-end to extend the BG color */
+			display: flex;
+			align-items: center;
+			inline-size: calc(100% + var(--CALLOUT-padding));
+			padding-inline-start: var(--CALLOUT-padding); /* Half the padding will be for the background */
 
-			line-height: 0.675; /* ! MAGIC NUMBER but I really need text-box: cap alphabetic :( */
 			color: var(--C-text);
 			text-shadow: 2px 2px 0 var(--C-canvas), 4px 4px 0 var(--C-accent);
-			background-color: var(--C-canvas);
+			background: linear-gradient(var(--CALLOUT-border-color), var(--CALLOUT-border-color)) no-repeat 0 100% / var(--CALLOUT-border-width) round(up, 0.8em, 6px),
+				repeating-linear-gradient(var(--C-accent) 0, var(--C-accent) 2px, transparent 2px, transparent 6px) no-repeat 0 100% / calc(var(--CALLOUT-padding) / 2)
+					round(up, 0.8em, 6px);
 
 			&::before {
 				position: static;
 
-				display: inline;
+				min-block-size: initial;
 				aspect-ratio: initial;
 				padding: 0 0.5ch 0 0;
 
@@ -116,6 +116,20 @@ html[data-theme='dawn'] {
 				background: none;
 
 				translate: 0;
+			}
+
+			&::after {
+				content: '';
+
+				flex: 1 1 auto;
+				align-self: end;
+				display: block;
+				block-size: 1em;
+				block-size: 1lh;
+				margin-inline-start: 0.5em;
+
+				background: repeating-linear-gradient(var(--C-accent) 0, var(--C-accent) 2px, transparent 2px, transparent 6px) repeat-x 0 100% / 100% round(up, 0.8em, 6px);
+				mask: linear-gradient(90deg, tan 10%, transparent) repeat-y 100% 0 / 100cqi 100%;
 			}
 		}
 
@@ -170,31 +184,31 @@ html[data-theme='dusk'] {
 
 	.callout {
 		padding: 0 0 var(--CALLOUT-padding) var(--CALLOUT-padding);
+
 		border-width: 0 0 0 var(--CALLOUT-border-width);
-		background: linear-gradient(90deg, transparent, var(--C-canvas)) repeat-y 100% 0,
-			repeating-linear-gradient(var(--C-accent) 0, var(--C-accent) 2px, transparent 2px, transparent 6px) repeat-x 0 0 / 100% 1em,
-			linear-gradient(90deg, var(--C-accent), var(--C-canvas)) no-repeat 0 100% / 100% var(--CALLOUT-border-width);
+		background: linear-gradient(90deg, var(--C-accent), transparent) no-repeat 0 100% / 100% 2px;
 	}
 
 	.callout-label {
 		position: relative;
-		inset-block-start: -0.125em; /* Cancel vertical offset caused by padding */
-		inset-inline-start: -0.325em; /* Cancel horizontal offset caused by padding */
+		inset-block-start: calc((1cap - 1em) / 2); /* Cancel horizontal offset caused by parent padding */
+		inset-inline-start: calc(var(--CALLOUT-padding) * -1 - var(--CALLOUT-border-width)); /* Cancel horizontal offset caused by parent padding */
 
-		inline-size: fit-content;
-		max-inline-size: 100%;
-		margin-block-end: -0.125em; /* Cancel vertical offset caused by padding */
-		padding: 0.125em 0.325em calc(0.125em + var(--size-xs)); /* Extra bottom padding matching the default margin-block-end to extend the BG color */
+		display: flex;
+		align-items: center;
+		inline-size: calc(100% + var(--CALLOUT-padding));
+		padding-inline-start: var(--CALLOUT-padding); /* Half the padding will be for the background */
 
-		line-height: 0.675; /* ! MAGIC NUMBER but I really need text-box: cap alphabetic :( */
 		color: var(--C-text);
 		text-shadow: 2px 2px 0 var(--C-canvas), 4px 4px 0 var(--C-accent);
-		background-color: var(--C-canvas);
+		background: linear-gradient(var(--CALLOUT-border-color), var(--CALLOUT-border-color)) no-repeat 0 100% / var(--CALLOUT-border-width) round(up, 0.8em, 6px),
+			repeating-linear-gradient(var(--C-accent) 0, var(--C-accent) 2px, transparent 2px, transparent 6px) no-repeat 0 100% / calc(var(--CALLOUT-padding) / 2)
+				round(up, 0.8em, 6px);
 
 		&::before {
 			position: static;
 
-			display: inline;
+			min-block-size: initial;
 			aspect-ratio: initial;
 			padding: 0 0.5ch 0 0;
 
@@ -204,6 +218,20 @@ html[data-theme='dusk'] {
 			background: none;
 
 			translate: 0;
+		}
+
+		&::after {
+			content: '';
+
+			flex: 1 1 auto;
+			align-self: end;
+			display: block;
+			block-size: 1em;
+			block-size: 1lh;
+			margin-inline-start: 0.5em;
+
+			background: repeating-linear-gradient(var(--C-accent) 0, var(--C-accent) 2px, transparent 2px, transparent 6px) repeat-x 0 100% / 100% round(up, 0.8em, 6px);
+			mask: linear-gradient(90deg, tan 10%, transparent) repeat-y 100% 0 / 100cqi 100%;
 		}
 	}
 
