@@ -1,9 +1,9 @@
 ---js
 {
   pagination: {
-    data: "collections",
+    data: 'collections',
     size: 1,
-    alias: "tag",
+    alias: 'tag',
     before: function (paginationData, fullData) {
       return paginationData.filter(function(t) {
         // Exclude tags that are "system" tags (starting with an underscore)
@@ -16,7 +16,7 @@
     tags: [],
     permalink: (data) => `/tags/${data.tag}/`,
     title: (data) => `${data.collections[ data.tag ].length} post${data.collections[ data.tag ].length !== 1 ? 's' : ''} tagged “${data.tag}”`,
-    heroCta: [{ label: "All Tags", url: "/tags/" }, { label: "Blog", url: "/Blog/" }],
+    heroCta: [{ label: 'All Tags', url: '/tags/' }, { label: 'Blog', url: '/Blog/' }],
   }
 }
 ---

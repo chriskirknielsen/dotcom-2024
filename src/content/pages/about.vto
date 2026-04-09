@@ -1,10 +1,10 @@
 ---js
 {
     title: 'About',
-    heroTitle: "Hiya, I’m Chris",
+    heroTitle: 'Hiya, I’m Chris',
     summary: 'Chris is a CSS nerd who used to be a designer and who now likes to build on the web',
-    ogImageTitle: "Hiya, I’m Chris",
-    ogImageSummary: "(he/him)",
+    ogImageTitle: 'Hiya, I’m Chris',
+    ogImageSummary: '(he/him)',
     tags: ['_og'],
     heroHideSummary: true,
     heroSub: '(he/him)',
@@ -29,21 +29,21 @@ I’m a French Dane, living in the USA, who used to be a designer, and who now l
 {{ /echo }}
 
 {{ webcomponent 'cycling-expander', { 'data-about': 'facts' }, {
-    buttonLabel: "🎲 Chris’s Random Fact-o-tron",
+    buttonLabel: '🎲 Chris’s Random Fact-o-tron',
     listItems: [
-        ["👀", "Can read the Cyrillic alphabet… kinda."],
-        ["⏱️", "His favourite movie is likely Back to the Future, though the dad is a creep."],
-        ["☕️", "Used to drink lots of tea, but is now into iced coffee any day!"],
-        ["🕵️", "Leans into his pareidolia (seeing faces in things) to make life more fun."],
-        ["🤓", "Enjoys maths/physics YouTube videos despite not grasping everything."],
-        ["🛹", "Practiced skateboarding for a while, then decided playing Tony Hawk was safer."],
-        ["🏔️", "Truly wishes to be a more outdoorsy person (help)."],
-        ["🏃‍♂️", "Has run a couple semi-marathons, but still far from ready for a full one."],
-        ["🐈", "Loves animals, please introduce your pet."],
-        ["😴", "Sleeps on his side but wakes up on his back."],
-        ["📚", "Loves learning but also helping — ask away about anything!"],
-        ["🎸", "His favourite band of all time is Thrice, just ask for a recommendation!"],
-        ["💜", "Appreciates you reading through these facts."]
+        ['👀', 'Can read the Cyrillic alphabet… kinda.'],
+        ['⏱️', 'His favourite movie is likely Back to the Future, though the dad is a creep.'],
+        ['☕️', 'Used to drink lots of tea, but is now into iced coffee any day!'],
+        ['🕵️', 'Leans into his pareidolia (seeing faces in things) to make life more fun.'],
+        ['🤓', 'Enjoys maths/physics YouTube videos despite not grasping everything.'],
+        ['🛹', 'Practiced skateboarding for a while, then decided playing Tony Hawk was safer.'],
+        ['🏔️', 'Truly wishes to be a more outdoorsy person (help).'],
+        ['🏃‍♂️', 'Has run a couple semi-marathons, but still far from ready for a full one.'],
+        ['🐈', 'Loves animals, please introduce your pet.'],
+        ['😴', 'Sleeps on his side but wakes up on his back.'],
+        ['📚', 'Loves learning but also helping — ask away about anything!'],
+        ['🎸', 'His favourite band of all time is Thrice, just ask for a recommendation!'],
+        ['💜', 'Appreciates you reading through these facts.']
     ]
 } -}}
 {{- js 'foot-about' }}{{- include 'assets/js/components/cycling-expander.js' -}}{{ /js }}
@@ -148,4 +148,4 @@ The **Adobe Creative Suite** and I go _way_ back (2005!), specifically **Photos
 <hr>
 
 <p>👋 You made it this far? Well, in that case…</p>
-{{ video "/" + assets.videos + "/kazoothx.mp4", "A short clip of the Kazoo Kid video thanking the viewer.", "I just wanted to say… thanks, partner!", { width: 220, height: 164, poster: "/" + assets.images + "/kazoothx.jpg" } }}
+{{ video `/${assets.videos}/kazoothx.mp4`, 'A short clip of the Kazoo Kid video thanking the viewer.', 'I just wanted to say… thanks, partner!', { width: 220, height: 164, poster: `/${assets.images}/kazoothx.jpg` } }}
