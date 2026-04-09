@@ -76,8 +76,8 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 			attrs['data-ratio'] = options.ratio; // Store the initial ratio provided
 
 			if (options.ratio.includes('/')) {
-				let ratioParts = options.ratio.split('/');
-				options.ratio = parseFloat(ratioParts[0]) / parseFloat(ratioParts[1]);
+				let [ratioW, ratioH] = options.ratio.split('/');
+				options.ratio = parseFloat(ratioW) / parseFloat(ratioH);
 			} else {
 				options.ratio = parseFloat(options.ratio);
 			}
@@ -107,7 +107,7 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 	attrs.style = `aspect-ratio: ${ratioString}; max-width: 100%;`; // max-width is for RSS feeds
 
 	const attrsStr = Object.entries(attrs)
-		.map((attr) => `${attr[0]}="${attr[1]}"`)
+		.map(([prop, val]) => `${prop}="${val}"`)
 		.join(' ');
 
 	let mediaMarkup = '';

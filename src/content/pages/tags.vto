@@ -22,9 +22,7 @@ eleventyComputed:
 
 <p id="tags-description" class="visually-hidden">All tags:</p>
 <ul class="inline-list inline-list--tags | textAlign-center textWrap-balance" aria-describedby="tags-description">
-    {{ for tagCount of sortedTags }}
-        {{ set tag = tagCount[0] }}
-        {{ set count = tagCount[1] }}
+    {{ for [tag, count] of sortedTags }}
         <li><span class="tooltip" data-tooltip-pos="start center"><a href="/tags/{{ tag }}" class="button button--tag | p-category" style="--r: {{ count / maxCount }}">{{ tag }}</a><span class="tooltip-content">{{ count }} post{{ count > 1 ? 's' : '' }}</span></li>
     {{ /for }}
 </ul>
