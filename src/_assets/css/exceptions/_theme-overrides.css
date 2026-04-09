@@ -183,6 +183,7 @@ html[data-theme='dusk'] {
 	}
 
 	.callout {
+		--CALLOUT-bg-height: round(up, 0.8em, 6px);
 		padding: 0 0 var(--CALLOUT-padding) var(--CALLOUT-padding);
 
 		border-width: 0 0 0 var(--CALLOUT-border-width);
@@ -197,13 +198,13 @@ html[data-theme='dusk'] {
 		display: flex;
 		align-items: center;
 		inline-size: calc(100% + var(--CALLOUT-padding));
-		padding-inline-start: var(--CALLOUT-padding); /* Half the padding will be for the background */
+		padding-inline-start: calc(var(--CALLOUT-padding) + var(--CALLOUT-border-width));
 
 		color: var(--C-text);
 		text-shadow: 2px 2px 0 var(--C-canvas), 4px 4px 0 var(--C-accent);
-		background: linear-gradient(var(--CALLOUT-border-color), var(--CALLOUT-border-color)) no-repeat 0 100% / var(--CALLOUT-border-width) round(up, 0.8em, 6px),
+		background: linear-gradient(var(--CALLOUT-border-color), var(--CALLOUT-border-color)) no-repeat 0 100% / var(--CALLOUT-border-width) var(--CALLOUT-bg-height),
 			repeating-linear-gradient(var(--C-accent) 0, var(--C-accent) 2px, transparent 2px, transparent 6px) no-repeat 0 100% / calc(var(--CALLOUT-padding) / 2)
-				round(up, 0.8em, 6px);
+				var(--CALLOUT-bg-height);
 
 		&::before {
 			position: static;
@@ -230,7 +231,7 @@ html[data-theme='dusk'] {
 			block-size: 1lh;
 			margin-inline-start: 0.5em;
 
-			background: repeating-linear-gradient(var(--C-accent) 0, var(--C-accent) 2px, transparent 2px, transparent 6px) repeat-x 0 100% / 100% round(up, 0.8em, 6px);
+			background: repeating-linear-gradient(var(--C-accent) 0, var(--C-accent) 2px, transparent 2px, transparent 6px) repeat-x 0 100% / 100% var(--CALLOUT-bg-height);
 			mask: linear-gradient(90deg, tan 10%, transparent) repeat-y 100% 0 / 100cqi 100%;
 		}
 	}
