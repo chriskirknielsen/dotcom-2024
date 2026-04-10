@@ -5,7 +5,7 @@ tags: [personal, api]
 time: '13:37:00'
 ---
 
-{{ callout }}Heads up: this is a long post, but I share all my code in the [tl;dr](#tl-dr) at the end!{{ /callout }}
+{{ callout 'Heads up' }}This is a long post, but I share all my code in the [tl;dr](#tl-dr) at the end!{{ /callout }}
 
 Last week, I played with the idea of showing statistics related to my running below the other [site-related stats](/stats/). I’ve only been running since some time in 2022, which wouldn’t be such a big thing if it weren’t for the fact I had never been athletic in my life before (except when forced to, i.e. in P.E class, and to avoid missing a bus or subway).
 
