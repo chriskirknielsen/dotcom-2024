@@ -23,7 +23,7 @@
 			--THEMESWITCH-root-origin: var(--THEMESWITCH-root-origin-x) 0px;
 			--THEMESWITCH-root-length-x: tan(atan2(var(--THEMESWITCH-root-origin-x), 1px));
 			--THEMESWITCH-root-length-y: tan(atan2(var(--100vb), 1px));
-			--THEMESWITCH-root-radius: calc(sqrt(pow(var(--THEMESWITCH-root-length-x), 2) + pow(var(--THEMESWITCH-root-length-y), 2)) * 1px); /* Pythagoras, baby! */
+			--THEMESWITCH-root-radius: calc(hypot(var(--THEMESWITCH-root-length-x), var(--THEMESWITCH-root-length-y)) * 1px); /* Pythagoras, baby! */
 
 			&::view-transition-old(root) {
 				animation: --blurIn var(--THEMESWITCH-root-duration) var(--THEMESWITCH-root-easing);
