@@ -27,6 +27,8 @@
 }
 
 .footer {
+	--GAP: var(--size-l); /* For .grouper override */
+
 	position: relative;
 	isolation: isolate;
 	z-index: 3;
@@ -37,8 +39,7 @@
 }
 
 .footer-nav {
-	--RULE: 3px;
-	--GAP: 0.5rem;
+	--GAP: var(--size-xs);
 
 	position: relative;
 }
@@ -47,10 +48,37 @@
 	color: currentColor;
 }
 
+.img-88x31-list {
+	--gap: calc(max(8px, var(--size-s)) / 2);
+
+	list-style-type: '';
+	display: block;
+	text-align: center;
+	text-wrap: balance;
+
+	li {
+		display: inline-flex;
+		margin: var(--gap) calc(var(--gap) - 0.125ch); /* Because we have (and need?) the whitespace, using about quarter of a character width as a space width seems fine, which is then divided by two to share the space between each <li> */
+	}
+
+	img {
+		image-rendering: pixelated;
+
+		&:hover {
+			position: relative;
+			z-index: 1;
+
+			scale: 2;
+		}
+	}
+
+	&:has(img:hover) img:not(:hover) {
+		filter: opacity(0.75) grayscale(0.5);
+	}
+}
+
 .footer-message {
 	position: relative;
-
-	margin-block-start: var(--size-l);
 
 	&::before {
 		content: '💙      💜';
