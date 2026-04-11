@@ -233,7 +233,7 @@
 .homepage-side {
 	container: --side / inline-size;
 	display: grid;
-	grid-template-columns: 1fr;
+	grid-template-columns: minmax(0, 1fr);
 	place-items: center;
 	align-content: center;
 	gap: var(--layout-gutter);
@@ -245,7 +245,7 @@
 	position: relative;
 	isolation: isolate;
 
-	max-inline-size: 12rem;
+	max-inline-size: min(100%, 12rem);
 	margin-inline: auto;
 
 	color: var(--C-surface);
