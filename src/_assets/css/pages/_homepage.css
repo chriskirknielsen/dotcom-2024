@@ -103,7 +103,7 @@
 	[data-deco-anim] {
 		transform-origin: 50% 50%;
 		animation: resetTransform calc(var(--CTX-factor, 1) * var(--anim-medium)) var(--CTX-easing, var(--easing-out)) 1 forwards;
-		animation-delay: calc((300ms + var(--CTX-delay, 0) * 100ms) * var(--anim-f));
+		animation-delay: calc((300ms + var(--CTX-delay, 0) * 100ms));
 	}
 
 	[data-deco-anim]:not([data-deco-anim='path']),
