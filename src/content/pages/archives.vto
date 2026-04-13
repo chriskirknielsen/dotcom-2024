@@ -40,7 +40,7 @@
                     src="{{ [assets.images, "site-archives/year-"+versionYear+"-light.jpg"] |> toPath |> toNetlifyImage }}"
                     width="600"
                     height="600"
-                    {{ if loopIndex >= 3 }}loading="lazy"{{ /if }}
+                    {{ if loopIndex >= 3 }}loading="lazy"{{ else }}fetchpriority="high"{{ /if }}
                     class="timeline-image hide-when-dark"
                     alt="My website’s {{ versionYear }} version"
                 >
@@ -48,7 +48,7 @@
                     src="{{ [assets.images, "site-archives/year-"+versionYear+"-dark.jpg"] |> toPath |> toNetlifyImage }}"
                     width="600"
                     height="600"
-                    {{ if loopIndex >= 2 }}loading="lazy"{{ /if }}
+                    {{ if loopIndex >= 2 }}loading="lazy"{{ else }}fetchpriority="high"{{ /if }}
                     class="timeline-image hide-when-light"
                     alt="My website’s {{ versionYear }} version"
                 >
@@ -57,7 +57,7 @@
                     src="{{ [assets.images, "site-archives/year-"+versionYear+".jpg"] |> toPath |> toNetlifyImage }}"
                     width="600"
                     height="600"
-                    {{ if loopIndex >= 2 }}loading="lazy"{{ /if }}
+                    {{ if loopIndex >= 2 }}loading="lazy"{{ else }}fetchpriority="high"{{ /if }}
                     class="timeline-image"
                     alt="My website’s {{ versionYear }} version"
                 >

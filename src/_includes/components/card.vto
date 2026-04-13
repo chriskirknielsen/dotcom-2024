@@ -13,7 +13,7 @@
 					alt="{{ image.alt || ((imageLink && !isImageAriaHidden) ? heading  : '') }}"
 					width="{{ image.width }}"
 					height="{{ image.height }}"
-					{{ if image.lazy }}loading="lazy"{{ /if }}
+					{{ if image.lazy }}loading="lazy"{{ else }}fetchpriority="high"{{ /if }}
 					{{ if image.focusPoint || image.style -}}
 					style="
 						{{- if image.focusPoint }}--CARD-image-focus-point: {{ image.focusPoint }};{{ /if -}}
