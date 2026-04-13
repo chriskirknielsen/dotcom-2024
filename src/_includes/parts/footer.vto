@@ -69,7 +69,7 @@
     {{ if !metadata.nakedCss }}
     <div class="footer-decorator">
         {{ for theme of themes }}
-            {{ footersvg 'footer-deco-'+theme.key+'.svg', { 'data-theme-condition': theme.key } }}
+            {{ footersvg `footer-deco-${theme.key}.svg`, { 'data-theme-condition': theme.key } }}
         {{ /for }}
     </div>
     {{ /if }}
