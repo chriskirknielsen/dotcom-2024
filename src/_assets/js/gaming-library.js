@@ -66,6 +66,7 @@ function loadAndPopulateGameDetailDialog(target, navAnimSign = 0) {
 
 	clone.querySelector('[data-slot="title"]').setAttribute('id', dialogTitleRefId);
 	clone.querySelector('[data-slot-computed="format"]').innerText = !gameData.discs ? 'digital' : gameData.discs > 1 ? `${gameData.discs} ${physicalType}s` : physicalType;
+
 	if (gameData.rating) {
 		const starRef = clone.querySelector('#svg-star-icon');
 		const svgW = parseInt(starRef.getAttribute('width'), 10);
@@ -98,6 +99,7 @@ function loadAndPopulateGameDetailDialog(target, navAnimSign = 0) {
 			</svg>`;
 		clone.querySelector('[data-slot-computed="rating"]').innerHTML = `${ratingLabel}${ratingImage}`;
 	}
+
 	if (gameData.completed === null) {
 		clone.querySelector('[data-slot-checkbox="completed"]').indeterminate = true;
 		clone.querySelector('[data-slot-computed="completed"]').innerText = 'Partially';
@@ -105,6 +107,7 @@ function loadAndPopulateGameDetailDialog(target, navAnimSign = 0) {
 		clone.querySelector('[data-slot-checkbox="completed"]').checked = gameData.completed;
 		clone.querySelector('[data-slot-computed="completed"]').innerText = gameData.completed ? 'Yes' : 'No';
 	}
+
 	clone.querySelector('[data-slot-checkbox="completed"]').setAttribute('data-clean-value', String(gameData.completed));
 	clone.querySelector('[data-slot-computed="subItems"]').innerHTML =
 		gameData.subItems.length > 0
@@ -124,26 +127,34 @@ function loadAndPopulateGameDetailDialog(target, navAnimSign = 0) {
 					)
 					.join('')}</ul>`
 			: '';
+
 	if (gameData.trophyIcon) {
 		const iconHeight = parseInt(clone.querySelector('[data-slot-img="trophyIcon"]').getAttribute('height'), 10);
 		const iconWidth = ['PS3', 'PS4', 'PSV'].includes(gameData.platform) ? iconHeight * (320 / 176) : iconHeight; // PS5 icons are square, PS3/PS4/Vita are 320x176
 		clone.querySelector('[data-slot-img="trophyIcon"]').src = gameData.trophyIcon;
 		clone.querySelector('[data-slot-img="trophyIcon"]').setAttribute('width', iconWidth);
 	}
+
 	clone.querySelector('[data-slot-computed="trophyEarned"]').innerHTML = gameData.trophyEarned
 		? `<span class="gaming-details-trophies-percentage">${Object.values(gameData.trophyEarned).reduce((p, c) => p + c, 0)} <span${
 				gameData.trophyProgress === 100 ? ' class="fontWeight-bold"' : ''
 		  }>(${gameData.trophyProgress}%)</span>:</span> ${toTrophyList(gameData.trophyEarned, trophySvgId)}`
 		: '';
 
+	const boxartEl = clone.querySelector('[data-slot-computed="boxart"]');
+	if (gameData.boxart.url) {
+		boxartEl.querySelector('img').src = gameData.boxart.url;
+		// boxartEl.setAttribute('data-gaming-platform', gameData.platform.toLowerCase());
+		boxartEl.hidden = false;
+	} else {
+		boxartEl.querySelector('img').src = '';
+		// boxartEl.removeAttribute('data-gaming-platform');
+		boxartEl.hidden = true;
+	}
+
 	Array.from(dialog.childNodes).forEach((el) => el.remove());
 	dialog.append(clone);
 	dialog.setAttribute('aria-labelledby', dialogTitleRefId);
-	if (gameData.boxart) {
-		dialog.style.setProperty('--cover-url', `url(${gameData.boxart.url})`);
-	} else {
-		dialog.style.setProperty('--cover-url', `url(#null)`);
-	}
 
 	try {
 		dialog.showModal();
@@ -186,7 +197,6 @@ let msgs = [
 let openGame = null;
 const hideOpenGame = () => {
 	openGame = null;
-	document.getElementById('gaming-details-dialog').style.removeProperty('--cover-url');
 };
 
 document.addEventListener('DOMContentLoaded', function (e) {

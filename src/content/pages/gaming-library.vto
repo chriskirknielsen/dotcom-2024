@@ -258,55 +258,61 @@
             </div>
         </div>
 
-        <dl>
-            <dt class="grouper grouper--icon-text-pair">
-                {{ svg 'controller', { class: 'inline-icon' } }}
-                <span>Platform</span>
-            </dt>
-            <dd>
-                <span data-slot="platform"></span>
-                (<span data-slot-computed="format"></span>)
-            </dd>
+        <div class="gaming-details-content | grouper grouper--wrap">
+            <dl>
+                <dt class="grouper grouper--icon-text-pair">
+                    {{ svg 'controller', { class: 'inline-icon' } }}
+                    <span>Platform</span>
+                </dt>
+                <dd>
+                    <span data-slot="platform"></span>
+                    (<span data-slot-computed="format"></span>)
+                </dd>
 
-            <dt data-slot-show="region" class="grouper grouper--icon-text-pair">
-                {{ svg 'world', { class: 'inline-icon' } }}
-                <span>Region</span>
-            </dt>
-            <dd data-slot="region"></dd>
+                <dt data-slot-show="region" class="grouper grouper--icon-text-pair">
+                    {{ svg 'world', { class: 'inline-icon' } }}
+                    <span>Region</span>
+                </dt>
+                <dd data-slot="region"></dd>
 
-            <dt data-slot-show="dlc" class="grouper grouper--icon-text-pair">
-                {{ svg 'added', { class: 'inline-icon' } }}
-                <span>DLC</span>
-            </dt>
-            <dd data-slot="dlc"></dd>
+                <dt data-slot-show="dlc" class="grouper grouper--icon-text-pair">
+                    {{ svg 'added', { class: 'inline-icon' } }}
+                    <span>DLC</span>
+                </dt>
+                <dd data-slot="dlc"></dd>
 
-            <dt class="grouper grouper--icon-text-pair">
-                {{ svg 'checkbox', { class: 'inline-icon linecap-auto' } }}
-                <span>Completed</span>
-            </dt>
-            <dd>
-                <input type="checkbox" aria-hidden="true" data-slot-checkbox="completed">
-                <span data-slot-computed="completed"></span>
-            </dd>
+                <dt class="grouper grouper--icon-text-pair">
+                    {{ svg 'checkbox', { class: 'inline-icon linecap-auto' } }}
+                    <span>Completed</span>
+                </dt>
+                <dd>
+                    <input type="checkbox" aria-hidden="true" data-slot-checkbox="completed">
+                    <span data-slot-computed="completed"></span>
+                </dd>
 
-            <dt data-slot-show="trophyProgress" class="grouper grouper--icon-text-pair">
-                {{ svg 'trophy', { class: 'inline-icon linecap-auto' } }}
-                <span>Trophies</span>
-            </dt>
-            <dd data-slot-show="trophyProgress" data-slot-computed="trophyEarned"></dd>
+                <dt data-slot-show="trophyProgress" class="grouper grouper--icon-text-pair">
+                    {{ svg 'trophy', { class: 'inline-icon linecap-auto' } }}
+                    <span>Trophies</span>
+                </dt>
+                <dd data-slot-show="trophyProgress" data-slot-computed="trophyEarned"></dd>
 
-            <dt data-slot-show="rating" class="grouper grouper--icon-text-pair">
-                {{ injectsvg 'star', { id: 'svg-star-icon', class: 'inline-icon linecap-auto' } }}
-                <span>Rating</span>
-            </dt>
-            <dd data-slot-show="rating" data-slot-computed="rating"></dd>
+                <dt data-slot-show="rating" class="grouper grouper--icon-text-pair">
+                    {{ injectsvg 'star', { id: 'svg-star-icon', class: 'inline-icon linecap-auto' } }}
+                    <span>Rating</span>
+                </dt>
+                <dd data-slot-show="rating" data-slot-computed="rating"></dd>
 
-            <dt data-slot-show="subItems" class="grouper grouper--icon-text-pair">
-                {{ svg 'subfolders', { class: 'inline-icon linecap-auto' } }}
-                <span>Includes</span>
-            </dt>
-            <dd data-slot-show="subItems" data-slot-computed="subItems"></dd>
-        </dl>
+                <dt data-slot-show="subItems" class="grouper grouper--icon-text-pair">
+                    {{ svg 'subfolders', { class: 'inline-icon linecap-auto' } }}
+                    <span>Includes</span>
+                </dt>
+                <dd data-slot-show="subItems" data-slot-computed="subItems"></dd>
+            </dl>
+
+            <div class="gaming-details-boxart" data-slot-computed="boxart">
+                <img src="" alt="" width="528" height="704" class="gaming-box">
+            </div>
+        </div>
     </div>
 </template>
 <dialog id="gaming-details-dialog" class="gaming-details-dialog" aria-labelledby="gaming-details-dialog-heading"></dialog>
