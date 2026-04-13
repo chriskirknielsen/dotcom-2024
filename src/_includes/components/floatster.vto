@@ -1,3 +1,4 @@
+{{ set laziness = ['all', 'auto'].includes(laziness) ? laziness : 'auto' }}
 {{ set safeSlug = (slug || '') |> slugify }}
 {{ set seed = slug ? Math.round(parseInt(safeSlug, 36) % 499 / 17) * 13 : Math.round(Math.random() * 99) }} {{# Ensures the seed is always the same from one build to the next #}}
 <div class="floatster" style="--FL-img-ratio: calc({{ w }} / {{ h }}); --FL-seed: {{ seed }};">
@@ -11,7 +12,14 @@
 			{{ if item.image }}
 				{{ set imageUrl = item.image |> toCloudinary('c_pad,w_250') }}
 				{{ if item.link }}<a href="{{ item.link }}" class="floatster-media" aria-label="{{ item.title |> escape }} on {{ new URL(item.link).host.replace(/^www\./i, '') }}">{{ else }}<div class="floatster-media">{{ /if }}
-					<img src="{{ imageUrl }}" alt="" class="floatster-image" width="{{ item.width || w }}" height="{{ item.height || h }}" loading="lazy">
+					<img
+						src="{{ imageUrl }}"
+						alt=""
+						class="floatster-image"
+						width="{{ item.width || w }}"
+						height="{{ item.height || h }}"
+						{{ if (laziness === 'auto' && i < 3) }}loading="eager" fetchpriority="high"{{ else }}loading="lazy"{{ /if }}
+						>
 					{{ if item.praise }}<span class="floatster-praise" aria-hidden="true" title="{{ (praiseLabel || 'Recommended') |> escape }}">{{ praiseIcon || '👍' }}</span>{{ /if }}
 				{{ if !item.link }}</div>{{ else }}</a>{{ /if }}
 			{{ /if }}

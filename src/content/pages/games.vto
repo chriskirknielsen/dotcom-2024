@@ -285,8 +285,8 @@
 </p>
 
 <hr aria-hidden="true">
-
-{{ for category, gamesByCategory of games |> groupBy('category') }}
+{{ set categories = games |> groupBy('category') }}
+{{ for category, gamesByCategory of categories }}
     <h2>{{ category }}</h2>
     {{ component 'floatster', {
         slug: category,
@@ -305,6 +305,7 @@
         w: 600,
         h: 800,
         detailPrefix: detailPrefix || '',
+        laziness: Object.keys(categories).at(0) === category ? 'auto' : 'all',
     } }}
 {{ /for }}
 
