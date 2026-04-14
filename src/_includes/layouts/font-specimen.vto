@@ -1,7 +1,7 @@
-{{ set miniSiteSlug = 'minisite-'+page.fileSlug }}
+{{ set miniSiteSlug = `minisite-${page.fileSlug}` }}
 
 {{# Set up unique CSS for the typeface page #}}
-{{ css miniSiteSlug }}{{ include 'assets/css/font-specimen/'+page.fileSlug+'.css' }}{{ /css }}
+{{ css miniSiteSlug }}{{ include `assets/css/font-specimen/${page.fileSlug}.css` }}{{ /css }}
 {{- for fontSpecimenName, fontSpecimensFaces of fontSpecimen -}}
     {{# Preload the "default" font #}}
     {{- set fontPreload -}}<link rel="preload" href="./{{ fontSpecimensFaces[0].file }}" as="font" type="font/woff2" crossorigin>{{ /set }}
