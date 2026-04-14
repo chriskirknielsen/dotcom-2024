@@ -575,8 +575,18 @@
 }
 
 .gaming-details-content {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: var(--size-l);
 	padding-block-start: var(--flow-space);
+
 	border-block-start: 1px solid color-mix(in hsl, currentColor, transparent 75%);
+}
+.gaming-details-boxart {
+	align-self: center;
+	inline-size: min(90%, 12rem);
+	margin-inline: auto;
 }
 
 .gaming-details-trophies {
@@ -723,15 +733,5 @@
 		& > li {
 			font-size: 0.75em;
 		}
-	}
-}
-
-.gaming-details-boxart {
-	align-self: flex-end;
-	max-inline-size: 8rem;
-	margin-inline-start: auto;
-
-	img {
-		border-radius: var(--_corner);
 	}
 }

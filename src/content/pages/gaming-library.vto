@@ -258,7 +258,7 @@
             </div>
         </div>
 
-        <div class="gaming-details-content | grouper grouper--wrap">
+        <div class="gaming-details-content">
             <dl>
                 <dt class="grouper grouper--icon-text-pair">
                     {{ svg 'controller', { class: 'inline-icon' } }}
@@ -294,7 +294,7 @@
                     {{ svg 'trophy', { class: 'inline-icon linecap-auto' } }}
                     <span>Trophies</span>
                 </dt>
-                <dd data-slot-show="trophyProgress" data-slot-computed="trophyEarned"></dd>
+                <dd data-slot-show="trophyProgress" data-slot-computed="trophyEarned" class="textWrap-balance"></dd>
 
                 <dt data-slot-show="rating" class="grouper grouper--icon-text-pair">
                     {{ injectsvg 'star', { id: 'svg-star-icon', class: 'inline-icon linecap-auto' } }}
@@ -310,7 +310,9 @@
             </dl>
 
             <div class="gaming-details-boxart" data-slot-computed="boxart">
-                <img src="" alt="" width="528" height="704" class="gaming-box">
+                <hyper-card style="display:block">
+                    <img src="" alt="" width="528" height="704" class="gaming-box">
+                </hyper-card>
             </div>
         </div>
     </div>
@@ -318,6 +320,7 @@
 <dialog id="gaming-details-dialog" class="gaming-details-dialog" aria-labelledby="gaming-details-dialog-heading"></dialog>
 
 {{ js 'foot-gameslibrary' }}{{ include 'assets/js/gaming-library.js' }}{{ /js }}
+{{ js 'foot-gameslibrary' }}{{ include 'assets/js/components/hypercard.js' }}{{ /js }}
 
 <hr>
 
