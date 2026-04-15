@@ -7,6 +7,7 @@
 	margin-block: var(--size-m);
 
 	@container (inline-size > 512px) {
+		margin-block-start: var(--size-xs);
 		margin-inline: var(--size-m) 0;
 		float: right;
 		float: inline-end;
