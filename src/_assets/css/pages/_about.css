@@ -1,3 +1,18 @@
+.about-pic-wrapper {
+	container-type: inline-size;
+}
+.about-pic {
+	max-inline-size: 12rem;
+	margin-inline: auto;
+	margin-block: var(--size-m);
+
+	@container (inline-size > 512px) {
+		margin-inline: var(--size-m) 0;
+		float: right;
+		float: inline-end;
+	}
+}
+
 [data-about='facts'] {
 	& ul {
 		padding-inline-start: 1em;

@@ -134,7 +134,8 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 
 	// If not grouped in a gallery (wrapped in a `gallery` shortcode pair), make it a single-media gallery
 	if (!isGroupContext) {
-		return imageGalleryShortcode(output, options._galleryClasses);
+		const mixedClasses = [options._galleryClasses, options.wrapperClass || ''].filter(Boolean).join(' ');
+		return imageGalleryShortcode(output, mixedClasses);
 	}
 
 	return output;

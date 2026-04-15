@@ -24,9 +24,19 @@
 
 {{ echo |> markdown }}
 ## Wait a minute… who are you?
-
-I’m a French Dane, living in the USA, who used to be a designer, and who now likes to build on the web, with the web, and for the web. I started messing with code in 2004, and got professional about it around 2014. I am, of course, not just a web developer: I’m generally speaking a bit of a nerd (the introverted kind), which may become blatantly obvious as you read through the contents of this page.
 {{ /echo }}
+
+
+<div class="about-pic-wrapper">
+    {{ set profile_pic_url = [assets.images, 'profile-256.jpg'] |> toPath }}
+    {{ set profile_pic_alt = `A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head.` }}
+    {{ set profile_pic_size = 256 }}
+    {{ image profile_pic_url, profile_pic_alt, 'Certified baldie.', { width: 256, height: 256, eager: true, bypassLink: true, wrapperClass: 'about-pic' } }}
+
+    <p>
+        I’m a French Dane, living in the USA, who used to be a designer, and who now likes to build on the web, with the web, and for the web. I started messing with code in 2004, and got professional about it around 2014. I am, of course, not just a web developer: I’m generally speaking a bit of a nerd (the introverted kind), which may become blatantly obvious as you read through the contents of this page.
+    </p>
+</div>
 
 {{ webcomponent 'cycling-expander', { 'data-about': 'facts' }, {
     buttonLabel: '🎲 Chris’s Random Fact-o-tron',
@@ -74,7 +84,15 @@ Curiosity is part of my DNA (alongside whichever gene made me bald) and I value
 
 ## Languages
 
-I grew up in Lyon, France, born to **Danish** parents. Australia was my home for a year as a child, speaking **English** with a Down Under accent (which I’ve since then lost), and I even held a baby koala. Between those and **French**, I sometimes mix things up, which can result in inadvertently funny sentences. I do know a decent amount of **Italian** but natives seem to prefer to answer me in English — <em lang="it">ché peccato</em>. I took **Japanese** in high school, but didn’t apply myself (and instead learned the Cyrillic alphabet, for some reason?), so I’m not good at it, but I did learn some vocabulary thanks to DuoLingo (I stopped after my 1,000-day streak). Anyways, I find languages — and accents — fascinating! (and if anybody mocks your accent, please kick them in the shins)
+I grew up in Lyon, France, born to **Danish** parents. Australia was my home for a year as a child, speaking **English** with a Down Under accent (which I’ve since then lost), and I even held a baby koala. Between those and **French**, I sometimes mix things up, which can result in inadvertently funny sentences, especially when directly translating expressions!
+
+Having taken **Italian** in middle/high school, I know a decent amount, but natives seem to prefer to answer me in English — <em lang="it">ché peccato</em>. The shared Latin roots mean I can kinda-sorta grasp the meaning of Spanish, too, which is nice.
+
+I took **Japanese** in high school, but didn’t apply myself (and instead learned the Cyrillic alphabet, for some reason?), so I’m not good at it, but I did learn some vocabulary thanks to DuoLingo (I stopped after my 1,000-day streak).
+
+In short? I’m fluent in English, French, and Danish. I have a basic conversational level in Italian, and can make my way through a simple sentence in Spanish. I can read and understand _some_ Japanese, and can read but _not_ understand Russian.
+
+Anyways, I find languages — and accents — fascinating! (and if anybody mocks your accent, please kick them in the shins) Did I mention I love imitations, and accents? (so long as it’s in good taste — you won’t catch me doing an Indian accent, have you seen how white I am?)
 
 ## Skills, a.k.a. The Professional Section {$#resume$}
 

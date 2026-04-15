@@ -371,6 +371,7 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 	padding: 5px; /* Larger than the inner box-shadow */
 	overflow: hidden;
 	float: left;
+	float: inline-start;
 	shape-outside: content-box;
 	shape-margin: 1rem;
 
