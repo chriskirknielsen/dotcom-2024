@@ -2,6 +2,9 @@
 	inline-size: 100%;
 }
 
+.display-inline {
+	display: inline;
+}
 .display-block {
 	display: block;
 }
