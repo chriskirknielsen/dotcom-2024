@@ -1,83 +1,83 @@
 ---js
 {
-    title: 'Search',
-    summary: 'Find, uh, stuff',
-    permalink: '/search/',
-    tags: ['_og'],
-    eleventyComputed: {
-        ogImageSummary: 'Does exactly what you’d expect',
-        customMetaImage: function (data) {
-            if (data.permalink) {
-                return this.toOgImage(data);
-            }
-            return this.toPath([data.assets.images, 'metaimage.jpg']);
-        }
-    },
+	title: 'Search',
+	summary: 'Find, uh, stuff',
+	permalink: '/search/',
+	tags: ['_og'],
+	eleventyComputed: {
+		ogImageSummary: 'Does exactly what you’d expect',
+		customMetaImage: function (data) {
+			if (data.permalink) {
+				return this.toOgImage(data);
+			}
+			return this.toPath([data.assets.images, 'metaimage.jpg']);
+		}
+	},
 }
 ---
 <instant-search data-search-input="q" class="display-block | flow">
-    <search role="search">
-        <form method="get" class="inline-form" action="https://duckduckgo.com/" autocomplete="off" novalidate>
-            <input type="hidden" name="sites" value="https://chriskirknielsen.com"/>
-            <label for="q" class="fontWeight-bold">Keyword:</label>
-            <input type="text" value="" name="q" id="q" placeholder="e.g.: css" enterkeyhint="search" required pattern="(?!^$)([^\s])">
-            {{ component 'cta', {
-                type: 'submit',
-                label: 'Search',
-                ctaAttr: 'id="searchsubmit"',
-                icon: 'search',
-                iconBefore: true
-            } }}
-        </form>
-    </search>
+	<search role="search">
+		<form method="get" class="inline-form" action="https://duckduckgo.com/" autocomplete="off" novalidate>
+			<input type="hidden" name="sites" value="https://chriskirknielsen.com"/>
+			<label for="q" class="fontWeight-bold">Keyword:</label>
+			<input type="text" value="" name="q" id="q" placeholder="e.g.: css" enterkeyhint="search" required pattern="(?!^$)([^\s])">
+			{{ component 'cta', {
+				type: 'submit',
+				label: 'Search',
+				ctaAttr: 'id="searchsubmit"',
+				icon: 'search',
+				iconBefore: true
+			} }}
+		</form>
+	</search>
 
-    <hr data-show-on-first-run hidden>
+	<hr data-show-on-first-run hidden>
 
-    <div class="flow" data-results-wrapper>
-        <div class="grouper grouper--wrap grouper--toolbar" data-show-on-first-run hidden>
-            <h2 role="status">Results <span data-results-count></span></h2>
-            <div class="form-label-wrap" data-formlike>
-                <label for="results-filter" class="fontWeight-bold">Filter:</label>
-                <div class="button button--select"><select id="results-filter" class="search-filter" data-results-filter></select></div>
-            </div>
-        </div>
+	<div class="flow" data-results-wrapper>
+		<div class="grouper grouper--wrap grouper--toolbar" data-show-on-first-run hidden>
+			<h2 role="status">Results <span data-results-count></span></h2>
+			<div class="form-label-wrap" data-formlike>
+				<label for="results-filter" class="fontWeight-bold">Filter:</label>
+				<div class="button button--select"><select id="results-filter" class="search-filter" data-results-filter></select></div>
+			</div>
+		</div>
 
-        <div class="search-results-container">
-            <table class="search-results" data-show-on-first-run aria-live="polite" role="table" hidden>
-                <thead role="rowgroup">
-                    <tr class="search-results-header" role="row">
-                        <th class="search-results-col-type" role="columnheader">Type</th>
-                        <th class="search-results-col-title" role="columnheader">Title</th>
-                        <th class="search-results-col-date" role="columnheader">Date</th>
-                    </tr>
-                </thead>
-                <tbody data-results-list role="rowgroup"></tbody>
-            </table>
+		<div class="search-results-container">
+			<table class="search-results" data-show-on-first-run aria-live="polite" role="table" hidden>
+				<thead role="rowgroup">
+					<tr class="search-results-header" role="row">
+						<th class="search-results-col-type" role="columnheader">Type</th>
+						<th class="search-results-col-title" role="columnheader">Title</th>
+						<th class="search-results-col-date" role="columnheader">Date</th>
+					</tr>
+				</thead>
+				<tbody data-results-list role="rowgroup"></tbody>
+			</table>
 
-            <template data-for="result-row">
-                <tr class="search-results-item" data-result-type role="row">
-                    <td class="search-results-col-type fontSize-smaller" role="cell">
-                        <div class="grouper grouper--icon-text-pair" data-result-slot="type"></div>
-                    </td>
-                    <td class="search-results-col-title" role="cell">
-                        <a href="/" hreflang="" data-result-slot="link"></a>
-                        <span class="fontSize-smaller" data-result-slot="lang"></span>
-                    </td>
-                    <td class="search-results-col-date fontSize-smaller" role="cell">
-                        <time datetime="" data-result-slot="date" class="fontVariant-tabularNums"></time>
-                    </td>
-                </tr>
-            </template>
-            <template data-for="result-icon">
-                {{ svg 'asterisk', { class: 'inline-icon inline-icon--center', 'data-type': '*' } }}
-                {{ svg 'font-file', { class: 'inline-icon inline-icon--center', 'data-type': '_fonts' } }}
-                {{ svg 'shirt', { class: 'inline-icon inline-icon--center', 'data-type': '_designs' } }}
-                {{ svg 'hammer', { class: 'inline-icon inline-icon--center', 'data-type': '_projects' } }}
-                {{ svg 'page', { class: 'inline-icon inline-icon--center', 'data-type': '_pages' } }}
-                {{ svg 'note', { class: 'inline-icon inline-icon--center', 'data-type': '_posts' } }}
-            </template>
-        </div>
-    </div>
+			<template data-for="result-row">
+				<tr class="search-results-item" data-result-type role="row">
+					<td class="search-results-col-type fontSize-smaller" role="cell">
+						<div class="grouper grouper--icon-text-pair" data-result-slot="type"></div>
+					</td>
+					<td class="search-results-col-title" role="cell">
+						<a href="/" hreflang="" data-result-slot="link"></a>
+						<span class="fontSize-smaller" data-result-slot="lang"></span>
+					</td>
+					<td class="search-results-col-date fontSize-smaller" role="cell">
+						<time datetime="" data-result-slot="date" class="fontVariant-tabularNums"></time>
+					</td>
+				</tr>
+			</template>
+			<template data-for="result-icon">
+				{{ svg 'asterisk', { class: 'inline-icon inline-icon--center', 'data-type': '*' } }}
+				{{ svg 'font-file', { class: 'inline-icon inline-icon--center', 'data-type': '_fonts' } }}
+				{{ svg 'shirt', { class: 'inline-icon inline-icon--center', 'data-type': '_designs' } }}
+				{{ svg 'hammer', { class: 'inline-icon inline-icon--center', 'data-type': '_projects' } }}
+				{{ svg 'page', { class: 'inline-icon inline-icon--center', 'data-type': '_pages' } }}
+				{{ svg 'note', { class: 'inline-icon inline-icon--center', 'data-type': '_posts' } }}
+			</template>
+		</div>
+	</div>
 </instant-search>
 
 {{ js 'foot-instantsearch' }}{{ include 'assets/js/components/instant-search.js' }}{{ /js }}

@@ -9,11 +9,11 @@ eleventyComputed:
 {{- set tagList = collections |> Object.keys |> startsWith('_', false) }}
 {{ set countedTags = [] }}
 {{ for t of tagList }}
-    {{ if t != 'all' }}
-        {{ set count = collections[t].length }}
-        {{ set selfObj = [t, count] }}
-        {{> countedTags.push(selfObj) }}
-    {{ /if }}
+	{{ if t != 'all' }}
+		{{ set count = collections[t].length }}
+		{{ set selfObj = [t, count] }}
+		{{> countedTags.push(selfObj) }}
+	{{ /if }}
 {{ /for }}
 
 {{# Sort ascending by alpha first (on the tag, index=0), then descending by count (index=1) #}}
@@ -22,28 +22,28 @@ eleventyComputed:
 
 <p id="tags-description" class="visually-hidden">All tags:</p>
 <ul class="inline-list inline-list--tags | textAlign-center textWrap-balance" aria-describedby="tags-description">
-    {{ for [tag, count] of sortedTags }}
-        <li><span class="tooltip" data-tooltip-pos="start center"><a href="/tags/{{ tag }}" class="button button--tag | p-category" style="--r: {{ count / maxCount }}">{{ tag }}</a><span class="tooltip-content">{{ count }} post{{ count > 1 ? 's' : '' }}</span></li>
-    {{ /for }}
+	{{ for [tag, count] of sortedTags }}
+		<li><span class="tooltip" data-tooltip-pos="start center"><a href="/tags/{{ tag }}" class="button button--tag | p-category" style="--r: {{ count / maxCount }}">{{ tag }}</a><span class="tooltip-content">{{ count }} post{{ count > 1 ? 's' : '' }}</span></li>
+	{{ /for }}
 </ul>
 
 {{ if !metadata.nakedCss }}
 <style>
 .inline-list--tags {
-    max-inline-size: 32rem;
-    margin-inline: auto;
-    line-height: 2.5em;
+	max-inline-size: 32rem;
+	margin-inline: auto;
+	line-height: 2.5em;
 }
 
 .inline-list--tags .tooltip {
-    display: inline-flex;
+	display: inline-flex;
 }
 
 .button--tag {
-    --r-squared: var(--r) * var(--r);
-    --r-cubed: var(--r) * var(--r) * var(--r);
-    --r-smoothstep: calc((3 * var(--r-squared)) - (2 * var(--r-cubed))); /* Smoothstep (3x^2-2x^3) */
-    font-size: calc((1 + 1.5 * var(--r-smoothstep)) * 1em); /* Smoothed from 2.5 to 1 */
+	--r-squared: var(--r) * var(--r);
+	--r-cubed: var(--r) * var(--r) * var(--r);
+	--r-smoothstep: calc((3 * var(--r-squared)) - (2 * var(--r-cubed))); /* Smoothstep (3x^2-2x^3) */
+	font-size: calc((1 + 1.5 * var(--r-smoothstep)) * 1em); /* Smoothed from 2.5 to 1 */
 }
 </style>
 {{ /if }}

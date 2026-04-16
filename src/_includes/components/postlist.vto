@@ -1,42 +1,42 @@
 {{ set groupByYear = !Boolean(ungrouped) }}
 {{# By default, posts should be shown by year unless #}}
 <div class="postlist | flow">
-    {{ if !groupByYear }}
-        <div class="postlist-group-list">
-    {{ /if }}
-    {{ set groupedPosts = postlist |> groupBy('data.year') }}
-    {{ set years = groupedPosts |> Object.keys |> sort |> reverse }}
-    {{ for year of years }}
-        {{ set posts = groupedPosts[year] }}
-        {{ if groupByYear }}
-            <details class="postlist-group" open>
-                <summary class="postlist-group-label | u-fontSize-larger">
-                    <span class="visually-hidden">Year</span>
-                    <span class="postlist-group-label-text">{{ year }}</span>
-                    <span class="postlist-group-count">(&times;{{ posts.length }})</span>
-                </summary>
+	{{ if !groupByYear }}
+		<div class="postlist-group-list">
+	{{ /if }}
+	{{ set groupedPosts = postlist |> groupBy('data.year') }}
+	{{ set years = groupedPosts |> Object.keys |> sort |> reverse }}
+	{{ for year of years }}
+		{{ set posts = groupedPosts[year] }}
+		{{ if groupByYear }}
+			<details class="postlist-group" open>
+				<summary class="postlist-group-label | u-fontSize-larger">
+					<span class="visually-hidden">Year</span>
+					<span class="postlist-group-label-text">{{ year }}</span>
+					<span class="postlist-group-count">(&times;{{ posts.length }})</span>
+				</summary>
 
-                <div class="postlist-group-list">
-        {{ /if }}
-                {{ for post of posts |> slice |> reverse }}
-                    {{ set dateString }}
-                    <p>
-                        {{ post.date |> timeTag({ lang }) }}
-                        {{ if post.data.updated }}
-                            {{ set originalTime = post.date |> dateFormat('ms')}}
-                            {{ set updateTime = post.data.updated |> dateFormat('ms')}}
-                            (updated{{ if updateTime != originalTime }} {{ post.data.updated |> timeTag({ lang }) }}{{ /if }})
-                        {{ /if }}
-                    </p>
-                    {{ /set }}
-                    {{ set descriptionMarkup }}
-                    <p>
-                        {{- post.data.summary || post.excerpt }}
-                        {{ for t of (post.data.tags || post.tags) |> startsWith('_', false) }}
-                            <span class="icon-text-pair | fontSize-smaller"><span class="icon-text-icon | color-accent">#&hairsp;</span><span class="icon-text-text">{{ t }}</span></span>
-                        {{ /for -}}
-                    </p>
-                    {{ /set }}
+				<div class="postlist-group-list">
+		{{ /if }}
+				{{ for post of posts |> slice |> reverse }}
+					{{ set dateString }}
+					<p>
+						{{ post.date |> timeTag({ lang }) }}
+						{{ if post.data.updated }}
+							{{ set originalTime = post.date |> dateFormat('ms')}}
+							{{ set updateTime = post.data.updated |> dateFormat('ms')}}
+							(updated{{ if updateTime != originalTime }} {{ post.data.updated |> timeTag({ lang }) }}{{ /if }})
+						{{ /if }}
+					</p>
+					{{ /set }}
+					{{ set descriptionMarkup }}
+					<p>
+						{{- post.data.summary || post.excerpt }}
+						{{ for t of (post.data.tags || post.tags) |> startsWith('_', false) }}
+							<span class="icon-text-pair | fontSize-smaller"><span class="icon-text-icon | color-accent">#&hairsp;</span><span class="icon-text-text">{{ t }}</span></span>
+						{{ /for -}}
+					</p>
+					{{ /set }}
 					{{ component 'card', {
 						link: post.url,
 						eyebrow: dateString,
@@ -44,13 +44,13 @@
 						headingTag: 'h2',
 						descriptionMarkup,
 					} }}
-                {{ /for }}
-        {{ if groupByYear }}
-                </div>
-            </details>
-        {{ /if }}
-    {{ /for }}
-    {{ if !groupByYear }}
-        </div>
-    {{ /if }}
+				{{ /for }}
+		{{ if groupByYear }}
+				</div>
+			</details>
+		{{ /if }}
+	{{ /for }}
+	{{ if !groupByYear }}
+		</div>
+	{{ /if }}
 </div>

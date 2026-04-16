@@ -1,45 +1,45 @@
 ---js
 {
-    title: 'Webring',
-    summary: 'Fun sites and things and such!',
-    permalink: '/webring/',
-    tags: ['_og'],
-    eleventyComputed: {
-        customMetaImage: function (data) {
-            if (data.permalink) {
-                return this.toOgImage(data);
-            }
-            return this.toPath([data.assets.images, 'metaimage.jpg']);
-        }
-    },
+	title: 'Webring',
+	summary: 'Fun sites and things and such!',
+	permalink: '/webring/',
+	tags: ['_og'],
+	eleventyComputed: {
+		customMetaImage: function (data) {
+			if (data.permalink) {
+				return this.toOgImage(data);
+			}
+			return this.toPath([data.assets.images, 'metaimage.jpg']);
+		}
+	},
 }
 ---
 
 <h2>
-    <a href="https://cs.sjoy.lol/#webring">CSS Joy</a>
+	<a href="https://cs.sjoy.lol/#webring">CSS Joy</a>
 </h2>
 
 <p>Websites of people that enjoy experimenting with CSS :)</p>
 
 <div class="grouper" style="--flow-space: var(--size-m);">
-    {{ component 'cta', {
-        url: 'https://webri.ng/webring/cssjoy/previous?via=https://chriskirknielsen.com/webring/',
-        label: { aria: 'Previous', text: 'Prev' },
-        icon: 'arrow-left',
-        iconBefore: true,
-        ctaAttr: 'data-shape="flipped"'
-    } }}
+	{{ component 'cta', {
+		url: 'https://webri.ng/webring/cssjoy/previous?via=https://chriskirknielsen.com/webring/',
+		label: { aria: 'Previous', text: 'Prev' },
+		icon: 'arrow-left',
+		iconBefore: true,
+		ctaAttr: 'data-shape="flipped"'
+	} }}
 
-    {{ component 'cta', {
-        url: 'https://webri.ng/webring/cssjoy/random?via=https://chriskirknielsen.com/webring/',
-        label: 'Random',
-        icon: false,
-        ctaAttr: 'data-shape="rect"'
-    } }}
+	{{ component 'cta', {
+		url: 'https://webri.ng/webring/cssjoy/random?via=https://chriskirknielsen.com/webring/',
+		label: 'Random',
+		icon: false,
+		ctaAttr: 'data-shape="rect"'
+	} }}
 
-    {{ component 'cta', {
-        url: 'https://webri.ng/webring/cssjoy/next?via=https://chriskirknielsen.com/webring/',
-        label: 'Next',
-        icon: 'arrow-right'
-    } }}
+	{{ component 'cta', {
+		url: 'https://webri.ng/webring/cssjoy/next?via=https://chriskirknielsen.com/webring/',
+		label: 'Next',
+		icon: 'arrow-right'
+	} }}
 </div>

@@ -4,33 +4,33 @@
 	title: 'Font Directory',
 	permalink: '/fonts/',
 	summary: 'You might find a cool, nerdy font by yours truly',
-    ogImageTitle: 'Custom Fonts',
-    eleventyComputed: {
-        customMetaImage: function (data) {
-            if (data.permalink) {
-                return this.toOgImage(data);
-            }
-            return this.toPath([data.assets.images, 'metaimage.jpg']);
-        }
+	ogImageTitle: 'Custom Fonts',
+	eleventyComputed: {
+		customMetaImage: function (data) {
+			if (data.permalink) {
+				return this.toOgImage(data);
+			}
+			return this.toPath([data.assets.images, 'metaimage.jpg']);
+		}
 	}
 }
 ---
 
 <ul class="cards" data-grid-cols="3">
-    {{ for font of collections._fonts |> sortBy(false, false, 'inputPath') }}
-        <li class="card-wrapper">
-            {{ component 'card', {
-                link: font.url,
-                image: {
-                    src: font.data.customMetaImage,
-                    width: 600,
-                    height: 600
-                },
-                heading: font.data.title,
-                description: font.data.summary
-            } }}
-        </li>
-    {{ /for }}
+	{{ for font of collections._fonts |> sortBy(false, false, 'inputPath') }}
+		<li class="card-wrapper">
+			{{ component 'card', {
+				link: font.url,
+				image: {
+					src: font.data.customMetaImage,
+					width: 600,
+					height: 600
+				},
+				heading: font.data.title,
+				description: font.data.summary
+			} }}
+		</li>
+	{{ /for }}
 </ul>
 
 <p class="textAlign-center textWrap-balance fontSize-smaller fontStyle-italic">If you were looking for the fonts used on this website, it’s detailed for every theme on the <a href="/colophon/">Colophon page</a>.</p>

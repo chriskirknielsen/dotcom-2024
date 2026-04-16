@@ -1,330 +1,330 @@
 ---js
 {
-    title: 'Stats',
-    summary: 'Statistics for nerds',
-    permalink: '/stats/',
-    tags: ['_og'],
-    runAutoToc: true,
-    eleventyComputed: {
-        ogImageSummary: 'Just stats',
-        customMetaImage: function (data) {
-            if (data.permalink) {
-                return this.toOgImage(data);
-            }
-            return this.toPath([data.assets.images, 'metaimage.jpg']);
-        },
-    },
-    eleventyImport: {
-        collections: ['_posts', '_pages', '_designs', '_projects', '_fonts']
-    }
+	title: 'Stats',
+	summary: 'Statistics for nerds',
+	permalink: '/stats/',
+	tags: ['_og'],
+	runAutoToc: true,
+	eleventyComputed: {
+		ogImageSummary: 'Just stats',
+		customMetaImage: function (data) {
+			if (data.permalink) {
+				return this.toOgImage(data);
+			}
+			return this.toPath([data.assets.images, 'metaimage.jpg']);
+		},
+	},
+	eleventyImport: {
+		collections: ['_posts', '_pages', '_designs', '_projects', '_fonts']
+	}
 }
 ---
 <h2>The Big Picture</h2>
 <div style="--flow-space: var(--size-m);">
-    <dl class="dl-tiles dl-tiles--flipped">
-        <div class="dl-tile">
-            <dt>Posts</dt>
-            <dd class="h3">{{ collections._posts.length |> formatNumber }}</dd>
-        </div>
-        <div class="dl-tile">
-            <dt>Pages</dt>
-            <dd class="h3">{{ collections._pages.length |> formatNumber }}</dd>
-        </div>
-        <div class="dl-tile">
-            <dt>Designs</dt>
-            <dd class="h3">{{ collections._designs.length |> formatNumber }}</dd>
-        </div>
-        <div class="dl-tile">
-            <dt>Projects</dt>
-            <dd class="h3">{{ collections._projects.length |> formatNumber }}</dd>
-        </div>
-        <div class="dl-tile">
-            <dt>Fonts</dt>
-            <dd class="h3">{{ collections._fonts.length |> formatNumber }}</dd>
-        </div>
-    </dl>
+	<dl class="dl-tiles dl-tiles--flipped">
+		<div class="dl-tile">
+			<dt>Posts</dt>
+			<dd class="h3">{{ collections._posts.length |> formatNumber }}</dd>
+		</div>
+		<div class="dl-tile">
+			<dt>Pages</dt>
+			<dd class="h3">{{ collections._pages.length |> formatNumber }}</dd>
+		</div>
+		<div class="dl-tile">
+			<dt>Designs</dt>
+			<dd class="h3">{{ collections._designs.length |> formatNumber }}</dd>
+		</div>
+		<div class="dl-tile">
+			<dt>Projects</dt>
+			<dd class="h3">{{ collections._projects.length |> formatNumber }}</dd>
+		</div>
+		<div class="dl-tile">
+			<dt>Fonts</dt>
+			<dd class="h3">{{ collections._fonts.length |> formatNumber }}</dd>
+		</div>
+	</dl>
 </div>
 
 <h2>Blogging Numbers</h2>
 {{>
-    const mathClamp = (min,num,max) => Math.min(max, Math.max(min, num));
-    const mathExpo = (num) => parseInt(num.toExponential().split('e').pop().replace('-', ''), 10);
-    const posts = collections._posts;
-    const postsByDate = posts.map(p => p.date);
-    const firstPostDate = postsByDate[0];
-    const lastPostDate = postsByDate[postsByDate.length - 1];
-    const postDateDelta = lastPostDate.getTime() - firstPostDate.getTime(); // milliseconds between first and last post
-    const dayDelta = postDateDelta / 1000 / 3600 / 24; // milliseconds between first and last post / milliseconds by second / seconds by hour / hours by day
-    const averagePerDay = dayDelta / postsByDate.length;
-    const averagePerDayExpo = mathExpo(averagePerDay);
-    const averagePerDayMaxDecimals = 2;
-    const averagePerDayDecimals = mathClamp(0, averagePerDayMaxDecimals - averagePerDayExpo, averagePerDayMaxDecimals);
-    const averagePerDayRounded = averagePerDay.toFixed(averagePerDayDecimals);
-    const averageDaysPerPost = postsByDate.length / dayDelta;
-    const averageDaysPerPostRounded = averageDaysPerPost.toFixed(2);
-    const weekdayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    const postsByWeekday = postsByDate
-        .map((d) => weekdayList[(d.getUTCDay() || 7) - 1]) // Sunday returns 0, so `n = 0 || 7` returns 7, and then `n - 1` ensures Monday is 0 and Sunday is 6, matching common-sense ordering
-        .reduce((p, c) => {
-            if (!(c in p)) { p[c] = 0; }
-            p[c]++;
-            return p;
-    }, {});
-    const maxPostInWeekday = Math.max.apply(null, Object.values(postsByWeekday));
-    const postsByYear = postsByDate
-        .map((p) => p.getUTCFullYear())
-        .reduce((p, c) => {
-            if (!(c in p)) { p[c] = 0; }
-            p[c]++;
-            return p;
-    }, {});
-    const maxPostInYear = Math.max.apply(null, Object.values(postsByYear));
-    const yearsList = Object.keys(postsByYear).sort();
-    const wordsByPost = posts.map(p => p.rawInput.replace(/```.+```/gs, '').split(' ')); // Try to remove code blocks, probably misses a bit, but it's an average anyways, who cares?
-    const wordCountByPost = wordsByPost.map(p => p.length);
-    const wordCountTotal = wordCountByPost.reduce((p, c) => p + c, 0);
-    const wordCountAverage = Math.round(wordCountTotal / posts.length);
-    // const allWords = wordsByPost.flat(1).map(w => w.trim().replace(/(['"’“”`.,;:?!\[\]\(\)\{\}]|\n)+/g, ''));
-    const cssCount = wordsByPost.flat(1).filter(w => w.trim().replace(/(['"’“”`.,;:?!\[\]\(\)\{\}]|\n)+/g, '') === 'CSS').length;
-    const cssCountOverTotal = cssCount / wordCountTotal; // Given the word CSS is going to be less frequent than all words, this number will always be under 1
-    const cssCountExpo = mathClamp(2, mathExpo(cssCountOverTotal), 3); // Clamp to 2 or 3
-    const cssCountPerSign = cssCountExpo === 3 ? '‰' : '%'; // permille or percent
-    const cssCountFormatted = (cssCountOverTotal * Math.pow(10, cssCountExpo)).toFixed(cssCountExpo);
+	const mathClamp = (min,num,max) => Math.min(max, Math.max(min, num));
+	const mathExpo = (num) => parseInt(num.toExponential().split('e').pop().replace('-', ''), 10);
+	const posts = collections._posts;
+	const postsByDate = posts.map(p => p.date);
+	const firstPostDate = postsByDate[0];
+	const lastPostDate = postsByDate[postsByDate.length - 1];
+	const postDateDelta = lastPostDate.getTime() - firstPostDate.getTime(); // milliseconds between first and last post
+	const dayDelta = postDateDelta / 1000 / 3600 / 24; // milliseconds between first and last post / milliseconds by second / seconds by hour / hours by day
+	const averagePerDay = dayDelta / postsByDate.length;
+	const averagePerDayExpo = mathExpo(averagePerDay);
+	const averagePerDayMaxDecimals = 2;
+	const averagePerDayDecimals = mathClamp(0, averagePerDayMaxDecimals - averagePerDayExpo, averagePerDayMaxDecimals);
+	const averagePerDayRounded = averagePerDay.toFixed(averagePerDayDecimals);
+	const averageDaysPerPost = postsByDate.length / dayDelta;
+	const averageDaysPerPostRounded = averageDaysPerPost.toFixed(2);
+	const weekdayList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+	const postsByWeekday = postsByDate
+		.map((d) => weekdayList[(d.getUTCDay() || 7) - 1]) // Sunday returns 0, so `n = 0 || 7` returns 7, and then `n - 1` ensures Monday is 0 and Sunday is 6, matching common-sense ordering
+		.reduce((p, c) => {
+			if (!(c in p)) { p[c] = 0; }
+			p[c]++;
+			return p;
+	}, {});
+	const maxPostInWeekday = Math.max.apply(null, Object.values(postsByWeekday));
+	const postsByYear = postsByDate
+		.map((p) => p.getUTCFullYear())
+		.reduce((p, c) => {
+			if (!(c in p)) { p[c] = 0; }
+			p[c]++;
+			return p;
+	}, {});
+	const maxPostInYear = Math.max.apply(null, Object.values(postsByYear));
+	const yearsList = Object.keys(postsByYear).sort();
+	const wordsByPost = posts.map(p => p.rawInput.replace(/```.+```/gs, '').split(' ')); // Try to remove code blocks, probably misses a bit, but it's an average anyways, who cares?
+	const wordCountByPost = wordsByPost.map(p => p.length);
+	const wordCountTotal = wordCountByPost.reduce((p, c) => p + c, 0);
+	const wordCountAverage = Math.round(wordCountTotal / posts.length);
+	// const allWords = wordsByPost.flat(1).map(w => w.trim().replace(/(['"’“”`.,;:?!\[\]\(\)\{\}]|\n)+/g, ''));
+	const cssCount = wordsByPost.flat(1).filter(w => w.trim().replace(/(['"’“”`.,;:?!\[\]\(\)\{\}]|\n)+/g, '') === 'CSS').length;
+	const cssCountOverTotal = cssCount / wordCountTotal; // Given the word CSS is going to be less frequent than all words, this number will always be under 1
+	const cssCountExpo = mathClamp(2, mathExpo(cssCountOverTotal), 3); // Clamp to 2 or 3
+	const cssCountPerSign = cssCountExpo === 3 ? '‰' : '%'; // permille or percent
+	const cssCountFormatted = (cssCountOverTotal * Math.pow(10, cssCountExpo)).toFixed(cssCountExpo);
 }}
 <div class="dl-container | fontVariant-tabularNums">
-    <dl>
-        <dt>Word count average</dt>
-        <dd>
-            {{ wordCountAverage |> formatNumber }} words <span class="fontStyle-italic">(excludes code blocks)</span>
-        </dd>
+	<dl>
+		<dt>Word count average</dt>
+		<dd>
+			{{ wordCountAverage |> formatNumber }} words <span class="fontStyle-italic">(excludes code blocks)</span>
+		</dd>
 
-        <dt>Mentions of “CSS”</dt>
-        <dd>
-            {{ cssCount |> formatNumber }} occurrences <span class="fontStyle-italic">({{ cssCountFormatted }}{{ cssCountPerSign }} of all words)</span>
-        </dd>
+		<dt>Mentions of “CSS”</dt>
+		<dd>
+			{{ cssCount |> formatNumber }} occurrences <span class="fontStyle-italic">({{ cssCountFormatted }}{{ cssCountPerSign }} of all words)</span>
+		</dd>
 
-        <dt>Uses of “A.I.”</dt>
-        <dd>
-            Zero, zilch, zip, nada, naught. <a href="/ai-policy/">Why?</a>
-        </dd>
+		<dt>Uses of “A.I.”</dt>
+		<dd>
+			Zero, zilch, zip, nada, naught. <a href="/ai-policy/">Why?</a>
+		</dd>
 
-        <dt>Overall frequency</dt>
-        <dd>
-            Every {{ if averagePerDayRounded != 1 }}{{ averagePerDayRounded }} days{{ else }}day{{ /if }}
-            <span class="fontStyle-italic">(or {{ averageDaysPerPostRounded }} posts per day)</span>
-        </dd>
-        
-        <div class="dl-item-wrap">
-            <dt>Frequency by weekday</dt>
-            <dd>
-                <ol class="progress-list">
-                    {{ for day of weekdayList }}
-                        <li class="progress-list-item" style="--progress: {{ postsByWeekday[day] / maxPostInWeekday |> toRound(3) }}">
-                            <span class="progress-list-label">{{ day }}</span>
-                            <div class="progress-list-bar">
-                                <span class="progress-list-number">{{ postsByWeekday[day] |> formatNumber }} <span class="visually-hidden">posts</span></span>
-                            </div>
-                        </li>
-                    {{ /for }}
-                </ol>
-            </dd>
-        </div>
+		<dt>Overall frequency</dt>
+		<dd>
+			Every {{ if averagePerDayRounded != 1 }}{{ averagePerDayRounded }} days{{ else }}day{{ /if }}
+			<span class="fontStyle-italic">(or {{ averageDaysPerPostRounded }} posts per day)</span>
+		</dd>
+		
+		<div class="dl-item-wrap">
+			<dt>Frequency by weekday</dt>
+			<dd>
+				<ol class="progress-list">
+					{{ for day of weekdayList }}
+						<li class="progress-list-item" style="--progress: {{ postsByWeekday[day] / maxPostInWeekday |> toRound(3) }}">
+							<span class="progress-list-label">{{ day }}</span>
+							<div class="progress-list-bar">
+								<span class="progress-list-number">{{ postsByWeekday[day] |> formatNumber }} <span class="visually-hidden">posts</span></span>
+							</div>
+						</li>
+					{{ /for }}
+				</ol>
+			</dd>
+		</div>
 
-        <div class="dl-item-wrap">
-            <dt>Frequency by year</dt>
-            <dd>
-                <ol class="progress-list">
-                    {{ for year of yearsList }}
-                        <li class="progress-list-item" style="--progress: {{ postsByYear[year] / maxPostInYear |> toRound(3) }}">
-                            <span class="progress-list-label">{{ year }}</span>
-                            <div class="progress-list-bar">
-                                <span class="progress-list-number">{{ postsByYear[year] |> formatNumber }} <span class="visually-hidden">posts</span></span>
-                            </div>
-                        </li>
-                    {{ /for }}
-                </ol>
-            </dd>
-        </div>
-    </dl>
+		<div class="dl-item-wrap">
+			<dt>Frequency by year</dt>
+			<dd>
+				<ol class="progress-list">
+					{{ for year of yearsList }}
+						<li class="progress-list-item" style="--progress: {{ postsByYear[year] / maxPostInYear |> toRound(3) }}">
+							<span class="progress-list-label">{{ year }}</span>
+							<div class="progress-list-bar">
+								<span class="progress-list-number">{{ postsByYear[year] |> formatNumber }} <span class="visually-hidden">posts</span></span>
+							</div>
+						</li>
+					{{ /for }}
+				</ol>
+			</dd>
+		</div>
+	</dl>
 </div>
 
 <h2 class="running">Running <span aria-hidden="true">🏃‍♂️</span></h2>
 <div style="--flow-space: var(--size-m);">
-    <dl class="dl-tiles dl-tiles--flipped">
-        <div class="dl-tile">
-            <dt>Runs</dt>
-            <dd class="h3">{{ strava.count |> formatNumber }}</dd>
-        </div>
-        <div class="dl-tile">
-            <dt>Distance</dt>
-            <dd class="h3">{{ strava.distance / 1000 |> toRound |> formatNumber }} Km</dd>
-        </div>
-        <div class="dl-tile">
-            <dt>Hours</dt>
-            <dd class="h3">{{ strava.moving_time / 3600 |> toRound }}</dd>
-        </div>
-        <div class="dl-tile">
-            <dt>Average Pace (Km)</dt>
-            {{ set averagePace = strava.moving_time / (strava.distance / 1000) }}
-            {{ set averagePaceM = Math.floor(averagePace / 60) }}
-            {{ set averagePaceS = averagePace % 60 |> toRound |> toString |> padStart(2, '0') }}
-            <dd class="h3">
-                {{ averagePaceM }}<span aria-hidden="true">'</span><span class="visually-hidden">minutes</span>
-                {{ averagePaceS }}<span aria-hidden="true">"</span><span class="visually-hidden">seconds</span>
-            </dd>
-        </div>
-        <div class="dl-tile">
-            <dt>Half-Marathons</dt>
-            <dd class="h3">{{ strava.activities.filter(a => a.distance >= 21_097.5).length }}</dd>
-        </div>
-    </dl>
+	<dl class="dl-tiles dl-tiles--flipped">
+		<div class="dl-tile">
+			<dt>Runs</dt>
+			<dd class="h3">{{ strava.count |> formatNumber }}</dd>
+		</div>
+		<div class="dl-tile">
+			<dt>Distance</dt>
+			<dd class="h3">{{ strava.distance / 1000 |> toRound |> formatNumber }} Km</dd>
+		</div>
+		<div class="dl-tile">
+			<dt>Hours</dt>
+			<dd class="h3">{{ strava.moving_time / 3600 |> toRound }}</dd>
+		</div>
+		<div class="dl-tile">
+			<dt>Average Pace (Km)</dt>
+			{{ set averagePace = strava.moving_time / (strava.distance / 1000) }}
+			{{ set averagePaceM = Math.floor(averagePace / 60) }}
+			{{ set averagePaceS = averagePace % 60 |> toRound |> toString |> padStart(2, '0') }}
+			<dd class="h3">
+				{{ averagePaceM }}<span aria-hidden="true">'</span><span class="visually-hidden">minutes</span>
+				{{ averagePaceS }}<span aria-hidden="true">"</span><span class="visually-hidden">seconds</span>
+			</dd>
+		</div>
+		<div class="dl-tile">
+			<dt>Half-Marathons</dt>
+			<dd class="h3">{{ strava.activities.filter(a => a.distance >= 21_097.5).length }}</dd>
+		</div>
+	</dl>
 </div>
 
 <div class="dl-container | fontVariant-tabularNums">
-    <dl>
-        <div class="dl-item-wrap">
-            <dt>Runs per year</dt>
-            <dd class="flow" style="--flow-space: var(--size-xs);">
-                <ol class="progress-list">
-                    {{ set runsByYear = strava.activities |> groupBy('year') }}
-                    {{ set maxStatsInYear = Math.max.apply(null, Object.values(runsByYear).map(y => (y.length))) }}
-                    {{ for year, yearData of runsByYear }}
-                        <li class="progress-list-item" style="--progress: {{ yearData.length / maxStatsInYear |> toRound(3) }}">
-                            <span class="progress-list-label">{{ year }}</span>
-                            <div class="progress-list-bar">
-                                <span class="progress-list-number">{{ yearData.length |> toRound |> formatNumber }}</span>
-                            </div>
-                        </li>
-                    {{ /for }}
-                </ol>
+	<dl>
+		<div class="dl-item-wrap">
+			<dt>Runs per year</dt>
+			<dd class="flow" style="--flow-space: var(--size-xs);">
+				<ol class="progress-list">
+					{{ set runsByYear = strava.activities |> groupBy('year') }}
+					{{ set maxStatsInYear = Math.max.apply(null, Object.values(runsByYear).map(y => (y.length))) }}
+					{{ for year, yearData of runsByYear }}
+						<li class="progress-list-item" style="--progress: {{ yearData.length / maxStatsInYear |> toRound(3) }}">
+							<span class="progress-list-label">{{ year }}</span>
+							<div class="progress-list-bar">
+								<span class="progress-list-number">{{ yearData.length |> toRound |> formatNumber }}</span>
+							</div>
+						</li>
+					{{ /for }}
+				</ol>
 
-                <p class="fontStyle-italic fontSize-smaller">Don’t ask how the hell I went running every 4 days in 2023 because it baffles me.</p>
-            </dd>
-        </div>
+				<p class="fontStyle-italic fontSize-smaller">Don’t ask how the hell I went running every 4 days in 2023 because it baffles me.</p>
+			</dd>
+		</div>
 
-        <div class="dl-item-wrap">
-            <dt>Distance (Km) over months</dt>
-            <dd>
-                {{>
-                    const getMonthAndYear = (d) => d.split('-').slice(0, 2).join('-');
-                    const graphMetric = 'distance';
-                    const activities = strava.activities; // These should already be sorted by date in descending order (newest first)
-                    const firstActivityDate = activities.at(-1).date;
-                    const lastActivityDate = activities.at(0).date;
-                    const startingDateBase = new Date(`${getMonthAndYear(firstActivityDate)}-15T00:00:00Z`); // Using the middle of the month to avoid any weirdness related to leap years
-                    function getNthMonthDateFromBase (n) {
-                        const nthMonthDate = new Date(startingDateBase); // Don't want to modify the original Date object!
-                        nthMonthDate.setMonth(startingDateBase.getMonth() + n); // The Date object will know that a 13th month means year+1 and month=1
-                        return nthMonthDate.toISOString();
-                    }
-                    const dataPointCoordinates = [];
-                    const allMonthsList = [];
-                }}
-                {{# Briefly exiting the JS block to run the dateDiff filter #}}
-                {{ set activityMonthDeltaDiff = firstActivityDate |> dateDiff(lastActivityDate, 'months') |> Math.ceil }}
-                {{>
-                    const svgSize = { w: 960, h: 240, stroke: 2, font: 14, button: 8 };
-                    const svgChartPadding = svgSize.font * 2;
-                    const yStepCount = 4;
-                    const monthlyData = strava.activities.reduce((prev, curr) => {
-                        const yearAndMonth = getMonthAndYear(curr.date);
-                        if (!(yearAndMonth in prev)) { prev[yearAndMonth] = 0; }
-                        prev[yearAndMonth] += curr[graphMetric];
-                        return prev;
-                    }, {});
-                    const lastMonthAndYearDate = getNthMonthDateFromBase(activityMonthDeltaDiff);
-                    const lastMonthAndYearByDelta = getMonthAndYear(lastMonthAndYearDate);
-                    const isLastDateEmpty = monthlyData.hasOwnProperty(lastMonthAndYearByDelta) === false || monthlyData[lastMonthAndYearByDelta] === 0;
-                    if (isLastDateEmpty) {
-                        activityMonthDeltaDiff -= 1; // Since the number is set with Math.ceil it might overshoot into an empty month, so it can be decreased if needed
-                    }
-                    const maxMetric = Math.max.apply(null, Object.values(monthlyData));
-                    const maxExpo = maxMetric.toExponential();
-                    const [expoValue, expoMagnitude] = maxExpo.split('e').map(n => Math.ceil(Number(n)));
-                    const maxGraphValue = Math.pow(10, expoMagnitude + 1);
-                    const graphStepValueX = maxGraphValue / yStepCount;
-                    const graphStepSizeX = (svgSize.w - svgChartPadding) / activityMonthDeltaDiff;
-                    const graphStepSizeY = (svgSize.h - svgChartPadding) / yStepCount;
-                    const graphXAxisPosY = svgSize.h - svgChartPadding;
-                    const graphYAxisPosX = svgChartPadding + svgSize.stroke / 2;
-                    for (let i = 0; i <= activityMonthDeltaDiff; i++) {
-                        const monthAndYearISO = getNthMonthDateFromBase(i);
-                        const yearAndMonthLabel = getMonthAndYear(monthAndYearISO);
-                        const pointValue = monthlyData[yearAndMonthLabel] || 0;
-                        const pointPosX = svgChartPadding + graphStepSizeX * i;
-                        const pointPosY = svgSize.h - svgChartPadding - ((monthlyData[yearAndMonthLabel] || 0) / maxGraphValue * (svgSize.h - svgChartPadding));
-                        dataPointCoordinates.push([Math.round(pointPosX * 100) / 100, Math.round(pointPosY * 100) / 100, pointValue, yearAndMonthLabel]);
-                        allMonthsList.push(yearAndMonthLabel);
-                    }
-                }}
-                <div class="linechart-wrapper">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="{{ svgSize.w }}"
-                        height="{{ svgSize.h }}"
-                        viewBox="0 0 {{ svgSize.w }} {{ svgSize.h }}"
-                        class="linechart"
-                        role="img"
-                        aria-label="A line graph showing the distance I have run each month since {{ getMonthAndYear(firstActivityDate) }} up till now, with a maximum of {{ maxMetric / 1000 |> toRound }} Km. The values vary wildly with no visible pattern, with a few months even reaching zero."
-                    >
-                        {{# value lines + labels #}}
-                        {{ for y of (yStepCount + 1) }}
-                            <text font-size="{{ svgSize.font * 0.75 }}" x="{{ svgChartPadding - 2 }}" y="{{ (y - 1) * graphStepSizeY + svgSize.font * 0.25 }}" text-anchor="end" fill="currentColor">{{ graphStepValueX * (yStepCount - y + 1) / 1000 |> toRound }}</text>
-                            {{ if y <= yStepCount }}
-                                <line x1="{{ svgChartPadding }}" x2="{{ svgSize.w }}" y1="{{ (y - 1) * graphStepSizeY }}" y2="{{ (y - 1) * graphStepSizeY }}" fill="none" stroke="currentColor" stroke-opacity="0.5" stroke-width="{{ svgSize.stroke / 2 }}"/>
-                            {{ /if }}
-                        {{ /for }}
+		<div class="dl-item-wrap">
+			<dt>Distance (Km) over months</dt>
+			<dd>
+				{{>
+					const getMonthAndYear = (d) => d.split('-').slice(0, 2).join('-');
+					const graphMetric = 'distance';
+					const activities = strava.activities; // These should already be sorted by date in descending order (newest first)
+					const firstActivityDate = activities.at(-1).date;
+					const lastActivityDate = activities.at(0).date;
+					const startingDateBase = new Date(`${getMonthAndYear(firstActivityDate)}-15T00:00:00Z`); // Using the middle of the month to avoid any weirdness related to leap years
+					function getNthMonthDateFromBase (n) {
+						const nthMonthDate = new Date(startingDateBase); // Don't want to modify the original Date object!
+						nthMonthDate.setMonth(startingDateBase.getMonth() + n); // The Date object will know that a 13th month means year+1 and month=1
+						return nthMonthDate.toISOString();
+					}
+					const dataPointCoordinates = [];
+					const allMonthsList = [];
+				}}
+				{{# Briefly exiting the JS block to run the dateDiff filter #}}
+				{{ set activityMonthDeltaDiff = firstActivityDate |> dateDiff(lastActivityDate, 'months') |> Math.ceil }}
+				{{>
+					const svgSize = { w: 960, h: 240, stroke: 2, font: 14, button: 8 };
+					const svgChartPadding = svgSize.font * 2;
+					const yStepCount = 4;
+					const monthlyData = strava.activities.reduce((prev, curr) => {
+						const yearAndMonth = getMonthAndYear(curr.date);
+						if (!(yearAndMonth in prev)) { prev[yearAndMonth] = 0; }
+						prev[yearAndMonth] += curr[graphMetric];
+						return prev;
+					}, {});
+					const lastMonthAndYearDate = getNthMonthDateFromBase(activityMonthDeltaDiff);
+					const lastMonthAndYearByDelta = getMonthAndYear(lastMonthAndYearDate);
+					const isLastDateEmpty = monthlyData.hasOwnProperty(lastMonthAndYearByDelta) === false || monthlyData[lastMonthAndYearByDelta] === 0;
+					if (isLastDateEmpty) {
+						activityMonthDeltaDiff -= 1; // Since the number is set with Math.ceil it might overshoot into an empty month, so it can be decreased if needed
+					}
+					const maxMetric = Math.max.apply(null, Object.values(monthlyData));
+					const maxExpo = maxMetric.toExponential();
+					const [expoValue, expoMagnitude] = maxExpo.split('e').map(n => Math.ceil(Number(n)));
+					const maxGraphValue = Math.pow(10, expoMagnitude + 1);
+					const graphStepValueX = maxGraphValue / yStepCount;
+					const graphStepSizeX = (svgSize.w - svgChartPadding) / activityMonthDeltaDiff;
+					const graphStepSizeY = (svgSize.h - svgChartPadding) / yStepCount;
+					const graphXAxisPosY = svgSize.h - svgChartPadding;
+					const graphYAxisPosX = svgChartPadding + svgSize.stroke / 2;
+					for (let i = 0; i <= activityMonthDeltaDiff; i++) {
+						const monthAndYearISO = getNthMonthDateFromBase(i);
+						const yearAndMonthLabel = getMonthAndYear(monthAndYearISO);
+						const pointValue = monthlyData[yearAndMonthLabel] || 0;
+						const pointPosX = svgChartPadding + graphStepSizeX * i;
+						const pointPosY = svgSize.h - svgChartPadding - ((monthlyData[yearAndMonthLabel] || 0) / maxGraphValue * (svgSize.h - svgChartPadding));
+						dataPointCoordinates.push([Math.round(pointPosX * 100) / 100, Math.round(pointPosY * 100) / 100, pointValue, yearAndMonthLabel]);
+						allMonthsList.push(yearAndMonthLabel);
+					}
+				}}
+				<div class="linechart-wrapper">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="{{ svgSize.w }}"
+						height="{{ svgSize.h }}"
+						viewBox="0 0 {{ svgSize.w }} {{ svgSize.h }}"
+						class="linechart"
+						role="img"
+						aria-label="A line graph showing the distance I have run each month since {{ getMonthAndYear(firstActivityDate) }} up till now, with a maximum of {{ maxMetric / 1000 |> toRound }} Km. The values vary wildly with no visible pattern, with a few months even reaching zero."
+					>
+						{{# value lines + labels #}}
+						{{ for y of (yStepCount + 1) }}
+							<text font-size="{{ svgSize.font * 0.75 }}" x="{{ svgChartPadding - 2 }}" y="{{ (y - 1) * graphStepSizeY + svgSize.font * 0.25 }}" text-anchor="end" fill="currentColor">{{ graphStepValueX * (yStepCount - y + 1) / 1000 |> toRound }}</text>
+							{{ if y <= yStepCount }}
+								<line x1="{{ svgChartPadding }}" x2="{{ svgSize.w }}" y1="{{ (y - 1) * graphStepSizeY }}" y2="{{ (y - 1) * graphStepSizeY }}" fill="none" stroke="currentColor" stroke-opacity="0.5" stroke-width="{{ svgSize.stroke / 2 }}"/>
+							{{ /if }}
+						{{ /for }}
 
-                        {{# The data lines #}}
-                        {{ set points = dataPointCoordinates.map(([cx, cy, v, txt]) => `${cx},${cy}`).join(' ')}}
-                        <polyline fill="var(--C-heading)" fill-opacity="0.2" points="{{ points }} {{ svgSize.w }},{{ svgSize.h - svgChartPadding }} {{ svgChartPadding }},{{ svgSize.h - svgChartPadding }}"/>
-                        <polyline fill="none" stroke="var(--C-heading)" stroke-width="{{ svgSize.stroke }}" points="{{ points }}"/>
-                        
-                        {{# Or: create individual lines? (loop over dataPointCoordinates and use the index to find the current + previous point coord) That way they can animated from y1/y2="\{\{ (svgSize.h - svgChartPadding) \}\}" #}}
+						{{# The data lines #}}
+						{{ set points = dataPointCoordinates.map(([cx, cy, v, txt]) => `${cx},${cy}`).join(' ')}}
+						<polyline fill="var(--C-heading)" fill-opacity="0.2" points="{{ points }} {{ svgSize.w }},{{ svgSize.h - svgChartPadding }} {{ svgChartPadding }},{{ svgSize.h - svgChartPadding }}"/>
+						<polyline fill="none" stroke="var(--C-heading)" stroke-width="{{ svgSize.stroke }}" points="{{ points }}"/>
+						
+						{{# Or: create individual lines? (loop over dataPointCoordinates and use the index to find the current + previous point coord) That way they can animated from y1/y2="\{\{ (svgSize.h - svgChartPadding) \}\}" #}}
 
-                        {{# X-axis lines + labels #}}
-                        <line x1="{{ svgChartPadding }}" x2="{{ svgSize.w }}" y1="{{ graphXAxisPosY }}" y2="{{ graphXAxisPosY }}" fill="none" stroke="currentColor" stroke-width="{{ svgSize.stroke }}"/>
-                        
-                        {{# Y-axis line #}}
-                        <line x1="{{ graphYAxisPosX }}" x2="{{ graphYAxisPosX }}" y1="0" y2="{{ svgSize.h - svgChartPadding }}" fill="none" stroke="currentColor" stroke-width="{{ svgSize.stroke }}"/>
-                        
-                        {{ for [cx, cy, v, txt] of dataPointCoordinates }}
-                            <g>
-                                <circle cx="{{ cx }}" cy="{{ cy }}" r="{{ svgSize.stroke }}" fill="currentColor"/>
-                                <text font-size="{{ svgSize.font * 0.75 }}" x="{{ cx }}" y="{{ cy - svgSize.font * 0.75 }}" text-anchor="middle" fill="currentColor" stroke="var(--C-canvas)" stroke-width="3" paint-order="stroke">{{ v / 1000 |> toRound }}</text>
-                            </g>
-                        {{ /for }}
+						{{# X-axis lines + labels #}}
+						<line x1="{{ svgChartPadding }}" x2="{{ svgSize.w }}" y1="{{ graphXAxisPosY }}" y2="{{ graphXAxisPosY }}" fill="none" stroke="currentColor" stroke-width="{{ svgSize.stroke }}"/>
+						
+						{{# Y-axis line #}}
+						<line x1="{{ graphYAxisPosX }}" x2="{{ graphYAxisPosX }}" y1="0" y2="{{ svgSize.h - svgChartPadding }}" fill="none" stroke="currentColor" stroke-width="{{ svgSize.stroke }}"/>
+						
+						{{ for [cx, cy, v, txt] of dataPointCoordinates }}
+							<g>
+								<circle cx="{{ cx }}" cy="{{ cy }}" r="{{ svgSize.stroke }}" fill="currentColor"/>
+								<text font-size="{{ svgSize.font * 0.75 }}" x="{{ cx }}" y="{{ cy - svgSize.font * 0.75 }}" text-anchor="middle" fill="currentColor" stroke="var(--C-canvas)" stroke-width="3" paint-order="stroke">{{ v / 1000 |> toRound }}</text>
+							</g>
+						{{ /for }}
 
-                        {{ set xAxisLabelPosY = svgSize.h - (svgChartPadding - svgSize.font) / 2 }}
-                        <text font-size="{{ svgSize.font }}" y="{{ xAxisLabelPosY }}" x="{{ svgChartPadding }}" fill="currentColor">{{ getMonthAndYear(firstActivityDate) }}</text>
-                        <text font-size="{{ svgSize.font }}" y="{{ xAxisLabelPosY }}" x="{{ (svgSize.w - svgChartPadding) / 2 }}" text-anchor="middle" fill="currentColor">{{ allMonthsList[Math.floor(allMonthsList.length/2)] }}</text>
-                        <text font-size="{{ svgSize.font }}" y="{{ xAxisLabelPosY }}" x="{{ svgSize.w }}" text-anchor="end" fill="currentColor">{{ getMonthAndYear(lastActivityDate) }}</text>
-                    </svg>
-                </div>
-            </dd>
-        </dl>
-    </div>
+						{{ set xAxisLabelPosY = svgSize.h - (svgChartPadding - svgSize.font) / 2 }}
+						<text font-size="{{ svgSize.font }}" y="{{ xAxisLabelPosY }}" x="{{ svgChartPadding }}" fill="currentColor">{{ getMonthAndYear(firstActivityDate) }}</text>
+						<text font-size="{{ svgSize.font }}" y="{{ xAxisLabelPosY }}" x="{{ (svgSize.w - svgChartPadding) / 2 }}" text-anchor="middle" fill="currentColor">{{ allMonthsList[Math.floor(allMonthsList.length/2)] }}</text>
+						<text font-size="{{ svgSize.font }}" y="{{ xAxisLabelPosY }}" x="{{ svgSize.w }}" text-anchor="end" fill="currentColor">{{ getMonthAndYear(lastActivityDate) }}</text>
+					</svg>
+				</div>
+			</dd>
+		</dl>
+	</div>
 </div>
 
 <p class="fontStyle-italic">The info above is pulled from Strava (after some tedious Nike Running Club import) but manually saved periodically through their API. <a href="/blog/nerd-snipped-into-importing-nike-running-club-into-strava-api/">Here’s how I did it.</a></p>
 
 <style>
 .linechart {
-    padding: 0.25em 0.5em;
-    overflow: visible;
-    font-family: var(--font-body-family);
+	padding: 0.25em 0.5em;
+	overflow: visible;
+	font-family: var(--font-body-family);
 }
 
 @media (max-width: {{ svgSize.w / 1.25 }}px) {
-    .linechart-wrapper {
-        inline-size: 0; /* Don't participate in the grid cell sizing */
-        min-inline-size: 100%; /* Occupy all the space */
-        overflow-x: auto; /* Safari 18 doesn't support logical variant :( */
-    }
-    
-    .linechart {
-        inline-size: {{ svgSize.w / 1.25 }}px; 
-        max-inline-size: unset;
-    }
+	.linechart-wrapper {
+		inline-size: 0; /* Don't participate in the grid cell sizing */
+		min-inline-size: 100%; /* Occupy all the space */
+		overflow-x: auto; /* Safari 18 doesn't support logical variant :( */
+	}
+	
+	.linechart {
+		inline-size: {{ svgSize.w / 1.25 }}px; 
+		max-inline-size: unset;
+	}
 }
 </style>

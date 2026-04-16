@@ -1,17 +1,17 @@
 ---js
 {
-    title: 'About',
-    heroTitle: 'Hiya, I’m Chris',
-    summary: 'Chris is a CSS nerd who used to be a designer and who now likes to build on the web',
-    ogImageTitle: 'Hiya, I’m Chris',
-    ogImageSummary: '(he/him)',
-    tags: ['_og'],
-    heroHideSummary: true,
-    heroSub: '(he/him)',
-    permalink: '/about/',
-    autoHeadingAnchors: true,
-    toc: true,
-    eleventyComputed: {
+	title: 'About',
+	heroTitle: 'Hiya, I’m Chris',
+	summary: 'Chris is a CSS nerd who used to be a designer and who now likes to build on the web',
+	ogImageTitle: 'Hiya, I’m Chris',
+	ogImageSummary: '(he/him)',
+	tags: ['_og'],
+	heroHideSummary: true,
+	heroSub: '(he/him)',
+	permalink: '/about/',
+	autoHeadingAnchors: true,
+	toc: true,
+	eleventyComputed: {
 		customMetaImage: function (data) {
 			if (data.permalink) {
 				return this.toOgImage(data);
@@ -28,33 +28,33 @@
 
 
 <div class="about-pic-wrapper">
-    {{ set profile_pic_url = [assets.images, 'profile-256.jpg'] |> toPath }}
-    {{ set profile_pic_alt = `A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head.` }}
-    {{ set profile_pic_size = 256 }}
-    {{ image profile_pic_url, profile_pic_alt, 'Certified baldie.', { width: 256, height: 256, eager: true, bypassLink: true, wrapperClass: 'about-pic' } }}
+	{{ set profile_pic_url = [assets.images, 'profile-256.jpg'] |> toPath }}
+	{{ set profile_pic_alt = `A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head.` }}
+	{{ set profile_pic_size = 256 }}
+	{{ image profile_pic_url, profile_pic_alt, 'Certified baldie.', { width: 256, height: 256, eager: true, bypassLink: true, wrapperClass: 'about-pic' } }}
 
-    <p>
-        I’m a French Dane, living in the USA, who used to be a designer, and who now likes to build on the web, with the web, and for the web. I started messing with code in 2004, and got professional about it around 2014. I am, of course, not just a web developer: I’m generally speaking a bit of a nerd (the introverted kind), which may become blatantly obvious as you read through the contents of this page.
-    </p>
+	<p>
+		I’m a French Dane, living in the USA, who used to be a designer, and who now likes to build on the web, with the web, and for the web. I started messing with code in 2004, and got professional about it around 2014. I am, of course, not just a web developer: I’m generally speaking a bit of a nerd (the introverted kind), which may become blatantly obvious as you read through the contents of this page.
+	</p>
 </div>
 
 {{ webcomponent 'cycling-expander', { 'data-about': 'facts' }, {
-    buttonLabel: '🎲 Chris’s Random Fact-o-tron',
-    listItems: [
-        ['👀', 'Can read the Cyrillic alphabet… kinda.'],
-        ['⏱️', 'His favourite movie is likely Back to the Future, though the dad is a creep.'],
-        ['☕️', 'Used to drink lots of tea, but is now into iced coffee any day!'],
-        ['🕵️', 'Leans into his pareidolia (seeing faces in things) to make life more fun.'],
-        ['🤓', 'Enjoys maths/physics YouTube videos despite not grasping everything.'],
-        ['🛹', 'Practiced skateboarding for a while, then decided playing Tony Hawk was safer.'],
-        ['🏔️', 'Truly wishes to be a more outdoorsy person (help).'],
-        ['🏃‍♂️', 'Has run a couple semi-marathons, but still far from ready for a full one.'],
-        ['🐈', 'Loves animals, please introduce your pet.'],
-        ['😴', 'Sleeps on his side but wakes up on his back.'],
-        ['📚', 'Loves learning but also helping — ask away about anything!'],
-        ['🎸', 'His favourite band of all time is Thrice, just ask for a recommendation!'],
-        ['💜', 'Appreciates you reading through these facts.']
-    ]
+	buttonLabel: '🎲 Chris’s Random Fact-o-tron',
+	listItems: [
+		['👀', 'Can read the Cyrillic alphabet… kinda.'],
+		['⏱️', 'His favourite movie is likely Back to the Future, though the dad is a creep.'],
+		['☕️', 'Used to drink lots of tea, but is now into iced coffee any day!'],
+		['🕵️', 'Leans into his pareidolia (seeing faces in things) to make life more fun.'],
+		['🤓', 'Enjoys maths/physics YouTube videos despite not grasping everything.'],
+		['🛹', 'Practiced skateboarding for a while, then decided playing Tony Hawk was safer.'],
+		['🏔️', 'Truly wishes to be a more outdoorsy person (help).'],
+		['🏃‍♂️', 'Has run a couple semi-marathons, but still far from ready for a full one.'],
+		['🐈', 'Loves animals, please introduce your pet.'],
+		['😴', 'Sleeps on his side but wakes up on his back.'],
+		['📚', 'Loves learning but also helping — ask away about anything!'],
+		['🎸', 'His favourite band of all time is Thrice, just ask for a recommendation!'],
+		['💜', 'Appreciates you reading through these facts.']
+	]
 } -}}
 {{- js 'foot-about' }}{{- include 'assets/js/components/cycling-expander.js' -}}{{ /js }}
 
@@ -104,60 +104,60 @@ The **Adobe Creative Suite** and I go _way_ back (2005!), specifically **Photos
 {{ /echo }}
 
 {{ set tools = {
-    'Front-End': {
-        html: 'HTML',
-        css: 'CSS',
-        sass: 'Sass/SCSS',
-        svg: 'SVG',
-        js: 'JavaScript',
-        // markdown: 'Markdown',
-    },
-    'Templating / Server-Side': {
-        nodejs: 'NodeJS',
-        eleventy: 'Eleventy',
-        nunjucks: 'Nunjucks',
-        vento: 'Vento',
-        liquid: 'Liquid',
-        php: 'PHP',
-        sql: 'SQL',
-    },
-    'Workflow': {
-        git: 'git',
-        github: 'GitHub',
-        gitlab: 'GitLab',
-        bitbucket: 'Bitbucket',
-        npm: 'npm',
-        netlify: 'Netlify Deploys',
-    },
-    'CMS / Platforms': {
-        wordpress: 'WordPress',
-        shopify: 'Shopify',
-        webflow: 'Webflow',
-    },
-    // TODO Libraries? jQuery, DevExtreme, maybe Vue?
-    'Designing': {
-        figma: 'Figma',
-        photoshop: 'Photoshop',
-        illustrator: 'Illustrator',
-        aftereffects: 'After Effects',
-    },
+	'Front-End': {
+		html: 'HTML',
+		css: 'CSS',
+		sass: 'Sass/SCSS',
+		svg: 'SVG',
+		js: 'JavaScript',
+		// markdown: 'Markdown',
+	},
+	'Templating / Server-Side': {
+		nodejs: 'NodeJS',
+		eleventy: 'Eleventy',
+		nunjucks: 'Nunjucks',
+		vento: 'Vento',
+		liquid: 'Liquid',
+		php: 'PHP',
+		sql: 'SQL',
+	},
+	'Workflow': {
+		git: 'git',
+		github: 'GitHub',
+		gitlab: 'GitLab',
+		bitbucket: 'Bitbucket',
+		npm: 'npm',
+		netlify: 'Netlify Deploys',
+	},
+	'CMS / Platforms': {
+		wordpress: 'WordPress',
+		shopify: 'Shopify',
+		webflow: 'Webflow',
+	},
+	// TODO Libraries? jQuery, DevExtreme, maybe Vue?
+	'Designing': {
+		figma: 'Figma',
+		photoshop: 'Photoshop',
+		illustrator: 'Illustrator',
+		aftereffects: 'After Effects',
+	},
 } }}
 {{ async function aboutIcon(icon, label) }}
 <span class="about-icons-list-badge">
-    <span class="about-icons-list-icon">{{ svg `${icon}-icon`, { class: 'inline-icon inline-icon--center' } }}</span>
-    <span class="about-icons-list-label">{{ label }}</span>
+	<span class="about-icons-list-icon">{{ svg `${icon}-icon`, { class: 'inline-icon inline-icon--center' } }}</span>
+	<span class="about-icons-list-label">{{ label }}</span>
 </span>
 {{ /function }}
 
 <p id="tools">Here’s a (non-exhaustive) list of tools and environments I frequently use:</p>
 <ul class="about-icons-list | textAlign-start" style="--GAP: var(--size-s);">
 {{ for toolLabel, toolItems of tools -}}
-    <li class="about-icons-list-item | inline-list">
-        <strong>{{ toolLabel }}:</strong>
-        {{ for icon, label of toolItems }}
-            {{ await aboutIcon(icon, label) }}
-        {{ /for }}
-    </li>
+	<li class="about-icons-list-item | inline-list">
+		<strong>{{ toolLabel }}:</strong>
+		{{ for icon, label of toolItems }}
+			{{ await aboutIcon(icon, label) }}
+		{{ /for }}
+	</li>
 {{- /for }}
 </ul>
 

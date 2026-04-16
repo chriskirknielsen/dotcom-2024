@@ -1,37 +1,37 @@
 ---js
 {
-    title: 'A.I. Policy',
-    metaDescriptionOverride: 'My approach to artificial intelligence',
-    permalink: '/ai-policy/',
-    tags: ['_og'],
-    toc: true,
-    date: 'git Last Modified',
-    eleventyComputed: {
-        summary: function (data) {
-            return `My approach to artificial intelligence (last updated ${this.dateFormat(data.page.date.toISOString(), { format: 'nice' })})`;
-        },
-        customMetaImage: function (data) {
-            if (data.permalink) {
-                return this.toOgImage(data);
-            }
-            return this.toPath([data.assets.images, 'metaimage.jpg']);
-        }
-    },
+	title: 'A.I. Policy',
+	metaDescriptionOverride: 'My approach to artificial intelligence',
+	permalink: '/ai-policy/',
+	tags: ['_og'],
+	toc: true,
+	date: 'git Last Modified',
+	eleventyComputed: {
+		summary: function (data) {
+			return `My approach to artificial intelligence (last updated ${this.dateFormat(data.page.date.toISOString(), { format: 'nice' })})`;
+		},
+		customMetaImage: function (data) {
+			if (data.permalink) {
+				return this.toOgImage(data);
+			}
+			return this.toPath([data.assets.images, 'metaimage.jpg']);
+		}
+	},
 }
 ---
 
 <p><a href="/blog/no-ai-icon-for-humans/">I wrote a bit about why I created the icon below</a> but I wanted to outline my take on “artificial intelligence” on this page as a more “pinned statement”, albeit non-exhaustive. While “A.I.” is a misnomer (which tends to amalgamate large language models, neural networks, and machine learning), that ship has sailed, so I will refer to it as such from here on out.</p>
 
 {{ gallery 'image-gallery--nofx' }}
-    {{ svg 'no-ai', { width: 320, height: 320, title: 'no A.I.' } }}
+	{{ svg 'no-ai', { width: 320, height: 320, title: 'no A.I.' } }}
 {{ /gallery }}
 
 <p class="textAlign-center">{{ component 'cta', {
-    url: "/assets/img/no-ai.svg",
-    label: 'Download “No A.I." SVG file',
-    icon: 'arrow-download',
-    iconBefore: true,
-    ctaAttr: 'download'
+	url: "/assets/img/no-ai.svg",
+	label: 'Download “No A.I." SVG file',
+	icon: 'arrow-download',
+	iconBefore: true,
+	ctaAttr: 'download'
 } }}</p>
 
 {{ callout "tl;dr"}}My stance is simple: **I avoid any direct use A.I., or interactions with A.I.-generated content.** Every thing I claim to make is indeed made by my hands, be it code, design, or words you’ve kindly decided to read.{{ /callout }}
