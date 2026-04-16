@@ -6,6 +6,15 @@
 	margin-inline: auto;
 	margin-block: var(--size-m);
 
+	figure {
+		background: var(--C-accent);
+	}
+
+	img {
+		filter: grayscale(100%);
+		mix-blend-mode: luminosity;
+	}
+
 	@container (inline-size > 512px) {
 		margin-block-start: var(--size-xs);
 		margin-inline: var(--size-m) 0;
