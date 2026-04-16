@@ -483,6 +483,19 @@ const designs = [
 		mockup: 'sticker',
 	},
 	{
+		slug: 'certified-baldie',
+		name: 'Certified Baldie',
+		description: 'This mister is clean — clean shaved, that is!',
+		img: 'certified-baldie.png',
+		links: {
+			RedBubble: 'https://www.redbubble.com/i/sticker/Certified-Baldie-by-ckirknielsen/179794107/7sgk',
+		},
+		tags: [],
+		date: '2026-04-0114',
+		accent: '#0081c1',
+		mockup: 'sticker',
+	},
+	{
 		slug: 'cartridge-world',
 		name: 'Cartridge World',
 		description: 'Memories of the thousands of worlds we held in our hands.',
