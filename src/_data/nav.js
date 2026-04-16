@@ -17,7 +17,10 @@ const slashPages = [
 	{ path: '/music/', label: '/music' },
 ];
 const gamesLibrary = { path: '/games/library/', label: 'Gaming Library' };
-const email = { path: `mailto:${encodeURIComponent('chriskirknielsen+dot-com@gmail.com')}`, label: 'Email' };
+const email = {
+	path: 'mailto:chriskirknielsen+dot-com@gmail.com',
+	label: 'Email',
+};
 
 export default {
 	rss, // Expose it via global data
