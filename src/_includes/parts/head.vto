@@ -11,10 +11,13 @@
 <meta name="color-scheme" content="light dark">
 
 {{# Meta, SEO, etc. #}}
-<meta name="author" content="{{ metadata.author.name }}">
 <meta name="generator" content="{{ eleventy.generator }}">
+<meta name="author" content="{{ metadata.author.name }}">
 <meta name="fediverse:creator" content="{{ social.mastodon.handle }}">
 <link href="{{ social.mastodon.url }}" rel="me">
+<link href="{{ social.bluesky.url }}" rel="me">
+<link href="{{ social.codepen.url }}" rel="me">
+<link href="{{ social.github.url }}" rel="me">
 
 <meta property="og:title" content="{{ title }} | {{ metadata.title }}">
 <meta property="og:site_name" content="{{ metadata.title }}">

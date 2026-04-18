@@ -7,11 +7,11 @@ export default {
 		url: `https://${mastodonServer}/@${mastodonUsername}`,
 		handle: `@${mastodonUsername}@${mastodonServer}`,
 	},
-	// bluesky: {
-	// 	label: 'Bluesky',
-	// 	url: 'https://bsky.app/profile/chriskirknielsen.com',
-	// 	handle: '@chriskirknielsen.com',
-	// },
+	bluesky: {
+		label: 'Bluesky',
+		url: 'https://bsky.app/profile/chriskirknielsen.com',
+		handle: '@chriskirknielsen.com',
+	},
 	codepen: {
 		label: 'CodePen',
 		url: 'https://codepen.io/chriskirknielsen',

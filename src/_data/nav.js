@@ -8,7 +8,9 @@ const navbar = [
 	{ path: '/designs/', label: 'Designs' },
 	{ path: '/projects/', label: 'Projects' },
 ];
-const socialFromEntry = Object.entries(social).map(([key, item]) => ({ path: item.url, label: item.label }));
+const socialFromEntry = Object.entries(social)
+	.filter((s) => s[0] !== 'bluesky') // Don't care about Bluesky right now
+	.map(([key, item]) => ({ path: item.url, label: item.label }));
 const slashPages = [
 	{ path: '/uses/', label: '/uses' },
 	{ path: '/support/', label: '/support' },
