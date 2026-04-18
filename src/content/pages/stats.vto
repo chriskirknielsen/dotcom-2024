@@ -19,6 +19,122 @@
 	}
 }
 ---
+{{>
+	const svgSize = { w: 960, h: 240, stroke: 2, font: 14, button: 8 };
+	const svgChartPadding = svgSize.font * 2;
+	const yStepCount = 4;
+	const getMonthAndYear = (d) => d.split('-').slice(0, 2).join('-');
+}}
+{{ function buildSparklineFromData({ data, getDateStr = null, countProp = null, metricScale = 1, alt }) }}
+	{{>
+		if (!getDateStr) { getDateStr = (v) => typeof v === 'string' ? v : new Date(v).toISOString(); }
+		const sortedData = data.slice(); // These should already be sorted by date in descending order (newest first)
+		const firstItemDate = new Date(getDateStr(sortedData.at(-1))).toISOString();
+		const lastItemDate = new Date(getDateStr(sortedData.at(0))).toISOString();
+		const startingDateBase = new Date(`${getMonthAndYear(firstItemDate)}-15T00:00:00Z`); // Using the middle of the month to avoid any weirdness related to leap years
+		function getNthMonthDateFromBase (n) {
+			const nthMonthDate = new Date(startingDateBase); // Don't want to modify the original Date object!
+			nthMonthDate.setMonth(startingDateBase.getMonth() + n); // The Date object will know that a 13th month means year+1 and month=1
+			return nthMonthDate.toISOString();
+		}
+		const dataPointCoordinates = [];
+		const allMonthsList = [];
+	}}
+	{{# Briefly exiting the JS block to run the dateDiff filter #}}
+	{{ set dataMonthDelta = firstItemDate |> dateDiff(lastItemDate, 'months') |> Math.ceil }}
+	{{>
+		const monthlyData = sortedData.reduce((prev, curr) => {
+			const yearAndMonth = getMonthAndYear(getDateStr ? getDateStr(curr) : curr);
+			if (!(yearAndMonth in prev)) { prev[yearAndMonth] = 0; }
+			prev[yearAndMonth] += countProp ? curr[countProp] : 1; // If a property is provided, use that as a metric, else just increment the count by 1
+			return prev;
+		}, {});
+		const lastMonthAndYearDate = getNthMonthDateFromBase(dataMonthDelta);
+		const lastMonthAndYearByDelta = getMonthAndYear(lastMonthAndYearDate);
+		const isLastDateEmpty = monthlyData.hasOwnProperty(lastMonthAndYearByDelta) === false || monthlyData[lastMonthAndYearByDelta] === 0;
+		if (isLastDateEmpty) {
+			dataMonthDelta -= 1; // Since the number is set with Math.ceil it might overshoot into an empty month, so it can be decreased if needed
+		}
+		const maxMetric = Math.max.apply(null, Object.values(monthlyData));
+		const maxExpo = maxMetric.toExponential();
+		const [expoValue, expoMagnitude] = maxExpo.split('e').map(n => Math.ceil(Number(n)));
+		// Get the max value but make it fit nicely to a multiple of the values, if applicable (not exactly a lower common denominator but similar idea, works for the current data)
+		let maxGraphValue = Math.pow(10, expoMagnitude + 1);
+		const modStepSize = maxGraphValue % yStepCount;
+		let graphStepValueX = (modStepSize !== 0) ? modStepSize : maxGraphValue / yStepCount;
+		maxGraphValue = graphStepValueX * yStepCount;
+		if ((graphStepValueX * 2) > maxMetric) {
+			graphStepValueX /= 2;
+			maxGraphValue /= 2;
+		}
+		const graphStepSizeX = (svgSize.w - svgChartPadding) / dataMonthDelta;
+		const graphStepSizeY = (svgSize.h - svgChartPadding) / yStepCount;
+		const graphXAxisPosY = svgSize.h - svgChartPadding;
+		const graphYAxisPosX = svgChartPadding + svgSize.stroke / 2;
+		for (let i = 0; i <= dataMonthDelta; i++) {
+			const monthAndYearISO = getNthMonthDateFromBase(i);
+			const yearAndMonthLabel = getMonthAndYear(monthAndYearISO);
+			const pointValue = monthlyData[yearAndMonthLabel] || 0;
+			const pointPosX = svgChartPadding + graphStepSizeX * i;
+			const pointPosY = svgSize.h - svgChartPadding - ((monthlyData[yearAndMonthLabel] || 0) / maxGraphValue * (svgSize.h - svgChartPadding));
+			dataPointCoordinates.push([Math.round(pointPosX * 100) / 100, Math.round(pointPosY * 100) / 100, pointValue, yearAndMonthLabel]);
+			allMonthsList.push(yearAndMonthLabel);
+		}
+		const svgAlt =
+			(typeof alt === 'function' ? alt({ minDate: firstItemDate, maxDate: lastItemDate, minMonthYear: getMonthAndYear(firstItemDate), maxMonthYear: getMonthAndYear(lastItemDate), maxMetric }) : alt)
+			|| `A line graph showing the numbers of values for every month since {{ getMonthAndYear(firstItemDate) }} up till now, with a maximum of {{ maxMetric |> toRound }}.`
+	}}
+	<div class="linechart-wrapper">
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="{{ svgSize.w }}"
+			height="{{ svgSize.h }}"
+			viewBox="0 0 {{ svgSize.w }} {{ svgSize.h }}"
+			class="linechart"
+			role="img"
+			aria-label="{{ svgAlt }}"
+		>
+			{{ set points = dataPointCoordinates.map(([cx, cy, v, txt]) => `${cx},${cy}`).join(' ')}}
+			{{ set xAxisLabelPosY = svgSize.h - (svgChartPadding - svgSize.font) / 2 }}
+			{{# value lines + labels #}}
+			{{ for y of (yStepCount + 1) }}
+				<text font-size="{{ svgSize.font * 0.75 }}" x="{{ svgChartPadding - svgSize.stroke * 2 }}" y="{{ (y - 1) * graphStepSizeY + svgSize.font * 0.25 }}" text-anchor="end" fill="currentColor">{{ graphStepValueX * (yStepCount - y + 1) * metricScale |> toRound }}</text>
+				{{ if y <= yStepCount }}
+					<line x1="{{ svgChartPadding }}" x2="{{ svgSize.w }}" y1="{{ (y - 1) * graphStepSizeY }}" y2="{{ (y - 1) * graphStepSizeY }}" fill="none" stroke="currentColor" stroke-opacity="0.5" stroke-width="{{ svgSize.stroke / 2 }}"/>
+				{{ /if }}
+			{{ /for }}
+
+			{{# The data lines #}}
+			<polyline fill="var(--C-heading)" fill-opacity="0.2" points="{{ points }} {{ svgSize.w }},{{ svgSize.h - svgChartPadding }} {{ svgChartPadding }},{{ svgSize.h - svgChartPadding }}"/>
+			<polyline fill="none" stroke="var(--C-heading)" stroke-width="{{ svgSize.stroke }}" points="{{ points }}"/>
+
+			{{# X-axis line #}}
+			<line x1="{{ svgChartPadding }}" x2="{{ svgSize.w }}" y1="{{ graphXAxisPosY }}" y2="{{ graphXAxisPosY }}" fill="none" stroke="currentColor" stroke-width="{{ svgSize.stroke }}"/>
+			
+			{{# Y-axis line #}}
+			<line x1="{{ graphYAxisPosX }}" x2="{{ graphYAxisPosX }}" y1="0" y2="{{ svgSize.h - svgChartPadding }}" fill="none" stroke="currentColor" stroke-width="{{ svgSize.stroke }}"/>
+			
+			{{ for [cx, cy, v, txt] of dataPointCoordinates }}
+				{{ if v > 0 }}
+					{{# Add a marker for non-empty values #}}
+					<g>
+						<circle cx="{{ cx }}" cy="{{ cy }}" r="{{ svgSize.stroke }}" fill="currentColor"/>
+						<text font-size="{{ svgSize.font * 0.75 }}" x="{{ cx }}" y="{{ cy - svgSize.font * 0.75 }}" text-anchor="middle" fill="currentColor" stroke="var(--C-canvas)" stroke-width="3" paint-order="stroke">{{ v * metricScale |> toRound }}</text>
+					</g>
+				{{ /if }}
+				{{ if (txt.endsWith('-01')) }}
+					{{# Add a marker for the first month of the year #}}
+					<rect x="{{ cx - svgSize.stroke }}" y="{{ svgSize.h - svgChartPadding - svgSize.stroke }}" width="{{ svgSize.stroke*2 }}" height="{{ svgSize.stroke*2 }}" fill="none" stroke="currentColor" />
+					<text font-size="{{ svgSize.font * 0.75 }}" y="{{ svgSize.h - svgChartPadding + svgSize.stroke * 2 + svgSize.font * 0.75 }}" x="{{ cx }}" text-anchor="middle" fill="currentColor" fill-opacity="0.5">{{ txt.split('-').at(0) }}</text>
+				{{ /if }}
+			{{ /for }}
+
+			<text font-size="{{ svgSize.font }}" y="{{ xAxisLabelPosY }}" x="{{ svgChartPadding }}" fill="currentColor">{{ getMonthAndYear(firstItemDate) }}</text>
+			<text font-size="{{ svgSize.font }}" y="{{ xAxisLabelPosY }}" x="{{ svgSize.w }}" text-anchor="end" fill="currentColor">{{ getMonthAndYear(lastItemDate) }}</text>
+		</svg>
+	</div>
+{{ /function }}
+
 <h2>The Big Picture</h2>
 <div style="--flow-space: var(--size-m);">
 	<dl class="dl-tiles dl-tiles--flipped">
@@ -131,18 +247,12 @@
 		</div>
 
 		<div class="dl-item-wrap">
-			<dt>Frequency by year</dt>
+			<dt>Frequency by month</dt>
 			<dd>
-				<ol class="progress-list">
-					{{ for year of yearsList }}
-						<li class="progress-list-item" style="--progress: {{ postsByYear[year] / maxPostInYear |> toRound(3) }}">
-							<span class="progress-list-label">{{ year }}</span>
-							<div class="progress-list-bar">
-								<span class="progress-list-number">{{ postsByYear[year] |> formatNumber }} <span class="visually-hidden">posts</span></span>
-							</div>
-						</li>
-					{{ /for }}
-				</ol>
+				{{ buildSparklineFromData({
+					data: postsByDate.slice().reverse(), // Posts are usually sorted in ascending order
+					alt: ({ minMonthYear, maxMetric }) => `A line graph showing the numbers of blog posts for every month since ${minMonthYear} up till now, with a maximum of ${maxMetric} posts in any given month. The values vary wildly with no visible pattern, with a good handful of months even reaching zero.` })
+				}}
 			</dd>
 		</div>
 	</dl>
@@ -205,102 +315,13 @@
 		<div class="dl-item-wrap">
 			<dt>Distance (Km) over months</dt>
 			<dd>
-				{{>
-					const getMonthAndYear = (d) => d.split('-').slice(0, 2).join('-');
-					const graphMetric = 'distance';
-					const activities = strava.activities; // These should already be sorted by date in descending order (newest first)
-					const firstActivityDate = activities.at(-1).date;
-					const lastActivityDate = activities.at(0).date;
-					const startingDateBase = new Date(`${getMonthAndYear(firstActivityDate)}-15T00:00:00Z`); // Using the middle of the month to avoid any weirdness related to leap years
-					function getNthMonthDateFromBase (n) {
-						const nthMonthDate = new Date(startingDateBase); // Don't want to modify the original Date object!
-						nthMonthDate.setMonth(startingDateBase.getMonth() + n); // The Date object will know that a 13th month means year+1 and month=1
-						return nthMonthDate.toISOString();
-					}
-					const dataPointCoordinates = [];
-					const allMonthsList = [];
+				{{ buildSparklineFromData({
+					data: strava.activities,
+					getDateStr: (a) => new Date(a.date).toISOString(),
+					countProp: 'distance',
+					metricScale: 0.001,
+					alt: ({ minMonthYear, maxMetric }) => `A line graph showing the distance I have run each month since ${minMonthYear} up till now, with a maximum of ${Math.round(maxMetric / 1000)} Km. The values vary wildly with no visible pattern, with a few months even reaching zero.` })
 				}}
-				{{# Briefly exiting the JS block to run the dateDiff filter #}}
-				{{ set activityMonthDeltaDiff = firstActivityDate |> dateDiff(lastActivityDate, 'months') |> Math.ceil }}
-				{{>
-					const svgSize = { w: 960, h: 240, stroke: 2, font: 14, button: 8 };
-					const svgChartPadding = svgSize.font * 2;
-					const yStepCount = 4;
-					const monthlyData = strava.activities.reduce((prev, curr) => {
-						const yearAndMonth = getMonthAndYear(curr.date);
-						if (!(yearAndMonth in prev)) { prev[yearAndMonth] = 0; }
-						prev[yearAndMonth] += curr[graphMetric];
-						return prev;
-					}, {});
-					const lastMonthAndYearDate = getNthMonthDateFromBase(activityMonthDeltaDiff);
-					const lastMonthAndYearByDelta = getMonthAndYear(lastMonthAndYearDate);
-					const isLastDateEmpty = monthlyData.hasOwnProperty(lastMonthAndYearByDelta) === false || monthlyData[lastMonthAndYearByDelta] === 0;
-					if (isLastDateEmpty) {
-						activityMonthDeltaDiff -= 1; // Since the number is set with Math.ceil it might overshoot into an empty month, so it can be decreased if needed
-					}
-					const maxMetric = Math.max.apply(null, Object.values(monthlyData));
-					const maxExpo = maxMetric.toExponential();
-					const [expoValue, expoMagnitude] = maxExpo.split('e').map(n => Math.ceil(Number(n)));
-					const maxGraphValue = Math.pow(10, expoMagnitude + 1);
-					const graphStepValueX = maxGraphValue / yStepCount;
-					const graphStepSizeX = (svgSize.w - svgChartPadding) / activityMonthDeltaDiff;
-					const graphStepSizeY = (svgSize.h - svgChartPadding) / yStepCount;
-					const graphXAxisPosY = svgSize.h - svgChartPadding;
-					const graphYAxisPosX = svgChartPadding + svgSize.stroke / 2;
-					for (let i = 0; i <= activityMonthDeltaDiff; i++) {
-						const monthAndYearISO = getNthMonthDateFromBase(i);
-						const yearAndMonthLabel = getMonthAndYear(monthAndYearISO);
-						const pointValue = monthlyData[yearAndMonthLabel] || 0;
-						const pointPosX = svgChartPadding + graphStepSizeX * i;
-						const pointPosY = svgSize.h - svgChartPadding - ((monthlyData[yearAndMonthLabel] || 0) / maxGraphValue * (svgSize.h - svgChartPadding));
-						dataPointCoordinates.push([Math.round(pointPosX * 100) / 100, Math.round(pointPosY * 100) / 100, pointValue, yearAndMonthLabel]);
-						allMonthsList.push(yearAndMonthLabel);
-					}
-				}}
-				<div class="linechart-wrapper">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="{{ svgSize.w }}"
-						height="{{ svgSize.h }}"
-						viewBox="0 0 {{ svgSize.w }} {{ svgSize.h }}"
-						class="linechart"
-						role="img"
-						aria-label="A line graph showing the distance I have run each month since {{ getMonthAndYear(firstActivityDate) }} up till now, with a maximum of {{ maxMetric / 1000 |> toRound }} Km. The values vary wildly with no visible pattern, with a few months even reaching zero."
-					>
-						{{# value lines + labels #}}
-						{{ for y of (yStepCount + 1) }}
-							<text font-size="{{ svgSize.font * 0.75 }}" x="{{ svgChartPadding - 2 }}" y="{{ (y - 1) * graphStepSizeY + svgSize.font * 0.25 }}" text-anchor="end" fill="currentColor">{{ graphStepValueX * (yStepCount - y + 1) / 1000 |> toRound }}</text>
-							{{ if y <= yStepCount }}
-								<line x1="{{ svgChartPadding }}" x2="{{ svgSize.w }}" y1="{{ (y - 1) * graphStepSizeY }}" y2="{{ (y - 1) * graphStepSizeY }}" fill="none" stroke="currentColor" stroke-opacity="0.5" stroke-width="{{ svgSize.stroke / 2 }}"/>
-							{{ /if }}
-						{{ /for }}
-
-						{{# The data lines #}}
-						{{ set points = dataPointCoordinates.map(([cx, cy, v, txt]) => `${cx},${cy}`).join(' ')}}
-						<polyline fill="var(--C-heading)" fill-opacity="0.2" points="{{ points }} {{ svgSize.w }},{{ svgSize.h - svgChartPadding }} {{ svgChartPadding }},{{ svgSize.h - svgChartPadding }}"/>
-						<polyline fill="none" stroke="var(--C-heading)" stroke-width="{{ svgSize.stroke }}" points="{{ points }}"/>
-						
-						{{# Or: create individual lines? (loop over dataPointCoordinates and use the index to find the current + previous point coord) That way they can animated from y1/y2="\{\{ (svgSize.h - svgChartPadding) \}\}" #}}
-
-						{{# X-axis lines + labels #}}
-						<line x1="{{ svgChartPadding }}" x2="{{ svgSize.w }}" y1="{{ graphXAxisPosY }}" y2="{{ graphXAxisPosY }}" fill="none" stroke="currentColor" stroke-width="{{ svgSize.stroke }}"/>
-						
-						{{# Y-axis line #}}
-						<line x1="{{ graphYAxisPosX }}" x2="{{ graphYAxisPosX }}" y1="0" y2="{{ svgSize.h - svgChartPadding }}" fill="none" stroke="currentColor" stroke-width="{{ svgSize.stroke }}"/>
-						
-						{{ for [cx, cy, v, txt] of dataPointCoordinates }}
-							<g>
-								<circle cx="{{ cx }}" cy="{{ cy }}" r="{{ svgSize.stroke }}" fill="currentColor"/>
-								<text font-size="{{ svgSize.font * 0.75 }}" x="{{ cx }}" y="{{ cy - svgSize.font * 0.75 }}" text-anchor="middle" fill="currentColor" stroke="var(--C-canvas)" stroke-width="3" paint-order="stroke">{{ v / 1000 |> toRound }}</text>
-							</g>
-						{{ /for }}
-
-						{{ set xAxisLabelPosY = svgSize.h - (svgChartPadding - svgSize.font) / 2 }}
-						<text font-size="{{ svgSize.font }}" y="{{ xAxisLabelPosY }}" x="{{ svgChartPadding }}" fill="currentColor">{{ getMonthAndYear(firstActivityDate) }}</text>
-						<text font-size="{{ svgSize.font }}" y="{{ xAxisLabelPosY }}" x="{{ (svgSize.w - svgChartPadding) / 2 }}" text-anchor="middle" fill="currentColor">{{ allMonthsList[Math.floor(allMonthsList.length/2)] }}</text>
-						<text font-size="{{ svgSize.font }}" y="{{ xAxisLabelPosY }}" x="{{ svgSize.w }}" text-anchor="end" fill="currentColor">{{ getMonthAndYear(lastActivityDate) }}</text>
-					</svg>
-				</div>
 			</dd>
 		</dl>
 	</div>
@@ -312,7 +333,8 @@
 .linechart {
 	padding: 0.25em 0.5em;
 	overflow: visible;
-	font-family: var(--font-body-family);
+
+	font-family: sans-serif;
 }
 
 @media (max-width: {{ svgSize.w / 1.25 }}px) {
