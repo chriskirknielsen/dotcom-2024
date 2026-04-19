@@ -20,7 +20,7 @@
 }
 ---
 {{>
-	const svgSize = { w: 960, h: 240, stroke: 2, font: 14, button: 8 };
+	const svgSize = { w: 960, h: 240, stroke: 2, font: 14  };
 	const svgChartPadding = svgSize.font * 2;
 	const yStepCount = 4;
 	const getMonthAndYear = (d) => d.split('-').slice(0, 2).join('-');
@@ -125,7 +125,7 @@
 				{{ if (txt.endsWith('-01')) }}
 					{{# Add a marker for the first month of the year #}}
 					<rect x="{{ cx - svgSize.stroke }}" y="{{ svgSize.h - svgChartPadding - svgSize.stroke }}" width="{{ svgSize.stroke*2 }}" height="{{ svgSize.stroke*2 }}" fill="none" stroke="currentColor" />
-					<text font-size="{{ svgSize.font * 0.75 }}" y="{{ svgSize.h - svgChartPadding + svgSize.stroke * 2 + svgSize.font * 0.75 }}" x="{{ cx }}" text-anchor="middle" fill="currentColor" fill-opacity="0.5">{{ txt.split('-').at(0) }}</text>
+					<text font-size="{{ svgSize.font * 0.75 }}" y="{{ svgSize.h - svgChartPadding + svgSize.stroke * 2 + svgSize.font * 0.75 }}" x="{{ cx }}" text-anchor="middle" fill="currentColor" fill-opacity="0.75">{{ txt.split('-').at(0) }}</text>
 				{{ /if }}
 			{{ /for }}
 
