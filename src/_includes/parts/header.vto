@@ -44,22 +44,23 @@
 				{{ component 'cta', {
 					iconStack: {
 						'idle': 'palette',
-						'pressed': 'close'
+						'pressed': 'close',
 					},
 					iconClass: 'button-icon',
 					label: {
 						text: 'Themes',
-						aria: 'Toggle Theme Picker'
+						aria: 'Toggle Theme Picker',
 					},
 					ctaAttr: 'data-toggle-pressed aria-controls="themepicker"',
-					ctaClass: 'header-themepicker-toggle linecap-auto hide-when-viewport--small'
+					ctaClass: 'header-themepicker-toggle linecap-auto hide-when-viewport--small',
 				} }}
 				{{ webcomponent 'theme-picker',
 					{
 						id: 'themepicker',
 						'data-light': 'dawn',
 						'data-dark': 'dusk',
-						'aria-labelledby': 'header-themepicker-heading'
+						'aria-labelledby': 'header-themepicker-heading',
+						'role': 'group',
 					},
 					{ themes }
 				}}
