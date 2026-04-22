@@ -61,7 +61,7 @@
 		// Get the max value but make it fit nicely to a multiple of the values, if applicable (not exactly a lower common denominator but similar idea, works for the current data)
 		let maxGraphValue = Math.pow(10, expoMagnitude + 1);
 		const modStepSize = maxGraphValue % yStepCount;
-		let graphStepValueX = (modStepSize !== 0) ? modStepSize : maxGraphValue / yStepCount;
+		let graphStepValueX = ((modStepSize !== 0) ? maxGraphValue - modStepSize : maxGraphValue) / yStepCount;
 		maxGraphValue = graphStepValueX * yStepCount;
 		if ((graphStepValueX * 2) > maxMetric) {
 			graphStepValueX /= 2;
