@@ -94,7 +94,23 @@
 			role="img"
 			aria-label="{{ svgAlt }}"
 		>
-			{{ set points = dataPointCoordinates.map(([cx, cy, v, txt]) => `${cx},${cy}`).join(' ')}}
+			{{ set points = dataPointCoordinates.map(([cx, cy, v, txt], i, p) => {
+				if (i === 0) return `M ${cx} ${cy}`; // Starting point
+				const [px, py] = p[i - 1]; // Previous point X and Y coordinates
+				const dx = Math.round(cx - px);
+				const dy = Math.round(cy - py);
+				const qx1 = Math.round(px + dx/2);
+				const qx2 = Math.round(cx - dx/2);
+				return `C ${qx1} ${py}, ${qx2} ${cy}, ${cx} ${cy}`
+			}).join(' ')}}
+
+			const pointPosY = svgSize.h - svgChartPadding - ((monthlyData[yearAndMonthLabel] || 0) / maxGraphValue * (svgSize.h - svgChartPadding));
+			<defs>
+				<linearGradient id="sparklineGradient" x1="0" x2="0" y1="{{ svgChartPadding }}" y2="{{ svgSize.h - svgChartPadding }}" gradientUnits="userSpaceOnUse">
+					<stop offset="0%" stop-color="var(--C-heading)" stop-opacity="0" />
+					<stop offset="100%" stop-color="var(--C-heading)" stop-opacity="0.25" />
+				</linearGradient>
+			</defs>
 			{{ set xAxisLabelPosY = svgSize.h - (svgChartPadding - svgSize.font) / 2 }}
 			{{# value lines + labels #}}
 			{{ for y of (yStepCount + 1) }}
@@ -105,8 +121,8 @@
 			{{ /for }}
 
 			{{# The data lines #}}
-			<polyline fill="var(--C-heading)" fill-opacity="0.2" points="{{ points }} {{ svgSize.w }},{{ svgSize.h - svgChartPadding }} {{ svgChartPadding }},{{ svgSize.h - svgChartPadding }}"/>
-			<polyline fill="none" stroke="var(--C-heading)" stroke-width="{{ svgSize.stroke }}" points="{{ points }}"/>
+			<path fill="url(#sparklineGradient)" d="{{ points }} L {{ svgSize.w }} {{ svgSize.h - svgChartPadding }} L {{ svgChartPadding }} {{ svgSize.h - svgChartPadding }} Z"/>
+			<path fill="none" stroke="var(--C-heading)" stroke-width="{{ svgSize.stroke }}" d="{{ points }}"/>
 
 			{{# X-axis line #}}
 			<line x1="{{ svgChartPadding }}" x2="{{ svgSize.w }}" y1="{{ graphXAxisPosY }}" y2="{{ graphXAxisPosY }}" fill="none" stroke="currentColor" stroke-width="{{ svgSize.stroke }}"/>
