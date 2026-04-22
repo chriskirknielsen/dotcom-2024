@@ -25,7 +25,7 @@
 	const yStepCount = 4;
 	const getMonthAndYear = (d) => d.split('-').slice(0, 2).join('-');
 }}
-{{ function buildSparklineFromData({ data, getDateStr = null, countProp = null, metricScale = 1, alt }) }}
+{{ function buildSparklineFromData({ data, getDateStr = null, countProp = null, metricScale = 1, alt, showYearBar = false }) }}
 	{{>
 		if (!getDateStr) { getDateStr = (v) => typeof v === 'string' ? v : new Date(v).toISOString(); }
 		const sortedData = data.slice(); // These should already be sorted by date in descending order (newest first)
@@ -103,8 +103,6 @@
 				const qx2 = Math.round(cx - dx/2);
 				return `C ${qx1} ${py}, ${qx2} ${cy}, ${cx} ${cy}`
 			}).join(' ')}}
-
-			const pointPosY = svgSize.h - svgChartPadding - ((monthlyData[yearAndMonthLabel] || 0) / maxGraphValue * (svgSize.h - svgChartPadding));
 			<defs>
 				<linearGradient id="sparklineGradient" x1="0" x2="0" y1="{{ svgChartPadding }}" y2="{{ svgSize.h - svgChartPadding }}" gradientUnits="userSpaceOnUse">
 					<stop offset="0%" stop-color="var(--C-heading)" stop-opacity="0" />
@@ -130,7 +128,8 @@
 			{{# Y-axis line #}}
 			<line x1="{{ graphYAxisPosX }}" x2="{{ graphYAxisPosX }}" y1="0" y2="{{ svgSize.h - svgChartPadding }}" fill="none" stroke="currentColor" stroke-width="{{ svgSize.stroke }}"/>
 			
-			{{ for [cx, cy, v, txt] of dataPointCoordinates }}
+			{{ for i, p of dataPointCoordinates }}
+				{{> let [cx, cy, v, txt] = p; }}
 				{{ if v > 0 }}
 					{{# Add a marker for non-empty values #}}
 					<g>
@@ -138,8 +137,9 @@
 						<text font-size="{{ svgSize.font * 0.75 }}" x="{{ cx }}" y="{{ cy - svgSize.font * 0.75 }}" text-anchor="middle" fill="currentColor" stroke="var(--C-canvas)" stroke-width="3" paint-order="stroke">{{ v * metricScale |> toRound }}</text>
 					</g>
 				{{ /if }}
-				{{ if (txt.endsWith('-01')) }}
+				{{ if (txt.endsWith('-01')) && i > 0 }}
 					{{# Add a marker for the first month of the year #}}
+					{{ if showYearBar }}<line x1="{{ cx }}" x2="{{ cx }}" y1="0" y2="{{ svgSize.h - svgChartPadding }}" stroke="currentColor" stroke-width="{{ svgSize.stroke/2 }}" stroke-opacity="0.5" />{{ /if }}
 					<rect x="{{ cx - svgSize.stroke }}" y="{{ svgSize.h - svgChartPadding - svgSize.stroke }}" width="{{ svgSize.stroke*2 }}" height="{{ svgSize.stroke*2 }}" fill="none" stroke="currentColor" />
 					<text font-size="{{ svgSize.font * 0.75 }}" y="{{ svgSize.h - svgChartPadding + svgSize.stroke * 2 + svgSize.font * 0.75 }}" x="{{ cx }}" text-anchor="middle" fill="currentColor" fill-opacity="0.75">{{ txt.split('-').at(0) }}</text>
 				{{ /if }}
@@ -267,7 +267,9 @@
 			<dd>
 				{{ buildSparklineFromData({
 					data: postsByDate.slice().reverse(), // Posts are usually sorted in ascending order
-					alt: ({ minMonthYear, maxMetric }) => `A line graph showing the numbers of blog posts for every month since ${minMonthYear} up till now, with a maximum of ${maxMetric} posts in any given month. The values vary wildly with no visible pattern, with a good handful of months even reaching zero.` })
+					showYearBar: true,
+					alt: ({ minMonthYear, maxMetric }) => `A line graph showing the numbers of blog posts for every month since ${minMonthYear} up till now, with a maximum of ${maxMetric} posts in any given month. The values vary wildly with no visible pattern, with a good handful of months even reaching zero.`
+					})
 				}}
 			</dd>
 		</div>
@@ -332,11 +334,12 @@
 			<dt>Distance (Km) over months</dt>
 			<dd>
 				{{ buildSparklineFromData({
-					data: strava.activities,
-					getDateStr: (a) => new Date(a.date).toISOString(),
-					countProp: 'distance',
-					metricScale: 0.001,
-					alt: ({ minMonthYear, maxMetric }) => `A line graph showing the distance I have run each month since ${minMonthYear} up till now, with a maximum of ${Math.round(maxMetric / 1000)} Km. The values vary wildly with no visible pattern, with a few months even reaching zero.` })
+						data: strava.activities,
+						getDateStr: (a) => new Date(a.date).toISOString(),
+						countProp: 'distance',
+						metricScale: 0.001,
+						alt: ({ minMonthYear, maxMetric }) => `A line graph showing the distance I have run each month since ${minMonthYear} up till now, with a maximum of ${Math.round(maxMetric / 1000)} Km. The values vary wildly with no visible pattern, with a few months even reaching zero.`
+					})
 				}}
 			</dd>
 		</dl>
