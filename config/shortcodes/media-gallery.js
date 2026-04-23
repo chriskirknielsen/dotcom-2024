@@ -115,7 +115,7 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 	if (type === 'video') {
 		mediaMarkup = `<video src="${src}" ${attrsStr}></video>`;
 	} else if (type === 'image') {
-		const imageSrc = options.bypassCdn ? src : toNetlifyImage(src, { w: widths.at(-2) });
+		const imageSrc = options.bypassCdn ? src : toNetlifyImage(src, { w: widths.length > 2 ? widths.at(-2) : options.width });
 		const imageTag = `<img src="${imageSrc}" ${attrsStr}>`;
 
 		if (options.bypassLink) {
