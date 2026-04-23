@@ -33,8 +33,9 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 	}
 
 	const isGroupContext = type === 'image' && options.hasOwnProperty('group') && options.group; // Whether the image is part of a group
-	const sizes = ['100vw', '(min-width: 50rem) 50rem'].join(', ');
-	const widths = type === 'video' ? [] : options.widths || [480, 800, 1200];
+	const hasSingleRedundantWidth = Array.isArray(options.widths) && options.widths.length === 1 && options.widths[0] === options.width;
+	const sizes = options.sizes || ['100vw', '(min-width: 50rem) 50rem'];
+	const widths = type === 'video' || hasSingleRedundantWidth ? [] : options.widths || [480, 800, 1200];
 	const srcset = widths.map((w) => `${toNetlifyImage(src, { w: w })} ${w}w`);
 
 	// Safely escape the alt attribute
@@ -59,9 +60,9 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 	} else if (type === 'image') {
 		attrs = { alt: alt, decoding: 'async', loading: options.eager ? 'eager' : 'lazy' };
 
-		if (!options.bypassCdn) {
+		if (!options.bypassCdn && Array.isArray(srcset) && srcset.length > 0) {
 			attrs.srcset = srcset.join(', ');
-			attrs.sizes = sizes;
+			attrs.sizes = sizes.join(', ');
 		}
 	}
 

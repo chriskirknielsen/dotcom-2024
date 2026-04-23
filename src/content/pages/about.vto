@@ -31,7 +31,7 @@
 	{{ set profile_pic_url = [assets.images, 'profile-256.jpg'] |> toPath }}
 	{{ set profile_pic_alt = `A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head.` }}
 	{{ set profile_pic_size = 256 }}
-	{{ image profile_pic_url, profile_pic_alt, 'Certified baldie.', { width: 256, height: 256, eager: true, bypassLink: true, wrapperClass: 'about-pic' } }}
+	{{ image profile_pic_url, profile_pic_alt, 'Certified baldie.', { width: 256, height: 256, widths: [256], eager: true, bypassLink: true, wrapperClass: 'about-pic' } }}
 
 	<p>
 		I’m a French Dane, living in the USA, who used to be a designer, and who now likes to build on the web, with the web, and for the web. I started messing with code in 2004, and got professional about it around 2014. I am, of course, not just a web developer: I’m generally speaking a bit of a nerd (the introverted kind), which may become blatantly obvious as you read through the contents of this page.
