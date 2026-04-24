@@ -1,0 +1,19 @@
+---js
+{
+	title: 'Elsewhere',
+	summary: 'Where else have I published stuff?',
+	permalink: '/elsewhere/',
+	tags: ['_og'],
+	eleventyComputed: {
+		customMetaImage: function (data) {
+			if (data.permalink) {
+				return this.toOgImage(data);
+			}
+			return this.toPath([data.assets.images, 'metaimage.jpg']);
+		}
+	},
+}
+---
+
+{{ set externalPosts = collections._posts.filter(p => p.data.externalHost) }}
+{{ component 'postlist', { postlist: externalPosts, ungrouped: true, directToExternal: true, showExternalIcon: true } }}
