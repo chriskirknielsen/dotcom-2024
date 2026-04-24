@@ -1,0 +1,38 @@
+---js
+{
+	title: 'Slashes',
+	summary: 'All my slash pages',
+	permalink: '/slashes/',
+	tags: ['_og'],
+	templateEngineOverride: 'vto,md',
+	eleventyComputed: {
+		customMetaImage: function (data) {
+			if (data.permalink) {
+				return this.toOgImage(data);
+			}
+			return this.toPath([data.assets.images, 'metaimage.jpg']);
+		}
+	},
+}
+---
+
+_What’s a slash page_, you may ask? It’s a kind of convention on the indie web, read more on [slashpages.net](https://slashpages.net/), where you have easily-guessable URLs on your personal site. Here are the ones I have on my website:
+
+{{ set slashes = {
+	about: 'Maybe too much information about me.',
+	ai: 'My stance on all things A.I. / L.L.M., etc.',
+	blogroll: 'A bunch of blogs I read — includes a downloadable OPML file.',
+	colophon: 'Myriad details about how this website is made.',
+	contact: 'Reach me, one way or another.',
+	elsewhere: 'Other places my “content” has been published.',
+	now: 'The media/activities I am currently going through, like books or TV shows.',
+	uses: 'Hardware and software I use (nearly) daily.',
+	slashes: 'A list of all my /slash pages. Wait, that’s this page!',
+	stats: 'A bunch of random stats for nerds.',
+	style: 'My barebones style guide (canonically `/styleguide`)',
+	tip: 'If you absolutely want to throw money at me (canonically `/support`).',
+} }}
+
+{{ for link, description of slashes }}
+- [/{{link}}](/{{link}}/): {{ description }}
+{{ /for }}
