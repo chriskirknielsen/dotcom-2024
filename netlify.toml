@@ -59,6 +59,9 @@ package = "netlify-plugin-debug-cache"
   from = "/ai/"
   to = "/ai-policy/"
 [[redirects]]
+  from = "/style/"
+  to = "/styleguide/"
+[[redirects]]
   from = "/follow/"
   to = "/rss.xml"
   status = 301
