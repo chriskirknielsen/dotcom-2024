@@ -1,0 +1,20 @@
+---js
+{
+	title: 'Contact',
+	summary: 'How to reach me.',
+	permalink: '/contact/',
+	tags: ['_og'],
+	eleventyComputed: {
+		customMetaImage: function (data) {
+			if (data.permalink) {
+				return this.toOgImage(data);
+			}
+			return this.toPath([data.assets.images, 'metaimage.jpg']);
+		}
+	},
+}
+---
+
+<p class="textAlign-center fontSize-large">👋</p>
+
+<p>You can find <a href="#footer-email-link">my email address in the footer</a>, or you can find <a href="{{ social.mastodon.url }}">me on Mastodon</a>. Reach out wherever is most convenient for you!</p>
