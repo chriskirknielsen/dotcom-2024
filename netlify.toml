@@ -62,6 +62,9 @@ package = "netlify-plugin-debug-cache"
   from = "/style/"
   to = "/styleguide/"
 [[redirects]]
+  from = "/lang/"
+  to = "/languages/"
+[[redirects]]
   from = "/follow/"
   to = "/rss.xml"
   status = 301
