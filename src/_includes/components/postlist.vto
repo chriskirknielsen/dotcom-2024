@@ -1,4 +1,6 @@
 {{ set groupByYear = !Boolean(ungrouped) }}
+{{ set directToExternal = Boolean(directToExternal) }}
+{{ set showExternalIcon = Boolean(showExternalIcon) }}
 {{# By default, posts should be shown by year unless #}}
 <div class="postlist | flow">
 	{{ if !groupByYear }}
@@ -19,15 +21,25 @@
 				<div class="postlist-group-list">
 		{{ /if }}
 				{{ for post of posts |> slice |> reverse }}
+					{{ set cardHref = post.data.externalUrl && directToExternal ? post.data.externalUrl : post.url }}
 					{{ set dateString }}
-					<p>
-						{{ post.date |> timeTag({ lang }) }}
-						{{ if post.data.updated }}
-							{{ set originalTime = post.date |> dateFormat('ms')}}
-							{{ set updateTime = post.data.updated |> dateFormat('ms')}}
-							(updated{{ if updateTime != originalTime }} {{ post.data.updated |> timeTag({ lang }) }}{{ /if }})
+					<div class="grouper grouper--toolbar">
+						<p>
+							{{ post.date |> timeTag({ lang }) }}
+							{{ if post.data.updated }}
+								{{ set originalTime = post.date |> dateFormat('ms')}}
+								{{ set updateTime = post.data.updated |> dateFormat('ms')}}
+								(updated{{ if updateTime != originalTime }} {{ post.data.updated |> timeTag({ lang }) }}{{ /if }})
+							{{ /if }}
+						</p>
+						{{ if post.data.externalUrl && showExternalIcon }}
+							{{ if post.data.externalUrl.includes('css-tricks.com') }}
+								{{ svg 'csstricks-icon', { class: 'inline-icon inline-icon--center' } }}
+							{{ else if post.data.externalUrl.includes('smashingmagazine.com') }}
+								{{ svg 'smashingmagazine-icon', { class: 'inline-icon inline-icon--center' } }}
+							{{ /if }}
 						{{ /if }}
-					</p>
+					</div>
 					{{ /set }}
 					{{ set descriptionMarkup }}
 					<p>
@@ -38,7 +50,7 @@
 					</p>
 					{{ /set }}
 					{{ component 'card', {
-						link: post.url,
+						link: cardHref,
 						eyebrow: dateString,
 						heading: post.data.title,
 						headingTag: 'h2',
