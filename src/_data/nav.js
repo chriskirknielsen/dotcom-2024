@@ -12,8 +12,8 @@ const socialFromEntry = Object.entries(social)
 	.filter((s) => s[0] !== 'bluesky') // Don't care about Bluesky right now
 	.map(([key, item]) => ({ path: item.url, label: item.label }));
 const slashPages = [
+	{ path: '/slashes/', label: '/slashes' },
 	{ path: '/uses/', label: '/uses' },
-	{ path: '/support/', label: '/support' },
 	{ path: '/now/', label: '/now' },
 	{ path: '/games/', label: '/games' },
 	{ path: '/music/', label: '/music' },
