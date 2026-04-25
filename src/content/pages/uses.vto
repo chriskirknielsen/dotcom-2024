@@ -3,7 +3,7 @@
 	title: 'Uses',
 	summary: 'My frequently used tools',
 	permalink: '/uses/',
-	templateEngineOverride: 'md',
+	templateEngineOverride: 'vto,md',
 	toc: true,
 	tags: ['_slash', '_og'],
 	eleventyComputed: {
@@ -39,6 +39,7 @@
 	- Very crappy $10 Amazon mouse: Using this for the PC, after my “gaming” one broke.
 - Western Digital 4TB External Hard Drive: For the backups I always forget to make.
 - TP-Link Deco X20 Mesh WiFi: Keeps the internet flowing through the apartment.
+- Brother Black & White Printer/Scanner: A printer that works, if you can believe it.
 
 ### Desk
 -   [Fully Remi](https://store.hermanmiller.com/brands-fully): 58"&times;27" standing desk. (discontinued after Herman Miller acquisition)
@@ -78,3 +79,31 @@
 
 ### This website
 -   The [colophon](/colophon/) covers it all!
+
+### My macOS dock
+
+My personal laptop’s pinned applications list looks a bit like this (Dark Mode 24/7!), minus a few utilities like the scanner/printer or bin we don’t care much about (inspired by [Trevor Morris](https://www.trovster.com/about/uses#development)).
+
+{{ set macosDockIcons = {
+	'finder': 'Finder',
+	'zen': 'Zen Browser',
+	'firefox': 'Firefox',
+	'firefox-nightly': 'Firefox Nightly',
+	'chrome': 'Chrome',
+	'chrome-canary': 'Chrome Canary',
+	'safari': 'Safari',
+	'safari-tp': 'Safari Technology Preview',
+	'adobe-photoshop': 'Photoshop',
+	'adobe-illustrator': 'Illustrator',
+	'imageoptim': 'ImageOptim',
+	'vscode': 'VS Code',
+	'fork': 'Fork',
+	'messages': 'Messages',
+	'1password': '1Password',
+	'settings': 'Settings',
+} }}
+<div class="macos-dock-wrapper"><div class="macos-dock"><div class="macos-dock-inner"><ul class="macos-dock-list">
+{{- for file, label of macosDockIcons -}}
+	<li class="tooltip" data-tooltip-flow="inline" data-tooltip-pos="start center"><img src="/assets/img/macos-dock/{{ file }}.png" alt="{{ label }}" width="128" height="128" loading="lazy"><span class="tooltip-content">{{ label }}</span></li>
+{{- /for -}}
+</ul></div></div><p class="fontStyle-italic textAlign-center"><span class="fontSize-smaller">All icons belong to their respective authors.</span></p></div>
