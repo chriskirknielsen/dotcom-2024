@@ -32,6 +32,7 @@
 
 		margin-block-end: max(8px, var(--size-xs));
 		break-inside: avoid;
+		break-inside: avoid-page;
 
 		&::before {
 			content: counter(tocList, var(--toc-marker-type, decimal)) ' ';
