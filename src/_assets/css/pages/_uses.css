@@ -1,3 +1,16 @@
+@property --100vi {
+	syntax: '<length>';
+	inherits: true;
+	initial-value: 100vi;
+}
+html:has(.macos-dock) {
+	container-type: inline-size;
+}
+body:has(.macos-dock) {
+	--100vi: calc(100cqi);
+	--scrollbar-size: calc(100vi - var(--100vi));
+}
+
 *:has(+ .macos-dock-wrapper) {
 	position: relative;
 	z-index: 1;
@@ -37,7 +50,9 @@
 }
 .macos-dock-inner {
 	padding-block-start: calc(var(--MACOSDOCK-padding) * var(--MACOSDOCK-overflow-factor));
-	padding-block-end: calc(var(--MACOSDOCK-padding) - 6px); /* Scrollbar sizing varies so we'll just remove a few pixels to make it look clos enough */
+	padding-block-end: calc(
+		var(--MACOSDOCK-padding) - clamp(0px, var(--scrollbar-size), 1px) * 6
+	); /* If there's any scrollbar, assume they are visible at all times, take up space, and are not overlays (6px for thin scrollbars, a quick and dirty average) */
 	overflow-x: auto;
 	overflow-y: clip;
 	scrollbar-width: thin;
