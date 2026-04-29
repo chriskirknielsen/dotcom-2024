@@ -170,6 +170,7 @@ summary::marker {
 dl {
 	display: grid;
 	grid-template-columns: auto 1fr;
+	align-content: start;
 	gap: var(--size-s) var(--size-m);
 }
 
