@@ -302,6 +302,10 @@ document.addEventListener('change', function (e) {
 	} else if ((target = e.target.closest('[data-games-completed]'))) {
 		const selectedValue = target.value || 'any';
 		eachDom('[data-gaming-completed]', (g) => (g.hidden = selectedValue !== 'any' && g.getAttribute('data-gaming-completed') !== selectedValue));
+		eachDom(
+			'[data-gaming-count]',
+			(g) => (g.textContent = g.closest('.expander').querySelector('.gaming-platform-group').querySelectorAll(':scope > li:not([hidden])').length)
+		);
 	}
 });
 

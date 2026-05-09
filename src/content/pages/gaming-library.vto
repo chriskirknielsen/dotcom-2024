@@ -72,8 +72,8 @@
 	{{> loopIndex++ }}
 	{{ set platformSlug = platform |> toLowerCase |> replace(' ', '-') }}
 	{{ set expanderLabel }}
-			{{ injectsvg `gaming-${platformSlug}`, { class: 'gaming-logo inline-icon' } }}
-		{{ platformLabels[platform] }} ({{ games.length }})
+		{{ injectsvg `gaming-${platformSlug}`, { class: 'gaming-logo inline-icon' } }}
+		<span>{{ platformLabels[platform] }} (<span data-gaming-count>{{ games.length }}</span>)</span>
 	{{ /set }}
 	{{ expander expanderLabel, { isExpanded: loopIndex === 1 } }}
 		<ul class="gaming-platform-group" data-gaming-platform="{{ platformSlug }}">
@@ -81,7 +81,7 @@
 				<li
 					class="gaming-box-wrap"
 					{{ if ['Essentials', 'Platinum'].includes(game.edition) }}data-gaming-edition="{{ game.edition |> toLowerCase |> replace(' ', '-') }}"{{ /if }}
-					data-gaming-completed="{{ game.completed |> toString }}"
+					data-gaming-completed="{{ game.completed || false |> toString }}"
 					{{ if platformSlug === 'ps3' }}data-gaming-branding="{{ game.year < 2009 ? 'old' : 'new' }}"{{ /if }}
 					data-game="{{ game |> JSON.stringify |> escape }}"
 				>
