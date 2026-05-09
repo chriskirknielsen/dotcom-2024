@@ -301,7 +301,6 @@ document.addEventListener('change', function (e) {
 		eachDom('[data-gaming-platform]', (g) => (g.style.fontSize = sizeMap[selectedValue]));
 	} else if ((target = e.target.closest('[data-games-completed]'))) {
 		const selectedValue = target.value || 'any';
-		console.log(selectedValue);
 		eachDom('[data-gaming-completed]', (g) => (g.hidden = selectedValue !== 'any' && g.getAttribute('data-gaming-completed') !== selectedValue));
 	}
 });
