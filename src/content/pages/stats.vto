@@ -95,7 +95,9 @@
 			aria-label="{{ svgAlt }}"
 		>
 			{{ set points = dataPointCoordinates.map(([cx, cy, v, txt], i, p) => {
-				if (i === 0) return `M ${cx} ${cy}`; // Starting point
+				if (i === 0) {
+					return `M ${cx} ${cy}`; // Starting point
+				}
 				const [px, py] = p[i - 1]; // Previous point X and Y coordinates
 				const dx = Math.round(cx - px);
 				const dy = Math.round(cy - py);
