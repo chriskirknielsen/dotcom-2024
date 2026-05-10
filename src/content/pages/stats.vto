@@ -352,6 +352,8 @@
 
 <style>
 .linechart {
+	inline-size: 100%;
+	block-size: auto;
 	padding: 0.25em 0.5em;
 	overflow: visible;
 
@@ -360,12 +362,20 @@
 
 @media (max-width: {{ svgSize.w / 1.25 }}px) {
 	.linechart-wrapper {
+		--m: 20px;
+
 		inline-size: 0; /* Don't participate in the grid cell sizing */
 		min-inline-size: 100%; /* Occupy all the space */
+		padding-inline: var(--m); /* Ensure the content isn't faded by the mask at the edges */
 		overflow-x: auto; /* Safari 18 doesn't support logical variant :( */
+
+		mask:
+			linear-gradient(90deg, #0000, tan var(--m) calc(100% - var(--m)), #0000) no-repeat 0 0 / 100% 100%, /* Fade the overflowing content */
+			conic-gradient(red 0 0) no-repeat 0 100% / 100% var(--scrollbar-size, 15px); /* Don't fade the scrollbar */
 	}
-	
+
 	.linechart {
+		padding-inline: 0;
 		inline-size: {{ svgSize.w / 1.25 }}px; 
 		max-inline-size: unset;
 	}

@@ -1,4 +1,6 @@
 html {
+	container-type: inline-size;
+
 	color-scheme: var(--_color-scheme);
 	color: var(--C-text);
 	background-color: var(--C-canvas);
@@ -10,7 +12,16 @@ html {
 	}
 }
 
+@property --100vi {
+	syntax: '<length>';
+	inherits: true;
+	initial-value: 100vi;
+}
+
 body {
+	--100vi: calc(100cqi);
+	--scrollbar-size: clamp(0px, calc(100vi - var(--100vi)), 20px); /* Magic number: limit the scrollbar to 20 pixels, that'll be enough… right? */
+
 	display: flex;
 	flex-direction: column;
 }
