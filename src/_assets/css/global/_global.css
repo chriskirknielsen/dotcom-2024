@@ -1,21 +1,21 @@
+@property --100vi {
+	syntax: '<length>';
+	inherits: true;
+	initial-value: 100vi;
+}
+
 html {
 	container-type: inline-size;
 
 	color-scheme: var(--_color-scheme);
 	color: var(--C-text);
 	background-color: var(--C-canvas);
-}
 
-@media (--accept-motion) {
-	html:focus-within {
-		scroll-behavior: smooth;
+	@media (--accept-motion) {
+		&:focus-within {
+			scroll-behavior: smooth;
+		}
 	}
-}
-
-@property --100vi {
-	syntax: '<length>';
-	inherits: true;
-	initial-value: 100vi;
 }
 
 body {
