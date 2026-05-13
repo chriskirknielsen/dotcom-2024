@@ -193,45 +193,111 @@
 {{ /for }}
 </div>
 
-<div class="textAlign-center textWrap-balance fontSize-smaller">
-	{{ if gameslibrary.meta.totalTrophyData }}
-		{{ set trophiesByLevel = gameslibrary.meta.totalTrophyData }}
-		{{ set trophyTotal = trophiesByLevel |> values |> sum  }}
-	{{ else }}
-		{{ set trophiesTop = gameslibrary.data |> pluck('trophyEarned') }}
-		{{ set trophiesSub = gameslibrary.data |> pluck('subItems') |> flatten |> pluck('trophyEarned') }}
-		{{ set trophies = [].concat(trophiesTop, trophiesSub) }}
-		{{ set bronzeCount = trophies |> pluck('bronze') |> sum }}
-		{{ set silverCount = trophies |> pluck('silver') |> sum }}
-		{{ set goldCount = trophies |> pluck('gold') |> sum }}
-		{{ set platinumCount = trophies |> pluck('platinum') |> sum }}
-		{{ set trophiesByLevel = {
-			bronze: bronzeCount,
-			silver: silverCount,
-			gold: goldCount,
-			platinum: platinumCount
-		} }}
-		{{ set trophyTotal = trophies |> toValues |> flatten |> sum }}
-	{{ /if }}
-
-	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="inline-icon inline-icon--center" aria-hidden="true">
+{{ if gameslibrary.meta.totalTrophyData }}
+	{{ set trophiesByLevel = gameslibrary.meta.totalTrophyData }}
+	{{ set trophyTotal = trophiesByLevel |> values |> sum  }}
+{{ else }}
+	{{ set trophiesTop = gameslibrary.data |> pluck('trophyEarned') }}
+	{{ set trophiesSub = gameslibrary.data |> pluck('subItems') |> flatten |> pluck('trophyEarned') }}
+	{{ set trophies = [].concat(trophiesTop, trophiesSub) }}
+	{{ set bronzeCount = trophies |> pluck('bronze') |> sum }}
+	{{ set silverCount = trophies |> pluck('silver') |> sum }}
+	{{ set goldCount = trophies |> pluck('gold') |> sum }}
+	{{ set platinumCount = trophies |> pluck('platinum') |> sum }}
+	{{ set trophiesByLevel = {
+		bronze: bronzeCount,
+		silver: silverCount,
+		gold: goldCount,
+		platinum: platinumCount
+	} }}
+	{{ set trophyTotal = trophies |> toValues |> flatten |> sum }}
+{{ /if }}
+{{ set trophyExpanderLabel }}
+<div class="textAlign-center textWrap-balance">
+	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="gaming-logo inline-icon inline-icon--center" aria-hidden="true">
 		<g id="icon-psn-trophy">
 			<path fill="none" d="M0 0h24v24H0z" />
 			<path fill="currentColor" d="M23.15 6.14a3.53 3.53 0 0 0-3.53-3.53H4.38A3.53 3.53 0 0 0 .85 6.14c0 3.71 4.16 6.72 7.87 6.72l.7 3.16H6.68l-.73 5.37h12.12l-.73-5.37h-2.76l.71-3.16c3.71 0 7.87-3.01 7.87-6.72Zm-5.69-.97s3.05-1.02 3.05 1.56c0 2.62-4.15 3.36-4.15 3.36l1.1-4.92ZM3.5 6.73c0-2.58 3.05-1.56 3.05-1.56l1.1 4.92S3.5 9.35 3.5 6.73Z"/>
 		</g>
 	</svg>
 
-	<strong>PlayStation Network Trophies ({{ trophyTotal |> formatNumber }}):</strong>
-	
-	<ul class="gaming-details-trophies | inline-list" data-flow="run-in">
-		{{ for lvl, count of trophiesByLevel }}
-			<li><span class="gaming-details-trophies-badge" data-trophy-level="{{ lvl }}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24" class="gaming-details-trophies-icon | inline-icon">
-				<title>{{ lvl |> toTitleCase }} trophies</title>
-				<use xlink:href="#icon-psn-trophy" width="24" height="24"></use>
-			</svg> {{ count |> formatNumber }}</span></li>
-		{{ /for }}
-	</ul>
+	<span>PlayStation Network Trophies ({{ trophyTotal |> formatNumber }})</span>
 </div>
+{{ /set }}
+{{ set trophyLevelCounts }}
+<ul class="gaming-details-trophies | inline-list{{ if gameslibrary.meta.totalTrophyData }} lineHeight-normal{{ /if }}"{{ if !gameslibrary.meta.totalTrophyData }} data-flow="run-in"{{ /if }}>
+{{ for lvl, count of trophiesByLevel }}
+	<li><span class="gaming-info-badge gaming-details-trophies-badge" data-trophy-level="{{ lvl }}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24" class="gaming-details-trophies-icon | inline-icon">
+		<title>{{ lvl |> toTitleCase }} trophies</title>
+		<use xlink:href="#icon-psn-trophy" width="24" height="24"></use>
+	</svg> {{ count |> formatNumber }}</span></li>
+{{ /for }}
+</ul>
+{{ /set }}
+
+{{ if gameslibrary.meta.totalTrophyData }}
+	{{ expander trophyExpanderLabel }}
+		<div class="textAlign-center">
+			{{ trophyLevelCounts }}
+		</div>
+
+		<div class="gaming-trophies">
+			<ul class="gaming-trophies-list">
+			{{ for game of gameslibrary.data.filter((g) => g.trophyProgress > 0).sort((a, b) => Date.parse(b.trophyLastUpdate) - Date.parse(a.trophyLastUpdate)) }}
+				{{ set trophyIconHeight = 128 }}
+				{{ set trophyIconWidth = ['PS3', 'PS4', 'PSV'].includes(game.platform) ? trophyIconHeight * (320 / 176) : trophyIconHeight; /* PS5 icons are square, PS3/PS4/Vita are 320x176 */ }}
+				{{ set trophyCount = Object.values(game.trophyEarned).reduce((p ,c) => p + c, 0) }}
+				<li class="gaming-trophies-item">
+					<img src="{{ game.trophyIcon }}" alt="" fetchpriority="low" loading="lazy" width="{{ trophyIconHeight }}" height="{{ trophyIconWidth }}" class="gaming-trophies-image">
+
+					<div class="gaming-trophies-info">
+						<div class="h3 gaming-trophies-title">{{ game.title }}</div>
+						<div class="lineHeight-dense">{{ trophyCount }} trophies</div>
+						<div class="fontSize-smaller fontStyle-italic lineHeight-tight">Latest: {{ game.trophyLastUpdate |> dateFormat({ format: 'nice' }) }}</div>
+					</div>
+
+					<div class="gaming-trophies-plat">
+						<span class="gaming-info-badge gaming-trophies-platform">
+							{{ game.platform |> toUpperCase }}
+						</span>
+						{{ if game.trophyEarned.platinum > 0 }}
+						<span class="gaming-info-badge gaming-trophies-platinum">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 24 24" class=" inline-icon">
+								<title>Platinum trophy unlocked</title>
+								<use xlink:href="#icon-psn-trophy" width="24" height="24"></use>
+							</svg>
+						</span>
+						{{ /if }}
+					</div>
+
+					<div class="gaming-trophies-stats">
+						<ul class="gaming-trophies-counts | inline-list | textAlign-center">
+						{{ for lvl, count of game.trophyEarned }}{{ if lvl !== 'platinum' }}
+							<li class="gaming-trophies-count"><span class="gaming-info-badge gaming-details-trophies-badge" data-trophy-level="{{ lvl }}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 24 24" class="gaming-details-trophies-icon | inline-icon">
+								<title>{{ lvl |> toTitleCase }} trophies</title>
+								<use xlink:href="#icon-psn-trophy" width="24" height="24"></use>
+							</svg> {{ count |> formatNumber }}</span></li>
+						{{ /if }}{{ /for }}
+						</ul>
+
+						<div class="progress-list-item" style="--progress: {{ game.trophyProgress / 100 |> toRound(3) }}">
+							<div class="progress-list-bar">
+								<span class="progress-list-number">{{ game.trophyProgress |> formatNumber }}%</span>
+							</div>
+						</div>
+						
+					</div>
+				</li>
+			{{ /for }}
+			</ul>
+		</div>
+	{{ /expander }}
+{{ else }}
+	<div class="fontSize-smaller">
+		{{ trophyExpanderLabel }}:
+		{{ trophyLevelCounts }}
+	</div>
+{{ /if }}
 
 <template id="gaming-details-dialog-template" data-trophy-svg-id="icon-psn-trophy">
 	<div class="gaming-details-dialog-inner | dialog-inner flow" style="--flow-space: var(--size-s);">

@@ -115,6 +115,7 @@ const gameslibrary = await notionDatabaseQuery({
 					processedEntry.trophyIcon = matchedPsnTrophyData.trophyTitleIconUrl;
 					processedEntry.trophyProgress = matchedPsnTrophyData.progress;
 					processedEntry.trophyEarned = matchedPsnTrophyData.earnedTrophies;
+					processedEntry.trophyLastUpdate = matchedPsnTrophyData.lastUpdatedDateTime;
 				}
 
 				// If there's an icon, make sure it's resized appropriately

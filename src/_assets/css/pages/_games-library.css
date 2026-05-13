@@ -599,7 +599,7 @@
 	font-variant-numeric: tabular-nums;
 }
 
-.gaming-details-trophies-badge {
+.gaming-info-badge {
 	--r: 0.25em;
 
 	position: relative;
@@ -609,10 +609,14 @@
 	font-size: 0.875em;
 	font-family: var(--fontStack-sans-serif), sans-serif;
 	white-space: nowrap;
+	line-height: 1;
 
+	border-radius: var(--r);
+}
+
+.gaming-details-trophies-badge {
 	color: var(--trophy-color);
 	background-color: var(--trophy-background);
-	border-radius: var(--r);
 
 	@supports (background-image: linear-gradient(in oklch, red, color-mix(in oklch, var(--a), var(--b)))) {
 		background-image: linear-gradient(to bottom right in oklch, color-mix(in oklch, var(--trophy-color), var(--trophy-background) 75%), var(--trophy-background));
@@ -734,4 +738,114 @@
 			font-size: 0.75em;
 		}
 	}
+}
+
+.gaming-trophies {
+	container-type: inline-size;
+}
+
+.gaming-trophies-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-m);
+
+	list-style-type: '';
+	padding: 0;
+
+	@container (inline-size >= 46rem) {
+		display: grid;
+		grid-template-columns: [--image-start] auto [--image-end --info-start] 1fr [--info-end --detail-start] auto [--detail-end --count-start] auto [--count-end];
+	}
+}
+
+.gaming-trophies-item {
+	grid-column: 1 / -1;
+	display: grid;
+	align-items: center;
+	grid-template-areas:
+		'image info'
+		'image detail'
+		'stats stats';
+	grid-template-columns: auto 1fr;
+	gap: var(--size-xs) var(--size-m);
+
+	@container (inline-size < 46rem) {
+		.gaming-trophies-info {
+			align-self: end;
+		}
+		.gaming-trophies-image,
+		.gaming-trophies-plat {
+			align-self: start;
+		}
+	}
+
+	@container (inline-size >= 46rem) {
+		gap: inherit;
+		grid-template-areas: 'image info detail stats';
+		grid-template-rows: unset;
+		grid-template-columns: subgrid;
+	}
+
+	&:not(:first-child) {
+		padding-block-start: var(--size-m);
+
+		border-block-start: 1px solid currentColor;
+	}
+}
+
+.gaming-trophies-image {
+	grid-area: image;
+	aspect-ratio: 1;
+	object-fit: contain;
+}
+
+.gaming-trophies-info {
+	grid-area: info;
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-xs);
+}
+
+.gaming-trophies-plat,
+.gaming-trophies-stats {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-2xs);
+}
+
+.gaming-trophies-plat {
+	grid-area: detail;
+
+	@container (inline-size < 46rem) {
+		flex-direction: row;
+	}
+}
+
+.gaming-trophies-platform {
+	display: flex;
+	align-items: center;
+
+	font-size: 0.75em;
+	border: 1px solid currentColor;
+	border-radius: clamp(0px, var(--_corner), var(--size-2xs));
+}
+
+.gaming-trophies-platinum {
+	--trophy-color: #adf7ff;
+	--trophy-background: #144d90;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.125em;
+
+	color: var(--trophy-color);
+	border: 1px solid var(--trophy-background);
+	border-radius: clamp(0px, var(--_corner), var(--size-2xs));
+	background: var(--trophy-background);
+	background-image: linear-gradient(to bottom right in oklch, color-mix(in oklch, var(--trophy-color), var(--trophy-background) 75%), var(--trophy-background));
+}
+
+.gaming-trophies-stats {
+	grid-area: stats;
 }

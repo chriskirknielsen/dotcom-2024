@@ -22,7 +22,7 @@ function toTrophyList(trophies, svgId) {
 	return `<ul class="gaming-details-trophies | inline-list" data-flow="run-in">
 		${Object.keys(trophies)
 			.filter((lvl) => trophies[lvl] > 0)
-			.map((lvl) => `<li><span class="gaming-details-trophies-badge" data-trophy-level="${lvl}">${getTrophySvg(svgId, lvl)} ${trophies[lvl]}</span></li>`)
+			.map((lvl) => `<li><span class="gaming-info-badge gaming-details-trophies-badge" data-trophy-level="${lvl}">${getTrophySvg(svgId, lvl)} ${trophies[lvl]}</span></li>`)
 			.join('')}
 	</ul>`;
 }
