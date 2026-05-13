@@ -213,7 +213,7 @@
 	{{ set trophyTotal = trophies |> toValues |> flatten |> sum }}
 {{ /if }}
 {{ set trophyExpanderLabel }}
-<div class="textAlign-center textWrap-balance" id="trophylist">
+<div class="textAlign-center textWrap-balance">
 	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="gaming-logo inline-icon inline-icon--center" aria-hidden="true">
 		<g id="icon-psn-trophy">
 			<path fill="none" d="M0 0h24v24H0z" />
@@ -237,7 +237,7 @@
 
 {{ if gameslibrary.meta.totalTrophyData }}
 	{{ expander trophyExpanderLabel }}
-		<div class="textAlign-center">
+		<div class="textAlign-center" id="trophylist">
 			{{ trophyLevelCounts }}
 		</div>
 
