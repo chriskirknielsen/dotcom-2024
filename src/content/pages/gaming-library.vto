@@ -4,7 +4,7 @@
 	summary: 'Dang, I’ve played a lot of games, eh?',
 	permalink: '/games/library/',
 	section: 'games',
-	heroCta: [{ label: '/games', url: '/games/' }, { label: 'PSN Profile', url: 'https://psnprofiles.com/JaKhris', iconBefore: true, icon: 'https://v1.indieweb-avatar.11ty.dev/https%3A%2F%2Fpsnprofiles.com%2F' }],
+	heroCta: [{ label: '/games', url: '/games/' }, { label: 'PSN Profile', url: 'https://psnprofiles.com/JaKhris' }],
 	platformLabels: {
 		'PS5': 'PlayStation 5',
 		'PS4': 'PlayStation 4',
@@ -225,7 +225,7 @@
 </div>
 {{ /set }}
 {{ set trophyLevelCounts }}
-<ul class="gaming-details-trophies | inline-list{{ if gameslibrary.meta.totalTrophyData }} lineHeight-normal{{ /if }}"{{ if !gameslibrary.meta.totalTrophyData }} data-flow="run-in"{{ /if }}>
+<ul class="gaming-details-trophies | inline-list{{ if gameslibrary.meta.totalTrophyData }} lineHeight-normal{{ /if }}" data-flow="run-in">
 {{ for lvl, count of trophiesByLevel }}
 	<li><span class="gaming-info-badge gaming-details-trophies-badge" data-trophy-level="{{ lvl }}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24" class="gaming-details-trophies-icon | inline-icon">
 		<title>{{ lvl |> toTitleCase }} trophies</title>
@@ -253,20 +253,19 @@
 					<div class="gaming-trophies-info">
 						<div class="h3 gaming-trophies-title">{{ game.title }}</div>
 						<div class="lineHeight-dense">{{ trophyCount }} trophies</div>
-						<div class="fontSize-smaller fontStyle-italic lineHeight-tight">Latest: {{ game.trophyLastUpdate |> dateFormat({ format: 'nice' }) }}</div>
+						{{ if game.trophyLastUpdate }}<div class="fontSize-smaller fontStyle-italic lineHeight-tight">Latest: {{ game.trophyLastUpdate |> dateFormat({ format: 'nice' }) }}</div>{{ /if }}
 					</div>
 
 					<div class="gaming-trophies-plat">
 						<span class="gaming-info-badge gaming-trophies-platform">
-							{{ game.platform |> toUpperCase }}
+							{{ set platformSlug = game.platform |> toLowerCase |> replace(' ', '-') }}
+							{{ injectsvg `gaming-${platformSlug}`, { class: 'gaming-logo inline-icon' } }}
 						</span>
 						{{ if game.trophyEarned.platinum > 0 }}
-						<span class="gaming-info-badge gaming-trophies-platinum">
-							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 24 24" class=" inline-icon">
-								<title>Platinum trophy unlocked</title>
-								<use xlink:href="#icon-psn-trophy" width="24" height="24"></use>
-							</svg>
-						</span>
+						<span class="gaming-info-badge gaming-details-trophies-badge gaming-trophies-platinum" data-trophy-level="platinum"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 24 24" class="gaming-details-trophies-icon | inline-icon">
+							<title>Platinum trophy unlocked</title>
+							<use xlink:href="#icon-psn-trophy" width="24" height="24"></use>
+						</svg> <span class="visually-hidden">1</span><span aria-hidden="true">✓</span></span>
 						{{ /if }}
 					</div>
 

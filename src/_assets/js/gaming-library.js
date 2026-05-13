@@ -18,12 +18,16 @@ function toTrophyList(trophies, svgId) {
 	if (!trophies) {
 		return '';
 	}
+	const nonEmptyTrophyLevels = Object.keys(trophies).filter((lvl) => trophies[lvl] > 0);
+	const trophyLevels = nonEmptyTrophyLevels.map((lvl) => {
+		const trophySvg = getTrophySvg(svgId, lvl);
+		const platinumStr = `<span class="visually-hidden">${trophies[lvl]}</span><span aria-hidden="true">${trophies[lvl] > 0 ? '✓' : '𐄂'}</span>`;
+		const trophyCount = lvl === 'platinum' ? platinumStr : trophies[lvl];
+		return `<li><span class="gaming-info-badge gaming-details-trophies-badge" data-trophy-level="${lvl}">${trophySvg} ${trophyCount}</span></li>`;
+	});
 
 	return `<ul class="gaming-details-trophies | inline-list" data-flow="run-in">
-		${Object.keys(trophies)
-			.filter((lvl) => trophies[lvl] > 0)
-			.map((lvl) => `<li><span class="gaming-info-badge gaming-details-trophies-badge" data-trophy-level="${lvl}">${getTrophySvg(svgId, lvl)} ${trophies[lvl]}</span></li>`)
-			.join('')}
+		${trophyLevels.join('')}
 	</ul>`;
 }
 

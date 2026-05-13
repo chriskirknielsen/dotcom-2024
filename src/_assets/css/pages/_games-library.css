@@ -741,13 +741,14 @@
 }
 
 .gaming-trophies {
+	--flow-space: var(--size-m); /* Since it's currently in an expander, re-use the expander padding */
 	container-type: inline-size;
 }
 
 .gaming-trophies-list {
 	display: flex;
 	flex-direction: column;
-	gap: var(--size-m);
+	gap: var(--flow-space);
 
 	list-style-type: '';
 	padding: 0;
@@ -767,7 +768,10 @@
 		'image detail'
 		'stats stats';
 	grid-template-columns: auto 1fr;
-	gap: var(--size-xs) var(--size-m);
+	gap: var(--size-xs) var(--flow-space);
+	padding-block-start: var(--flow-space);
+
+	border-block-start: 1px solid currentColor;
 
 	@container (inline-size < 46rem) {
 		.gaming-trophies-info {
@@ -784,12 +788,6 @@
 		grid-template-areas: 'image info detail stats';
 		grid-template-rows: unset;
 		grid-template-columns: subgrid;
-	}
-
-	&:not(:first-child) {
-		padding-block-start: var(--size-m);
-
-		border-block-start: 1px solid currentColor;
 	}
 }
 
@@ -815,6 +813,7 @@
 
 .gaming-trophies-plat {
 	grid-area: detail;
+	align-items: center;
 
 	@container (inline-size < 46rem) {
 		flex-direction: row;
@@ -823,27 +822,12 @@
 
 .gaming-trophies-platform {
 	display: flex;
-	align-items: center;
-
-	font-size: 0.75em;
-	border: 1px solid currentColor;
-	border-radius: clamp(0px, var(--_corner), var(--size-2xs));
-}
-
-.gaming-trophies-platinum {
-	--trophy-color: #adf7ff;
-	--trophy-background: #144d90;
-
-	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 0.125em;
 
-	color: var(--trophy-color);
-	border: 1px solid var(--trophy-background);
+	text-align: center;
+	border: 1px solid currentColor;
 	border-radius: clamp(0px, var(--_corner), var(--size-2xs));
-	background: var(--trophy-background);
-	background-image: linear-gradient(to bottom right in oklch, color-mix(in oklch, var(--trophy-color), var(--trophy-background) 75%), var(--trophy-background));
 }
 
 .gaming-trophies-stats {
