@@ -252,20 +252,20 @@
 
 					<div class="gaming-trophies-info">
 						<div class="h3 gaming-trophies-title">{{ game.title }}</div>
-						<div class="lineHeight-dense">{{ trophyCount }} trophies</div>
-						{{ if game.trophyLastUpdate }}<div class="fontSize-smaller fontStyle-italic lineHeight-tight">Latest: {{ game.trophyLastUpdate |> dateFormat({ format: 'nice' }) }}</div>{{ /if }}
+						<div class="lineHeight-dense">{{ trophyCount }} {{ trophyCount === 1 ? 'trophy' : 'trophies' }}</div>
+						{{ if game.trophyLastUpdate }}<div class="fontSize-smaller fontStyle-italic lineHeight-tight">Latest: {{ game.trophyLastUpdate |> timeTag({ format: 'nice' }) }}</div>{{ /if }}
 					</div>
 
 					<div class="gaming-trophies-plat">
 						<span class="gaming-info-badge gaming-trophies-platform">
 							{{ set platformSlug = game.platform |> toLowerCase |> replace(' ', '-') }}
-							{{ injectsvg `gaming-${platformSlug}`, { class: 'gaming-logo inline-icon' } }}
+							{{ injectsvg `gaming-${platformSlug}`, { class: 'gaming-logo inline-icon', title: game.platform } }}
 						</span>
 						{{ if game.trophyEarned.platinum > 0 }}
 						<span class="gaming-info-badge gaming-details-trophies-badge gaming-trophies-platinum" data-trophy-level="platinum"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 24 24" class="gaming-details-trophies-icon | inline-icon">
 							<title>Platinum trophy unlocked</title>
 							<use xlink:href="#icon-psn-trophy" width="24" height="24"></use>
-						</svg> <span class="visually-hidden">1</span><span aria-hidden="true">✓</span></span>
+						</svg> <span aria-hidden="true">✓</span></span>
 						{{ /if }}
 					</div>
 

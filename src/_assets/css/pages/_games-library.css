@@ -752,14 +752,11 @@
 
 	list-style-type: '';
 	padding: 0;
-
-	@container (inline-size >= 46rem) {
-		display: grid;
-		grid-template-columns: [--image-start] auto [--image-end --info-start] 1fr [--info-end --detail-start] auto [--detail-end --count-start] auto [--count-end];
-	}
 }
 
 .gaming-trophies-item {
+	content-visibility: auto;
+
 	grid-column: 1 / -1;
 	display: grid;
 	align-items: center;
@@ -767,13 +764,23 @@
 		'image info'
 		'image detail'
 		'stats stats';
-	grid-template-columns: auto 1fr;
+	grid-template-columns: min(33cqi, 6rem) 1fr;
 	gap: var(--size-xs) var(--flow-space);
-	padding-block-start: var(--flow-space);
 
-	border-block-start: 1px solid currentColor;
+	&:first-child {
+		padding-block-start: var(--flow-space);
 
-	@container (inline-size < 46rem) {
+		border-block-start: 1px solid currentColor;
+	}
+	&:not(:last-child) {
+		padding-block-end: var(--flow-space);
+
+		border-block-end: 1px solid currentColor;
+	}
+
+	@container (inline-size < 42rem) {
+		contain-intrinsic-size: 220px;
+
 		.gaming-trophies-info {
 			align-self: end;
 		}
@@ -783,11 +790,13 @@
 		}
 	}
 
-	@container (inline-size >= 46rem) {
+	@container (inline-size >= 42rem) {
+		contain-intrinsic-size: 145px;
+
 		gap: inherit;
 		grid-template-areas: 'image info detail stats';
 		grid-template-rows: unset;
-		grid-template-columns: subgrid;
+		grid-template-columns: 8rem 1fr 6rem 14rem;
 	}
 }
 
@@ -808,14 +817,14 @@
 .gaming-trophies-stats {
 	display: flex;
 	flex-direction: column;
-	gap: var(--size-2xs);
+	gap: var(--size-xs);
 }
 
 .gaming-trophies-plat {
 	grid-area: detail;
 	align-items: center;
 
-	@container (inline-size < 46rem) {
+	@container (inline-size < 42rem) {
 		flex-direction: row;
 	}
 }
@@ -832,4 +841,8 @@
 
 .gaming-trophies-stats {
 	grid-area: stats;
+
+	& .gaming-details-trophies-badge::after {
+		animation-play-state: paused; /* No animation needed */
+	}
 }
