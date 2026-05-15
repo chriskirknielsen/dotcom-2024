@@ -275,13 +275,13 @@
 							<li class="gaming-trophies-count"><span class="gaming-info-badge gaming-details-trophies-badge" data-trophy-level="{{ lvl }}"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 24 24" class="gaming-details-trophies-icon | inline-icon">
 								<title>{{ lvl |> toTitleCase }} trophies</title>
 								<use xlink:href="#icon-psn-trophy" width="24" height="24"></use>
-							</svg> {{ count |> formatNumber }}</span></li>
+							</svg> {{ count }}</span></li>
 						{{ /if }}{{ /for }}
 						</ul>
 
 						<div class="progress-list-item" style="--progress: {{ game.trophyProgress / 100 |> toRound(3) }}">
 							<div class="progress-list-bar">
-								<span class="progress-list-number">{{ game.trophyProgress |> formatNumber }}%</span>
+								<span class="progress-list-number">{{ game.trophyProgress }}%</span>
 							</div>
 						</div>
 						
