@@ -5,7 +5,8 @@ export default function (eleventyConfig, options = {}) {
 	// Default values
 	const config = Object.assign(
 		{
-			keyframes: true, // Removes unused keyframes
+			keyframes: false,
+			variables: false,
 			safelist: [],
 			blocklist: [],
 			dynamicAttributes: [],
@@ -25,7 +26,7 @@ export default function (eleventyConfig, options = {}) {
 		config.pathToCss = [config.pathToCss];
 	}
 
-	const { pathToCss, placeholder, keyframes, getPageList, dynamicAttributes } = config;
+	const { pathToCss, placeholder, keyframes, variables, getPageList, dynamicAttributes } = config;
 
 	eleventyConfig.addTransform('purge-and-inline-css', async (content, outputPath) => {
 		if (!outputPath || !outputPath.endsWith('.html')) {
@@ -40,6 +41,7 @@ export default function (eleventyConfig, options = {}) {
 				content: [{ raw: content }],
 				css: pathToCss,
 				keyframes,
+				variables,
 				safelist,
 				blocklist,
 				dynamicAttributes,

@@ -492,7 +492,7 @@ html[data-theme='cyberpunk'] {
 			filter: drop-shadow(0 0 0.5em color-mix(in hsl, var(--C-heading), transparent));
 
 			@media (--accept-motion) {
-				animation: cyberpunkCta 200ms steps(3, jump-none) 1;
+				animation: --cyberpunkCta 200ms steps(3, jump-none) 1;
 			}
 		}
 	}
@@ -577,7 +577,7 @@ html[data-theme='cyberpunk'] {
 	}
 }
 
-@keyframes cyberpunkCta {
+@keyframes --cyberpunkCta {
 	/*
 	<svg xmlns='http://www.w3.org/2000/svg' width='0' height='0'>
 		<defs>

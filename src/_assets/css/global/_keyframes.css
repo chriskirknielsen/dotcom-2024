@@ -1,16 +1,16 @@
-@keyframes fadeIn {
+@keyframes --fadeIn {
 	from {
 		opacity: 0;
 	}
 }
 
-@keyframes scaleUp {
+@keyframes --scaleUp {
 	from {
 		scale: 0;
 	}
 }
 
-@keyframes moveUp {
+@keyframes --moveUp {
 	from {
 		translate: 0 100%;
 	}

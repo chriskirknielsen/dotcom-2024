@@ -102,7 +102,7 @@
 @media (--accept-motion) {
 	[data-deco-anim] {
 		transform-origin: 50% 50%;
-		animation: resetTransform calc(var(--CTX-factor, 1) * var(--anim-medium)) var(--CTX-easing, var(--easing-out)) 1 forwards;
+		animation: --resetTransform calc(var(--CTX-factor, 1) * var(--anim-medium)) var(--CTX-easing, var(--easing-out)) 1 forwards;
 		animation-delay: calc((300ms + var(--CTX-delay, 0) * 100ms));
 	}
 
@@ -112,7 +112,7 @@
 		transform-origin: 50% 50%;
 
 		will-change: transform;
-		animation-name: resetTransform;
+		animation-name: --resetTransform;
 	}
 
 	[data-deco-anim='path'] {
@@ -130,7 +130,7 @@
 		stroke-dashoffset: calc(var(--CTX-dashoffset, 1) * var(--CTX-ratio) * 1px);
 
 		will-change: stroke-dashoffset;
-		animation-name: pathDraw;
+		animation-name: --pathDraw;
 	}
 }
 
@@ -165,7 +165,7 @@
 		transform: scale(0.9) translateY(10%);
 		will-change: transform;
 
-		animation-name: fadeIn, resetTransform, unblur;
+		animation-name: --fadeIn, --resetTransform, --unblur;
 		animation-timing-function: var(--easing-out);
 		animation-duration: var(--anim-eternity);
 		animation-fill-mode: both;
@@ -177,19 +177,19 @@
 	}
 }
 
-@keyframes unblur {
+@keyframes --unblur {
 	0% {
 		filter: blur(8px);
 	}
 }
 
-@keyframes resetTransform {
+@keyframes --resetTransform {
 	100% {
 		transform: none;
 	}
 }
 
-@keyframes pathDraw {
+@keyframes --pathDraw {
 	100% {
 		stroke-dashoffset: 0;
 	}

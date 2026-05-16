@@ -217,7 +217,7 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 	width: 100%;
 
 	@media (prefers-reduced-motion: no-preference) {
-		animation: revealScale 1s cubic-bezier(0.215, 0.61, 0.355, 1) 1;
+		animation: --revealScale 1s cubic-bezier(0.215, 0.61, 0.355, 1) 1;
 	}
 }
 
@@ -231,7 +231,7 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 	transform-origin: 50% 50%;
 
 	@media (prefers-reduced-motion: no-preference) {
-		animation: fullRotation 60s linear infinite;
+		animation: --fullRotation 60s linear infinite;
 	}
 }
 
@@ -251,7 +251,7 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 	paint-order: stroke;
 
 	@media (prefers-reduced-motion: no-preference) {
-		animation: revealUpwards 1s cubic-bezier(0.215, 0.61, 0.355, 1) 500ms 1 backwards;
+		animation: --revealUpwards 1s cubic-bezier(0.215, 0.61, 0.355, 1) 500ms 1 backwards;
 	}
 }
 

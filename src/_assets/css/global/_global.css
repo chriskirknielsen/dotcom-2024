@@ -45,11 +45,11 @@ dialog {
 	background: var(--C-surface);
 
 	transform-origin: 50% 0%;
-	animation: fadeIn var(--anim-short) var(--easing-out) 20ms 1 backwards;
+	animation: --fadeIn var(--anim-short) var(--easing-out) 20ms 1 backwards;
 	/* 20ms delay + backwards fill to reduce amount of stutter upon opening a dialog */
 
 	@media (--accept-motion) {
-		animation-name: fadeIn, scaleUp;
+		animation-name: --fadeIn, --scaleUp;
 	}
 
 	&:not([open]) {
@@ -63,7 +63,7 @@ dialog {
 
 		background: #000a;
 
-		animation: fadeIn var(--anim-short, calc(200ms * var(--anim-f))) var(--easing-out, ease-out) 20ms 1 backwards;
+		animation: --fadeIn var(--anim-short, calc(200ms * var(--anim-f))) var(--easing-out, ease-out) 20ms 1 backwards;
 	}
 }
 

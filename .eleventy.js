@@ -287,6 +287,8 @@ export default async function (eleventyConfig) {
 			placeholder: assets.inlineCssPlaceholder,
 			pathToCss: [`./${rootDir}/${includesDir}/assets/css/style.css`],
 			dynamicAttributes: ['data-theme', 'aria-pressed', 'href'],
+			keyframes: true,
+			variables: false,
 			safelist: purgeCssList._global.safe,
 			blocklist: purgeCssList._global.block,
 			getPageList: function (outputPath) {

@@ -652,7 +652,7 @@ code,
 		color: var(--bg-alt);
 		background-color: var(--color-main);
 
-		animation: codePress calc(200ms * var(--anim-f)) var(--easing) 1;
+		animation: --codePress calc(200ms * var(--anim-f)) var(--easing) 1;
 	}
 
 	html.no-js &:is(button) {
@@ -686,27 +686,27 @@ code,
 	clip: rect(0 0 0 0);
 }
 
-@keyframes fullRotation {
+@keyframes --fullRotation {
 	to {
 		transform: rotate(360deg);
 	}
 }
 
-@keyframes revealScale {
+@keyframes --revealScale {
 	from {
 		opacity: 0;
 		transform: scale(0.5);
 	}
 }
 
-@keyframes revealUpwards {
+@keyframes --revealUpwards {
 	from {
 		opacity: 0;
 		transform: translateY(25%);
 	}
 }
 
-@keyframes codePress {
+@keyframes --codePress {
 	50% {
 		transform: translateY(2px);
 	}

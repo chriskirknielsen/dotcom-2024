@@ -92,7 +92,7 @@
 
 		&::view-transition-old(.filteredTileItem):only-child,
 		&::view-transition-new(.filteredTileItem):only-child {
-			animation-name: scale;
+			animation-name: --filterScale;
 		}
 
 		&::view-transition-old(.filteredTileItem):only-child {
@@ -104,7 +104,7 @@
 		}
 	}
 
-	@keyframes scale {
+	@keyframes --filterScale {
 		to {
 			scale: 0.5;
 			rotate: calc(7deg * var(--a, 1));
