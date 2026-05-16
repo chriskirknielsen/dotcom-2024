@@ -236,14 +236,16 @@
 {{ /set }}
 
 {{ if gameslibrary.meta.totalTrophyData }}
+	{{ set trophyGames = gameslibrary.data.filter((g) => g.trophyProgress > 0).sort((a, b) => Date.parse(b.trophyLastUpdate) - Date.parse(a.trophyLastUpdate)) }}
 	{{ expander trophyExpanderLabel }}
-		<div class="textAlign-center" id="trophylist">
+		<div class="textAlign-center textWrap-balance" id="trophylist">
+			<span class="fontWeight-bold">{{ trophyGames.length }} games</span> | 
 			{{ trophyLevelCounts }}
 		</div>
 
 		<div class="gaming-trophies">
 			<ul class="gaming-trophies-list">
-			{{ for game of gameslibrary.data.filter((g) => g.trophyProgress > 0).sort((a, b) => Date.parse(b.trophyLastUpdate) - Date.parse(a.trophyLastUpdate)) }}
+			{{ for game of trophyGames }}
 				{{ set trophyIconHeight = 128 }}
 				{{ set trophyIconWidth = ['PS3', 'PS4', 'PSV'].includes(game.platform) ? trophyIconHeight * (320 / 176) : trophyIconHeight; /* PS5 icons are square, PS3/PS4/Vita are 320x176 */ }}
 				{{ set trophyCount = Object.values(game.trophyEarned).reduce((p ,c) => p + c, 0) }}
@@ -284,7 +286,6 @@
 								<span class="progress-list-number">{{ game.trophyProgress }}%</span>
 							</div>
 						</div>
-						
 					</div>
 				</li>
 			{{ /for }}
