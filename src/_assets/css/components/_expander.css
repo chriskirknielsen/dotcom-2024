@@ -5,6 +5,7 @@
 	&:is(summary) {
 		position: sticky;
 	}
+
 	z-index: 2;
 
 	inset-block-start: 0;
