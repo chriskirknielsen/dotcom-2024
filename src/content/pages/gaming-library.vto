@@ -191,7 +191,6 @@
 		{{ /if }}
 	{{ /expander }}
 {{ /for }}
-</div>
 
 {{ if gameslibrary.meta.totalTrophyData }}
 	{{ set trophiesByLevel = gameslibrary.meta.totalTrophyData }}
@@ -298,6 +297,8 @@
 		{{ trophyLevelCounts }}
 	</div>
 {{ /if }}
+</div>
+
 
 <template id="gaming-details-dialog-template" data-trophy-svg-id="icon-psn-trophy">
 	<div class="gaming-details-dialog-inner | dialog-inner flow" style="--flow-space: var(--size-s);">
