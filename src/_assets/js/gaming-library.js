@@ -284,6 +284,7 @@ document.addEventListener(
 			const allExpanderStates = new Set(expanders.map((exp) => exp.open));
 			const allStatesIdentical = allExpanderStates.size === 1;
 			toggleAllButton.setAttribute('data-indeterminate', Boolean(!allStatesIdentical).toString());
+			toggleAllButton.setAttribute('aria-pressed', Boolean(allStatesIdentical ? allExpanderStates.has(true) : false).toString());
 		}
 	},
 	{ capture: true }
