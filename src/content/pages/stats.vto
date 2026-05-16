@@ -135,6 +135,7 @@
 				{{ if v > 0 }}
 					{{# Add a marker for non-empty values #}}
 					<g>
+						<title>{{ txt }}</title>
 						<circle cx="{{ cx }}" cy="{{ cy }}" r="{{ svgSize.stroke }}" fill="currentColor"/>
 						<text font-size="{{ svgSize.font * 0.75 }}" x="{{ cx }}" y="{{ cy - svgSize.font * 0.75 }}" text-anchor="middle" fill="currentColor" stroke="var(--C-canvas)" stroke-width="3" paint-order="stroke">{{ v * metricScale |> toRound }}</text>
 					</g>
