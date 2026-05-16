@@ -1,10 +1,12 @@
+@property --EXPANDER-arrow-size {
+	syntax: '<length>';
+	inherits: true;
+	initial-value: 10px;
+}
+
 .expander-button:not(#\#) {
 	--CTA-display: flex;
-	--arrow-side-size: 0.5em;
-
-	&:is(summary) {
-		position: sticky;
-	}
+	--EXPANDER-arrow-size: 0.625em;
 
 	z-index: 2;
 
@@ -12,10 +14,14 @@
 
 	-webkit-user-select: none;
 	user-select: none;
-	list-style-type: '';
+	list-style-type: ''; /* Hides the native arrow */
 
-	&::-webkit-details-marker {
-		display: none;
+	@supports (width: tan(atan2(var(--x), 1px))) {
+		--EXPANDER-arrow-factor: tan(atan2(var(--EXPANDER-arrow-size), 1px));
+	}
+
+	&:is(summary) {
+		position: sticky; /* If it's an actual expander, allow the summary button to be stuck at the top, useful for tall <details> elements */
 	}
 
 	&.expander-button:not(.expander-button--unbalanced):has(> .expander-button-arrow)::after {
@@ -23,36 +29,51 @@
 		content: '';
 
 		display: inline-block;
-		inline-size: calc(var(--sqrt3) * var(--arrow-side-size) / 2);
+		inline-size: var(--EXPANDER-arrow-size);
 		margin-inline-start: auto;
 	}
 }
 
 .expander-button-arrow {
 	/*
-     * 1: Equilateral triangle has h = √3 * a / 2, where a is the side
-     * 2: Center of mass for a triangle, for side a, is C = (a√3)/3
-     * 3: Compensate to be optically sized similar to the original triangle
-	 * 4: Push away from the button contents
+     * 1: Base SVG size
+     * 2: Ensure sub-pixel overflow doesn't cut off circle edges
+     * 3: Rounded linejoin stroke will turn into a circle
+	 * 4: Keep scaled-down shape's stroke consistent to look like a circle
+	 * 5: Scale down the triangle to 1% of its original size so the rounded stroke ends up as a circle
+	 * 6: Push away from the button contents
      */
 
-	display: inline-block;
-	block-size: 0;
-	inline-size: 0;
-	margin-inline-end: auto; /* 4 */
+	inline-size: var(--EXPANDER-arrow-size); /* 1 */
+	block-size: auto;
+	margin-inline-end: auto; /* 6 */
+	overflow: visible; /* 2 */
 
-	--CENTER-MASS: calc(100% - var(--sqrt3) * 100% / 3) 50%; /* 2 */
-	--DELAY: calc(var(--anim-short) / 4);
+	will-change: rotate, scale;
 
-	border-width: calc(var(--arrow-side-size) / 2) 0 calc(var(--arrow-side-size) / 2) calc(var(--sqrt3) * var(--arrow-side-size) / 2); /* 1 */
-	border-style: solid;
-	border-color: transparent transparent transparent var(--EXPANDER-button-arrow-color, currentColor);
+	& > path {
+		fill: currentColor;
+		stroke: currentColor;
+		stroke-linejoin: round; /* 3 */
+		vector-effect: non-scaling-stroke; /* 4 */
 
-	transform-origin: var(--CENTER-MASS);
+		transform-origin: 50% 50%;
+		will-change: stroke-width, scale;
+	}
 
 	@media (--accept-motion) {
-		transition: all var(--anim-short) var(--easing-in-out);
-		transition-property: clip-path, scale, rotate;
+		&,
+		& > path {
+			transition: all var(--anim-short) var(--easing-in-out);
+		}
+
+		& > path {
+			transition-property: stroke-width, scale;
+		}
+
+		& {
+			transition-property: scale, rotate;
+		}
 	}
 
 	.expander[open] &,
@@ -60,16 +81,13 @@
 		rotate: 90deg;
 	}
 
-	.expander-button[data-indeterminate] > & {
-		--CLIP: 75%;
-		clip-path: circle(var(--CLIP) at var(--CENTER-MASS));
-		transition-delay: var(--DELAY), 0s, var(--DELAY);
-	}
-
 	.expander-button[data-indeterminate='true'] > & {
-		--CLIP: 25%;
-		scale: var(--sqrt3); /* 3 */
-		transition-delay: 0s, var(--DELAY), 0s;
+		scale: calc(2 / 3);
+
+		& > path {
+			stroke-width: var(--EXPANDER-arrow-size); /* 4 */
+			scale: calc(1 / var(--EXPANDER-arrow-factor)); /* 5 */
+		}
 	}
 }
 
