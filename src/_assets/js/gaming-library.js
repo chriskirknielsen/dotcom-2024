@@ -312,7 +312,7 @@ document.addEventListener('change', function (e) {
 			(g) => (g.textContent = g.closest('.expander').querySelector('.gaming-platform-group').querySelectorAll(':scope > li:not([hidden])').length)
 		);
 	} else if ((target = e.target.closest('[data-games-sort]'))) {
-		const selectedValue = target.value || 'alpha';
+		const selectedValue = target.value || 'alphaasc';
 		eachDom('[data-gaming-platform]', (g) => {
 			const games = Array.from(g.querySelectorAll(':scope > .gaming-box-wrap'));
 			const gamesWithSort = games.map((game) => {
@@ -323,11 +323,12 @@ document.addEventListener('change', function (e) {
 					year: gameData.year,
 				};
 			});
+			const sortFactor = selectedValue.endsWith('desc') ? -1 : 1;
 			const sortedGames = gamesWithSort.sort((a, b) => {
-				if (selectedValue === 'year' && a.year !== b.year) {
-					return a.year - b.year;
+				if (['yearasc', 'yeardesc'].includes(selectedValue) && a.year !== b.year) {
+					return (a.year - b.year) * sortFactor;
 				}
-				return a.sortTitle.localeCompare(b.sortTitle, 'en', { numeric: true });
+				return a.sortTitle.localeCompare(b.sortTitle, 'en', { numeric: true }) * sortFactor;
 			});
 			for (const game of sortedGames) {
 				g.appendChild(game.el);
