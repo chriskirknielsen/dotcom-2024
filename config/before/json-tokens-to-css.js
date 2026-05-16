@@ -93,18 +93,17 @@ export default function (string) {
 	let toolsOutput = `${customMediaOutput}
 	
 	@media (--prefers-light) {
-		html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='${lightThemeKey}']) {
+		html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='${lightThemeKey}']),
+		html:is(:not([data-theme]), [data-theme='custom']) .hide-when-light {
 			display: none !important;
-
-			}
-		html:not([data-theme]) .hide-when-light { display: none !important; }
+		}
 	}
 	
 	@media (--prefers-dark) {
-		html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='${darkThemeKey}']) {
+		html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='${darkThemeKey}']),
+		html:is(:not([data-theme]), [data-theme='custom']) .hide-when-dark {
 			display: none !important;
 		}
-		html:not([data-theme]) .hide-when-dark { display: none !important; }
 	}`;
 
 	// All themes are disabled by default

@@ -390,18 +390,17 @@ html[data-theme="director"] {
 @custom-media --toc-side (min-width: calc(60rem + 2 * 300px)) and (min-height: 500px);
 	
 	@media (--prefers-light) {
-		html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='dawn']) {
+		html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='dawn']),
+		html:is(:not([data-theme]), [data-theme='custom']) .hide-when-light {
 			display: none !important;
-
-			}
-		html:not([data-theme]) .hide-when-light { display: none !important; }
+		}
 	}
 	
 	@media (--prefers-dark) {
-		html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='dusk']) {
+		html:not([data-theme]) [data-theme-condition]:not([data-theme-condition='dusk']),
+		html:is(:not([data-theme]), [data-theme='custom']) .hide-when-dark {
 			display: none !important;
 		}
-		html:not([data-theme]) .hide-when-dark { display: none !important; }
 	}html[data-theme]:not([data-theme='dawn']) [data-theme-condition='dawn'] {
 			display: none !important;
 		}
