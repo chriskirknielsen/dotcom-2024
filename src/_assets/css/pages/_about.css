@@ -7,7 +7,7 @@
 	margin-block: var(--size-m);
 
 	figure {
-		background: var(--C-accent);
+		background: var(--color-accent);
 	}
 
 	img {
@@ -476,8 +476,8 @@
 	padding: var(--stroke);
 
 	line-height: 1;
-	border: 1px solid var(--C-text);
-	background: var(--C-canvas);
+	border: 1px solid var(--color-text);
+	background: var(--color-canvas);
 }
 .about-icons-list-icon {
 	& > svg {
@@ -488,8 +488,8 @@
 	padding: var(--pad);
 	aspect-ratio: 1;
 
-	color: var(--C-canvas);
-	background: var(--C-text);
+	color: var(--color-canvas);
+	background: var(--color-text);
 }
 .about-icons-list-label {
 	flex-grow: 1;

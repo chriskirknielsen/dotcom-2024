@@ -8,10 +8,10 @@ blockquote.remote-quote {
 	--remote-quote-border-width: 1px;
 	padding: calc(var(--layout-gutter) - var(--remote-quote-border-width));
 
-	border: var(--remote-quote-border-width) solid var(--C-text, currentColor);
+	border: var(--remote-quote-border-width) solid var(--color-text, currentColor);
 	border-radius: var(--_corner);
-	background: var(--C-surface);
-	box-shadow: inset calc(var(--layout-side-border) - var(--remote-quote-border-width)) 0 0 var(--C-text, currentColor);
+	background: var(--color-surface);
+	box-shadow: inset calc(var(--layout-side-border) - var(--remote-quote-border-width)) 0 0 var(--color-text, currentColor);
 
 	/* Undo the blockquote styles */
 	& > p:first-of-type::before,

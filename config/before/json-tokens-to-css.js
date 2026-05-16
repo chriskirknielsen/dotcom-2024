@@ -174,7 +174,7 @@ export default function (string) {
 		const regularTokens = uniqueTokenList.map((defKey) => lightDarkVar(defKey, lightTheme.tokens[defKey], darkTheme.tokens[defKey])).join('\n');
 
 		const colorTokens = Object.keys(lightTheme.color)
-			.map((defKey) => lightDarkVar(defKey, lightTheme.color[defKey], darkTheme.color[defKey], 'C'))
+			.map((defKey) => lightDarkVar(defKey, lightTheme.color[defKey], darkTheme.color[defKey], 'color'))
 			.join('\n');
 
 		const fontTokens = Object.keys(lightTheme.font)
@@ -208,7 +208,7 @@ export default function (string) {
 				.join('\n');
 
 			const colorTokens = Object.entries(data.color)
-				.map(([defKey, defVal]) => tokenToCssVar(defKey, defVal, 'C'))
+				.map(([defKey, defVal]) => tokenToCssVar(defKey, defVal, 'color'))
 				.join('\n');
 
 			const fontTokens = Object.entries(data.font)

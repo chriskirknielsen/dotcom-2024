@@ -43,8 +43,8 @@
 
 			font-size: 0.75em;
 			text-align: center;
-			color: var(--C-text);
-			background-color: var(--C-surface-alt, var(--C-surface));
+			color: var(--color-text);
+			background-color: var(--color-surface-alt, var(--color-surface));
 		}
 
 		/* Ensure sibling items aren't stretched and instead keep their original ratio by layering the caption on top of the image,

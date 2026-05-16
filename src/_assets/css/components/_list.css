@@ -97,7 +97,7 @@ ol > li > ol {
 	padding: var(--size-s) var(--size-m);
 
 	border-radius: var(--_corner);
-	background: var(--C-surface);
+	background: var(--color-surface);
 	box-shadow: var(--_shadow);
 
 	& > dt {
@@ -125,9 +125,9 @@ ol > li > ol {
 }
 
 .progress-list-item {
-	--BAR-track: var(--C-surface);
-	--BAR-fill: color-mix(in oklch, var(--C-accent) 10%, var(--C-surface));
-	--BAR-text: var(--C-text);
+	--BAR-track: var(--color-surface);
+	--BAR-fill: color-mix(in oklch, var(--color-accent) 10%, var(--color-surface));
+	--BAR-text: var(--color-text);
 
 	position: relative;
 
@@ -201,6 +201,6 @@ ol > li > ol {
 		display: block;
 		inline-size: calc(100cqi - 100%);
 
-		background: linear-gradient(to right, transparent, color-mix(in oklch, var(--C-accent), transparent));
+		background: linear-gradient(to right, transparent, color-mix(in oklch, var(--color-accent), transparent));
 	}
 }

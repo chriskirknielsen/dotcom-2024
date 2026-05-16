@@ -8,8 +8,8 @@ html {
 	container-type: inline-size;
 
 	color-scheme: var(--_color-scheme);
-	color: var(--C-text);
-	background-color: var(--C-canvas);
+	color: var(--color-text);
+	background-color: var(--color-canvas);
 
 	@media (--accept-motion) {
 		&:focus-within {
@@ -39,10 +39,10 @@ dialog {
 	margin: auto;
 	padding: 0;
 
-	color: var(--C-text);
-	border: 2px solid var(--C-text);
+	color: var(--color-text);
+	border: 2px solid var(--color-text);
 	border-radius: var(--_corner);
-	background: var(--C-surface);
+	background: var(--color-surface);
 
 	transform-origin: 50% 0%;
 	animation: --fadeIn var(--anim-short) var(--easing-out) 20ms 1 backwards;

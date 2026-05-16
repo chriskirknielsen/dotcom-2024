@@ -1,8 +1,8 @@
 .homepage-logo {
-	--HOME-logo-bg: var(--C-surface);
-	--HOME-logo-line-color: var(--C-heading);
-	--HOME-logo-text-color: var(--C-text);
-	--HOME-logo-name-color: var(--C-heading);
+	--HOME-logo-bg: var(--color-surface);
+	--HOME-logo-line-color: var(--color-heading);
+	--HOME-logo-text-color: var(--color-text);
+	--HOME-logo-name-color: var(--color-heading);
 	--HOME-logo-line-weight: clamp(1px, 0.1vw, 1.25px);
 	--HOME-logo-text-font: var(--_font-body-family);
 	--HOME-logo-text-size: clamp(0.75rem, calc(0.75rem + ((1vw - 0.16rem) * 1.0417)), 1.25rem);
@@ -33,7 +33,7 @@
 	isolation: isolate;
 
 	/* Reset the h1 font settings */
-	color: var(--HOME-logo-name-color);
+	color: var(--HOME-logo-name-color, currentColor);
 	font-family: var(--HOME-logo-text-font);
 	font-size: calc(var(--HOME-logo-text-scaling) * var(--HOME-logo-text-size));
 	letter-spacing: 0;
@@ -154,7 +154,7 @@
 	overflow: visible;
 
 	& > path {
-		fill: var(--HOME-logo-name-color);
+		fill: var(--HOME-logo-name-color, currentColor);
 
 		transform-origin: 50% 50%;
 	}
@@ -248,11 +248,11 @@
 	max-inline-size: min(100%, 12rem);
 	margin-inline: auto;
 
-	color: var(--C-surface);
-	border: var(--HOME-photo-border-width) solid var(--C-text);
+	color: var(--color-surface);
+	border: var(--HOME-photo-border-width) solid var(--color-text);
 	/* border-radius: calc(var(--_corner) * 4); */
 	border-radius: 50%;
-	background: var(--C-accent);
+	background: var(--color-accent);
 	box-shadow: var(--_shadow-active);
 
 	& > img {

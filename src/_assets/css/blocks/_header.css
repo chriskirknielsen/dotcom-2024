@@ -200,11 +200,11 @@ html[data-js='false'] .header-themepicker {
 		min-inline-size: calc(var(--PICKER-padding) * 2 + var(--PICKER-gap) + var(--PICKER-cta-inline-size) * 2); /* 1 */
 		padding: var(--PICKER-padding);
 
-		color: var(--C-text);
-		border: 1px solid var(--C-text);
+		color: var(--color-text);
+		border: 1px solid var(--color-text);
 		border-radius: clamp(0px, var(--_corner) * 999, var(--_cta-border-radius) + var(--PICKER-padding)); /* 2 */
 		border-start-end-radius: 0; /* Top-right corner*/
-		background-color: var(--C-surface);
+		background-color: var(--color-surface);
 		box-shadow: var(--_shadow-active);
 	}
 
@@ -215,7 +215,7 @@ html[data-js='false'] .header-themepicker {
 		justify-content: center;
 		align-items: flex-start;
 
-		background: linear-gradient(transparent, var(--C-text), transparent) no-repeat center / 1px 100%;
+		background: linear-gradient(transparent, var(--color-text), transparent) no-repeat center / 1px 100%;
 	} */
 
 	.theme-picker-scheme-group {
@@ -250,8 +250,8 @@ html[data-js='false'] .header-themepicker {
 
 		block-size: 100vh;
 
-		background-color: var(--C-canvas); /* Fallback */
-		background-color: color-mix(in hsl, var(--C-canvas), transparent 67%);
+		background-color: var(--color-canvas); /* Fallback */
+		background-color: color-mix(in hsl, var(--color-canvas), transparent 67%);
 
 		opacity: 0;
 		-webkit-backdrop-filter: blur(12px);
@@ -282,7 +282,7 @@ html[data-js='false'] .header-themepicker {
 			block-size: var(--theme-group-rule);
 			inline-size: 100%;
 
-			background: linear-gradient(90deg, transparent, var(--C-heading), transparent);
+			background: linear-gradient(90deg, transparent, var(--color-heading), transparent);
 		}
 
 		--theme-group-rule: 1px;
@@ -307,7 +307,7 @@ html[data-js='false'] .header-themepicker {
 
 		border: 1px solid var(--_card-border-color);
 		border-radius: var(--_corner);
-		background-color: var(--C-surface);
+		background-color: var(--color-surface);
 		box-shadow: var(--_shadow-active);
 
 		transform: translateY(8em) scale(0.9);
@@ -375,7 +375,7 @@ html[data-js='false'] .header-themepicker {
 				inset-block-end: calc(-1 * var(--theme-group-gap) / 2);
 				inset-inline: 0;
 
-				background: linear-gradient(90deg, transparent, var(--C-text), transparent);
+				background: linear-gradient(90deg, transparent, var(--color-text), transparent);
 			}
 		}
 	}
@@ -469,11 +469,11 @@ html[data-js='false'] .header-themepicker {
 	padding: var(--size-2xs) var(--size-m);
 
 	font-size: var(--typeScale-n2);
-	color: var(--C-canvas);
-	background: var(--C-heading);
+	color: var(--color-canvas);
+	background: var(--color-heading);
 
 	& :any-link:is(:hover, :focus-visible) {
-		--LINK-color: var(--C-surface);
-		--LINK-underline-color: var(--C-text);
+		--LINK-color: var(--color-surface);
+		--LINK-underline-color: var(--color-text);
 	}
 }

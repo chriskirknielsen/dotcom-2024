@@ -72,19 +72,19 @@ html[data-theme='dawn'] {
 @media (--prefers-dark) {
 	html:not([data-theme]) {
 		@supports (fill: color(display-p3 1 1 1)) {
-			--C-accent: color(display-p3 0.99289 0.1318 0.44724);
-			--C-heading: color(display-p3 0.17445 0.86504 0.83123);
+			--color-accent: color(display-p3 0.99289 0.1318 0.44724);
+			--color-heading: color(display-p3 0.17445 0.86504 0.83123);
 		}
 
 		.homepage-logo {
-			--HOME-logo-name-color: var(--C-accent);
+			--HOME-logo-name-color: var(--color-accent);
 		}
 
 		.callout {
 			padding: 0 0 var(--CALLOUT-padding) var(--CALLOUT-padding);
 
 			border-width: 0 0 0 var(--CALLOUT-border-width);
-			background: linear-gradient(90deg, var(--C-accent), transparent) no-repeat 0 100% / 100% 2px;
+			background: linear-gradient(90deg, var(--color-accent), transparent) no-repeat 0 100% / 100% 2px;
 		}
 
 		.callout-label {
@@ -97,10 +97,10 @@ html[data-theme='dawn'] {
 			inline-size: calc(100% + var(--CALLOUT-padding));
 			padding-inline-start: var(--CALLOUT-padding); /* Half the padding will be for the background */
 
-			color: var(--C-text);
-			text-shadow: 2px 2px 0 var(--C-canvas), 4px 4px 0 var(--C-accent);
+			color: var(--color-text);
+			text-shadow: 2px 2px 0 var(--color-canvas), 4px 4px 0 var(--color-accent);
 			background: linear-gradient(var(--CALLOUT-border-color), var(--CALLOUT-border-color)) no-repeat 0 100% / var(--CALLOUT-border-width) round(up, 0.8em, 6px),
-				repeating-linear-gradient(var(--C-accent) 0, var(--C-accent) 2px, transparent 2px, transparent 6px) no-repeat 0 100% / calc(var(--CALLOUT-padding) / 2)
+				repeating-linear-gradient(var(--color-accent) 0, var(--color-accent) 2px, transparent 2px, transparent 6px) no-repeat 0 100% / calc(var(--CALLOUT-padding) / 2)
 					round(up, 0.8em, 6px);
 
 			&::before {
@@ -128,13 +128,13 @@ html[data-theme='dawn'] {
 				block-size: 1lh;
 				margin-inline-start: 0.5em;
 
-				background: repeating-linear-gradient(var(--C-accent) 0, var(--C-accent) 2px, transparent 2px, transparent 6px) repeat-x 0 100% / 100% round(up, 0.8em, 6px);
+				background: repeating-linear-gradient(var(--color-accent) 0, var(--color-accent) 2px, transparent 2px, transparent 6px) repeat-x 0 100% / 100% round(up, 0.8em, 6px);
 				mask: linear-gradient(90deg, tan 10%, transparent) repeat-y 100% 0 / 100cqi 100%;
 			}
 		}
 
 		:is(.codeblock, .codeview) {
-			--CODEBLOCK-border-color: var(--C-heading);
+			--CODEBLOCK-border-color: var(--color-heading);
 		}
 
 		.codeblock pre {
@@ -147,8 +147,8 @@ html[data-theme='dawn'] {
 
 			block-size: 3px;
 
-			background: radial-gradient(farthest-side, white, var(--C-accent), transparent);
-			filter: drop-shadow(0 0 4px var(--C-accent));
+			background: radial-gradient(farthest-side, white, var(--color-accent), transparent);
+			filter: drop-shadow(0 0 4px var(--color-accent));
 
 			&::after {
 				content: '';
@@ -167,19 +167,19 @@ html[data-theme='dawn'] {
 		}
 
 		.hero-heading {
-			text-shadow: 0 0.03125em 0.0625em color-mix(in hsl, var(--C-heading) 33%, black);
+			text-shadow: 0 0.03125em 0.0625em color-mix(in hsl, var(--color-heading) 33%, black);
 		}
 	}
 }
 
 html[data-theme='dusk'] {
 	@supports (fill: color(display-p3 1 1 1)) {
-		--C-accent: color(display-p3 0.99289 0.1318 0.44724);
-		--C-heading: color(display-p3 0.17445 0.86504 0.83123);
+		--color-accent: color(display-p3 0.99289 0.1318 0.44724);
+		--color-heading: color(display-p3 0.17445 0.86504 0.83123);
 	}
 
 	.homepage-logo {
-		--HOME-logo-name-color: var(--C-accent);
+		--HOME-logo-name-color: var(--color-accent);
 	}
 
 	.callout {
@@ -187,7 +187,7 @@ html[data-theme='dusk'] {
 		padding: 0 0 var(--CALLOUT-padding) var(--CALLOUT-padding);
 
 		border-width: 0 0 0 var(--CALLOUT-border-width);
-		background: linear-gradient(90deg, var(--C-accent), transparent) no-repeat 0 100% / 100% 2px;
+		background: linear-gradient(90deg, var(--color-accent), transparent) no-repeat 0 100% / 100% 2px;
 	}
 
 	.callout-label {
@@ -200,10 +200,10 @@ html[data-theme='dusk'] {
 		inline-size: calc(100% + var(--CALLOUT-padding));
 		padding-inline-start: calc(var(--CALLOUT-padding) + var(--CALLOUT-border-width));
 
-		color: var(--C-text);
-		text-shadow: 2px 2px 0 var(--C-canvas), 4px 4px 0 var(--C-accent);
+		color: var(--color-text);
+		text-shadow: 2px 2px 0 var(--color-canvas), 4px 4px 0 var(--color-accent);
 		background: linear-gradient(var(--CALLOUT-border-color), var(--CALLOUT-border-color)) no-repeat 0 100% / var(--CALLOUT-border-width) var(--CALLOUT-bg-height),
-			repeating-linear-gradient(var(--C-accent) 0, var(--C-accent) 2px, transparent 2px, transparent 6px) no-repeat 0 100% / calc(var(--CALLOUT-padding) / 2)
+			repeating-linear-gradient(var(--color-accent) 0, var(--color-accent) 2px, transparent 2px, transparent 6px) no-repeat 0 100% / calc(var(--CALLOUT-padding) / 2)
 				var(--CALLOUT-bg-height);
 
 		&::before {
@@ -231,13 +231,13 @@ html[data-theme='dusk'] {
 			block-size: 1lh;
 			margin-inline-start: 0.5em;
 
-			background: repeating-linear-gradient(var(--C-accent) 0, var(--C-accent) 2px, transparent 2px, transparent 6px) repeat-x 0 100% / 100% var(--CALLOUT-bg-height);
+			background: repeating-linear-gradient(var(--color-accent) 0, var(--color-accent) 2px, transparent 2px, transparent 6px) repeat-x 0 100% / 100% var(--CALLOUT-bg-height);
 			mask: linear-gradient(90deg, tan 10%, transparent) repeat-y 100% 0 / 100cqi 100%;
 		}
 	}
 
 	:is(.codeblock, .codeview) {
-		--CODEBLOCK-border-color: var(--C-heading);
+		--CODEBLOCK-border-color: var(--color-heading);
 	}
 
 	.codeblock pre {
@@ -250,8 +250,8 @@ html[data-theme='dusk'] {
 
 		block-size: 3px;
 
-		background: radial-gradient(farthest-side, white, var(--C-accent), transparent);
-		filter: drop-shadow(0 0 4px var(--C-accent));
+		background: radial-gradient(farthest-side, white, var(--color-accent), transparent);
+		filter: drop-shadow(0 0 4px var(--color-accent));
 
 		&::after {
 			content: '';
@@ -270,17 +270,17 @@ html[data-theme='dusk'] {
 	}
 
 	.hero-heading {
-		text-shadow: 0 0.03125em 0.0625em color-mix(in hsl, var(--C-heading) 33%, black);
+		text-shadow: 0 0.03125em 0.0625em color-mix(in hsl, var(--color-heading) 33%, black);
 	}
 }
 
 html[data-theme='vapor'] {
 	.hero-heading {
-		color: var(--C-accent);
+		color: var(--color-accent);
 	}
 
 	.homepage-logo {
-		--HOME-logo-name-color: var(--C-accent);
+		--HOME-logo-name-color: var(--color-accent);
 		--HOME-logo-text-font: var(--fontStack-monospace);
 		--HOME-logo-text-scaling: 0.8;
 	}
@@ -327,36 +327,36 @@ html[data-theme='vapor'] {
 	}
 
 	.expander-content {
-		box-shadow: 0 4px 0 -2px var(--C-heading);
+		box-shadow: 0 4px 0 -2px var(--color-heading);
 	}
 
 	& :not(pre) > code {
-		--CODE-bg: var(--C-surface-alt);
+		--CODE-bg: var(--color-surface-alt);
 	}
 
 	:is(.codeblock-toolbar-label, .codeview-toolbar) {
-		color: var(--C-surface-alt);
+		color: var(--color-surface-alt);
 	}
 
 	hr:where(:not(.hero-like)) {
 		block-size: 4px;
 		mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='4'%3E%3Cdefs%3E%3Cpattern id='wave' width='15' height='4' patternUnits='userSpaceOnUse'%3E%3Cpath fill='none' stroke='black' d='M0 1c3.8 0 3.8 2 7.6 2s3.8-2 7.6-2'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='4' fill='url(%23wave)'/%3E%3C/svg%3E")
 			repeat-x center;
-		background: var(--C-accent);
+		background: var(--color-accent);
 	}
 }
 
 html[data-theme='quill'] {
 	.homepage-logo {
-		--HOME-logo-name-color: var(--C-accent);
+		--HOME-logo-name-color: var(--color-accent);
 	}
 
 	.expander-content {
-		--CODE-bg: var(--C-canvas);
+		--CODE-bg: var(--color-canvas);
 	}
 
 	.image-gallery > figure > figcaption {
-		background-color: var(--C-surface);
+		background-color: var(--color-surface);
 	}
 
 	hr:where(:not(.hero-like)) {
@@ -365,7 +365,7 @@ html[data-theme='quill'] {
 
 		block-size: 1px;
 
-		background: var(--C-text);
+		background: var(--color-text);
 
 		&::after {
 			content: '';
@@ -388,11 +388,11 @@ html[data-theme='cyberpunk'] {
 	--cut-size: clamp(0.25rem, 0.375em, 0.75rem);
 
 	@supports (fill: color(display-p3 1 1 1)) {
-		--C-accent: color(display-p3 0.42472 0.99866 0.9163);
+		--color-accent: color(display-p3 0.42472 0.99866 0.9163);
 	}
 
 	.homepage-logo {
-		--HOME-logo-name-color: var(--C-accent);
+		--HOME-logo-name-color: var(--color-accent);
 		--HOME-logo-text-transform: uppercase;
 		--HOME-logo-text-style: normal;
 		--HOME-logo-text-scaling: 0.8;
@@ -409,8 +409,9 @@ html[data-theme='cyberpunk'] {
 		inset: var(--i);
 		z-index: -1;
 
-		border: var(--HOME-photo-border-width) solid var(--C-heading);
-		background: conic-gradient(from -90deg, var(--C-heading) 90deg, transparent 0) repeat calc(50% + var(--s) / var(--f)) calc(50% + var(--s) / var(--f)) / var(--s) var(--s);
+		border: var(--HOME-photo-border-width) solid var(--color-heading);
+		background: conic-gradient(from -90deg, var(--color-heading) 90deg, transparent 0) repeat calc(50% + var(--s) / var(--f)) calc(50% + var(--s) / var(--f)) / var(--s)
+			var(--s);
 
 		mask: radial-gradient(circle at 50% 50%, transparent calc(100% - var(--i) * 2), #0008 0) no-repeat center / calc(100% + 2 * var(--i)) calc(100% + 2 * var(--i));
 	}
@@ -489,7 +490,7 @@ html[data-theme='cyberpunk'] {
 		}
 
 		&:is(:hover, :focus-visible) {
-			filter: drop-shadow(0 0 0.5em color-mix(in hsl, var(--C-heading), transparent));
+			filter: drop-shadow(0 0 0.5em color-mix(in hsl, var(--color-heading), transparent));
 
 			@media (--accept-motion) {
 				animation: --cyberpunkCta 200ms steps(3, jump-none) 1;
@@ -505,10 +506,10 @@ html[data-theme='cyberpunk'] {
 		--CTA-box-shadow: none;
 
 		&:is(:hover, :focus-visible) {
-			--CTA-text-color: var(--C-accent);
-			--CTA-bg-color: var(--C-surface);
-			--CTA-border-color: var(--C-accent);
-			--CTA-box-shadow: 0 0 1em color-mix(in hsl, var(--C-accent), transparent);
+			--CTA-text-color: var(--color-accent);
+			--CTA-bg-color: var(--color-surface);
+			--CTA-border-color: var(--color-accent);
+			--CTA-box-shadow: 0 0 1em color-mix(in hsl, var(--color-accent), transparent);
 		}
 
 		font-family: var(--_font-heading-family);
@@ -516,13 +517,13 @@ html[data-theme='cyberpunk'] {
 
 	.hero-heading {
 		text-transform: uppercase;
-		text-shadow: 0 0.0125em 0.25em color-mix(in hsl, var(--C-heading), transparent);
+		text-shadow: 0 0.0125em 0.25em color-mix(in hsl, var(--color-heading), transparent);
 	}
 
 	hr:where(:not(.hero-like)) {
 		--s: 12px;
-		--g1: var(--C-accent-alt) 50%, transparent 0;
-		--g2: transparent 25%, var(--C-accent-alt) calc(25% + 0.5px), var(--C-accent-alt) calc(75% - 0.5px), transparent 75%;
+		--g1: var(--color-accent-alt) 50%, transparent 0;
+		--g2: transparent 25%, var(--color-accent-alt) calc(25% + 0.5px), var(--color-accent-alt) calc(75% - 0.5px), transparent 75%;
 
 		block-size: var(--s);
 
@@ -537,7 +538,7 @@ html[data-theme='cyberpunk'] {
 		clip-path: polygon(0 50%, 0 0, 100% 0, 100% 50%, calc(100% - 1em) 100%, 1em 100%);
 
 		& :any-link {
-			--LINK-color: var(--C-canvas);
+			--LINK-color: var(--color-canvas);
 		}
 	}
 
@@ -573,7 +574,7 @@ html[data-theme='cyberpunk'] {
 		border: 0px;
 		border-block-start: 1px solid currentColor;
 		border-image: initial;
-		background: color-mix(in hsl, var(--C-surface), transparent);
+		background: color-mix(in hsl, var(--color-surface), transparent);
 	}
 }
 
@@ -623,14 +624,14 @@ html[data-theme='vintage'] {
 	.homepage-photo {
 		--HOME-photo-border-width: 0px;
 		border-radius: var(--size-m);
-		background: var(--C-heading);
+		background: var(--color-heading);
 	}
 
 	hr:where(:not(.hero-like)) {
 		block-size: 1rem;
 
 		border-radius: 2px;
-		background: linear-gradient(90deg, goldenrod, gold 33%, goldenrod) no-repeat 50% 75% / 100% 0.125rem, linear-gradient(var(--C-heading) 75%, var(--C-text) 0);
+		background: linear-gradient(90deg, goldenrod, gold 33%, goldenrod) no-repeat 50% 75% / 100% 0.125rem, linear-gradient(var(--color-heading) 75%, var(--color-text) 0);
 	}
 
 	.header-link {
@@ -639,36 +640,36 @@ html[data-theme='vintage'] {
 		}
 
 		@media (--small-viewport) {
-			--LINK-color: var(--C-accent);
+			--LINK-color: var(--color-accent);
 
 			&:is(:hover, :focus-visible) {
-				--LINK-color: var(--C-heading);
+				--LINK-color: var(--color-heading);
 			}
 		}
 	}
 
 	.button:is(:active) {
-		--CTA-box-shadow: 0 1px 1px #0003, inset 0 -2px 2px #954a4a, inset 0 2px 2px var(--C-accent);
+		--CTA-box-shadow: 0 1px 1px #0003, inset 0 -2px 2px #954a4a, inset 0 2px 2px var(--color-accent);
 	}
 
 	.card a:is(:hover, :focus-visible) {
-		--LINK-color: var(--C-surface-alt);
-		--LINK-underline-color: var(--C-heading);
+		--LINK-color: var(--color-surface-alt);
+		--LINK-underline-color: var(--color-heading);
 	}
 
 	.signoff :any-link {
-		--LINK-color: var(--C-surface-alt);
-		--LINK-underline-color: var(--C-canvas);
+		--LINK-color: var(--color-surface-alt);
+		--LINK-underline-color: var(--color-canvas);
 
 		&:is(:hover, :focus-visible) {
-			--LINK-color: var(--C-canvas);
-			--LINK-underline-color: var(--C-heading);
+			--LINK-color: var(--color-canvas);
+			--LINK-underline-color: var(--color-heading);
 		}
 	}
 
 	.announcement {
-		background-color: var(--C-text);
-		box-shadow: inset 0 1px 0 var(--C-surface-alt);
+		background-color: var(--color-text);
+		box-shadow: inset 0 1px 0 var(--color-surface-alt);
 	}
 }
 
@@ -681,11 +682,11 @@ html[data-theme='campfire'] {
 			padding: var(--bleed);
 
 			color: transparent;
-			background: linear-gradient(135deg, var(--C-heading) 33%, var(--C-accent) 125%);
+			background: linear-gradient(135deg, var(--color-heading) 33%, var(--color-accent) 125%);
 			-webkit-background-clip: text;
 			background-clip: text;
 
-			filter: drop-shadow(-0.5px -1px 0 var(--C-text));
+			filter: drop-shadow(-0.5px -1px 0 var(--color-text));
 		}
 	}
 
@@ -707,12 +708,12 @@ html[data-theme='campfire'] {
 	}
 
 	.signoff {
-		color: var(--C-canvas);
-		border: 1px solid var(--C-text);
+		color: var(--color-canvas);
+		border: 1px solid var(--color-text);
 
 		& :any-link:is(:hover, :focus-visible) {
-			--LINK-color: var(--C-canvas);
-			--LINK-underline-color: var(--C-heading);
+			--LINK-color: var(--color-canvas);
+			--LINK-underline-color: var(--color-heading);
 		}
 	}
 
@@ -747,7 +748,7 @@ html[data-theme='campfire'] {
 			radial-gradient(circle at calc(var(--CTX-u) / 2) calc(100% - (var(--CTX-u) / 2)), var(--CTX-nail)),
 			radial-gradient(circle at calc(100% - (var(--CTX-u) / 2)) calc(100% - (var(--CTX-u) / 2)), var(--CTX-nail));
 		background-repeat: no-repeat;
-		box-shadow: 0 calc(var(--CTX-u) / 4 * -1) 0 var(--C-heading), var(--_shadow);
+		box-shadow: 0 calc(var(--CTX-u) / 4 * -1) 0 var(--color-heading), var(--_shadow);
 	}
 
 	.callout-label {
@@ -756,16 +757,16 @@ html[data-theme='campfire'] {
 	}
 
 	.signoff-title {
-		color: var(--C-surface);
+		color: var(--color-surface);
 		text-shadow: none;
 	}
 
 	:is(.codeblock, .codeview) {
-		--CODEBLOCK-border-color: var(--C-accent-alt);
+		--CODEBLOCK-border-color: var(--color-accent-alt);
 	}
 
 	.postlist-group-label {
-		color: var(--C-accent-alt);
+		color: var(--color-accent-alt);
 	}
 }
 
@@ -838,20 +839,20 @@ html[data-theme='director'] {
 
 	.hero-sub {
 		time {
-			color: var(--C-accent-alt);
+			color: var(--color-accent-alt);
 		}
 	}
 
 	.callout {
-		--callout-color: var(--C-surface-alt);
-		--callout-border-color: var(--C-text);
-		--callout-background: var(--C-text);
+		--callout-color: var(--color-surface-alt);
+		--callout-border-color: var(--color-text);
+		--callout-background: var(--color-text);
 	}
 
 	.signoff {
-		color: var(--C-surface-alt);
-		border-color: var(--C-text);
-		background: var(--C-text);
+		color: var(--color-surface-alt);
+		border-color: var(--color-text);
+		background: var(--color-text);
 	}
 
 	.callout,
@@ -861,12 +862,12 @@ html[data-theme='director'] {
 
 	.callout-label,
 	.signoff-title {
-		color: var(--C-surface);
+		color: var(--color-surface);
 	}
 
 	:is(.callout, .signoff) :any-link:is(:hover, :focus-visible) {
-		--LINK-color: var(--C-canvas);
-		--LINK-underline-color: var(--C-accent);
+		--LINK-color: var(--color-canvas);
+		--LINK-underline-color: var(--color-accent);
 	}
 
 	:not(pre) > code {
@@ -874,8 +875,8 @@ html[data-theme='director'] {
 		--CODE-bg: linear-gradient(
 			calc(90deg + 4deg * var(--f, 1)),
 			transparent 2px,
-			var(--C-surface-alt) 3px,
-			var(--C-surface-alt) calc(100% - 3px),
+			var(--color-surface-alt) 3px,
+			var(--color-surface-alt) calc(100% - 3px),
 			transparent calc(100% - 2px)
 		);
 
@@ -892,8 +893,8 @@ html[data-theme='director'] {
 	hr:where(:not(.hero-like)) {
 		--h: 20px;
 		--w: calc(var(--h) / var(--sqrt3));
-		--c: var(--C-heading);
-		--b: var(--C-canvas);
+		--c: var(--color-heading);
+		--b: var(--color-canvas);
 		--s: 0.75;
 		--s2: 0.25;
 		--g: calc(50% / var(--sqrt3));

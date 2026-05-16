@@ -1,8 +1,8 @@
 .callout {
-	--CALLOUT-color: var(--callout-color, var(--C-text));
+	--CALLOUT-color: var(--callout-color, var(--color-text));
 	--CALLOUT-border-width: var(--layout-side-border);
-	--CALLOUT-border-color: var(--callout-border-color, var(--C-accent));
-	--CALLOUT-background: var(--callout-background, var(--C-surface));
+	--CALLOUT-border-color: var(--callout-border-color, var(--color-accent));
+	--CALLOUT-background: var(--callout-background, var(--color-surface));
 	--CALLOUT-padding: calc(var(--layout-gutter) - var(--CALLOUT-border-width));
 
 	position: relative;
@@ -20,7 +20,7 @@
 	display: block;
 	margin-block-end: var(--size-xs);
 
-	color: var(--C-heading);
+	color: var(--color-heading);
 
 	&::before {
 		content: var(--callout-emoji, none);

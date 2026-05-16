@@ -1,19 +1,19 @@
 .color-canvas {
-    color: var(--C-canvas);
+	color: var(--color-canvas);
 }
 
 .color-surface {
-    color: var(--C-surface);
+	color: var(--color-surface);
 }
 
 .color-text {
-    color: var(--C-text);
+	color: var(--color-text);
 }
 
 .color-heading {
-    color: var(--C-heading);
+	color: var(--color-heading);
 }
 
 .color-accent {
-    color: var(--C-accent);
+	color: var(--color-accent);
 }

@@ -1,6 +1,6 @@
 .legendary {
 	--LGD-border-width: 1px;
-	--LGD-border-color: var(--C-accent);
+	--LGD-border-color: var(--color-accent);
 	--LGD-corner-radius: var(--_corner);
 	--LGD-border-style: solid;
 	--LGD-padding: max(var(--LGD-corner-radius), var(--size-m));

@@ -47,9 +47,9 @@
 	display: inline-block;
 	padding: var(--size-xs);
 
-	color: var(--C-heading);
-	background-color: var(--C-surface);
-	outline-color: var(--C-accent);
+	color: var(--color-heading);
+	background-color: var(--color-surface);
+	outline-color: var(--color-accent);
 
 	/* When a skip-link is added to a specific part of the page and not the entire content */
 	&[data-skiplink='local'] {
@@ -129,8 +129,8 @@
 			display: block;
 			margin: auto;
 
-			color: var(--C-surface);
-			background-color: var(--C-text);
+			color: var(--color-surface);
+			background-color: var(--color-text);
 		}
 	}
 

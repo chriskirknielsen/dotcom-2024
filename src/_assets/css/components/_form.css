@@ -103,7 +103,7 @@
 
 :is(form, [data-formlike]) :is(input, select) {
 	line-height: 1;
-	accent-color: var(--C-accent);
+	accent-color: var(--color-accent);
 }
 
 fieldset {

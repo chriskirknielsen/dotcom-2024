@@ -13,7 +13,7 @@ thead > tr > th {
 	font-size: 0.625em;
 	font-weight: normal;
 	text-transform: uppercase;
-	color: var(--C-accent);
+	color: var(--color-accent);
 }
 tr > :is(td, th) {
 	padding-inline: var(--size-s);
@@ -22,5 +22,5 @@ tr > :is(td, th) {
 }
 
 tbody > tr:where(:nth-child(odd of :not([hidden]))) {
-	background: color-mix(in oklch, transparent 90%, var(--C-accent));
+	background: color-mix(in oklch, transparent 90%, var(--color-accent));
 }

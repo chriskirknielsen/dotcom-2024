@@ -3,7 +3,7 @@
 	--TL-gap-y: var(--size-2xl);
 	--TL-image-radius: clamp(0px, var(--_corner) * 999, var(--_card-corner));
 	--TL-rule-thickness: 2px;
-	--TL-rule-color: var(--C-accent);
+	--TL-rule-color: var(--color-accent);
 	--TL-rule-radius: clamp(0px, var(--TL-image-radius), var(--TL-gap-x) / 2);
 	--TL-fadeout: 6rem;
 

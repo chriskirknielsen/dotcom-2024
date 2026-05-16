@@ -167,8 +167,8 @@ class ThemePicker extends HTMLElement {
 	updateCustomThemeStyles() {
 		const form = document.getElementById('theme-custom-form');
 		const values = Object.fromEntries(new FormData(form));
-		const canvasHsl = this.hexToHsl(values['C-canvas']);
-		const accentHsl = this.hexToHsl(values['C-accent']);
+		const canvasHsl = this.hexToHsl(values['color-canvas']);
+		const accentHsl = this.hexToHsl(values['color-accent']);
 		const isDark = canvasHsl.l < 50; // Guestimation
 		const remappedValues = Object.entries(values).map(([key, input]) => {
 			let value;
@@ -224,7 +224,7 @@ class ThemePicker extends HTMLElement {
 			--font-heading-style: ${values['font-heading-family'] === 'XanhMono' ? 'italic' : 'normal'};
 			--font-heading-size-adjust: none;
 			${values['font-heading-transform'] === 'uppercase' ? '--HERO-title-factor: 1.75;' : ''}
-			--header-bg-color: color-mix(in oklch, var(--C-surface), var(--C-canvas));
+			--header-bg-color: color-mix(in oklch, var(--color-surface), var(--color-canvas));
 			--stroke-linecap: ${values.corner};
 			--shadow-color: ${shadowColor};
 			${values['font-body-family'] === 'monospace' ? 'font-size-adjust: 0.45;' : ''}
@@ -235,7 +235,8 @@ class ThemePicker extends HTMLElement {
 	}
 
 	connectedCallback() {
-		const savedStyles = JSON.parse(window.localStorage.getItem(this.styleStore) || null);
+		const savedJson = (window.localStorage.getItem(this.styleStore) || '').replace(/"C-([a-z-]+)":/g, `"color-$1":`); // Legacy handling of C-{color} names
+		const savedStyles = JSON.parse(savedJson || null);
 		const form = document.getElementById('theme-custom-form');
 		if (savedStyles) {
 			Array.from(form.querySelectorAll('[name]')).forEach((field) => {

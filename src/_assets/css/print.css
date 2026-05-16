@@ -1,13 +1,13 @@
 /* https://github.com/h5bp/main.css/blob/main/src/_print.css */
 @media print {
 	:root:not(#\#) {
-		--C-canvas: #fff;
-		--C-surface: #fff;
-		--C-surface-alt: #fff;
-		--C-text: #000;
-		--C-heading: #000;
-		--C-accent: #000;
-		--C-accent-alt: #000;
+		--color-canvas: #fff;
+		--color-surface: #fff;
+		--color-surface-alt: #fff;
+		--color-text: #000;
+		--color-heading: #000;
+		--color-accent: #000;
+		--color-accent-alt: #000;
 
 		&,
 		*,

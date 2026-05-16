@@ -88,7 +88,7 @@
 										<p class="theme-custom-control">
 											<label for="theme-custom-color-{{ colorKey }}" class="theme-custom-control-inner">
 												<span class="theme-custom-control-label">{{ colorKey |> toTitleCase }}<span class="visually-hidden"> color</span>:</span>
-												<input type="color" id="theme-custom-color-{{ colorKey }}" data-color-key="{{ colorKey }}" name="C-{{ colorKey }}" class="theme-custom-control-field">
+												<input type="color" id="theme-custom-color-{{ colorKey }}" data-color-key="{{ colorKey }}" name="color-{{ colorKey }}" class="theme-custom-control-field">
 											</label>
 											{{ if colorKey === 'canvas' }}Controls the color-scheme{{ /if }}
 										</p>
@@ -106,7 +106,7 @@
 										<p class="theme-custom-control">
 											<label for="theme-custom-color-{{ colorKey }}" class="theme-custom-control-inner">
 												<span class="theme-custom-control-label">{{ colorKey |> toTitleCase }}<span class="visually-hidden"> color</span>:</span>
-												<input type="color" id="theme-custom-color-{{ colorKey }}" data-color-key="{{ colorKey }}" name="C-{{ colorKey }}" class="theme-custom-control-field">
+												<input type="color" id="theme-custom-color-{{ colorKey }}" data-color-key="{{ colorKey }}" name="color-{{ colorKey }}" class="theme-custom-control-field">
 											</label>
 										</p>
 									{{ /for }}

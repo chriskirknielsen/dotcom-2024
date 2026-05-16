@@ -92,11 +92,11 @@
 }
 
 .expander-content {
-	--CODE-bg: var(--C-surface-alt, var(--C-canvas));
+	--CODE-bg: var(--color-surface-alt, var(--color-canvas));
 	margin-inline: var(--size-s);
 	padding: var(--size-m);
 
-	background: var(--C-surface);
+	background: var(--color-surface);
 	box-shadow: var(--_shadow);
 }
 

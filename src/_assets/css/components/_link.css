@@ -50,7 +50,7 @@
 			position: absolute;
 
 			font-size: 0.625em;
-			color: var(--C-accent-alt, var(--C-accent));
+			color: var(--color-accent-alt, var(--color-accent));
 
 			opacity: 0;
 

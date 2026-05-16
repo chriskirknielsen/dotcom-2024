@@ -30,7 +30,7 @@
 	content: '—';
 	content: '—' / '';
 
-	color: var(--C-accent);
+	color: var(--color-accent);
 }
 .search-results:not(:has(.search-results-item:not([hidden]) > .search-results-col-date:not(:empty))) .search-results-col-date {
 	display: none; /* When displaying a list of results that are all without a date, hide the date column */

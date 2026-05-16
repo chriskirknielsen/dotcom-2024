@@ -46,7 +46,7 @@
 		}
 
 		&:not(:has(> a:is(:hover, :focus-visible)))::before {
-			color: color-mix(in hsl, var(--C-text), transparent 30%);
+			color: color-mix(in hsl, var(--color-text), transparent 30%);
 		}
 	}
 }

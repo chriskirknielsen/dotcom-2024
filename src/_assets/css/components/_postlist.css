@@ -13,11 +13,11 @@
 	padding-inline-start: var(--size-xs);
 	padding-block-end: var(--size-2xs);
 
-	color: var(--C-accent);
+	color: var(--color-accent);
 	border-inline-start: calc(var(--LIST-group-border) * 1px) solid transparent;
 	border-block-end: calc(var(--LIST-group-border) * 1px) solid transparent;
 	border-image: radial-gradient(100% 100% at 0 100%, currentColor, transparent) var(--LIST-group-border);
-	background: radial-gradient(farthest-side at 0 100%, var(--C-canvas), transparent);
+	background: radial-gradient(farthest-side at 0 100%, var(--color-canvas), transparent);
 
 	cursor: pointer;
 

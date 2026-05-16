@@ -41,7 +41,7 @@ html:not([data-theme]) {
 		aspect-ratio: 1;
 
 		border-radius: 50%;
-		background: var(--C-accent);
+		background: var(--color-accent);
 	}
 
 	@media (--prefers-light) {

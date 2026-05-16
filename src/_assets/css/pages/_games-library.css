@@ -565,7 +565,7 @@
 
 	font-size: 0.875em;
 
-	accent-color: var(--C-accent);
+	accent-color: var(--color-accent);
 }
 
 [data-slot-img='trophyIcon'] {

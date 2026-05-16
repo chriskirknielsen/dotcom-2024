@@ -29,8 +29,8 @@
 
 .icon-badge {
 	--ICON-size: 1.25em;
-	--fg: var(--C-canvas);
-	--bg: var(--C-text);
+	--fg: var(--color-canvas);
+	--bg: var(--color-text);
 
 	block-size: var(--ICON-size);
 	margin-inline-end: 0.25em;

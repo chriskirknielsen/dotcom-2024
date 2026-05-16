@@ -48,9 +48,9 @@ code-wrap {
 .codeview {
 	--CODEBLOCK-border-width: 1px;
 	--CODEBLOCK-padding: calc(var(--layout-gutter) - var(--CODEBLOCK-border-width));
-	--CODEBLOCK-border-color: var(--C-accent);
+	--CODEBLOCK-border-color: var(--color-accent);
 	--CODEBLOCK-toolbar-padding: 6px;
-	--CODEBLOCK-toolbar-color: var(--C-surface);
+	--CODEBLOCK-toolbar-color: var(--color-surface);
 }
 
 .codeblock-toolbar,
@@ -92,8 +92,8 @@ code-wrap {
 	font-size: var(--typeScale-n1);
 	border: var(--CODEBLOCK-border-width) solid var(--CODEBLOCK-border-color);
 	border-block-start-width: 0;
-	background-color: var(--CODE-bg, var(--C-surface));
-	background-image: conic-gradient(from -90deg at 1px 1px, color-mix(in hsl, var(--C-inactive, #808080), transparent) 0 90deg, transparent 0);
+	background-color: var(--CODE-bg, var(--color-surface));
+	background-image: conic-gradient(from -90deg at 1px 1px, color-mix(in hsl, var(--color-inactive, #808080), transparent) 0 90deg, transparent 0);
 	background-origin: content-box;
 	background-size: calc(var(--tab-size) * 1ch) 0.33em;
 	background-attachment: local;
@@ -110,9 +110,9 @@ code-wrap {
 	word-break: break-word;
 	line-height: 1;
 
-	color: var(--C-heading);
+	color: var(--color-heading);
 	border-radius: var(--_corner);
-	background: var(--CODE-bg, var(--C-surface));
+	background: var(--CODE-bg, var(--color-surface));
 
 	&::before,
 	&::after {
@@ -130,12 +130,12 @@ kbd {
 	margin-inline-end: calc(var(--d) + 2px);
 
 	color: #111;
-	color: oklch(from var(--C-heading) 10% 100% h);
+	color: oklch(from var(--color-heading) 10% 100% h);
 	border-radius: max(var(--d), var(--_corner)); /* Always at least a little rounded */
 	background: #eee;
-	background: oklch(from var(--C-heading) 100% 15% h);
+	background: oklch(from var(--color-heading) 100% 15% h);
 	box-shadow: calc(var(--d) - 1px) calc(var(--d) - 1px) 0 var(--d) #808080;
-	box-shadow: calc(var(--d) - 1px) calc(var(--d) - 1px) 0 var(--d) oklch(from var(--C-heading) 50% 20% h);
+	box-shadow: calc(var(--d) - 1px) calc(var(--d) - 1px) 0 var(--d) oklch(from var(--color-heading) 50% 20% h);
 }
 
 .token.namespace {
@@ -145,17 +145,17 @@ kbd {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: var(--C-inactive, #808080);
+	color: var(--color-inactive, #808080);
 }
 
 .token.comment {
 	padding-inline: 0.175em 0.125em; /* Because it's italic, it feels like there's less space on the left, so we add a tiny bit more */
 
 	font-style: italic;
-	color: var(--C-text);
+	color: var(--color-text);
 	border-radius: var(--_corner);
-	background: var(--C-canvas);
-	outline: 1px solid var(--C-inactive, gray);
+	background: var(--color-canvas);
+	outline: 1px solid var(--color-inactive, gray);
 }
 
 .token.boolean,
@@ -167,12 +167,12 @@ kbd {
 .token.property,
 .token.deleted,
 .token.tag {
-	color: var(--C-heading);
+	color: var(--color-heading);
 }
 
 .token.selector,
 .token.inserted {
-	color: var(--C-heading);
+	color: var(--color-heading);
 }
 
 .token.attr-name,
@@ -182,7 +182,7 @@ kbd {
 .token.string,
 .style .token.string,
 .token.attr-value {
-	color: var(--C-accent-alt, var(--C-accent));
+	color: var(--color-accent-alt, var(--color-accent));
 }
 
 .token.regex,
@@ -192,12 +192,12 @@ kbd {
 .token.script,
 .token.punctuation,
 .token.script .token.keyword {
-	color: var(--C-accent);
+	color: var(--color-accent);
 }
 
 .token.placeholder,
 .token.variable {
-	color: var(--C-text);
+	color: var(--color-text);
 }
 
 .token.important,
