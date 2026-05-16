@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
 	document.querySelector('[data-gaming-toolbar]').hidden = false;
 
 	// Reset saved form selection on page load
-	eachDom('[data-games-sizing], [data-games-completed]', (select) => (select.value = select.querySelector('option[selected]').value));
+	eachDom('[data-games-sizing], [data-games-completed], [data-games-sort]', (select) => (select.value = select.querySelector('option[selected]').value));
 
 	eachDom('.gaming-box', (spine) => {
 		const button = document.createElement('button');
@@ -311,6 +311,28 @@ document.addEventListener('change', function (e) {
 			'[data-gaming-count]',
 			(g) => (g.textContent = g.closest('.expander').querySelector('.gaming-platform-group').querySelectorAll(':scope > li:not([hidden])').length)
 		);
+	} else if ((target = e.target.closest('[data-games-sort]'))) {
+		const selectedValue = target.value || 'alpha';
+		eachDom('[data-gaming-platform]', (g) => {
+			const games = Array.from(g.querySelectorAll(':scope > .gaming-box-wrap'));
+			const gamesWithSort = games.map((game) => {
+				const gameData = JSON.parse(game.getAttribute('data-game'));
+				return {
+					el: game,
+					sortTitle: gameData.sortTitle || gameData.title,
+					year: gameData.year,
+				};
+			});
+			const sortedGames = gamesWithSort.sort((a, b) => {
+				if (selectedValue === 'year' && a.year !== b.year) {
+					return a.year - b.year;
+				}
+				return a.sortTitle.localeCompare(b.sortTitle, 'en', { numeric: true });
+			});
+			for (const game of sortedGames) {
+				g.appendChild(game.el);
+			}
+		});
 	}
 });
 

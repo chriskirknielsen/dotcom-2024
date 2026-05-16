@@ -136,21 +136,23 @@ const gameslibrary = await notionDatabaseQuery({
 				let totalCompletion = [];
 
 				const processedSubItem = item.subItems
-					.map((sub) => {
-						const matched = normalizedData.find((entry) => sub.id === entry.id);
+					.reduce((prev, curr) => {
+						const matched = normalizedData.find((entry) => curr.id === entry.id);
 						if (!matched) {
-							return false; // Hidden items will not be surfaced
+							return prev; // Hidden items will not be surfaced
 						}
+
 						totalCompletion.push(matched.completed);
-						return {
-							title: matched.title.replace(/'/, '’'),
-							sortTitle: matched.sortTitle,
-							completed: matched.completed,
-							trophyProgress: matched.trophyProgress,
-							trophyEarned: matched.trophyEarned,
-						};
-					})
-					.filter((t) => Boolean(t))
+						return prev.concat([
+							{
+								title: matched.title.replace(/'/, '’'),
+								sortTitle: matched.sortTitle,
+								completed: matched.completed,
+								trophyProgress: matched.trophyProgress,
+								trophyEarned: matched.trophyEarned,
+							},
+						]);
+					}, [])
 					.sort((a, b) => (a.sortTitle || a.title).localeCompare(b.sortTitle || b.title, 'en', { numeric: true }))
 					.map((sub) => {
 						delete sub.sortTitle; // We don't need this property once we've sorted the sub-items
