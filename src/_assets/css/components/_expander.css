@@ -1,15 +1,29 @@
 .expander-button:not(#\#) {
-	position: sticky;
+	--CTA-display: flex;
+	--arrow-side-size: 0.5em;
+
+	&:is(summary) {
+		position: sticky;
+		z-index: 2;
+	}
+
 	inset-block-start: 0;
-	z-index: 2;
 
 	-webkit-user-select: none;
 	user-select: none;
-
-	--CTA-display: flex;
+	list-style-type: '';
 
 	&::-webkit-details-marker {
 		display: none;
+	}
+
+	&.expander-button:not(.expander-button--unbalanced):has(> .expander-button-arrow)::after {
+		/* Balance the contents of the button due to the arrow on the other side */
+		content: '';
+
+		display: inline-block;
+		inline-size: calc(var(--sqrt3) * var(--arrow-side-size) / 2);
+		margin-inline-start: auto;
 	}
 }
 
@@ -18,15 +32,16 @@
      * 1: Equilateral triangle has h = √3 * a / 2, where a is the side
      * 2: Center of mass for a triangle, for side a, is C = (a√3)/3
      * 3: Compensate to be optically sized similar to the original triangle
+	 * 4: Push away from the button contents
      */
 
 	display: inline-block;
 	block-size: 0;
 	inline-size: 0;
+	margin-inline-end: auto; /* 4 */
 
 	--CENTER-MASS: calc(100% - var(--sqrt3) * 100% / 3) 50%; /* 2 */
 	--DELAY: calc(var(--anim-short) / 4);
-	--arrow-side-size: 0.5em;
 
 	border-width: calc(var(--arrow-side-size) / 2) 0 calc(var(--arrow-side-size) / 2) calc(var(--sqrt3) * var(--arrow-side-size) / 2); /* 1 */
 	border-style: solid;
