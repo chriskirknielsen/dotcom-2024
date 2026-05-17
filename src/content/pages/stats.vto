@@ -77,7 +77,7 @@
 			const pointValue = monthlyData[yearAndMonthLabel] || 0;
 			const pointPosX = svgChartPadding + graphStepSizeX * i;
 			const pointPosY = svgSize.h - svgChartPadding - ((monthlyData[yearAndMonthLabel] || 0) / maxGraphValue * (svgSize.h - svgChartPadding));
-			dataPointCoordinates.push([Math.round(pointPosX * 100) / 100, Math.round(pointPosY * 100) / 100, pointValue, yearAndMonthLabel]);
+			dataPointCoordinates.push([Math.round(pointPosX), Math.round(pointPosY), pointValue, yearAndMonthLabel]);
 			allMonthsList.push(yearAndMonthLabel);
 		}
 		const svgAlt =
