@@ -10,12 +10,6 @@
 		summary: function (data) {
 			return `My approach to artificial intelligence (last updated ${this.dateFormat(data.page.date.toISOString(), { format: 'nice' })})`;
 		},
-		customMetaImage: function (data) {
-			if (data.permalink) {
-				return this.toOgImage(data);
-			}
-			return this.toPath([data.assets.images, 'metaimage.jpg']);
-		}
 	},
 }
 ---

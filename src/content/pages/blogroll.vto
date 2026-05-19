@@ -6,12 +6,6 @@
 	tags: ['_og'],
 	eleventyComputed: {
 		ogImageSummary: (data) => data.summary,
-		customMetaImage: function (data) {
-			if (data.permalink) {
-				return this.toOgImage(data);
-			}
-			return this.toPath([data.assets.images, 'metaimage.jpg']);
-		}
 	},
 	blogroll: {
 		"Individuals": [

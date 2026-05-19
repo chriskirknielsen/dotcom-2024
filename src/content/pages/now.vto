@@ -4,6 +4,8 @@
 	summary: 'What am I doing these days?',
 	permalink: '/now/',
 	section: 'now',
+	tags: ['_slash', '_og'],
+	ogImageTitle: '/now',
 	nowInfo: {
 		home: { heading: 'Living' },
 		music: { heading: 'Listening' },
@@ -11,16 +13,6 @@
 		show: { heading: 'Watching', detail: 'Season' },
 		book: { heading: 'Reading' },
 		game: { heading: 'Playing' },
-	},
-	tags: ['_slash', '_og'],
-	eleventyComputed: {
-		ogImageTitle: '/now',
-		customMetaImage: function (data) {
-			if (data.permalink) {
-				return this.toOgImage(data);
-			}
-			return this.toPath([data.assets.images, 'metaimage.jpg']);
-		}
 	},
 }
 ---

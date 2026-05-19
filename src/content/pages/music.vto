@@ -89,14 +89,6 @@
 			intro: 'Ghosts’n’Stuff',
 		},
 	],
-	eleventyComputed: {
-		customMetaImage: function (data) {
-			if (data.permalink) {
-				return this.toOgImage(data);
-			}
-			return this.toPath([data.assets.images, 'metaimage.jpg']);
-		}
-	},
 }
 ---
 

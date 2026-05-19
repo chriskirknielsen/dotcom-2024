@@ -34,8 +34,12 @@ export default function (eleventyConfig) {
 	eleventyConfig.addFilter('toOgImage', function (data, url = null) {
 		// Extract the link from the data if not provided
 		if (!url) {
-			if (data.permalink && typeof data.permalink === 'string') {
-				url = data.permalink;
+			if (data.permalink) {
+				if (typeof data.permalink === 'string') {
+					url = data.permalink;
+				} else if (typeof data.permalink === 'function') {
+					url = data.permalink(data);
+				}
 			} else if (data?.page?.url && typeof data.page.url === 'string') {
 				url = data.page.url;
 			}

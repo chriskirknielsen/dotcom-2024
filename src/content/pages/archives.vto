@@ -2,6 +2,7 @@
 {
 	title: 'Archives',
 	summary: 'A digital museum of the previous versions of this website',
+	ogImageSummary: 'A Digital Museum',
 	permalink: '/archives/',
 	versionsInfo: {
 		2016: { description: "Definitely a student’s website" },
@@ -10,15 +11,6 @@
 		2022: { description: "I… uh… made it better with themes!", hasScheme: true }
 	},
 	tags: ['_og'],
-	eleventyComputed: {
-		ogImageSummary: 'A Digital Museum',
-		customMetaImage: function (data) {
-			if (data.permalink) {
-				return this.toOgImage(data);
-			}
-			return this.toPath([data.assets.images, 'metaimage.jpg']);
-		}
-	},
 }
 ---
 

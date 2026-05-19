@@ -6,13 +6,7 @@
 	tags: ['_og'],
 	runAutoToc: true,
 	eleventyComputed: {
-		ogImageSummary: 'Just stats',
-		customMetaImage: function (data) {
-			if (data.permalink) {
-				return this.toOgImage(data);
-			}
-			return this.toPath([data.assets.images, 'metaimage.jpg']);
-		},
+		ogImageSummary: (data) => data.summary,
 	},
 	eleventyImport: {
 		collections: ['_posts', '_pages', '_designs', '_projects', '_fonts']

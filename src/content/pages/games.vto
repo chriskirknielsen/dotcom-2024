@@ -5,6 +5,7 @@
 	ogImageSummary: 'Some of my favourites',
 	permalink: '/games/',
 	section: 'games',
+	tags: ['_slash', '_og'],
 	toc: true,
 	autoHeadingAnchors: true,
 	games: [
@@ -255,15 +256,6 @@
 			blurb: "I’ve always been an aspiring skateboarder, though I am barely worthy of an ollie. Regardless, I love the sport, and while Tony Hawk games are super fun, skate. is one of those games that just made it feel real _and_ fun. I’ve sunk many hours into the three games, but the newest entry, I think, is not for me."
 		},
 	],
-	tags: ['_slash', '_og'],
-	eleventyComputed: {
-		customMetaImage: function (data) {
-			if (data.permalink) {
-				return this.toOgImage(data);
-			}
-			return this.toPath([data.assets.images, 'metaimage.jpg']);
-		}
-	},
 }
 ---
 

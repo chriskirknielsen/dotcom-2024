@@ -3,17 +3,12 @@
 	title: 'Uses',
 	summary: 'My frequently used tools',
 	permalink: '/uses/',
+	tags: ['_slash', '_og'],
 	templateEngineOverride: 'vto,md',
 	toc: true,
-	tags: ['_slash', '_og'],
+	ogImageTitle: '/uses',
 	eleventyComputed: {
 		ogImageSummary: (data) => data.summary,
-		customMetaImage: function (data) {
-			if (data.permalink) {
-				return this.toOgImage(data);
-			}
-			return this.toPath([data.assets.images, 'metaimage.jpg']);
-		}
 	},
 }
 ---

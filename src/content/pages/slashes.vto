@@ -4,14 +4,10 @@
 	summary: 'All my slash pages',
 	permalink: '/slashes/',
 	tags: ['_og'],
+	ogImageTitle: '/slashes',
 	templateEngineOverride: 'vto,md',
 	eleventyComputed: {
-		customMetaImage: function (data) {
-			if (data.permalink) {
-				return this.toOgImage(data);
-			}
-			return this.toPath([data.assets.images, 'metaimage.jpg']);
-		}
+		ogImageSummary: (data) => data.summary,
 	},
 }
 ---

@@ -4,15 +4,7 @@
 	summary: 'Find, uh, stuff',
 	permalink: '/search/',
 	tags: ['_og'],
-	eleventyComputed: {
-		ogImageSummary: 'Does exactly what you’d expect',
-		customMetaImage: function (data) {
-			if (data.permalink) {
-				return this.toOgImage(data);
-			}
-			return this.toPath([data.assets.images, 'metaimage.jpg']);
-		}
-	},
+	ogImageSummary: 'Does exactly what you’d expect',
 }
 ---
 <instant-search data-search-input="q" class="display-block | flow">
