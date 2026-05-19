@@ -75,7 +75,7 @@
 			.logo-wrap::after {
 				content: '';
 				flex: 1 0 0;
-				height: calc(var(--fs) / 20);
+				height: calc(var(--fs) / 30);
 				background: var(--ca);
 			}
 			.logo-inner {
@@ -103,9 +103,8 @@
 			}
 			.logo-paths {
 				fill: var(--ct);
-				stroke: var(--ca);
-				stroke-width: calc(var(--fs) / 10);
-				paint-order: stroke;
+				stroke: 0;
+				filter: drop-shadow(calc(var(--fs) / 15) calc(var(--fs) / 15) 0 var(--ca));
 			}
 			.title {
 				margin: 0.1em 0;
