@@ -44,12 +44,6 @@ export default {
 				const datetime = new Date(date.toISOString().replace('00:00:00', data.time));
 				if (datetime !== 'Invalid DateTime') {
 					const formattedDate = this.dateFormat(datetime, { format: 'nice' });
-					// const formattedDate = new Intl.DateTimeFormat('en-GB', {
-					// 	year: 'numeric',
-					// 	month: 'long',
-					// 	day: 'numeric',
-					// 	timeZone: 'UTC',
-					// }).format(datetime);
 					return `Posted ${formattedDate}`;
 				}
 			}

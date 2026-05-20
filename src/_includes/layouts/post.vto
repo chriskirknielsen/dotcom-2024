@@ -102,7 +102,16 @@
 		<hr>
 		<div>
 		{{ if externalHost }}
-			{{ component 'cta', { url: externalUrl, label: `View original post on ${externalHost}`, icon: 'arrow-right' } }}
+			{{ if externalUrl }}
+				{{ if externalUrl.includes('css-tricks.com') }}
+					{{ set externalIcon = 'csstricks-icon' }}
+				{{ else if externalUrl.includes('smashingmagazine.com') }}
+					{{ set externalIcon = 'smashingmagazine-icon' }}
+				{{ else }}
+					{{ set externalIcon = null }}
+				{{ /if }}
+			{{ /if }}
+			{{ component 'cta', { url: externalUrl, label: `View original post on ${externalHost}`, iconBefore: !!externalIcon, icon: externalIcon || 'arrow-right' } }}
 		{{ else }}
 			View original post: <a href="{{ externalUrl }}">{{ externalUrl }}</a>
 		{{ /if }}
