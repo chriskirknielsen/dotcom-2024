@@ -1,4 +1,4 @@
-export default {
+export const strava = {
 	count: 190,
 	distance: 1500816.2999999996,
 	moving_time: 623408,
