@@ -1,6 +1,8 @@
 import { PurgeCSS } from 'purgecss';
 import jsBeautify from 'js-beautify';
 
+const BUILD_CONTEXT = ['serve', 'watch'].includes(process.env.ELEVENTY_RUN_MODE) ? 'DEV' : 'LIVE';
+
 export default function (eleventyConfig, options = {}) {
 	// Default values
 	const config = Object.assign(
@@ -48,6 +50,10 @@ export default function (eleventyConfig, options = {}) {
 			});
 
 			content = content.replace(placeholder, purgeCSSResults[0].css || '');
+		}
+
+		if (BUILD_CONTEXT === 'DEV') {
+			return content;
 		}
 
 		return jsBeautify.html(content, {
