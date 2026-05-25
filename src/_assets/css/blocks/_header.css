@@ -365,7 +365,8 @@ html[data-js='false'] .header-themepicker {
 		justify-content: flex-end;
 		inline-size: 100%;
 
-		&:not(:last-child) {
+		/* Add a separator between each group, except the last (the last group is followed by a <dialog>, hence :last-of-type) */
+		&:not(:last-of-type) {
 			&::before {
 				content: '';
 
