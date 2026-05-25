@@ -14,7 +14,7 @@ I have recently seen articles that tackle fascinating topics, only to notice a c
 {{ svg 'no-ai', { width: 320, height: 320, title: 'no A.I.' } }}
 {{ /gallery }}
 
-It goes without saying I made it myself (ironically enough, in a programme whose initials are… A.I.). And if you want to use it? Feel free to do so! I made the footer icon into a link so you can download it with a simple click, or you can use [this link to the symbol’s SVG file](/assets/img/no-ai.svg) as well.
+It goes without saying I made it myself (ironically enough, in a programme whose initials are… A.I.). And if you want to use it? Feel free to do so! I made the 88&times;31 “No-A.I.” button in the footer into a link so you can download it with a simple click, or you can use [this link to the symbol’s SVG file](/assets/img/no-ai.svg) as well.
 
 ## Other icons and badges
 You can find other icons and badges around the internet, here are a few:

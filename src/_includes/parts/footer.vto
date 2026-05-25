@@ -10,7 +10,7 @@
 
 			<wbr>
 
-			<a href="/assets/img/no-ai.svg" download class="footer-meta-ai" aria-label="No-A.I. icon, click to download SVG.">{{ svg 'no-ai', { class: 'inline-icon inline-icon--center', title: 'no A.I.' } }}</a>
+			{{ svg 'no-ai', { class: 'inline-icon inline-icon--center', title: 'No A.I.' } }}
 			<a href="/ai-policy/">100% human-made</a>.
 		</p>
 		
@@ -41,7 +41,6 @@
 				</li>
 				<li>
 					<a href="https://indieweb.social/@sstephenson/116098428280403793" style="
-						box-sizing: border-box;
 						display: flex;
 						align-items: center;
 						justify-content: center;
@@ -69,6 +68,24 @@
 				<li>
 					<!-- Made by leap123: https://front-end.social/@leap123@wetdry.world/111641069489695533 -->
 					<a href="https://11ty.dev" class="display-block"><img src="{{ [assets.images, 'made-with-11ty.gif'] |> toPath }}" alt="Made with Eleventy." loading="lazy" width="88" height="31"></a>
+				</li>
+				<li>
+					<a href="/assets/img/no-ai.svg" download style="
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						width: 88px;
+						height: 31px;
+						border: 2px outset #fff7ad;
+						background: #ffe300;
+						color: #cb0a00;
+					">
+						<svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 16 16" width="24" height="24">
+							<title>No-A.I., click to download icon SVG</title>
+							<path fill="currentColor" d="M12.37,13.35l1-1L3.61,2.61l-1,1,9.76,9.74ZM8,15.5c4.25,0,7.5-3.25,7.5-7.5S12.26.5,8,.5C3.93.43.57,3.67.5,7.74c0,.09,0,.17,0,.26,0,4.24,3.26,7.5,7.5,7.5M8,14.18c-3.35.06-6.11-2.62-6.17-5.97,0-.07,0-.14,0-.21,0-3.5,2.67-6.18,6.17-6.18s6.17,2.68,6.17,6.18-2.67,6.18-6.17,6.18"/>
+							<path d="M10.29,8.48V3.78h2.07v6.77l-2.07-2.07ZM7,8.78h-1.14l.16-.99-1.5-1.5-1.3,5.43h2.18l.21-1.39h1.65l.22,1.4h2.2l-.09-.38-2.59-2.57ZM8.43,6.64l-.7-2.87h-2.16l2.86,2.87Z"/>
+						</svg>
+					</a>
 				</li>
 				<li>
 					<img src="{{ [assets.images, 'ckn-html5-lgtm.gif'] |> toPath }}" alt="Chris’s Seal of Approval: HTML5 looks good to me" loading="lazy" width="88" height="31">
