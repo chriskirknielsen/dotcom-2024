@@ -238,7 +238,9 @@
 </ul>
 {{ /set }}
 
-{{ if gameslibrary.meta.totalTrophyData }}
+{{ if trophyTotal === 0 }}
+{{# Something failed during the API data capture #}}
+{{ else if gameslibrary.meta.totalTrophyData }}
 	{{ set trophyGames = gameslibrary.data.filter((g) => g.trophyProgress > 0).sort((a, b) => Date.parse(b.trophyLastUpdate) - Date.parse(a.trophyLastUpdate)) }}
 	{{ expander trophyExpanderLabel }}
 		<div class="textAlign-center textWrap-balance" id="trophylist">

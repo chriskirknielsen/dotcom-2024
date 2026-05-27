@@ -516,7 +516,8 @@
 	[data-gaming-platform='ps4'],
 	[data-gaming-platform='ps5'],
 	[data-gaming-platform='psp'],
-	[data-gaming-platform='psv'] {
+	[data-gaming-platform='psv'],
+	[data-gaming-platform='pc'] {
 		& .gaming-spine-label > span {
 			padding-block-start: 0.2em; /* Magic number, looks just right to my eyes */
 		}
