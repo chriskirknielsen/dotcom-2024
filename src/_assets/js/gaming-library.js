@@ -146,12 +146,15 @@ function loadAndPopulateGameDetailDialog(target, navAnimSign = 0) {
 		: '';
 
 	const boxartEl = clone.querySelector('[data-slot-computed="boxart"]');
+	const boxartImgEl = boxartEl ? boxartEl.querySelector('img') : null;
 	if (gameData.boxart.url) {
-		boxartEl.querySelector('img').src = gameData.boxart.url;
+		boxartImgEl.src = gameData.boxart.url;
+		boxartImgEl.alt = `Box art for ${gameData.title}`;
 		// boxartEl.setAttribute('data-gaming-platform', gameData.platform.toLowerCase());
 		boxartEl.hidden = false;
 	} else {
-		boxartEl.querySelector('img').src = '';
+		boxartImgEl.src = '';
+		boxartImgEl.alt = '';
 		// boxartEl.removeAttribute('data-gaming-platform');
 		boxartEl.hidden = true;
 	}
@@ -230,7 +233,9 @@ document.addEventListener('click', function (e) {
 			d.open = newPressed;
 		});
 	} else if ((target = e.target.closest('.gaming-box'))) {
-		loadAndPopulateGameDetailDialog(target);
+		if (target && target.closest) {
+			loadAndPopulateGameDetailDialog(target);
+		}
 	} else if (e.target.closest('[data-hide-game-info]') || e.target.matches('.gaming-details-dialog')) {
 		const dialog = document.getElementById('gaming-details-dialog');
 		hideOpenGame();
