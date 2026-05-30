@@ -259,8 +259,8 @@
 
 					<div class="gaming-trophies-info">
 						<div class="h3 gaming-trophies-title">{{ game.title }}</div>
-						<div class="lineHeight-dense">{{ trophyCount }} {{ trophyCount === 1 ? 'trophy' : 'trophies' }}</div>
-						{{ if game.trophyLastUpdate }}<div class="fontSize-smaller fontStyle-italic lineHeight-tight">Latest: {{ game.trophyLastUpdate |> timeTag({ format: 'nice' }) }}</div>{{ /if }}
+						<div class="lineHeight-one">{{ trophyCount }} {{ trophyCount === 1 ? 'trophy' : 'trophies' }}</div>
+						{{ if game.trophyLastUpdate }}<div class="fontSize-smaller fontStyle-italic lineHeight-dense">Latest: {{ game.trophyLastUpdate |> timeTag({ format: 'nice' }) }}</div>{{ /if }}
 					</div>
 
 					<div class="gaming-trophies-plat">

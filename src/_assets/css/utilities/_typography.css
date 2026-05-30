@@ -38,6 +38,9 @@
 }
 
 .lineHeight-tight {
+	line-height: 1.4;
+}
+.lineHeight-dense {
 	line-height: 1.1;
 }
 

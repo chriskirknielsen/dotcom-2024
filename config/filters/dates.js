@@ -23,6 +23,9 @@ const dateFormat = (date, opts = {}) => {
 		case 'machine': {
 			return utcDate.toFormat('yyyy-MM-dd');
 		}
+		case 'monthAndYear': {
+			return utcDate.toFormat('LLLL yyyy');
+		}
 		case 'nice': {
 			// In French, you usually say "1st" instead of "1" for the first of the month, but the rest of the days can be said as "13 October 1984", no ordinal needed
 			if (lang === 'fr' && parseInt(utcDate.toFormat('d'), 10) === 1) {
