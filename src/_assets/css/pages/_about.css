@@ -498,14 +498,3 @@
 	text-align: center;
 	white-space: nowrap;
 }
-
-/* If a list item has line breaks within, give more space between all items of the list, but shrink the line-height, to better group each item */
-:is(ul, ol):has(> li > br) > li {
-	line-height: 1.4;
-	text-wrap: balance;
-	text-wrap: pretty;
-
-	& + li {
-		margin-block-start: 0.5em;
-	}
-}
