@@ -9,6 +9,18 @@
 	}
 }
 
+li:has(> .list-item-icon) {
+	position: relative;
+
+	list-style-type: '';
+
+	& > .list-item-icon {
+		position: absolute;
+		inset-inline-end: calc(100% + 0.5ch);
+		inset-block-start: calc((1lh - var(--ICON-size, 1em)) / 2);
+	}
+}
+
 *:has(+ .macos-dock-wrapper) {
 	position: relative;
 	z-index: 1;
@@ -56,7 +68,8 @@
 	scrollbar-width: thin;
 	scrollbar-color: #808080 transparent;
 
-	mask: conic-gradient(tan 0 0) no-repeat 0 100% / 100% var(--MACOSDOCK-padding),
+	mask:
+		conic-gradient(tan 0 0) no-repeat 0 100% / 100% var(--MACOSDOCK-padding),
 		linear-gradient(90deg, transparent 0%, tan var(--MACOSDOCK-padding), tan calc(100% - var(--MACOSDOCK-padding)), transparent 100%) no-repeat center 0 / 100%
 			calc(100% - var(--MACOSDOCK-padding));
 
