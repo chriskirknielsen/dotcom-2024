@@ -24,6 +24,17 @@ body {
 
 	display: flex;
 	flex-direction: column;
+
+	&::before {
+		/* Pride banner strip */
+		content: '';
+
+		display: block;
+		block-size: 4px;
+
+		background: linear-gradient(90deg, red 16.66%, orange 0 33.33%, yellow 0 50%, green 0 66.66%, blue 0 83.33%, indigo 0);
+		opacity: 0.67;
+	}
 }
 
 body > footer {
