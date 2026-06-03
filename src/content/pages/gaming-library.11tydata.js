@@ -97,10 +97,13 @@ const gameslibrary = await notionDatabaseQuery({
 					boxart:
 						props.Boxart.files.length > 0
 							? {
-									url: props.Boxart.files[0].type === 'external' ? props.Boxart.files[0].external.url : props.Boxart.files[0].file.url,
+									url:
+										props.Boxart.files[0].type === 'external'
+											? toCloudinary(props.Boxart.files[0].external.url, `c_fit,h_500/q_80/f_auto`)
+											: props.Boxart.files[0].file.url,
 									width: 375, // All games should use the IGDB image, which has a fixed size
 									height: 500,
-							  }
+								}
 							: null,
 					trophyIcon:
 						props.Thumbnail.files.length > 0
@@ -124,7 +127,6 @@ const gameslibrary = await notionDatabaseQuery({
 				} else {
 					delete processedEntry.trophyIcon;
 				}
-				delete processedEntry.psnId; // Once we have trophy data, we can discard the PSN's reference code to it
 
 				return processedEntry;
 			});

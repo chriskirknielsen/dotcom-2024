@@ -86,6 +86,7 @@
 					class="gaming-box-wrap"
 					{{ if ['Essentials', 'Platinum'].includes(game.edition) }}data-gaming-edition="{{ game.edition |> toLowerCase |> replace(' ', '-') }}"{{ /if }}
 					data-gaming-completed="{{ game.completed || false |> toString }}"
+					{{ if game.psnId }}data-gaming-psnid="{{ game.psnId }}"{{ /if }}
 					{{ if platformSlug === 'ps3' }}data-gaming-branding="{{ game.year < 2009 ? 'old' : 'new' }}"{{ /if }}
 					data-game="{{ game |> JSON.stringify |> escape }}"
 				>
@@ -258,7 +259,13 @@
 					<img src="{{ game.trophyIcon }}" alt="" fetchpriority="low" loading="lazy" width="{{ trophyIconHeight }}" height="{{ trophyIconWidth }}" class="gaming-trophies-image">
 
 					<div class="gaming-trophies-info">
-						<div class="h3 gaming-trophies-title">{{ game.title }}</div>
+						<div class="h3 gaming-trophies-title">
+							{{ game.title }}
+							<button type="button" class="button-reset | gaming-trophies-button" data-target-game="{{ game.psnId }}">
+								<span class="visually-hidden">View game info</span>
+								{{ svg 'arrow-external', { class: 'inline-icon' } }}
+							</button>
+						</div>
 						<div class="lineHeight-one">{{ trophyCount }} {{ trophyCount === 1 ? 'trophy' : 'trophies' }}</div>
 						{{ if game.trophyLastUpdate }}<div class="fontSize-smaller fontStyle-italic lineHeight-dense">Latest: {{ game.trophyLastUpdate |> timeTag({ format: 'nice' }) }}</div>{{ /if }}
 					</div>

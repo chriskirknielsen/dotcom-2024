@@ -142,7 +142,7 @@ function loadAndPopulateGameDetailDialog(target, navAnimSign = 0) {
 	clone.querySelector('[data-slot-computed="trophyEarned"]').innerHTML = gameData.trophyEarned
 		? `<span class="gaming-details-trophies-percentage">${Object.values(gameData.trophyEarned).reduce((p, c) => p + c, 0)} <span${
 				gameData.trophyProgress === 100 ? ' class="fontWeight-bold"' : ''
-		  }>(${gameData.trophyProgress}%)</span>:</span> ${toTrophyList(gameData.trophyEarned, trophySvgId)}`
+			}>(${gameData.trophyProgress}%)</span>:</span> ${toTrophyList(gameData.trophyEarned, trophySvgId)}`
 		: '';
 
 	const boxartEl = clone.querySelector('[data-slot-computed="boxart"]');
@@ -235,6 +235,14 @@ document.addEventListener('click', function (e) {
 	} else if ((target = e.target.closest('.gaming-box'))) {
 		if (target && target.closest) {
 			loadAndPopulateGameDetailDialog(target);
+		}
+	} else if ((target = e.target.closest('.gaming-trophies-button'))) {
+		if (target && target.closest) {
+			const psnId = target.getAttribute('data-target-game');
+			const matchingGame = document.querySelector(`[data-gaming-psnid="${psnId}"] > button`);
+			if (matchingGame) {
+				loadAndPopulateGameDetailDialog(matchingGame);
+			}
 		}
 	} else if (e.target.closest('[data-hide-game-info]') || e.target.matches('.gaming-details-dialog')) {
 		const dialog = document.getElementById('gaming-details-dialog');
