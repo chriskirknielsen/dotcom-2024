@@ -161,3 +161,7 @@ In any case, in Firefox, with a little browser-specific hack, the transition is 
 I am certain there are ways to make this work: maybe some trick using `mod()` off by `0.01deg`, or adding in a CSS keyframe animation (I specifically avoided keyframes as you cannot smoothly reverse the transition if you interrupt it midway). Definitely easy with some JavaScript (either Web Animation API or an event listener), but that’s no fun!
 
 If you have ideas, I’d be happy to hear some details and expand this article accordingly (_eehhh?_).
+
+PS: As a bonus, we can totally have the chevron face to the right when closed, down when open, and still do a full rotation!
+
+{{ codepen "https://codepen.io/chriskirknielsen/pen/gbLKbLZ", "result", 300 }}
