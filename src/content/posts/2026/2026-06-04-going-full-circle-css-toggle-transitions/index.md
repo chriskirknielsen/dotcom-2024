@@ -3,6 +3,7 @@ title: "Going Full Circle on CSS Toggle Transitions"
 summary: "Spin a marker right round, like a record"
 tags: ['css']
 time: '04:04:00'
+updated: 2026-06-05
 ---
 
 I recently worked on some “accordion” component with a custom marker to indicate open and closed states. I had it set up so the marker, a chevron, would rotate by 180 degrees when the component was in its open state. Add a CSS transition (when motion preferences allow it), job done.
@@ -165,3 +166,15 @@ If you have ideas, I’d be happy to hear some details and expand this article a
 PS: As a bonus, we can totally have the chevron face to the right when closed, down when open, and still do a full rotation!
 
 {{ codepen "https://codepen.io/chriskirknielsen/pen/gbLKbLZ", "result", 300 }}
+
+## Update
+
+vrugtehagel and Temani Afif chimed in on Mastodon with different solutions, which work cross-browser! Not only that but they both require less code, so I’m all for it.
+
+vrugtehagel suggested using `linear()` to create a negative version of the easing, and it works! A little bit of a pain to maintain if you want to adjust the easing but I wouldn’t imagine you'd change that often, so this is really neat!
+
+{{ codepen "https://codepen.io/vrugtehagel/pen/PwbaEZy", "result", 300, 2 }}
+
+Temani suggested something even simpler, that kind of resonates with my negated duration approach, but applied to a different property. Because the chevron is symmetrical, mirroring it allows to get the same effect: rotate then mirror.
+
+{{ codepen "https://codepen.io/t_afif/pen/VYmdBpj", "result", 300 }}

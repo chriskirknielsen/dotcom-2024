@@ -8,11 +8,11 @@ export default function (eleventyConfig, options = {}) {
 
 	const { markdownEngine } = options;
 
-	eleventyConfig.addShortcode('codepen', function (url, tabs = 'result', height = '480', theme = '') {
+	eleventyConfig.addShortcode('codepen', function (url, tabs = 'result', height = '480', version = 1) {
 		const path = new URL(url).pathname;
 		const id = path.split('/')[3];
 		const shotThumbnail = `https://shots.codepen.io/username/pen/${id}-512.webp?version=${Date.now()}`;
-		let markup = `<div class="cp_embed_wrapper codepen | cellstack cellstack--center" data-height="${height}" data-theme-id="${theme}" data-default-tab="${tabs}" data-slug-hash="${id}">
+		let markup = `<div class="cp_embed_wrapper codepen | cellstack cellstack--center" data-height="${height}" data-default-tab="${tabs}" data-slug-hash="${id}" data-version="${version}">
 			<div class="single-media">
 				<img src="${toCloudinary(shotThumbnail)}" alt="" class="codepen-thumbnail" width="512" height="288" loading="lazy" decoding="async" style="height: ${height}px;">
 			</div>
@@ -21,7 +21,7 @@ export default function (eleventyConfig, options = {}) {
 
 		// Only inject the CodePen embed script once per page
 		if (!this.page.hasOwnProperty('__codepen_embed_script_injected__') && !metadata.nakedJs) {
-			markup += `<script async src="https://static.codepen.io/assets/embed/ei.js"></script>`;
+			markup += `<script async src="https://public.codepenassets.com/embed/index.js"></script>`;
 			this.page.__codepen_embed_script_injected__ = true;
 		}
 
