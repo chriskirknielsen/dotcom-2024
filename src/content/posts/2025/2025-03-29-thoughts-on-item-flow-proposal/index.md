@@ -84,7 +84,7 @@ I think this is an elegant way to unite all these concepts under a single term, 
 
 This helpful matrix from the original article is an image, so… _tadaaa_ (hopefully I didn’t muck up semantics, but the `tfoot` is probably not super appropriate):
 
-{{ codepen "https://codepen.io/chriskirknielsen/pen/YPzJLOx", "result", 610 }}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/YPzJLOx", { height: 610 } }}
 
 ## More reading
 - [Item Flow, Part 1: A new unified concept for layout](https://webkit.org/blog/16587/item-flow-part-1-a-new-unified-concept-for-layout/)

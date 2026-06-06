@@ -12,7 +12,7 @@ With CSS container query units, we can know the size of the cell (`100cqi`), and
 
 ## Result
 
-{{ codepen "https://codepen.io/chriskirknielsen/pen/YPWjpmZ", "result" }}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/YPWjpmZ" }}
 
 ## The idea
 

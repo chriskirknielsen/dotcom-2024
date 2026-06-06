@@ -58,7 +58,7 @@ details {
 
 And here’s what that looks like: it works everywhere but the marker “rewinds” — keep an eye on that chevron at the end of the line there when opening and closing the details/expander/accordion/stretchyboi:
 
-{{ codepen "https://codepen.io/chriskirknielsen/pen/vEyjvrb", "result", 300 }}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/vEyjvrb", { height: 300 } }}
 
 
 
@@ -96,7 +96,7 @@ details {
 }
 ```
 
-{{ codepen "https://codepen.io/chriskirknielsen/pen/OPbZdOb", "result", 300 }}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/OPbZdOb", { height: 300 } }}
 
 It did almost everything I wanted (in Chrome and Safari…), going from 0 degrees, to 180, and to 360 on close, except… when the rotation was completed, and `--DET-state` returned to `0`, the marker would also transition from 360 degrees to 0 degrees, so it looked kind of loopy (pun intended, thank you very much, I’ll be here all week).
 
@@ -122,7 +122,7 @@ I tried a few things, like adjusting the timing function between open and closed
 }
 ```
 
-{{ codepen "https://codepen.io/chriskirknielsen/pen/XJNqGbL", "result", 300 }}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/XJNqGbL", { height: 300 } }}
 
 Instead of quashing the duration, I tried using a negative `transition-delay`, and I clicked in disbelief several times to see the marker animate exactly as I wanted. My final result is as follows:
 
@@ -153,7 +153,7 @@ Instead of quashing the duration, I tried using a negative `transition-delay`, a
 }
 ```
 
-{{ codepen "https://codepen.io/chriskirknielsen/pen/NPbMJdB", "result", 300 }}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/NPbMJdB", { height: 300 } }}
 
 However, as mentioned at the start of this article, **this does not work in Firefox**. Which sucks! These properties are not exactly bleeding edge… I know I’m manipulating time in weird ways here, but this doesn’t require a flux capacitor… it feels like it should work.
 
@@ -165,16 +165,16 @@ If you have ideas, I’d be happy to hear some details and expand this article a
 
 PS: As a bonus, we can totally have the chevron face to the right when closed, down when open, and still do a full rotation!
 
-{{ codepen "https://codepen.io/chriskirknielsen/pen/gbLKbLZ", "result", 300 }}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/gbLKbLZ", { height: 300 } }}
 
 ## Update
 
 vrugtehagel and Temani Afif chimed in on Mastodon with different solutions, which work cross-browser! Not only that but they both require less code, so I’m all for it.
 
-vrugtehagel suggested using `linear()` to create a negative version of the easing, and it works! A little bit of a pain to maintain if you want to adjust the easing but I wouldn’t imagine you'd change that often, so this is really neat!
+vrugtehagel suggested using `linear()` to create a negative version of the easing, and it works! A little bit of a pain to maintain if you want to adjust the easing but I wouldn’t imagine you’d change that often, so this is really neat!
 
-{{ codepen "https://codepen.io/vrugtehagel/pen/PwbaEZy", "result", 300, 2 }}
+{{ codepen "https://codepen.io/vrugtehagel/pen/PwbaEZy", { height: 300, version: 2 } }}
 
 Temani suggested something even simpler, that kind of resonates with my negated duration approach, but applied to a different property. Because the chevron is symmetrical, mirroring it allows to get the same effect: rotate then mirror.
 
-{{ codepen "https://codepen.io/t_afif/pen/VYmdBpj", "result", 300 }}
+{{ codepen "https://codepen.io/t_afif/pen/VYmdBpj", { height: 300 } }}

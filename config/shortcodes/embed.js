@@ -8,7 +8,9 @@ export default function (eleventyConfig, options = {}) {
 
 	const { markdownEngine } = options;
 
-	eleventyConfig.addShortcode('codepen', function (url, tabs = 'result', height = '480', version = 1) {
+	eleventyConfig.addShortcode('codepen', function (url, options = {}) {
+		const config = Object.assign({ tabs: 'result', height: 480, version: 1 }, options);
+		const { tabs, height, version } = config;
 		const path = new URL(url).pathname;
 		const id = path.split('/')[3];
 		const shotThumbnail = `https://shots.codepen.io/username/pen/${id}-512.webp?version=${Date.now()}`;

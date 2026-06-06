@@ -133,4 +133,4 @@ If you want to use more modern CSS techniques, you can use `:any-link:has(.link-
 {{ /callout }}
 
 I also threw it into a CodePen just for kicks:
-{{ codepen "https://codepen.io/chriskirknielsen/pen/RwXbpKo", "css,result", 300 }}
+{{ codepen "https://codepen.io/chriskirknielsen/pen/RwXbpKo", { tabs: "css,result", height: 300 } }}
