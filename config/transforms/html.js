@@ -13,6 +13,7 @@ export default function (eleventyConfig, options = {}) {
 			blocklist: [],
 			dynamicAttributes: [],
 			getPageList: (path) => [],
+			getIsBeautifiedHtml: null,
 		},
 		options.css || {}
 	);
@@ -28,7 +29,7 @@ export default function (eleventyConfig, options = {}) {
 		config.pathToCss = [config.pathToCss];
 	}
 
-	const { pathToCss, placeholder, keyframes, variables, getPageList, dynamicAttributes } = config;
+	const { pathToCss, placeholder, keyframes, variables, getPageList, dynamicAttributes, getIsBeautifiedHtml } = config;
 
 	eleventyConfig.addTransform('purge-and-inline-css', async (content, outputPath) => {
 		if (!outputPath || !outputPath.endsWith('.html')) {
@@ -52,7 +53,13 @@ export default function (eleventyConfig, options = {}) {
 			content = content.replace(placeholder, purgeCSSResults[0].css || '');
 		}
 
+		// Skip beautifying in dev mode
 		if (BUILD_CONTEXT === 'DEV') {
+			return content;
+		}
+
+		// Skip pages which don't pass the test, if provided
+		if (typeof getIsBeautifiedHtml === 'function' && getIsBeautifiedHtml(outputPath) === false) {
 			return content;
 		}
 

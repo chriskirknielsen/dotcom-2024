@@ -298,6 +298,9 @@ export default async function (eleventyConfig) {
 					return purgeCssList.about;
 				}
 			},
+			getIsBeautifiedHtml: function (outputPath) {
+				return outputPath.endsWith(`/og.html`) === false; // Don't beautify OG pages, they aren't even supposed to be viewed by a human
+			},
 		},
 	});
 
