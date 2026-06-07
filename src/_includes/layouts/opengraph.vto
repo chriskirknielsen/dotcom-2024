@@ -200,7 +200,7 @@
 		</style>
 	</head>
 	<body>
-		{{ if !isHome }}
+	{{ if !isHome }}
 		<div class="logo-wrap">
 			<div class="logo-inner">
 				{{ injectsvg 'logo', { class: 'logo' } }}
@@ -210,8 +210,8 @@
 				</span>
 			</div>
 		</div>
-		{{ /if }}
-		{{ if isProjectsPage || isFontsPage || isDesignsPage }}
+	{{ /if }}
+	{{ if isProjectsPage || isFontsPage || isDesignsPage }}
 		<div class="strip">
 		{{ if isProjectsPage }}
 			{{ set entities = collections['_projects'] |> slice |> reverse }}
@@ -225,24 +225,26 @@
 			<img src="{{ entity.data.thumbnail || entity.data.customMetaImage }}" alt="" width="512" height="512">
 		{{ /for }}
 		</div>
-		{{ /if }}
+	{{ else if imageUrl }}
+		<img src="{{ imageUrl }}" alt="" width="1" height="1" style="opacity: 0; position: absolute;" onload="console.log(1)">
+	{{ /if }}
 
 
 		{{ set heading = post.data.ogImageTitle || post.data.title }}
 		<h1 class="title" style="--scale: {{ heading |> sizeFactor }}">{{ heading }}</h1>
 
-		{{ if post.data.ogImageSummary }}
+	{{ if post.data.ogImageSummary }}
 		<p class="summary">{{ post.data.ogImageSummary }}</p>
-		{{ /if }}
-		{{ if isHome }}
-			<p class="summary small">
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="block-size: 1.2em; inline-size: auto; vertical-align: sub;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-				{{ new URL(post.data.metadata.url).host }}
-			</p>
-		{{ else if post.data.tags.includes('_posts') }}
-			<p class="summary small">
-				{{ post.data.tags.filter((t) =>  t.startsWith('_') === false).map(t => `#${t}`).join(', ') }}
-			</p>
-		{{ /if }}
+	{{ /if }}
+	{{ if isHome }}
+		<p class="summary small">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="block-size: 1.2em; inline-size: auto; vertical-align: sub;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+			{{ new URL(post.data.metadata.url).host }}
+		</p>
+	{{ else if post.data.tags.includes('_posts') }}
+		<p class="summary small">
+			{{ post.data.tags.filter((t) =>  t.startsWith('_') === false).map(t => `#${t}`).join(', ') }}
+		</p>
+	{{ /if }}
 	</body>
 </html>
