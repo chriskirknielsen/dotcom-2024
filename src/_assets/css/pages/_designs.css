@@ -22,9 +22,10 @@
 					position: absolute;
 					inset: 0;
 
-					background-image: conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 50%) 0 0),
-						conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 60%) 0 0), conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 70%) 0 0),
-						conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 80%) 0 0), conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 90%) 0 0);
+					background-image:
+						conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 50%) 0 0), conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 60%) 0 0),
+						conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 70%) 0 0), conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 80%) 0 0),
+						conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 90%) 0 0);
 					background-repeat: no-repeat;
 					background-position: 50% 50%;
 					background-size: 30%, 40%, 50%, 60%, 70%;
@@ -38,6 +39,26 @@
 
 	&:has(a:is(.card-heading > a, .card-image > a):is(:hover, :focus-visible)) .card-image > a:has(> img[src*='.png'])::before {
 		transform: skewX(-30deg) scaleX(1.5);
+	}
+}
+
+.store-icon-linkwrap {
+	isolation: isolate;
+	position: relative;
+
+	&::before {
+		content: '';
+		pointer-events: none;
+
+		position: absolute;
+		inset: calc(var(--size-2xs) * -1);
+		z-index: -1;
+
+		border-radius: 50%;
+	}
+
+	&:hover::before {
+		outline: 1px solid currentColor;
 	}
 }
 

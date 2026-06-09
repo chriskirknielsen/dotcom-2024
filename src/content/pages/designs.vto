@@ -51,7 +51,7 @@
 				{{ /if }}
 			{{- /set }}
 			{{ set designLinks }}
-				<ul role="list" class="flex-list | marginBlockStart-auto">
+				<ul role="list" class="flex-list">
 					{{- for site, url of design.links }}
 						{{ if site.includes('(') == false }}
 							{{ set siteIconId }}{{ site |> toLowerCase }}-icon{{ /set }}
@@ -76,6 +76,7 @@
 				},
 				link: designPermalink,
 				heading: design.name,
+				descriptionClass: 'marginBlockStart-auto',
 				descriptionMarkup: designLinks,
 				classes: 'card--design',
 				containsLinks: true,

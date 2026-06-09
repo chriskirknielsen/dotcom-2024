@@ -43,7 +43,7 @@
 			</{{ headingTag || 'h2' }}>
 		{{ /if }}
 		
-		<div>
+		<div{{ if descriptionClass }} class="{{ descriptionClass }}"{{ /if }}>
 		{{ if descriptionMarkup }}
 			{{ descriptionMarkup }}
 		{{ else if description }}
