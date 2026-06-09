@@ -44,7 +44,10 @@
 			<h2>Available on</h2>
 			<ul class="flow">
 				{{- for site, url of design.links }}
-				<li><a href="{{ url }}">{{ site }}</a></li>
+				<li>
+					{{ svg `${site.toLowerCase()}-icon`, { width: 16, height: 16, class: 'inline-icon list-item-icon' } }} 
+					<a href="{{ url }}">{{ site }}</a>
+				</li>
 				{{ /for -}}
 			</ul>
 		{{ /if }}

@@ -58,6 +58,17 @@ ol > li > ol {
 	margin-block-start: 1em;
 }
 
+li:has(> .list-item-icon) {
+	position: relative;
+
+	list-style-type: '';
+}
+.list-item-icon {
+	position: absolute;
+	inset-inline-end: calc(100% + 0.5ch);
+	inset-block-start: calc((1lh - var(--ICON-size, 1em)) / 2);
+}
+
 .dl-container {
 	container: --dl / inline-size;
 
