@@ -583,7 +583,7 @@
 		const groupBlogs = blogroll[groupLabel];
 		const xml = `<?xml version="1.0" encoding="UTF-8"?>
 		<opml version="1.0">
-			<head><title>chriskirknielsen's blogroll - ${groupLabel}</title></head>
+			<head><title>chriskirknielsen’s blogroll - ${groupLabel}</title></head>
 			<body>
 				${groupBlogs.map((b) => `<outline text="${safeAttrUrl(b.title)}" title="${safeAttrUrl(b.title)}" type="${safeAttrUrl(b.type)}" xmlUrl="${safeAttrUrl(b.xmlUrl)}" htmlUrl="${safeAttrUrl(b.htmlUrl)}" />`).join('')}
 			</body>

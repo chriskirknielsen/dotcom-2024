@@ -148,7 +148,7 @@ I added `.text { translate: 0; }` as well because on a 72 DPI monitor with Fire
 
 ## Relative duration?
 
-If you wanted to over-engineer the crap out of it, maybe you could use [Jane Ori's scalar trick](https://dev.to/janeori/css-type-casting-to-numeric-tanatan2-scalars-582j) to compute a relative animation time based on the distance to “travel”, so you’d have an animation that goes about 30 pixels per second, instead of a static duration? I hit a roadblock though: while `100% - 100cqi` makes sense in a `translate` context, if you’re creating a variable that ultimately is consumed as a `animation-duration`, that `100%` value doesn’t really make sense. This is definitely [solvable with scroll-driven animations](https://css-tip.com/element-dimension/) (again!), but I have rambled enough. Still, if you want to push this further, here’s how far I got before realising it wouldn’t work with the existing setup:
+If you wanted to over-engineer the crap out of it, maybe you could use [Jane Ori’s scalar trick](https://dev.to/janeori/css-type-casting-to-numeric-tanatan2-scalars-582j) to compute a relative animation time based on the distance to “travel”, so you’d have an animation that goes about 30 pixels per second, instead of a static duration? I hit a roadblock though: while `100% - 100cqi` makes sense in a `translate` context, if you’re creating a variable that ultimately is consumed as a `animation-duration`, that `100%` value doesn’t really make sense. This is definitely [solvable with scroll-driven animations](https://css-tip.com/element-dimension/) (again!), but I have rambled enough. Still, if you want to push this further, here’s how far I got before realising it wouldn’t work with the existing setup:
 
 ```css
 .text {
