@@ -38,7 +38,7 @@
 		{{ if heading }}
 			<{{ headingTag || 'h2' }} class="h3 | card-heading">
 			<a href="{{ link }}" {{ if !containsLinks }}class="card-link--cover"{{ /if }}>
-				{{ heading }}
+				{{ heading |> shy }}
 			</a>
 			</{{ headingTag || 'h2' }}>
 		{{ /if }}
