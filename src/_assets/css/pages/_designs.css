@@ -10,7 +10,8 @@
 
 .card--design {
 	& .card-image {
-		background: #fff;
+		--CARD-imgbg: #dedede;
+		background: var(--CARD-imgbg);
 
 		@media (--accept-motion) {
 			& > a:has(> img[src*='.png']) {
@@ -23,9 +24,11 @@
 					inset: 0;
 
 					background-image:
-						conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 50%) 0 0), conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 60%) 0 0),
-						conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 70%) 0 0), conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 80%) 0 0),
-						conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), white 90%) 0 0);
+						conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), var(--CARD-imgbg) 30%) 0 0),
+						conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), var(--CARD-imgbg) 40%) 0 0),
+						conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), var(--CARD-imgbg) 50%) 0 0),
+						conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), var(--CARD-imgbg) 60%) 0 0),
+						conic-gradient(color-mix(in hsl, var(--CARD-img-bg-color), var(--CARD-imgbg) 70%) 0 0);
 					background-repeat: no-repeat;
 					background-position: 50% 50%;
 					background-size: 30%, 40%, 50%, 60%, 70%;
