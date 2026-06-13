@@ -13,10 +13,11 @@
 		{{ for loopIndex, project of collections._projects |> sortBy(true, false, 'data.projectOrder') }}
 			{{ set customMetaImage800 = project.data.customMetaImage |> toNetlifyImage({ w: 800 }) }}
 			{{ set customMetaImage400 = project.data.customMetaImage |> toNetlifyImage({ w: 400 }) }}
+			{{ set customMetaImage200 = project.data.customMetaImage |> toNetlifyImage({ w: 200 }) }}
 			<li class="card-wrapper"{{ if project.data.projectImportance }} data-importance="{{ project.data.projectImportance }}"{{ /if }}>
 				{{ if project.data.projectImportance == 5 }}{{ set cardImageSizeSet = {
-					srcset: `${customMetaImage800} 800w, ${customMetaImage400}`,
-					sizes: "(min-width: 60em) 800px, 400px"
+					srcset: `${customMetaImage800} 800w, ${customMetaImage400} 400w, ${customMetaImage200}`,
+					sizes: "(min-width: 60em) 800px, (min-width: 60em) 400px, 200px"
 				} }}{{ else }}{{ set cardImageSizeSet = {} }}{{ /if }}
 				{{ component 'card', {
 					link: project.url,
