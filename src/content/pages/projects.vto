@@ -17,7 +17,7 @@
 			<li class="card-wrapper"{{ if project.data.projectImportance }} data-importance="{{ project.data.projectImportance }}"{{ /if }}>
 				{{ if project.data.projectImportance == 5 }}{{ set cardImageSizeSet = {
 					srcset: `${customMetaImage800} 800w, ${customMetaImage400} 400w, ${customMetaImage200}`,
-					sizes: "(min-width: 60em) 800px, (min-width: 60em) 400px, 200px"
+					sizes: "(min-width: 32em) 400px, (min-width: 60em) 800px, 200px"
 				} }}{{ else }}{{ set cardImageSizeSet = {} }}{{ /if }}
 				{{ component 'card', {
 					link: project.url,
