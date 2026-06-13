@@ -46,21 +46,20 @@
 ] }}
 <ul>
 	{{ for miniProject of miniProjects }}
-		<li class="textWrap-avoidShortLastLines"
-		{{- if miniProject.svg || miniProject.emoji -}}
-			{{- set fullSvg -}}
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="1.1em" height="1.1em">
-				{{ if miniProject.svg -}}
-					{{- miniProject.svg -}}
-				{{- else if miniProject.emoji }}
-					{{ if miniProject.emojiBg }}<rect width="100%" height="100%" fill="{{ miniProject.emojiBg }}"/>{{ /if }}
-					<text x="50%" y="0.95em" font-size="48" text-anchor="middle" fill="black">{{ miniProject.emoji }}</text>
-				{{- /if }}
-				</svg>
-			{{- /set }}
-			style="list-style-image: url('data:image/svg+xml,{{ fullSvg |> encodeURIComponent }}');"
-		{{- /if -}}
-		>
+		<li class="textWrap-avoidShortLastLines">
+			{{- if miniProject.svg || miniProject.emoji -}}
+				{{- set fullSvg -}}
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="16" height="16" class="inline-icon list-item-icon">
+					{{ if miniProject.svg -}}
+						{{- miniProject.svg -}}
+					{{- else if miniProject.emoji }}
+						{{ if miniProject.emojiBg }}<rect width="100%" height="100%" fill="{{ miniProject.emojiBg }}"/>{{ /if }}
+						<text x="50%" y="0.95em" font-size="48" text-anchor="middle" fill="black">{{ miniProject.emoji }}</text>
+					{{- /if }}
+					</svg>
+				{{- /set }}
+			{{ fullSvg }}
+			{{- /if -}}
 			<a href="{{ miniProject.url }}">{{ miniProject.name }}</a>{{ if miniProject.blurb }}: {{ miniProject.blurb }}{{ /if }}
 		</li>
 	{{ /for }}
