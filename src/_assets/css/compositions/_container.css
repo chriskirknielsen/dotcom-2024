@@ -73,6 +73,9 @@
 .content-fullbleed {
 	grid-column: --fullbleed;
 }
+.content--with-gutters {
+	margin-inline: var(--layout-gutter);
+}
 
 .container[style*='--grid-block-gutter:'] {
 	gap: calc(var(--layout-gutter) * var(--grid-block-gutter, 1)) 0;
