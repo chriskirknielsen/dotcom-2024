@@ -3,7 +3,7 @@
 	tags: ['_og'],
 	permalink: '/designs/',
 	title: 'Designs',
-	summary: 'A collection of my shirt/sticker/poster designs (and more!), available across multiple print-on-demand shops',
+	summary: 'A collection of my shirt/sticker/poster designs (and more!), available across multiple <a href="#shops">print-on-demand shops</a>',
 	ogImageSummary: 'Shirts / Stickers / Posters / etc.',
 	ogImageBackup: 'metaimage-designs.jpg',
 }
@@ -95,8 +95,8 @@
 
 
 <div class="textAlign-center">
-	<h2 class="visually-hidden" id="designs-shops-label">Shops</h2>
-	<ul class="designs-stores | flex-list justifyContent-center | fontSize-small" aria-labelledby="designs-shops-label" style="--list-gap: var(--size-m);">
+	<h2 class="visually-hidden" id="shops">Shops</h2>
+	<ul class="designs-stores | flex-list justifyContent-center | fontSize-small" aria-labelledby="shops" style="--list-gap: var(--size-m);">
 		{{ for merchStore, merchUrl of metadata.merch }}
 			{{ set storeIconName }}{{ merchStore |> toLowerCase }}-icon{{ /set }}
 			<li>
