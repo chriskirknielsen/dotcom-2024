@@ -4,6 +4,9 @@
 	title: 'Projects',
 	permalink: '/projects/',
 	summary: 'Some of the things I’ve made, either passion projects or real-world work',
+	eleventyImport: {
+		collections: ['_projects'],
+	},
 }
 ---
 
@@ -25,7 +28,8 @@
 						src: customMetaImage400,
 						width: 600,
 						height: 600,
-						lazy: loopIndex >= 5
+						lazy: loopIndex >= 5,
+						imagePlaceholderBg: project.data.imagePlaceholderBg || null,
 					}, cardImageSizeSet || {}),
 					heading: project.data.title,
 					description: project.data.summary

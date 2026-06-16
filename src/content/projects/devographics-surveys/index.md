@@ -2,6 +2,7 @@
 title: Devographics Surveys
 summary: Making logos and t-shirt designs to celebrate the web ecosystem for yearly surveys.
 customMetaImage: devographics-cover.jpg
+imagePlaceholderBg: 'conic-gradient(#282325 0 90deg, #182b35 0 180deg, #262326 0 270deg, #4b564d 0)'
 externalUrl: https://www.devographics.com/
 date: 2024-07-19
 projectButtonLabel: Visit site

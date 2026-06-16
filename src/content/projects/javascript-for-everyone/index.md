@@ -2,6 +2,7 @@
 title: JavaScript for Everyone
 summary: A rad JS shirt for a rad JS course
 customMetaImage: javascript-for-everyone-shirt.jpg
+imagePlaceholderBg: 'radial-gradient(#f0e7d6 0 50%, #6e2826 51%)'
 externalUrl: https://cottonbureau.com/p/NHCZJK/shirt/javascript-for-everyone#/29933216/tee-men-premium-lightweight-natural-100percent-cotton-m
 date: 2025-10-13
 projectButtonLabel: View shirt

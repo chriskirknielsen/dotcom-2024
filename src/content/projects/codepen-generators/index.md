@@ -2,6 +2,7 @@
 title: Generators
 summary: A collection of generators built on CodePen
 customMetaImage: generators-cover.jpg
+imagePlaceholderBg: 'conic-gradient(#4a2134 0 90deg, #1e1a1e 0 180deg, #272727 0 270deg, #181818 0)'
 externalUrl: https://codepen.io/collection/YyraBV
 date: 2019-02-26
 projectButtonLabel: View collection

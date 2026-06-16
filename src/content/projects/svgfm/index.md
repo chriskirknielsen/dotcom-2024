@@ -2,6 +2,7 @@
 title: SVG Filter Maker
 summary: A node graph builder for SVG filters, making it easy to visually create filters
 customMetaImage: svgfm.jpg
+imagePlaceholderBg: '#150226'
 externalUrl: https://svgfm.chriskirknielsen.com/
 date: 2024-01-15
 projectButtonLabel: Open SVGFM

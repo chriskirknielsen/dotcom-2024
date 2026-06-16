@@ -2,6 +2,7 @@
 title: Kevin Powell Shirts
 summary: Designing CSS-themed t-shirts for YouTube educator Kevin Powell
 customMetaImage: front-end-friends-shirts.jpg
+imagePlaceholderBg: 'linear-gradient(90deg, #2d2d2d 0 33%, #f6ece1 0 67%, #2d2d2d 0)'
 externalUrl: https://cottonbureau.com/people/kevin-powell
 date: 2023-12-31
 projectButtonLabel: View shirts

@@ -2,6 +2,7 @@
 title: markdown-it-codewrap
 summary: A Markdown-It plugin to wrap custom markup around blocks of code, optionally adding a Copy button.
 customMetaImage: markdown-it-codewrap-cover.png
+imagePlaceholderBg: '#ddf4ff'
 externalUrl: https://github.com/chriskirknielsen/markdown-it-codewrap
 date: 2023-05-28
 projectButtonLabel: View plugin

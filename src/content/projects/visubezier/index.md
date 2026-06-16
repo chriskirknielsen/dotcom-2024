@@ -2,6 +2,7 @@
 title: VisuBezier
 summary: A VS Code extension to preview CSS timing functions
 customMetaImage: visubezier-cover.png
+imagePlaceholderBg: '#002d3e'
 externalUrl: https://marketplace.visualstudio.com/items?itemName=chriskirknielsen.visubezier
 date: 2018-09-03
 projectButtonLabel: Get the extension

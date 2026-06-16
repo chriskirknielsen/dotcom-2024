@@ -14,9 +14,10 @@
 					width="{{ image.width }}"
 					height="{{ image.height }}"
 					{{ if image.lazy }}loading="lazy"{{ else }}fetchpriority="high"{{ /if }}
-					{{ if image.focusPoint || image.style -}}
+					{{ if image.focusPoint || image.style || image.imagePlaceholderBg -}}
 					style="
 						{{- if image.focusPoint }}--CARD-image-focus-point: {{ image.focusPoint }};{{ /if -}}
+						{{- if image.imagePlaceholderBg }}background:{{ image.imagePlaceholderBg }};{{ /if -}}
 						{{- if extraStyle }}{{ image.style }}{{ /if -}}
 					"
 					{{- /if }}
