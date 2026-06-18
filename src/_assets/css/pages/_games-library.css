@@ -226,12 +226,12 @@
 		align-items: center;
 
 		writing-mode: vertical-rl;
+		text-orientation: sideways; /* Fix for Chrome rendering smart apostrophes as if in the opposite writing mode, which is sadly marked as wontfix: https://issues.chromium.org/issues/509983812 */
 		text-wrap: balance;
 		font-family: var(--spine-font-family);
 		font-weight: var(--spine-font-weight);
 		letter-spacing: var(--spine-letter-spacing);
 		line-height: 0.9;
-		text-orientation: sideways; /* Fix for Chrome rendering smart apostrophes as if in the opposite writing mode, which is sadly marked as wontfix: https://issues.chromium.org/issues/509983812 */
 	}
 }
 
@@ -494,11 +494,11 @@
 	--box-depth: 20;
 }
 
-/* Storage method (displayed as a bookshelf or one big stack) */
+/* Overrides for the stacked view */
 #games-library-expander[data-storage='stack'] {
 	& .gaming-platform-group {
 		container-type: inline-size;
-		isolation: isolate;
+		isolation: isolate; /* We're going to use ridiculous z-index values so let's isolate them */
 
 		display: flex;
 		flex-direction: column;
@@ -509,16 +509,16 @@
 			position: relative;
 			z-index: 1000; /* Large z-index allow for better discrete steps during transitions */
 
-			inset-block-start: calc(-1 * var(--spine-block-size) + var(--spine-inline-size));
+			inset-block-start: calc(-1 * var(--spine-block-size) + var(--spine-inline-size)); /* Adjust the height to basically take up only the width of the box */
 
 			flex-direction: column;
 			block-size: var(--spine-inline-size);
 			inline-size: var(--spine-block-size);
 			margin-inline: auto;
 
-			transform: translateX(-100%) rotate(-90deg);
+			transform: translateX(-100%) rotate(-90deg); /* Rotate and place it in the top left corner */
 			transform-origin: 100% 0;
-			perspective: none;
+			perspective: none; /* We'll use reset this value and instead pass it to the button itself */
 
 			@media (--accept-motion) {
 				transition: z-index var(--anim-short) var(--easing-in-out);
@@ -542,8 +542,8 @@
 			inline-size: var(--spine-inline-size);
 
 			transform: translateY(calc(sin(var(--GAME-index) * 199) * 0.5%)); /* A stack won't be super perfectly aligned, so make it wavy */
-			transform-origin: 50% 50%;
-			perspective: 360rem;
+			transform-origin: 50% 50%; /* Reset from the original layout */
+			perspective: 360rem; /* Using the original value for .gaming-box-wrap */
 
 			&:is(:hover, :focus-visible) {
 				&:is(button) {
