@@ -59,12 +59,13 @@
 	</div>
 
 	<div class="form-label-wrap">
-		<label for="spine-sizing" class="fontWeight-bold">Size:</label>
+		<label for="spine-sizing" class="fontWeight-bold">View:</label>
 		<div class="button button--select">
 			<select id="spine-sizing" data-games-sizing>
 				<option value="sm">Smaller</option>
 				<option value="md" selected>Standard</option>
 				<option value="lg">Larger</option>
+				<option value="stack">Stacked</option>
 			</select>
 		</div>
 	</div>
@@ -81,7 +82,7 @@
 	{{ /set }}
 	{{ expander expanderLabel, { isExpanded: loopIndex === 1 } }}
 		<ul class="gaming-platform-group" data-gaming-platform="{{ platformSlug }}">
-			{{ for game of games |> sortBy(false, false, 'sortTitle') }}
+			{{ for i, game of games |> sortBy(false, false, 'sortTitle') }}
 				<li
 					class="gaming-box-wrap"
 					{{ if ['Essentials', 'Platinum'].includes(game.edition) }}data-gaming-edition="{{ game.edition |> toLowerCase |> replace(' ', '-') }}"{{ /if }}
@@ -89,6 +90,7 @@
 					{{ if game.psnId }}data-gaming-psnid="{{ game.psnId }}"{{ /if }}
 					{{ if platformSlug === 'ps3' }}data-gaming-branding="{{ game.year < 2009 ? 'old' : 'new' }}"{{ /if }}
 					data-game="{{ game |> JSON.stringify |> escape }}"
+					style="--GAME-index: {{ i }};"
 				>
 					<div class="gaming-box">
 						<span class="visually-hidden">{{ game.title }}</span>

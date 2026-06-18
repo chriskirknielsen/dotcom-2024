@@ -231,6 +231,7 @@
 		font-weight: var(--spine-font-weight);
 		letter-spacing: var(--spine-letter-spacing);
 		line-height: 0.9;
+		text-orientation: sideways; /* Fix for Chrome rendering smart apostrophes as if in the opposite writing mode */
 	}
 }
 
@@ -491,6 +492,71 @@
 [data-gaming-platform='gameboy-advance'] {
 	--box-height: 142;
 	--box-depth: 20;
+}
+
+/* Storage method (displayed as a bookshelf or one big stack) */
+#games-library-expander[data-storage='stack'] {
+	& .gaming-platform-group {
+		container-type: inline-size;
+		isolation: isolate;
+
+		display: flex;
+		flex-direction: column;
+		gap: var(--size-2xs) var(--size-l);
+
+		& .gaming-box-wrap {
+			pointer-events: none;
+			position: relative;
+			z-index: 1000; /* Large z-index allow for better discrete steps during transitions */
+
+			inset-block-start: calc(-1 * var(--spine-block-size) + var(--spine-inline-size));
+
+			flex-direction: column;
+			block-size: var(--spine-inline-size);
+			inline-size: var(--spine-block-size);
+			margin-inline: auto;
+
+			transform: translateX(-100%) rotate(-90deg);
+			transform-origin: 100% 0;
+			perspective: none;
+
+			@media (--accept-motion) {
+				transition: z-index var(--anim-short) var(--easing-in-out);
+			}
+
+			&:has(~ .gaming-box-wrap > button.gaming-box:hover, :focus-visible) {
+				z-index: 3000; /* For boxes above on the stack, they should cover the hovered item */
+			}
+
+			&:has(> button.gaming-box:hover, :focus-visible) {
+				z-index: 2000; /* For the hovered item, cover the items below on the stack */
+			}
+		}
+
+		& .gaming-box {
+			pointer-events: auto;
+
+			flex: 1 0 auto;
+			block-size: var(--spine-block-size);
+			max-block-size: 100cqi;
+			inline-size: var(--spine-inline-size);
+
+			transform: translateY(calc(sin(var(--GAME-index) * 199) * 0.5%)); /* A stack won't be super perfectly aligned, so make it wavy */
+			transform-origin: 50% 50%;
+			perspective: 360rem;
+
+			&:is(:hover, :focus-visible) {
+				&:is(button) {
+					transform: scale(1.1);
+				}
+
+				&:has(> .gaming-front) {
+					transform: rotateY(-5deg) scale(1.1) translate3D(-15%, 0, 10rem);
+					transition-delay: inherit;
+				}
+			}
+		}
+	}
 }
 
 /* Font overrides */

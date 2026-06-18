@@ -12,7 +12,7 @@ export default function (eleventyConfig, options = {}) {
 			safelist: [],
 			blocklist: [],
 			dynamicAttributes: [],
-			getPageList: (path) => [],
+			getPageList: (path) => {},
 			getIsBeautifiedHtml: null,
 		},
 		options.css || {}

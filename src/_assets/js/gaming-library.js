@@ -314,8 +314,10 @@ document.addEventListener('submit', function (e) {
 document.addEventListener('change', function (e) {
 	let target;
 	if ((target = e.target.closest('[data-games-sizing]'))) {
-		const selectedValue = target.value || 'md';
+		const isStack = target.value === 'stack';
+		const selectedValue = (isStack ? null : target.value) || 'md';
 		const sizeMap = { sm: '0.75em', md: '1em', lg: '1.25em' };
+		document.getElementById('games-library-expander').setAttribute('data-storage', isStack ? 'stack' : 'bookshelf');
 		eachDom('[data-gaming-platform]', (g) => (g.style.fontSize = sizeMap[selectedValue]));
 	} else if ((target = e.target.closest('[data-games-completed]'))) {
 		const selectedValue = target.value || 'any';
