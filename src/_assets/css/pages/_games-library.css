@@ -231,7 +231,7 @@
 		font-weight: var(--spine-font-weight);
 		letter-spacing: var(--spine-letter-spacing);
 		line-height: 0.9;
-		text-orientation: sideways; /* Fix for Chrome rendering smart apostrophes as if in the opposite writing mode */
+		text-orientation: sideways; /* Fix for Chrome rendering smart apostrophes as if in the opposite writing mode, which is sadly marked as wontfix: https://issues.chromium.org/issues/509983812 */
 	}
 }
 
