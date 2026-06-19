@@ -542,6 +542,7 @@
 			inline-size: var(--spine-inline-size);
 
 			transform: translateY(calc(sin(var(--GAME-index) * 199) * 0.5%)); /* A stack won't be super perfectly aligned, so make it wavy */
+			transform: translateY(random(-1%, 1%, 0.1%)); /* If supported, use random */
 			transform-origin: 50% 50%; /* Reset from the original layout */
 			perspective: 360rem; /* Using the original value for .gaming-box-wrap */
 
