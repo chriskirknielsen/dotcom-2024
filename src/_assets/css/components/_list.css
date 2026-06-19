@@ -69,6 +69,17 @@ li:has(> .list-item-icon) {
 	inset-block-start: calc((1lh - var(--ICON-size, 1em)) / 2);
 }
 
+/* If a list item has line breaks within, give more space between all items of the list, but shrink the line-height, to better group each item */
+:is(ul, ol):has(> li > br) > li {
+	line-height: 1.4;
+	text-wrap: balance;
+	text-wrap: pretty;
+
+	& + li {
+		margin-block-start: 0.5em;
+	}
+}
+
 .dl-container {
 	container: --dl / inline-size;
 
