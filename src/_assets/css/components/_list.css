@@ -70,7 +70,7 @@ li:has(> .list-item-icon) {
 }
 
 /* If a list item has line breaks within, give more space between all items of the list, but shrink the line-height, to better group each item */
-:is(ul, ol):has(> li > br) > li {
+:is(ul, ol):has(> li > :is(br, p)) > li {
 	line-height: 1.4;
 	text-wrap: balance;
 	text-wrap: pretty;
