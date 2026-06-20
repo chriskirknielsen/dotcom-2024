@@ -2,7 +2,7 @@
 {
 	title: 'Curriculum Vitæ',
     heroTitle: 'Curriculum<wbr> Vitæ',
-	summary: 'I could just title this “résumé”, but a little Latin lettering looks lovely',
+	summary: 'The résumé of a creative developer who is a total CSS nerd',
 	permalink: '/hire/',
 	tags: ['_og'],
     autoHeadingAnchors: true,
@@ -40,7 +40,46 @@
                 dates: ['2010'],
                 description: 'French high school diploma, with a “major” in socio-economics.',
             },
-        ]
+        ],
+        skills: {
+            'Front-End': {
+                html: 'HTML',
+                css: 'CSS',
+                sass: 'Sass/SCSS',
+                svg: 'SVG',
+                js: 'JavaScript',
+                // markdown: 'Markdown',
+            },
+            'Templating / Server-Side': {
+                nodejs: 'NodeJS',
+                eleventy: 'Eleventy',
+                nunjucks: 'Nunjucks',
+                vento: 'Vento',
+                liquid: 'Liquid',
+                php: 'PHP',
+                sql: 'SQL',
+            },
+            'Workflow': {
+                git: 'git',
+                github: 'GitHub',
+                gitlab: 'GitLab',
+                bitbucket: 'Bitbucket',
+                npm: 'npm',
+                netlify: 'Netlify Deploys',
+            },
+            'CMS / Platforms': {
+                wordpress: 'WordPress',
+                shopify: 'Shopify',
+                webflow: 'Webflow',
+            },
+            // TODO Libraries? jQuery, DevExtreme, maybe Vue?
+            'Designing': {
+                figma: 'Figma',
+                photoshop: 'Photoshop',
+                illustrator: 'Illustrator',
+                aftereffects: 'After Effects',
+            },
+        }
     },
     eleventyComputed: {
 		ogImageSummary: (data) => data.summary,
@@ -82,17 +121,23 @@
 
 {{ callout "Enquiring Minds Want to Know" }}I’m not currently looking for a new role, but I do have a <a href="https://www.linkedin.com/in/chriskirknielsen" class="link-label-anchor">{{ svg 'linkedin-icon', { class: 'inline-icon inline-icon--center' } }} <span class="link-label-text">LinkedIn profile</span></a> if you wanted to get in touch. For <a href="/designs/">t-shirt designs</a>, you can <a href="/contact/">reach out to me up directly</a>.{{ /callout }}
 
-<div class="about-pic-wrapper | flow">
-    <h2 style="--flow-space: 0;">Christopher Kirk-Nielsen</h2>
-    <p class="fontStyle-italic fontSize-smaller">A creative developer who is a total CSS nerd.</p>
+<h2 id="ckn">
+    Christopher<wbr>
+    Kirk&#8209;Nielsen,<wbr>
+    <span aria-hidden="true" title="established">est.</span>
+    <span class="visually-hidden">established</span>
+    <wbr><span aria-hidden="true">MCMXCII</span>
+    <span class="visually-hidden">1992</span>
+    </h2>
 
+<div class="about-pic-wrapper | flow">
     {{ set profile_pic_url = [assets.images, 'profile-256.jpg'] |> toPath }}
     {{ set profile_pic_alt = `A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head.` }}
     {{ set profile_pic_size = 256 }}
-    <div>{{ image profile_pic_url, profile_pic_alt, '', { width: 256, height: 256, widths: [256], eager: true, bypassLink: true, wrapperClass: 'about-pic' } }}</div>
+    {{ image profile_pic_url, profile_pic_alt, '', { width: 256, height: 256, widths: [256], eager: true, bypassLink: true, wrapperClass: 'about-pic' } }}
 
-    <p>
-        I enjoy building websites and solving challenges through code. Implementing a design system or layout with CSS is my happy place, but building custom components and web experiences is a close second. I focus on making accessible experiences, and I sweat the details.
+    <p style="--flow-space: 0;">
+        I enjoy crafting websites and solving challenges through code. Implementing a design system or layout with CSS is my happy place, but building custom components and web experiences is a close second. I focus on making accessible experiences, and I sweat the details.
     </p>
 </div>
 
@@ -115,45 +160,6 @@
     <ul>{{ await getResumeList(cv.edu) }}</ul>
 
     <h2>Skills</h2>
-    {{ set tools = {
-        'Front-End': {
-            html: 'HTML',
-            css: 'CSS',
-            sass: 'Sass/SCSS',
-            svg: 'SVG',
-            js: 'JavaScript',
-            // markdown: 'Markdown',
-        },
-        'Templating / Server-Side': {
-            nodejs: 'NodeJS',
-            eleventy: 'Eleventy',
-            nunjucks: 'Nunjucks',
-            vento: 'Vento',
-            liquid: 'Liquid',
-            php: 'PHP',
-            sql: 'SQL',
-        },
-        'Workflow': {
-            git: 'git',
-            github: 'GitHub',
-            gitlab: 'GitLab',
-            bitbucket: 'Bitbucket',
-            npm: 'npm',
-            netlify: 'Netlify Deploys',
-        },
-        'CMS / Platforms': {
-            wordpress: 'WordPress',
-            shopify: 'Shopify',
-            webflow: 'Webflow',
-        },
-        // TODO Libraries? jQuery, DevExtreme, maybe Vue?
-        'Designing': {
-            figma: 'Figma',
-            photoshop: 'Photoshop',
-            illustrator: 'Illustrator',
-            aftereffects: 'After Effects',
-        },
-    } }}
     {{ async function aboutIcon(icon, label) }}
     <span class="icon-badge-list-item">
         <span class="icon-badge-list-icon">{{ svg `${icon}-icon`, { class: 'inline-icon inline-icon--center' } }}</span>
@@ -161,7 +167,7 @@
     </span>
     {{ /function }}
     <ul class="icon-badge-list | textAlign-start" style="--GAP: var(--size-s);">
-    {{ for toolLabel, toolItems of tools -}}
+    {{ for toolLabel, toolItems of cv.skills -}}
         <li class="inline-list">
             <strong>{{ toolLabel }}:</strong>
             {{ for icon, label of toolItems }}
