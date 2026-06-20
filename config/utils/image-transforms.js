@@ -1,4 +1,11 @@
+const BUILD_CONTEXT = ['serve', 'watch'].includes(process.env.ELEVENTY_RUN_MODE) ? 'DEV' : 'LIVE';
+const NETLIFY_LOCAL = process.env.NETLIFY_LOCAL === 'true';
+
 function toNetlifyImage(url, options = {}) {
+	if (BUILD_CONTEXT === 'DEV' && !NETLIFY_LOCAL) {
+		return url;
+	}
+
 	if (!url) {
 		throw new Error('Cannot convert to Netlify Image CDN: `url` value missing!');
 	}
