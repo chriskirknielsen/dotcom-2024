@@ -55,6 +55,9 @@
 }
 
 /** Font weights */
+.fontWeight-regular {
+	font-weight: normal;
+}
 .fontWeight-bold {
 	font-weight: bold;
 }

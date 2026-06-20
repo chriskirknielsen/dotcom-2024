@@ -470,9 +470,8 @@
 	--pad: max(2 * var(--stroke), 3px);
 
 	list-style-type: '';
-}
-.about-icons-list-item {
-	&:not(:first-child) {
+
+	& > :not(:first-child) {
 		margin-block-start: var(--GAP, var(--size-s));
 	}
 }
