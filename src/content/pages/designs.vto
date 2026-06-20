@@ -94,8 +94,8 @@
 <p class="textAlign-center fontStyle-italic">Note: this is not an exhaustive list, some more designs are available in each shop below.</p>
 
 
-<div class="textAlign-center">
-	<h2 class="visually-hidden" id="shops">Shops</h2>
+<div class="textAlign-center" id="shops" tabindex="-1">
+	<h2 class="visually-hidden">Shops</h2>
 	<ul class="designs-stores | flex-list justifyContent-center | fontSize-small" aria-labelledby="shops" style="--list-gap: var(--size-m);">
 		{{ for merchStore, merchUrl of metadata.merch }}
 			{{ set storeIconName }}{{ merchStore |> toLowerCase }}-icon{{ /set }}
