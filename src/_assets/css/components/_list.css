@@ -1,7 +1,8 @@
 ol > li > ol {
-	list-style-type: lower-alpha;
+	list-style-type: lower-alpha; /* 1 > 1a, 1b; 2 > 2a...*/
 }
 
+/* Inline list with a separator between each item except at the end of a line (whitespace collapse) */
 .inline-list {
 	--item-gap: max(var(--GAP, 0px), 12px, 0.75em); /* Ensure there is at least 8px between items */
 
@@ -22,10 +23,8 @@ ol > li > ol {
 			display: inline-block;
 			padding-block: var(--GAP, 0px);
 		}
-	}
 
-	& > li:not(:last-child) {
-		&::after {
+		&:not(:last-child)::after {
 			--mask: var(
 				--separator,
 				/* Safari fix */ conic-gradient(#0000, #0000),
@@ -54,10 +53,7 @@ ol > li > ol {
 	justify-content: center;
 }
 
-[data-list] > li + li {
-	margin-block-start: 1em;
-}
-
+/* List with custom icon instead of the bullet */
 li:has(> .list-item-icon) {
 	position: relative;
 
@@ -80,6 +76,64 @@ li:has(> .list-item-icon) {
 	}
 }
 
+/* Badge-like list */
+.icon-badge-list {
+	--stroke: 1px;
+	--pad: max(2 * var(--stroke), 3px);
+
+	list-style-type: '';
+
+	& > :not(:first-child) {
+		margin-block-start: var(--GAP, var(--size-s));
+	}
+}
+.icon-badge-list-item {
+	display: inline-flex;
+	align-items: center;
+	min-inline-size: 80px; /* Just like old school 80x15px buttons */
+	margin: var(--stroke);
+	padding: var(--stroke);
+
+	line-height: 1;
+	baseline-source: last; /* The icon appears first, so it might throw off the baseline: this tells the element to use the last child as the baseline source */
+	border: 1px solid var(--color-text);
+	background: var(--color-canvas);
+}
+.icon-badge-list-icon {
+	& > svg {
+		--ICON-size: 1em;
+	}
+
+	& > .icon-badge-list-abbr {
+		display: inline-flex;
+		block-size: 1em;
+		inline-size: 1em;
+		justify-content: center;
+		align-items: center;
+
+		font-family: var(--fontStack-sans-serif);
+		font-weight: bold;
+
+		transform: scale(0.875);
+	}
+
+	display: flex;
+	flex: 0 0 auto;
+	padding: var(--pad);
+	aspect-ratio: 1;
+
+	color: var(--color-canvas);
+	background: var(--color-text);
+}
+.icon-badge-list-label {
+	flex-grow: 1;
+	padding: 0 calc(var(--pad) * 2);
+
+	text-align: center;
+	white-space: nowrap;
+}
+
+/* Styled definition list */
 .dl-container {
 	container: --dl / inline-size;
 
@@ -135,6 +189,7 @@ li:has(> .list-item-icon) {
 	}
 }
 
+/* Progress bar list */
 .progress-list {
 	isolation: isolate;
 
