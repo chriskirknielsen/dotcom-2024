@@ -16,4 +16,5 @@ export default {
 	Yearnotes: 'Year&shy;notes',
 	réinitialisation: 'réinitial&shy;isation',
 	McFleetwood: 'McFleet&shy;wood',
+	Curriculum: 'Curri&shy;culum',
 };

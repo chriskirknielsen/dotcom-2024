@@ -1,0 +1,221 @@
+---js
+{
+	title: 'Curriculum Vitæ',
+    heroTitle: 'Curriculum<wbr> Vitæ',
+	summary: 'I could just title this “résumé”, but a little Latin lettering looks lovely',
+	permalink: '/hire/',
+	tags: ['_og'],
+    autoHeadingAnchors: true,
+    cv: {
+        pro: [
+            {
+                title: 'Senior front-end developer',
+                info: 'MOJO PSG',
+                dates: ['2020-01', 'Present'],
+                description: 'In addition to the diverse types of project I already work on, I am currently leading a small front-end team to migrate and modernise a web app from the ground up.',
+            },
+            {
+                title: 'Front-end developer',
+                info: 'MOJO PSG',
+                dates: ['2018-06', '2020-01'],
+                description: 'Working on a variety of projects, including enterprise web applications, e-commerce, and custom CMS-driven sites, implementing design systems from Figma in CSS and tailored components in HTML, JS and/or PHP.',
+            },
+            {
+                title: 'Creative designer and developer',
+                info: 'Freelance',
+                dates: ['2015-09', '2018-06'],
+                description: 'Worked as a freelancer on a broad scope of projects, wearing multiple hats such as graphic designer, motion designer, video editor, and front-end developer for large entertainment and sportswear brands.',
+            },
+        ],
+        edu: [
+            {
+                title: 'Graphic design studies',
+                info: 'e-artsup Lyon and Paris, France',
+                dates: ['2011', '2015'],
+                description: '4 years learning about graphic design as a whole: typography and colour, print and motion, and even traditional arts.',
+            },
+            {
+                title: 'Baccalauréat E.S.',
+                info: 'France',
+                dates: ['2010'],
+                description: 'French high school diploma, with a “major” in socio-economics.',
+            },
+        ]
+    },
+    eleventyComputed: {
+		ogImageSummary: (data) => data.summary,
+	},
+}
+---
+
+{{ async function getResumeList(list) }}
+    {{ set timeFormatByLength = { 1: 'year', 2: 'monthAndYear', 3: 'nice' } }}
+    {{ for entry of list }}
+    <li>
+        <p class="fontWeight-bold">{{ entry.title}}</p>
+        
+        <p class="fontSize-smaller">
+        <span class="fontStyle-italic">
+            {{ for i, date of entry.dates }}
+                {{ set d = String(date) }}
+                {{ set parts = d.split('-') }}
+                {{ if (!Date.parse(d)) }}
+                    {{ d }}
+                {{ else }}
+                    <time datetime="{{ d }}" class="fontWeight-regular">{{ d |> dateFormat({ format: timeFormatByLength[Math.min(3, Math.max(1, parts.length))] }) }}</time>
+                {{ /if }}
+                
+                {{ if (entry.dates.length > 1 && (i + 1) < entry.dates.length) }}
+                <span class="visually-hidden">–</span>{{ svg 'arrow-right', { class: 'inline-icon inline-icon--center' } }}
+                {{ /if }}
+            {{ /for }}
+        </span>
+        {{ if entry.info }}
+            | {{ entry.info }}
+        {{ /if }}
+        </p>
+        
+        <p>{{ entry.description }}</p>
+    </li>
+    {{ /for }}
+{{ /function }}
+
+{{ callout "Enquiring Minds Want to Know" }}I’m not currently looking for a new role, but I do have a <a href="https://www.linkedin.com/in/chriskirknielsen" class="link-label-anchor">{{ svg 'linkedin-icon', { class: 'inline-icon inline-icon--center' } }} <span class="link-label-text">LinkedIn profile</span></a> if you wanted to get in touch. For <a href="/designs/">t-shirt designs</a>, you can <a href="/contact/">reach out to me up directly</a>.{{ /callout }}
+
+<div class="about-pic-wrapper | flow">
+    <h2 style="--flow-space: 0;">Christopher Kirk-Nielsen</h2>
+    <p class="fontStyle-italic fontSize-smaller">A creative developer who is a total CSS nerd.</p>
+
+    {{ set profile_pic_url = [assets.images, 'profile-256.jpg'] |> toPath }}
+    {{ set profile_pic_alt = `A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head.` }}
+    {{ set profile_pic_size = 256 }}
+    <div>{{ image profile_pic_url, profile_pic_alt, '', { width: 256, height: 256, widths: [256], eager: true, bypassLink: true, wrapperClass: 'about-pic' } }}</div>
+
+    <p>
+        I enjoy building websites and solving challenges through code. Implementing a design system or layout with CSS is my happy place, but building custom components and web experiences is a close second. I focus on making accessible experiences, and I sweat the details.
+    </p>
+</div>
+
+<hr class="hero-like">
+
+<div class="grouper grouper--wrap grouper--center-inline" data-cv-switcher-prop="unhide" hidden>
+	<button type="button" class="button" aria-pressed="true" data-persist-pressed-style data-cv-switcher="bullet">
+		Bullet points
+	</button>
+	<button type="button" class="button" aria-pressed="false" data-persist-pressed-style data-cv-switcher="written">
+		Write-up
+	</button>
+</div>
+
+<section role="region" class="flow" aria-label="Bullet point version" data-cv-version="bullet">
+    <h2>Professional</h2>
+    <ul>{{ await getResumeList(cv.pro) }}</ul>
+
+    <h2>Education</h2>
+    <ul>{{ await getResumeList(cv.edu) }}</ul>
+
+    <h2>Skills</h2>
+    {{ set tools = {
+        'Front-End': {
+            html: 'HTML',
+            css: 'CSS',
+            sass: 'Sass/SCSS',
+            svg: 'SVG',
+            js: 'JavaScript',
+            // markdown: 'Markdown',
+        },
+        'Templating / Server-Side': {
+            nodejs: 'NodeJS',
+            eleventy: 'Eleventy',
+            nunjucks: 'Nunjucks',
+            vento: 'Vento',
+            liquid: 'Liquid',
+            php: 'PHP',
+            sql: 'SQL',
+        },
+        'Workflow': {
+            git: 'git',
+            github: 'GitHub',
+            gitlab: 'GitLab',
+            bitbucket: 'Bitbucket',
+            npm: 'npm',
+            netlify: 'Netlify Deploys',
+        },
+        'CMS / Platforms': {
+            wordpress: 'WordPress',
+            shopify: 'Shopify',
+            webflow: 'Webflow',
+        },
+        // TODO Libraries? jQuery, DevExtreme, maybe Vue?
+        'Designing': {
+            figma: 'Figma',
+            photoshop: 'Photoshop',
+            illustrator: 'Illustrator',
+            aftereffects: 'After Effects',
+        },
+    } }}
+    {{ async function aboutIcon(icon, label) }}
+    <span class="about-icons-list-badge">
+        <span class="about-icons-list-icon">{{ svg `${icon}-icon`, { class: 'inline-icon inline-icon--center' } }}</span>
+        <span class="about-icons-list-label">{{ label }}</span>
+    </span>
+    {{ /function }}
+    <ul class="about-icons-list | textAlign-start" style="--GAP: var(--size-s);">
+    {{ for toolLabel, toolItems of tools -}}
+        <li class="inline-list">
+            <strong>{{ toolLabel }}:</strong>
+            {{ for icon, label of toolItems }}
+                {{ await aboutIcon(icon, label) }}
+            {{ /for }}
+        </li>
+    {{- /for }}
+        <li>
+            <strong>Spoken languages:</strong>
+            English (fluent),
+            French (fluent),
+            Danish (fluent),
+            Italian (conversational),
+            Japanese (basic)
+        </li>
+        <li><strong>Also:</strong> proficient prompt engineer (as in, command line prompts, of course)</li>
+    </ul>
+</section>
+
+<hr class="hero-like" data-cv-switcher-prop="hide">
+
+<section role="region" class="flow" aria-label="Nicely written version" data-cv-version="written" data-cv-switcher-prop="hide">
+    <h2 data-cv-switcher-prop="hide">Or in a few sentences…</h2>
+    {{ echo |> markdown }}
+    I have over ten years experience working as a creative developer, or “design engineer”, meaning I can code and design, keeping an eye on details (including typography!), though my official title is currently **senior front-end developer**.
+
+    My front-end fluency especially shines through **HTML** (the semantic kind), **CSS** (I’m a nerd for it), and **JavaScript** (not React!), but I don’t shy away from **PHP** and **SQL** (mainly for **WordPress** projects), **Shopify**, or **Webflow**. I use **git** (any of GitHub, GitLab, or Bitbucket) to keep my projects neatly tracked, and like to write commented, squeaky-clean(ish) code, keeping **accessibility** in mind.
+
+    The **Adobe Creative Suite** and I go _way_ back (2005!), specifically **Photoshop, Illustrator, and After Effects**, though I’ve also gotten on the **Figma** train (sorry, Sketch!). Also I speak native English, French, and Danish, plus some Italian and I know a tiny bit of Japanese.
+    {{ /echo }}
+</section>
+
+<script>
+{{ js 'resumeScript' }}
+document.addEventListener('DOMContentLoaded', () => {
+    Array.from(document.querySelectorAll('[data-cv-switcher-prop]')).forEach((el) => {
+        el.hidden = el.getAttribute('data-cv-switcher-prop') !== 'unhide';
+        el.removeAttribute('data-cv-switcher-prop');
+    });
+
+    const allSwitcherButtons = Array.from(document.querySelectorAll('[data-cv-switcher]'));
+    document.addEventListener('click', (e) => {
+        const switcherButton = e.target && e.target.closest ? e.target.closest('[data-cv-switcher]') : null;
+        if (!switcherButton) { return; }
+        const switchTarget = switcherButton.getAttribute('data-cv-switcher');
+        allSwitcherButtons.forEach((btn) => {
+            const targetVersion = btn.getAttribute('data-cv-switcher');
+            const targetEl = document.querySelector(`[data-cv-version="${targetVersion}"]`);
+            const isActive = btn === switcherButton;
+            btn.setAttribute('aria-pressed', isActive.toString());
+            targetEl.hidden = !isActive;
+        })
+    })
+})
+{{ /js }}
+{{ getBundle 'js', 'resumeScript' }}
+</script>

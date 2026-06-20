@@ -78,75 +78,11 @@ I grew up in Lyon, France, born to **Danish** parents. Australia was my home fo
 You can read more about my love of languages on my dedicated [Languages page](/languages), but in short? I’m fluent in English, French, and Danish. I have a basic conversational level in Italian. I can read and understand _some_ Japanese, and can read but _not_ understand Russian.
 
 I find languages — and accents — fascinating! (and if anybody mocks your accent, please kick them in the shins) Did I mention I love imitations, and accents? (so long as it’s in good taste — have you seen how white I am?)
-
-## Skills, a.k.a. The Professional Section {$#resume$}
-
-I have over ten years experience working as a creative developer, or “design engineer”, meaning I can code and design, keeping an eye on details (including typography!), though my official title is currently **senior front-end developer**.
-
-My front-end fluency especially shines through **HTML** (the semantic kind), **CSS** (I’m a nerd for it), and **JavaScript** (not React!), but I don’t shy away from **PHP** and **SQL** (mainly for **WordPress** projects), **Shopify**, or **Webflow**. I use **git** (any of GitHub, GitLab, or Bitbucket) to keep my projects neatly tracked, and like to write commented, squeaky-clean(ish) code, keeping **accessibility** in mind.
-
-The **Adobe Creative Suite** and I go _way_ back (2005!), specifically **Photoshop, Illustrator, and After Effects**, though I’ve also gotten on the **Figma** train (sorry, Sketch!).
 {{ /echo }}
 
-{{ set tools = {
-	'Front-End': {
-		html: 'HTML',
-		css: 'CSS',
-		sass: 'Sass/SCSS',
-		svg: 'SVG',
-		js: 'JavaScript',
-		// markdown: 'Markdown',
-	},
-	'Templating / Server-Side': {
-		nodejs: 'NodeJS',
-		eleventy: 'Eleventy',
-		nunjucks: 'Nunjucks',
-		vento: 'Vento',
-		liquid: 'Liquid',
-		php: 'PHP',
-		sql: 'SQL',
-	},
-	'Workflow': {
-		git: 'git',
-		github: 'GitHub',
-		gitlab: 'GitLab',
-		bitbucket: 'Bitbucket',
-		npm: 'npm',
-		netlify: 'Netlify Deploys',
-	},
-	'CMS / Platforms': {
-		wordpress: 'WordPress',
-		shopify: 'Shopify',
-		webflow: 'Webflow',
-	},
-	// TODO Libraries? jQuery, DevExtreme, maybe Vue?
-	'Designing': {
-		figma: 'Figma',
-		photoshop: 'Photoshop',
-		illustrator: 'Illustrator',
-		aftereffects: 'After Effects',
-	},
-} }}
-{{ async function aboutIcon(icon, label) }}
-<span class="about-icons-list-badge">
-	<span class="about-icons-list-icon">{{ svg `${icon}-icon`, { class: 'inline-icon inline-icon--center' } }}</span>
-	<span class="about-icons-list-label">{{ label }}</span>
-</span>
-{{ /function }}
+<hr class="hero-like">
 
-<p id="tools">Here’s a (non-exhaustive) list of tools and environments I frequently use:</p>
-<ul class="about-icons-list | textAlign-start" style="--GAP: var(--size-s);">
-{{ for toolLabel, toolItems of tools -}}
-	<li class="about-icons-list-item | inline-list">
-		<strong>{{ toolLabel }}:</strong>
-		{{ for icon, label of toolItems }}
-			{{ await aboutIcon(icon, label) }}
-		{{ /for }}
-	</li>
-{{- /for }}
-</ul>
-
-<p>If you were looking for a résumé, you <em>may</em> find what you need on my <a href="https://www.linkedin.com/in/chriskirknielsen" class="link-label-anchor">{{ svg 'linkedin-icon', { class: 'inline-icon inline-icon--center' } }} <span class="link-label-text">LinkedIn profile</span></a>.</p>
+<p class="fontStyle-italic">PS: I do have a <a href="/hire">résumé</a> if you’re after that.</p>
 
 <hr>
 
