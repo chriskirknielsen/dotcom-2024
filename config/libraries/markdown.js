@@ -403,7 +403,7 @@ export default function (eleventyConfig, options = {}) {
 			const text = h.text(); // Get the heading content
 			const slug = slugify(text); // Create a slug from the content
 			const id = h.attr('id') || slug;
-			const inner = `<a class="${anchorClass}" href="#${slug}">${h.html()}</a>`;
+			const inner = `<a class="${anchorClass}" href="#${id}">${h.html()}</a>`;
 			h.attr('id', id);
 			h.attr('tabindex', '-1');
 			h.html(inner);
