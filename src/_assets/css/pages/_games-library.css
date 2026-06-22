@@ -498,11 +498,12 @@
 #games-library-expander[data-storage='stack'] {
 	& .gaming-platform-group {
 		container-type: inline-size;
-		isolation: isolate; /* We're going to use ridiculous z-index values so let's isolate them */
+		isolation: isolate; /* We're going to use _ridiculous_ z-index values so let's isolate them */
 
 		display: flex;
 		flex-direction: column;
 		gap: var(--size-2xs) var(--size-l);
+		margin-block-start: 0; /* Undo the default */
 
 		& .gaming-box-wrap {
 			pointer-events: none;
