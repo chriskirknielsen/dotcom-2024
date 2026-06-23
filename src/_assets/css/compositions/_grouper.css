@@ -8,10 +8,6 @@
 	flex-wrap: balance;
 }
 
-.grouper--baseline {
-	align-items: baseline;
-}
-
 .grouper--center-block {
 	align-items: center;
 }
@@ -26,6 +22,10 @@
 .grouper--toolbar {
 	justify-content: space-between;
 	align-items: flex-start;
+}
+
+.grouper--baseline {
+	align-items: baseline;
 }
 
 .grouper--icon-text-pair {

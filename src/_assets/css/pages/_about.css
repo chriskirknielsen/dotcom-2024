@@ -2,7 +2,7 @@
 	container-type: inline-size;
 }
 .about-pic {
-	max-inline-size: 12rem;
+	max-inline-size: var(--ABOUT-pic-max, 12rem);
 	margin-inline: auto;
 	margin-block: var(--size-m);
 
@@ -20,6 +20,10 @@
 		margin-inline: var(--size-m) 0;
 		float: right;
 		float: inline-end;
+
+		.flow > & + * {
+			--flow-space: 0;
+		}
 	}
 }
 

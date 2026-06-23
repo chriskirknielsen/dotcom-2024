@@ -32,7 +32,7 @@
                 title: 'Graphic design studies',
                 info: 'e-artsup Lyon and Paris, France',
                 dates: ['2011', '2015'],
-                description: '4 years learning about graphic design as a whole: typography and colour, print and motion, and even traditional arts.',
+                description: '4 years studying graphic design as a whole: typography and colour theory, print and motion design, and traditional arts.',
             },
             {
                 title: 'Baccalauréat E.S.',
@@ -91,28 +91,33 @@
     {{ set timeFormatByLength = { 1: 'year', 2: 'monthAndYear', 3: 'nice' } }}
     {{ for entry of list }}
     <li>
-        <p class="fontWeight-bold">{{ entry.title}}</p>
-        
-        <p class="fontSize-smaller">
-        <span class="fontStyle-italic">
-            {{ for i, date of entry.dates }}
-                {{ set d = String(date) }}
-                {{ set parts = d.split('-') }}
-                {{ if (!Date.parse(d)) }}
-                    {{ d }}
-                {{ else }}
-                    <time datetime="{{ d }}" class="fontWeight-regular">{{ d |> dateFormat({ format: timeFormatByLength[Math.min(3, Math.max(1, parts.length))] }) }}</time>
+        <div class="grouper grouper--baseline grouper--wrap grouper--toolbar" style="--GAP: 0 var(--size-m);">
+            <p>
+                <span  class="fontWeight-bold">{{ entry.title }}</span>
+                {{ if entry.info }}
+                    | {{ entry.info }}
                 {{ /if }}
-                
-                {{ if (entry.dates.length > 1 && (i + 1) < entry.dates.length) }}
-                <span class="visually-hidden">–</span>{{ svg 'arrow-right', { class: 'inline-icon inline-icon--center' } }}
-                {{ /if }}
-            {{ /for }}
-        </span>
-        {{ if entry.info }}
-            | {{ entry.info }}
-        {{ /if }}
-        </p>
+            </p>
+            
+            <p class="fontSize-smaller color-heading">
+            <span class="fontStyle-italic">
+                {{ for i, date of entry.dates }}
+                    {{ set d = String(date) }}
+                    {{ set parts = d.split('-') }}
+                    {{ if (!Date.parse(d)) }}
+                        {{ d }}
+                    {{ else }}
+                        <time datetime="{{ d }}" class="fontWeight-regular">{{ d |> dateFormat({ format: timeFormatByLength[Math.min(3, Math.max(1, parts.length))] }) }}</time>
+                    {{ /if }}
+                    
+                    {{ if (entry.dates.length > 1 && (i + 1) < entry.dates.length) }}
+                    <span class="visually-hidden">–</span>{{ svg 'arrow-right', { class: 'inline-icon inline-icon--center' } }}
+                    {{ /if }}
+                {{ /for }}
+            </span>
+            
+            </p>
+        </div>
         
         <p>{{ entry.description }}</p>
     </li>
@@ -123,20 +128,22 @@
 
 <h2 id="ckn">
     Christopher<wbr>
-    Kirk&#8209;Nielsen,<wbr>
-    <span aria-hidden="true" title="established">est.</span>
-    <span class="visually-hidden">established</span>
-    <wbr><span aria-hidden="true">MCMXCII</span>
-    <span class="visually-hidden">1992</span>
-    </h2>
+    Kirk&#8209;Nielsen
+</h2>
 
-<div class="about-pic-wrapper | flow">
+<p class="fontSize-smaller fontStyle-italic">
+    <span class="visually-hidden">Established 1992</span>
+    <span aria-hidden="true" title="established">Est.</span>
+    <wbr><span aria-hidden="true">MCMXCII</span>, based in the USA.
+</p>
+
+<div class="about-pic-wrapper | flow" style="--ABOUT-pic-max: 8.5rem;">
     {{ set profile_pic_url = [assets.images, 'profile-256.jpg'] |> toPath }}
     {{ set profile_pic_alt = `A profile photo of Chris looking upwards to the left, and wearing sunglasses. He looks like a white man with some beard and a bald head.` }}
     {{ set profile_pic_size = 256 }}
     {{ image profile_pic_url, profile_pic_alt, '', { width: 256, height: 256, widths: [256], eager: true, bypassLink: true, wrapperClass: 'about-pic' } }}
 
-    <p style="--flow-space: 0;">
+    <p class="textWrap-balance">
         <strong>I enjoy crafting websites and solving challenges through code.</strong> Implementing a design system or layout with CSS is my happy place, but building custom components and web experiences is a close second. I focus on making accessible experiences, and I sweat the details.
     </p>
 </div>
