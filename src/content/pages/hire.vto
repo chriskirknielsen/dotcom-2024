@@ -30,13 +30,13 @@
         edu: [
             {
                 title: 'Graphic design studies',
-                info: 'e-artsup Lyon and Paris, France',
+                info: 'e&#8209;artsup Lyon and Paris, France',
                 dates: ['2011', '2015'],
                 description: '4 years studying graphic design as a whole: typography and colour theory, print and motion design, and traditional arts.',
             },
             {
                 title: 'Baccalauréat E.S.',
-                info: 'France',
+                info: 'Lyon, France',
                 dates: ['2010'],
                 description: 'French high school diploma, with a “major” in socio-economics.',
             },
@@ -99,8 +99,7 @@
                 {{ /if }}
             </p>
             
-            <p class="fontSize-smaller color-heading">
-            <span class="fontStyle-italic">
+            <p class="fontSize-smaller fontStyle-italic | color-heading | borderBottom-dotted">
                 {{ for i, date of entry.dates }}
                     {{ set d = String(date) }}
                     {{ set parts = d.split('-') }}
@@ -114,8 +113,6 @@
                     <span class="visually-hidden">–</span>{{ svg 'arrow-right', { class: 'inline-icon inline-icon--center' } }}
                     {{ /if }}
                 {{ /for }}
-            </span>
-            
             </p>
         </div>
         
@@ -134,7 +131,7 @@
 <p class="fontSize-smaller fontStyle-italic">
     <span class="visually-hidden">Established 1992</span>
     <span aria-hidden="true" title="established">Est.</span>
-    <wbr><span aria-hidden="true">MCMXCII</span>, based in the USA.
+    <span aria-hidden="true">MCMXCII</span>, based in the USA.
 </p>
 
 <div class="about-pic-wrapper | flow" style="--ABOUT-pic-max: 8.5rem;">
