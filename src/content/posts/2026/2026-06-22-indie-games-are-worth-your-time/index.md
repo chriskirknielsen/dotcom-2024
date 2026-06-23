@@ -26,7 +26,7 @@ This isn’t to say big games aren’t made with love (I mean have you seen how 
 All of this is to say that indie games are important for the ecosystem of video games, as they bring a much-needed touch of humanity to the otherwise giant, sanded-down products of the entertainment industry. While I know it’s easier to only look out for the big names out there (trust me [I play those](/games/library/), too), next time you’re looking for a new game, try to seek out the smaller titles out there. It might just make your heart feel a little fuller. *(something something, commentary about the indie web)*
 
 {{ expander 'In need of a few recommendations?' }}
-In addition to those I mentioned, here’s a list of indie-and-indie-adjacent games, in no particular order*, that I can heartily recommend:
+In addition to those I mentioned, here’s a list of indie and indie-adjacent games, in no particular order*, that I can heartily recommend:
 
 - The Return of the Obra-Dinn
 - Kena: Bridge of Spirits
