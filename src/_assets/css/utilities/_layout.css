@@ -26,7 +26,3 @@
 .justifyContent-center {
 	justify-content: center;
 }
-
-.borderBottom-dotted {
-	border-block-end: 1px dotted;
-}

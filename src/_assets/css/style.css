@@ -50,5 +50,6 @@
 @import 'utilities/_layout.css';
 @import 'utilities/_typography.css';
 @import 'utilities/_color.css';
+@import 'utilities/_decoration.css';
 
 @import 'exceptions/_theme-overrides.css';
