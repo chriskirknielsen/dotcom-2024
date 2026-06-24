@@ -69,30 +69,8 @@
 }
 
 .header-logo,
-.header-menu-toggle,
 theme-picker button {
 	flex: 0 0 auto;
-}
-
-.header-menu-toggle {
-	[data-js='false'] &:not(:focus),
-	[data-js='true'] &:not([aria-pressed='true']) {
-		[data-show-when='idle'] {
-			transform: translate(0) scale(1);
-		}
-	}
-
-	[data-js='false'] &:focus,
-	[data-js='true'] &[aria-pressed='true'] {
-		[data-show-when='pressed'] {
-			transform: translate(0) scale(1);
-		}
-	}
-
-	line {
-		transform-origin: 50% 50%;
-		transform-box: view-box;
-	}
 }
 
 .header-link {
@@ -146,69 +124,68 @@ html[data-js='false'] .header-themepicker {
 	text-transform: uppercase;
 }
 
-@media (--large-viewport) {
-	.header-themepicker .header-themepicker-toggle ~ theme-picker {
-		visibility: hidden;
-		pointer-events: none;
+.header-themepicker .header-themepicker-toggle ~ theme-picker {
+	visibility: hidden;
+	pointer-events: none;
 
-		transform: scale(0) rotate(15deg) translate(1rem, -1rem);
-		transform-origin: 100% 0;
+	transform: scale(0) rotate(15deg) translate(1rem, -1rem);
+	transform-origin: 100% 0;
 
-		@media (--accept-motion) {
-			transition-property: transform, visibility;
-			transition-duration: var(--anim-short);
-			transition-timing-function: var(--easing-in);
+	@media (--accept-motion) {
+		transition-property: transform, visibility;
+		transition-duration: var(--anim-short);
+		transition-timing-function: var(--easing-in);
+	}
+}
+
+.header-themepicker .header-themepicker-toggle[aria-pressed='true'] ~ theme-picker {
+	visibility: visible;
+	pointer-events: auto;
+
+	transform: scale(1);
+
+	@media (--accept-motion) {
+		transition-duration: var(--anim-short);
+		transition-timing-function: var(--easing-out);
+
+		/* Fallback above, linear()-anim support below (long animation duration for the bounce to look bouncy) */
+		@supports (transition: all linear(0, 0.5 1%)) {
+			transition-duration: var(--anim-long);
+			transition-timing-function: var(--easing-bounce);
 		}
 	}
+}
 
-	.header-themepicker .header-themepicker-toggle[aria-pressed='true'] ~ theme-picker {
-		visibility: visible;
-		pointer-events: auto;
-
-		transform: scale(1);
-
-		@media (--accept-motion) {
-			transition-duration: var(--anim-short);
-			transition-timing-function: var(--easing-out);
-
-			/* Fallback above, linear()-anim support below (long animation duration for the bounce to look bouncy) */
-			@supports (transition: all linear(0, 0.5 1%)) {
-				transition-duration: var(--anim-long);
-				transition-timing-function: var(--easing-bounce);
-			}
-		}
-	}
-
-	theme-picker {
-		/**
+theme-picker {
+	/**
 		 * 1: padding on both sides + gap between items + expected buttons size.
 		 * 2: CTA-radius-aware picker corner rounding.
 		 */
-		--PICKER-parent-inline-size: calc(var(--_cta-icon-size, 2.5em) + 2 * (var(--_cta-border-width) + var(--_cta-padding-inline)));
-		--PICKER-cta-inline-size: calc(var(--_cta-icon-size, 1.5em) + 2 * var(--_cta-padding-block)); /* It's a square! */
-		--PICKER-gap: var(--size-m);
-		--PICKER-padding: var(--size-m);
+	--PICKER-parent-inline-size: calc(var(--_cta-icon-size, 2.5em) + 2 * (var(--_cta-border-width) + var(--_cta-padding-inline)));
+	--PICKER-cta-inline-size: calc(var(--_cta-icon-size, 1.5em) + 2 * var(--_cta-padding-block)); /* It's a square! */
+	--PICKER-gap: var(--size-m);
+	--PICKER-padding: var(--size-m);
 
-		position: absolute;
-		inset-block-start: calc(var(--PICKER-cta-inline-size) / 2 + var(--PICKER-padding) / 2);
-		inset-inline-end: calc(var(--PICKER-parent-inline-size) / 2);
+	position: absolute;
+	inset-block-start: calc(var(--PICKER-cta-inline-size) / 2 + var(--PICKER-padding) / 2);
+	inset-inline-end: calc(var(--PICKER-parent-inline-size) / 2);
 
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: var(--PICKER-gap);
-		min-inline-size: calc(var(--PICKER-padding) * 2 + var(--PICKER-gap) + var(--PICKER-cta-inline-size) * 2); /* 1 */
-		padding: var(--PICKER-padding);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--PICKER-gap);
+	min-inline-size: calc(var(--PICKER-padding) * 2 + var(--PICKER-gap) + var(--PICKER-cta-inline-size) * 2); /* 1 */
+	padding: var(--PICKER-padding);
 
-		color: var(--color-text);
-		border: 1px solid var(--color-text);
-		border-radius: clamp(0px, var(--_corner) * 999, var(--_cta-border-radius) + var(--PICKER-padding)); /* 2 */
-		border-start-end-radius: 0; /* Top-right corner*/
-		background-color: var(--color-surface);
-		box-shadow: var(--_shadow-active);
-	}
+	color: var(--color-text);
+	border: 1px solid var(--color-text);
+	border-radius: clamp(0px, var(--_corner) * 999, var(--_cta-border-radius) + var(--PICKER-padding)); /* 2 */
+	border-start-end-radius: 0; /* Top-right corner*/
+	background-color: var(--color-surface);
+	box-shadow: var(--_shadow-active);
+}
 
-	/* .theme-picker-scheme-groups {
+/* .theme-picker-scheme-groups {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(max-content, 1fr));
 		gap: var(--size-m);
@@ -218,24 +195,23 @@ html[data-js='false'] .header-themepicker {
 		background: linear-gradient(transparent, var(--color-text), transparent) no-repeat center / 1px 100%;
 	} */
 
-	.theme-picker-scheme-group {
-		flex: 1 0 auto;
-		display: flex;
-		gap: var(--size-xs);
-		flex-wrap: wrap;
-		align-items: start;
-		justify-content: center;
-	}
+.theme-picker-scheme-group {
+	flex: 1 0 auto;
+	display: flex;
+	gap: var(--size-xs);
+	flex-wrap: wrap;
+	align-items: start;
+	justify-content: center;
+}
 
-	.theme-picker-scheme-label {
-		flex: 1 0 100%;
-		display: flex;
-		justify-content: center;
+.theme-picker-scheme-label {
+	flex: 1 0 100%;
+	display: flex;
+	justify-content: center;
 
-		font-size: var(--typeScale-n2);
-		line-height: 1;
-		text-align: center;
-	}
+	font-size: var(--typeScale-n2);
+	line-height: 1;
+	text-align: center;
 }
 
 @media (--small-viewport) {
@@ -265,187 +241,35 @@ html[data-js='false'] .header-themepicker {
 		}
 	}
 
-	.header-logo,
-	.header-menu-toggle {
+	.header-logo {
 		position: relative;
 		z-index: 2;
 	}
 
-	.header-menu-toggle {
-		margin-inline-start: auto;
+	.header {
+		flex-wrap: wrap;
+		row-gap: max(8px, var(--size-m));
 	}
 
-	.header-menu {
-		html[data-js='true'] &::before {
-			content: '';
-
-			block-size: var(--theme-group-rule);
-			inline-size: 100%;
-
-			background: linear-gradient(90deg, transparent, var(--color-heading), transparent);
-		}
-
-		--theme-group-rule: 1px;
-		--theme-group-gap: calc(max(8px, var(--size-l)) + var(--theme-group-rule));
-
-		visibility: hidden;
-		pointer-events: none;
-
-		position: absolute;
-		z-index: 1;
-		inset-block-start: 100%;
-		inset-inline: 0;
-
-		display: flex;
-		flex-direction: column;
-		gap: var(--size-m);
-		max-block-size: calc(100vh - 100% - var(--size-l));
-		max-block-size: calc(100dvh - 100% - var(--size-l));
-		margin: var(--size-m) 0;
-		padding: var(--size-m);
-		overflow: auto;
-
-		border: 1px solid var(--_card-border-color);
-		border-radius: var(--_corner);
-		background-color: var(--color-surface);
-		box-shadow: var(--_shadow-active);
-
-		transform: translateY(8em) scale(0.9);
-		opacity: 0;
-
-		@media (--accept-motion) {
-			transition-property: transform, opacity, visibility;
-			transition-duration: var(--anim-short);
-			transition-timing-function: var(--easing-in);
-		}
+	html[data-js='true'] .header-menu {
+		display: contents;
 	}
 
 	.header-nav {
-		order: -1;
+		order: 1; /* Place it last so the Theme button can appear on the same line as the logo*/
 		inline-size: 100%;
 	}
 
+	html[data-js='true'] .header-list {
+		justify-content: center;
+	}
 	.header-list {
-		--gap: var(--size-s);
-		flex-direction: column;
-		align-items: center;
-		inline-size: 100%;
-		gap: var(--gap);
-
-		font-size: 1.5em;
+		flex-wrap: wrap;
+		flex-wrap: balance;
 	}
 
 	.header-themepicker {
-		order: 1;
-		inline-size: 100%;
-	}
-
-	theme-picker {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: var(--theme-group-gap);
-	}
-
-	.header-themepicker-heading {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: var(--size-s);
-		margin-block-end: var(--size-s);
-	}
-
-	.theme-picker-scheme-group {
-		position: relative;
-
-		display: flex;
-		flex-wrap: wrap;
-		gap: max(8px, var(--size-xs));
-		align-items: center;
-		justify-content: flex-end;
-		inline-size: 100%;
-
-		/* Add a separator between each group, except the last (the last group is followed by a <dialog>, hence :last-of-type) */
-		&:not(:last-of-type) {
-			&::before {
-				content: '';
-
-				position: absolute;
-
-				block-size: var(--theme-group-rule);
-				inset-block-end: calc(-1 * var(--theme-group-gap) / 2);
-				inset-inline: 0;
-
-				background: linear-gradient(90deg, transparent, var(--color-text), transparent);
-			}
-		}
-	}
-
-	.theme-picker-scheme-label {
-		margin-inline-end: auto;
-
-		font-size: var(--typeScale-n1);
-	}
-
-	html[data-js='false'] .header-menu-toggle:focus {
-		pointer-events: none;
-	}
-
-	html[data-js='false'] .header-menu:focus-within,
-	html[data-js='false'] .header-menu-toggle:focus + .header-menu,
-	html[data-js='true'] .header-menu-toggle[aria-pressed='true'] + .header-menu {
-		visibility: visible;
-
-		opacity: 1;
-		transform: translate(0, 0);
-
-		@media (--accept-motion) {
-			transition-duration: var(--anim-medium);
-			transition-timing-function: var(--easing-circ-out);
-		}
-
-		& > * {
-			pointer-events: auto;
-		}
-	}
-
-	html[data-js='true'] .header-menu-toggle[aria-pressed='true'] + .header-menu {
-		pointer-events: auto;
-	}
-
-	html[data-js='false']:has(.header-menu:focus-within),
-	html[data-js='false']:has(.header-menu-toggle:focus + .header-menu),
-	html[data-js='true']:has(.header-menu-toggle[aria-pressed='true'] + .header-menu) {
-		overflow: hidden; /* Prevent scrolling */
-		scrollbar-gutter: stable; /* Preserve space occupied by scrollbar */
-
-		& .header-wrap {
-			&::before {
-				pointer-events: auto; /* Make it clickable to trigger a close */
-
-				opacity: 1;
-			}
-
-			& + main {
-				transform: scale(0.95);
-			}
-
-			@media (--accept-motion) {
-				&::before,
-				& + main {
-					transition-duration: var(--anim-long);
-					transition-timing-function: var(--easing-out);
-				}
-			}
-		}
-	}
-
-	@media (--accept-motion) {
-		main {
-			transform-origin: 50% 50vh; /* Middle of the screen regardless of <main>'s height) */
-
-			transition: transform var(--anim-short) var(--easing-in);
-		}
+		margin-inline-start: auto;
 	}
 }
 
