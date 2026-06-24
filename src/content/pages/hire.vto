@@ -88,6 +88,7 @@
 ---
 
 {{ async function getResumeList(list) }}
+    {{ set dateSep }}<span class="visually-hidden">–</span>{{ svg 'arrow-right', { class: 'inline-icon inline-icon--center' } }}{{ /set }}
     {{ set timeFormatByLength = { 1: 'year', 2: 'monthAndYear', 3: 'nice' } }}
     {{ for entry of list }}
     <li>
@@ -100,19 +101,20 @@
             </p>
             
             <p class="fontSize-smaller fontStyle-italic | color-heading | borderBottom-dotted">
+                {{ set itemDates = []; /* Reset on every list item */ }}
                 {{ for i, date of entry.dates }}
                     {{ set d = String(date) }}
                     {{ set parts = d.split('-') }}
-                    {{ if (!Date.parse(d)) }}
-                        {{ d }}
-                    {{ else }}
-                        <time datetime="{{ d }}" class="fontWeight-regular">{{ d |> dateFormat({ format: timeFormatByLength[Math.min(3, Math.max(1, parts.length))] }) }}</time>
-                    {{ /if }}
-                    
-                    {{ if (entry.dates.length > 1 && (i + 1) < entry.dates.length) }}
-                    <span class="visually-hidden">–</span>{{ svg 'arrow-right', { class: 'inline-icon inline-icon--center' } }}
-                    {{ /if }}
+                    {{ set singleDate -}}
+                        {{ if (!Date.parse(d)) }}
+                            {{ d }}
+                        {{ else }}
+                            <time datetime="{{ d }}" class="fontWeight-regular">{{ d |> dateFormat({ format: timeFormatByLength[Math.min(3, Math.max(1, parts.length))] }) }}</time>
+                        {{ /if }}
+                    {{- /set }}
+                    {{> itemDates.push(singleDate) }}
                 {{ /for }}
+                {{ itemDates.join(dateSep) }}
             </p>
         </div>
         
