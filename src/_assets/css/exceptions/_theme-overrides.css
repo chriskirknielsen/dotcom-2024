@@ -98,8 +98,11 @@ html[data-theme='dawn'] {
 			padding-inline-start: var(--CALLOUT-padding); /* Half the padding will be for the background */
 
 			color: var(--color-text);
-			text-shadow: 2px 2px 0 var(--color-canvas), 4px 4px 0 var(--color-accent);
-			background: linear-gradient(var(--CALLOUT-border-color), var(--CALLOUT-border-color)) no-repeat 0 100% / var(--CALLOUT-border-width) round(up, 0.8em, 6px),
+			text-shadow:
+				2px 2px 0 var(--color-canvas),
+				4px 4px 0 var(--color-accent);
+			background:
+				linear-gradient(var(--CALLOUT-border-color), var(--CALLOUT-border-color)) no-repeat 0 100% / var(--CALLOUT-border-width) round(up, 0.8em, 6px),
 				repeating-linear-gradient(var(--color-accent) 0, var(--color-accent) 2px, transparent 2px, transparent 6px) no-repeat 0 100% / calc(var(--CALLOUT-padding) / 2)
 					round(up, 0.8em, 6px);
 
@@ -160,7 +163,8 @@ html[data-theme='dawn'] {
 				inline-size: 2rem;
 				margin: auto;
 
-				background: linear-gradient(white, #fff29b, pink) no-repeat 50% 0 / 100% 50%,
+				background:
+					linear-gradient(white, #fff29b, pink) no-repeat 50% 0 / 100% 50%,
 					repeating-linear-gradient(transparent 0, transparent 2px, hotpink 0, hotpink 4px) no-repeat 50% 100% / 100% 100%;
 				border-radius: 50%;
 			}
@@ -201,8 +205,11 @@ html[data-theme='dusk'] {
 		padding-inline-start: calc(var(--CALLOUT-padding) + var(--CALLOUT-border-width));
 
 		color: var(--color-text);
-		text-shadow: 2px 2px 0 var(--color-canvas), 4px 4px 0 var(--color-accent);
-		background: linear-gradient(var(--CALLOUT-border-color), var(--CALLOUT-border-color)) no-repeat 0 100% / var(--CALLOUT-border-width) var(--CALLOUT-bg-height),
+		text-shadow:
+			2px 2px 0 var(--color-canvas),
+			4px 4px 0 var(--color-accent);
+		background:
+			linear-gradient(var(--CALLOUT-border-color), var(--CALLOUT-border-color)) no-repeat 0 100% / var(--CALLOUT-border-width) var(--CALLOUT-bg-height),
 			repeating-linear-gradient(var(--color-accent) 0, var(--color-accent) 2px, transparent 2px, transparent 6px) no-repeat 0 100% / calc(var(--CALLOUT-padding) / 2)
 				var(--CALLOUT-bg-height);
 
@@ -263,7 +270,8 @@ html[data-theme='dusk'] {
 			inline-size: 2rem;
 			margin: auto;
 
-			background: linear-gradient(white, #fff29b, pink) no-repeat 50% 0 / 100% 50%,
+			background:
+				linear-gradient(white, #fff29b, pink) no-repeat 50% 0 / 100% 50%,
 				repeating-linear-gradient(transparent 0, transparent 2px, hotpink 0, hotpink 4px) no-repeat 50% 100% / 100% 100%;
 			border-radius: 50%;
 		}
@@ -295,7 +303,9 @@ html[data-theme='vapor'] {
 		border: 12px solid #d5cfca;
 		border-radius: 12px;
 		background: var(--crt-frame);
-		box-shadow: 0 3px 0 #bbafa4, 0 20px 0 -6px #a59a8f;
+		box-shadow:
+			0 3px 0 #bbafa4,
+			0 20px 0 -6px #a59a8f;
 		transform: translateY(-4px);
 
 		& > img {
@@ -450,7 +460,8 @@ html[data-theme='cyberpunk'] {
 
 					/* By setting the border color as our color, we can leverage currentColor which will transition when used in a gradient definition */
 					color: var(--CTA-border-color);
-					background: linear-gradient(90deg, currentColor 1px, transparent 0) repeat-y 0 0 / 100% 100%,
+					background:
+						linear-gradient(90deg, currentColor 1px, transparent 0) repeat-y 0 0 / 100% 100%,
 						linear-gradient(90deg, currentColor 2px, transparent 0) no-repeat 0 0 / 2px 30%,
 						linear-gradient(90deg, currentColor 2px, transparent 0) no-repeat 0 100% / 2px 30%,
 						linear-gradient(135deg, transparent calc(50% - 0.2px), currentColor calc(50% + 0.2px)) no-repeat 100% 100% / var(--cut-size) var(--cut-size);
@@ -470,7 +481,8 @@ html[data-theme='cyberpunk'] {
 		@supports (corner-shape: bevel) {
 			corner-shape: bevel;
 			border-end-end-radius: var(--cut-size);
-			background: linear-gradient(0deg, var(--CTA-border-color) 33%, transparent 0, transparent 67%, var(--CTA-border-color) 0) no-repeat 0 0 / 2px 100%,
+			background:
+				linear-gradient(0deg, var(--CTA-border-color) 33%, transparent 0, transparent 67%, var(--CTA-border-color) 0) no-repeat 0 0 / 2px 100%,
 				conic-gradient(var(--CTA-border-color) 0 0) no-repeat 0 0 / 1px 100%;
 			background-color: var(--CTA-bg-color);
 
@@ -482,9 +494,11 @@ html[data-theme='cyberpunk'] {
 
 			&[data-shape='rect'] {
 				border-radius: 0;
-				background: linear-gradient(0deg, var(--CTA-border-color) 33%, transparent 0, transparent 67%, var(--CTA-border-color) 0) no-repeat 0 0 / 2px 100%,
+				background:
+					linear-gradient(0deg, var(--CTA-border-color) 33%, transparent 0, transparent 67%, var(--CTA-border-color) 0) no-repeat 0 0 / 2px 100%,
 					linear-gradient(0deg, var(--CTA-border-color) 33%, transparent 0, transparent 67%, var(--CTA-border-color) 0) no-repeat 100% 0 / 2px 100%,
-					conic-gradient(var(--CTA-border-color) 0 0) no-repeat 0 0 / 1px 100%, conic-gradient(var(--CTA-border-color) 0 0) no-repeat 100% 0 / 1px 100%;
+					conic-gradient(var(--CTA-border-color) 0 0) no-repeat 0 0 / 1px 100%,
+					conic-gradient(var(--CTA-border-color) 0 0) no-repeat 100% 0 / 1px 100%;
 				background-color: var(--CTA-bg-color);
 			}
 		}
@@ -527,8 +541,11 @@ html[data-theme='cyberpunk'] {
 
 		block-size: var(--s);
 
-		background: linear-gradient(180deg, var(--g1)) 0 0 / 33.3% 100%, linear-gradient(60deg, var(--g2)) 33.3% 0 / calc(var(--s) * 0.75) var(--s),
-			linear-gradient(0deg, var(--g1)) 50% 0 / calc(33.4% - var(--s) / 2) 100%, linear-gradient(-60deg, var(--g2)) 66.7% 0 / calc(var(--s) * 0.75) var(--s),
+		background:
+			linear-gradient(180deg, var(--g1)) 0 0 / 33.3% 100%,
+			linear-gradient(60deg, var(--g2)) 33.3% 0 / calc(var(--s) * 0.75) var(--s),
+			linear-gradient(0deg, var(--g1)) 50% 0 / calc(33.4% - var(--s) / 2) 100%,
+			linear-gradient(-60deg, var(--g2)) 66.7% 0 / calc(var(--s) * 0.75) var(--s),
 			linear-gradient(180deg, var(--g1)) 100% 0 / 33.3% 100%;
 		background-repeat: no-repeat;
 		clip-path: polygon(0 50%, calc(var(--s) / 3) 0, calc(100% - (var(--s) / 3)) 0, 100% 50%, 100% 100%, 0 100%);
@@ -631,7 +648,9 @@ html[data-theme='vintage'] {
 		block-size: 1rem;
 
 		border-radius: 2px;
-		background: linear-gradient(90deg, goldenrod, gold 33%, goldenrod) no-repeat 50% 75% / 100% 0.125rem, linear-gradient(var(--color-heading) 75%, var(--color-text) 0);
+		background:
+			linear-gradient(90deg, goldenrod, gold 33%, goldenrod) no-repeat 50% 75% / 100% 0.125rem,
+			linear-gradient(var(--color-heading) 75%, var(--color-text) 0);
 	}
 
 	.header-link {
@@ -743,12 +762,15 @@ html[data-theme='campfire'] {
 			hline to 0
 		); */
 
-		background-image: radial-gradient(circle at calc(var(--CTX-u) / 2) calc(var(--CTX-u) / 2), var(--CTX-nail)),
+		background-image:
+			radial-gradient(circle at calc(var(--CTX-u) / 2) calc(var(--CTX-u) / 2), var(--CTX-nail)),
 			radial-gradient(circle at calc(100% - (var(--CTX-u) / 2)) calc(var(--CTX-u) / 2), var(--CTX-nail)),
 			radial-gradient(circle at calc(var(--CTX-u) / 2) calc(100% - (var(--CTX-u) / 2)), var(--CTX-nail)),
 			radial-gradient(circle at calc(100% - (var(--CTX-u) / 2)) calc(100% - (var(--CTX-u) / 2)), var(--CTX-nail));
 		background-repeat: no-repeat;
-		box-shadow: 0 calc(var(--CTX-u) / 4 * -1) 0 var(--color-heading), var(--_shadow);
+		box-shadow:
+			0 calc(var(--CTX-u) / 4 * -1) 0 var(--color-heading),
+			var(--_shadow);
 	}
 
 	.callout-label {
@@ -847,6 +869,29 @@ html[data-theme='director'] {
 		--callout-color: var(--color-surface-alt);
 		--callout-border-color: var(--color-text);
 		--callout-background: var(--color-text);
+		--callout-fold-width: min(25vi, 10rem);
+		--callout-fold-height: var(--CALLOUT-padding);
+
+		/* The clip-path will have a -2rem left-side origin to allow overflow for the icon container */
+		clip-path: polygon(-2rem 0, 100% 0, 100% calc(100% - var(--callout-fold-height)), calc(100% - var(--callout-fold-width)) 100%, -2rem 100%);
+
+		&::after {
+			content: '';
+
+			position: absolute;
+			inset-block-end: calc(-1 * var(--CALLOUT-border-width));
+			inset-inline-end: calc(-1 * var(--CALLOUT-border-width));
+
+			display: block;
+			inline-size: var(--callout-fold-width);
+			block-size: var(--callout-fold-height);
+
+			background: color-mix(in srgb, var(--callout-background, var(--color-surface)), var(--callout-color) 20%);
+			box-shadow: var(--_shadow);
+
+			transform: skewX(-75deg) rotate(180deg) translate(-100%, 100%);
+			transform-origin: 0 100%;
+		}
 	}
 
 	.signoff {
@@ -855,7 +900,6 @@ html[data-theme='director'] {
 		background: var(--color-text);
 	}
 
-	.callout,
 	.signoff {
 		box-shadow: var(--_shadow);
 	}

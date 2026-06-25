@@ -10,7 +10,7 @@ export default function (eleventyConfig, options = {}) {
 		const emojiStyleAttr = emoji ? `style="--callout-emoji: '${emoji}'"` : '';
 		heading ||= 'Note';
 		const renderMode = renderOptions.hasOwnProperty('mode') ? renderOptions.mode : 'inline';
-		const wrapperClass = renderOptions.hasOwnProperty('class') ? renderOptions.class : '';
+		const wrapperClass = ['callout', renderOptions.hasOwnProperty('class') ? renderOptions.class : ''].filter(Boolean);
 		let renderOutput;
 		switch (renderMode) {
 			case 'markup': {
@@ -29,7 +29,7 @@ export default function (eleventyConfig, options = {}) {
 
 		// Little trick to avoid additional whitespace
 		return ''.concat(
-			`<section class="callout ${wrapperClass}" aria-labelledby="${uniqueId}">`,
+			`<section class="${wrapperClass.join(' ')}" aria-labelledby="${uniqueId}">`,
 			`<p id="${uniqueId}" class="callout-label | h3" ${emojiStyleAttr}>${heading}</p>`,
 			renderOutput.trim(),
 			`</section>`
