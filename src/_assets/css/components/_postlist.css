@@ -41,6 +41,7 @@
 
 	@supports (display: grid-lanes) {
 		display: grid-lanes; /* Modern masonry implementation */
+		flow-tolerance: infinite; /* Keep items in order */
 	}
 }
 
