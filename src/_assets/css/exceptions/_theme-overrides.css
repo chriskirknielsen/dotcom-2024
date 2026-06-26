@@ -866,12 +866,14 @@ html[data-theme='director'] {
 	}
 
 	.callout {
+		--CALLOUT-border-width: 0px;
 		--callout-color: var(--color-surface-alt);
 		--callout-border-color: var(--color-text);
 		--callout-background: var(--color-text);
 		--callout-fold-width: min(25vi, 10rem);
 		--callout-fold-height: var(--CALLOUT-padding);
 
+		overflow: hidden;
 		/* The clip-path will have a -2rem left-side origin to allow overflow for the icon container */
 		clip-path: polygon(-2rem 0, 100% 0, 100% calc(100% - var(--callout-fold-height)), calc(100% - var(--callout-fold-width)) 100%, -2rem 100%);
 
