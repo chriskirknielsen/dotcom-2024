@@ -95,10 +95,16 @@
 
 .expander-content {
 	--CODE-bg: var(--color-surface-alt, var(--color-canvas));
+	--EXPANDER-bg: radial-gradient(var(--color-accent), transparent 80%) no-repeat 0 0 / 1px 100%;
+
 	margin-inline: var(--size-s);
 	padding: var(--size-m);
 
-	background: var(--color-surface);
+	background: var(--EXPANDER-bg), var(--EXPANDER-bg);
+	background-position:
+		0 0,
+		100% 0;
+	background-color: var(--color-surface);
 	box-shadow: var(--_shadow);
 }
 
