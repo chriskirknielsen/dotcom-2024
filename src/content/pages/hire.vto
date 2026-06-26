@@ -92,15 +92,13 @@
     {{ set timeFormatByLength = { 1: 'year', 2: 'monthAndYear', 3: 'nice' } }}
     {{ for entry of list }}
     <li>
-        <div class="grouper grouper--baseline grouper--wrap grouper--toolbar" style="--GAP: 0 var(--size-m);">
-            <p>
-                <span  class="fontWeight-bold">{{ entry.title }}</span>
-                {{ if entry.info }}
-                    | {{ entry.info }}
-                {{ /if }}
+        <div class="underdot-group">
+            <p class="underdot-group-main | inline-list">
+                <span  class="fontWeight-bold | inline-list-item">{{ entry.title }}</span>
+                {{ if entry.info }}<span class="inline-list-item">{{ entry.info }}</span>{{ /if }}
             </p>
             
-            <p class="fontSize-smaller fontStyle-italic | color-heading | borderBottom-dotted">
+            <p class="underdot-group-secondary">
                 {{ set itemDates = []; /* Reset on every list item */ }}
                 {{ for i, date of entry.dates }}
                     {{ set d = String(date) }}
@@ -114,7 +112,7 @@
                     {{- /set }}
                     {{> itemDates.push(singleDate) }}
                 {{ /for }}
-                {{ itemDates.join(dateSep) }}
+                <span>{{ itemDates.join(dateSep) }}</span>
             </p>
         </div>
         
