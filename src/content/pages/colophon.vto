@@ -34,16 +34,11 @@ My website has distinct themes with distinct typefaces (some paid, some free) an
 First off, the homepage wordmark for my name is a custom edit of the [Sprat typeface](https://www.collletttivo.it/typefaces/sprat) with everything tightened up and minor corrections. When I first saw it, I knew I had to use it: it’s got a vibe reminiscent of Stephen King books and other designs using [ITC Benguiat](https://fontsinuse.com/typefaces/1682/itc-benguiat) (you know, the Stranger Things logo!). The reveal animation is very simple but does the trick and is pretty performant compared to the [last version](/archives/).
 {{ /echo }}
 
-<p>Also, I used a handful of SVG icons from <a href="https://lucide.dev/icons/">Lucide</a>, listed here:
-{{> let loopIndex = 0 }}
-{{ for name, icon of tokens._meta.icons.lucide.used }}
-	{{> loopIndex++ }}
-	{{ if loopIndex === Object.keys(tokens._meta.icons.lucide.used).length }}and {{ /if }}
+<p>Also, I used a handful of SVG icons from <a href="{{ tokens._meta.icons.lucide.link }}">Lucide</a>, listed here:</p>
+<div class="grouper grouper--wrap" style="--flow-space: 0;">{{ for name, icon of tokens._meta.icons.lucide.used }}
 	<span class="icon-text-pair">{{ svg name, { class: 'inline-icon inline-icon--center linecap-auto' } }} <code>{{ icon }}</code></span>
-	{{- if loopIndex === Object.keys(tokens._meta.icons.lucide.used).length }}.{{ else }},{{ /if }}
-{{ /for }}
-(the themes icons are custom, and “brand” icons belong to their respective owners)
-</p>
+{{ /for }}</div>
+<p>(the themes icons are custom made, and “brand” icons belong to their respective owners)</p>
 
 {{ callout "Keyboard user?", "⌨️", { mode: 'markup', class: 'hide-when-nojs' } }}
 <p>If you are using a keyboard with JS enabled, you can press a number key to activate the corresponding theme based on the theme picker order (the <kbd>0</kbd> key and current theme index {{ for i, t of [].concat(themes,[{key:'custom'}]) }}<kbd data-theme-condition="{{ t.key }}">{{ i+1 }}</kbd>{{ /for }} will revert to the system light/dark default).</p>
