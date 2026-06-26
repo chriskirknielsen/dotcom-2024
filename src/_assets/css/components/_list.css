@@ -16,7 +16,7 @@ ol > li > ol {
 		display: inline; /* List is on the same line as preceding content */
 	}
 
-	& > li {
+	& > :is(li, .inline-list-item) {
 		display: inline;
 
 		& > a {
