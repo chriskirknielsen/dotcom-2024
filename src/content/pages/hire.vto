@@ -150,12 +150,24 @@
 <hr class="hero-like">
 
 <div class="grouper grouper--wrap grouper--center-inline" data-cv-switcher-prop="unhide" hidden>
-	<button type="button" class="button" aria-pressed="true" data-persist-pressed-style data-cv-switcher="bullet">
-		Bullet points
-	</button>
-	<button type="button" class="button" aria-pressed="false" data-persist-pressed-style data-cv-switcher="written">
-		Write-up
-	</button>
+    {{ component 'cta', {
+        icon: 'page',
+        iconClass: ' ',
+        iconBefore: true,
+        label: "Bullet points",
+        ctaType: 'button',
+        ctaClass: 'linecap-auto',
+        ctaAttr: 'aria-pressed="true" data-persist-pressed-style data-cv-switcher="bullet"',
+    } }}
+    {{ component 'cta', {
+        icon: 'note',
+        iconClass: ' ',
+        iconBefore: true,
+        label: "Write-up",
+        ctaType: 'button',
+        ctaClass: 'linecap-auto',
+        ctaAttr: 'aria-pressed="false" data-persist-pressed-style data-cv-switcher="written"',
+    } }}
 </div>
 
 <section role="region" class="flow" aria-label="Bullet point version" data-cv-version="bullet">
