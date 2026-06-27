@@ -93,8 +93,8 @@
     {{ for entry of list }}
     <li>
         <div class="underdot-group">
-            <p class="underdot-group-main | inline-list">
-                <span  class="fontWeight-bold | inline-list-item">{{ entry.title }}</span>
+            <p class="underdot-group-main | inline-list | color-heading">
+                <span  class="fontWeight-bold color-heading | inline-list-item">{{ entry.title }}</span>
                 {{ if entry.info }}<span class="inline-list-item">{{ entry.info }}</span>{{ /if }}
             </p>
             
@@ -148,6 +148,7 @@
 <hr class="hero-like">
 
 <div class="grouper grouper--wrap grouper--center-inline" data-cv-switcher-prop="unhide" hidden>
+    <span class="lineHeight-tight">Read as:</span>
     {{ component 'cta', {
         icon: 'page',
         iconClass: ' ',

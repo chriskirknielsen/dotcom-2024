@@ -1,36 +1,38 @@
 .underdot-group {
 	--DOT-space: 2px;
 	--DOT-width: 1px;
+	--DOT-color: var(--color-accent);
+
 	container-type: inline-size;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: baseline;
 	gap: calc(var(--DOT-width) + var(--DOT-space) * 2) 0.5em;
 	margin-block-end: max(calc(var(--DOT-width) + var(--DOT-space) * 2), 0.5em);
+}
 
-	& > .underdot-group-main {
-		flex: 0 0 auto;
-		position: relative;
+.underdot-group-main {
+	flex: 0 0 auto;
+	position: relative;
 
-		max-inline-size: 100%;
+	max-inline-size: 100%;
 
-		&::after {
-			content: '';
+	&::after {
+		content: '';
 
-			position: absolute;
-			inset: calc(100% + var(--DOT-space)) 0;
+		position: absolute;
+		inset: calc(100% + var(--DOT-space)) 0;
 
-			block-size: var(--DOT-width);
-			inline-size: 100cqi;
+		block-size: var(--DOT-width);
+		inline-size: 100cqi;
 
-			background: repeating-linear-gradient(90deg, var(--color-accent) 0 4px, #0000 0 6px) repeat-x 0 100%;
-		}
+		background: repeating-linear-gradient(90deg, var(--DOT-color) 0 4px, #0000 0 6px) repeat-x 0 100%;
 	}
-	& > .underdot-group-secondary {
-		margin-inline-start: auto;
+}
 
-		font-size: 0.75em;
-		font-style: italic;
-		color: var(--color-heading);
-	}
+.underdot-group-secondary {
+	margin-inline-start: auto;
+
+	font-size: 0.75em;
+	font-style: italic;
 }
