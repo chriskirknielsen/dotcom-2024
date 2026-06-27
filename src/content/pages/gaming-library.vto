@@ -226,7 +226,6 @@
 	{{ set trophyTotal = trophies |> toValues |> flatten |> sum }}
 {{ /if }}
 {{ set trophyExpanderLabel }}
-<div class="textAlign-center textWrap-balance">
 	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="gaming-logo inline-icon inline-icon--center" aria-hidden="true">
 		<g id="icon-psn-trophy">
 			<path fill="none" d="M0 0h24v24H0z" />
@@ -235,7 +234,6 @@
 	</svg>
 
 	<span>PlayStation Network Trophies ({{ trophyTotal |> formatNumber }})</span>
-</div>
 {{ /set }}
 {{ set trophyLevelCounts }}
 <ul class="gaming-details-trophies | inline-list{{ if gameslibrary.meta.totalTrophyData }} lineHeight-normal{{ /if }}" data-flow="run-in">
