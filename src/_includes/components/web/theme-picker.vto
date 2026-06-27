@@ -6,7 +6,7 @@
             System
         </span>
 		<div class="tooltip" data-tooltip-pos="end end">
-			<button class="button button--icon-only" data-theme-set="" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-system-description">
+			<button type="button" class="button button--icon-only" data-theme-set="" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-system-description">
 				{{ svg 'device-desktop', { width: 24, height: 24, class: 'hide-when-viewport--small' } }}
 				{{ svg 'device-phone', { width: 24, height: 24, class: 'hide-when-viewport--large' } }}
 			</button>
@@ -26,7 +26,7 @@
 			</span>
 			{{ for theme of groupedthemes }}
 				<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}"{{ if theme.key == 'secret' }} data-theme-condition="{{ theme.key }}"{{ /if }}>
-					<button class="button button--icon-only" data-theme-set="{{ theme.key }}" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-{{ theme.key }}-description">
+					<button type="button" class="button button--icon-only" data-theme-set="{{ theme.key }}" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-{{ theme.key }}-description">
 						{{ svg 'theme-'+theme.key, { width: 24, height: 24 } }}
 					</button>
 					<span class="tooltip-content" id="theme-picker-{{ theme.key }}-description">
@@ -43,7 +43,7 @@
 		<span class="theme-picker-scheme-label">Custom</span>
 		
 		<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}">
-			<button class="button button--icon-only" data-theme-set="custom" aria-pressed="false" aria-label="Toggle theme: Custom" data-persist-pressed-style>
+			<button type="button" class="button button--icon-only" data-theme-set="custom" aria-pressed="false" aria-label="Toggle theme: Custom" data-persist-pressed-style>
 				{{ svg 'paint-roller', { width: 24, height: 24 } }}
 			</button>
 			<span class="tooltip-content" id="theme-picker-custom-apply-label">
@@ -51,7 +51,7 @@
 			</span>
 		</div>
 		<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}">
-			<button class="button button--icon-only" aria-label="Customise" aria-describedby="theme-picker-custom-adjust-label" data-theme-custom-action="open">
+			<button type="button" class="button button--icon-only" aria-label="Customise" aria-describedby="theme-picker-custom-adjust-label" data-theme-custom-action="open">
 				{{ svg 'sliders', { width: 24, height: 24 } }}
 			</button>
 			<span class="tooltip-content" id="theme-picker-custom-adjust-label">
@@ -65,7 +65,7 @@
 			<div>
 				<div class="grouper grouper--toolbar">
 					<h2 id="theme-custom-controls-heading">Theme Customisation</h2>
-					<button class="button button--icon-only linecap-auto" aria-label="Apply styles and close" data-theme-custom-action="apply">
+					<button type="button" class="button button--icon-only linecap-auto" aria-label="Apply styles and close" data-theme-custom-action="apply">
 						{{ svg 'close', { width: 24, height: 24 } }}
 					</button>
 				</div>
