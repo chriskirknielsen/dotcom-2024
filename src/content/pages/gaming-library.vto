@@ -81,6 +81,8 @@
 		<span>{{ platformLabels[platform] }} (<span data-gaming-count>{{ games.length }}</span>)</span>
 	{{ /set }}
 	{{ expander expanderLabel, { isExpanded: loopIndex === 1 } }}
+		{{ set gamesPerFormat = { physical: 0, digital: 0 } }}
+		{{ for g of games }}{{> gamesPerFormat[g.discs >= 1 ? 'physical' : 'digital']++ }}{{ /for }}
 		<ul class="gaming-platform-group" data-gaming-platform="{{ platformSlug }}">
 			{{ for i, game of games |> sortBy(false, false, 'sortTitle') }}
 				<li
@@ -194,6 +196,11 @@
 		{{ if platformSlug === 'pc' }}
 		<p class="textAlign-center textWrap-balance fontSize-smaller fontStyle-italic">
 			Only showing completed games, due to hundreds I have never played (and never will), mostly thanks to the Epic Games Store’s weekly freebies.
+		</p>
+		{{ else if !!gamesPerFormat.physical }}
+		{{ set physicalGamesPercentage = gamesPerFormat.physical / (gamesPerFormat.digital + gamesPerFormat.physical) * 100 |> toRound(1) }}
+		<p class="textAlign-center textWrap-balance fontSize-smaller fontStyle-italic">
+			{{ gamesPerFormat.physical }} of these games are physical versions ({{ physicalGamesPercentage }}%)
 		</p>
 		{{ /if }}
 	{{ /expander }}
