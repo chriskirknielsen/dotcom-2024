@@ -921,8 +921,9 @@
 	align-items: center;
 
 	text-align: center;
-	border: 1px solid currentColor;
 	border-radius: clamp(0px, var(--_corner), var(--size-2xs));
+	outline: 1px solid currentColor;
+	outline-offset: -1px; /* Border makes this a little bigger than the platinum badge, so outline with a negative offset makes both the same size */
 }
 
 .gaming-trophies-stats {
