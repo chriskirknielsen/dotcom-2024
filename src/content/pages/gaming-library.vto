@@ -197,10 +197,10 @@
 		<p class="textAlign-center textWrap-balance fontSize-smaller fontStyle-italic">
 			Only showing completed games, due to hundreds I have never played (and never will), mostly thanks to the Epic Games Store’s weekly freebies.
 		</p>
-		{{ else if gamesPerFormat.physical }}
+		{{ else if gamesPerFormat.digital > 0 }}
 		{{ set physicalGamesPercentage = gamesPerFormat.physical / (gamesPerFormat.digital + gamesPerFormat.physical) * 100 |> toRound(1) }}
 		<p class="textAlign-center textWrap-balance fontSize-smaller fontStyle-italic">
-			{{ gamesPerFormat.physical }} of these games are physical versions ({{ physicalGamesPercentage }}%)
+			{{ gamesPerFormat.physical > 0 ? gamesPerFormat.physical : 'None' }} of these games are physical versions {{ physicalGamesPercentage > 0 ? `(${physicalGamesPercentage}%)` : '' }} {{ physicalGamesPercentage > 66.6 ? '😁' : (physicalGamesPercentage < 33.3 ? (physicalGamesPercentage < 5 ? '😭' : '😔') : '😅') }}
 		</p>
 		{{ /if }}
 	{{ /expander }}
