@@ -3,6 +3,7 @@ title: "Indie games are worth your time"
 summary: "Little games deserve a little love, too."
 tags: ['gaming']
 time: '05:23:00'
+ogBackground: "./herdling-bridge.jpg"
 ---
 
 I don’t know if you play video games, but it’s likely you enjoy games in one form or another. Maybe you play a cozy game on your phone, a card game on your work computer (definitely only during breaks), or a cute adventure game on your gaming console. And table top games count, too, of course!
