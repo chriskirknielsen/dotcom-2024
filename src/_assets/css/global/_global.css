@@ -32,7 +32,20 @@ body {
 		display: block;
 		block-size: 4px;
 
-		background: linear-gradient(90deg, red 16.66%, orange 0 33.33%, yellow 0 50%, green 0 66.66%, blue 0 83.33%, indigo 0);
+		background: linear-gradient(
+			90deg,
+			white 0 9.09%,
+			#ffa6b9 0 18.18%,
+			#00d2ff 0 27.27%,
+			#753000 0 36.36%,
+			black 0 45.45%,
+			red 0 54.54%,
+			orange 0 63.63%,
+			yellow 0 72.72%,
+			green 0 81.81%,
+			blue 0 90.9%,
+			indigo 0 100%
+		);
 		opacity: 0.67;
 	}
 }
