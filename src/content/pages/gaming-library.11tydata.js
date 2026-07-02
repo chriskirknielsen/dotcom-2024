@@ -189,7 +189,7 @@ const gameslibrary = await notionDatabaseQuery({
 			}
 
 			const title = c.trophyTitleName
-				.replace(/(®|©|™)/g, '') // Remove stupid symbols added just because of shareholders
+				.replace(/(®|©|™|Trophies|Trophy Set)/gi, '') // Remove stupid symbols added just because of shareholders, and remove generic Trophy suffixes
 				.trim()
 				.replace(/'/, '’'); // Normalise apostrophes
 			const platform = c.trophyTitlePlatform.split(',').at(-1); // If multiplatform, assume the last one is accurate…ish
