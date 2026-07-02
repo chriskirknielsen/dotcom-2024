@@ -2,6 +2,7 @@
 	container-type: inline-size;
 }
 .about-pic {
+	inline-size: 100%;
 	max-inline-size: var(--ABOUT-pic-max, 12rem);
 	margin-inline: auto;
 	margin-block: var(--size-m);
