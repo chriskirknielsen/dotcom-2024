@@ -115,6 +115,7 @@ const gameslibrary = await notionDatabaseQuery({
 
 				const matchedPsnTrophyData = psnTrophyData.find((game) => game.npCommunicationId === processedEntry.psnId);
 				if (matchedPsnTrophyData) {
+					matchedPsnTrophyData._matched = true;
 					processedEntry.trophyIcon = matchedPsnTrophyData.trophyTitleIconUrl;
 					processedEntry.trophyProgress = matchedPsnTrophyData.progress;
 					processedEntry.trophyEarned = matchedPsnTrophyData.earnedTrophies;
@@ -181,9 +182,47 @@ const gameslibrary = await notionDatabaseQuery({
 			}
 		}
 
+		// Create an entry for PSN titles not part of the Notion data
+		const unmatchedPsnTitles = psnTrophyData.reduce((p, c) => {
+			if (c._matched || c.hiddenFlag || c.progress === 0) {
+				return p; // Skip any already-matched item, hidden item, or title without any trophies
+			}
+
+			const title = c.trophyTitleName
+				.replace(/(®|©|™)/g, '') // Remove stupid symbols added just because of shareholders
+				.trim()
+				.replace(/'/, '’'); // Normalise apostrophes
+			const platform = c.trophyTitlePlatform.split(',').at(-1); // If multiplatform, assume the last one is accurate…ish
+			const processedEntry = {
+				isTrophyEntryOnly: true,
+				id: `psn_${c.npCommunicationId}`,
+				title: title,
+				sortTitle: title,
+				edition: '',
+				platform: platform === 'PSVITA' ? 'PSV' : platform,
+				region: regions['EU'] || null,
+				dlc: '',
+				discs: null,
+				year: null,
+				rating: null,
+				completed: false,
+				parentItem: [],
+				subItems: [],
+				psnId: c.npCommunicationId,
+				boxart: null,
+				trophyIcon: toCloudinary(c.trophyTitleIconUrl, `c_fit,h_128/q_80/f_auto`),
+				trophyProgress: c.progress,
+				trophyEarned: c.earnedTrophies,
+				trophyLastUpdate: c.lastUpdatedDateTime,
+			};
+
+			return [].concat(p, processedEntry);
+		}, []);
+		const consolidatedData = [].concat(filteredData, unmatchedPsnTitles);
+
 		return {
 			meta: { totalTrophyData },
-			data: filteredData,
+			data: consolidatedData,
 		};
 	},
 });

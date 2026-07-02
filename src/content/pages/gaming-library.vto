@@ -73,7 +73,7 @@
 
 <div class="expander-group | flow" id="games-library-expander">
 {{> let loopIndex = 0 }}
-{{ for platform, games of gameslibrary.data |> groupBy('platform') |> Object.entries |> sortEntries(Object.keys(platformLabels)) |> Object.fromEntries }}
+{{ for platform, games of gameslibrary.data |> filter(g => !g.isTrophyEntryOnly) |> groupBy('platform') |> Object.entries |> sortEntries(Object.keys(platformLabels)) |> Object.fromEntries }}
 	{{> loopIndex++ }}
 	{{ set platformSlug = platform |> toLowerCase |> replace(' ', '-') }}
 	{{ set expanderLabel }}
@@ -263,15 +263,17 @@
 				{{ set trophyIconWidth = ['PS3', 'PS4', 'PSV'].includes(game.platform) ? trophyIconHeight * (320 / 176) : trophyIconHeight; /* PS5 icons are square, PS3/PS4/Vita are 320x176 */ }}
 				{{ set trophyCount = Object.values(game.trophyEarned).reduce((p ,c) => p + c, 0) }}
 				<li class="gaming-trophies-item">
-					<img src="{{ game.trophyIcon }}" alt="" fetchpriority="low" loading="lazy" width="{{ trophyIconHeight }}" height="{{ trophyIconWidth }}" class="gaming-trophies-image">
+					<img src="{{ game.trophyIcon }}" alt="" fetchpriority="low" loading="lazy" width="{{ trophyIconHeight |> Math.round }}" height="{{ trophyIconWidth }}" class="gaming-trophies-image">
 
 					<div class="gaming-trophies-info">
 						<div class="h3 gaming-trophies-title">
 							{{ game.title }}
+							{{ if !game.isTrophyEntryOnly }}
 							<button type="button" class="button-reset | gaming-trophies-button" data-target-game="{{ game.psnId }}">
 								<span class="visually-hidden">View game info</span>
 								{{ svg 'arrow-external', { class: 'inline-icon' } }}
 							</button>
+							{{ /if }}
 						</div>
 						<div class="lineHeight-one">{{ trophyCount }} {{ trophyCount === 1 ? 'trophy' : 'trophies' }}</div>
 						{{ if game.trophyLastUpdate }}<div class="fontSize-smaller fontStyle-italic lineHeight-dense">Latest: {{ game.trophyLastUpdate |> timeTag({ format: 'nice' }) }}</div>{{ /if }}
