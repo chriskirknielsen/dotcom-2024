@@ -200,7 +200,7 @@ const gameslibrary = await notionDatabaseQuery({
 				sortTitle: title,
 				edition: '',
 				platform: platform === 'PSVITA' ? 'PSV' : platform,
-				region: regions['EU'] || null,
+				region: regions['EU'] || null, // Assume a trophy list is for an EU version of a game I "got" on PS+ way back when
 				dlc: '',
 				discs: null,
 				year: null,

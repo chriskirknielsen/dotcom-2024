@@ -67,7 +67,6 @@
 --_font-heading-tracking: var(--font-heading-tracking, 0em);
 --_font-heading-transform: var(--font-heading-transform, none);
 --_font-heading-features: var(--font-heading-features, normal);
---_font-heading-shadow: var(--font-heading-shadow, none);
 --_font-heading-size-adjust: var(--font-heading-size-adjust, none);
 --_font-body-family: var(--font-body-family, sans-serif);
 --_link-color: var(--link-color, currentColor);

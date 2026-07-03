@@ -361,6 +361,10 @@ html[data-theme='quill'] {
 		--HOME-logo-name-color: var(--color-accent);
 	}
 
+	.hero-heading {
+		text-shadow: 0 1px 0 white;
+	}
+
 	.expander-content {
 		--CODE-bg: var(--color-canvas);
 	}
@@ -642,6 +646,10 @@ html[data-theme='vintage'] {
 		--HOME-photo-border-width: 0px;
 		border-radius: var(--size-m);
 		background: var(--color-heading);
+	}
+
+	.hero-heading {
+		text-shadow: 0 -1px 0 white;
 	}
 
 	hr:where(:not(.hero-like)) {
