@@ -321,11 +321,15 @@ document.addEventListener('change', function (e) {
 		eachDom('[data-gaming-platform]', (g) => (g.style.fontSize = sizeMap[selectedValue]));
 	} else if ((target = e.target.closest('[data-games-completed]'))) {
 		const selectedValue = target.value || 'any';
-		eachDom('[data-gaming-completed]', (g) => (g.hidden = selectedValue !== 'any' && g.getAttribute('data-gaming-completed') !== selectedValue));
-		eachDom(
-			'[data-gaming-count]',
-			(g) => (g.textContent = g.closest('.expander').querySelector('.gaming-platform-group').querySelectorAll(':scope > li:not([hidden])').length)
-		);
+		eachDom('[data-gaming-completed]', (g) => {
+			g.hidden = selectedValue !== 'any' && g.getAttribute('data-gaming-completed') !== selectedValue;
+		});
+		eachDom('[data-gaming-format-stats]', (g) => {
+			g.hidden = selectedValue !== 'any';
+		});
+		eachDom('[data-gaming-count]', (g) => {
+			g.textContent = g.closest('.expander').querySelector('.gaming-platform-group').querySelectorAll(':scope > li:not([hidden])').length;
+		});
 	} else if ((target = e.target.closest('[data-games-sort]'))) {
 		const selectedValue = target.value || 'alphaasc';
 		eachDom('[data-gaming-platform]', (g) => {

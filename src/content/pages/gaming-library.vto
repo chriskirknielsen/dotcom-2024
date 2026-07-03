@@ -39,10 +39,10 @@
 		<label for="game-sort" class="fontWeight-bold">Sort:</label>
 		<div class="button button--select">
 			<select id="game-sort" data-games-sort>
-				<option value="alphaasc" selected>Alphabetical (A-Z)</option>
-				<option value="alphadesc">Alphabetical (Z-A)</option>
-				<option value="yearasc">Year (Ascending)</option>
-				<option value="yeardesc">Year (Descending)</option>
+				<option value="alphaasc" selected>Title (A-Z)</option>
+				<option value="alphadesc">Title (Z-A)</option>
+				<option value="yearasc">Year (Asc.)</option>
+				<option value="yeardesc">Year (Desc.)</option>
 			</select>
 		</div>
 	</div>
@@ -199,7 +199,7 @@
 		</p>
 		{{ else if gamesPerFormat.digital > 0 }}
 		{{ set physicalGamesPercentage = gamesPerFormat.physical / (gamesPerFormat.digital + gamesPerFormat.physical) * 100 |> toRound(1) }}
-		<p class="textAlign-center textWrap-balance fontSize-smaller fontStyle-italic">
+		<p class="textAlign-center textWrap-balance fontSize-smaller fontStyle-italic" data-gaming-format-stats>
 			{{ gamesPerFormat.physical > 0 ? gamesPerFormat.physical : 'None' }} of these games are physical versions {{ physicalGamesPercentage > 0 ? `(${physicalGamesPercentage}%)` : '' }} {{ physicalGamesPercentage > 66.6 ? '😁' : (physicalGamesPercentage < 33.3 ? (physicalGamesPercentage < 5 ? '😭' : '😔') : '😅') }}
 		</p>
 		{{ /if }}

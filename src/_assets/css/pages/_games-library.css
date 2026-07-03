@@ -29,6 +29,17 @@
 	gap: var(--size-l) var(--size-2xs);
 	margin-block-start: var(--size-m);
 	list-style-type: '';
+
+	&:not(:has(> li:not([hidden]))) {
+		display: block;
+		margin: 0;
+
+		text-align: center;
+
+		&::after {
+			content: 'No titles to display!';
+		}
+	}
 }
 
 .gaming-logo {
