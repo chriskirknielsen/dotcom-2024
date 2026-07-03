@@ -356,6 +356,70 @@ html[data-theme='vapor'] {
 	}
 }
 
+html[data-theme='vintage'] {
+	.homepage-logo {
+		--HOME-logo-text-transform: uppercase;
+		--HOME-logo-text-scaling: 0.75;
+	}
+
+	.homepage-photo {
+		--HOME-photo-border-width: 0px;
+		border-radius: var(--size-m);
+		background: var(--color-heading);
+	}
+
+	.hero-heading {
+		text-shadow: 0 -1px 0 white;
+	}
+
+	hr:where(:not(.hero-like)) {
+		block-size: 1rem;
+
+		border-radius: 2px;
+		background:
+			linear-gradient(90deg, goldenrod, gold 33%, goldenrod) no-repeat 50% 75% / 100% 0.125rem,
+			linear-gradient(var(--color-heading) 75%, var(--color-text) 0);
+	}
+
+	.header-link {
+		&[aria-current='page'] {
+			--LINK-underline-color: currentColor;
+		}
+
+		@media (--small-viewport) {
+			--LINK-color: var(--color-accent);
+
+			&:is(:hover, :focus-visible) {
+				--LINK-color: var(--color-heading);
+			}
+		}
+	}
+
+	.button:is(:active) {
+		--CTA-box-shadow: 0 1px 1px #0003, inset 0 -2px 2px #954a4a, inset 0 2px 2px var(--color-accent);
+	}
+
+	.card a:is(:hover, :focus-visible) {
+		--LINK-color: var(--color-surface-alt);
+		--LINK-underline-color: var(--color-heading);
+	}
+
+	.signoff :any-link {
+		--LINK-color: var(--color-surface-alt);
+		--LINK-underline-color: var(--color-canvas);
+
+		&:is(:hover, :focus-visible) {
+			--LINK-color: var(--color-canvas);
+			--LINK-underline-color: var(--color-heading);
+		}
+	}
+
+	.announcement {
+		background-color: var(--color-text);
+		box-shadow: inset 0 1px 0 var(--color-surface-alt);
+	}
+}
+
 html[data-theme='quill'] {
 	.homepage-logo {
 		--HOME-logo-name-color: var(--color-accent);
@@ -633,70 +697,6 @@ html[data-theme='cyberpunk'] {
 	0%,
 	33% {
 		filter: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='0' height='0'%3E%3Cdefs%3E%3Cfilter id='dist'%3E%3CfeTile x='0%25' result='fx1' width='100%25' height='30%25' y='35%25'%3E%3C/feTile%3E%3CfeOffset in='fx1' result='fx2' dy='25%25' dx='-12'%3E%3Canimate attributeName='dx' values='-4;-12' dur='0.2s' repeatCount='indefinite' /%3E%3C/feOffset%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0 0.15' numOctaves='2' seed='2' stitchTiles='stitch' result='fx3'%3E%3Canimate attributeName='seed' values='1;4' dur='0.2s' repeatCount='indefinite' /%3E%3C/feTurbulence%3E%3CfeComposite in='fx2' operator='atop' in2='SourceGraphic' result='fx4'%3E%3C/feComposite%3E%3CfeDisplacementMap in='fx4' in2='fx3' scale='16' xChannelSelector='A' yChannelSelector='A' result='fx4'%3E%3C/feDisplacementMap%3E%3CfeOffset in='fx4' dx='3' dy='0' result='fx5' /%3E%3CfeComponentTransfer in='fx5' result='fx6'%3E%3CfeFuncR type='identity' /%3E%3CfeFuncG type='discrete' tableValues='0' /%3E%3CfeFuncB type='discrete' tableValues='0' /%3E%3C/feComponentTransfer%3E%3CfeOffset in='fx4' dx='-3' dy='0' result='fx7' /%3E%3CfeComponentTransfer in='fx7' result='fx8'%3E%3CfeFuncR type='discrete' tableValues='0' /%3E%3CfeFuncG type='identity' /%3E%3CfeFuncB type='identity' /%3E%3C/feComponentTransfer%3E%3CfeBlend in='fx6' in2='fx8' mode='screen' result='fx9' /%3E%3C/filter%3E%3C/defs%3E%3C/svg%3E#dist");
-	}
-}
-
-html[data-theme='vintage'] {
-	.homepage-logo {
-		--HOME-logo-text-transform: uppercase;
-		--HOME-logo-text-scaling: 0.75;
-	}
-
-	.homepage-photo {
-		--HOME-photo-border-width: 0px;
-		border-radius: var(--size-m);
-		background: var(--color-heading);
-	}
-
-	.hero-heading {
-		text-shadow: 0 -1px 0 white;
-	}
-
-	hr:where(:not(.hero-like)) {
-		block-size: 1rem;
-
-		border-radius: 2px;
-		background:
-			linear-gradient(90deg, goldenrod, gold 33%, goldenrod) no-repeat 50% 75% / 100% 0.125rem,
-			linear-gradient(var(--color-heading) 75%, var(--color-text) 0);
-	}
-
-	.header-link {
-		&[aria-current='page'] {
-			--LINK-underline-color: currentColor;
-		}
-
-		@media (--small-viewport) {
-			--LINK-color: var(--color-accent);
-
-			&:is(:hover, :focus-visible) {
-				--LINK-color: var(--color-heading);
-			}
-		}
-	}
-
-	.button:is(:active) {
-		--CTA-box-shadow: 0 1px 1px #0003, inset 0 -2px 2px #954a4a, inset 0 2px 2px var(--color-accent);
-	}
-
-	.card a:is(:hover, :focus-visible) {
-		--LINK-color: var(--color-surface-alt);
-		--LINK-underline-color: var(--color-heading);
-	}
-
-	.signoff :any-link {
-		--LINK-color: var(--color-surface-alt);
-		--LINK-underline-color: var(--color-canvas);
-
-		&:is(:hover, :focus-visible) {
-			--LINK-color: var(--color-canvas);
-			--LINK-underline-color: var(--color-heading);
-		}
-	}
-
-	.announcement {
-		background-color: var(--color-text);
-		box-shadow: inset 0 1px 0 var(--color-surface-alt);
 	}
 }
 
