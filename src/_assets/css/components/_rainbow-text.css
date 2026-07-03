@@ -1,7 +1,8 @@
 .rainbow-text {
 	/* Repurposing Miriam's solution to extract a single colour channel: https://codepen.io/editor/miriamsuzanne/pen/019cbad1-8aed-76cf-8496-2f90f56dd475 */
 	--text-light: oklch(from currentColor clamp(0.3, l, 0.8) none none);
-	--text-anim-time: 1s;
+	--text-anim-time: 2s;
+	--text-skew-angle: 16deg;
 
 	& > span {
 		color: color-mix(in oklch, oklch(50% 75% calc(var(--i) / var(--c) * 1turn)), var(--text-light) 100%);
@@ -11,15 +12,25 @@
 @media (--accept-motion) {
 	.rainbow-text > span {
 		display: inline-block;
-		animation: --text-wave var(--text-anim-time) cubic-bezier(0.37, 0, 0.63, 1) calc(var(--i) / var(--c) * -1 * var(--text-anim-time)) infinite alternate;
+		animation: --text-wave var(--text-anim-time) cubic-bezier(0.37, 0, 0.63, 1) calc(var(--i) / var(--c) * -1 * var(--text-anim-time)) infinite;
 	}
 
 	@keyframes --text-wave {
-		from {
+		0%,
+		100% {
 			translate: 0 -0.25em;
 		}
-		to {
+
+		25% {
+			transform: skewY(var(--text-skew-angle));
+		}
+
+		50% {
 			translate: 0 0.25em;
+		}
+
+		75% {
+			transform: skewY(calc(-1 * var(--text-skew-angle)));
 		}
 	}
 }
