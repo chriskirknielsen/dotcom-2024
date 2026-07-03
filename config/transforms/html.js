@@ -36,6 +36,7 @@ export default function (eleventyConfig, options = {}) {
 			return content;
 		}
 
+		// Run PurgeCSS
 		if (content.includes(placeholder)) {
 			const pageList = getPageList(outputPath) || {};
 			const safelist = config.safelist.concat(pageList.safe || []);
