@@ -119,7 +119,7 @@
                 {{ set noteIndexW = w % 7 }}
                 {{ set noteW = notes[ noteIndexW ] }}
                 {{ set octaveW = (Math.floor(w / 7)) + ((noteIndexW < 5) ? 1 : 2) }}
-                <button type="button" style="--synth-key-index: {{ w + 1 }}" class="button-reset synth-key" data-key="white" data-note="{{ noteW }}" data-octave="{{ octaveW }}" aria-label="{{ noteW }}{{ octaveW }}" aria-pressed="false" disabled>
+                <button type="button" style="--synth-key-index: {{ w + 1 }}" class="button-reset | synth-key" data-key="white" data-note="{{ noteW }}" data-octave="{{ octaveW }}" aria-label="{{ noteW }}{{ octaveW }}" aria-pressed="false" disabled>
                     <kbd class="synth-key-label"></kbd>
                 </button>
                 {{ set b = w + 1 }}
@@ -127,7 +127,7 @@
                 {{ set noteB = notes[ noteIndexB ] }}
                 {{ set octaveB = (Math.floor(b / 7)) + ((noteIndexB < 5) ? 1 : 2) }}
                 {{ if b % 7 !== 0 && ((b + 4) % 7 !== 0) && b < noteCount }}
-                    <button type="button" style="--synth-key-index: {{ b + 1 }}" class="button-reset synth-key" data-key="black" data-note="{{ noteB }}#" data-octave="{{ octaveB }}" aria-label="{{ noteB }}#{{ octaveB }}" aria-pressed="false" disabled>
+                    <button type="button" style="--synth-key-index: {{ b + 1 }}" class="button-reset | synth-key" data-key="black" data-note="{{ noteB }}#" data-octave="{{ octaveB }}" aria-label="{{ noteB }}#{{ octaveB }}" aria-pressed="false" disabled>
                         <kbd class="synth-key-label"></kbd>
                     </button>
                 {{ /if }}
@@ -136,36 +136,18 @@
     </div>
 
     <div class="synth-instructions">
-        {{# <div class="toggleswitch">
-            <label class="toggleswitch-label" for="synth-keyboard-layout-switch">Keyboard Layout:</label>
-            
-            <button type="button" class="button-reset toggleswitch-value" id="synth-layoutmode-off" data-value="false">
-                <span class="visually-hidden">Off: </span>
-                QWERTY<span class="visually-hidden">.</span>
-            </button>
-
-            <button type="button" class="button-reset toggleswitch-value" id="synth-layoutmode-on" data-value="true">
-                <span class="visually-hidden">On: </span>
-                AZERTY<span class="visually-hidden">.</span>
-            </button>
-
-            <span class="toggleswitch-toggle">
-                <input
-                    type="checkbox"
-                    role="switch"
-                    aria-checked="false"
-                    class="toggleswitch-checkbox"
-                    id="synth-keyboard-layout-switch"
-                    aria-labelledby="synth-layoutmode-off synth-layoutmode-on"
-                >
-
-                <label class="toggleswitch-back" aria-hidden="true" for="synth-keyboard-layout-switch">
-                    <span class="toggleswitch-thumb"></span>
-                </label>
-            </span>
-        </div> #}}
-
-        <p class="fontSize-smaller">If you have a keyboard, hold the <kbd>Shift</kbd> key to go up an octave</p>
+        <p class="fontSize-smaller">
+            Press
+            {{ component 'cta', {
+                ctaType: 'button',
+                ctaAttr: 'aria-pressed="false" data-persist-pressed-style data-octave-shift',
+                label: 'shift',
+                iconStack: {
+                    idle: 'arrow-right',
+                    pressed: 'arrow-left',
+                }
+            } }}
+            to go up an octave, or hold <kbd>Shift</kbd> on your keyboard.</p>
         <p class="fontSize-smaller"><a href="/colophon/#synthesizer">How I made this</a></p>
     </div>
 

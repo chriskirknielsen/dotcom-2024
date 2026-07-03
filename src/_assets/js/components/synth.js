@@ -23,6 +23,7 @@
 	let isAzerty = false;
 	let isShiftPressed = false;
 	let isSynthVisible = false;
+	let octaveShiftButton = document.querySelector('[data-octave-shift]');
 
 	/* Functions */
 	/** Get the note associated to a keyboard key. */
@@ -266,9 +267,12 @@
 		release.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + Math.max(envelope.release, threshold));
 
 		if (osc) {
-			setTimeout(() => {
-				osc.stop();
-			}, 1000 * Math.max(envelope.release, threshold));
+			setTimeout(
+				() => {
+					osc.stop();
+				},
+				1000 * Math.max(envelope.release, threshold)
+			);
 
 			pressedNotes.delete(noteOctave);
 			pressedKbkeys.delete(noteOctave);
@@ -278,6 +282,13 @@
 	function triggerKey(element, note, octave) {
 		let key = { element, note, octave };
 		playKey(key);
+	}
+
+	function setOctaveShift(shifted) {
+		shifted = Boolean(shifted);
+		isShiftPressed = shifted;
+		octaveShiftButton.setAttribute('aria-pressed', shifted.toString());
+		reLabelKeys();
 	}
 
 	/* Init */
@@ -316,17 +327,22 @@
 		reLabelKeys();
 	});
 
+	document.addEventListener('click', (e) => {
+		if (e.target.closest('[data-octave-shift]')) {
+			const wasShifted = octaveShiftButton.getAttribute('aria-pressed') === 'true';
+			setOctaveShift(!wasShifted);
+		}
+	});
+
 	document.addEventListener('keydown', (e) => {
-		if (isKeyEventShift(e) || e.shiftKey) {
-			isShiftPressed = true;
-			reLabelKeys();
+		if (isKeyEventShift(e)) {
+			setOctaveShift(true);
 		}
 	});
 
 	document.addEventListener('keyup', (e) => {
-		if (isKeyEventShift(e) || (!e.shiftKey && !isKeyEventShift(e))) {
-			isShiftPressed = false;
-			reLabelKeys();
+		if (isKeyEventShift(e)) {
+			setOctaveShift(false);
 		}
 	});
 
@@ -418,6 +434,7 @@
 		},
 		false
 	);
+
 	window.addEventListener('blur', function () {
 		Array.from(pressedKbkeys).forEach((noteKey) => {
 			const note = noteKey.slice(0, noteKey.length - 1);
