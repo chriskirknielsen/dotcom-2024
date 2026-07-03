@@ -23,7 +23,8 @@
 	let isAzerty = false;
 	let isShiftPressed = false;
 	let isSynthVisible = false;
-	let octaveShiftButton = document.querySelector('[data-octave-shift]');
+	const synthEl = document.querySelector('[data-synth-wrap]');
+	let octaveShiftButton = synthEl.querySelector('[data-octave-shift]');
 
 	/* Functions */
 	/** Get the note associated to a keyboard key. */
@@ -42,7 +43,7 @@
 
 	/** Get the synth element mapped to a note-octave pair. */
 	function getElementByNoteOctave(note, octave) {
-		return document.querySelector(`.synth-key[data-note="${note}"][data-octave="${octave}"]`) || false;
+		return synthEl.querySelector(`.synth-key[data-note="${note}"][data-octave="${octave}"]`) || false;
 	}
 
 	/** Get the synth element mapped to a note-octave pair. */
@@ -117,7 +118,7 @@
 	/** Label relevant key on the keyboard based on the layout and shift state. */
 	function reLabelKeys() {
 		const octaveShift = isShiftPressed ? 1 : 0;
-		const keys = Array.from(document.querySelectorAll('[data-note]'));
+		const keys = Array.from(synthEl.querySelectorAll('[data-note]'));
 		keys.forEach((key) => {
 			const label = key.querySelector('.synth-key-label');
 			const note = key.getAttribute('data-note');
@@ -297,15 +298,26 @@
 
 	/* Event handlers */
 	document.addEventListener('click', (e) => {
+		const octaveShift = e.target.closest('[data-octave-shift]');
+		if (octaveShift) {
+			Array.from(pressedKbkeys.values()).forEach((key) => {
+				const element = synthEl.querySelector(`[data-note][aria-label="${key}"]`);
+				stopKey({ element, note: element.getAttribute('data-note'), octave: parseInt(element.getAttribute('data-octave'), 10) });
+			});
+			const wasShifted = octaveShiftButton.getAttribute('aria-pressed') === 'true';
+			setOctaveShift(!wasShifted);
+			return;
+		}
+
 		const toggler = e.target.closest('.toggleswitch');
 		if (!toggler) {
-			return true;
+			return;
 		}
 
 		const cbox = toggler.querySelector('.toggleswitch-checkbox');
 		const label = e.target.closest('[data-value]');
 		if (!label) {
-			return true;
+			return;
 		}
 
 		const forcedVal = label.getAttribute('data-value') === 'true';
@@ -325,13 +337,6 @@
 		cbox.setAttribute('aria-checked', isAzerty.toString());
 		setKeyboardLayout(isAzerty);
 		reLabelKeys();
-	});
-
-	document.addEventListener('click', (e) => {
-		if (e.target.closest('[data-octave-shift]')) {
-			const wasShifted = octaveShiftButton.getAttribute('aria-pressed') === 'true';
-			setOctaveShift(!wasShifted);
-		}
 	});
 
 	document.addEventListener('keydown', (e) => {
@@ -391,7 +396,7 @@
 			return;
 		}
 		let key = getKeyDataByKeyNote(keyNote);
-		pressedKeysShifted.set(pressedKey, isShiftPressed);
+		pressedKeysShifted.set(pressedKey, Boolean(e.shiftKey));
 		playKey(key);
 	});
 
@@ -422,10 +427,11 @@
 
 				// If the shift key was pressed when the note started playing and is no longer pressed (or vice-versa), adjust the key to find by an octave
 				const wasTriggeredWithShift = pressedKeysShifted.get(pressedKey);
-				if (wasTriggeredWithShift && e.shiftKey === false) {
+				const isShiftButtonPressed = octaveShiftButton.getAttribute('aria-pressed') === 'true';
+				if (wasTriggeredWithShift && !e.shiftKey) {
 					key.octave += 1;
 					key = getKeyDataByKeyNote(key, true);
-				} else if (!wasTriggeredWithShift && e.shiftKey === true) {
+				} else if (!wasTriggeredWithShift && Boolean(e.shiftKey)) {
 					key.octave -= 1;
 					key = getKeyDataByKeyNote(key, true);
 				}
@@ -447,7 +453,7 @@
 	});
 
 	/* Intersection Observer insuring notes can't play when the synth isn't in the viewport */
-	const target = document.querySelector('.synth');
+	const target = synthEl.querySelector('.synth');
 	const observer = new IntersectionObserver(
 		function (entries) {
 			entries.forEach((entry) => {
