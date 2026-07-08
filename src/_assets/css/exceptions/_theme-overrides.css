@@ -373,12 +373,34 @@ html[data-theme='vintage'] {
 	}
 
 	hr:where(:not(.hero-like)) {
-		block-size: 1rem;
+		block-size: 19px;
 
-		border-radius: 2px;
-		background:
-			linear-gradient(90deg, goldenrod, gold 33%, goldenrod) no-repeat 50% 75% / 100% 0.125rem,
-			linear-gradient(var(--color-heading) 75%, var(--color-text) 0);
+		background: linear-gradient(
+			0deg,
+			oklch(80% 18% 209) 0 4px,
+			#0000 0 5px,
+			oklch(70% 30% 121) 0 9px,
+			#0000 0 10px,
+			oklch(68% 75% 100) 0 14px,
+			#0000 0 15px,
+			oklch(59% 56% 26) 0 19px
+		);
+
+		/* This will be a lot easier with corner-shape: notch */
+		clip-path: polygon(
+			4px 0,
+			calc(100% - 4px) 0,
+			calc(100% - 4px) 4px,
+			100% 4px,
+			100% calc(100% - 4px),
+			calc(100% - 4px) calc(100% - 4px),
+			calc(100% - 4px) 100%,
+			4px 100%,
+			4px calc(100% - 4px),
+			0 calc(100% - 4px),
+			0 4px,
+			4px 4px
+		);
 	}
 
 	.header-link {
