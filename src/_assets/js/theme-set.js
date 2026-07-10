@@ -2,7 +2,7 @@
 window.themeStore = 'cknTheme';
 const themeSelected = localStorage.getItem(window.themeStore);
 if (window.themeKeys.includes(themeSelected)) {
-	docEl.setAttribute('data-theme', themeSelected);
+	document.documentElement.setAttribute('data-theme', themeSelected);
 } else {
 	localStorage.removeItem(window.themeStore);
 }

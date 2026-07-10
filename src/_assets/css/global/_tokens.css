@@ -23,7 +23,7 @@
 --typeScale-n2: clamp(0.7243rem, 0.6788rem + 0.2204vw, 0.8442rem);
 --typeScale-n1: clamp(0.8511rem, 0.7471rem + 0.5043vw, 1.1253rem);
 --fontStack-emoji: Twemoji Mozilla, Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, EmojiOne Color;
---fontStack-serif: Georgia, Constantia, Lucida Bright, Lucidabright, Lucida Serif, Lucida, DejaVu Serif, Bitstream Vera Serif, Liberation Serif, serif;
+--fontStack-serif: Iowan Old Style, Palatino Linotype, URW Palladio L, P052, serif;
 --fontStack-sans-serif: system-ui, sans-serif;
 --fontStack-fantasy: Segoe Print, Bradley Hand, Chilanka, TSCu_Comic, casual, cursive;
 --fontStack-monospace: ui-monospace, Cascadia Code, Source Code Pro, Menlo, Consolas, DejaVu Sans Mono, monospace;
@@ -252,7 +252,7 @@ html[data-theme="vintage"] {
 --color-accent-alt: #632120;
 --color-inactive: #686868;
 				--font-heading-family: Switzer, Helvetica Neue, system-ui,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
---font-body-family: Georgia,Constantia,Lucida Bright,Lucidabright,Lucida Serif,Lucida,DejaVu Serif,Bitstream Vera Serif,Liberation Serif,serif;
+--font-body-family: Iowan Old Style,Palatino Linotype,URW Palladio L,P052,serif;
 			}
 			html[data-theme="vintage"] .hide-when-light { display: none !important; }
 html[data-theme="quill"] {
@@ -275,7 +275,7 @@ html[data-theme="quill"] {
 --color-accent: #6d3c3c;
 --color-surface-alt: #bcbbb4;
 --color-inactive: #666666;
-				--font-heading-family: InstrumentSerif, Apple Garamond,AppleGaramond,Garamond, Georgia,Constantia,Lucida Bright,Lucidabright,Lucida Serif,Lucida,DejaVu Serif,Bitstream Vera Serif,Liberation Serif,serif;--font-heading-weight: 400;--font-heading-style: normal;
+				--font-heading-family: InstrumentSerif, Apple Garamond,AppleGaramond,Garamond, Iowan Old Style,Palatino Linotype,URW Palladio L,P052,serif;--font-heading-weight: 400;--font-heading-style: normal;
 --font-body-family: system-ui,sans-serif;
 			}
 			html[data-theme="quill"] .hide-when-light { display: none !important; }
@@ -347,8 +347,8 @@ html[data-theme="campfire"] {
 --color-accent: #f55a00;
 --color-accent-alt: #76ab63;
 --color-inactive: #848484;
-				--font-heading-family: Chinook, CooperBlack,Cooper Black, Georgia,Constantia,Lucida Bright,Lucidabright,Lucida Serif,Lucida,DejaVu Serif,Bitstream Vera Serif,Liberation Serif,serif;--font-heading-weight: 900;--font-heading-style: normal;
---font-body-family: Georgia,Constantia,Lucida Bright,Lucidabright,Lucida Serif,Lucida,DejaVu Serif,Bitstream Vera Serif,Liberation Serif,serif;
+				--font-heading-family: Chinook, CooperBlack,Cooper Black, Iowan Old Style,Palatino Linotype,URW Palladio L,P052,serif;--font-heading-weight: 900;--font-heading-style: normal;
+--font-body-family: Iowan Old Style,Palatino Linotype,URW Palladio L,P052,serif;
 			}
 			html[data-theme="campfire"] .hide-when-dark { display: none !important; }
 html[data-theme="director"] {

@@ -11,9 +11,17 @@ class ThemePicker extends HTMLElement {
 		};
 
 		// Trigger as soon as possible to give the current theme's trigger the appropriate aria-pressed value
-		let themeOverride = window.location.hash.startsWith('#theme:') ? window.location.hash.replace('#theme:', '') : null;
+		let themeOverride = null;
+		if (window.location.search.includes('theme=')) {
+			themeOverride = new URLSearchParams(document.location.search).get('theme');
+		} else if (window.location.hash.startsWith('#theme:')) {
+			themeOverride = window.location.hash.replace('#theme:', '');
+		}
+
 		if (this.keys.includes(themeOverride)) {
-			history.replaceState(undefined, '', window.location.pathname + window.location.search); // Remove the hash
+			const searchWithoutTheme = new URLSearchParams(window.location.search);
+			searchWithoutTheme.delete('theme');
+			history.replaceState(undefined, '', window.location.pathname + searchWithoutTheme.toString()); // Remove the hash
 		} else {
 			themeOverride = null;
 		}

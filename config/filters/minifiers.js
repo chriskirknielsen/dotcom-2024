@@ -6,7 +6,7 @@ let CACHE = { js: {}, css: {} };
 async function cachedMinify(code, cacheKey, type, transformer) {
 	try {
 		if (cacheKey && CACHE[type] && CACHE[type].hasOwnProperty(cacheKey)) {
-			const cacheValue = await Promise.resolve(CACHE[type][cacheKey]); // Wait for the data, wrapped in a resolved promise in case the original value already was resolved
+			const cacheValue = await CACHE[type][cacheKey]; // Wait for the data
 			return cacheValue.code; // Access the code property of the cached value
 		} else {
 			const minified = transformer(code);
@@ -49,14 +49,12 @@ export default async function (eleventyConfig, options = {}) {
 
 	/** Minify a block of JavaScript code and optionally caches the result for reuse if a key is provided. */
 	eleventyConfig.addAsyncFilter('jsmin', async function (code, cacheKey = null) {
-		const cachedCode = await cachedJsmin(code, cacheKey);
-		return cachedCode;
+		return cachedJsmin(code, cacheKey);
 	});
 
 	/** Add ability to minify inline CSS. */
 	eleventyConfig.addAsyncFilter('cssmin', async function (code, cacheKey = null) {
-		const cachedCode = await cachedCssmin(code, cacheKey);
-		return cachedCode;
+		return cachedCssmin(code, cacheKey);
 	});
 
 	/** Minify a block of JavaScript code and optionally caches the result for reuse if a key is provided. */

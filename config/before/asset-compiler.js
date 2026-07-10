@@ -17,7 +17,7 @@ import jsonTokensToFontFace from './json-tokens-to-font-face.js';
  * @param {function} [settings.filterFn] Optional. Function run against the list of file paths retuning a boolean describing if the file should be compiled.
  * @param {function} settings.compileFn Compiler for the provided files.
  * @param {object} config Configuration for the Eleventy folders.
- * @returns {Promise<string[]>} List of output files.
+ * @returns {Promise<Array<string>>} List of output files.
  */
 function assetCompiler(settings, config) {
 	const _requiredSettings = ['inFolder', 'inExt', 'compileFn'];
