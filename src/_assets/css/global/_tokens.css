@@ -203,8 +203,8 @@ html[data-theme="vapor"] {
 --color-accent: #ac3d7e;
 --color-surface-alt: #bffffb;
 --color-inactive: #6b6b6b;
-				--font-heading-family: XanhMono, ui-monospace,Cascadia Code,Source Code Pro,Menlo,Consolas,DejaVu Sans Mono,monospace;--font-heading-weight: 400;--font-heading-style: italic;
---font-body-family: system-ui,sans-serif;
+				--font-heading-family: XanhMono, var(--fontStack-monospace);--font-heading-weight: 400;--font-heading-style: italic;
+--font-body-family: var(--fontStack-sans-serif);
 			}
 			html[data-theme="vapor"] .hide-when-light { display: none !important; }
 html[data-theme="vintage"] {
@@ -251,8 +251,8 @@ html[data-theme="vintage"] {
 --color-surface-alt: #ffbe33;
 --color-accent-alt: #632120;
 --color-inactive: #686868;
-				--font-heading-family: Switzer, Helvetica Neue, system-ui,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
---font-body-family: Iowan Old Style,Palatino Linotype,URW Palladio L,P052,serif;
+				--font-heading-family: Switzer, Helvetica Neue, var(--fontStack-sans-serif);--font-heading-weight: 700;--font-heading-style: normal;
+--font-body-family: var(--fontStack-serif);
 			}
 			html[data-theme="vintage"] .hide-when-light { display: none !important; }
 html[data-theme="quill"] {
@@ -275,8 +275,8 @@ html[data-theme="quill"] {
 --color-accent: #6d3c3c;
 --color-surface-alt: #bcbbb4;
 --color-inactive: #666666;
-				--font-heading-family: InstrumentSerif, Apple Garamond,AppleGaramond,Garamond, Iowan Old Style,Palatino Linotype,URW Palladio L,P052,serif;--font-heading-weight: 400;--font-heading-style: normal;
---font-body-family: system-ui,sans-serif;
+				--font-heading-family: InstrumentSerif, Apple Garamond,AppleGaramond,Garamond, var(--fontStack-serif);--font-heading-weight: 400;--font-heading-style: normal;
+--font-body-family: var(--fontStack-sans-serif);
 			}
 			html[data-theme="quill"] .hide-when-light { display: none !important; }
 html[data-theme="cyberpunk"] {
@@ -321,8 +321,8 @@ html[data-theme="cyberpunk"] {
 --color-accent-alt: #ffbc1f;
 --color-surface-alt: #321410;
 --color-inactive: #848484;
-				--font-heading-family: Rajdhani, system-ui,sans-serif;--font-heading-weight: 500;--font-heading-style: normal;
---font-body-family: system-ui,sans-serif;
+				--font-heading-family: Rajdhani, var(--fontStack-sans-serif);--font-heading-weight: 500;--font-heading-style: normal;
+--font-body-family: var(--fontStack-sans-serif);
 			}
 			html[data-theme="cyberpunk"] .hide-when-dark { display: none !important; }
 html[data-theme="campfire"] {
@@ -347,8 +347,8 @@ html[data-theme="campfire"] {
 --color-accent: #f55a00;
 --color-accent-alt: #76ab63;
 --color-inactive: #848484;
-				--font-heading-family: Chinook, CooperBlack,Cooper Black, Iowan Old Style,Palatino Linotype,URW Palladio L,P052,serif;--font-heading-weight: 900;--font-heading-style: normal;
---font-body-family: Iowan Old Style,Palatino Linotype,URW Palladio L,P052,serif;
+				--font-heading-family: Chinook, CooperBlack,Cooper Black, var(--fontStack-serif);--font-heading-weight: 900;--font-heading-style: normal;
+--font-body-family: var(--fontStack-serif);
 			}
 			html[data-theme="campfire"] .hide-when-dark { display: none !important; }
 html[data-theme="director"] {
@@ -379,8 +379,8 @@ html[data-theme="director"] {
 --color-surface-alt: #0d1d34;
 --color-accent-alt: #00dbb0;
 --color-inactive: #a48383;
-				--font-heading-family: OPTIAuvantGothic, ITC Avant-Garde Gothic,Avenir,Montserrat,Corbel,URW Gothic,source-sans-pro, system-ui,sans-serif;--font-heading-weight: 700;--font-heading-style: normal;
---font-body-family: system-ui,sans-serif;
+				--font-heading-family: OPTIAuvantGothic, ITC Avant-Garde Gothic,Avenir,Montserrat,Corbel,URW Gothic,source-sans-pro, var(--fontStack-sans-serif);--font-heading-weight: 700;--font-heading-style: normal;
+--font-body-family: var(--fontStack-sans-serif);
 			}
 			html[data-theme="director"] .hide-when-dark { display: none !important; }
 @custom-media --small-viewport (width <= 36rem);

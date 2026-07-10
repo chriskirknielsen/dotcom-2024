@@ -214,7 +214,7 @@ export default function (string) {
 			const fontTokens = Object.entries(data.font)
 				.map(([fontGroup, fontData]) => {
 					let fontDefinition = '';
-					const fontStack = `${[fontData.family, fontData.fallback, json.global.fontStack[fontData.stack]].filter(Boolean).join(', ')}`;
+					const fontStack = `${[fontData.family, fontData.fallback, `var(--fontStack-${fontData.stack})`].filter(Boolean).join(', ')}`;
 					fontDefinition += tokenToCssVar('family', fontStack, ['font', fontGroup]);
 
 					extraFontProps.forEach((extraProp) => {
