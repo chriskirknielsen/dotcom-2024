@@ -3,25 +3,25 @@ import { transform, Features } from 'lightningcss';
 
 let CACHE = { js: {}, css: {} };
 
-async function cachedMinify(code, cacheKey, type, transformer) {
+async function cachedMinify(input, cacheKey, type, transformer) {
 	try {
+		let promiseOutput;
 		if (cacheKey && CACHE[type] && CACHE[type].hasOwnProperty(cacheKey)) {
-			const cacheValue = await CACHE[type][cacheKey]; // Wait for the data
-			return cacheValue.code; // Access the code property of the cached value
+			promiseOutput = CACHE[type][cacheKey]; // Retrieve the cache
 		} else {
-			const minified = transformer(code);
+			promiseOutput = transformer(input);
 			if (cacheKey) {
-				CACHE[type][cacheKey] = minified; // Store the promise which has the minified output (an object with a code property)
+				CACHE[type][cacheKey] = promiseOutput; // Store the promise which has the minified output (an object with a code property)
 			}
-			return (await minified).code; // Await and use the return value in the callback
 		}
+		return (await promiseOutput).code; // Await and use the return value in the callback
 	} catch (err) {
 		console.error(`${type.toUpperCase()} minify error:`, err);
-		return code; // Fail gracefully.
+		return input; // Fail gracefully.
 	}
 }
 
-async function cachedJsmin(code, cacheKey = null) {
+async function cachedJsmin(input, cacheKey = null) {
 	const transformer = (code) =>
 		esbuild.transform(code, { minify: true }).then((content) => {
 			return {
@@ -29,12 +29,12 @@ async function cachedJsmin(code, cacheKey = null) {
 				code: content.code.trim(),
 			};
 		});
-	return cachedMinify(code, cacheKey, 'js', transformer);
+	return cachedMinify(input, cacheKey, 'js', transformer);
 }
 
-async function cachedCssmin(code, cacheKey = null) {
+async function cachedCssmin(input, cacheKey = null) {
 	const transformer = (code) => transform({ code: Buffer.from(code), minify: true, sourceMap: false, include: Features.Nesting });
-	return cachedMinify(code, cacheKey, 'css', transformer);
+	return cachedMinify(input, cacheKey, 'css', transformer);
 }
 
 export default async function (eleventyConfig, options = {}) {

@@ -10,7 +10,7 @@
 			document.documentElement.setAttribute('data-js', 'true');
 			window.themeKeys = {{ themes |> pluck('key') |> JSON.stringify }};
 			window.themeKeys.push('custom');
-			{{- include 'assets/js/theme-set.js' }}
+			{{ include 'assets/js/theme-set.js' }}
 		{{ /js }}
 		{{- getBundle 'js', 'head' -}}
 		</script>
