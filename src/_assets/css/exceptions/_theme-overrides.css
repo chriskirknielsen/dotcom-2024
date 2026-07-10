@@ -407,14 +407,6 @@ html[data-theme='vintage'] {
 		&[aria-current='page'] {
 			--LINK-underline-color: currentColor;
 		}
-
-		@media (--small-viewport) {
-			--LINK-color: var(--color-accent);
-
-			&:is(:hover, :focus-visible) {
-				--LINK-color: var(--color-heading);
-			}
-		}
 	}
 
 	.button:is(:active) {
@@ -969,7 +961,7 @@ html[data-theme='director'] {
 	hr:where(:not(.hero-like)) {
 		--h: 20px;
 		--w: calc(var(--h) / var(--sqrt3));
-		--c: var(--color-heading);
+		--c: #feda0d;
 		--b: var(--color-canvas);
 		--s: 0.75;
 		--s2: 0.25;

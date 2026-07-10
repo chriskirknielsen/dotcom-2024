@@ -5,7 +5,7 @@
 	--LINK-decoration-thickness: var(--_link-decoration-thickness);
 	--LINK-underline-offset: var(--_link-underline-offset);
 
-	:where(main &:not(.button, .toc a)) {
+	:where(main &:not(.button, .toc a, .heading-anchor)) {
 		font-weight: 550; /* Inspired by from https://blog.kizu.dev/bolder-links/ */
 	}
 
