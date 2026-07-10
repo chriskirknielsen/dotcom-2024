@@ -33,7 +33,7 @@
 		"dotenv": "^16.4.5",
 		"eleventy-plugin-page-assets": "github:chriskirknielsen/eleventy-plugin-page-assets#patch-1",
 		"eleventy-plugin-robotstxt": "^0.0.4",
-		"eleventy-plugin-vento": "^5.0.0",
+		"eleventy-plugin-vento": "^5.4.3",
 		"esbuild": "^0.25.0",
 		"js-beautify": "^1.15.4",
 		"lightningcss": "^1.29.3",
