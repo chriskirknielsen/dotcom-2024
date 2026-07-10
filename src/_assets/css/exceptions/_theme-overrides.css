@@ -418,6 +418,10 @@ html[data-theme='vintage'] {
 		--LINK-underline-color: var(--color-heading);
 	}
 
+	.card .color-accent {
+		color: var(--color-surface-alt);
+	}
+
 	.signoff :any-link {
 		--LINK-color: var(--color-surface-alt);
 		--LINK-underline-color: var(--color-canvas);
