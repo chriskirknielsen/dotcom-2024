@@ -42,6 +42,7 @@
 	); /* If there's any scrollbar, assume they are visible at all times, take up space, and are not overlays (6px for thin scrollbars, a quick and dirty average) */
 	overflow-x: auto;
 	overflow-y: clip;
+	overscroll-behavior: chain; /* If supported, this allows scroll-chaining but disables the bounce effect */
 	scrollbar-width: thin;
 	scrollbar-color: #808080 transparent;
 

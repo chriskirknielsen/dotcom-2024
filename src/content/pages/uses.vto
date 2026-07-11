@@ -130,7 +130,7 @@ The [colophon](/colophon/) covers it all!
 
 ### My macOS dock
 
-My personal laptop’s pinned applications list looks a bit like this (Dark Mode 24/7!), minus a few utilities like the scanner/printer or bin we don’t care much about (inspired by [Trevor Morris](https://www.trovster.com/about/uses#development)).
+My personal laptop’s pinned applications list looks a bit like this (Dark Mode 24/7!), minus a few utilities like the scanner/printer or bin we don’t care much about.
 
 {{ set macosDockIcons = {
 	'finder': 'Finder',
@@ -154,4 +154,4 @@ My personal laptop’s pinned applications list looks a bit like this (Dark Mode
 {{- for file, label of macosDockIcons -}}
 	<li class="tooltip" data-tooltip-flow="inline" data-tooltip-pos="start center"><img src="/assets/img/macos-dock/{{ file }}.png" alt="{{ label }}" width="128" height="128" loading="lazy"><span class="tooltip-content">{{ label }}</span></li>
 {{- /for -}}
-</ul></div></div><p class="fontStyle-italic textAlign-center"><span class="fontSize-smaller">All icons belong to their respective authors.</span></p></div>
+</ul></div></div><p class="fontStyle-italic textAlign-center fontSize-smaller"><a href="https://www.trovster.com/about/uses#development">Inspired by Trevor Morris</a>. All icons belong to their respective authors.</p></div>
