@@ -47,23 +47,25 @@ class ThemePicker extends HTMLElement {
 	/** Convert hex to RGB */
 	hexToRgb(H) {
 		H = H.trim();
-		if (H.startsWith('#') === false) {
-			H = `#${H};`;
+		if (H[0] !== '#') {
+			H = `#${H};`; // Prepend the hash/pound/octothorpe symbol if it's not the first character
 		}
 
-		let r = 0;
-		let g = 0;
-		let b = 0;
+		// Shorthand #f00 syntax
 		if (H.length === 4) {
-			r = '0x' + H[1] + H[1];
-			g = '0x' + H[2] + H[2];
-			b = '0x' + H[3] + H[3];
-		} else if (H.length === 7) {
-			r = '0x' + H[1] + H[2];
-			g = '0x' + H[3] + H[4];
-			b = '0x' + H[5] + H[6];
+			return {
+				r: '0x' + H[1] + H[1],
+				g: '0x' + H[2] + H[2],
+				b: '0x' + H[3] + H[3],
+			};
 		}
-		return { r, g, b };
+
+		// This will discard any alpha component
+		return {
+			r: '0x' + H[1] + H[2],
+			g: '0x' + H[3] + H[4],
+			b: '0x' + H[5] + H[6],
+		};
 	}
 
 	/** Convert RGB to HSL */
@@ -74,12 +76,10 @@ class ThemePicker extends HTMLElement {
 		let cmin = Math.min(r, g, b);
 		let cmax = Math.max(r, g, b);
 		let delta = cmax - cmin;
-		let h = 0;
-		let s = 0;
-		let l = 0;
 
+		let h = 0;
 		if (delta === 0) {
-			h = 0;
+			h = 0; // Greyscale
 		} else if (cmax === r) {
 			h = ((g - b) / delta) % 6;
 		} else if (cmax === g) {
@@ -94,8 +94,8 @@ class ThemePicker extends HTMLElement {
 			h += 360;
 		}
 
-		l = (cmax + cmin) / 2;
-		s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+		let l = (cmax + cmin) / 2;
+		let s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
 		s = +(s * 100).toFixed(1);
 		l = +(l * 100).toFixed(1);
 
