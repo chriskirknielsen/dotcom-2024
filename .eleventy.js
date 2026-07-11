@@ -342,13 +342,23 @@ export default async function (eleventyConfig) {
 	//* Options for development
 	eleventyConfig.addWatchTarget(`./${rootDir}/${assetsDir}/css/**/*.css`);
 	eleventyConfig.addWatchTarget(`./${rootDir}/${assetsDir}/js/**/*.js`);
-	eleventyConfig.setConcurrency(1);
 
-	// The following resources are built in the `before` step, so we must not watch them, lest we want to trigger an infinite build loop
+	// The following resources are built in the `before` step, so we must not watch them, lest we want to trigger an infinite build loop…
 	eleventyConfig.watchIgnores.add(`./${rootDir}/${assetsDir}/css/global/_tokens.css`);
 	eleventyConfig.watchIgnores.add(`./${rootDir}/${assetsDir}/css/font-face.css`);
 	eleventyConfig.watchIgnores.add(`./${rootDir}/${includesDir}/assets/css/**/*`);
 	eleventyConfig.watchIgnores.add(`./${rootDir}/${includesDir}/assets/js/**/*`);
+
+	// … however those are now also ignored by Vento's cache busting mechanism, so we re-add them to the list of changes when the source file updates (Assuming this beforeWatch runs before the one in the Vento plugin!)
+	eleventyConfig.on('eleventy.beforeWatch', function (changedFiles) {
+		for (let file of changedFiles) {
+			const isAsset = file.includes(`${rootDir}/_assets/`);
+			const isCssOrJs = ['css', 'js'].includes(file.split('.').at(-1));
+			if (isAsset && isCssOrJs) {
+				changedFiles.push(file.replace(`_assets/`, `${includesDir}/assets/`));
+			}
+		}
+	});
 
 	eleventyConfig.setServerOptions({
 		domDiff: false, // Due to runtime JS (mainly themes), it is preferable to get a fresh copy of the DOM
