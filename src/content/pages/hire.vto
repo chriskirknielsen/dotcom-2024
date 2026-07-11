@@ -132,7 +132,9 @@
 <p class="fontSize-smaller fontStyle-italic">
     <span class="visually-hidden">Established 1992</span>
     <span aria-hidden="true" title="established">Est.</span>
-    <span aria-hidden="true">MCMXCII</span>, based in the USA.
+    <span aria-hidden="true">MCMXCII</span>,
+    based in the USA,
+    over {{ Math.floor(new Date().getFullYear() - parseInt(cv.pro.at(-1).dates[0].split('-')[0])) }} years experience.
 </p>
 
 <div class="about-pic-wrapper | flow" style="--ABOUT-pic-max: 8.5rem;">
@@ -142,7 +144,7 @@
     {{ image profile_pic_url, profile_pic_alt, '', { width: 256, height: 256, widths: [256], eager: true, bypassLink: true, wrapperClass: 'about-pic' } }}
 
     <p class="textWrap-balance">
-        <strong>I enjoy crafting websites and solving challenges through code.</strong> Implementing a design system or layout with CSS is my happy place, but building custom components and web experiences is a close second. I focus on making accessible experiences, and I sweat the details.
+        <strong>I enjoy crafting websites and solving challenges through code.</strong> Implementing a design system or layout with CSS is my happy place, but building custom components and web experiences is a close second. I keep an eye on accessibility, and I sweat the details.
     </p>
 </div>
 
