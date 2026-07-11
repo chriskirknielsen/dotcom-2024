@@ -28,6 +28,9 @@ export default {
 				if (postYMD === data.page.fileSlug) {
 					baseSlug = data.title; // This gets slugified, it's fine
 				}
+				if (!baseSlug) {
+					baseSlug = postYMD; // Should not be used but is a good fallback to avoid crashing the build (if empty it attempts to use the same permalink as the /blog/ page)
+				}
 			}
 
 			return `blog/${this.slugify(baseSlug)}/index.html`; // Build the permalink by slugifying the final string used a slug, to ensure it is safe to use
