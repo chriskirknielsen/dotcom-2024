@@ -53,7 +53,7 @@ function assetCompiler(settings, config) {
 				return [];
 			})
 			.then((inputFiles) => {
-				// Filter the found files if the a function is provided, or else run a basic boolean check
+				// Filter the found files if a function is provided, or else run a basic boolean check
 				const filteredInputFiles = inputFiles.filter(typeof settings.filterFn === 'function' ? settings.filterFn : (file) => Boolean(file));
 
 				// Generate each file
