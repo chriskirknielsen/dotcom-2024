@@ -14,7 +14,7 @@ document.addEventListener('click', function (e) {
 });
 
 document.addEventListener('keydown', function (e) {
-	// Asks users for a query and direct them right away to the search page with their query filled and executed
+	// Asks users for a query and directs them right away to the search page with their query filled and executed
 	if (!e.target.closest('input, textarea, button')) {
 		const modifierKey = window.navigator.platform ? (/Mac|iPod|iPhone|iPad/.test(window.navigator.platform) ? e.metaKey : e.ctrlKey) : e.metaKey || e.ctrlKey;
 		if ((e.key === 'k' || e.keyCode == 75) && modifierKey) {
@@ -45,16 +45,3 @@ document.addEventListener('keyup', function (e) {
 		pressedToggle.focus();
 	}
 });
-
-document.addEventListener(
-	'mouseenter',
-	function (e) {
-		// Keep the footer message animation running even after unhovering it
-		let target = e?.target?.closest?.('.footer-message');
-		if (target) {
-			target.classList.add('activated');
-			target.addEventListener('animationend', (evt) => target.classList.remove('activated'), { once: true });
-		}
-	},
-	{ capture: true }
-);

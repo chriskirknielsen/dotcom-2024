@@ -82,16 +82,16 @@
 	position: relative;
 
 	&::before {
-		content: '💙      💜';
-		content: '💙      💜' / '';
+		content: '💙';
+
+		inset-inline-start: 0;
 	}
 
 	&::after {
-		--f: 0.9;
-		content: '🤍';
-		content: '🤍' / '';
+		--f: 1;
+		content: '💜';
 
-		margin-block-start: -0.5em;
+		inset-inline-end: 0;
 	}
 
 	&::before,
@@ -99,41 +99,25 @@
 		pointer-events: none;
 
 		position: absolute;
-		inset: 0;
+		inset-block: 0;
 
-		display: inline-block;
+		display: flex;
+		align-items: center;
+		margin-block: auto;
 
 		text-align: center;
-		font-size: 4em;
+		font-size: 3em;
 
-		scale: 0;
-		opacity: 0;
-	}
+		transform-origin: calc(50% + var(--f, -1) * 50%) 50%;
+		transform: scale(var(--s, 0));
 
-	html:not([data-js='true']) &:hover,
-	html[data-js='true'] &.activated {
-		&::before,
-		&::after {
-			animation: --footerMessage 3s ease-out 1 both;
+		@media (--accept-motion) {
+			transition: transform var(--anim-medium) var(--easing-in-out);
 		}
 	}
-}
 
-@keyframes --footerMessage {
-	0% {
-		scale: 0;
-		opacity: 0;
-	}
-	10% {
-		opacity: 0;
-	}
-	50% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-		scale: 1;
-		translate: 0 calc(-2em * var(--f, 1));
+	&:hover {
+		--s: 1;
 	}
 }
 
