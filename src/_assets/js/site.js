@@ -58,22 +58,3 @@ document.addEventListener(
 	},
 	{ capture: true }
 );
-
-console.log(
-	`
-To meet a fellow explorer
-In these liminal spaces
-Outside hyperlink anchors
-Hah, what a nice surprise
-
-I hope not to take much
-Of your attention any further
-But hope you will keep an eye out
-For what is worthy to discover
-
-I wish your quest leads you farther
-Someplace you can feel safe, and yet
-Where you'd still want whisper:
-“Hah, what a nice surprise.”
-`.trim()
-); // ckn mmxxv
