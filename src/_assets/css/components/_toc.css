@@ -1,7 +1,8 @@
 .toc {
 	& > ol {
-		columns: 150px 2;
+		columns: 10em 2;
 		column-gap: var(--layout-gutter);
+		break-inside: avoid;
 
 		&:has(> :nth-child(10)) {
 			--toc-marker-type: decimal-leading-zero;
@@ -31,8 +32,6 @@
 		counter-increment: tocList;
 
 		margin-block-end: max(8px, var(--size-xs));
-		break-inside: avoid;
-		break-inside: avoid-page;
 
 		&::before {
 			content: counter(tocList, var(--toc-marker-type, decimal)) ' ';
