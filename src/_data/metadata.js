@@ -30,7 +30,7 @@ export default {
 	},
 	support: {
 		kofi: 'https://ko-fi.com/chriskirknielsen',
-		buymeacoffee: 'https://buymeacoffee.com/ckirknielsen',
+		buymeacoffee: 'https://buymeacoffee.com/chriskirknielsen',
 	},
 	nakedCss: isCssNakedDay,
 	nakedJs: isJsNakedDay,
