@@ -2,44 +2,7 @@
 :root {
 	--layout-content-max: 960px;
 	--layout-gutter: 24px;
-	--specimen-aalt: 'aalt' off;
-	--specimen-dlig: 'dlig' off;
-	--specimen-ss01: 'ss01' off;
 	--easing: cubic-bezier(0.8, 0, 0.2, 1);
-}
-
-/* If class is applied, update custom property and
-   apply modern font-variant-* when supported */
-.specimen-aalt {
-	--specimen-aalt: 'aalt' on;
-}
-
-.specimen-dlig {
-	--specimen-dlig: 'dlig' on;
-}
-
-@supports (font-variant-ligatures: discretionary-ligatures) {
-	.specimen-dlig {
-		--specimen-dlig: '____';
-		font-variant-ligatures: discretionary-ligatures;
-	}
-}
-
-.specimen-ss01 {
-	--specimen-ss01: 'ss01' on;
-}
-
-/* Apply current state of all custom properties
-   whenever a class is being applied */
-.specimen,
-.specimen-aalt,
-.specimen-dlig,
-.specimen-ss01 {
-	font-feature-settings: var(--specimen-aalt), var(--specimen-dlig), var(--specimen-ss01), 'salt' on;
-}
-
-.specimen-italic {
-	font-style: italic;
 }
 
 .preview-svg {
@@ -54,12 +17,12 @@
 *::after {
 	box-sizing: border-box;
 	margin: 0;
-	line-height: 1.6;
 }
 
 /* Bascic styles */
 html {
 	font-family: var(--body-font, serif);
+	line-height: 1.6;
 	color: var(--color-main);
 	background: var(--bg-main);
 }
@@ -88,6 +51,10 @@ hr {
 	border: 0;
 	block-size: 1px;
 	background: var(--color-main);
+}
+
+summary {
+	cursor: pointer;
 }
 
 /* Layout */
@@ -139,6 +106,7 @@ hr {
 	& > .full,
 	& > .fullbleed {
 		grid-column: fullbleed-start / fullbleed-end;
+		inline-size: 100%;
 	}
 }
 
@@ -392,6 +360,7 @@ font-preview:not(.defined) > form > :not(.preview-fallback),
 
 /* Styles for specimens */
 .specimen {
+	font-family: var(--specimen-font-family);
 	font-weight: 400;
 }
 
@@ -401,6 +370,7 @@ font-preview:not(.defined) > form > :not(.preview-fallback),
 
 .demo-grid {
 	--gap: 2rem;
+
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
 	gap: var(--gap);
@@ -452,6 +422,7 @@ font-preview:not(.defined) > form > :not(.preview-fallback),
 
 html:not(.no-js) .glyph-detail {
 	inline-size: 100%;
+	margin-inline: auto;
 	padding: 0.25em;
 
 	font-size: min(var(--single-glyph-magic-number), 12rem);
@@ -459,17 +430,16 @@ html:not(.no-js) .glyph-detail {
 	line-height: 1;
 }
 
-html:not(.no-js) button.glyph {
+:where(html:not(.no-js) button.glyph) {
 	font: inherit;
 	color: inherit;
 	border: none;
-	background: none;
+	background: var(--bg, none);
 	cursor: pointer;
 
-	&[aria-pressed='true'] {
+	&:where([aria-pressed='true']) {
 		--bg: color-mix(in hsl, var(--color-alt, var(--palette-02)) 20%, transparent);
 
-		background: var(--bg);
 		box-shadow: 0 0 0 calc(var(--gap) / 4) var(--bg);
 	}
 }
@@ -479,7 +449,7 @@ html:not(.no-js) button.glyph {
 	padding-inline: var(--layout-gutter);
 }
 
-@media (min-width: 740px) {
+@media (min-width: 48em) {
 	html:not(.no-js) {
 		& .glyph-detail {
 			--fs: min(var(--single-glyph-magic-number), 32rem);
@@ -490,7 +460,7 @@ html:not(.no-js) button.glyph {
 			grid-column: fullbleed-start / container-left-end;
 			align-self: start;
 			max-inline-size: 46rem;
-			margin-inline-start: auto;
+			margin-inline-end: 0;
 			padding: 0;
 
 			font-size: var(--fs);
@@ -623,7 +593,7 @@ code,
 
 	transition: background-color 200ms var(--easing);
 
-	html:not(.no-js) &:is(:hover, :focus-within) {
+	:where(html:not(.no-js)) &:is(:hover, :focus-within) {
 		background-color: var(--bg-alt);
 	}
 }

@@ -5,15 +5,25 @@
 	permalink: '/fonts/',
 	summary: 'You might find a cool, nerdy font by yours truly',
 	ogImageTitle: 'Custom Fonts',
+	eleventyImport: {
+		collections: ["_fonts"]
+	}
 }
 ---
 
-<ul class="cards" data-grid-cols="3">
-	{{ for font of collections._fonts |> sortBy(false, false, 'inputPath') }}
+<ul class="cards" data-grid-cols="2">
+	{{ set sortedFonts = collections._fonts |> sortBy(false, false, 'inputPath') }}
+	{{ for font of sortedFonts.sort((a, b) => {
+		if (a.data.fontDirectoryOrder || b.data.fontDirectoryOrder) {
+			return (a.data.fontDirectoryOrder || 0) - (b.data.fontDirectoryOrder || 0);
+		}
+		return 0;
+	}) }}
 		<li class="card-wrapper">
 			{{ component 'card', {
 				link: font.url,
 				image: {
+					decorator: (font.data.fontPrice === 0 ? 'free' : `$${font.data.fontPrice}`),
 					src: font.data.customMetaImage,
 					width: 600,
 					height: 600

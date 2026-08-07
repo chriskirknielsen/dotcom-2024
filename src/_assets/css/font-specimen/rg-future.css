@@ -19,8 +19,36 @@
 	--bg-alt: var(--palette-03);
 	--link: var(--palette-07);
 	--link-active: var(--palette-06);
+	--specimen-aalt: 'aalt' off;
+	--specimen-dlig: 'dlig' off;
+	--specimen-ss01: 'ss01' off;
 
 	scrollbar-color: var(--palette-02) color-mix(in hsl, var(--bg-main), var(--bg-alt));
+}
+
+/* If class is applied, update custom property and
+   apply modern font-variant-* when supported */
+.specimen-aalt {
+	--specimen-aalt: 'aalt' on;
+}
+
+.specimen-dlig {
+	--specimen-dlig: 'dlig' on;
+}
+
+@supports (font-variant-ligatures: discretionary-ligatures) {
+	.specimen-dlig {
+		--specimen-dlig: '____';
+		font-variant-ligatures: discretionary-ligatures;
+	}
+}
+
+.specimen-ss01 {
+	--specimen-ss01: 'ss01' on;
+}
+
+.specimen-italic {
+	font-style: italic;
 }
 
 h2::before {

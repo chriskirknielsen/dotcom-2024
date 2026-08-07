@@ -1,0 +1,774 @@
+---js
+{
+	layout: 'font-specimen.vto',
+	title: 'Peritel',
+	summary: 'A nostalgia-fuelled retro typeface',
+	metaDescriptionOverride: 'A typeface',
+	fontLove: 'electron beams',
+	styleOverrides: ['peritel'],
+	customMetaImage: 'peritel.jpg', // Base photo by molvin: https://unsplash.com/photos/a-white-rectangular-object-with-a-screen-E1ZWQdhHO1w
+	fontSpecimen: { 'Peritel': [{
+		'file': '/assets/fonts/Peritel-Regular.woff2',
+	}]},
+	fontPrice: 8,
+	fontDirectoryOrder: -1,
+	fontSpecimenSampleDefault: 'Electron beams',
+	fontSpecimenFallback: 'sans-serif',
+	fontPreventPreviewDownload: true,
+	fontMetrics: {
+		emSize: 1000,
+		capHeight: 639,
+		xHeight: 458,
+		ascender: 639,
+		descender: -180,
+	},
+	fontPurchaseLink: 'https://buymeacoffee.com/chriskirknielsen/e/562657',
+	setsList: {
+		ss01: { name: 'Single-storey a', glyphs: 'aāàáâãäå' },
+		ss02: { name: 'Straightened r', glyphs: 'r' },
+		ss03: { name: 'Curvy y', glyphs: 'yýÿŷỳ' },
+		ss04: { name: 'Barred G', glyphs: 'G' },
+		ss05: { name: 'Serif I', glyphs: 'IÍÎÏÌĪ' },
+		ss06: { name: 'Taller P+R', glyphs: 'PR' },
+		ss07: { name: 'Restyled 3+4', glyphs: '34' },
+		ss08: { name: 'Smaller @+®', glyphs: '@®' },
+		liga: { name: 'Standard Ligatures', glyphs: ['fa','fi', 'fl', 'ra','ri','rt','st','ts','tt'] },
+		dlig: { name: 'Discretionary Ligatures', glyphs: ['(SELECT)', '(START)'] },
+		tnum: { name: 'Tabular Figures', glyphs: '0123456789' },
+	},
+	eleventyComputed: {
+		fontSpecimenNav: function (data) {
+			return {
+				'#test': 'Test Drive',
+				'#glyphs': 'Glyphs',
+				'#features': 'Features',
+				[data.fontPurchaseLink]: 'Buy'
+			};
+		}
+	},
+}
+---
+
+{{ set unicodeMapping = {
+	"2013": "EN DASH",
+	"2014": "EM DASH",
+	"2018": "LEFT SINGLE QUOTATION MARK",
+	"2019": "RIGHT SINGLE QUOTATION MARK",
+	"2022": "BULLET",
+	"2026": "HORIZONTAL ELLIPSIS",
+	"2030": "PER MILLE SIGN",
+	"2039": "SINGLE LEFT-POINTING ANGLE QUOTATION MARK",
+	"2044": "FRACTION SLASH",
+	"2122": "TRADE MARK SIGN",
+	"2190": "LEFTWARDS ARROW",
+	"2191": "UPWARDS ARROW",
+	"2192": "RIGHTWARDS ARROW",
+	"2193": "DOWNWARDS ARROW",
+	"2202": "PARTIAL DIFFERENTIAL",
+	"2206": "INCREMENT",
+	"2211": "N-ARY SUMMATION",
+	"2212": "MINUS SIGN",
+	"2248": "ALMOST EQUAL TO",
+	"2260": "NOT EQUAL TO",
+	"2264": "LESS-THAN OR EQUAL TO",
+	"2265": "GREATER-THAN OR EQUAL TO",
+	"2605": "BLACK STAR",
+	"0021": "EXCLAMATION MARK",
+	"0022": "QUOTATION MARK",
+	"0023": "NUMBER SIGN",
+	"0024": "DOLLAR SIGN",
+	"0025": "PERCENT SIGN",
+	"0026": "AMPERSAND",
+	"0027": "APOSTROPHE",
+	"0028": "LEFT PARENTHESIS",
+	"0029": "RIGHT PARENTHESIS",
+	"002A": "ASTERISK",
+	"002B": "PLUS SIGN",
+	"002C": "COMMA",
+	"002D": "HYPHEN-MINUS",
+	"002E": "FULL STOP",
+	"002F": "SOLIDUS",
+	"0030": "DIGIT ZERO",
+	"0031": "DIGIT ONE",
+	"0032": "DIGIT TWO",
+	"0033": "DIGIT THREE",
+	"0034": "DIGIT FOUR",
+	"0035": "DIGIT FIVE",
+	"0036": "DIGIT SIX",
+	"0037": "DIGIT SEVEN",
+	"0038": "DIGIT EIGHT",
+	"0039": "DIGIT NINE",
+	"003A": "COLON",
+	"003B": "SEMICOLON",
+	"003C": "LESS-THAN SIGN",
+	"003D": "EQUALS SIGN",
+	"003E": "GREATER-THAN SIGN",
+	"003F": "QUESTION MARK",
+	"0040": "COMMERCIAL AT",
+	"0041": "LATIN CAPITAL LETTER A",
+	"0042": "LATIN CAPITAL LETTER B",
+	"0043": "LATIN CAPITAL LETTER C",
+	"0044": "LATIN CAPITAL LETTER D",
+	"0045": "LATIN CAPITAL LETTER E",
+	"0046": "LATIN CAPITAL LETTER F",
+	"0047": "LATIN CAPITAL LETTER G",
+	"0048": "LATIN CAPITAL LETTER H",
+	"0049": "LATIN CAPITAL LETTER I",
+	"004A": "LATIN CAPITAL LETTER J",
+	"004B": "LATIN CAPITAL LETTER K",
+	"004C": "LATIN CAPITAL LETTER L",
+	"004D": "LATIN CAPITAL LETTER M",
+	"004E": "LATIN CAPITAL LETTER N",
+	"004F": "LATIN CAPITAL LETTER O",
+	"0050": "LATIN CAPITAL LETTER P",
+	"0051": "LATIN CAPITAL LETTER Q",
+	"0052": "LATIN CAPITAL LETTER R",
+	"0053": "LATIN CAPITAL LETTER S",
+	"0054": "LATIN CAPITAL LETTER T",
+	"0055": "LATIN CAPITAL LETTER U",
+	"0056": "LATIN CAPITAL LETTER V",
+	"0057": "LATIN CAPITAL LETTER W",
+	"0058": "LATIN CAPITAL LETTER X",
+	"0059": "LATIN CAPITAL LETTER Y",
+	"005A": "LATIN CAPITAL LETTER Z",
+	"005B": "LEFT SQUARE BRACKET",
+	"005C": "REVERSE SOLIDUS",
+	"005D": "RIGHT SQUARE BRACKET",
+	"005E": "CIRCUMFLEX ACCENT",
+	"005F": "LOW LINE",
+	"0060": "GRAVE ACCENT",
+	"0061": "LATIN SMALL LETTER A",
+	"0062": "LATIN SMALL LETTER B",
+	"0063": "LATIN SMALL LETTER C",
+	"0064": "LATIN SMALL LETTER D",
+	"0065": "LATIN SMALL LETTER E",
+	"0066": "LATIN SMALL LETTER F",
+	"0067": "LATIN SMALL LETTER G",
+	"0068": "LATIN SMALL LETTER H",
+	"0069": "LATIN SMALL LETTER I",
+	"006A": "LATIN SMALL LETTER J",
+	"006B": "LATIN SMALL LETTER K",
+	"006C": "LATIN SMALL LETTER L",
+	"006D": "LATIN SMALL LETTER M",
+	"006E": "LATIN SMALL LETTER N",
+	"006F": "LATIN SMALL LETTER O",
+	"0070": "LATIN SMALL LETTER P",
+	"0071": "LATIN SMALL LETTER Q",
+	"0072": "LATIN SMALL LETTER R",
+	"0073": "LATIN SMALL LETTER S",
+	"0074": "LATIN SMALL LETTER T",
+	"0075": "LATIN SMALL LETTER U",
+	"0076": "LATIN SMALL LETTER V",
+	"0077": "LATIN SMALL LETTER W",
+	"0078": "LATIN SMALL LETTER X",
+	"0079": "LATIN SMALL LETTER Y",
+	"007A": "LATIN SMALL LETTER Z",
+	"007B": "LEFT CURLY BRACKET",
+	"007C": "VERTICAL LINE",
+	"007D": "RIGHT CURLY BRACKET",
+	"007E": "TILDE",
+	"00A1": "INVERTED EXCLAMATION MARK",
+	"00A2": "CENT SIGN",
+	"00A3": "POUND SIGN",
+	"00A4": "CURRENCY SIGN",
+	"00A5": "YEN SIGN",
+	"00A7": "SECTION SIGN",
+	"00A8": "DIAERESIS",
+	"00A9": "COPYRIGHT SIGN",
+	"00AB": "LEFT-POINTING DOUBLE ANGLE QUOTATION MARK",
+	"00AE": "REGISTERED SIGN",
+	"00AF": "MACRON",
+	"00B0": "DEGREE SIGN",
+	"00B1": "PLUS-MINUS SIGN",
+	"00B4": "ACUTE ACCENT",
+	"00B5": "MICRO SIGN",
+	"00B6": "PILCROW SIGN",
+	"00B7": "MIDDLE DOT",
+	"00B8": "CEDILLA",
+	"00BB": "RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK",
+	"00BF": "INVERTED QUESTION MARK",
+	"00C0": "LATIN CAPITAL LETTER A WITH GRAVE",
+	"00C1": "LATIN CAPITAL LETTER A WITH ACUTE",
+	"00C2": "LATIN CAPITAL LETTER A WITH CIRCUMFLEX",
+	"00C3": "LATIN CAPITAL LETTER A WITH TILDE",
+	"00C4": "LATIN CAPITAL LETTER A WITH DIAERESIS",
+	"00C5": "LATIN CAPITAL LETTER A WITH RING ABOVE",
+	"00C6": "LATIN CAPITAL LETTER AE",
+	"00C7": "LATIN CAPITAL LETTER C WITH CEDILLA",
+	"00C8": "LATIN CAPITAL LETTER E WITH GRAVE",
+	"00C9": "LATIN CAPITAL LETTER E WITH ACUTE",
+	"00CA": "LATIN CAPITAL LETTER E WITH CIRCUMFLEX",
+	"00CB": "LATIN CAPITAL LETTER E WITH DIAERESIS",
+	"00CC": "LATIN CAPITAL LETTER I WITH GRAVE",
+	"00CD": "LATIN CAPITAL LETTER I WITH ACUTE",
+	"00CE": "LATIN CAPITAL LETTER I WITH CIRCUMFLEX",
+	"00CF": "LATIN CAPITAL LETTER I WITH DIAERESIS",
+	"00D0": "LATIN CAPITAL LETTER ETH",
+	"00D1": "LATIN CAPITAL LETTER N WITH TILDE",
+	"00D2": "LATIN CAPITAL LETTER O WITH GRAVE",
+	"00D3": "LATIN CAPITAL LETTER O WITH ACUTE",
+	"00D4": "LATIN CAPITAL LETTER O WITH CIRCUMFLEX",
+	"00D5": "LATIN CAPITAL LETTER O WITH TILDE",
+	"00D6": "LATIN CAPITAL LETTER O WITH DIAERESIS",
+	"00D7": "MULTIPLICATION SIGN",
+	"00D8": "LATIN CAPITAL LETTER O WITH STROKE",
+	"00D9": "LATIN CAPITAL LETTER U WITH GRAVE",
+	"00DA": "LATIN CAPITAL LETTER U WITH ACUTE",
+	"00DB": "LATIN CAPITAL LETTER U WITH CIRCUMFLEX",
+	"00DC": "LATIN CAPITAL LETTER U WITH DIAERESIS",
+	"00DD": "LATIN CAPITAL LETTER Y WITH ACUTE",
+	"00DE": "LATIN CAPITAL LETTER THORN",
+	"00DF": "LATIN SMALL LETTER SHARP S",
+	"00E0": "LATIN SMALL LETTER A WITH GRAVE",
+	"00E1": "LATIN SMALL LETTER A WITH ACUTE",
+	"00E2": "LATIN SMALL LETTER A WITH CIRCUMFLEX",
+	"00E3": "LATIN SMALL LETTER A WITH TILDE",
+	"00E4": "LATIN SMALL LETTER A WITH DIAERESIS",
+	"00E5": "LATIN SMALL LETTER A WITH RING ABOVE",
+	"00E6": "LATIN SMALL LETTER AE",
+	"00E7": "LATIN SMALL LETTER C WITH CEDILLA",
+	"00E8": "LATIN SMALL LETTER E WITH GRAVE",
+	"00E9": "LATIN SMALL LETTER E WITH ACUTE",
+	"00EA": "LATIN SMALL LETTER E WITH CIRCUMFLEX",
+	"00EB": "LATIN SMALL LETTER E WITH DIAERESIS",
+	"00EC": "LATIN SMALL LETTER I WITH GRAVE",
+	"00ED": "LATIN SMALL LETTER I WITH ACUTE",
+	"00EE": "LATIN SMALL LETTER I WITH CIRCUMFLEX",
+	"00EF": "LATIN SMALL LETTER I WITH DIAERESIS",
+	"00F0": "LATIN SMALL LETTER ETH",
+	"00F1": "LATIN SMALL LETTER N WITH TILDE",
+	"00F2": "LATIN SMALL LETTER O WITH GRAVE",
+	"00F3": "LATIN SMALL LETTER O WITH ACUTE",
+	"00F4": "LATIN SMALL LETTER O WITH CIRCUMFLEX",
+	"00F5": "LATIN SMALL LETTER O WITH TILDE",
+	"00F6": "LATIN SMALL LETTER O WITH DIAERESIS",
+	"00F7": "DIVISION SIGN",
+	"00F8": "LATIN SMALL LETTER O WITH STROKE",
+	"00F9": "LATIN SMALL LETTER U WITH GRAVE",
+	"00FA": "LATIN SMALL LETTER U WITH ACUTE",
+	"00FB": "LATIN SMALL LETTER U WITH CIRCUMFLEX",
+	"00FC": "LATIN SMALL LETTER U WITH DIAERESIS",
+	"00FD": "LATIN SMALL LETTER Y WITH ACUTE",
+	"00FE": "LATIN SMALL LETTER THORN",
+	"00FF": "LATIN SMALL LETTER Y WITH DIAERESIS",
+	"0100": "LATIN CAPITAL LETTER A WITH MACRON",
+	"0101": "LATIN SMALL LETTER A WITH MACRON",
+	"010F": "LATIN SMALL LETTER D WITH CARON",
+	"0110": "LATIN CAPITAL LETTER D WITH STROKE",
+	"0111": "LATIN SMALL LETTER D WITH STROKE",
+	"0112": "LATIN CAPITAL LETTER E WITH MACRON",
+	"0113": "LATIN SMALL LETTER E WITH MACRON",
+	"012A": "LATIN CAPITAL LETTER I WITH MACRON",
+	"012B": "LATIN SMALL LETTER I WITH MACRON",
+	"0132": "LATIN CAPITAL LIGATURE IJ",
+	"0133": "LATIN SMALL LIGATURE IJ",
+	"0141": "LATIN CAPITAL LETTER L WITH STROKE",
+	"0142": "LATIN SMALL LETTER L WITH STROKE",
+	"014C": "LATIN CAPITAL LETTER O WITH MACRON",
+	"014D": "LATIN SMALL LETTER O WITH MACRON",
+	"0152": "LATIN CAPITAL LIGATURE OE",
+	"0153": "LATIN SMALL LIGATURE OE",
+	"016A": "LATIN CAPITAL LETTER U WITH MACRON",
+	"016B": "LATIN SMALL LETTER U WITH MACRON",
+	"0174": "LATIN CAPITAL LETTER W WITH CIRCUMFLEX",
+	"0175": "LATIN SMALL LETTER W WITH CIRCUMFLEX",
+	"0176": "LATIN CAPITAL LETTER Y WITH CIRCUMFLEX",
+	"0177": "LATIN SMALL LETTER Y WITH CIRCUMFLEX",
+	"0178": "LATIN CAPITAL LETTER Y WITH DIAERESIS",
+	"02C6": "MODIFIER LETTER CIRCUMFLEX ACCENT",
+	"02C7": "CARON",
+	"02D9": "DOT ABOVE",
+	"02DA": "RING ABOVE",
+	"02DC": "SMALL TILDE",
+	"0394": "GREEK CAPITAL LETTER DELTA",
+	"03A0": "GREEK CAPITAL LETTER PI",
+	"03A3": "GREEK CAPITAL LETTER SIGMA",
+	"03A9": "GREEK CAPITAL LETTER OMEGA",
+	"03B2": "GREEK SMALL LETTER BETA",
+	"03BC": "GREEK SMALL LETTER MU",
+	"03C0": "GREEK SMALL LETTER PI",
+	"1E80": "LATIN CAPITAL LETTER W WITH GRAVE",
+	"1E81": "LATIN SMALL LETTER W WITH GRAVE",
+	"1E82": "LATIN CAPITAL LETTER W WITH ACUTE",
+	"1E83": "LATIN SMALL LETTER W WITH ACUTE",
+	"1E84": "LATIN CAPITAL LETTER W WITH DIAERESIS",
+	"1E85": "LATIN SMALL LETTER W WITH DIAERESIS",
+	"1EF2": "LATIN CAPITAL LETTER Y WITH GRAVE",
+	"1EF3": "LATIN SMALL LETTER Y WITH GRAVE",
+	"201C": "LEFT DOUBLE QUOTATION MARK",
+	"201D": "RIGHT DOUBLE QUOTATION MARK",
+	"203A": "SINGLE RIGHT-POINTING ANGLE QUOTATION MARK",
+	"20AC": "EURO SIGN",
+	"220F": "N-ARY PRODUCT",
+	"F8FF": "APPLE PROPRIETARY SYMBOL"
+} }}
+{{ set initialGlyph = 'A' }}
+{{ set initialGlyphCode = initialGlyph |> toCharCode }}
+{{ set initialGlyphName = unicodeMapping[initialGlyphCode] }}
+{{ function glyphGroup(name, glyphs, isOpen, features) }}
+	{{ set count = glyphs.length }}
+	<details class="expander"{{ isOpen ? ' open' : '' }}>
+		<summary class="expander-button"><span class="expander-button-inner"><span class="expander-button-text">{{ name }} &times; {{ count }}</span></span></summary>
+		<div class="expander-content">
+			<p class="demo-grid-multi specimen-set-demo demo-grid specimen">
+				{{ for char of glyphs.split('') }}
+					{{- set charCodePoint = char |> toCharCode -}}
+					{{- set charUnicodeName = unicodeMapping[charCodePoint] -}}
+					<span class="glyph fancy-button" data-base-class="" data-glyph-code="{{ charCodePoint }}" data-glyph-name="{{ charUnicodeName }}" title="{{ charUnicodeName }}">
+						<span>{{ char }}</span>
+					</span>
+				{{ /for }}
+			</p>
+		</div>
+	</details>
+{{ /function }}
+
+<div class="main-heading-block fullbleed">
+	<h1 class="visually-hidden">{{ title }}</h1>
+
+	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="860" height="240"  viewBox="0 0 860 240" class="main-heading-vector" aria-hidden="true">
+		<defs>
+			<symbol id="font-outline" width="860" height="240" viewBox="0 0 860 240">
+				<path d="M39.41 30.36h87.41c31.63 0 44.75 22.98 44.75 51.17 0 28.04-13.12 50.71-44.75 50.71H84.76v76.97H39.4zm76.08 75.78c6.4 0 11.78-5.37 11.78-12.53V68.25a11.93 11.93 0 0 0-11.93-12.38H84.76v50.27zm61.9 41.32v-4.77c0-34.31 13.42-61.61 45.35-61.61h43.7c19.84 0 35.8 16.86 35.8 37.89v38.78h-79.5v13.43c0 7 5.22 12.68 11.63 12.68h45.2v25.2h-56.68c-32.22 0-45.5-27.44-45.5-61.6m80.55-15.22v-12.97c0-7.16-5.52-13.13-12.08-13.13h-10.9c-6.85 0-12.22 5.97-12.22 13.13v12.97zm61.9-51.16h76.08c31.77 0 45.05 27.6 45.05 61.6h-45.2v-23.86a11.93 11.93 0 0 0-11.93-12.68h-18.8v103.07h-45.2zm137.24-50.72h45.2v25.36h-45.2zm0 50.72h45.2v127.99h-45.2zm66.82 66.38V30.2h45.2v50.72h29.39V106h-29.24v65.04c0 7 5.07 12.68 11.93 12.68h23.87v25.2h-35.8c-32.07 0-45.2-27.44-45.2-61.6m90.55 0v-4.77c0-34.31 13.42-61.6 45.5-61.6h43.7c19.69 0 35.8 16.85 35.8 37.88v38.78h-79.5v13.43c0 7 5.06 12.68 11.63 12.68h45.2v25.2h-56.84c-32.07 0-45.5-27.44-45.5-61.6m80.7-15.21v-12.98c0-7.16-5.51-13.13-12.23-13.13h-10.74c-6.86 0-12.23 5.97-12.23 13.13v12.98zm62.2 15.21V30.21h45.2v140.82c0 7 5.23 12.68 11.94 12.68h5.82v25.2H802.7c-32.07 0-45.2-27.44-45.2-61.6"/>
+			</symbol>
+		</defs>
+		<use xlink:href="#font-outline" fill="currentColor"></use>
+	</svg>
+	
+	<div class="main-heading-deco" data-shaded="medium">
+		{{# <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108.34 33.73" width="109" height="34" aria-hidden="true">
+			<g stroke="#000" stroke-miterlimit="10" stroke-width=".4" paint-order="stroke">
+				<path fill="#464646" d="M8.28 29.04v-9.15L.84 5.15A3.2 3.2 0 0 1 3.71.5h99.94a4.2 4.2 0 0 1 4.2 4.19v24.35a4.2 4.2 0 0 1-4.2 4.2H12.47a4.2 4.2 0 0 1-4.2-4.2Z" />
+				<path fill="#808285" d="M12.47 31.43a2.4 2.4 0 0 1-2.4-2.4v-9.52L2.46 4.34a1.4 1.4 0 0 1 .06-1.37c.12-.2.49-.67 1.2-.67h99.94a2.4 2.4 0 0 1 2.4 2.4v24.34a2.4 2.4 0 0 1-2.4 2.4z" />
+				<g fill="#464646" paint-order="stroke">
+					<path d="M17.3 20.57h1.6v6.84h-1.6z" />
+					<path d="M26.32 20.57h1.6v6.84h-1.6z" />
+					<path d="M8.28 20.57h1.6v6.84h-1.6z" />
+					<path d="M35.34 20.57h1.6v6.84h-1.6z" />
+					<path d="M44.37 20.57h1.6v6.84h-1.6z" />
+					<path d="M53.39 20.57h1.6v6.84h-1.6z" />
+					<path d="M62.41 20.57h1.6v6.84h-1.6z" />
+					<path d="M71.43 20.57h1.6v6.84h-1.6z" />
+					<path d="M80.45 20.57h1.6v6.84h-1.6z" />
+					<path d="M89.48 20.57h1.6v6.84h-1.6z" />
+					<path d="M98.5 20.57h1.6v6.84h-1.6z" />
+					<path d="M12.82 6.32h1.6v6.84h-1.6z" />
+					<path d="M21.84 6.32h1.6v6.84h-1.6z" />
+					<path d="M30.86 6.32h1.6v6.84h-1.6z" />
+					<path d="M39.89 6.32h1.6v6.84h-1.6z" />
+					<path d="M48.91 6.32h1.6v6.84h-1.6z" />
+					<path d="M57.93 6.32h1.6v6.84h-1.6z" />
+					<path d="M66.95 6.32h1.6v6.84h-1.6z" />
+					<path d="M75.97 6.32h1.6v6.84h-1.6z" />
+					<path d="M85 6.32h1.6v6.84H85z" />
+					<path d="M94.02 6.32h1.6v6.84h-1.6z" />
+				</g>
+			</g>
+		</svg> #}}
+		
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 113 38" width="113" height="38" aria-hidden="true">
+			<defs>
+				<filter id="inner-highlight"><feOffset dx="0" dy="1.5"></feOffset>
+					<feMorphology operator="dilate" radius="2"></feMorphology>
+					<feGaussianBlur stdDeviation="1" result="offset-blur"></feGaussianBlur>
+					<feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse"></feComposite>
+					<feFlood flood-color="white" result="color" flood-opacity=".5"></feFlood>
+					<feComposite operator="in" in="color" in2="inverse" result="highlight"></feComposite>
+					<feComposite operator="over" in="highlight" in2="SourceGraphic"></feComposite>
+				</filter>
+			</defs>
+		    <path fill="#313532" stroke="#181b19" filter="url(#inner-highlight)" stroke-width=".4" d="M8.19 31.92 1.09 8.18C-.02 4.42 2.1.63 6.03.63h99.96a6.2 6.2 0 0 1 6.2 6.2v24.34a6.2 6.2 0 0 1-6.2 6.2H14.8c-3.37 0-5.64-2.22-6.61-5.45Z" />
+		    <path fill="#181b19" stroke="#181b19" stroke-width=".4" d="M10.6 31.17v-9.15L3.18 7.28a3.2 3.2 0 0 1 2.87-4.65h99.94a4.2 4.2 0 0 1 4.2 4.2v24.34a4.2 4.2 0 0 1-4.2 4.2H14.8a4.2 4.2 0 0 1-4.2-4.2Z" />
+		    <path fill="#313532" stroke="#181b19" filter="url(#inner-highlight)" stroke-width=".4" d="M14.8 33.57a2.4 2.4 0 0 1-2.4-2.4v-9.53L4.79 6.47a1.4 1.4 0 0 1 .06-1.37c.12-.2.49-.67 1.2-.67h99.94a2.4 2.4 0 0 1 2.4 2.4v24.34a2.4 2.4 0 0 1-2.4 2.4z" />
+		    <g fill="#181b19" stroke="#181b19" stroke-width=".2">
+		        <path d="M19.43 29.75v-2.92h-1.18v-1.41h1.18V22.5h2v2.92h1.17v1.41h-1.17v2.92z" />
+		        <path d="M28.45 29.75v-2.92h-1.18v-1.41h1.18V22.5h2v2.92h1.18v1.41h-1.18v2.92z" />
+		        <path d="M10.41 29.75v-2.92H9.23v-1.41h1.18V22.5h2v2.92h1.17v1.41h-1.17v2.92z" />
+		        <path d="M37.47 29.75v-2.92H36.3v-1.41h1.17V22.5h2v2.92h1.18v1.41h-1.18v2.92z" />
+		        <path d="M46.49 29.75v-2.92h-1.17v-1.41h1.17V22.5h2v2.92h1.18v1.41h-1.18v2.92z" />
+		        <path d="M55.52 29.75v-2.92h-1.18v-1.41h1.18V22.5h2v2.92h1.17v1.41h-1.17v2.92z" />
+		        <path d="M64.54 29.75v-2.92h-1.18v-1.41h1.18V22.5h2v2.92h1.18v1.41h-1.18v2.92z" />
+		        <path d="M73.56 29.75v-2.92h-1.18v-1.41h1.18V22.5h2v2.92h1.18v1.41h-1.18v2.92z" />
+		        <path d="M82.58 29.75v-2.92h-1.17v-1.41h1.17V22.5h2v2.92h1.18v1.41h-1.18v2.92z" />
+		        <path d="M91.6 29.75v-2.92h-1.17v-1.41h1.17V22.5h2.01v2.92h1.17v1.41h-1.17v2.92z" />
+		        <path d="M14.95 15.5v-2.92h-1.18v-1.41h1.18V8.25h2v2.92h1.18v1.41h-1.18v2.92z" />
+		        <path d="M23.97 15.5v-2.92H22.8v-1.41h1.17V8.25h2v2.92h1.18v1.41h-1.18v2.92z" />
+		        <path d="M32.99 15.5v-2.92h-1.17v-1.41h1.17V8.25h2v2.92h1.18v1.41h-1.18v2.92z" />
+		        <path d="M42.01 15.5v-2.92h-1.17v-1.41h1.17V8.25h2.01v2.92h1.17v1.41h-1.17v2.92z" />
+		        <path d="M51.04 15.5v-2.92h-1.18v-1.41h1.18V8.25h2v2.92h1.17v1.41h-1.17v2.92z" />
+		        <path d="M60.06 15.5v-2.92h-1.18v-1.41h1.18V8.25h2v2.92h1.18v1.41h-1.18v2.92z" />
+		        <path d="M69.08 15.5v-2.92H67.9v-1.41h1.18V8.25h2v2.92h1.18v1.41h-1.18v2.92z" />
+		        <path d="M78.1 15.5v-2.92h-1.17v-1.41h1.17V8.25h2v2.92h1.18v1.41H80.1v2.92z" />
+		        <path d="M87.13 15.5v-2.92h-1.18v-1.41h1.18V8.25h2v2.92h1.17v1.41h-1.17v2.92z" />
+		        <path d="M96.15 15.5v-2.92h-1.18v-1.41h1.18V8.25h2v2.92h1.17v1.41h-1.17v2.92z" />
+		        <path d="M100.63 29.75v-2.92h-1.18v-1.41h1.18V22.5h2v2.92h1.17v1.41h-1.17v2.92z" />
+		    </g>
+		</svg>
+		
+		
+		
+		<p class="main-heading-tagline">{{ summary }}</p>
+
+		{{# <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108.34 33.73" width="109" height="34" aria-hidden="true">
+			<g stroke="#000" stroke-width=".5">
+				<g>
+					<circle cx="40.66" cy="17.22" r="9.82" fill="#fec243" />
+					<circle cx="40.66" cy="17.22" r="7.86" fill="#ee334d" />
+					<circle cx="40.66" cy="17.22" r="4.26" fill="#808285" />
+				</g>
+				<g>
+					<circle cx="94.7" cy="16.86" r="9.82" fill="#fec243" />
+					<circle cx="94.7" cy="16.86" r="7.86" fill="#fcd741" />
+					<circle cx="94.7" cy="16.86" r="4.26" fill="#808285" />
+				</g>
+				<g>
+					<circle cx="13.65" cy="17.22" r="9.82" fill="#fec243" />
+					<circle cx="13.65" cy="17.22" r="7.86" fill="#fff" />
+					<circle cx="13.65" cy="17.22" r="4.26" fill="#808285" />
+				</g>
+			</g>
+			<g>
+				<g stroke="#000" stroke-width=".5">
+					<circle cx="67.68" cy="17.22" r="9.82" fill="#7f7f7f" />
+					<circle cx="67.68" cy="17.22" r="8.05" fill="#464646" />
+				</g>
+				<circle cx="67.68" cy="17.22" r="7.41" fill="#808285" />
+				<g>
+					<circle cx="65.37" cy="13.79" r="1.25" />
+					<circle cx="63.49" cy="18.12" r="1.25" />
+					<path d="M65.37 20.26h4.62v2.08h-4.62z" />
+					<circle cx="69.99" cy="13.79" r="1.25" />
+					<circle cx="71.87" cy="18.12" r="1.25" />
+				</g>
+			</g>
+		</svg> #}}
+		{{# <span aria-hidden="true">INPUT</span> #}}
+		{{# <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" class="visually-hidden" aria-hidden="true">
+			<filter id="woodtexture" x="-10%" y="-20%" width="120%" height="140%">
+				<feTurbulence baseFrequency=".001 .02" numOctaves="7" result="n"></feTurbulence>
+				<feDiffuseLighting surfaceScale="9" lighting-color="red" diffuseConstant="0.5">
+					<feDistantLight elevation="45" azimuth="45"></feDistantLight>
+				</feDiffuseLighting>
+				<feDisplacementMap in2="n" scale="50"></feDisplacementMap>
+			</filter>
+		</svg> #}}
+	</div>
+</div>
+
+{{ set fontPangrams = [
+	'The quick brown fox jumps over the lazy dog.',
+	'Sphinx of black quartz, judge my vow!',
+	'Portez ce vieux whisky au juge blond qui fume.',
+	'Pack my bag with five dozen liquor jugs.',
+	'When juxtaposition yields formidable victories, geeks are quite zen.',
+	'Many bespectacled quixotic wizards love frog hijinks.',
+	'Brand new CRTs provide quality & fix jank with 50Hz images!',
+	'By Zeus! Your very quick brew just fixed my aching temples.',
+	'Jake was thoroughly piqued by museum’s voxel zone facts.',
+	'A flummoxed jockey’s brave unicorn requested warm gazpacho.',
+] }}
+
+<div class="full content freetype" id="test">
+	<div class="freetype-specimen">
+		<label for="test-editor" class="freetype-label"><span class="specimen" aria-hidden="true">&darr;</span> Test Drive <span class="specimen" aria-hidden="true">&darr;</span></label>
+		<div class="freetype-input-wrapper"><textarea class="specimen freetype-input" data-features="" placeholder="Type your text here" spellcheck="false" id="test-editor">{{ fontSpecimenSampleDefault }}</textarea></div>
+	</div>
+
+	<div class="freetype-options-wrapper">
+		<div class="freetype-options">
+			<div class="freetype-option-nojs"><p>Sorry! JavaScript is required to enable interactive font feature testing.</p></div>
+
+			<div class="freetype-option-group" data-group-flow="column" data-group-grow="false">
+				<label for="freetype-slider-size" class="freetype-option-group-label">
+					Size
+				</label>
+				<div class="freetype-option-group-items">
+					<div class="freetype-option-slider-wrap">
+						<input id="freetype-slider-size" type="range" value="52" min="16" max="88" step="1" class="freetype-option-slider" data-freetype-slider="size">
+					</div>
+				</div>
+			</div>
+
+			<div class="freetype-option-group" data-group-flow="row">
+				<div class="freetype-option-group-label">
+					Style
+				</div>
+				<div class="freetype-option-group-items">
+				{{ for setKey, setInfo of setsList }}
+					<div class="freetype-option-group-item-linked">
+						<button class="toggle-button freetype-option-group-item-button" type="button" aria-pressed="false" data-freetype-toggle="{{ setKey }}">
+							<span class="toggle-button-label" aria-hidden="true">{{ setKey }}</span>
+							<span class="visually-hidden">{{ setInfo.name }}</span>
+						</button>
+						<span class="freetype-option-group-item-label" aria-hidden="true">{{ setInfo.name }}</span>
+					</div>
+				{{ /for }}
+				</div>
+			</div>
+
+			<div class="freetype-option-group" data-group-flow="column">
+				<div class="freetype-option-group-label">
+					Cast
+				</div>
+
+				<div class="freetype-option-group-items">
+					<button type="button" class="fancy-button" data-freetype-trigger="pangram">
+						<span>Pangram</span>
+					</button>
+					<button type="button" class="fancy-button" data-freetype-trigger="designs">
+						<span>Features</span>
+					</button>
+					<button type="button" class="fancy-button" data-freetype-trigger="uppercase">
+						<span><span class="visually-hidden">Transform current text to</span> Uppercase</span>
+					</button>
+					<button type="button" class="fancy-button" data-freetype-trigger="lowercase">
+						<span><span class="visually-hidden">Transform current text to</span> Lowercase</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="freetype-deco shaded" data-shaded="high" aria-hidden="true"></div>
+</div>
+
+<div class="content-split">
+	<p>Long before the HD generation, gaming consoles and personal computers had a very distinct style. It was contemporarily futuristic, blending sharp with rounded angles, and plastic surfaces with wooden textures. Nostalgia for this aesthetic led to the creation of <strong>Peritel</strong>. The name comes from the “<em lang="fr">prise Péritel</em>” standard (also known as <a href="https://en.wikipedia.org/wiki/SCART">SCART</a>), a 21-pin connector I used a lot growing up to play video games on various televisions. This typeface embodies the identity I picture in my mind when I think of this era of electronics.</p>
+
+	<div class="flow">
+		<ul>
+			<li><a href="#license">Straightforward licencing</a></li>
+			<li>Personal &amp; commercial</li>
+			<li>OTF &amp; WOFF2 provided</li>
+		</ul>
+		<p>
+			<a href="{{ fontPurchaseLink }}" class="fancy-button buy-button specimen"><span>Buy Peritel for $8</span></a>
+		</p>
+	</div>
+</div>
+
+<div class="glyph-split color-alt bg-alt fullbleed" id="glyphs">
+	<div
+		class="glyph-detail specimen shaded"
+		data-code-point="{{ initialGlyphCode }}"
+		data-glyph-name="{{ initialGlyphName }}"
+		data-transition-event="ckn:fontDetailChanged"
+		hidden
+	>
+		{{ set fontSize = 20 }}
+		{{ set noteSize = 0.75 }}
+		{{ set baseLine = 21 }}
+		{{ set lineThickness = 0.05 }}
+		{{ set xHeight = baseLine - (fontMetrics.xHeight / fontMetrics.emSize * fontSize) }}
+		{{ set capHeight = baseLine - (fontMetrics.capHeight / fontMetrics.emSize * fontSize) }}
+		{{ set descender = baseLine - (fontMetrics.descender / fontMetrics.emSize * fontSize) }}
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 30" class="glyph-detail-viewer" aria-hidden="true">
+			<defs>
+				<clipPath id="screen4x3">
+					<path d="M39.7 3.12c-.11-1.48-.57-2.37-1.96-2.66C36.36.16 30.12 0 20 0S3.64.16 2.26.46C.87.76.4 1.64.3 3.12.3 3.12 0 6.91 0 15s.3 11.88.3 11.88c.11 1.48.57 2.37 1.96 2.66 1.38.3 7.62.46 17.74.46s16.36-.16 17.74-.46 1.85-1.18 1.95-2.66c0 0 .31-3.79.31-11.88s-.3-11.88-.3-11.88" />
+				</clipPath>
+				<radialGradient id="screen-main-grad" cx="50%" cy="95%" r="98%" fx="50%" fy="15%">
+					<stop offset="0" stop-color="#421416"/>
+					<stop offset="0.99" stop-color="#220708"/>
+				</radialGradient>
+			</defs>
+			<g clip-path="url(#screen4x3)">
+				<rect class="glyph-detail-bg" width="100%" height="100%" />
+				<rect fill="url(#screen-main-grad)" width="100%" height="100%" />
+				
+				<line x1="0" x2="100%" y1="{{ baseLine }}" y2="{{ baseLine }}" class="glyph-detail-line" stroke-width="{{ lineThickness }}" />
+				<text class="glyph-detail-info" text-anchor="end" font-size="{{ noteSize }}" x="99%" y="{{ baseLine - 0.5 }}">BASELINE</text>
+
+				<line x1="0" x2="100%" y1="{{ xHeight + lineThickness }}" y2="{{ xHeight + lineThickness }}" class="glyph-detail-line" stroke-width="{{ lineThickness }}" />
+				<text class="glyph-detail-info" text-anchor="end" font-size="{{ noteSize }}" x="99%" y="{{ xHeight - 0.5 }}">X-HEIGHT</text>
+
+				<line x1="0" x2="100%" y1="{{ capHeight + lineThickness }}" y2="{{ capHeight + lineThickness }}" class="glyph-detail-line" stroke-width="{{ lineThickness }}" />
+				<text class="glyph-detail-info" text-anchor="end" font-size="{{ noteSize }}" x="99%" y="{{ capHeight - 0.5 }}">CAP HEIGHT</text>
+
+				<line x1="0" x2="100%" y1="{{ descender }}" y2="{{ descender }}" class="glyph-detail-line" stroke-width="{{ lineThickness }}" />
+
+				<text class="glyph-detail-inner" text-anchor="middle" font-size="{{ fontSize }}" x="50%" y="{{ baseLine }}">{{ initialGlyph }}</text>
+
+				<text class="glyph-detail-code | glyph-detail-info" text-anchor="middle" font-size="{{ noteSize }}" x="50%" y="2">U+{{ initialGlyphCode }}</text>
+				<text class="glyph-detail-name | glyph-detail-info" text-anchor="middle" font-size="{{ noteSize }}" x="50%" y="28">{{ initialGlyphName }}</text>
+			</g>
+		</svg>
+	</div>
+	<div class="glyph-list flow shaded" data-shaded="medium">
+		{{ glyphGroup('Basic Latin', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', true) }}
+		{{ glyphGroup('Latin Supplement', 'ÁÂÄÀĀÅÃÆÇÐĐÉÊËÈĒĲÍÎÏÌĪŁÑÓÔÖÒŌØÕŒÞÚÛÜÙŪẂŴẄẀÝŶŸỲáâäàāåãæçðďđéêëèēíîïìĳīłñóôöòōøõœþßúûüùūẃŵẅẁýŷÿỳ¨˙`´ˆˇ˚˜¯¸', false) }}
+		{{ glyphGroup('Numbers', '0123456789', true) }}
+		{{ glyphGroup('Greek', 'ΔΠΣΩβμπ', false) }}
+		{{ glyphGroup('Punctuation', `.…,;:?!¡¿·•*/\\#(){}[]-–—_"'“”‘’«»‹›`, true) }}
+		{{ glyphGroup('Symbols', `@&¶§%‰©®™°^|↑↓←→★$¢€£¥¤+−×÷=≠⁄<>≤≥±≈~∆∏∑∂µ`, true) }}
+	</div>
+</div>
+
+<div id="features" class="specimen-sets">
+	<h2 class="specimen-set-title">Features</h2>
+	{{ for setKey, setInfo of setsList }}
+	<h3 class="specimen-set-title">{{ setInfo.name }}</h3>
+	{{ set glyphs = Array.isArray(setInfo.glyphs) ? setInfo.glyphs : setInfo.glyphs.split('') }}
+	<div class="specimen-set-demo specimen-set-compare specimen">
+		<span class="specimen-set-compare-before"{{ if setKey === 'dlig' }} style="--specimen-font-size-override: 0.625em;"{{ /if }}>
+			{{ for loopIndex, glyph of glyphs }}
+				{{ glyph }}
+			{{ /for }}
+		</span>
+		<span class="specimen-set-compare-arrow">
+			<span aria-hidden="true">&minus;</span>
+			<span class="specimen-set-arrow-label">{{ setKey }}</span>
+			<span aria-hidden="true">&rarr;</span>
+		</span>
+		<span class="specimen-set-compare-after specimen" data-features="{{ setKey }}">
+			{{ for loopIndex, glyph of glyphs }}
+				{{ glyph }}
+			{{ /for }}
+		</span>
+	</div>
+	{{ /for }}
+</div>
+
+<div class="font-samplers">
+	<img src="./sampler-a.jpg" alt="" class="font-sampler-image" width="600" height="600" loading="lazy">
+	<img src="./sampler-b.jpg" alt="" class="font-sampler-image" width="600" height="600" loading="lazy">
+	<img src="./sampler-c.jpg" alt="" class="font-sampler-image" width="600" height="600" loading="lazy">
+	<img src="./sampler-d.jpg" alt="" class="font-sampler-image" width="600" height="600" loading="lazy">
+</div>
+
+<h2 id="license">Straightforward License</h2>
+<p>
+	<strong>Basic License:</strong> personal use, or company size up to 20 employees.
+	<br>
+	<strong>Extended License:</strong> company size over 20 employees.
+</p>
+
+<ul>
+    <li><strong>For use on a website</strong><br>Use on any website owned or under the licensee’s control, no pageview limits.<br></li>
+    <li><strong>For use in an app</strong><br>App embed allowed for 1 app. Another app = another license.<br></li>
+    <li><strong>Distribution</strong><br>The font may not be redistributed.<br></li>
+    <li><strong>Personal modification</strong><br>The font may be modified for personal use, but cannot be redistributed.</li>
+    <li><strong>Do not use the font for hateful purposes</strong><br>The font is not allowed to be used in any material promoting hate speech of any kind, including but not limited to: racism, xenophobia, homophobia, sexism, or other types of discrimination.</li>
+    <li><strong>Do not use the font with AI</strong><br>The font is not allowed to be used in, or in training of, AI/LLMs.</li>
+    <li><strong>Use at your own risk</strong><br>Any usage of the fonts are at the licensee’s own risk.</li>
+</ul>
+
+<p>For ebooks and other commercial use, or any other specific needs, email me to figure something out: chriskirknielsen+fonts<wbr>[at]gmail.com</p>
+
+<p>
+	<a href="{{ fontPurchaseLink }}" class="fancy-button buy-button specimen"><span>Buy Peritel for $8</span></a>
+</p>
+
+<hr>
+
+<h2>Acknowledgements</h2>
+<p>I use the British English spelling everywhere, but since I live in the US, I am using US English spelling for the licence/license stuff, not that it makes much difference but I just want you to know, that I know, that it’s inconsistent of me.</p>
+<p>Many thanks to Roel Nieskens for <a href="https://wakamaifondue.com/">wakamaifondue</a> to inspect my font files, which was super helpful to debug during development!</p>
+<p>The visual materials for this font (samples, OpenGraph image) used photos from Unsplash by <a href="https://unsplash.com/photos/a-white-rectangular-object-with-a-screen-E1ZWQdhHO1w">molvin</a>, <a href="https://unsplash.com/photos/brown-wooden-framed-glass-door-DNameBYPLKo">sherloque</a>, <a href="https://unsplash.com/photos/black-and-white-ipad-case-zwKoA_0CWgg">onurbuz</a>, and <a href="https://unsplash.com/photos/a-desktop-computer-sitting-on-top-of-a-wooden-desk-PoL7eR-p4Z0">Marissa Lewis</a>.
+</p>
+
+<script>
+{{ set fontSpecimenScript |> await jsmin(miniSiteSlug) -}}
+document.addEventListener('DOMContentLoaded', function() {
+	const glyphDetail = document.querySelector('.glyph-detail');
+	const glyphDetailCode = glyphDetail.querySelector('.glyph-detail-code');
+	const glyphDetailName = glyphDetail.querySelector('.glyph-detail-name');
+	const glyphDetailInner = glyphDetail.querySelector('.glyph-detail-inner');
+
+	function populateGlyphDetailMetadata({ codePoint, glyphName }) {
+		if (glyphDetailCode) { glyphDetailCode.textContent = `U+${codePoint}`; }
+		if (glyphDetailName) { glyphDetailName.textContent = glyphName; }
+	}
+
+	glyphDetail.addEventListener(glyphDetail.getAttribute('data-transition-event'), function (e) {
+		const updateDom = () => {
+			e.detail.executeUpdate();
+			populateGlyphDetailMetadata(e.detail); // Should contain exactly what is expected: codePoint and glyphName
+		}
+
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			updateDom();
+			return;
+		}
+		
+		glyphDetailInner.classList.add('is-changing');
+		glyphDetailInner.addEventListener('animationend', () => { glyphDetailInner.classList.remove('is-changing'); }, { once: true });
+		updateDom();
+	})
+
+	// On init, run with first selected glyph
+	populateGlyphDetailMetadata({ ...glyphDetail.dataset });
+	glyphDetail.removeAttribute('data-code-point');
+	glyphDetail.removeAttribute('data-glyph-name');
+
+	// Text preview modifier
+	const testEditor = document.getElementById('test-editor');
+	const pangrams = {{ fontPangrams |> JSON.stringify }};
+	
+	document.addEventListener('click', function(e) {
+		if (!e.target || !e.target.closest) { return; }
+
+		// If the user clicks in the inactive zone around the textarea, focus the input anyway
+		const freetypeInputWrapper = e.target.matches('.freetype-input-wrapper') ? e.target : null;
+		if (freetypeInputWrapper) {
+			const freetypeInput = freetypeInputWrapper.querySelector('input, textarea');
+			if (document.activeElement !== freetypeInput) {
+				freetypeInput.focus();
+			}
+			return;
+		}
+
+		// Change the content
+		const triggerButton = e.target.closest('[data-freetype-trigger]');
+		if (triggerButton) {
+			const triggerName = triggerButton.getAttribute('data-freetype-trigger');
+			const currentText = testEditor.value.toUpperCase().trim();
+			if (triggerName === 'pangram') {
+				const currentPangram = triggerButton.hasOwnProperty('_currentPangram') ? triggerButton._currentPangram : -1;
+				const nextPangram = [currentPangram + 1] % pangrams.length;
+				triggerButton._currentPangram = nextPangram;
+				testEditor.value = pangrams[nextPangram];
+			}
+			else if (triggerName === 'designs') {
+				testEditor.value = `I <3 Cathode Ray Tube® Groove Stress 2.1 (START)`; // Showcases at least one of each font feature
+			}
+			else if (triggerName === 'uppercase') {
+				testEditor.value = testEditor.value.toUpperCase();
+			}
+			else if (triggerName === 'lowercase') {
+				testEditor.value = testEditor.value.toLowerCase();
+			}
+		}
+
+		// Change the font features
+		const toggleButton = e.target.closest('[data-freetype-toggle]');
+		if (toggleButton) {
+			const feature = toggleButton.getAttribute('data-freetype-toggle');
+			const previewElement = testEditor.closest('[data-features]');
+			const wasPressed = toggleButton.getAttribute('aria-pressed') === 'true';
+			const isPressed = !wasPressed;
+
+			toggleButton.setAttribute('aria-pressed', isPressed.toString());
+			let activeFeatures = (previewElement.getAttribute('data-features') || '').split(' ').filter(Boolean);
+			if (isPressed) { activeFeatures.push(feature); }
+			else { activeFeatures = activeFeatures.filter(ft => ft !== feature); }
+			previewElement.setAttribute('data-features', activeFeatures.join(' '));
+		}
+	});
+
+	document.addEventListener('input', function(e) {
+		if (!e.target || !e.target.closest) { return; }
+
+		const slider = e.target.closest('[data-freetype-slider]');
+		if (slider) {
+			const targetAttr = slider.getAttribute('data-freetype-slider');
+			const [sliderMin, sliderMax] = [slider.min, slider.max].map(n => parseInt(n, 10));
+			const sliderValue = slider.valueAsNumber || (sliderMax + sliderMin / 2);
+			const finalValue = Math.max(sliderMin, Math.min(sliderValue, sliderMax));
+			testEditor.style.setProperty('--freeinput-size', `${finalValue}px`);
+		}
+	});
+})
+{{- /set }}
+{{- fontSpecimenScript -}}
+</script>

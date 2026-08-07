@@ -219,7 +219,7 @@ html[data-theme="vintage"] {
 --logo-color: var(--color-surface-alt);
 --logo-color-active: var(--color-canvas);
 --footer-special-char: '✚';
---font-heading-tracking: -0.0125em;
+--font-heading-features: 'liga' off, 'ss07' on;
 --font-heading-size-adjust: 0.4975;
 --link-underline-color: var(--color-heading);
 --cta-border-radius: var(--size-xs);
@@ -251,7 +251,7 @@ html[data-theme="vintage"] {
 --color-surface-alt: #ffbe33;
 --color-accent-alt: #632120;
 --color-inactive: #686868;
-				--font-heading-family: Switzer, Helvetica Neue, var(--fontStack-sans-serif);--font-heading-weight: 700;--font-heading-style: normal;
+				--font-heading-family: Peritel, Helvetica Neue, var(--fontStack-sans-serif);--font-heading-weight: 700;--font-heading-style: normal;
 --font-body-family: var(--fontStack-serif);
 			}
 			html[data-theme="vintage"] .hide-when-light { display: none !important; }

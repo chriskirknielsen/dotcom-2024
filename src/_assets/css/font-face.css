@@ -14,8 +14,8 @@
 	font-display: swap;
 }
 @font-face {
-	font-family: "Switzer";
-	src: url("/assets/fonts/Switzer-Bold.woff2") format("woff2");
+	font-family: "Peritel";
+	src: url("/assets/fonts/Peritel-Regular.woff2") format("woff2");
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
@@ -66,6 +66,13 @@
 	font-family: "LibreFranklin";
 	src: url("/assets/fonts/LibreFranklin-ExtraBold.woff2") format("woff2");
 	font-weight: 800;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Switzer";
+	src: url("/assets/fonts/Switzer-Bold.woff2") format("woff2");
+	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
 }

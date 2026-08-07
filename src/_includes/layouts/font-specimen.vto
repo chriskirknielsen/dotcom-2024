@@ -4,13 +4,13 @@
 {{ css miniSiteSlug }}{{ include `assets/css/font-specimen/${page.fileSlug}.css` }}{{ /css }}
 {{- for fontSpecimenName, fontSpecimensFaces of fontSpecimen -}}
 	{{# Preload the "default" font #}}
-	{{- set fontPreload -}}<link rel="preload" href="./{{ fontSpecimensFaces[0].file }}" as="font" type="font/woff2" crossorigin>{{ /set }}
+	{{- set fontPreload -}}<link rel="preload" href="{{ fontSpecimensFaces[0].file }}" as="font" type="font/woff2" fetchpriority="high" crossorigin>{{ /set }}
 
 	{{ css miniSiteSlug }}
 	{{- for fontSpecimenFace of fontSpecimensFaces -}}
 		@font-face {
 			font-family: '{{ fontSpecimenName }}';
-			src: url('{{ './' + fontSpecimenFace.file }}') format('woff2');
+			src: url('{{ fontSpecimenFace.file }}') format('woff2');
 			font-weight: {{ fontSpecimenFace.weight || 400 }};
 			font-style: {{ fontSpecimenFace.style || 'normal' }};
 			font-display: swap;
@@ -19,7 +19,7 @@
 			{{ if fontSpecimenFace.lineGapOverride }}line-gap-override: {{ fontSpecimenFace.lineGapOverride }};{{ /if }}
 		}
 	{{- /for -}}
-	.specimen { font-family: '{{ fontSpecimenName }}', {{ fontSpecimenFallback || 'sans-serif' }}; }
+	:root { --specimen-font-family: '{{ fontSpecimenName }}', {{ fontSpecimenFallback || 'sans-serif' }}; }
 	{{ /css }}
 {{- /for -}}
 
@@ -84,7 +84,7 @@
 			<nav aria-label="Page Sections">
 				<ul class="nav">
 					{{ for url, label of fontSpecimenNav }}
-					<li><a href="{{ url }}">{{ label }}</a></li>
+					<li><a href="{{ url }}">{{ label }}{{ if url.startsWith('#') === false }}{{ svg 'arrow-external', { class: 'link-icon' } }}{{ /if }}</a></li>
 					{{ /for }}
 				</ul>
 			</nav>
@@ -103,7 +103,7 @@
 		<script>
 		{{ js 'fontSpecimenScript' }}
 			document.addEventListener('click', function(e) {
-				let ligCode = e.target.closest('.ligature-sample-code');
+				let ligCode = e.target.closest('.ligature-sample-code:not(.no-interactive)');
 				if (!ligCode) {
 					return;
 				}
@@ -124,24 +124,35 @@
 
 			document.addEventListener('DOMContentLoaded', function() {
 				const glyphDetail = document.querySelector('.glyph-detail');
-				if (!glyphDetail) {
+				const glyphDetailTarget = glyphDetail.querySelector('.glyph-detail-inner') || glyphDetail;
+				if (!glyphDetailTarget) {
 					return;
 				}
 				const glyphDetailBaseClass = glyphDetail.className;
 
 				glyphDetail.hidden = false;
-				Array.from(document.querySelectorAll('.glyph')).forEach(function(g, i) {
+				Array.from(document.querySelectorAll('.glyph:not(.no-interactive)')).forEach(function(g, i) {
 					const button = Object.assign(document.createElement('button'), {
 						type: 'button',
 						className: g.className,
-						innerText: g.innerText.trim(),
-						ariaLabel: `Detail for glyph ${g.innerText.trim()}`,
-						ariaPressed: i === 0,
+						ariaLabel: `Glyph: ${g.textContent.trim()}`,
+						ariaPressed: i === 0, // First glyph should be pressed by default
 					});
-					button.setAttribute('data-base-class', g.className);
+					if (g.hasAttribute('data-glyph-name')) {
+						button.setAttribute('data-glyph-name', g.getAttribute('data-glyph-name'));
+					}
+					if (g.hasAttribute('title')) {
+						button.setAttribute('title', g.getAttribute('title'));
+					}
+					button.setAttribute('data-base-class', g.hasAttribute('data-base-class') ? g.getAttribute('data-base-class') :  g.className);
 					if (g.hasAttribute('data-variant')) {
 						button.setAttribute('data-variant', g.getAttribute('data-variant'));
 					}
+					
+					// Move all the contents into the button
+					button.append.apply(button, Array.from(g.childNodes));
+
+					// Replace the static element with the button
 					g.parentElement.replaceChild(button, g);
 				});
 
@@ -152,18 +163,42 @@
 					}
 
 					const activeGlyph = document.querySelector('button.glyph[aria-pressed="true"]');
+
+					if (activeGlyph === glyphButton) {
+						return; // No change
+					}
+					
 					if (activeGlyph && activeGlyph !== glyphButton) {
-						activeGlyph.ariaPressed = false;
+						activeGlyph.ariaPressed = false; // Deactivate the previous glyph
 					}
 
-					glyphDetail.innerText = glyphButton.innerText.trim();
-					glyphDetail.className = (glyphButton.getAttribute('data-variant') || '').split(' ').filter(Boolean).concat([glyphDetailBaseClass, glyphButton.getAttribute('data-base-class')].filter(Boolean)).join(' ');
-					glyphButton.ariaPressed = true;
+					glyphButton.ariaPressed = true; // Active the current glyph
+
+					const vtEvent = glyphDetail.getAttribute('data-transition-event') || null;
+					const updateDom = () => {
+						glyphDetailTarget.textContent = glyphButton.textContent.trim();
+						glyphDetail.className = (glyphButton.getAttribute('data-variant') || '').split(' ').filter(Boolean).concat([glyphDetailBaseClass, glyphButton.getAttribute('data-base-class')].filter(Boolean)).join(' ');
+					}					
+
+					// If there is a transition trigger event, pass the update logic to the event handler
+					if (vtEvent) {
+						const event = new CustomEvent(vtEvent, {
+							bubbles: true,
+							detail: {
+								executeUpdate: updateDom,
+								codePoint: glyphButton.textContent.trim().charCodeAt(0).toString(16).padStart(4, '0').toUpperCase(),
+								glyphName: glyphButton.getAttribute('data-glyph-name'),
+							},
+						});
+						glyphDetail.dispatchEvent(event);
+					} else {
+						updateDom(); // If there's no special event, run the update immediately
+					}
 				})
 			});
 		{{ /js }};
 		{{ getBundle 'js', 'fontSpecimenScript' }}
 		</script>
-		<script src="../download-preview.js" defer></script>
+		{{ if (fontPreventPreviewDownload) }}{{ else }}<script src="../download-preview.js" defer></script>{{ /if }}
 	</body>
 </html>

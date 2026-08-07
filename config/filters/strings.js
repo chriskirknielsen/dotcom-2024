@@ -62,4 +62,10 @@ export default function (eleventyConfig) {
 		}
 		return trimmedInput.replace(/\s+/gi, ' ');
 	});
+
+	/** Retrieves the code of a provided character. */
+	eleventyConfig.addFilter('toCharCode', function (glyph, pad = 4) {
+		const string = String(glyph || '').trim();
+		return string.charCodeAt(0).toString(16).padStart(pad, '0').toUpperCase();
+	});
 }
