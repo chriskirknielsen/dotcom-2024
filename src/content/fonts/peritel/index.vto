@@ -315,7 +315,7 @@
 					{{- set charCodePoint = char |> toCharCode -}}
 					{{- set charUnicodeName = unicodeMapping[charCodePoint] -}}
 					<span class="glyph fancy-button" data-base-class="" data-glyph-code="{{ charCodePoint }}" data-glyph-name="{{ charUnicodeName }}" title="{{ charUnicodeName }}">
-						<span>{{ char }}</span>
+						<span>{{ char |> escape }}</span>
 					</span>
 				{{ /for }}
 			</p>
