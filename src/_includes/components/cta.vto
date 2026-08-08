@@ -32,6 +32,7 @@
 	{{ /if }}
 {{ /set }}
 {{ set classList }}button {{ if (icon || iconStack) && emptyLabel }}button--icon-only{{ /if }} {{ ctaClass || '' }}{{ /set }}
+{{ set ctaOutput }}
 <{{ctaType}}
 	{{ if href }}
 		href="{{ href }}"
@@ -47,3 +48,5 @@
 	{{ if (icon || iconStack) && !iconBefore }}{{ iconRender }}
 	{{ /if }}
 </{{ctaType}}>
+{{ /set }}
+{{ if inline }}{{ ctaOutput |> replace(/\r|\n|\r\n/g, '') |> replace(/(\t)+/g, ' ') |> trim }}{{ else }}{{ ctaOutput }}{{ /if }}
