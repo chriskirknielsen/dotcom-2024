@@ -5,7 +5,7 @@ tags: ['font']
 time: '00:15:00'
 toc: true
 ---
-{{ set themeCta }}{{ component 'cta', {
+{{ set themeCta }}{{ if !metadata.nakedJs }}{{ component 'cta', {
         type: 'button',
         label: `Vintage theme`,
         ctaAttr: `data-theme-set="vintage"`,
@@ -13,7 +13,7 @@ toc: true
         icon: `theme-vintage`,
         inline: true,
     }
-}}<span class="hide-when-js">Vintage theme</span>{{ /set }}
+}}<span class="hide-when-js">Vintage theme</span>{{ else }}Vintage theme{{ /if }}{{ /set }}
 
 Being unsatisfied with the heading typeface used on my {{ themeCta |> trim }}, I set out to find the perfect typeface encapsulating the ‘80s and ‘90s, especially computer (entertainment) systems, but there was always something that fell short: boring `s`, ugly `r`, or way-too-sharp angles. After looking at more fonts than I could count (I seriously had dreams about fonts for a couple days), I decided I would make my own, from scratch. I’ve made a few (inspired) [fonts](/fonts/) before, *how hard could it be?*
 
@@ -86,3 +86,15 @@ Here are all the tools I used to make this font
 - [A handful of tools to create pangrams, check kerning pairs, and get the unicode names](https://codepen.io/editor/chriskirknielsen/pen/019fbe20-33eb-7d7a-a140-c4b981d45430)
 
 And that’s the tale of Peritel. You can check out the [specimen page](/fonts/peritel/), or [buy Peritel for $5](https://buymeacoffee.com/chriskirknielsen/e/562657) instead of $8. That's right: as a reader of this here blog, you get a discount with code `YAYFONTS`. Thanks for reading all what I typed about my typeface. And that's enough font puns for now…
+
+{{ if !metadata.nakedJs }}
+<script>
+document.addEventListener('click', (e) => {
+	const inlineSetter = e.target.closest('main [data-theme-set]');
+	if (!inlineSetter) { return; }
+	const theme = inlineSetter.getAttribute('data-theme-set')
+	const picker = document.querySelector('theme-picker');
+	picker.querySelector(`[data-theme-set="${theme}"]`).click();
+});
+</script>
+{{ /if }}
