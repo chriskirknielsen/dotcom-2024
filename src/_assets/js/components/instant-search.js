@@ -82,7 +82,8 @@ class InstantSearch extends HTMLElement {
 				(item) =>
 					normalizeApostrophe(item.title.toLowerCase()).includes(query) ||
 					normalizeApostrophe(item.summary.toLowerCase()).includes(query) ||
-					normalizeApostrophe(item.tags.join(' ').toLowerCase()).includes(query)
+					normalizeApostrophe(item.tags.join(' ').toLowerCase()).includes(query) ||
+					normalizeApostrophe(item.extraKeywords.join(' ').toLowerCase()).includes(query)
 			);
 
 			this.lastSearch = query; // Track the latest query to avoid running it again on blur
