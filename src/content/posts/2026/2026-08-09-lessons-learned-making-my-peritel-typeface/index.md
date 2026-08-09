@@ -1,7 +1,7 @@
 ---
 title: "Lessons Learned Making my Peritel Typeface"
 summary: "The why and the how of my latest font project."
-tags: ['font']
+tags: ['font', 'typography']
 time: '00:15:00'
 toc: true
 ---
