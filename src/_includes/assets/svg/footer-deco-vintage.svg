@@ -3,11 +3,9 @@
     width="1200"
     height="240"
     viewBox="0 0 1200 240"
+    preserveAspectRatio="xMidYMin slice"
+    style="background:linear-gradient(transparent 77%, #632120 0)"
 >
-    <path
-        fill="#632120"
-        d="M0 184.3h1200V240H0z"
-    />
     <rect
         width="203.4"
         height="76.3"
