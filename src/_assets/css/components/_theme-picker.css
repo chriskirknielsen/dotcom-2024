@@ -55,3 +55,9 @@ html:not([data-theme]) {
 		}
 	}
 }
+
+theme-button {
+	&:not(:defined) > :not([data-fallback]) {
+		display: none;
+	}
+}

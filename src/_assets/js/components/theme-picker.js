@@ -351,3 +351,33 @@ class ThemePicker extends HTMLElement {
 }
 
 customElements.define('theme-picker', ThemePicker);
+
+class ThemeButton extends HTMLElement {
+	constructor() {
+		super();
+
+		this.addEventListener('click', this);
+
+		// Remove the fallback content if provided
+		this.querySelector('[data-fallback]')?.remove();
+
+		// Set the button to pressed if the current theme matches
+		this.setButton = this.querySelector('[data-theme-set]');
+		const isInitiallyActive = this.setButton.dataset.themeSet === document.documentElement.dataset.theme;
+		this.setButton.setAttribute('aria-pressed', isInitiallyActive.toString());
+	}
+
+	handleEvent(e) {
+		if (e.type === 'click') {
+			const inlineSetter = e.target.closest('[data-theme-set]:not(theme-picker [data-theme-set])'); // Ignore theme set buttons in the dedicated theme-picker
+			if (!inlineSetter) {
+				return;
+			}
+			const theme = inlineSetter.getAttribute('data-theme-set');
+			const picker = document.querySelector('theme-picker');
+			picker.querySelector(`[data-theme-set="${theme}"i]`).click(); // Find the theme in the theme-picker element and click it
+		}
+	}
+}
+
+customElements.define('theme-button', ThemeButton);

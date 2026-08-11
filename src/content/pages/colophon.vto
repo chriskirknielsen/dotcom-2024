@@ -68,25 +68,12 @@ First off, the homepage wordmark for my name is a custom edit of the [Sprat type
 	{{ set tKey = tName |> toLowerCase }}
 	{{- `### ${tName}` |> markdown }}
 	<p>
-		{{ component 'cta', {
+		<theme-button>{{ component 'cta', {
 			type: 'button',
 			label: { aria: `Toggle ${tName} theme` },
 			ctaAttr: `data-theme-set="${tKey}"`,
-			ctaClass: 'button hide-when-nojs',
 			icon: `theme-${tKey}`
-		} }}
+		} }}</theme-button>
 		{{ tDetails |> markdown(true) }}
 	</p>
 {{ /for }}
-
-{{ if !metadata.nakedJs }}
-<script>
-document.addEventListener('click', (e) => {
-	const inlineSetter = e.target.closest('main [data-theme-set]');
-	if (!inlineSetter) { return; }
-	const theme = inlineSetter.getAttribute('data-theme-set')
-	const picker = document.querySelector('theme-picker');
-	picker.querySelector(`[data-theme-set="${theme}"]`).click();
-});
-</script>
-{{ /if }}

@@ -5,26 +5,31 @@ tags: ['font', 'typography']
 time: '00:15:00'
 toc: true
 ---
-{{ set themeCta }}{{ if !metadata.nakedJs }}{{ component 'cta', {
-        type: 'button',
-        label: `Vintage theme`,
-        ctaAttr: `data-theme-set="vintage"`,
-        ctaClass: 'button hide-when-nojs',
-        icon: `theme-vintage`,
-        inline: true,
-    }
-}}<span class="hide-when-js">Vintage theme</span>{{ else }}Vintage theme{{ /if }}{{ /set }}
 
-Being unsatisfied with the heading typeface used on my {{ themeCta |> trim }}, I set out to find the perfect typeface encapsulating the ‘80s and ‘90s, especially computer (entertainment) systems, but there was always something that fell short: boring `s`, ugly `r`, or way-too-sharp angles. After looking at more fonts than I could count (I seriously had dreams about fonts for a couple days), I decided I would make my own, from scratch. I’ve made a few (inspired) [fonts](/fonts/) before, *how hard could it be?*
+<p>
+    Being unsatisfied with the heading typeface used on my <theme-button>{{- component 'cta', {
+            type: 'button',
+            label: ``,
+            label: { text: `Vintage theme`, aria: `Toggle Vintage theme` },
+            ctaAttr: `data-theme-set="vintage"`,
+            icon: `theme-vintage`,
+            inline: true,
+        }
+    -}}<span data-fallback>Vintage theme</span></theme-button>,
+    {{ echo |> markdown(true) }}I set out to find the perfect typeface encapsulating the ‘80s and ‘90s, especially computer (entertainment) systems, but there was always something that fell short: boring `s`, ugly `r`, or way-too-sharp angles. After looking at more fonts than I could count (I seriously had dreams about fonts for a couple days), I decided I would make my own, from scratch. I’ve made a few (inspired) [fonts](/fonts/) before, *how hard could it be?*{{ /echo }}
+</p>
 
 {{ callout }}I will refer to a typeface as a font interchangeably. I *know* this is technically not the same, but please, there are other gardens to tend to.{{ /callout }}
 
+{{ echo |> markdown }}
 A nice and gentle way to get the right feel for a font is to create some main characters* which inform the entire set’s angles, line thickness, and curves. For a Latin alphabet, starting with `SOAP` is helpful to get all those details in place. For lowercase letters, you need a few more depending on the type* of work you’re aiming for, but in my case*, a few letters like `new pals` got me a good baseline* to expand upon.
 _\* these are all typography puns and I will not apologise._
+{{ /echo }}
 
 {{ set imageUrl = './notepad.jpg' |> toRoot }}
 {{ image imageUrl, "A semi-blurry black and white photo of a page in my notepad, scribbled with a bunch of different letters and symbols.", "I spent some time drawing sketches on paper, which I think is a good way to try out a few ideas instead of staying stuck in a rigid framework for every line and curve", { ratio: "932/1024" } }}
 
+{{ echo |> markdown }}
 ## A few tips
 
 ### Repeat strain injury
@@ -86,15 +91,4 @@ Here are all the tools I used to make this font
 - [A handful of tools to create pangrams, check kerning pairs, and get the unicode names](https://codepen.io/editor/chriskirknielsen/pen/019fbe20-33eb-7d7a-a140-c4b981d45430)
 
 And that’s the tale of Peritel. You can check out the [specimen page](/fonts/peritel/), or [buy Peritel for $5](https://buymeacoffee.com/chriskirknielsen/e/562657) instead of $8. That's right: as a reader of this here blog, you get a discount with code `YAYFONTS`. Thanks for reading all what I typed about my typeface. And that's enough font puns for now…
-
-{{ if !metadata.nakedJs }}
-<script>
-document.addEventListener('click', (e) => {
-	const inlineSetter = e.target.closest('main [data-theme-set]');
-	if (!inlineSetter) { return; }
-	const theme = inlineSetter.getAttribute('data-theme-set')
-	const picker = document.querySelector('theme-picker');
-	picker.querySelector(`[data-theme-set="${theme}"]`).click();
-});
-</script>
-{{ /if }}
+{{ /echo }}
