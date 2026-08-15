@@ -21,7 +21,7 @@ export default class {
 					title: content.data?.pageTitle || content.data.title,
 					summary: content.data.summary || '',
 					extraKeywords: content.data?.extraKeywords || [],
-					date: content.data?.date || content.page?.date || content.date,
+					date: content.page?.date || content.date,
 					lang: content.data.lang || 'en', // English is the default
 					slug: content.page?.slug || content.fileSlug,
 					url: content.url,
