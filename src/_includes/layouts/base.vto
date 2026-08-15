@@ -48,7 +48,7 @@
 			{{ else if metadata.nakedJs }}
 				{{ set announcement }}My JavaScript isn’t broken! 🙅 No JS for <a href="https://js-naked-day.org/">JS Naked Day</a> (24th of April)!{{ /set }}
 			{{ else }}
-				{{# {{ set announcement = "" }} #}}
+				{{ set announcement }}<a href="/fonts/peritel/">I just release a font called Peritel!</a>{{ /set }}
 			{{ /if }}
 			{{ if announcement }}
 				<div class="announcement"><p class="textWrap-balance textAlign-center">{{ announcement |> markdown(true) }}</p></div>
