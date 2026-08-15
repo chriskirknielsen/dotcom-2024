@@ -27,7 +27,7 @@ class InstantSearch extends HTMLElement {
 
 		this.database = fetch('/search.json').then((response) => response.json()); // Immediately fetch the "database"
 		this.lastSearch = '';
-		this.initialSearch = window.location.search ? new URLSearchParams(window.location.search).get('q') : null;
+		this.initialSearch = new URLSearchParams(window.location.search).get('q');
 	}
 
 	connectedCallback() {
@@ -78,13 +78,15 @@ class InstantSearch extends HTMLElement {
 			resultFilterEl.innerHTML = '<option value="*">All</option>'; // Reset after every search
 
 			let data = await getDatabase();
-			let result = data.filter(
-				(item) =>
+			let result = data.filter((item) => {
+				return (
 					normalizeApostrophe(item.title.toLowerCase()).includes(query) ||
 					normalizeApostrophe(item.summary.toLowerCase()).includes(query) ||
 					normalizeApostrophe(item.tags.join(' ').toLowerCase()).includes(query) ||
-					normalizeApostrophe(item.extraKeywords.join(' ').toLowerCase()).includes(query)
-			);
+					normalizeApostrophe(item.extraKeywords.join(' ').toLowerCase()).includes(query) ||
+					(item.url.split('/').filter(Boolean).pop() || '').includes(query)
+				);
+			});
 
 			this.lastSearch = query; // Track the latest query to avoid running it again on blur
 			const newSearchParam = new URLSearchParams({ q: query }).toString();

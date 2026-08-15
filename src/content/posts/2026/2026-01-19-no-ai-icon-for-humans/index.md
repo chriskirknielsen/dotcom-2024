@@ -1,5 +1,5 @@
 ---
-title: "A no-AI icon for humans to use"
+title: "A no-A.I. icon for humans to use"
 summary: "A small statement for a human, but still important."
 tags: [quicknote]
 time: '19:56:00'
