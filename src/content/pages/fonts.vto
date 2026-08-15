@@ -26,7 +26,8 @@
 					decorator: (font.data.fontPrice === 0 ? 'free' : `$${font.data.fontPrice}`),
 					src: font.data.customMetaImage,
 					width: 600,
-					height: 600
+					height: 600,
+					imagePlaceholderBg: font.data.imagePlaceholderBg || null,
 				},
 				heading: font.data.title,
 				description: font.data.summary
