@@ -11,9 +11,12 @@
 
 {{ set activeDesigns = designs.filter(d => d.showInGallery) }}
 
-<p class="textAlign-center fontWeight-bold">
-	<span class="icon-text-pair">{{ svg 'handshake', { class: 'inline-icon inline-icon--center linecap-auto' } }} If</span>
-	you want to commission a design from me, <a href="#footer-email-link">reach out via email</a>!
+<p class="textAlign-center">
+	<span class="fontWeight-bold"><span class="icon-text-pair">{{ svg 'handshake', { class: 'inline-icon inline-icon--center linecap-auto' } }} If</span>
+	you want to commission a design from me, <a href="#footer-email-link">reach out via email</a>!</span>
+	<br>
+	<span class="icon-text-pair">{{ svg 'font-file', { class: 'inline-icon inline-icon--center linecap-auto' } }} Oh</span>, and I have
+	also designed a few <a href="/fonts/">fonts</a>.
 </p>
 
 <hr class="hero-like">
@@ -108,15 +111,5 @@
 		{{ /for }}
 	</ul>
 </div>
-
-<hr>
-
-<p class="textAlign-center">Oh, and I have also designed {{ component 'cta', {
-        type: 'link',
-		url: '/fonts',
-        label: `fonts`,
-        inline: true,
-    }
-}}!</p>
 
 {{ js 'foot-filteredtiles' }}{{ include 'assets/js/components/filtered-tiles.js' }}{{ /js }}
