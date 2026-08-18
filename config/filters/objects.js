@@ -11,7 +11,7 @@ export default function (eleventyConfig) {
 	/** Transform an object of key=>values into a string of HTML attributes. Array-type values are joined with commas. */
 	eleventyConfig.addFilter('objToAttr', (obj) =>
 		Object.entries(obj)
-			.map(([prop, val]) => `${prop}="${(Array.isArray(val) ? val.join(',') : val).trim()}"`)
+			.map(([prop, val]) => `${prop}="${((Array.isArray(val) ? val.join(',') : val) || '').trim()}"`)
 			.join(' ')
 	);
 }

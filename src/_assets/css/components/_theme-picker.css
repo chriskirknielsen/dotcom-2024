@@ -57,6 +57,8 @@ html:not([data-theme]) {
 }
 
 theme-button {
+	display: contents;
+
 	&:not(:defined) > :not([data-fallback]) {
 		display: none;
 	}

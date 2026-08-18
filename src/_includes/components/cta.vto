@@ -1,5 +1,5 @@
 {{ set href = url || path || false }} {{# Normalise from the nav file #}}
-{{ set iconClassStr = iconClass || 'inline-icon' }} {{# Set to an empty space for no-scale behaviour #}}
+{{ set iconClassStr = typeof iconClass === 'undefined' ? 'inline-icon' : (iconClass || '') }} {{# Set to null for no-scale behaviour #}}
 {{ set ctaType = href ? 'a' : 'button' }}
 {{ set iconSvgOptions = iconSvgOpts || {} }}
 {{ set iconRender -}}
@@ -33,7 +33,7 @@
 {{ /set }}
 {{ set classList }}button {{ if (icon || iconStack) && emptyLabel }}button--icon-only{{ /if }} {{ ctaClass || '' }}{{ /set }}
 {{ set ctaOutput }}
-<{{ctaType}}
+<{{ ctaType }}
 	{{ if href }}
 		href="{{ href }}"
 		{{ if pageContext && href === pageContext.url }}aria-current="page"{{ /if }}
@@ -41,12 +41,12 @@
 		type="{{ type || 'button' }}"{{# In case type=submit is needed #}}
 	{{ /if }}
 	class="{{ classList |> trim }}"
-	{{ ctaAttr }}
+	{{ if ctaAttr }}{{ if typeof ctaAttr === 'string' }}{{ ctaAttr }}{{ else }}{{ ctaAttr |> objToAttr }}{{ /if }}{{ /if }}
 >
 	{{ if (icon || iconStack) && iconBefore }}{{ iconRender }}{{ /if }}
 	{{ labelRender }}
 	{{ if (icon || iconStack) && !iconBefore }}{{ iconRender }}
 	{{ /if }}
-</{{ctaType}}>
+</{{ ctaType }}>
 {{ /set }}
 {{ if inline }}{{ ctaOutput |> replace(/\r|\n|\r\n/g, '') |> replace(/(\t)+/g, ' ') |> trim }}{{ else }}{{ ctaOutput }}{{ /if }}
