@@ -305,7 +305,8 @@ class ThemeButton extends HTMLElement {
 		if (e.type === 'click') {
 			const themeButton = e.target.closest('[data-theme-set]');
 			const themeKey = themeButton.dataset.themeSet;
-			themes.save(themeKey); // This will use a view transition by default
+			const targetKey = themeKey && themes.get() === themeKey ? '' : themeKey; // Allow unsetting the theme
+			themes.save(targetKey); // This will use a view transition by default
 		}
 	}
 }

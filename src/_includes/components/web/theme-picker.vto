@@ -40,7 +40,7 @@
 						iconSvgOpts: { width: 24, height: 24 },
 					} }}</theme-button>
 					<span class="tooltip-content" id="theme-picker-{{ theme.key }}-description">
-						<span class="visually-hidden">Set theme:</span>
+						<span class="visually-hidden">Toggle theme:</span>
 						{{ theme.label }}{{ if theme.default }}<span class="theme-picker-auto-label"> - auto</span>{{ /if }}
 						<span class="visually-hidden">({{ scheme }})</span>
 					</span>
@@ -60,7 +60,7 @@
 					'data-theme-set': 'custom',
 					'aria-pressed': 'false',
 					'data-persist-pressed-style': '',
-					'aria-label': 'Set theme: Custom',
+					'aria-label': 'Toggle theme: Custom',
 				},
 				icon: 'paint-roller',
 				iconClass: null,

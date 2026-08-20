@@ -71,7 +71,7 @@ First off, the homepage wordmark for my name is a custom edit of the [Sprat type
 		<theme-button>{{ component 'cta', {
 			type: 'button',
 			label: { aria: `Toggle ${tName} theme` },
-			ctaAttr: `data-theme-set="${tKey}"`,
+			ctaAttr: `data-theme-set="${tKey}" data-persist-pressed-style`,
 			icon: `theme-${tKey}`
 		} }}</theme-button>
 		{{ tDetails |> markdown(true) }}
