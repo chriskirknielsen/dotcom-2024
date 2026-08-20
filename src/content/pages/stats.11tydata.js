@@ -7,6 +7,12 @@ export const strava = {
 	activities: [
 		{
 			year: 2026,
+			date: '2026-08-09T08:08:00Z',
+			distance: 5660,
+			duration: 2570,
+		},
+		{
+			year: 2026,
 			date: '2026-05-31T07:44:29Z',
 			distance: 11684.7,
 			duration: 4768,
