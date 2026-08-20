@@ -101,7 +101,7 @@ theme-picker button {
 	}
 }
 
-html[data-js='false'] .header-themepicker {
+html.no-js .header-themepicker {
 	display: none;
 }
 
@@ -251,7 +251,7 @@ theme-picker {
 		row-gap: max(8px, var(--size-m));
 	}
 
-	html[data-js='true'] .header-menu {
+	html.js .header-menu {
 		display: contents;
 	}
 
@@ -260,7 +260,7 @@ theme-picker {
 		inline-size: 100%;
 	}
 
-	html[data-js='true'] .header-list {
+	html.js .header-list {
 		justify-content: center;
 	}
 	.header-list {

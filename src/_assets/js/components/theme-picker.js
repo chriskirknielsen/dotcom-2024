@@ -2,34 +2,18 @@ class ThemePicker extends HTMLElement {
 	constructor() {
 		super();
 
-		// Absorb the properties from the window (safe from minification)
-		this.store = window.themeStore;
-		this.keys = window.themeKeys;
-		this.defaults = {
-			light: this.dataset.light,
-			dark: this.dataset.dark,
-		};
-
-		// Trigger as soon as possible to give the current theme's trigger the appropriate aria-pressed value
-		let themeOverride = null;
-		if (window.location.search.includes('theme=')) {
-			themeOverride = new URLSearchParams(document.location.search).get('theme');
-		} else if (window.location.hash.startsWith('#theme:')) {
-			themeOverride = window.location.hash.replace('#theme:', '');
-		}
-
-		if (this.keys.includes(themeOverride)) {
-			const searchWithoutTheme = new URLSearchParams(window.location.search);
-			searchWithoutTheme.delete('theme');
-			history.replaceState(undefined, '', window.location.pathname + searchWithoutTheme.toString()); // Remove the hash
-		} else {
-			themeOverride = null;
-		}
-		this.setTheme(themeOverride || this.getTheme(), false);
+		// Absorb the properties from the global scope (safe from minification)
+		this.store = themes.store;
+		this.keys = themes.keys;
+		this.defaults = themes.defaults;
+		this.eventName = themes.eventName;
+		this.save = themes.save.bind(themes);
+		this.customThemeFormId = this.dataset.formId;
 
 		// Events handlers
 		this.addEventListener('click', this);
 		this.addEventListener('change', this);
+		this.addEventListener(this.eventName, this);
 		document.addEventListener('keyup', this);
 
 		// Set up a constructable stylesheet for user custom styles
@@ -107,73 +91,32 @@ class ThemePicker extends HTMLElement {
 		return this.rgbToHsl(this.hexToRgb(H));
 	}
 
-	setTheme(theme, runViewTransition = true) {
-		if (!theme || this.keys.includes(theme) === false) {
-			theme = ''; // System default is an empty string
-		}
-
+	setTheme(theme, applyTheme, skipViewTransition = false) {
 		let updatedPromised;
-		const isSameThemeKey = document.documentElement.getAttribute('data-theme') === theme || (document.documentElement.hasAttribute('data-theme') === false && !theme);
-		const isDefaultSameTarget = !theme && document.documentElement.getAttribute('data-theme') === this.defaults[this.getPreferredScheme()];
-		const isDefaultSameSource = !document.documentElement.getAttribute('data-theme') && theme === this.defaults[this.getPreferredScheme()];
-		const isSameTheme = isSameThemeKey || isDefaultSameTarget || isDefaultSameSource;
+		const isSameThemeKey = document.documentElement.dataset.theme === theme || (typeof document.documentElement.dataset.theme === 'undefined' && !theme);
+		const isDefaultSameSource = !document.documentElement.dataset.theme && theme === this.defaults[this.getPreferredScheme()];
+		const isDefaultSameTarget = !theme && document.documentElement.dataset.theme === this.defaults[this.getPreferredScheme()];
+		const isSameTheme = isSameThemeKey || isDefaultSameTarget || isDefaultSameSource; // If the visual result is the same, skip the transition
 		const useFallback =
-			isSameTheme ||
-			!runViewTransition ||
-			!document.startViewTransition ||
-			typeof ViewTransitionTypeSet !== 'function' ||
-			window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			isSameTheme || skipViewTransition || !document.startViewTransition || typeof ViewTransitionTypeSet !== 'function' || this.getPreferredMotion() === 'reduce';
 
-		// Prevent weird transition between theme styles for a brief instant
-		// document.documentElement.style.setProperty('--anim-f', useFallback ? '0' : '0.000000001');
-
-		const applyTheme = async () => {
-			if (theme) {
-				document.documentElement.setAttribute('data-theme', theme);
-				localStorage.setItem(this.store, theme);
-			} else {
-				document.documentElement.removeAttribute('data-theme');
-				localStorage.removeItem(this.store);
-			}
-			document.querySelectorAll('[data-theme-set]').forEach(function (btn) {
-				btn.setAttribute('aria-pressed', (btn.getAttribute('data-theme-set') === theme).toString());
-			});
-			return theme;
-		};
 		const restoreAnim = async () => {
 			if (useFallback) {
 				await new Promise((r, _) => requestAnimationFrame(() => setTimeout(r)));
 			}
-
-			// Once the theme's updated, allow transitions again
-			// document.documentElement.style.removeProperty('--anim-f');
 		};
 
 		if (useFallback) {
-			updatedPromised = applyTheme();
+			updatedPromised = Promise.resolve(applyTheme());
 		} else {
 			updatedPromised = document.startViewTransition({ update: applyTheme, types: ['--theme'] }).finished;
 		}
 
-		return updatedPromised.then(restoreAnim).then((x) => {
-			return x;
-		});
-	}
-
-	getTheme() {
-		let activeTheme = localStorage.getItem(this.store);
-		if (!activeTheme) {
-			return false; // If the user hasn't set an override, respect the `prefers-color-scheme` setting
-		}
-		if (this.keys.includes(activeTheme) === false) {
-			const preferredScheme = this.getPreferredScheme();
-			return this.defaults[preferredScheme];
-		}
-		return activeTheme;
+		return updatedPromised.then(restoreAnim);
 	}
 
 	updateCustomThemeStyles() {
-		const form = document.getElementById('theme-custom-form');
+		const form = document.getElementById(this.customThemeFormId);
 		const values = Object.fromEntries(new FormData(form));
 		const canvasHsl = this.hexToHsl(values['color-canvas']);
 		const accentHsl = this.hexToHsl(values['color-accent']);
@@ -246,7 +189,7 @@ class ThemePicker extends HTMLElement {
 	connectedCallback() {
 		const savedJson = (window.localStorage.getItem(this.styleStore) || '').replace(/"C-([a-z-]+)":/g, `"color-$1":`); // Legacy handling of C-{color} names
 		const savedStyles = JSON.parse(savedJson || null);
-		const form = document.getElementById('theme-custom-form');
+		const form = document.getElementById(this.customThemeFormId);
 		if (savedStyles) {
 			Array.from(form.querySelectorAll('[name]')).forEach((field) => {
 				const name = field.getAttribute('name');
@@ -271,12 +214,8 @@ class ThemePicker extends HTMLElement {
 				accent: isDark ? '#33ffff' : '#550000',
 			};
 
-			// Array.from(form.querySelectorAll(`[name="color-scheme"]`)).forEach((schemeField) => {
-			// 	schemeField.checked = schemeField.value === preferredScheme;
-			// });
-
 			Array.from(form.querySelectorAll(`input[type="color"][data-color-key]`)).forEach((colorField) => {
-				colorField.value = defaultColors[colorField.getAttribute('data-color-key')];
+				colorField.value = defaultColors[colorField.datasetcolorKey];
 			});
 
 			Array.from(form.querySelectorAll('[data-default]')).forEach((defaultOption) => {
@@ -286,7 +225,7 @@ class ThemePicker extends HTMLElement {
 				if (selectField) {
 					selectField.value = defaultOption.value;
 				} else if (radioField) {
-					if (radioField.getAttribute('data-default') === 'from-media') {
+					if (radioField.dataset.default === 'from-media') {
 						if (defaultOption.name === 'anim-f') {
 							radioField.checked = this.getPreferredMotion() === radioField.value;
 						}
@@ -300,35 +239,30 @@ class ThemePicker extends HTMLElement {
 		this.updateCustomThemeStyles();
 	}
 
-	// Ain't no way the picker is ever getting removed
-	// disconnectedCallback() {
-	// 	this.removeEventListener('click', this);
-	// 	this.removeEventListener('keyup', this);
-	// }
-
 	handleEvent(e) {
 		if (e.type === 'click') {
-			const dialog = document.getElementById('theme-custom-controls');
+			const dialog = this.querySelector('dialog'); // There should only be one
 			const isTargetDialogBackdrop = e.target === dialog;
 			const customDialog = e.target.closest('[data-theme-custom-action]');
-			const setter = e.target.closest('[data-theme-set]');
 
 			if (customDialog || isTargetDialogBackdrop) {
-				const action = customDialog && customDialog.getAttribute('data-theme-custom-action');
+				const action = customDialog && customDialog.dataset.themeCustomAction;
 
 				if (action === 'apply' || isTargetDialogBackdrop) {
 					this.updateCustomThemeStyles();
 					dialog.close();
 				} else if (action === 'open') {
 					this.updateCustomThemeStyles();
-					this.setTheme('custom').then(() => {
+					this.save('custom');
+					requestAnimationFrame(() => {
 						dialog.showModal();
 					});
 				}
-			} else if (setter) {
-				const isPressed = setter.getAttribute('aria-pressed') === 'true';
-				this.setTheme(!isPressed ? setter.getAttribute('data-theme-set') : false);
 			}
+		}
+
+		if (e.type === this.eventName) {
+			this.setTheme(e.detail.theme, e.detail.callback);
 		}
 
 		if (e.type === 'keyup') {
@@ -338,9 +272,9 @@ class ThemePicker extends HTMLElement {
 					themePickerToggleButton.setAttribute('aria-pressed', 'false');
 					themePickerToggleButton.focus(); // Restore focus to the toggler
 				}
-			} else if (e.key >= 0 && e.key <= this.keys.length && !e.target?.closest?.('input, [contenteditable]')) {
+			} else if (e.key >= 0 && e.key <= this.keys.length && !e.target?.closest?.('input, textarea, [contenteditable]')) {
 				const pressedDigit = parseInt(e.key, 10);
-				this.querySelectorAll('[data-theme-set]')[pressedDigit]?.click();
+				this.save(this.keys[pressedDigit - 1] || ''); // For pressedDigit === 0, we get an index of -1, which is undefined, so the fallback of empty string gives us the system default
 			}
 		}
 
@@ -358,24 +292,20 @@ class ThemeButton extends HTMLElement {
 
 		this.addEventListener('click', this);
 
-		// Remove the fallback content if provided
+		// Remove the fallback content if provided (CSS handles the visibility of the button, JS handles the presence of the fallback content)
 		this.querySelector('[data-fallback]')?.remove();
 
-		// Set the button to pressed if the current theme matches
-		this.setButton = this.querySelector('[data-theme-set]');
-		const isInitiallyActive = this.setButton.dataset.themeSet === document.documentElement.dataset.theme;
-		this.setButton.setAttribute('aria-pressed', isInitiallyActive.toString());
+		// Set the button to pressed if it applies the current theme
+		this.button = this.querySelector('[data-theme-set]');
+		const isInitiallyActive = this.button.dataset.themeSet === themes.get();
+		this.button.setAttribute('aria-pressed', isInitiallyActive.toString());
 	}
 
 	handleEvent(e) {
 		if (e.type === 'click') {
-			const inlineSetter = e.target.closest('[data-theme-set]:not(theme-picker [data-theme-set])'); // Ignore theme set buttons in the dedicated theme-picker
-			if (!inlineSetter) {
-				return;
-			}
-			const theme = inlineSetter.getAttribute('data-theme-set');
-			const picker = document.querySelector('theme-picker');
-			picker.querySelector(`[data-theme-set="${theme}"i]`).click(); // Find the theme in the theme-picker element and click it
+			const themeButton = e.target.closest('[data-theme-set]');
+			const themeKey = themeButton.dataset.themeSet;
+			themes.save(themeKey); // This will use a view transition by default
 		}
 	}
 }

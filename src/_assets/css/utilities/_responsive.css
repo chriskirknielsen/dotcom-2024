@@ -10,7 +10,7 @@
 	}
 }
 
-[data-js='false'] .hide-when-nojs,
-[data-js='true'] .hide-when-js {
+.no-js .hide-when-nojs,
+.js .hide-when-js {
 	display: none !important;
 }

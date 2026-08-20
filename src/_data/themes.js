@@ -2,10 +2,12 @@
 import * as fs from 'fs';
 const tokens = JSON.parse(fs.readFileSync('./src/_data/tokens.json'));
 const themes = tokens.themes;
-const themesWithLabel = Object.entries(themes).map(([themeKey, themeData]) => ({
-	key: themeKey,
-	label: themeData.label,
-	default: themeData.isDefaultScheme,
-	scheme: themeData.scheme,
-}));
+const themesWithLabel = Object.entries(themes).map(([themeKey, themeData]) => {
+	return {
+		key: themeKey,
+		label: themeData.label,
+		default: themeData.isDefaultScheme,
+		scheme: themeData.scheme,
+	};
+});
 export default themesWithLabel;

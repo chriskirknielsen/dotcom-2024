@@ -1172,11 +1172,11 @@ If you are a dork like me, here are the fonts (yay, fonts!), and inspiration for
 		z-index: 4; /* Because of Safari's issue with .fullsection-content::before, this now needs to be above that, yipee */
 	}
 
-	html[data-js="false"] .fullsection-illustration-button {
+	html.no-js .fullsection-illustration-button {
 		display: none;
 	}
 	
-	html[data-js="true"] .fullsection-illustration-button {
+	html.js .fullsection-illustration-button {
 		position: fixed; /* Relative would be fine but Safari fails to create the correct element without fixed */
 
 		display: block;
@@ -1295,7 +1295,7 @@ If you are a dork like me, here are the fonts (yay, fonts!), and inspiration for
 				100% { --FS-frame-scale: 0; }
 			}
 
-			html[data-js='true'] {
+			html.js {
 				.fullsection {
 					--FS-dynamic-radius: calc(var(--FS-radius) * var(--FS-frame-scale)); /* As the section "collapses" the radius will be reduced */
 					

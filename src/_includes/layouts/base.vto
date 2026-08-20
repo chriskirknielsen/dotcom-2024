@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html {{ if section }}data-section="{{ section }}"{{ /if }} lang="{{ metadata.lang }}" data-js="false">
+<html {{ if section }}data-section="{{ section }}"{{ /if }} lang="{{ metadata.lang }}" class="no-js">
 	<head>
 		<!--
 		Nice to see you here.
@@ -11,11 +11,12 @@
 		{{- if !metadata.nakedJs }}
 		<script>
 		{{- js 'head' -}}
-			let globalBreakpoint = `{{ tokens.settings.breakpoint }}`;
-			document.documentElement.setAttribute('data-js', 'true');
-			window.themeKeys = {{ themes |> pluck('key') |> JSON.stringify }};
-			window.themeKeys.push('custom');
-			{{ include 'assets/js/theme-set.js' }}
+			document.documentElement.classList.replace('no-js', 'js');
+			const themes = {
+				keys: {{ themes |> pluck('key') |> concat(['custom']) |> JSON.stringify }},
+				defaults: {{ themes |> filter(t => t.default) |> map(t => [t.scheme, t.key]) |> Object.fromEntries |> JSON.stringify }},
+			}; {{# This is build-time data we need to make available client-side, everything else can be in a JS file #}}
+			{{ include 'assets/js/theme-toolkit.js' }}
 		{{ /js }}
 		{{- getBundle 'js', 'head' -}}
 		</script>

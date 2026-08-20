@@ -67,11 +67,11 @@
 	}
 
 	/* If the main heading is a link that's in focus, make the full card look focused */
-	&:has(.card-heading > a:is(:focus-visible)) {
+	&:has(.card-heading > a:focus-visible) {
 		outline: var(--_focus-outline);
 		outline-offset: var(--_focus-outline-offset);
 
-		& .card-heading > a:is(:focus-visible) {
+		& .card-heading > a:focus-visible {
 			outline: none;
 		}
 	}
@@ -155,7 +155,6 @@
 	@container (inline-size > 20rem) {
 		.card {
 			flex-direction: row;
-			inline-size: 100%;
 		}
 
 		.card-image {
@@ -171,7 +170,7 @@
 	}
 }
 
-/* Special irregular card layout: titles need room so only large viewports can benefit from it: smaller viewports get a standard card */
+/* Special, irregular card layout: titles need room so only large viewports can benefit from it: smaller viewports get a standard card */
 @media (min-width: 60em) {
 	.cards[data-grid-layout='importance'] {
 		display: grid;
@@ -206,7 +205,7 @@
 				--CARD-rows: 2;
 				block-size: 0;
 				min-block-size: 100%;
-				/* Using aspect-ratio: 3 / 2 is slightly off; this height:0/min-height:100% ensures the neighbouring 1/1 squares drives this large card's size */
+				/* Using aspect-ratio: 3 / 2 is slightly off due to the gaps; this height:0/min-height:100% ensures the neighbouring 1/1 squares drives this large card's size */
 			}
 
 			grid-column: span var(--CARD-cols, 1);

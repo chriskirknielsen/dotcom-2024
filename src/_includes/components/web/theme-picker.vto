@@ -1,19 +1,19 @@
 {{ set attrs = componentAttrs |> objToAttr }}
 {{ set tooltipPos = 'start end' }}
-<theme-picker {{ attrs }}>
+{{ set customThemeFormId = 'theme-custom-form' }}
+<theme-picker {{ attrs }} data-form-id="{{ customThemeFormId }}">
 	<div class="theme-picker-scheme-group">
 		<span class="theme-picker-scheme-label">
             System
         </span>
 		<div class="tooltip" data-tooltip-pos="end end">
-			<button type="button" class="button button--icon-only" data-theme-set="" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-system-description">
+			<theme-button><button type="button" class="button button--icon-only" data-theme-set="" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-system-description">
 				{{ svg 'device-desktop', { width: 24, height: 24, class: 'hide-when-viewport--small' } }}
 				{{ svg 'device-phone', { width: 24, height: 24, class: 'hide-when-viewport--large' } }}
-			</button>
+			</button></theme-button>
 			<span class="tooltip-content" id="theme-picker-system-description">
-				<span class="visually-hidden">Toggle theme:</span>
+				<span class="visually-hidden">Set theme:</span>
 				System Default
-				<span class="visually-hidden">(auto)</span>
 			</span>
 		</div>
 	</div>
@@ -26,12 +26,22 @@
 			</span>
 			{{ for theme of groupedthemes }}
 				<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}"{{ if theme.key == 'secret' }} data-theme-condition="{{ theme.key }}"{{ /if }}>
-					<button type="button" class="button button--icon-only" data-theme-set="{{ theme.key }}" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-{{ theme.key }}-description">
-						{{ svg 'theme-'+theme.key, { width: 24, height: 24 } }}
-					</button>
+					<theme-button>{{ component 'cta', {
+						type: 'button',
+						label: '',
+						ctaAttr: {
+							'data-theme-set': theme.key,
+							'aria-pressed': 'false',
+							'data-persist-pressed-style': '',
+							'aria-labelledby': `theme-picker-${theme.key}-description`
+						},
+						icon: `theme-${theme.key}`,
+						iconClass: null,
+						iconSvgOpts: { width: 24, height: 24 },
+					} }}</theme-button>
 					<span class="tooltip-content" id="theme-picker-{{ theme.key }}-description">
-						<span class="visually-hidden">Toggle theme:</span>
-						{{ theme.label }}
+						<span class="visually-hidden">Set theme:</span>
+						{{ theme.label }}{{ if theme.default }}<span class="theme-picker-auto-label"> - auto</span>{{ /if }}
 						<span class="visually-hidden">({{ scheme }})</span>
 					</span>
 				</div>
@@ -43,9 +53,19 @@
 		<span class="theme-picker-scheme-label">Custom</span>
 		
 		<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}">
-			<button type="button" class="button button--icon-only" data-theme-set="custom" aria-pressed="false" aria-label="Toggle theme: Custom" data-persist-pressed-style>
-				{{ svg 'paint-roller', { width: 24, height: 24 } }}
-			</button>
+			<theme-button>{{ component 'cta', {
+				type: 'button',
+				label: '',
+				ctaAttr: {
+					'data-theme-set': 'custom',
+					'aria-pressed': 'false',
+					'data-persist-pressed-style': '',
+					'aria-label': 'Set theme: Custom',
+				},
+				icon: 'paint-roller',
+				iconClass: null,
+				iconSvgOpts: { width: 24, height: 24 },
+			} }}</theme-button>
 			<span class="tooltip-content" id="theme-picker-custom-apply-label">
 				Apply <span class="visually-hidden">custom theme</span>
 			</span>
@@ -73,7 +93,7 @@
 				<p><em lang="es">Mi casa es su casa.</em> Please, make yourself at home!</p>
 			</div>
 
-			<form method="dialog" id="theme-custom-form" class="flow">
+			<form method="dialog" id="{{ customThemeFormId }}" class="flow">
 				<fieldset>
 					<legend class="visually-hidden">Colours</legend>
 					<span aria-hidden="true" class="h3">Colours</span>

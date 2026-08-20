@@ -31,6 +31,9 @@ theme-picker {
 .theme-custom-control-field {
 	inline-size: 100%;
 }
+.theme-picker-auto-label {
+	display: none;
+}
 
 html:not([data-theme]) {
 	theme-picker button:is([data-theme-set='dawn'], [data-theme-set='dusk'])::after {
@@ -45,11 +48,17 @@ html:not([data-theme]) {
 	}
 
 	@media (--prefers-light) {
+		theme-button:has(button[data-theme-set='dawn']) ~ .tooltip-content .theme-picker-auto-label {
+			display: inline;
+		}
 		theme-picker button[data-theme-set='dawn']::after {
 			content: '';
 		}
 	}
 	@media (--prefers-dark) {
+		theme-button:has(button[data-theme-set='dusk']) ~ .tooltip-content .theme-picker-auto-label {
+			display: inline;
+		}
 		theme-picker button[data-theme-set='dusk']::after {
 			content: '';
 		}
