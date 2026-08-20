@@ -266,13 +266,14 @@ class ThemePicker extends HTMLElement {
 		}
 
 		if (e.type === 'keyup') {
+			const isModifierPressed = e.altKey || e.shiftKey || e.ctrlKey || e.metaKey;
 			if (e.key === 'Escape') {
 				const themePickerToggleButton = document.querySelector(`[aria-controls=${this.id}]`);
 				if (themePickerToggleButton && themePickerToggleButton.getAttribute('aria-pressed') === 'true') {
 					themePickerToggleButton.setAttribute('aria-pressed', 'false');
 					themePickerToggleButton.focus(); // Restore focus to the toggler
 				}
-			} else if (e.key >= 0 && e.key <= this.keys.length && !e.target?.closest?.('input, textarea, [contenteditable]')) {
+			} else if (e.key >= 0 && e.key <= this.keys.length && !e.target?.closest?.('input, textarea, [contenteditable]') && !isModifierPressed) {
 				const pressedDigit = parseInt(e.key, 10);
 				this.save(this.keys[pressedDigit - 1] || ''); // For pressedDigit === 0, we get an index of -1, which is undefined, so the fallback of empty string gives us the system default
 			}
