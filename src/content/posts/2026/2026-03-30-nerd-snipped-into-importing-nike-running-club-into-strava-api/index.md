@@ -3,7 +3,12 @@ title: "How I nerd-sniped myself into importing Nike Running Club data via the S
 summary: "Taking legacy TCX data from Nike and importing it to Strava"
 tags: [personal, api]
 time: '13:37:00'
+updated: 2026-08-19
 ---
+
+**Update (August 2026):** it seems Strava now only allows API access to subscribers, so you can only make this work with a paid subscriptions: _"We're updating API access to be subscriber-only. Start a subscription to maintain your access."_ Bummer.
+
+<hr>
 
 {{ callout 'Heads up' }}This is a long post, but I share all my code in the [tl;dr](#tl-dr) at the end!{{ /callout }}
 
