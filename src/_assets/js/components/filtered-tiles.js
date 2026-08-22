@@ -1,6 +1,6 @@
 function filterTiles(context, inputName) {
-	let hashIndicator = inputName + ':';
-	let initialHash = window.location.hash.slice(1);
+	let hashIndicator = inputName + '=';
+	let baseFilter = new URLSearchParams(window.location.search).get(inputName) || '';
 	let items = Array.from(context.querySelectorAll('[data-tags]'));
 	let list = context.querySelector('[data-filtered-list]');
 	const storageKey = 'designFilter';
@@ -23,7 +23,7 @@ function filterTiles(context, inputName) {
 
 	function filterTo(filter, skipAnim = false) {
 		let isShowAll = filter === '';
-		let filterHash = filter ? '#' + hashIndicator + filter : './';
+		let filterHash = filter ? '?' + hashIndicator + filter : './';
 		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		const doAnim = !skipAnim && !prefersReducedMotion;
 		const useVT = Boolean(document.startViewTransition && typeof ViewTransitionTypeSet === 'function');
@@ -181,13 +181,11 @@ function filterTiles(context, inputName) {
 		footerElement.animate([{ transform: `translateY(${-1 * footerOffsetDelta}px)` }, { transform: 'translateY(0)' }], animateOptions);
 	}
 
-	let baseFilter = '';
-	if (initialHash.indexOf(hashIndicator) === 0) {
-		baseFilter = initialHash.slice(hashIndicator.length);
+	if (baseFilter) {
 		let filterSelectBox = context.querySelector('#filter-' + (baseFilter || 'all'));
 
 		if (!filterSelectBox) {
-			baseFilter = '';
+			baseFilter = ''; // Reset the filter if the value doesn't match an existing filter
 			filterSelectBox = context.querySelector('#filter-all');
 		}
 		filterSelectBox.checked = true;

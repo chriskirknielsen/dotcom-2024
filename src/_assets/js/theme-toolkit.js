@@ -55,17 +55,28 @@ Object.assign(themes, {
 
 // Trigger as soon as possible to give the active theme-button the appropriate aria-pressed value
 let themeOverride = '';
+let clearOverride = [];
 if (window.location.search.includes('theme=')) {
 	themeOverride = new URLSearchParams(document.location.search).get('theme');
+	clearOverride.push('query');
 } else if (window.location.hash.startsWith('#theme:')) {
 	themeOverride = window.location.hash.replace('#theme:', '');
+	clearOverride.push('hash');
 }
 themeOverride = themeOverride.trim().toLowerCase();
 
 if (themes.has(themeOverride)) {
-	const searchWithoutTheme = new URLSearchParams(window.location.search);
-	searchWithoutTheme.delete('theme');
-	history.replaceState(undefined, '', window.location.pathname + searchWithoutTheme.toString()); // Remove the hash and/or query string
+	// Remove the hash and/or query string
+	let queryString = new URLSearchParams(window.location.search);
+	let hash = window.location.hash;
+	if (clearOverride.includes('query')) {
+		queryString.delete('theme');
+	}
+	if (clearOverride.includes('hash')) {
+		hash = '';
+	}
+
+	history.replaceState(undefined, '', window.location.pathname + queryString.toString() + hash);
 } else {
 	themeOverride = null;
 }
