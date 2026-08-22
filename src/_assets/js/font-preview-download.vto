@@ -1,6 +1,8 @@
----
-permalink: '/fonts/download-preview.js'
-eleventyExcludeFromCollections: true
+---js
+{
+    permalink: '/fonts/download-preview.js',
+    eleventyExcludeFromCollections: true,
+}
 ---
 {{ set fontPreviewDownload |> await jsmin('fontPreviewDownload') }}
 if (typeof Promise !== "undefined" && fontPreviewData) {
