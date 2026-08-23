@@ -18,10 +18,10 @@
 {{ set sortedTags = tags |> sort((a, b) => a.localeCompare(b)) }}
 {{ set pageHero }}
 	{{ component 'hero', {
-		heroTags: sortedTags,
-		heroTitle: title,
+		pageContext: page,
 		heroSup: dateInfo,
-		pageContext: page
+		heroTitle: title,
+		heroTags: sortedTags,
 	} }}
 {{ /set }}
 

@@ -6,11 +6,11 @@
 		{{ pageHero }}
 	{{ else }}
 		{{ component 'hero', {
+			pageContext: page,
+			heroSup: heroSup || null,
 			heroTitle: heroTitle || title,
 			heroSub: heroSub || (heroHideSummary ? null : summary),
-			heroSup: heroSup || null,
 			heroCta: heroCta || (isSlashPage ? nav.slashPages : null),
-			pageContext: page,
 		} }}
 	{{ /if }}
 

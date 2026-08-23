@@ -24,10 +24,13 @@ hr.hero-like {
 	font-variant-caps: all-petite-caps;
 }
 
+.hero-sup {
+	line-height: 1.1;
+}
+
 .hero-sup,
 .hero-sub {
 	font-size: var(--typeScale-n1);
-	line-height: 1.1;
 }
 
 .hero-sub {
