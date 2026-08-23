@@ -267,7 +267,7 @@ class ThemePicker extends HTMLElement {
 
 		if (e.type === 'keyup') {
 			const isModifierPressed = e.altKey || e.shiftKey || e.ctrlKey || e.metaKey;
-			if (e.key === 'Escape') {
+			if (e.key === 'Escape' && !isModifierPressed) {
 				const themePickerToggleButton = document.querySelector(`[aria-controls=${this.id}]`);
 				if (themePickerToggleButton && themePickerToggleButton.getAttribute('aria-pressed') === 'true') {
 					themePickerToggleButton.setAttribute('aria-pressed', 'false');
