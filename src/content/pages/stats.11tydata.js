@@ -1,9 +1,8 @@
 export const strava = {
-	count: 191,
-	distance: 1512500.9999999995,
-	moving_time: 628125,
-	elapsed_time: 634714,
-	elevation_gain: 4916,
+	count: 192,
+	distance: 1518161,
+	moving_time: 630695,
+	elapsed_time: 637284,
 	activities: [
 		{
 			year: 2026,
