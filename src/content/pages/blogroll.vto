@@ -539,19 +539,20 @@
 	<ul class="blogroll" style="--_tooltip-offset: 0px; --flow-space: var(--size-xs);">
 		{{ for loopIndex, blog of blogs |> sortBy(false, false, 'title') }}
 			<li class="blogroll-item">
+			{{ if blog.blurb }}<tool-tip tip-flow="inline" tip-position="start center">{{ /if }}
 				<a
 					href="{{ blog.htmlUrl }}"
-					class="link-label-anchor{{ if blog.blurb }} tooltip{{ /if }}"
+					class="link-label-anchor{{ if blog.blurb }} {{ /if }}"
 					rel="noopener noreferrer"
-					{{ if blog.blurb }}data-tooltip-pos="start center"{{ /if }}
 				>
 					{{- if blog['rssfr-favicon'] }}
 						{{- set faviconbg }}{{ if blog['favicon-dark'] }},b_white{{ /if }}{{ /set -}}
 						<img src="{{ blog['rssfr-favicon'] |> toCloudinary(`c_fill,w_${blogIconSize},h_${blogIconSize}${faviconbg}/q_auto:eco`) }}" width="{{blogIconSize}}" height="{{blogIconSize}}" class="inline-icon" alt="" {{ if !isFirstLoop || loopIndex >= 24 }}loading="lazy"{{ /if }}>
 					{{ /if }}
 					<span class="link-label-text">{{ blog.title }}</span>
-					{{- if blog.blurb -}}<span class="tip-content">{{ blog.blurb }}</span>{{- /if -}}
 				</a>
+				{{ if blog.blurb }}<span class="tip-content">{{ blog.blurb }}</span>{{ /if }}
+			{{ if blog.blurb }}</tool-tip>{{ /if }}
 			</li>
 		{{ /for }}
 	</ul>

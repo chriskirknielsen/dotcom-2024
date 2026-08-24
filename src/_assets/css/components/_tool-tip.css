@@ -1,5 +1,5 @@
-tool-tip:not(:defined):not(:hover, :focus-visible, :focus-within) > .tip-content,
-tool-tip:defined > .tip-content:not(:popover-open) {
+tool-tip:not(:defined):not(:hover, :focus-visible, :focus-within) > .tip-content/*,
+tool-tip:defined > .tip-content:not(:popover-open)*/ {
 	position: absolute;
 	width: 1px;
 	height: 0;
@@ -31,16 +31,16 @@ tool-tip {
 		--TOOLTIP-arrow-y: 50%;
 		--TOOLTIP-arrow-margin-block: auto 0;
 		--TOOLTIP-origin-y: calc(100% + var(--sqrt2) * var(--TOOLTIP-arrow-size));
-		--TOOLTIP-area-y: block-start;
-		--TOOLTIP-offset-x-factor: 0;
+		/* --TOOLTIP-area-y: block-start; */
+		/* --TOOLTIP-offset-x-factor: 0; */
 	}
 	&[tip-position^='end'] {
 		--TOOLTIP-block: var(--TOOLTIP-inset-block) auto;
 		--TOOLTIP-arrow-y: -50%;
 		--TOOLTIP-arrow-margin-block: 0 auto;
 		--TOOLTIP-origin-y: calc(0% - var(--sqrt2) * var(--TOOLTIP-arrow-size));
-		--TOOLTIP-area-y: block-end;
-		--TOOLTIP-offset-x-factor: 0;
+		/* --TOOLTIP-area-y: block-end; */
+		/* --TOOLTIP-offset-x-factor: 0; */
 	}
 	/* &[tip-position^='center'] {
 		--TOOLTIP-block: 50% auto;
@@ -63,14 +63,14 @@ tool-tip {
 		--TOOLTIP-arrow-x: -100%;
 		--TOOLTIP-arrow-margin-inline: auto 0;
 		--TOOLTIP-origin-x: calc(100% - var(--sqrt2) * var(--TOOLTIP-arrow-size));
-		--TOOLTIP-area-x: span-inline-start;
+		/* --TOOLTIP-area-x: span-inline-start; */
 	}
 	&[tip-position$='center'] {
 		--TOOLTIP-inline: 50%;
 		--TOOLTIP-translate-x: -50%;
 		--TOOLTIP-arrow-margin-inline: auto;
 		--TOOLTIP-origin-x: 0%; /* Due to the translateX(-50%) above, the center is actually at 0% before the transform */
-		--TOOLTIP-area-x: center;
+		/* --TOOLTIP-area-x: center; */
 	}
 
 	& > .tip-content {
@@ -89,8 +89,8 @@ tool-tip {
 	}
 
 	@media (--accept-motion) {
-		&:not(:defined):is(:hover, :focus-visible, :focus-within) > .tip-content,
-		&:defined > .tip-content:popover-open {
+		&:not(:defined):is(:hover, :focus-visible, :focus-within) > .tip-content/*,
+		&:defined > .tip-content:popover-open*/ {
 			filter: drop-shadow(0px 3px 2px hsl(var(--_shadow-color) / 0.5));
 			transition: filter var(--easing-in-out) var(--anim-short);
 			animation:
@@ -125,10 +125,6 @@ tool-tip {
 		/* Only if the contents aren't a singular image do we want inline padding */
 		&:not(:has(img:only-child)) {
 			padding-inline: var(--size-2xs);
-
-			& > img {
-				display: block;
-			}
 		}
 
 		&::before {
@@ -146,16 +142,16 @@ tool-tip {
 		}
 	}
 
-	&:defined > .tip-content {
+	/* &:defined > .tip-content {
 		transform-origin: calc(var(--TOOLTIP-origin-x) + (-1 * var(--TOOLTIP-translate-x, 0%))) var(--TOOLTIP-origin-y);
-	}
+	} */
 
-	&:not(:defined):is(:hover, :focus-visible, :focus-within) > .tip-content::before,
-	&:defined > .tip-content:popover-open::before {
+	&:not(:defined):is(:hover, :focus-visible, :focus-within) > .tip-content::before/*,
+	&:defined > .tip-content:popover-open::before*/ {
 		--TOOLTIP-arrow-scale: 1;
 	}
 
-	&:defined {
+	/* &:defined {
 		--TOOLTIP-block: initial;
 		--TOOLTIP-inline: initial;
 
@@ -171,5 +167,5 @@ tool-tip {
 		margin-inline: calc(var(--TOOLTIP-offset-x-factor, 0) * (var(--TOOLTIP-arrow-size) + var(--TOOLTIP-offset)));
 
 		transform: none;
-	}
+	} */
 }
