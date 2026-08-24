@@ -76,7 +76,7 @@
 		<h2 class="css-logo-usage">Want to use it?</h2>
 		<p>Although very appreciated, you may use this without needing to credit me under the condition it is non-A.I. and non-commercial (especially as I am selling <a href="/designs/{{ designSolid.slug }}/">this design</a>); just don’t claim you made it, is all I ask. Thank you!</p>
 
-		<div class="tooltip" data-tooltip-pos="start center">
+		<tool-tip tip-position="start center">
 			<p class="grouper grouper--wrap">
 				<strong>Download:</strong>
 
@@ -85,8 +85,8 @@
 				<a href="{{ [assets.images, 'css-logo.jpg'] |> toPath }}" download class="button">JPG</a>
 			</p>
 
-			<div class="tooltip-content">original design, no edits</div>
-		</div>
+			<div class="tip-content">original design, no edits</div>
+		</tool>
 
 		{{ if !metadata.nakedJs }}
 		<script>

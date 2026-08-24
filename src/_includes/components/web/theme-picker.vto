@@ -6,16 +6,16 @@
 		<span class="theme-picker-scheme-label">
             System
         </span>
-		<div class="tooltip" data-tooltip-pos="end end">
+		<tool-tip tip-position="end end">
 			<theme-button><button type="button" class="button button--icon-only" data-theme-set="" aria-pressed="false" data-persist-pressed-style aria-labelledby="theme-picker-system-description">
 				{{ svg 'device-desktop', { width: 24, height: 24, class: 'hide-when-viewport--small' } }}
 				{{ svg 'device-phone', { width: 24, height: 24, class: 'hide-when-viewport--large' } }}
 			</button></theme-button>
-			<span class="tooltip-content" id="theme-picker-system-description">
+			<span class="tip-content" id="theme-picker-system-description">
 				<span class="visually-hidden">Set theme:</span>
 				System Default
 			</span>
-		</div>
+		</tool-tip>
 	</div>
 
 	{{ set themesBySchemes = componentData.themes |> groupBy('scheme') }}
@@ -25,7 +25,7 @@
 				{{ scheme |> toTitleCase }}
 			</span>
 			{{ for theme of groupedthemes }}
-				<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}"{{ if theme.key == 'secret' }} data-theme-condition="{{ theme.key }}"{{ /if }}>
+				<tool-tip tip-position="{{ tooltipPos }}">
 					<theme-button>{{ component 'cta', {
 						type: 'button',
 						label: '',
@@ -39,12 +39,12 @@
 						iconClass: null,
 						iconSvgOpts: { width: 24, height: 24 },
 					} }}</theme-button>
-					<span class="tooltip-content" id="theme-picker-{{ theme.key }}-description">
+					<span class="tip-content" id="theme-picker-{{ theme.key }}-description">
 						<span class="visually-hidden">Toggle theme:</span>
 						{{ theme.label }}{{ if theme.default }}<span class="theme-picker-auto-label"> - auto</span>{{ /if }}
 						<span class="visually-hidden">({{ scheme }})</span>
 					</span>
-				</div>
+				</tool-tip>
 			{{ /for }}
 		</div>
 	{{ /for }}
@@ -52,7 +52,7 @@
 	<div class="theme-picker-scheme-group">
 		<span class="theme-picker-scheme-label">Custom</span>
 		
-		<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}">
+		<tool-tip tip-position="{{ tooltipPos }}">
 			<theme-button>{{ component 'cta', {
 				type: 'button',
 				label: '',
@@ -66,18 +66,18 @@
 				iconClass: null,
 				iconSvgOpts: { width: 24, height: 24 },
 			} }}</theme-button>
-			<span class="tooltip-content" id="theme-picker-custom-apply-label">
+			<span class="tip-content" id="theme-picker-custom-apply-label">
 				Apply <span class="visually-hidden">custom theme</span>
 			</span>
-		</div>
-		<div class="tooltip" data-tooltip-pos="{{ tooltipPos }}">
+		</tool-tip>
+		<tool-tip tip-position="{{ tooltipPos }}">
 			<button type="button" class="button button--icon-only" aria-label="Customise" aria-describedby="theme-picker-custom-adjust-label" data-theme-custom-action="open">
 				{{ svg 'sliders', { width: 24, height: 24 } }}
 			</button>
-			<span class="tooltip-content" id="theme-picker-custom-adjust-label">
+			<span class="tip-content" id="theme-picker-custom-adjust-label">
 				Adjust <span class="visually-hidden">custom theme styles</span>
 			</span>
-		</div>
+		</tool-tip>
 	</div>
 
 	<dialog id="theme-custom-controls" class="theme-picker-custom-dialog" aria-labelledby="theme-custom-controls-heading">

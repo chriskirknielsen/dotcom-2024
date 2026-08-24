@@ -155,6 +155,6 @@ My personal laptop’s pinned applications list looks a bit like this (Dark Mode
 } }}
 <div class="macos-dock-wrapper"><div class="macos-dock"><div class="macos-dock-inner"><ul class="macos-dock-list">
 {{- for file, label of macosDockIcons -}}
-	<li class="tooltip" data-tooltip-flow="inline" data-tooltip-pos="start center"><img src="/assets/img/macos-dock/{{ file }}.png" alt="{{ label }}" width="128" height="128" loading="lazy"><span class="tooltip-content">{{ label }}</span></li>
+	<li><tool-tip tip-flow="inline" tip-position="start center"><img src="/assets/img/macos-dock/{{ file }}.png" alt="{{ label }}" width="128" height="128" loading="lazy"><span class="tip-content">{{ label }}</span></tool-tip></li>
 {{- /for -}}
 </ul></div></div><p class="fontStyle-italic textAlign-center fontSize-smaller"><a href="https://www.trovster.com/about/uses#development">Inspired by Trevor Morris</a>. All icons belong to their respective authors.</p></div>

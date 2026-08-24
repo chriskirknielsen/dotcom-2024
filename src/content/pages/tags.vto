@@ -26,7 +26,7 @@
 <p id="tags-description" class="visually-hidden">All tags:</p>
 <ul class="inline-list inline-list--tags | textAlign-center textWrap-balance" aria-describedby="tags-description">
 	{{ for [tag, count] of sortedTags }}
-		<li><span class="tooltip" data-tooltip-pos="start center"><a href="/tags/{{ tag }}" class="button button--tag | p-category" style="--r: {{ count / maxCount }}">{{ tag }}</a><span class="tooltip-content">{{ count }} post{{ count > 1 ? 's' : '' }}</span></li>
+		<li><tool-tip tip-flow="inline" tip-position="start center"><a href="/tags/{{ tag }}" class="button button--tag | p-category" style="--r: {{ count / maxCount }}">{{ tag }}</a><span class="tip-content">{{ count }} post{{ count > 1 ? 's' : '' }}</span></tool-tip></li>
 	{{ /for }}
 </ul>
 
@@ -36,10 +36,6 @@
 	max-inline-size: 32rem;
 	margin-inline: auto;
 	line-height: 2.5em;
-}
-
-.inline-list--tags .tooltip {
-	display: inline-flex;
 }
 
 .button--tag {

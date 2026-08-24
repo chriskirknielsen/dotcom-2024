@@ -68,13 +68,13 @@
 					{{ set variantDesign = designs |> find('slug', variantSlug) }}
 					{{ set safeSlug = variantDesign.slug |> slugify }}
 					<li>
-						<a href="{{ ['designs', safeSlug] |> toPath }}/" class="tooltip" data-tooltip-flow="inline" data-tooltip-pos="start center">
-							<span>{{ variantDesign.name |> safe }}</span>
-
-							<span class="tooltip-content">
+						<tool-tip tip-flow="inline" tip-position="start center">
+							<a href="{{ ['designs', safeSlug] |> toPath }}/">{{ variantDesign.name |> safe }}</a>
+							
+							<span class="tip-content">
 								<img src="{{ [assets.images, 'designs', variantDesign.img] |> toPath |> toNetlifyImage({ w: 150 }) }}" alt="" width="150" height="150" loading="lazy">
-							</span>
-						</a>
+							</span>							
+						</tool-tip>
 					</li>
 				{{ /for -}}
 			</ul>
@@ -87,13 +87,13 @@
 					{{ set otherDesign = designs |> find('slug', otherDesignSlug) }}
 					{{ set safeSlug = otherDesign.slug |> slugify }}
 					<li>
-						<a href="{{ ['designs', safeSlug] |> toPath }}/" class="tooltip" data-tooltip-flow="inline" data-tooltip-pos="start center">
-							<span>{{ otherDesign.name }}</span>
+						<tool-tip tip-flow="inline" tip-position="start center">
+							<a href="{{ ['designs', safeSlug] |> toPath }}/">{{ otherDesign.name }}</a>
 
-							<span class="tooltip-content">
+							<span class="tip-content">
 								<img src="{{ [assets.images, 'designs', otherDesign.img] |> toPath |> toNetlifyImage({ w: 150 }) }}" alt="" width="150" height="150" loading="lazy">
 							</span>
-						</a>
+						</tool-tip>
 					</li>
 				{{ /for -}}
 			</ul>

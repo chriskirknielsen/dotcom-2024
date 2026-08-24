@@ -78,6 +78,7 @@
 }
 .macos-dock-list li {
 	flex: 0 0 auto;
+	display: inline-flex;
 }
 .macos-dock-list img {
 	display: block;

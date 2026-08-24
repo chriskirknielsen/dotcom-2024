@@ -1,5 +1,10 @@
-{{ css 'foot' }}{{ include 'assets/css/font-face.css' }}{{ /css }}
-{{ js 'foot' }}{{ include 'assets/js/site.js' }}{{ /js }}
+{{ css 'foot' }}
+	{{ include 'assets/css/font-face.css' }}
+{{ /css }}
+{{ js 'foot' }}
+	{{ include 'assets/js/site.js' }}
+	{{ include 'assets/js/components/tool-tip.js' }}
+{{ /js }}
 
 {{ if toc }}
 	{{ js 'foot-toc' }}{{ include 'assets/js/toc.js' }}{{ /js }}

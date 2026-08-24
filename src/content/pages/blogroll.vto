@@ -550,7 +550,7 @@
 						<img src="{{ blog['rssfr-favicon'] |> toCloudinary(`c_fill,w_${blogIconSize},h_${blogIconSize}${faviconbg}/q_auto:eco`) }}" width="{{blogIconSize}}" height="{{blogIconSize}}" class="inline-icon" alt="" {{ if !isFirstLoop || loopIndex >= 24 }}loading="lazy"{{ /if }}>
 					{{ /if }}
 					<span class="link-label-text">{{ blog.title }}</span>
-					{{- if blog.blurb -}}<span class="tooltip-content">{{ blog.blurb }}</span>{{- /if -}}
+					{{- if blog.blurb -}}<span class="tip-content">{{ blog.blurb }}</span>{{- /if -}}
 				</a>
 			</li>
 		{{ /for }}
