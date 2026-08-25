@@ -1,9 +1,15 @@
 export const strava = {
-	count: 192,
-	distance: 1518161,
-	moving_time: 630695,
-	elapsed_time: 637284,
+	count: 193,
+	distance: 1525901,
+	moving_time: 634071,
+	elapsed_time: 640660,
 	activities: [
+		{
+			year: 2026,
+			date: '2026-08-24T07:44:00Z',
+			distance: 7740,
+			duration: 3376,
+		},
 		{
 			year: 2026,
 			date: '2026-08-09T08:08:00Z',
