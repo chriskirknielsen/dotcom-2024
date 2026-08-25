@@ -305,6 +305,7 @@
 	</dl>
 </div>
 
+
 <div class="dl-container | fontVariant-tabularNums">
 	<dl>
 		<div class="dl-item-wrap">
@@ -344,6 +345,39 @@
 </div>
 
 <p class="fontStyle-italic">The info above is pulled from Strava (after some tedious Nike Running Club import) but manually saved periodically through their API. <a href="/blog/nerd-snipped-into-importing-nike-running-club-into-strava-api/">Here’s how I did it.</a></p>
+
+<h2 class="running">Gaming <span aria-hidden="true">🎮</span></h2>
+{{>
+	const gamingLibrary = collections._pages.find(p => p.data.permalink === '/games/library/');
+	const gamingLibraryData = gamingLibrary.data.gameslibrary;
+	const gamingTrophyData = gamingLibraryData.meta.totalTrophyData;
+	const gamingGamesData = gamingLibraryData.data;
+	const gamingGamesCount = gamingGamesData.length;
+	const gamingPhysicalCount = gamingGamesData.filter(g => g.discs).length;
+	const gamingCompletedCount = gamingGamesData.filter(g => g.completed).length;
+}}
+<div style="--flow-space: var(--size-m);">
+	<dl class="dl-tiles dl-tiles--flipped">
+		<div class="dl-tile">
+			<dt>Games Owned</dt>
+			<dd class="h3">{{ gamingGamesCount |> formatNumber }}</dd>
+		</div>
+		<div class="dl-tile">
+			<dt>Physical Copies</dt>
+			<dd class="h3">{{ gamingPhysicalCount |> formatNumber }}</dd>
+		</div>
+		<div class="dl-tile">
+			<dt>Games Completed</dt>
+			<dd class="h3">{{ gamingCompletedCount |> toRound |> formatNumber }}</dd>
+		</div>
+		<div class="dl-tile">
+			<dt>Trophies Earned</dt>
+			<dd class="h3">{{ Object.values(gamingTrophyData).reduce((p,c) => p+c, 0) |> formatNumber }}</dd>
+		</div>
+	</dl>
+</div>
+
+<p class="fontStyle-italic">If you really want to nerd out, my <a href="/games/library/">gaming library</a> has all the details.</p>
 
 <style>
 .linechart {
