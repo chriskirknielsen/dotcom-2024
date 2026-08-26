@@ -8,6 +8,8 @@
 		--color-heading: #000;
 		--color-accent: #000;
 		--color-accent-alt: #000;
+		--_logo-color: var(--color-text);
+		--_logo-color-active: var(--color-text);
 
 		&,
 		*,
@@ -97,7 +99,14 @@
 			text-align: start;
 		}
 
+		.page-content {
+			margin-block: 0;
+			padding-block: 0;
+		}
+
+		.hide-when-print,
 		[data-theme-condition],
+		.announcement,
 		.header-menu,
 		.footer > :not(p),
 		.footer-decorator,
