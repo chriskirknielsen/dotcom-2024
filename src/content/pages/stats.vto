@@ -21,7 +21,9 @@
 }}
 {{ function buildSparklineFromData({ data, getDateStr = null, countProp = null, metricScale = 1, alt, showYearBar = false }) }}
 	{{>
-		if (!getDateStr) { getDateStr = (v) => typeof v === 'string' ? v : new Date(v).toISOString(); }
+		if (!getDateStr) {
+			getDateStr = (v) => typeof v === 'string' ? v : new Date(v).toISOString();
+		}
 		const sortedData = data.slice(); // These should already be sorted by date in descending order (newest first)
 		const firstItemDate = new Date(getDateStr(sortedData.at(-1))).toISOString();
 		const lastItemDate = new Date(getDateStr(sortedData.at(0))).toISOString();
@@ -350,7 +352,9 @@
 {{>
 	const gamingLibrary = collections._pages.find(p => p.data.permalink === '/games/library/');
 	const gamingLibraryData = gamingLibrary.data.gameslibrary;
-	const gamingTrophyData = gamingLibraryData.meta.totalTrophyData;
+	const gamingMetaData = gamingLibraryData.meta;
+	const gamingTrophyData = gamingMetaData.totalTrophyData;
+	const gamingPlatformsCount = gamingMetaData.allPlatform.length;
 	const gamingGamesData = gamingLibraryData.data;
 	const gamingGamesCount = gamingGamesData.length;
 	const gamingPhysicalCount = gamingGamesData.filter(g => g.discs).length;
@@ -363,12 +367,16 @@
 			<dd class="h3">{{ gamingGamesCount |> formatNumber }}</dd>
 		</div>
 		<div class="dl-tile">
+			<dt>Games Completed</dt>
+			<dd class="h3">{{ gamingCompletedCount |> toRound |> formatNumber }}</dd>
+		</div>
+		<div class="dl-tile">
 			<dt>Physical Copies</dt>
 			<dd class="h3">{{ gamingPhysicalCount |> formatNumber }}</dd>
 		</div>
 		<div class="dl-tile">
-			<dt>Games Completed</dt>
-			<dd class="h3">{{ gamingCompletedCount |> toRound |> formatNumber }}</dd>
+			<dt>Consoles</dt>
+			<dd class="h3">{{ gamingPlatformsCount |> formatNumber }}</dd>
 		</div>
 		<div class="dl-tile">
 			<dt>Trophies Earned</dt>
@@ -380,42 +388,42 @@
 <p class="fontStyle-italic">If you really want to nerd out, my <a href="/games/library/">gaming library</a> has all the details.</p>
 
 <style>
-.linechart {
-	inline-size: 100%;
-	block-size: auto;
-	padding: 0.25em 0.5em;
-	overflow: visible;
-
-	font-family: sans-serif;
-}
-
-@media (max-width: {{ svgSize.w / 1.25 }}px) {
-	.linechart-wrapper {
-		--m: 20px;
-
-		display: flex;
-		inline-size: 0; /* Don't participate in the grid cell sizing */
-		min-inline-size: 100%; /* Occupy all the space */
-		overflow-x: auto; /* Safari 18 doesn't support logical variant :( */
-
-		mask:
-			linear-gradient(90deg, #0000, tan var(--m) calc(100% - var(--m)), #0000) no-repeat 0 0 / 100% 100%, /* Fade the overflowing content */
-			conic-gradient(red 0 0) no-repeat 0 100% / 100% var(--scrollbar-size, 15px); /* Don't fade the scrollbar */
-	}
-	.linechart-wrapper::before,
-	.linechart-wrapper::after {
-		content: '';
-		
-		flex: 0 0 auto;
-		display: block;
-		inline-size: var(--m); /* Ensure the content isn't faded by the mask at the edges */
-	}
-
 	.linechart {
-		flex: 0 0 auto;
-		padding-inline: 0;
-		inline-size: {{ svgSize.w / 1.25 }}px; 
-		max-inline-size: unset;
+		inline-size: 100%;
+		block-size: auto;
+		padding: 0.25em 0.5em;
+		overflow: visible;
+
+		font-family: sans-serif;
 	}
-}
+
+	@media (max-width: {{ svgSize.w / 1.25 }}px) {
+		.linechart-wrapper {
+			--m: 20px;
+
+			display: flex;
+			inline-size: 0; /* Don't participate in the grid cell sizing */
+			min-inline-size: 100%; /* Occupy all the space */
+			overflow-x: auto; /* Safari 18 doesn't support logical variant :( */
+
+			mask:
+				linear-gradient(90deg, #0000, tan var(--m) calc(100% - var(--m)), #0000) no-repeat 0 0 / 100% 100%, /* Fade the overflowing content */
+				conic-gradient(red 0 0) no-repeat 0 100% / 100% var(--scrollbar-size, 15px); /* Don't fade the scrollbar */
+		}
+		.linechart-wrapper::before,
+		.linechart-wrapper::after {
+			content: '';
+			
+			flex: 0 0 auto;
+			display: block;
+			inline-size: var(--m); /* Ensure the content isn't faded by the mask at the edges */
+		}
+
+		.linechart {
+			flex: 0 0 auto;
+			padding-inline: 0;
+			inline-size: {{ svgSize.w / 1.25 }}px; 
+			max-inline-size: unset;
+		}
+	}
 </style>

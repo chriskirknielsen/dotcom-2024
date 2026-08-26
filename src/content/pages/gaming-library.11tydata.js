@@ -69,6 +69,7 @@ const gameslibrary = await notionDatabaseQuery({
 			return []; // If the trophy information is not available, don't fail the build
 		});
 
+		const allPlatforms = new Set();
 		const normalizedData = data
 			.filter((entry) => {
 				return entry.properties.Title.title.length > 0; // Remove Untitled entries
@@ -112,6 +113,8 @@ const gameslibrary = await notionDatabaseQuery({
 								: props.Thumbnail.files[0].file.url
 							: null,
 				};
+
+				allPlatforms.add(processedEntry.platform);
 
 				const matchedPsnTrophyData = psnTrophyData.find((game) => game.npCommunicationId === processedEntry.psnId);
 				if (matchedPsnTrophyData) {
@@ -221,7 +224,7 @@ const gameslibrary = await notionDatabaseQuery({
 		const consolidatedData = [].concat(filteredData, unmatchedPsnTitles);
 
 		return {
-			meta: { totalTrophyData },
+			meta: { totalTrophyData, allPlatform: Array.from(allPlatforms) },
 			data: consolidatedData,
 		};
 	},
