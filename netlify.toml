@@ -72,6 +72,9 @@ package = "netlify-plugin-debug-cache"
 [[redirects]]
   from = "/resume/"
   to = "/hire/"
+[[redirects]]
+  from = "/cv/"
+  to = "/hire/"
 ### Well-known
 [[redirects]]
   from = "/.well-known/avatar"
