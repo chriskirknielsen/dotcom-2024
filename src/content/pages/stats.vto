@@ -151,26 +151,27 @@
 {{ /function }}
 
 <h2>The Big Picture</h2>
+<p>A few key figures to sum it all up.</p>
 <div style="--flow-space: var(--size-m);">
 	<dl class="dl-tiles dl-tiles--flipped">
 		<div class="dl-tile">
-			<dt>Posts</dt>
+			<dt><a href="/blog/">Posts</a></dt>
 			<dd class="h3">{{ collections._posts.length |> formatNumber }}</dd>
 		</div>
 		<div class="dl-tile">
-			<dt>Pages</dt>
+			<dt><a href="/slashes/">Pages</a></dt>
 			<dd class="h3">{{ collections._pages.length |> formatNumber }}</dd>
 		</div>
 		<div class="dl-tile">
-			<dt>Designs</dt>
+			<dt><a href="/designs/">Designs</a></dt>
 			<dd class="h3">{{ collections._designs.length |> formatNumber }}</dd>
 		</div>
 		<div class="dl-tile">
-			<dt>Projects</dt>
+			<dt><a href="/projects/">Projects</a></dt>
 			<dd class="h3">{{ collections._projects.length |> formatNumber }}</dd>
 		</div>
 		<div class="dl-tile">
-			<dt>Fonts</dt>
+			<dt><a href="/fonts/">Fonts</a></dt>
 			<dd class="h3">{{ collections._fonts.length |> formatNumber }}</dd>
 		</div>
 	</dl>
@@ -275,7 +276,7 @@
 	</dl>
 </div>
 
-<h2 class="running">Running <span aria-hidden="true">🏃‍♂️</span></h2>
+<h2 class="running"><span aria-hidden="true">🏃‍♂️</span> Running</h2>
 <div style="--flow-space: var(--size-m);">
 	<dl class="dl-tiles dl-tiles--flipped">
 		<div class="dl-tile">
@@ -348,7 +349,7 @@
 
 <p class="fontStyle-italic">The info above is pulled from Strava (after some tedious Nike Running Club import) but manually saved periodically through their API. <a href="/blog/nerd-snipped-into-importing-nike-running-club-into-strava-api/">Here’s how I did it.</a></p>
 
-<h2 class="running">Gaming <span aria-hidden="true">🎮</span></h2>
+<h2 class="running"><span aria-hidden="true">🕹️</span> Gaming</h2>
 {{>
 	const gamingLibrary = collections._pages.find(p => p.data.permalink === '/games/library/');
 	const gamingLibraryData = gamingLibrary.data.gameslibrary;
