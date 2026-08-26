@@ -87,7 +87,7 @@
 	},
 }
 ---
-
+{{ set expYears = Math.floor(new Date().getFullYear() - parseInt(cv.pro.at(-1).dates[0].split('-')[0])) }}
 {{ async function getResumeList(list) }}
     {{ set dateSep }}<span class="visually-hidden">–</span>{{ svg 'arrow-right', { class: 'inline-icon inline-icon--center' } }}{{ /set }}
     {{ set timeFormatByLength = { 1: 'year', 2: 'monthAndYear', 3: 'nice' } }}
@@ -122,7 +122,7 @@
     {{ /for }}
 {{ /function }}
 
-{{ callout "Enquiring Minds Want to Know" }}I’m not currently looking for a new role, but I do have a <a href="https://www.linkedin.com/in/chriskirknielsen" class="link-label-anchor">{{ svg 'linkedin-icon', { class: 'inline-icon inline-icon--center' } }} <span class="link-label-text">LinkedIn profile</span></a> if you wanted to get in touch. For <a href="/designs/">t-shirt designs</a>, you can <a href="/contact/">reach out to me directly</a>.{{ /callout }}
+{{ callout "Enquiring Minds Want to Know" }}I’m not currently looking for a new role, but I do have a <a href="https://www.linkedin.com/in/chriskirknielsen" class="link-label-anchor">{{ svg 'linkedin-icon', { class: 'inline-icon inline-icon--center' } }} <span class="link-label-text">LinkedIn profile</span></a> if you wanted to get in touch. For <a href="/designs/">t-shirt design commissions</a>, you can <a href="/contact/">reach out to me directly</a>.{{ /callout }}
 
 <h2 id="ckn">
     Christopher<wbr>
@@ -134,7 +134,7 @@
     <span aria-hidden="true" title="established">Est.</span>
     <span aria-hidden="true">MCMXCII</span>,
     based in the USA,
-    over {{ Math.floor(new Date().getFullYear() - parseInt(cv.pro.at(-1).dates[0].split('-')[0])) }} years experience.
+    over {{ expYears }} years experience.
 </p>
 
 <div class="about-pic-wrapper | flow" style="--ABOUT-pic-max: 8.5rem;">
@@ -211,13 +211,14 @@
 
 <section role="region" class="flow" aria-label="Nicely written version" data-cv-version="written" data-cv-switcher-prop="hide">
     <h2 data-cv-switcher-prop="hide">Or in a few sentences…</h2>
-    {{ echo |> markdown }}
-    I have over ten years experience working as a creative developer, or “design engineer”, meaning I can code and design, keeping an eye on details (including typography!), though my official title is currently **senior front-end developer**.
+    {{ set writeUpMarkup |> markdown }}
+    I have over {{ expYears }} years experience working as a creative developer, or “design engineer”, meaning I can code and design, keeping an eye on details (including typography!), though my official title is currently **senior front-end developer**.
 
     My front-end fluency especially shines through **HTML** (the semantic kind), **CSS** (I’m a nerd for it), and **JavaScript** (not React!), but I don’t shy away from **PHP** and **SQL** (mainly for **WordPress** projects), **Shopify**, or **Webflow**. I use **git** (any of GitHub, GitLab, or Bitbucket) to keep my projects neatly tracked, and like to write commented, squeaky-clean(ish) code, keeping **accessibility** in mind.
 
     The **Adobe Creative Suite** and I go _way_ back (2005!), specifically **Photoshop, Illustrator, and After Effects**, though I’ve also gotten on the **Figma** train (sorry, Sketch!). Also I speak native English, French, and Danish, plus some Italian and I know a tiny bit of Japanese.
-    {{ /echo }}
+    {{ /set }}
+    {{ writeUpMarkup }}
 </section>
 
 <script>

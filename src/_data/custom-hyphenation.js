@@ -4,6 +4,7 @@ export default {
 	Vaporwave: 'Vapor&shy;wave',
 	Acknowledgements: 'Acknow&shy;ledge&shy;ments',
 	Styleguide: 'Style&shy;guide',
+	Stylesheets: 'Style&shy;sheets',
 	Switcheroo: 'Swit&shy;cheroo',
 	switcheroo: 'swit&shy;cheroo',
 	Markdown: 'Mark&shy;down',

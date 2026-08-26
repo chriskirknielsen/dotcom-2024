@@ -488,7 +488,7 @@ const designs = [
 		description: 'A great band, a recognisable brand, a silly mashup…',
 		img: 'mcfleetwood.png',
 		links: {
-			RedBubble: 'https://www.redbubble.com/i/t-shirt/McFleetwood-by-ckirknielsen/181478737/lrcw',
+			// RedBubble: 'https://www.redbubble.com/i/t-shirt/McFleetwood-by-ckirknielsen/181478737/lrcw', // Bogus DMCA strike… awaiting resolution
 			TeePublic: 'https://www.teepublic.com/t-shirt/94045503-mcfleetwood',
 		},
 		tags: ['pop-culture'],
