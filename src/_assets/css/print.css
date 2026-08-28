@@ -10,6 +10,7 @@
 		--color-accent-alt: #000;
 		--_logo-color: var(--color-text);
 		--_logo-color-active: var(--color-text);
+		--anim-f: 0;
 
 		&,
 		*,
