@@ -98,6 +98,7 @@ export default async function (eleventyConfig) {
 		preAttributes: {
 			tabindex: 0,
 			class: (context) => `${context.language ? 'language-' + context.language : ''} codeblock-pre`.trim(),
+			translate: 'no',
 		},
 		init: function ({ Prism }) {
 			// Avoids re-running some logic for each save/rebuild
