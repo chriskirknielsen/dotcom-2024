@@ -11,7 +11,12 @@
 
 	color: var(--CALLOUT-color);
 	border: var(--CALLOUT-border-width) solid var(--CALLOUT-border-color);
+	border-inline-width: 0;
 	background-color: var(--CALLOUT-background);
+	/* Shadows don't take up space but are faking what the border would look like */
+	box-shadow:
+		calc(-1 * var(--CALLOUT-border-width)) 0 0 var(--CALLOUT-border-color),
+		var(--CALLOUT-border-width) 0 0 var(--CALLOUT-border-color);
 }
 
 .callout-label {
@@ -25,40 +30,5 @@
 	&::before {
 		content: var(--callout-emoji, none);
 		padding-inline-end: 0.5ch;
-	}
-
-	@media (--has-gutter-space) {
-		&::before {
-			--fs: 0.625; /* Font size */
-			--pad: calc(1 - var(--fs)); /* Available padding */
-			--pem: calc(1em / var(--fs)); /* Parent em */
-			--space: calc(var(--pad) / 2 * var(--pem));
-			--grad: var(--CALLOUT-background) calc(50% - var(--CALLOUT-border-width)), var(--CALLOUT-border-color) 0, var(--CALLOUT-border-color) 50%,
-				transparent calc(50% + 0.25px);
-
-			position: absolute;
-			inset-block-start: calc(-1 * var(--space));
-			inset-inline-start: calc(var(--CALLOUT-padding) * -1);
-
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			min-block-size: calc(var(--pem) * 1.2);
-			aspect-ratio: 1;
-			padding: calc(var(--space) + var(--space));
-
-			font-family: var(--fontStack-emoji);
-			text-align: center;
-			font-style: normal;
-			font-size: calc(var(--fs) * 1em);
-			line-height: 0;
-
-			border: var(--CALLOUT-border-width) solid transparent;
-			background: linear-gradient(-45deg, var(--grad)) no-repeat 0 0, linear-gradient(-135deg, var(--grad)) no-repeat 0 100%;
-			background-size: 50% 50%;
-			background-origin: border-box;
-
-			translate: -50% 0;
-		}
 	}
 }

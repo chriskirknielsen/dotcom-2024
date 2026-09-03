@@ -88,6 +88,7 @@ html[data-theme='dawn'] {
 
 			border-width: 0 0 0 var(--CALLOUT-border-width);
 			background: linear-gradient(90deg, var(--color-accent), transparent) no-repeat 0 100% / 100% 2px;
+			box-shadow: none;
 		}
 
 		.callout-label {
@@ -195,6 +196,7 @@ html[data-theme='dusk'] {
 
 		border-width: 0 0 0 var(--CALLOUT-border-width);
 		background: linear-gradient(90deg, var(--color-accent), transparent) no-repeat 0 100% / 100% 2px;
+		box-shadow: none;
 	}
 
 	.callout-label {
