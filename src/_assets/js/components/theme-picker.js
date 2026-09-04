@@ -215,7 +215,7 @@ class ThemePicker extends HTMLElement {
 			};
 
 			Array.from(form.querySelectorAll(`input[type="color"][data-color-key]`)).forEach((colorField) => {
-				colorField.value = defaultColors[colorField.datasetcolorKey];
+				colorField.value = defaultColors[colorField.dataset.colorKey];
 			});
 
 			Array.from(form.querySelectorAll('[data-default]')).forEach((defaultOption) => {

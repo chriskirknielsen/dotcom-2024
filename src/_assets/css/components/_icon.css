@@ -1,5 +1,6 @@
 .inline-icon {
 	--ICON-size: 0.9em;
+
 	display: inline-block;
 	block-size: var(--ICON-size, 1em);
 	inline-size: auto;
