@@ -266,17 +266,20 @@ class ThemePicker extends HTMLElement {
 		}
 
 		if (e.type === 'keyup') {
-			const isModifierPressed = e.altKey || e.shiftKey || e.ctrlKey || e.metaKey;
+			if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) {
+				return; // Don't interfere with keyboard shortcuts
+			}
+
 			const pressedDigit = parseInt(e.key, 10); // Gotta parse it first so ' ' isn't matched for `' ' >= 0`, sadly
 			const isValidDigitKey = !isNaN(pressedDigit) && pressedDigit >= 0 && pressedDigit <= this.keys.length;
 
-			if (e.key === 'Escape' && !isModifierPressed) {
+			if (e.key === 'Escape') {
 				const themePickerToggleButton = document.querySelector(`[aria-controls=${this.id}]`);
 				if (themePickerToggleButton && themePickerToggleButton.getAttribute('aria-pressed') === 'true') {
 					themePickerToggleButton.setAttribute('aria-pressed', 'false');
 					themePickerToggleButton.focus(); // Restore focus to the toggler
 				}
-			} else if (isValidDigitKey && !e.target?.closest?.('input, textarea, [contenteditable]') && !isModifierPressed) {
+			} else if (isValidDigitKey && !e.target?.closest?.('input, textarea, [contenteditable]')) {
 				this.save(this.keys[pressedDigit - 1] || ''); // For pressedDigit === 0, we get an index of -1, which is undefined, so the fallback of empty string gives us the system default
 			}
 		}
