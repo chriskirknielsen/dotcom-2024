@@ -194,7 +194,7 @@ export default function (string) {
 			})
 			.join('\n');
 
-		defaultOutput += `html:not([data-theme]), html[data-theme="${lightThemeKey}"], [data-theme="${darkThemeKey}"] {
+		defaultOutput += `html:not([data-theme]), html[data-theme="${lightThemeKey}"], html[data-theme="${darkThemeKey}"] {
 			${lightDarkVar('color-scheme', 'light', 'dark')}
 			${regularTokens}\n${colorTokens}\n${fontTokens}
 		}`;

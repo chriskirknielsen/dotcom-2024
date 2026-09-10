@@ -141,7 +141,7 @@
 		--T-dusk: var(--ON);
 		& .hide-when-dark { display: none !important; }
 	}
-html:not([data-theme]), html[data-theme="dawn"], [data-theme="dusk"] {
+html:not([data-theme]), html[data-theme="dawn"], html[data-theme="dusk"] {
 			--color-scheme: var(--T-dawn, light) var(--T-dusk, dark);
 			--corner: var(--T-dawn, 0px) var(--T-dusk, var(--size-2xs));
 --main-background: var(--T-dawn, radial-gradient(200% 100% at 50% -25%, #c6c9b5, transparent) no-repeat 50% 0% / 100% min(100%, max(300px, min(25%, 25vh)))) var(--T-dusk, linear-gradient(90deg, transparent, var(--color-text), transparent) no-repeat 50% 0 / 100% 1px, radial-gradient(200% 100% at 33% -25%, #7A0F53, 67%, transparent) no-repeat 50% 0% / 100% min(100%, max(800px, min(50%, 50vh))));
