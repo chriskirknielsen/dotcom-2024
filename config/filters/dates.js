@@ -44,7 +44,34 @@ export default function (eleventyConfig, options = {}) {
 	eleventyConfig.addFilter('dateFormat', dateFormat);
 
 	/** Formats a date and wraps it in a <time> element with the appropriate attribute. */
-	eleventyConfig.addFilter('timeTag', (date, opts = {}) => `<time datetime="${dateFormat(date)}">${dateFormat(date, Object.assign({ format: 'nice' }, opts))}</time>`);
+	eleventyConfig.addFilter('timeTag', (date, opts = {}) => {
+		const classAttr = opts.regular ? ' class="fontWeight-regular"' : '';
+		const isDuration = Boolean(opts.isDuration);
+		let formatted = '';
+		let dateTime = '';
+		if (isDuration) {
+			dateTime = `P${date.hasOwnProperty('d') ? `${date.d}D` : ''}T${['h', 'm', 's']
+				.reduce((p, c) => {
+					if (date.hasOwnProperty(c)) {
+						return p.concat([`${date[c]}${c.toUpperCase()}`]);
+					}
+					return p;
+				}, [])
+				.join('')}`;
+			formatted = ['d', 'h', 'm', 's']
+				.reduce((p, c) => {
+					if (date.hasOwnProperty(c)) {
+						return p.concat([`${date[c]}${c}`]);
+					}
+					return p;
+				}, [])
+				.join(' ');
+		} else {
+			dateTime = dateFormat(date);
+			formatted = dateFormat(date, Object.assign({ format: 'nice' }, opts));
+		}
+		return `<time datetime="${dateTime}"${classAttr}>${formatted}</time>`;
+	});
 
 	eleventyConfig.addFilter('dateDiff', (date1, date2, unit = 'days') => {
 		date1 = typeof date1 === 'string' ? DateTime.fromISO(date1) : DateTime.fromJSDate(date1);
