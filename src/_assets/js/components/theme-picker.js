@@ -134,7 +134,7 @@ class ThemePicker extends HTMLElement {
 						didone: 'Didot, Bodoni MT, Noto Serif Display, URW Palladio L, P052, Sylfaen, serif',
 						MDNichrome: 'MDNichrome, sans-serif',
 						Rajdhani: 'Rajdhani, sans-serif',
-						TeXGyreAdventor: 'OPTIAuvantGothic, ITC Avant Garde, sans-serif',
+						TeXGyreAdventor: 'AvignonPro, ITC Avant Garde Gothic, sans-serif',
 						Switzer: 'Switzer, sans-serif',
 						LibreFranklin: 'LibreFranklin, Libre Franklin, Franklin Gothic, HEX Franklin, sans-serif',
 						Outfit: 'Outfit, Century Gothic, sans-serif',
