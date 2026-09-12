@@ -35,7 +35,8 @@ First off, the homepage wordmark for my name is a custom edit of the [Sprat type
 {{ /echo }}
 
 <p>Also, I used a handful of SVG icons from <a href="{{ tokens._meta.icons.lucide.link }}">Lucide</a>, listed here:</p>
-<div class="grouper grouper--wrap" style="--flow-space: 0;">{{ for name, icon of tokens._meta.icons.lucide.used }}
+{{ set lucideIcons = Object.entries(tokens._meta.icons.lucide.used).sort((a, b) => a[1].localeCompare(b[1])) }}
+<div class="grouper grouper--wrap" style="--flow-space: 0;">{{ for [name, icon] of lucideIcons }}
 	<span class="icon-text-pair">{{ svg name, { class: 'inline-icon inline-icon--center linecap-auto' } }} <code>{{ icon }}</code></span>
 {{ /for }}</div>
 <p>(the themes icons are custom made, and “brand” icons belong to their respective owners)</p>
