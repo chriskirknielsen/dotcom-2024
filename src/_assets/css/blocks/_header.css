@@ -113,6 +113,10 @@ html.no-js .header-themepicker {
 	isolation: isolate;
 }
 
+.header-themepicker-toggle-wrapper {
+	margin-inline-start: auto;
+}
+
 .header-themepicker-toggle {
 	position: relative;
 	z-index: 1;
