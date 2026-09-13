@@ -1,5 +1,3 @@
-
-
 {{ set dateInfo }}
 	<time datetime="{{ date |> dateFormat({ format: 'iso' }) }}" title="{{ date |> dateFormat({ format: 'iso' }) }}">{{ date |> dateFormat({ format: 'nice', lang }) }}</time>
 	{{ if updated }}
@@ -84,7 +82,7 @@
 	{{ /if }}
 {{ /set }}
 
-{{ layout 'layouts/page.vto' { pageHero, pageFooter } }}
+{{- layout 'layouts/page.vto' { pageHero, pageFooter } }}
 	{{ if originalUrl }}
 		<div>
 		{{ if originalTitle }}
