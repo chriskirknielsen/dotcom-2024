@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html {{ if section }}data-section="{{ section }}"{{ /if }} lang="{{ metadata.lang }}" class="no-js">
+<html {{ if section }}data-section="{{ section }}"{{ /if }} {{ if themeOverride }}data-theme="_override"{{ /if }} lang="{{ metadata.lang }}" class="no-js">
 	<head>
 		<!--
 		Nice to see you here.
@@ -10,24 +10,25 @@
 		{{# Inline JS (instantly assigns the theme before any paint) #}}
 		{{- if !metadata.nakedJs }}
 		<script>
-		{{- js 'head' -}}
 			document.documentElement.classList.replace('no-js', 'js');
-			const themes = {
-				keys: {{ themes |> pluck('key') |> concat(['custom']) |> JSON.stringify }},
-				defaults: {{ themes |> filter(t => t.default) |> map(t => [t.scheme, t.key]) |> Object.fromEntries |> JSON.stringify }},
-			}; {{# This is build-time data we need to make available client-side, everything else can be in a JS file #}}
-			{{ include 'assets/js/theme-toolkit.js' }}
-		{{ /js }}
-		{{- getBundle 'js', 'head' -}}
+			{{- js 'head' -}}
+				const themes = {
+					keys: {{ themes |> pluck('key') |> concat(['custom']) |> JSON.stringify }},
+					defaults: {{ themes |> filter(t => t.default) |> map(t => [t.scheme, t.key]) |> Object.fromEntries |> JSON.stringify }},
+				}; {{# This is build-time data we need to make available client-side, everything else can be in a JS file #}}
+				{{ include 'assets/js/theme-toolkit.js' }}
+			{{ /js -}}
+			{{ if !themeOverride }}{{- getBundle 'js', 'head' -}}{{ /if }}
 		</script>
 		{{- /if }}
 
 		{{- if !metadata.nakedCss }}
-		{{# <link href="/assets/css/style.css" rel="stylesheet"> #}}
-		<style>
-			/* Want to see the full stylesheet? Load up the following URL: {{ metadata.url }}/assets/css/style.css */
-			{{ assets.inlineCssPlaceholder }}
-		</style>
+			{{# <link href="/assets/css/style.css" rel="stylesheet"> #}}
+			<style>
+				/* Want to see the full stylesheet? Load up the following URL: {{ metadata.url }}/assets/css/style.css */
+				{{ assets.inlineCssPlaceholder }}
+			</style>
+			{{ if themeOverride }}<link rel="stylesheet" media="screen" href="{{ [assets.css, `${themeOverride}.css`] |> toPath }}">{{ /if }}
 		{{ /if -}}
 
 		{{# Print styles -#}}
@@ -49,7 +50,9 @@
 			{{ else if metadata.nakedJs }}
 				{{ set announcement }}My JavaScript isn’t broken! 🙅 No JS for <a href="https://js-naked-day.org/">JS Naked Day</a> (24th of April)!{{ /set }}
 			{{ else }}
-				{{ set announcement }}<a href="/fonts/peritel/">I just release a font called Peritel!</a>{{ /set }}
+				{{ if section == 'home' }}
+					{{ set announcement }}<a href="/fonts/peritel/">I just release a font called Peritel!</a>{{ /set }}
+				{{ /if }}
 			{{ /if }}
 			{{ if announcement }}
 				<div class="announcement"><p class="textWrap-balance textAlign-center">{{ announcement |> markdown(true) }}</p></div>

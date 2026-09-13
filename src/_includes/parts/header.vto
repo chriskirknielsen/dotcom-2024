@@ -21,33 +21,51 @@
 			</nav>
 
 			{{ if (!metadata.nakedCss && !metadata.nakedJs) }}
-			<div class="header-themepicker">
-				<div id="header-themepicker-heading" class="visually-hidden">
-					<span>Theme Picker</span>
+				{{ if themeOverride }}
+				<tool-tip tip-position="end end" class="header-themepicker-toggle-wrapper">
+					{{ component 'cta', {
+						icon: 'lock',
+						iconClass: 'button-icon',
+						label: {
+							text: 'Themes',
+							aria: 'Theme Picker Disabled',
+						},
+						ctaAttr: 'disabled',
+						ctaClass: 'header-themepicker-toggle linecap-auto',
+					} }}
+					<span class="tip-content">
+						This page is art-directed and will respect your system preferences at all times.
+					</span>
+				</tool-tip>
+				{{ else }}
+				<div class="header-themepicker">
+					<div id="header-themepicker-heading" class="visually-hidden">
+						<span>Theme Picker</span>
+					</div>
+					{{ component 'cta', {
+						iconStack: {
+							'idle': 'palette',
+							'pressed': 'close',
+						},
+						iconClass: 'button-icon',
+						label: {
+							text: 'Themes',
+							aria: 'Toggle Theme Picker',
+						},
+						ctaAttr: 'data-toggle-pressed aria-controls="themepicker"',
+						ctaClass: 'header-themepicker-toggle linecap-auto',
+					} }}
+					{{ webcomponent 'theme-picker',
+						{
+							id: 'themepicker',
+							'aria-labelledby': 'header-themepicker-heading',
+							'role': 'group',
+						},
+						{ themes }
+					}}
 				</div>
-				{{ component 'cta', {
-					iconStack: {
-						'idle': 'palette',
-						'pressed': 'close',
-					},
-					iconClass: 'button-icon',
-					label: {
-						text: 'Themes',
-						aria: 'Toggle Theme Picker',
-					},
-					ctaAttr: 'data-toggle-pressed aria-controls="themepicker"',
-					ctaClass: 'header-themepicker-toggle linecap-auto',
-				} }}
-				{{ webcomponent 'theme-picker',
-					{
-						id: 'themepicker',
-						'aria-labelledby': 'header-themepicker-heading',
-						'role': 'group',
-					},
-					{ themes }
-				}}
+				{{ /if }}
 				{{ js 'foot' }}{{- include 'assets/js/components/theme-picker.js' -}}{{ /js }}
-			</div>
 			{{ /if }}
 		</div>
 	</div>
