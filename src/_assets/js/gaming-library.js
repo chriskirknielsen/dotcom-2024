@@ -232,7 +232,7 @@ document.addEventListener('click', function (e) {
 		eachDom('details', (d) => {
 			d.open = newPressed;
 		});
-	} else if ((target = e.target.closest('.gaming-box'))) {
+	} else if ((target = e.target.closest('.gaming-box-wrap > .gaming-box'))) {
 		if (target && target.closest) {
 			loadAndPopulateGameDetailDialog(target);
 		}

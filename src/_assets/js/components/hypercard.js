@@ -59,7 +59,7 @@ class HyperCard extends HTMLElement {
 	}
 
 	connectedCallback() {
-		console.log('hyper-card!')
+		// console.log('hyper-card!')
 		// https://caniuse.com/mdn-api_cssstylesheet_replacesync
 		if(this.shadowRoot || !("replaceSync" in CSSStyleSheet.prototype)) {
 			return;
