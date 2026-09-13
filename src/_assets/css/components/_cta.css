@@ -6,8 +6,8 @@
 	--CTA-border-radius: var(--_cta-border-radius);
 	--CTA-box-shadow: var(--_cta-box-shadow);
 	--CTA-padding: var(--_cta-padding-block) var(--_cta-padding-inline);
-	--CTA-transition-properties: color, text-decoration-color, text-underline-offset, text-decoration-thickness, background-color, border-color, box-shadow, opacity, filter,
-		transform;
+	--CTA-transition-properties:
+		color, text-decoration-color, text-underline-offset, text-decoration-thickness, background-color, border-color, box-shadow, opacity, filter, transform;
 
 	position: relative;
 	flex-shrink: 0;
@@ -55,7 +55,7 @@
 		}
 	}
 
-	&:is(:hover, :focus-visible, :has(:focus-visible)) {
+	&:is(:hover, :focus-visible, :has(:focus-visible)):not([disabled]) {
 		--CTA-text-color: var(--_cta-text-color-active);
 		--CTA-bg-color: var(--_cta-bg-color-active);
 		--CTA-border-color: var(--_cta-border-color-active);
@@ -105,6 +105,12 @@
 		visibility: hidden;
 		transform: scale(0, 0.8);
 		opacity: 0;
+	}
+
+	&[disabled] {
+		cursor: not-allowed;
+
+		opacity: 0.8;
 	}
 }
 
