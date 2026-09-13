@@ -3,6 +3,7 @@ permalink: '/rss.xml'
 eleventyImport:
     collections: ["_posts"]
 ---
+{# TODO Convert to Vento #}
 {%- set collectionPostsLocale = collections['_posts'] -%}
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet href="/rss.xsl" type="text/xsl"?>
@@ -30,6 +31,15 @@ eleventyImport:
             <updated>{{ postDate | dateFormat({ format: 'iso', lang: lang }) }}</updated>
             <id>{{ absolutePostUrl }}</id>
             <content type="html">
+                {% set rssOnlyIntro = post.data.rssOnlyIntro or false %}
+                {% if rssOnlyIntro %}{% set rssOnlyIntroMarkup %}
+                    <p><strong>Hiya, RSS reader!</strong>
+                    {% if post.data.rssOnlyIntro == true %}
+                        This post will look better on the original web page, just so you know!
+                    {% else %}
+                        {{ post.data.rssOnlyIntro }}
+                    {% endif %}</p>
+                {% endset %}{{ rssOnlyIntroMarkup | escape }}{% endif %}
                 {%- set showFullContent = (loop.index0 < 10 or post.data.externalUrl) -%}
                 {% if injectDescription or not showFullContent %}{{ '<p>' | escape }}{{ post.data.summary }}{{ '</p>' | escape }}{% endif %}
                 {% if showFullContent %}
