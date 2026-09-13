@@ -1,0 +1,949 @@
+/* THEME OVERRIDES */
+html {
+	--T-light: var(--OFF);
+	--T-dark: var(--OFF);
+	--u2-shadow-fx: 1px 1px 1px #000c, 0 0.1em 0.1em #0006, 0 0.2em 0.05em #0003, 0 -0.1em 0.1em #0006, 0 -0.2em 0.05em #0003;
+
+	background-image: url('../img/u2stats/leather-texture.avif'); /* Source: https://unsplash.com/photos/a-close-up-of-textured-red-leather-16FlHlfadZ4 */
+	background-blend-mode: overlay;
+}
+@media (prefers-color-scheme: light) {
+	html {
+		--T-light: var(--ON);
+	}
+
+	.hero-heading {
+		font-weight: 700;
+		text-shadow: 0 1px 0 #fff;
+	}
+
+	.uncharted2-stats-main {
+		filter: drop-shadow(0 2px 4px color-mix(in hsl, var(--color-accent), transparent));
+	}
+
+	.uncharted2-stats-username-text {
+		text-shadow: var(--u2-shadow-fx);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	html {
+		--T-dark: var(--ON);
+	}
+
+	h3,
+	h4 {
+		--_font-heading-weight: 400;
+	}
+
+	@supports (-webkit-background-clip: text) or (background-clip: text) {
+		.hero-heading {
+			--bleed: 4px;
+
+			margin: calc(var(--bleed) * -1);
+			padding: var(--bleed);
+
+			color: transparent;
+			background: linear-gradient(170deg, #fff6d7, #fce29e, #d7b84a);
+			-webkit-background-clip: text;
+			background-clip: text;
+
+			filter: drop-shadow(-0.5px -0.5px 0 #fff) drop-shadow(-0.5px -0.5px 0 #fff) drop-shadow(0.05em 0.05em 0.1em #000);
+		}
+	}
+
+	.callout-label {
+		text-shadow: var(--u2-shadow-fx);
+	}
+}
+[data-theme-condition] {
+	display: none;
+}
+
+:root:not(#\#) {
+	--color-canvas: var(--T-light, #eee3c1) var(--T-dark, #29180a);
+	--color-surface: var(--T-light, #f1dfa1) var(--T-dark, #312d22);
+	--color-text: var(--T-light, #3b3029) var(--T-dark, #cfccbe);
+	--color-accent: var(--T-light, #2b1e0e) var(--T-dark, #faea93);
+	--color-heading: var(--T-light, #2f1600) var(--T-dark, #f0dea0);
+	--color-surface-alt: var(--color-surface);
+	--color-inactive: var(--T-light, #636363) var(--T-dark, #aabbc5);
+	--shadow-color: var(--T-light, 30deg 100% 15%) var(--T-dark, 44deg 100% 5%);
+	--header-bg-color: var(--color-heading);
+	--header-link-color: var(--color-surface);
+	--header-link-color-active: var(--color-canvas);
+	--link-underline-color-active: var(--T-light, #ed5831) var(--T-dark, #5c0c00);
+	--logo-color: var(--color-surface);
+	--logo-color-active: var(--color-canvas);
+	--font-heading-family: var(--headingFontOverride), Adelon, Albertus, var(--fontStack-serif);
+	--font-heading-weight: var(--T-light, 400) var(--T-dark, 700);
+	--font-heading-size-adjust: 0.497;
+	--font-body-family: var(--fontStack-sans-serif);
+	--corner: 0px;
+
+	--u2-color-success: #174b0b;
+	--u2-color-error: #d00000;
+}
+
+.heading-with-sub {
+	inline-size: max-content;
+	max-inline-size: 100%;
+	margin-inline: auto;
+}
+.heading-with-sub > .subheading {
+	display: flex;
+	gap: 0.75em;
+	justify-content: center;
+	align-items: center;
+
+	color: var(--color-accent);
+	font-family: var(--_font-heading-family);
+	font-weight: 400;
+	font-size-adjust: var(--_font-heading-size-adjust);
+
+	&::before,
+	&::after {
+		content: '';
+
+		flex: 1 0 0;
+		margin-inline: 0.125em;
+		block-size: 2px;
+
+		background: linear-gradient(var(--a, 90deg), currentColor, transparent);
+
+		filter: url(#fx-old-paper);
+	}
+
+	&::before {
+		--a: -90deg;
+	}
+}
+hr {
+	position: relative;
+
+	block-size: 4px;
+	overflow: clip;
+
+	background: none;
+
+	&::before,
+	&::after {
+		content: '';
+
+		position: absolute;
+		inset: 0;
+	}
+
+	&::before {
+		background:
+			linear-gradient(to right, var(--color-heading) 67%, transparent 0),
+			linear-gradient(to bottom right, var(--color-heading) 50%, transparent 51%) no-repeat 100% 100% / 34% 100%;
+	}
+
+	&::after {
+		/* inset-inline-start: 66%; */
+
+		background:
+			linear-gradient(to top right, var(--color-heading) 50%, transparent 51%) no-repeat 0 0 / 100% 50%,
+			linear-gradient(to bottom right, var(--color-heading) 50%, transparent 51%) no-repeat 0 100% / 100% 50%;
+		/* linear-gradient(to top right, red 50%, transparent 51%) no-repeat 0 0 / 100% 50%, linear-gradient(to bottom right, green 50%, transparent 51%) no-repeat 0 100% / 100% 50% */
+
+		filter: url(#fx-old-paper);
+	}
+}
+
+/* Special components */
+.uncharted2-stats-main {
+	container-type: inline-size;
+	position: relative;
+	isolation: isolate;
+	overflow: clip; /* Make the background "eat" into the container, like parchment, which would not expand out */
+
+	display: flex;
+	gap: var(--size-m) clamp(var(--size-m), 0.5rem + 2.5vi, var(--size-l));
+	padding: var(--size-m);
+
+	color: var(--color-canvas);
+	background: conic-gradient(var(--color-text) 0 0);
+	background-clip: content-box; /* Safari 18.6 (looks OK on TP 245) fix where the filter removes part of the background in the middle of the container */
+
+	&::before {
+		content: '';
+
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+
+		border-radius: var(--size-m);
+		background: var(--color-text);
+
+		filter: url(#fx-old-paper);
+	}
+}
+
+.uncharted2-stats-pic {
+	flex: 1 1 6rem;
+	min-inline-size: 2rem;
+	max-inline-size: 8rem;
+	align-self: center;
+}
+
+.uncharted2-stats-list {
+	align-self: center;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-areas:
+		'--name --name'
+		'--level --exp'
+		'--time --time'
+		'--date --date';
+	align-items: end;
+	column-gap: inherit;
+	row-gap: 0;
+
+	@container (inline-size < 32rem) {
+		gap: var(--size-xs) var(--size-m);
+
+		& > div {
+			display: grid;
+			gap: 0;
+		}
+	}
+
+	@container (inline-size > 54rem) {
+		grid-template-areas:
+			'--name --name --time'
+			'--level --exp --date';
+		grid-template-columns: auto 1fr auto;
+	}
+
+	& dt {
+		font-family: var(--_font-heading-family);
+		font-weight: 700;
+		font-size-adjust: var(--_font-heading-size-adjust);
+	}
+}
+.uncharted2-stats-username {
+	grid-area: --name;
+}
+.uncharted2-stats-username-rank {
+	inline-size: min(3rem, 2em);
+}
+.uncharted2-stats-username-text {
+	text-box: trim-both cap alphabetic;
+	color: inherit;
+}
+
+.uncharted2-stats-level {
+	grid-area: --level;
+}
+
+.uncharted2-stats-cash {
+	grid-area: --exp;
+}
+
+.uncharted2-stats-time {
+	grid-area: --time;
+}
+
+.uncharted2-stats-date {
+	grid-area: --date;
+}
+
+.uncharted2-stats-level,
+.uncharted2-stats-cash,
+.uncharted2-stats-time,
+.uncharted2-stats-date {
+	display: flex;
+	align-items: baseline;
+	gap: var(--size-xs);
+}
+
+.uncharted2-stats-section {
+	container-type: inline-size;
+
+	&:has(> .uncharted2-weapon-stat-table) {
+		overflow-x: auto;
+	}
+}
+
+.uncharted2-stats-2up {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--col-2up-size, 16rem)), 1fr));
+	align-items: start;
+	gap: var(--size-l);
+
+	& & {
+		--col-2up-size: 8rem;
+	}
+}
+
+.uncharted2-stats-2up-title {
+	display: flex;
+	gap: var(--size-s);
+	justify-content: center;
+	align-items: center;
+
+	& > span:not([data-u2-mode]) {
+		text-box: trim-both cap alphabetic;
+	}
+
+	& [data-u2-mode] {
+		--scale: 0.25;
+	}
+}
+
+.uncharted2-stats-ring {
+	--ring-thickness: 1.5rem;
+
+	isolation: isolate;
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	aspect-ratio: 1;
+	max-inline-size: calc(var(--ring-thickness) * 2 + 6ch + 1em);
+	margin-inline: auto;
+	padding: calc(var(--ring-thickness) + 0.5em);
+
+	text-align: center;
+	line-height: 1.1;
+
+	&::before,
+	&::after {
+		content: '';
+		pointer-events: none;
+
+		position: absolute;
+		inset: 0;
+	}
+
+	&::before {
+		content: '';
+		pointer-events: none;
+
+		z-index: -2;
+
+		border: 1px solid currentColor;
+		border-radius: 50%;
+		background:
+			conic-gradient(currentColor 0 0) no-repeat 50% 0 / 1px 50%,
+			conic-gradient(var(--u2-color-error) 0 calc((1 - var(--stats-ring-ratio, 1)) * 1turn), var(--u2-color-success) 0 1turn);
+		outline: 2px solid currentColor;
+		outline-offset: calc(var(--ring-thickness) * -1 - 0.5px);
+
+		mask: radial-gradient(farthest-side at center, #0000 calc(100% - var(--ring-thickness)), red calc(100% - var(--ring-thickness) + 1px));
+	}
+
+	&::after {
+		inset-block-end: 50%;
+		z-index: -1;
+
+		inline-size: 1px;
+		margin-inline: auto;
+
+		background: linear-gradient(0deg, transparent calc(100% - var(--ring-thickness) + 0.75px), currentColor 0);
+
+		transform-origin: 50% 100%;
+		rotate: calc(var(--stats-ring-ratio, 1) * -1turn);
+	}
+}
+
+.uncharted2-stats-ring-label {
+	font-family: var(--_font-heading-family);
+	font-size-adjust: var(--_font-heading-size-adjust);
+	font-weight: 700;
+
+	& > abbr {
+		text-decoration: none;
+	}
+}
+.uncharted2-stats-ring-value {
+	font-variant-numeric: tabular-nums;
+}
+
+.uncharted2-stats-def {
+	display: grid;
+	grid-template-columns: [--val-start] 1fr [--val-end --label-start] 1fr [--label-end];
+	gap: var(--size-xs) var(--size-m);
+}
+
+.uncharted2-stats-def-inline {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: subgrid;
+	align-items: baseline;
+	grid-auto-flow: dense;
+
+	line-height: 1.1;
+
+	& > dt {
+		grid-column: --label;
+
+		text-align: left;
+		text-align: start;
+		font-family: var(--_font-heading-family);
+		font-weight: 700;
+		font-size-adjust: var(--_font-heading-size-adjust);
+	}
+
+	& > dd {
+		grid-column: --val;
+
+		text-align: right;
+		text-align: end;
+		font-variant-numeric: tabular-nums;
+	}
+}
+
+.uncharted2-stats-modes-list {
+	display: grid;
+	grid-template-columns: repeat(var(--u2-mode-grid-count, 1), minmax(min(100%, 8rem), 1fr));
+	gap: var(--size-l) var(--size-m);
+	list-style-type: '';
+
+	@container (inline-size > 20rem) {
+		--u2-mode-grid-count: 2;
+	}
+
+	@container (inline-size > 32rem) {
+		--u2-mode-grid-count: 3;
+
+		&::after {
+			content: '';
+
+			order: 10;
+		}
+		& > :last-child {
+			order: 11;
+		}
+	}
+
+	@container (inline-size > 48rem) {
+		--u2-mode-grid-count: 5;
+
+		&::after {
+			content: none;
+		}
+	}
+}
+
+.uncharted2-stats-modes-item {
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: var(--size-xs);
+
+	text-align: center;
+}
+
+.uncharted2-stats-modes-label {
+	align-self: stretch;
+	padding-block-end: var(--size-xs);
+
+	color: var(--color-heading);
+	font-family: var(--_font-heading-family);
+	font-weight: 700;
+	font-size-adjust: var(--_font-heading-size-adjust);
+	line-height: 1;
+
+	background: linear-gradient(90deg, transparent, currentColor, transparent) no-repeat 50% 100% / calc(100% - 2 * var(--size-xl)) 1px;
+}
+.uncharted2-stats-modes-count {
+	font-size: 1.5em;
+	line-height: 1;
+}
+
+.uncharted2-stats-medals-list {
+	display: grid;
+	grid-template-columns: repeat(var(--u2-mode-grid-count, 1), minmax(min(100%, 8rem), 1fr));
+	gap: var(--size-m);
+	list-style-type: '';
+
+	@container (inline-size > 20rem) {
+		--u2-mode-grid-count: 2;
+	}
+
+	@container (inline-size > 48rem) {
+		--u2-mode-grid-count: 3;
+	}
+}
+
+.uncharted2-stats-medals-item {
+	display: grid;
+	grid-template-areas: '--img --label' '--img --count';
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	gap: 0 var(--size-s);
+
+	& [data-u2-medal] {
+		grid-area: --img;
+
+		&:focus {
+			scale: 1.25;
+		}
+	}
+}
+
+.uncharted2-stats-medals-label {
+	grid-area: --label;
+	place-self: end;
+
+	font-family: var(--_font-heading-family);
+	font-weight: 700;
+	font-size-adjust: var(--_font-heading-size-adjust);
+	line-height: 1;
+}
+.uncharted2-stats-medals-label:not(.uncharted2-stats-medals-label--off) {
+	color: var(--color-heading);
+}
+
+.uncharted2-stats-medals-count {
+	grid-area: --count;
+	place-self: start;
+
+	font-size: 0.75em;
+	line-height: 1;
+}
+
+.uncharted2-stats-medals-desc {
+	font-size: 0.875em;
+}
+
+.uncharted2-skin {
+	inline-size: 12.875rem;
+}
+
+.uncharted2-weapon-stat-table .grouper {
+	--GAP: var(--size-2xs) var(--size-m);
+}
+
+.uncharted2-weapon-stat-image {
+	--scale: 0.25;
+
+	@container (inline-size > 48rem) {
+		--scale: 0.5;
+	}
+}
+
+.uncharted2-datagroup {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+/* Modes spritesheet */
+[data-u2-mode] {
+	display: inline-block;
+	inline-size: 150px;
+	block-size: 150px;
+
+	background-image: url('../img/u2stats/modes.avif');
+	background-repeat: no-repeat;
+	zoom: var(--scale, 0.5);
+}
+[data-u2-mode='competitive'] {
+	background-position: -0px -0px;
+}
+[data-u2-mode='coop'] {
+	background-position: -155px -0px;
+}
+
+[data-u2-mode='plunder'] {
+	background-position: -310px -0px;
+}
+
+[data-u2-mode='gold_rush'] {
+	background-position: -0px -155px;
+}
+
+[data-u2-mode='siege'] {
+	background-position: -155px -155px;
+}
+
+[data-u2-mode='survival'] {
+	background-position: -310px -155px;
+}
+
+[data-u2-mode='elimination'] {
+	background-position: -0px -310px;
+}
+
+[data-u2-mode='deathmatch'] {
+	background-position: -155px -310px;
+}
+
+[data-u2-mode='king_of_the_hill'] {
+	background-position: -310px -310px;
+}
+
+[data-u2-mode='chain_reaction'] {
+	background-position: -0px -465px;
+}
+
+[data-u2-mode='turf_war'] {
+	background-position: -155px -465px;
+}
+
+/* Medals spritesheet */
+[data-u2-medal] {
+	display: inline-block;
+	inline-size: 110px;
+	block-size: 110px;
+
+	background-image: url('../img/u2stats/medals.avif');
+	background-repeat: no-repeat;
+
+	zoom: var(--scale, 0.5);
+}
+
+[data-u2-medal].u2-medal-off {
+	filter: grayscale(1);
+}
+
+[data-u2-medal='12-parsecs'] {
+	background-position: 0px 0px;
+}
+
+[data-u2-medal='afterlife'] {
+	background-position: -114px 0px;
+}
+
+[data-u2-medal='assassin'] {
+	background-position: -228px 0px;
+}
+
+[data-u2-medal='assistant'] {
+	background-position: -342px 0px;
+}
+
+[data-u2-medal='big-bang-vs'] {
+	background-position: -456px 0px;
+}
+
+[data-u2-medal='big-bang'] {
+	background-position: -570px 0px;
+}
+
+[data-u2-medal='big-brawls'] {
+	background-position: -684px 0px;
+}
+
+[data-u2-medal='blind-fire'] {
+	background-position: -798px 0px;
+}
+
+[data-u2-medal='cap-ter'] {
+	background-position: 0px -114px;
+}
+
+[data-u2-medal='captured'] {
+	background-position: -114px -114px;
+}
+
+[data-u2-medal='chef'] {
+	background-position: -228px -114px;
+}
+
+[data-u2-medal='commando'] {
+	background-position: -342px -114px;
+}
+
+[data-u2-medal='covert'] {
+	background-position: -456px -114px;
+}
+
+[data-u2-medal='crushing-two'] {
+	background-position: -570px -114px;
+}
+
+[data-u2-medal='crushing'] {
+	background-position: -684px -114px;
+}
+
+[data-u2-medal='dead-eye'] {
+	background-position: -798px -114px;
+}
+
+[data-u2-medal='defender'] {
+	background-position: 0px -228px;
+}
+
+[data-u2-medal='double-kill'] {
+	background-position: -114px -228px;
+}
+
+[data-u2-medal='dropit'] {
+	background-position: -228px -228px;
+}
+
+[data-u2-medal='duck'] {
+	background-position: -342px -228px;
+}
+
+[data-u2-medal='ego'] {
+	background-position: -456px -228px;
+}
+
+[data-u2-medal='finish-him'] {
+	background-position: -570px -228px;
+}
+
+[data-u2-medal='first'] {
+	background-position: -684px -228px;
+}
+
+[data-u2-medal='fisticuffs'] {
+	background-position: -798px -228px;
+}
+
+[data-u2-medal='fly-on-the-wall'] {
+	background-position: 0px -342px;
+}
+
+[data-u2-medal='fury'] {
+	background-position: -114px -342px;
+}
+
+[data-u2-medal='gift'] {
+	background-position: -228px -342px;
+}
+
+[data-u2-medal='gunslinger'] {
+	background-position: -342px -342px;
+}
+
+[data-u2-medal='half-blind'] {
+	background-position: -456px -342px;
+}
+
+[data-u2-medal='head-hunter'] {
+	background-position: -570px -342px;
+}
+
+[data-u2-medal='heat-seeker'] {
+	background-position: -684px -342px;
+}
+
+[data-u2-medal='kick'] {
+	background-position: -798px -342px;
+}
+
+[data-u2-medal='killer-combo'] {
+	background-position: 0px -456px;
+}
+
+[data-u2-medal='lawn'] {
+	background-position: -114px -456px;
+}
+
+[data-u2-medal='let-em-go'] {
+	background-position: -228px -456px;
+}
+
+[data-u2-medal='medic'] {
+	background-position: -342px -456px;
+}
+
+[data-u2-medal='miserly'] {
+	background-position: -456px -456px;
+}
+
+[data-u2-medal='ninja'] {
+	background-position: -570px -456px;
+}
+
+[data-u2-medal='no-cigar'] {
+	background-position: -684px -456px;
+}
+
+[data-u2-medal='no-death'] {
+	background-position: -798px -456px;
+}
+
+[data-u2-medal='none-shall-pass'] {
+	background-position: 0px -570px;
+}
+
+[data-u2-medal='propane'] {
+	background-position: -114px -570px;
+}
+
+[data-u2-medal='protectorate'] {
+	background-position: -228px -570px;
+}
+
+[data-u2-medal='pull'] {
+	background-position: -342px -570px;
+}
+
+[data-u2-medal='punch-out'] {
+	background-position: -456px -570px;
+}
+
+[data-u2-medal='purple-heart'] {
+	background-position: -570px -570px;
+}
+
+[data-u2-medal='put-em-down'] {
+	background-position: -684px -570px;
+}
+
+[data-u2-medal='quadruple-kill'] {
+	background-position: -798px -570px;
+}
+
+[data-u2-medal='quintuple-kill'] {
+	background-position: 0px -684px;
+}
+
+[data-u2-medal='rage'] {
+	background-position: -114px -684px;
+}
+
+[data-u2-medal='rampant'] {
+	background-position: -228px -684px;
+}
+
+[data-u2-medal='range'] {
+	background-position: -342px -684px;
+}
+
+[data-u2-medal='retaliation'] {
+	background-position: -456px -684px;
+}
+
+[data-u2-medal='rider'] {
+	background-position: -570px -684px;
+}
+
+[data-u2-medal='shut-down'] {
+	background-position: -684px -684px;
+}
+
+[data-u2-medal='streak'] {
+	background-position: -798px -684px;
+}
+
+[data-u2-medal='that-embarassing'] {
+	background-position: 0px -798px;
+}
+
+[data-u2-medal='threat'] {
+	background-position: -114px -798px;
+}
+
+[data-u2-medal='tip-off'] {
+	background-position: -228px -798px;
+}
+
+[data-u2-medal='treasure-hunter'] {
+	background-position: -342px -798px;
+}
+
+[data-u2-medal='tricky'] {
+	background-position: -456px -798px;
+}
+
+[data-u2-medal='triple-kill'] {
+	background-position: -570px -798px;
+}
+
+[data-u2-medal='unlucky'] {
+	background-position: -684px -798px;
+}
+
+[data-u2-medal='wipe-out'] {
+	background-position: -798px -798px;
+}
+
+/* Weapons spritesheet */
+[data-u2-weapon] {
+	display: inline-block;
+	inline-size: 248px;
+	block-size: 80px;
+
+	background-image: url('../img/u2stats/weapons.avif');
+	background-repeat: no-repeat;
+
+	zoom: var(--scale, 0.5);
+}
+
+[data-u2-weapon='45-defender'] {
+	background-position: 0px 0px;
+}
+
+[data-u2-weapon='92fs-9mm'] {
+	background-position: 0px -84px;
+}
+
+[data-u2-weapon='ak-47'] {
+	background-position: 0px -168px;
+}
+
+[data-u2-weapon='desert-5'] {
+	background-position: 0px -252px;
+}
+
+[data-u2-weapon='dragon-sniper'] {
+	background-position: 0px -336px;
+}
+
+[data-u2-weapon='fal'] {
+	background-position: 0px -420px;
+}
+
+[data-u2-weapon='gau-19'] {
+	background-position: 0px -504px;
+}
+
+[data-u2-weapon='m4'] {
+	background-position: 0px -588px;
+}
+
+[data-u2-weapon='m32-hammer'] {
+	background-position: 0px -672px;
+}
+
+[data-u2-weapon='melee'] {
+	background-position: 0px -756px;
+}
+
+[data-u2-weapon='micro-9mm'] {
+	background-position: 0px -840px;
+}
+
+[data-u2-weapon='mk-ndi'] {
+	background-position: 0px -924px;
+}
+
+[data-u2-weapon='moss-12'] {
+	background-position: 0px -1008px;
+}
+
+[data-u2-weapon='pistole'] {
+	background-position: 0px -1092px;
+}
+
+[data-u2-weapon='rpg-7'] {
+	background-position: 0px -1176px;
+}
+
+[data-u2-weapon='sas-12'] {
+	background-position: 0px -1260px;
+}
+
+[data-u2-weapon='suicide'] {
+	background-position: 0px -1344px;
+}
+
+[data-u2-weapon='wes-44'] {
+	background-position: 0px -1428px;
+}
