@@ -68,13 +68,13 @@ html {
 	--color-heading: var(--T-light, #2f1600) var(--T-dark, #f0dea0);
 	--color-surface-alt: var(--color-surface);
 	--color-inactive: var(--T-light, #636363) var(--T-dark, #aabbc5);
+	--link-underline-color-active: var(--T-light, #ed5831) var(--T-dark, #5c0c00);
 	--shadow-color: var(--T-light, 30deg 100% 15%) var(--T-dark, 44deg 100% 5%);
 	--header-bg-color: var(--color-heading);
 	--header-link-color: var(--color-surface);
 	--header-link-color-active: var(--color-canvas);
-	--link-underline-color-active: var(--T-light, #ed5831) var(--T-dark, #5c0c00);
 	--logo-color: var(--color-surface);
-	--logo-color-active: var(--color-canvas);
+	--logo-color-active: var(--link-underline-color-active);
 	--font-heading-family: var(--headingFontOverride), Adelon, Albertus, var(--fontStack-serif);
 	--font-heading-weight: var(--T-light, 400) var(--T-dark, 700);
 	--font-heading-size-adjust: 0.497;
