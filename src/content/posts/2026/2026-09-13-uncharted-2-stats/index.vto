@@ -532,7 +532,7 @@ I used to run a fansite called **JAKPRO**, all about Jak & Daxter — a PlayStat
 During that time (starting on JAKPRO, and eventually migrated over to the Naughty Kennel), I had created a "stats card" service, since Naughty Dog made player stats available on the web, at a URL like this one (archived and outdated): [http://www.naughtydog.com/stats/index/JaKhris](https://web.archive.org/web/20100106001534/http://www.naughtydog.com/stats/index/JaKhris). I did this because it was the perfect storm — it would require some design skills: check; some coding skills: check; public access to user data: check; and a passion for the whole thing: check.
 {{ /echo }}
 
-{{ set imageUrl = './generator-u2-jp.avif' |> toNetlifyImage }}
+{{ set imageUrl = './generator-u2-jp.avif' |> toRoot }}
 {{ image imageUrl, "The generator for Uncharted 2 on JAKPRO.net, a stylised form asking you to provide your username and select a character and background to decorate the image. A total user count of 14599 is displayed as well as some milestones below.", "Rough but functional", { ratio: "1200/753" } }}
 
 {{ echo |> markdown }}
@@ -547,7 +547,7 @@ I created a PHP script to scrape the page of a given user (there were actually 4
 A few years after, when I built The Naughty Kennel, instead of just storing some basic ID and last updated info, since I was scraping all this data anyways, I figured I could create leaderboards, which were not available on Naughty Dog’s pages, to make it a little more community-oriented. So, I naturally created the world’s least optimised database table, with over 140 columns, capturing the main data provided on Uncharted 2’s player stats page, including kills and deaths for each of the 16 weapons, and also the count for each of the 63 medals you could earn, plus a handful for metadata.
 {{ /echo }}
 
-{{ set imageUrl = './generator-u2-nk.avif' |> toNetlifyImage }}
+{{ set imageUrl = './generator-u2-nk.avif' |> toRoot }}
 {{ image imageUrl, "The generator for Uncharted 2 on Naughty-Kennel.com, a stylised form asking you to provide your username and select a character and background to decorate the image. A total user count of 12231 is displayed as well as some milestones below.", "Kinda sorta better?", { ratio: "1200/753" } }}
 
 {{ echo |> markdown }}
@@ -875,7 +875,7 @@ I just noticed… the [Wipe Out](#:~:text=Wipe%20Out) medal image is not a monst
 Uncharted 3 came out on the 1st of November 2011 (1/11/11 or 11/1/11 in the U.S., nice — except it was a holiday in France so it came out on 2/11/11, not nice), so I was excited to get this stats card service up and running for the newest Uncharted game! However, while Naughty Dog did have a U3 player stats page, shortly after launch, it changed and it wasn’t possible to scrape it as before. Aside from the DOM being different, they changed the way the pages were served from `GET` to `POST` so I couldn’t just call up the URL, and the web host I used, thought that my server sending a `POST` request to another was fishy and blocked it, causing the service to go dark on the 22nd of November 2011. It was restored the on the 25th of February 2012, thanks to help from somebody I only ever knew as **wx327**, but ultimately the service wasn’t up to the task. Had I had better skills at the time, I probably would  have been able to make it all hold together, but that wasn’t in the cards (if you’ll pardon the pun).
 {{ /echo }}
 
-{{ set imageUrl = './generator-u3-nk.avif' |> toNetlifyImage }}
+{{ set imageUrl = './generator-u3-nk.avif' |> toRoot }}
 {{ image imageUrl, "The generator for Uncharted 3 on Naughty-Kennel.com, a stylised form asking you to provide your username and select a character and background to decorate the image. A total user count of 5456 is displayed.", "This looks half-baked because it kinda was, unfortunately!", { ratio: "1200/753" } }}
 
 {{ echo |> markdown }}
@@ -916,7 +916,7 @@ I did help set up a similar stats card service a while back on [Ratchet-Galaxy](
 We had set up the card service, and eventually Insomniac Games got in touch with us, wanting to make sure this was above-board. It was a friendly call, but given we were using imagery from the game, and had some ads running to cover server costs (we made _cents_!), we were kindly asked to remove those, and insert some “unofficial” language here and there — I’ll pretend it was because looked **so dang good** it seemed official. They were (and are) supporters of the fan site, so I believe they even set us up with an API to stop hammering their servers — whoops. You’d think I would have known better… In any case, those stats pages, as well as the stats cards, were eventually retired, and I don’t believe there are data backups. What an era.
 {{ /echo }}
 
-{{ set imageUrl = './generator-acit-rg.avif' |> toNetlifyImage }}
+{{ set imageUrl = './generator-acit-rg.avif' |> toRoot }}
 {{ image imageUrl, "The generator for Ratchet & Clank, a stylised form asking you to provide your username and select a character and background to decorate the image.", "Thanks to the Internet Archive, I can provide a screenshot!", { ratio: "1200/600" } }}
 
 {{ echo |> markdown }}
