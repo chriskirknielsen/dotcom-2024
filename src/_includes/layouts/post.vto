@@ -47,9 +47,9 @@
 					{{ set cssStickerData = designs |> find('slug', 'css-logo-solid') }}
 					{{ set htmlShirtData = designs |> find('slug', 'vhs-html') }}
 					{{ set jsShirtData = designs |> find('slug', 'vhs-js-dark') }}
-					<img src="{{ [assets.images, 'designs', cssStickerData.img] |> toPath |> toNetlifyImage({ w: 64 }) }}" alt="A CSS logo on a purple background" width="64" height="64">
-					<img src="{{ [assets.images, 'designs', htmlShirtData.img] |> toPath |> toNetlifyImage({ w: 64 }) }}" alt="A light retro t-shirt design with references to HTML" width="64" height="64">
-					<img src="{{ [assets.images, 'designs', jsShirtData.img] |> toPath |> toNetlifyImage({ w: 64 }) }}" alt="A dark retro t-shirt design with references to JavaScript" width="64" height="64">
+					<img src="{{ [assets.images, 'designs', cssStickerData.img] |> toPath |> toNetlifyImage({ w: 64 }) }}" alt="A CSS logo on a purple background" width="64" height="64" loading="lazy">
+					<img src="{{ [assets.images, 'designs', htmlShirtData.img] |> toPath |> toNetlifyImage({ w: 64 }) }}" alt="A light retro t-shirt design with references to HTML" width="64" height="64" loading="lazy">
+					<img src="{{ [assets.images, 'designs', jsShirtData.img] |> toPath |> toNetlifyImage({ w: 64 }) }}" alt="A dark retro t-shirt design with references to JavaScript" width="64" height="64" loading="lazy">
 				</span>
 				apparel/stickers</a> if you’d like to <a href="/support/">support me</a>. Thanks a ton!
 			</p>
