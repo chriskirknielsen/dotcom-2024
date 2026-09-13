@@ -90,7 +90,7 @@ export default async function (eleventyConfig) {
 			`${rootDir}/content/projects/**/index.{vto,njk,md}`, // Projects
 			`${rootDir}/content/fonts/*/*.{vto,njk}`, // Fonts
 		],
-		assetsMatching: '*.jpg|*.png|*.gif|*.mp4|*.otf|*.woff|*.woff2|*.zip', // Images, videos, fonts, and archives
+		assetsMatching: '*.jpg|*.png|*.gif|*.avif|*.mp4|*.otf|*.woff|*.woff2|*.zip', // Images, videos, fonts, and archives
 		silent: true,
 	});
 	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
