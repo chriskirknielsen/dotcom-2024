@@ -390,7 +390,7 @@
 <p class="fontStyle-italic">If you really want to nerd out, my <a href="/games/library/">gaming library</a> has all the details.</p>
 
 <h3>Stats Cards</h3>
-<p>These were all the rage back in the message board days! I had even created my own service go generate some for Uncharted 2 and 3 — feast your eyes…</p>
+<p>These were all the rage back in the message board days! I had even created my own service to generate some for Uncharted 2 and 3, as well as Ratchet &amp; Clank: A Crack in Time — feast your eyes… (sorry it’s a little crunchy)</p>
 
 {{ image "https://card.psnprofiles.com/1/JaKhris.png", "PSNProfiles.com stats card for JaKhris, showing trophy data (these values change) over time, click to view the profile page", "", { ratio: "405/120", linkOverride: 'https://psnprofiles.com/JaKhris' } }}
 
@@ -398,10 +398,10 @@
 {{ image imageUrl, "My stats card for Uncharted 2 online, showing I reached level 60, with a kill-death ratio of 1.14, and 17,755 games played, and a last game played on June 4th, 2011.", "", { ratio: "500/125" } }}
 
 {{ set imageUrl = [assets.images, 'u3-card-jakhris.png'] |> toPath }}
-{{ image imageUrl, "My stats card for Uncharted 3 online, with seemingly little captured data, showing only 16 games played.", "", { ratio: "500/125" } }}
-<p class="textAlign-center textWrap-balance">
-	<em>(the Uncharted 3 stats could not be properly captured by my stats card service due to a restriction on my host, so these numbers are way lower than they actually were)</em>
-</p>
+{{ image imageUrl, "My stats card for Uncharted 3 online, with seemingly little captured data, showing only 16 games played.", "The Uncharted 3 stats could not be properly captured by my stats card service due to a restriction on my host, so these numbers are way lower than they actually were", { ratio: "500/125" } }}
+
+{{ set imageUrl = [assets.images, 'acit-card-jakhris.png'] |> toPath }}
+{{ image imageUrl, "My stats card for Ratchet & Clank: A Crack In Time, showing some single player data like time played, enemies defeated, trophies, skill points, and golden bolts.", "", { ratio: "500/125" } }}
 
 <style>
 	.linechart {
