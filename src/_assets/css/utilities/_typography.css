@@ -69,11 +69,15 @@
 
 /** Text alignment */
 .textAlign-start {
+	text-align: left;
 	text-align: start;
 }
-
 .textAlign-center {
 	text-align: center;
+}
+.textAlign-end {
+	text-align: right;
+	text-align: end;
 }
 
 /** Text effects */
