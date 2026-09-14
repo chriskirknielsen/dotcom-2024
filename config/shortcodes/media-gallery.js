@@ -8,16 +8,26 @@ function escapeAttr(attrValue) {
 		.replace(/>+/g, '&gt;');
 }
 
-function imageGalleryShortcode(pictures, addClass = []) {
+function imageGalleryShortcode(pictures, addClass = [], maxWidth = null) {
 	let galleryClasses = [];
+	let galleryStyle = '';
+
 	if (addClass) {
 		if (typeof addClass === 'string') {
-			addClass = addClass.split(' ').filter((str) => str.trim().length > 0);
+			addClass = addClass
+				.split(' ')
+				.map((str) => str.trim())
+				.filter(Boolean);
 		}
-		galleryClasses = galleryClasses.concat(addClass);
+		addClass.forEach((c) => galleryClasses.push(c));
 	}
 
-	return `<div class="${galleryClasses.join(' ')}">${pictures.trim()}</div>`;
+	if (maxWidth) {
+		galleryClasses.push('image-gallery--max-width');
+		galleryStyle = ` style="--gallery-max-width: ${maxWidth}px;"`;
+	}
+
+	return `<div class="${galleryClasses.join(' ')}"${galleryStyle}>${pictures.trim()}</div>`;
 }
 
 function mediaShortcode(type, src, alt, caption = '', options = {}) {
@@ -37,6 +47,7 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 	const sizes = options.sizes || ['100vw', '(min-width: 50rem) 50rem'];
 	const widths = type === 'video' || hasSingleRedundantWidth ? [] : options.widths || [480, 800, 1200];
 	const srcset = widths.map((w) => `${toNetlifyImage(src, { w: w })} ${w}w`);
+	const maxWidth = options.maxWidth || null;
 
 	// Safely escape the alt attribute
 	alt = escapeAttr(alt);
@@ -136,7 +147,7 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 	// If not grouped in a gallery (wrapped in a `gallery` shortcode pair), make it a single-media gallery
 	if (!isGroupContext) {
 		const mixedClasses = [options._galleryClasses, options.wrapperClass || ''].filter(Boolean).join(' ');
-		return imageGalleryShortcode(output, mixedClasses);
+		return imageGalleryShortcode(output, mixedClasses, maxWidth);
 	}
 
 	return output;

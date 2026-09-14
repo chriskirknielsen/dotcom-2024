@@ -5,6 +5,12 @@
 	justify-items: center;
 	align-items: stretch;
 
+	&.image-gallery--max-width {
+		inline-size: 100%;
+		max-inline-size: var(--gallery-max-width, 100%);
+		margin-inline: auto;
+	}
+
 	& :is(img, video) {
 		inline-size: 100%;
 	}
