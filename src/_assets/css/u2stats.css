@@ -4,8 +4,11 @@ html {
 	--T-dark: var(--OFF);
 	--u2-shadow-fx: 1px 1px 1px #000c, 0 0.1em 0.1em #0006, 0 0.2em 0.05em #0003, 0 -0.1em 0.1em #0006, 0 -0.2em 0.05em #0003;
 
-	background-image: url('../img/u2stats/leather-texture.avif'); /* Source: https://unsplash.com/photos/a-close-up-of-textured-red-leather-16FlHlfadZ4 */
-	background-blend-mode: overlay;
+	/* Don't apply for Safari on iOS, because of course it;s broken without… `background-repeat: no-repeat`, what?? */
+	@supports (not ((font: -apple-system-body) and (-webkit-touch-callout: default))) {
+		background-image: url('../img/u2stats/leather-texture.avif'); /* Source: https://unsplash.com/photos/a-close-up-of-textured-red-leather-16FlHlfadZ4 */
+		background-blend-mode: overlay;
+	}
 }
 @media (prefers-color-scheme: light) {
 	html {
