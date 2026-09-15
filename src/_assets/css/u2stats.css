@@ -148,14 +148,13 @@ hr {
 	}
 
 	&::after {
-		/* inset-inline-start: 66%; */
+		inset-inline-start: 66%;
 
-		background:
-			linear-gradient(to top right, var(--color-heading) 50%, transparent 51%) no-repeat 0 0 / 100% 50%,
-			linear-gradient(to bottom right, var(--color-heading) 50%, transparent 51%) no-repeat 0 100% / 100% 50%;
-		/* linear-gradient(to top right, red 50%, transparent 51%) no-repeat 0 0 / 100% 50%, linear-gradient(to bottom right, green 50%, transparent 51%) no-repeat 0 100% / 100% 50% */
+		background: var(--color-heading);
 
-		filter: url(#fx-old-paper);
+		filter: blur(1px) url('#fx-old-paper');
+		transform-origin: 0 0;
+		transform: skewY(-0.5deg);
 	}
 }
 
