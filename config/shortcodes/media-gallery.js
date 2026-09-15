@@ -38,6 +38,13 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 		throw new Error(`The ${src} ${type} does not have an alt attribute! (empty string is allowed)`);
 	}
 
+	// If the ratio is provided as a "w/h" string, extract both dimensions if they are missing
+	if (typeof options.ratio === 'string' && options.ratio.includes('/') && !options.width && !options.height) {
+		const [w, h] = options.ratio.split('/').map(parseFloat);
+		options.width = w || false;
+		options.height = h || false;
+	}
+
 	if (!options.ratio && !options.width && !options.height) {
 		throw new Error(`The ${src} ${type} does not have a ratio or width/height attributes. At least two of the three must be provided.`);
 	}

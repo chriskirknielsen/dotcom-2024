@@ -36,7 +36,7 @@ I used the height of the `<body>` element as the extension value for the interse
 new IntersectionObserver(..., { rootMargin: `${document.body.clientHeight}px 0px -33% 0px` });
 ```
 {{ set imageUrl = './toc-intersection-observer.png' |> toRoot }}
-{{ image imageUrl, "A representation of the intersection detection on a sample page.", "A crude representation of what is going on.", { ratio: 1920/1200 } }}
+{{ image imageUrl, "A representation of the intersection detection on a sample page.", "A crude representation of what is going on.", { ratio: "1920/1200" } }}
 
 When I noticed highlighting on [Roman Komarov’s blog](https://blog.kizu.dev) (a CSS genius), I got curious and tried to reverse-engineer the feature by inspecting the minified JavaScript to improve my own implementation. I later found out he has an entire [blog post](https://blog.kizu.dev/toc-scroll-markers/) with links to [the source code](https://github.com/kizu/kizu-blog/blob/main/src/components/ScrollMarkers.astro), which I really should have looked for earlier! (the scroll-driven animation code is fascinating, which has [its own write-up](https://kizu.dev/scroll-driven-animations/)) The improvements from here on out directly benefited from Roman’s ideas.
 

@@ -359,4 +359,4 @@ Whew, what a ride. I should write about VentoJS because it is cool. I should als
 Go forth and paginate! Also here’s a meme from yesteryear because I am a cool and hip.
 
 {{ set imageUrl = "./yodawg.jpg" |> toRoot }}
-{{ image imageUrl, "A terribly old meme of famous rapper Xzibit laughing, captioned: Yo dawg, I heard you liked pagination, so I added pagination inside your paginated pages, so you can paginate while you paginate.", null, { ratio: 500/320 } }}
+{{ image imageUrl, "A terribly old meme of famous rapper Xzibit laughing, captioned: Yo dawg, I heard you liked pagination, so I added pagination inside your paginated pages, so you can paginate while you paginate.", null, { ratio: "500/320" } }}

@@ -80,7 +80,7 @@ eleventyConfig.addPassthroughCopy({
 And just like that, we can see our three alternative favicons in the output folder at the specified paths. Your browser might need a second to refresh the cache but you should see the change. On my “New Tab” page, I now see my very frequently visited sites, including my own, and don’t need to hover the link to figure out which is which: the pink (hashtag deepPink is the best colour) now stands out as my dev environment. Convenient!
 
 {{ set imageUrl = "./new-tab-icons.png" |> toRoot }}
-{{ image imageUrl, "Two identically labelled suggestions for my website on my New Tab page, except the favicons use different colours, making them easy to distinguish.", "Live and Dev are now disambiguated!", { ratio: 760/380 } }}
+{{ image imageUrl, "Two identically labelled suggestions for my website on my New Tab page, except the favicons use different colours, making them easy to distinguish.", "Live and Dev are now disambiguated!", { ratio: "760/380" } }}
 
 Just because that code above is a *little* unsightly, here’s a minor enhancement to conditionally add the suffix:
 

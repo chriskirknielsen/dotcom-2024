@@ -9,7 +9,7 @@ ogBackground: "./underline-gap-examples.jpg"
 Recently, <del>`text-decoration-trim`</del> [`text-decoration-inset`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-decoration-inset) was added to Firefox behind a flag, and I was hoping it could fix a little visual thing that has bugged me on my website: the gap in underlines for inline code when it’s part of a link (e.g.: `<a href="...">A <code>special</code> link</a>`). You can see this happen on popular sites like GitHub or Notion, to name a couple.
 
 {{ set imageUrl = "./underline-gap-examples.jpg" |> toRoot }}
-{{ image imageUrl, "Some blocks of text with an underlined link, and within the text of each, a small code element with a slightly different background colour is visible, and around which the link underline is interrupted.", "GitHub, Notion, and this very website (previously)", { ratio: 614/432 } }}
+{{ image imageUrl, "Some blocks of text with an underlined link, and within the text of each, a small code element with a slightly different background colour is visible, and around which the link underline is interrupted.", "GitHub, Notion, and this very website (previously)", { ratio: "614/432" } }}
 
 It’s not unusual for inline code to have a slightly different background colour, and in turn, padding to give the code some breathing room in the rectangle, preventing the text from being stuck against the edge of the box. But that’s the issue: the padding will separate the inline element a little, causing the underline in the parent link to break around the code element. What can we do?
 
