@@ -340,7 +340,7 @@ hr {
 		outline: 2px solid currentColor;
 		outline-offset: calc(var(--ring-thickness) * -1 - 0.5px);
 
-		mask: radial-gradient(farthest-side at center, #0000 calc(100% - var(--ring-thickness)), red calc(100% - var(--ring-thickness) + 1px));
+		mask: radial-gradient(farthest-side at center, #0000 calc(100% - var(--ring-thickness)), red calc(100% - var(--ring-thickness) + 0.5px));
 	}
 
 	&::after {
