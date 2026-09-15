@@ -568,7 +568,7 @@ Sorry for yapping so much, this is very nostalgic for me! Here’s what my **act
 {{ /echo }}
 
 {{ set imageUrl = [assets.images, 'u2-card-jakhris.png'] |> toPath }}
-{{ image imageUrl, "My stats card for Uncharted 2 online, showing I reached level 60, with a kill-death ratio of 1.14, and 17,755 games played, and a last game played on June 4th, 2011.", "Ooh, the crunchy, low-res nostalgia…", { ratio: "500/125" } }}
+{{ image imageUrl, "My stats card for Uncharted 2 online, showing I reached level 60, with a kill-death ratio of 1.14, and 17,755 games played, and a last game played on June 4th, 2011.", "Ooh, the crunchy, low-res nostalgia…", { ratio: "500/125", bypassLink: true, maxWidth: 500, widths: [500] } }}
 
 {{ echo |> markdown }}
 With that out of the way, let’s see if I can present the data, as it was a decade ago, but neatly…
@@ -886,7 +886,7 @@ Hey, anybody remember the “announcer” telling you your kickback is ready? Fu
 {{ /echo }}
 
 {{ set imageUrl = [assets.images, 'u3-card-jakhris.png'] |> toPath }}
-{{ image imageUrl, "My stats card for Uncharted 3 online, with seemingly little captured data, showing only 16 games played", "That’s barely any data :(", { ratio: "500/125" } }}
+{{ image imageUrl, "My stats card for Uncharted 3 online, with seemingly little captured data, showing only 16 games played", "That’s barely any data :(", { ratio: "500/125", bypassLink: true, maxWidth: 500, widths: [500] } }}
 
 {{ echo |> markdown }}
 ## What about Uncharted 4?
@@ -911,7 +911,7 @@ I did help set up a similar stats card service a while back on [Ratchet-Galaxy](
 {{ /echo }}
 
 {{ set imageUrl = [assets.images, 'acit-card-jakhris.png'] |> toPath }}
-{{ image imageUrl, "My stats card for Ratchet & Clank: A Crack In Time, with various single player stats", "I turned 195 enemies into monkeys!", { ratio: "500/125" } }}
+{{ image imageUrl, "My stats card for Ratchet & Clank: A Crack In Time, with various single player stats", "I turned 195 enemies into monkeys!", { ratio: "500/125", bypassLink: true, maxWidth: 500, widths: [500] } }}
 
 {{ echo |> markdown }}
 We had set up the card service, and eventually Insomniac Games got in touch with us, wanting to make sure this was above-board. It was a friendly call, but given we were using imagery from the game, and had some ads running to cover server costs (we made _cents_!), we were kindly asked to remove those, and insert some “unofficial” language here and there — I’ll pretend it was because looked **so dang good** it seemed official. They were (and are) supporters of the fan site, so I believe they even set us up with an API to stop hammering their servers — whoops. You’d think I would have known better… In any case, those stats pages, as well as the stats cards, were eventually retired, and I don’t believe there are data backups. What an era.

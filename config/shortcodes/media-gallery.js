@@ -52,7 +52,7 @@ function mediaShortcode(type, src, alt, caption = '', options = {}) {
 	const isGroupContext = type === 'image' && options.hasOwnProperty('group') && options.group; // Whether the image is part of a group
 	const hasSingleRedundantWidth = Array.isArray(options.widths) && options.widths.length === 1 && options.widths[0] === options.width;
 	const sizes = options.sizes || ['100vw', '(min-width: 50rem) 50rem'];
-	const widths = type === 'video' || hasSingleRedundantWidth ? [] : options.widths || [480, 800, 1200];
+	const widths = type === 'video' || hasSingleRedundantWidth ? [] : options.widths || [480, 800, 1200].filter((w) => w <= options.width);
 	const srcset = widths.map((w) => `${toNetlifyImage(src, { w: w })} ${w}w`);
 	const maxWidth = options.maxWidth || null;
 
