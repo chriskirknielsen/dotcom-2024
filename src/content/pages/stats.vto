@@ -395,7 +395,7 @@
 {{ image "https://card.psnprofiles.com/1/JaKhris.png", "PSNProfiles.com stats card for JaKhris, showing trophy data (these values change) over time, click to view the profile page", "I don’t use this online, this but it is up-to-date", { ratio: "405/120", linkOverride: 'https://psnprofiles.com/JaKhris', maxWidth: 405, bypassCdn: true } }}
 
 {{ set imageUrl = [assets.images, 'u2-card-jakhris.png'] |> toPath }}
-{{ image imageUrl, "My stats card for Uncharted 2 online, showing I reached level 60, with a kill-death ratio of 1.14, and 17,755 games played, and a last game played on June 4th, 2011.", 'This was a big project, I wrote a whole <a href="/blog/uncharted-2-stats/">post about this</a>', { ratio: "500/125", linkOverride: '/blog/uncharted-2-stats/', maxWidth: 500 } }}
+{{ image imageUrl, "My stats card for Uncharted 2 online, showing I reached level 60, with a kill-death ratio of 1.14, and 17,755 games played, and a last game played on June 4th, 2011.", 'This was a big project, I wrote a whole <a href="/blog/uncharted-2-stats/">post about this</a>', { ratio: "500/125", bypassLink: true, maxWidth: 500 } }}
 
 {{ set imageUrl = [assets.images, 'u3-card-jakhris.png'] |> toPath }}
 {{ image imageUrl, "My stats card for Uncharted 3 online, with seemingly little captured data, showing only 16 games played.", 'This is very incomplete data… see aforementioned post', { ratio: "500/125", bypassLink: true, maxWidth: 500 } }}
