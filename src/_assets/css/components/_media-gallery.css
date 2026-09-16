@@ -45,7 +45,7 @@
 		}
 
 		& > figcaption {
-			padding: var(--size-xs) var(--size-s);
+			padding: var(--size-2xs) var(--size-s);
 
 			font-size: 0.75em;
 			text-align: center;
