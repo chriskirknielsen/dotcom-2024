@@ -116,13 +116,13 @@ html {
 		margin-inline: 0.125em;
 		block-size: 2px;
 
-		background: linear-gradient(var(--a, 90deg), currentColor, transparent);
+		background: radial-gradient(ellipse at var(--p, 0) 50%, currentColor 67%, transparent calc(67% + 1px));
 
 		filter: url(#fx-old-paper);
 	}
 
 	&::before {
-		--a: -90deg;
+		--p: 100%;
 	}
 }
 hr {
