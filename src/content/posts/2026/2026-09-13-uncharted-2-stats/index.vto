@@ -5,6 +5,7 @@
     rssOnlyIntro: "This post is art-directed and will look its very best at the original web page!",
     tags: ['gaming', 'personal'],
     time: '19:20:21',
+    toc: true,
     ogBackground: "./generator-u2-jp.avif",
     themeOverride: "u2stats",
     headingFontOverride: {
@@ -607,9 +608,9 @@ With that out of the way, let’s see if I can present the data, as it was a dec
 <div class="uncharted2-stats-section">
     <div class="uncharted2-stats-2up">
         <div class="uncharted2-stats-2up-item flow">
-            <h2 class="uncharted2-stats-2up-title textAlign-center">
+            <h2 class="uncharted2-stats-2up-title textAlign-center" id="u2-stats-competitive" tabindex="-1">
                 <span data-u2-mode="competitive" aria-hidden="true"></span>
-                <span>Competitive</span>
+                <a href="#u2-stats-competitive" class="heading-anchor">Competitive</a>
             </h2>
 
             <p class="uncharted2-stats-ring" style="--flow-space: var(--size-l); --stats-ring-ratio: {{ uncharted2.competitive.kills / (uncharted2.competitive.kills + uncharted2.competitive.deaths) }};">
@@ -658,9 +659,9 @@ With that out of the way, let’s see if I can present the data, as it was a dec
         </div>
 
         <div class="uncharted2-stats-2up-item flow">
-            <h2 class="uncharted2-stats-2up-title textAlign-center">
+            <h2 class="uncharted2-stats-2up-title textAlign-center" id="u2-stats-cooperative" tabindex="-1">
                 <span data-u2-mode="coop" aria-hidden="true"></span>
-                <span>Cooperative</span>
+                <a href="#u2-stats-cooperative" class="heading-anchor">Cooperative</a>
             </h2>
 
             <p class="uncharted2-stats-ring" style="--flow-space: var(--size-l); --stats-ring-ratio: {{ uncharted2.cooperative.kills / (uncharted2.cooperative.kills + uncharted2.cooperative.deaths) }};">
@@ -703,19 +704,21 @@ With that out of the way, let’s see if I can present the data, as it was a dec
 
 <hr>
 
-<h2 class="textAlign-center">Most Used</h2>
+<h2 class="textAlign-center" id="u2-stats-most-used" tabindex="-1">
+    <a href="#u2-stats-most-used" class="heading-anchor">Most Used</a>
+</h2>
 <div class="uncharted2-stats-section">
     <div class="uncharted2-stats-2up">
         <div class="uncharted2-stats-2up-item flow">
             <div class="uncharted2-stats-section">
                 <div class="uncharted2-stats-2up">
                     <div class="uncharted2-stats-2up-item uncharted2-datagroup">
-                        <h3 class="uncharted2-stats-2up-title textAlign-center">Hero Skin</h3>
+                        <h3 class="uncharted2-stats-2up-title textAlign-center" data-toc="false">Hero Skin</h3>
                         <img src="./skin-{{ uncharted2.most.skin_hero.slug }}.avif" alt="" width="200" height="200" loading="lazy" class="uncharted2-skin marginInline-auto">
                         <p class="textAlign-center">{{ uncharted2.most.skin_hero.label }}</p>
                     </div>
                     <div class="uncharted2-stats-2up-item uncharted2-datagroup">
-                        <h3 class="uncharted2-stats-2up-title textAlign-center">Villain Skin</h3>
+                        <h3 class="uncharted2-stats-2up-title textAlign-center" data-toc="false">Villain Skin</h3>
                         <img src="./skin-{{ uncharted2.most.skin_villain.slug }}.avif" alt="" width="200" height="200" loading="lazy" class="uncharted2-skin marginInline-auto">
                         <p class="textAlign-center">{{ uncharted2.most.skin_villain.label }}</p>
                     </div>
@@ -723,23 +726,23 @@ With that out of the way, let’s see if I can present the data, as it was a dec
             </div>
         </div>
         <div class="uncharted2-stats-2up-item flow">
-            <h3 class="uncharted2-stats-2up-title textAlign-center">Weapons</h3>
+            <h3 class="uncharted2-stats-2up-title textAlign-center" data-toc="false">Weapons</h3>
             <div class="uncharted2-stats-section">
                 <div class="uncharted2-stats-2up">
                     <div class="uncharted2-stats-2up-item uncharted2-datagroup">
-                        <h4 class="textAlign-center">Handgun</h4>
+                        <h4 class="textAlign-center" data-toc="false">Handgun</h4>
                         <div data-u2-weapon="{{ uncharted2.most.handgun }}" aria-hidden="true"></div>
                         <p class="textAlign-center">{{ uncharted2.weapons[uncharted2.most.handgun].label }}</p>
                     </div>
                     <div class="uncharted2-stats-2up-item uncharted2-datagroup">
-                        <h4 class="textAlign-center">Rifle</h4>
+                        <h4 class="textAlign-center" data-toc="false">Rifle</h4>
                         <div data-u2-weapon="{{ uncharted2.most.rifle }}" aria-hidden="true"></div>
                         <p class="textAlign-center">{{ uncharted2.weapons[uncharted2.most.rifle].label }}</p>
                     </div>
                 </div>
             </div>
 
-            <h3 class="uncharted2-stats-2up-title textAlign-center" style="--flow-space: var(--size-m);">Boosters</h3>
+            <h3 class="uncharted2-stats-2up-title textAlign-center" style="--flow-space: var(--size-m);" data-toc="false">Boosters</h3>
             <div class="uncharted2-stats-section">
                 <div class="uncharted2-stats-2up">
                     <div class="uncharted2-stats-2up-item">
@@ -772,17 +775,19 @@ With that out of the way, let’s see if I can present the data, as it was a dec
 
 <hr>
 
-<h2 id="game-mode-totals" class="textAlign-center">Most Played</h2>
+<h2 class="textAlign-center" id="u2-stats-most-played" tabindex="-1">
+    <a href="#u2-stats-most-played" class="heading-anchor">Most Played</a>
+</h2>
 <div class="uncharted2-stats-section">
     <div class="uncharted2-stats-2up">
         <div class="uncharted2-stats-2up-item uncharted2-datagroup">
-            <h3 class="uncharted2-stats-2up-title textAlign-center">Map</h3>
+            <h3 class="uncharted2-stats-2up-title textAlign-center" data-toc="false">Map</h3>
             <img src="./map-{{ uncharted2.most.played_map.slug }}.avif" alt="" width="200" height="200" loading="lazy" class="marginInline-auto">
             <p class="textAlign-center">{{ uncharted2.most.played_map.label }}</p>
         </div>
 
         <div class="uncharted2-stats-2up-item uncharted2-datagroup">
-            <h3 class="uncharted2-stats-2up-title textAlign-center">Game Mode</h3>
+            <h3 class="uncharted2-stats-2up-title textAlign-center" data-toc="false">Game Mode</h3>
             <div data-u2-mode="{{ uncharted2.most.played_type }}" aria-hidden="true" style="--scale: 0.75;"></div>
             <p class="textAlign-center">{{ uncharted2.game_type_total[uncharted2.most.played_type].label }}</p>
         </div>
@@ -792,7 +797,9 @@ With that out of the way, let’s see if I can present the data, as it was a dec
 <hr>
 
 <hgroup class="heading-with-sub">
-    <h2 id="game-mode-totals" class="textAlign-center">Games per Mode</h2>
+    <h2 class="textAlign-center" id="u2-stats-game-mode-totals" tabindex="-1">
+        <a href="#u2-stats-game-mode-totals" class="heading-anchor">Games per Mode</a>
+    </h2>
     <p class="subheading textAlign-center">Total: 1,945</p>
 </hgroup>
 
@@ -810,9 +817,9 @@ With that out of the way, let’s see if I can present the data, as it was a dec
 
 <hr>
 
-<hgroup class="heading-with-sub">
-    <h2 id="game-weapon-totals" class="textAlign-center">Weapon Stats</h2>
-</hgroup>
+<h2 class="textAlign-center" id="u2-stats-weapon-totals" tabindex="-1">
+    <a href="#u2-stats-weapon-totals" class="heading-anchor">Weapon Stats</a>
+</h2>
 
 <div class="uncharted2-stats-section">
     <table class="uncharted2-weapon-stat-table">
@@ -846,7 +853,9 @@ With that out of the way, let’s see if I can present the data, as it was a dec
 <hr>
 
 <hgroup class="heading-with-sub">
-    <h2 id="game-medal-totals" class="textAlign-center">Medals Earned</h2>
+    <h2 class="textAlign-center" id="u2-stats-medal-totals" tabindex="-1">
+        <a href="#u2-stats-medal-totals" class="heading-anchor">Medals Earned</a>
+    </h2>
     <p class="subheading textAlign-center">Total: {{ uncharted2.total_medals |> formatNumber }}</p>
 </hgroup>
 <p class="fontStyle-italic fontSize-smaller textAlign-center" style="--flow-space: 0;">Hover any medal to see its award conditions.</p>

@@ -290,7 +290,7 @@ hr {
 	justify-content: center;
 	align-items: center;
 
-	& > span:not([data-u2-mode]) {
+	& > :not([data-u2-mode]) {
 		text-box: trim-both cap alphabetic;
 	}
 
