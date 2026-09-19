@@ -466,6 +466,8 @@ hr {
 }
 
 .uncharted2-stats-medals-list {
+	--scale: 0.25; /* For the medal images */
+
 	display: grid;
 	grid-template-columns: repeat(var(--u2-mode-grid-count, 1), minmax(min(100%, 8rem), 1fr));
 	gap: var(--size-m);
@@ -473,10 +475,12 @@ hr {
 
 	@container (inline-size > 20rem) {
 		--u2-mode-grid-count: 2;
+		--scale: 0.33;
 	}
 
 	@container (inline-size > 48rem) {
 		--u2-mode-grid-count: 3;
+		--scale: 0.5;
 	}
 }
 
