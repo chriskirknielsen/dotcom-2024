@@ -8,7 +8,7 @@ let anchorifiedContentCache = {};
 class TableOfContents {
 	constructor(options = {}) {
 		this.markup = options.markup;
-		this.selectors = options.selectors || 'h2, h3, h4, h5';
+		this.selectors = options.selectors || 'h2, h3, h4';
 		this.listClass = options.listClass || '';
 		this.listLabelledBy = options.listLabelledBy;
 		this.$ = cheerio.load(this.markup, null, false);
@@ -87,8 +87,7 @@ class TableOfContents {
 
 		// Loop over all the found headings
 		this.headings.each((i, el) => {
-			const h = this.$(el);
-			this.parseHeading(h, this.hierarchy);
+			this.parseHeading(this.$(el), this.hierarchy);
 		});
 
 		const list = this.populateList(this.hierarchy);
@@ -400,9 +399,7 @@ export default function (eleventyConfig, options = {}) {
 				return h;
 			}
 
-			const text = h.text(); // Get the heading content
-			const slug = slugify(text); // Create a slug from the content
-			const id = h.attr('id') || slug;
+			const id = h.attr('id') || slugify(h.text()); // Create a slug from the content if there is not already an ID
 			const inner = `<a class="${anchorClass}" href="#${id}">${h.html()}</a>`;
 			h.attr('id', id);
 			h.attr('tabindex', '-1');
