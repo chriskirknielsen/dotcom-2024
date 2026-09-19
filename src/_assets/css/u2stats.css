@@ -38,7 +38,7 @@ html {
 		--T-dark: var(--ON);
 	}
 
-	h3,
+	h3:not(.toc-title),
 	h4 {
 		--_font-heading-weight: 400;
 	}
