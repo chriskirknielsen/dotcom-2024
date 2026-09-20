@@ -60,11 +60,14 @@
 					background: var(--cb);
 				}
 				body {
+					isolation: isolate;
 					container-type: size;
 					/* min-height: 100%; */
 					display: grid;
 					width: 1200px;
 					height: 630px;
+
+					background: inherit;
 				}
 
 				open-graph {
