@@ -78,7 +78,7 @@ package = "netlify-plugin-debug-cache"
 ### Well-known
 [[redirects]]
   from = "/.well-known/avatar"
-  to = "/assets/img/profile.jpg"
+  to = "/assets/img/profile-256.jpg"
   status = 200
 [[redirects]]
   from = "/.well-known/pronouns"
