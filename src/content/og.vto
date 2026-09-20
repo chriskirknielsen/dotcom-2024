@@ -31,7 +31,7 @@
 	p.data?.design?.slug || '',
 ]) -}}
 {{- set fontImages = collections._fonts.map(f => f.data.customMetaImage).slice(0, 4) -}}
-{{- set projectImages = collections._projects.map(f => f.data.customMetaImage).slice(0, 9) -}}
+{{- set projectImages = collections._projects.map(f => f.data.customMetaImage).slice(1, 9) -}}
 <!DOCTYPE html>
 <html lang="{{ metadata.lang }}">
 	<head>
@@ -245,7 +245,7 @@
 					}
 				}
 				body.isDesignsPage { --stripFactor: 4; }
-				body.isProjectsPage { --stripFactor: 6; }
+				body:is(.isProjectsPage, .isFontsPage) { --stripFactor: 6; }
 			{{ /css }}
 			{{- getBundle 'css', 'opengraph' -}}
 		</style>
@@ -264,12 +264,12 @@
 					const title = context.ogTitle || context.title;
 					
 					// Set up body class modifier
-					document.body.classList.toggle('isHome', context.title === 'Home');
-					document.body.classList.toggle('isProjectsPage', context.title === 'Projects');
-					document.body.classList.toggle('isDesignsPage', context.title === 'Designs');
-					document.body.classList.toggle('isFontsPage', context.title === 'Font Directory');
-					document.body.classList.toggle('isDesignPage', context.tags.includes('_designs'));
-					document.body.classList.toggle('isPostPage', context.tags.includes('_posts'));
+					document.body.classList.toggle('isHome', permalink === '/');
+					document.body.classList.toggle('isProjectsPage', permalink === '/projects/');
+					document.body.classList.toggle('isDesignsPage', permalink === '/designs/');
+					document.body.classList.toggle('isFontsPage', permalink === '/fonts/');
+					document.body.classList.toggle('isDesignPage', permalink.startsWith('/designs/') && permalink !== '/designs/');
+					document.body.classList.toggle('isPostPage', permalink.startsWith('/blog/') && permalink !== '/blog/');
 
 					// Adjust the logo at the top
 					let logoOverlay = '';
@@ -298,7 +298,7 @@
 					} else if (context.url === '/fonts/') {
 						imageStripItems = fontImages.map(f => ({ thumbnail: f }));
 					} else if (context.url === '/designs/') {
-						imageStripItems = Object.values(allPages).filter(p => p.url.startsWith('/designs/') && p.url.length > ('/designs/').length && p.slug).sort((a, b) => slugToNum(a.slug) - slugToNum(b.slug)).slice(0, 20);
+						imageStripItems = Object.values(allPages).filter(p => p.url.startsWith('/designs/') && p.url.length > ('/designs/').length && p.slug).sort((a, b) => slugToNum(a.slug) - slugToNum(b.slug)).slice(0, 24);
 					}
 					document.querySelector('[data-slot="strip"]').innerHTML = imageStripItems.map(e => `<img src="${e.thumbnail || e.customMetaImage}" alt="" width="512" height="512">`).join('');
 				}
