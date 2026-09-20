@@ -47,7 +47,7 @@ export default function (eleventyConfig) {
 
 		const queryString = new URLSearchParams({ permalink: url }).toString();
 		const absolutePermalink = `${data.metadata.url}/og/?${queryString}`;
-		return `https://v1.screenshot.11ty.dev/${encodeURIComponent(absolutePermalink)}`;
+		return `https://v1.screenshot.11ty.dev/${encodeURIComponent(absolutePermalink)}/opengraph/`;
 	});
 
 	eleventyConfig.addFilter('absoluteUrl', function (string, base) {
