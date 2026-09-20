@@ -29,10 +29,10 @@ export default function (eleventyConfig, options = {}) {
 		config.pathToCss = [config.pathToCss];
 	}
 
-	const { pathToCss, placeholder, keyframes, variables, getPageList, dynamicAttributes, getIsBeautifiedHtml } = config;
+	const { pathToCss, placeholder, keyframes, variables, getPageList, dynamicAttributes, getIsSkippedPurgeCss, getIsBeautifiedHtml } = config;
 
 	eleventyConfig.addTransform('purge-and-inline-css', async (content, outputPath) => {
-		if (!outputPath || !outputPath.endsWith('.html')) {
+		if (!outputPath || !outputPath.endsWith('.html') || getIsSkippedPurgeCss(outputPath)) {
 			return content;
 		}
 

@@ -302,8 +302,11 @@ export default async function (eleventyConfig) {
 					return purgeCssList.games;
 				}
 			},
+			getIsSkippedPurgeCss: function (outputPath) {
+				return outputPath === `./${outputDir}/og/index.html`; // Don't purge the CSS on OG page, it is dynamic
+			},
 			getIsBeautifiedHtml: function (outputPath) {
-				return outputPath.endsWith(`/og.html`) === false; // Don't beautify OG pages, they aren't even supposed to be viewed by a human
+				return outputPath !== `./${outputDir}/og/index.html`; // Don't beautify OG page, this isn't even supposed to be viewed by a human
 			},
 		},
 	});

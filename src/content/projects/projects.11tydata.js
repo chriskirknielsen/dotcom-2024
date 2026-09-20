@@ -2,7 +2,7 @@ export default {
 	layout: 'project.vto',
 	tags: ['_projects'],
 	permalink: function (data) {
-		return `/projects/${this.slugify(data.slug || data.page.fileSlug)}/index.html`;
+		return `/projects/${this.slugify(data.slug || data.page.fileSlug)}/`;
 	},
 	eleventyComputed: {
 		customMetaImage: function (data) {

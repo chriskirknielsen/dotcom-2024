@@ -33,7 +33,7 @@ export default {
 				}
 			}
 
-			return `blog/${this.slugify(baseSlug)}/index.html`; // Build the permalink by slugifying the final string used a slug, to ensure it is safe to use
+			return `blog/${this.slugify(baseSlug)}/`; // Build the permalink by slugifying the final string used a slug, to ensure it is safe to use
 		},
 		customMetaImage: function (data) {
 			if (data.permalink) {

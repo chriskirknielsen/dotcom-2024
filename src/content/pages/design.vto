@@ -10,7 +10,7 @@
 			return paginationData;
 		}
 	},
-	permalink: `designs/{{ design.slug |> slugify }}/index.html`,
+	permalink: `designs/{{ design.slug |> slugify }}/`,
 	eleventyComputed: {
 		tags: ['_designs', '_og'],
 		pageTitle: (data) => data.design.name,

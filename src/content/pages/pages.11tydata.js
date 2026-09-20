@@ -2,7 +2,7 @@ import assetsPath from '../../_data/assets.js';
 export default {
 	tags: ['_pages'],
 	section: 'page',
-	permalink: (data) => `/${data.page.fileSlug}/index.html`,
+	permalink: (data) => `/${data.page.fileSlug}/`,
 	layout: 'page.vto',
 	eleventyComputed: {
 		customMetaImage: function (data) {

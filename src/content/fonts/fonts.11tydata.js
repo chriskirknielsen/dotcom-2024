@@ -1,7 +1,7 @@
 export default {
 	layout: false,
 	tags: ['_fonts'],
-	permalink: (data) => `/fonts/${data.page.fileSlug}/index.html`,
+	permalink: (data) => `/fonts/${data.page.fileSlug}/`,
 	isMiniSite: true,
 	fontPrice: 0, // Free by default
 	eleventyComputed: {

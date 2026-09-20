@@ -1,14 +1,349 @@
 ---js
 {
-	layout: 'opengraph.vto',
-	templateEngineOverride: 'vto',
-	pagination: {
-		data: 'collections._og',
-		size: 1,
-		alias: 'post',
-	},
+	layout: false,
+	permalink: '/og/',
 	eleventyExcludeFromCollections: true,
-	permalink: "{{ post.url }}og.html",
-	title: "{{ post.title }}",
+	eleventyImport: {
+		collections: ["_og"]
+	},
+	eleventyComputed: {
+		sizeFactor: function() {
+			return this.sizeFactor;
+		}
+	}
 }
 ---
+{{#- Shout out to https://my.stuffandthings.lol/blog/2025-08-23/og-images-using-11ty-screenshot-service.html -#}}
+{{#- And then simplified via https://www.zachleat.com/web/open-graph-easy-build/ -#}}
+{{#- Grab all the "server-side" data we need to pull into the page -#}}
+{{- set defaultImageUrl = [assets.images, 'profile.jpg'] |> toPath -}}
+{{- set pageObjectKeys = [ 'url', 'ogBg', 'ogTitle', 'ogSummary', 'title', 'tags', 'scale', 'thumbnail', 'customMetaImage', 'slug'] -}}
+{{- set allPages = collections._og.map(p => [
+	p.url,
+	p.data.ogBackground ? p.data.ogBackground.replace(/^\.\//, p.url) : '',
+	p.data.ogImageTitle || '',
+	p.data.ogImageSummary || '',
+	p.data.title,
+	(p.data.tags || []).filter((t) =>  t.startsWith('_') === false),
+	sizeFactor(p.data.ogImageTitle || p.data.title),
+	p.data?.thumbnail || '',
+	p.data?.customMetaImage || '',
+	p.data?.design?.slug || '',
+]) -}}
+{{- set fontImages = collections._fonts.map(f => f.data.customMetaImage).slice(0, 4) -}}
+{{- set projectImages = collections._projects.map(f => f.data.customMetaImage).slice(0, 9) -}}
+<!DOCTYPE html>
+<html lang="{{ metadata.lang }}">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Opengraph Builder | {{ metadata.title }}</title>
+		<link rel="stylesheet" href="{{ [assets.css, 'font-face.css'] |> toPath }}">
+		<link rel="preload" href="{{ [assets.fonts, `${tokens.themes.dusk.font.heading.filename}.woff2`] |> toPath }}" as="font" type="font/woff2" crossorigin>
+		<style>
+			{{- css 'opengraph' }}
+				* {
+					box-sizing: border-box;
+					margin: 0;
+					padding: 0;
+				}
+				html {
+					--fs: {{ tokens.global.typeScale['4'].replace('vw', 'cqmin') }};
+					--ff: {{ tokens.themes.dusk.font.heading.family }}, {{ tokens.themes.dusk.font.heading.fallback }}, {{ tokens.themes.dusk.font.heading.stack }};
+					--ct: {{ tokens.themes.dusk.color.text }};
+					--cb: {{ tokens.themes.dusk.color.canvas }};
+					--ca: {{ tokens.themes.dusk.color.accent }};
+					height: 100%;
+
+					font-family: var(--ff);
+					color: var(--ct);
+					background: var(--cb);
+				}
+				body {
+					container-type: size;
+					/* min-height: 100%; */
+					display: grid;
+					width: 1200px;
+					height: 680px;
+				}
+
+				open-graph {
+					position: relative;
+
+					display: grid;
+					grid-template-rows: 1fr auto 1fr;
+					width: 100%;
+					height: 100%;
+					padding: var(--fs);
+
+					text-align: center;
+				}
+				open-graph::before {
+					content: '';
+					
+					mix-blend-mode: overlay;
+					opacity: 0.8;
+				}
+				open-graph::before,
+				open-graph::after {
+					position: absolute;
+					inset: 0;
+					z-index: -1;
+
+					background: no-repeat center / cover;
+				}
+				open-graph::after {
+					opacity: 0.25;
+				}
+				.logo-wrap {
+					position: relative;
+
+					align-self: start;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					gap: var(--fs);
+					width: 6em;
+					margin: 0 auto;
+
+					font-size: calc(var(--fs) * 2.5);
+				}
+				.logo-wrap::before,
+				.logo-wrap::after {
+					content: '';
+					flex: 1 0 0;
+					height: calc(var(--fs) / 30);
+					background: var(--ca);
+				}
+				.logo-inner {
+					flex: 0 0 auto;
+				}
+				.logo-overlay {
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					right: 0;
+
+					font-size: 0.2em;
+					text-align: center;
+					-webkit-text-stroke: calc(var(--fs) / 15) var(--ca);
+					paint-order: stroke;
+
+					transform: translateY(50%) skewY(-6deg);
+				}
+				.logo {
+					width: 1em;
+					height: auto;
+					display: block;
+					margin: auto;
+					overflow: visible;
+				}
+				.logo-paths {
+					fill: var(--ct);
+					stroke: 0;
+					filter: drop-shadow(calc(var(--fs) / 15) calc(var(--fs) / 15) 0 var(--ca));
+				}
+				.title {
+					margin: 0.1em 0;
+
+					font-size: calc(var(--fs) * 2.25 * var(--scale, 1));
+					line-height: 1.1;
+					text-wrap: balance;
+					text-shadow:
+						-1px -1px 0 #fff,
+						0.02em 0.02em 0 var(--ca),
+						0 0.25em 0.5em var(--cb);
+				}
+				.summary {
+					font-size: calc(var(--fs) * 0.75);
+					font-weight: 200;
+					letter-spacing: 0.0875em;
+					line-height: 1.5;
+					font-family: sans-serif;
+					text-transform: uppercase;
+					text-wrap: balance;
+					text-shadow: 2px 2px 0 var(--cb);
+				}
+				.small { font-size: calc(var(--fs) * 0.5); letter-spacing: 0.125em; }
+				open-graph::before,
+				open-graph::after {
+					background-image: var(--ogBackground, url("{{ defaultImageUrl }}"));
+				}
+
+				[data-condition] { display: none; }
+				[data-slot]:empty { display: none !important; }
+				
+				body.isHome {
+					& open-graph {
+						grid-template-rows: auto auto auto;
+						align-content: end;
+					}
+					& open-graph::before {
+						mix-blend-mode: normal;
+						opacity: 0.5;
+					}
+					& .title, .summary { text-align: right; }
+					& .title {
+						--scale: 1.333 !important;
+
+						letter-spacing: 0.03725em;
+						line-height: 0.9;
+						text-transform: uppercase;
+					}
+					& [data-condition="isHome"] { display: block; }
+					& [data-uncondition="isHome"] { display: none; }
+				}
+
+				body.isDesignPage {
+					& .title {
+						grid-row: -2;
+						align-self: end;
+					}
+
+					& body::after {
+						content: '';
+					}
+
+					& open-graph::before,
+					& open-graph::after {
+						background-size: contain;
+					}
+				}
+
+				body:is(.isProjectsPage, .isFontsPage, .isDesignsPage) {
+					& open-graph::before,
+					& open-graph::after {
+						display: none;
+					}
+					& .strip {
+						position: absolute;
+						inset: 0;
+						z-index: -1;
+
+						display: flex;
+						flex-wrap: wrap;
+						gap: 8px;
+						place-content: center;
+						inline-size: 100%;
+						margin: auto;
+						overflow: hidden;
+						
+						text-wrap: balance;
+						text-align: center;
+
+						opacity: 0.5;
+						mix-blend-mode: overlay;
+					}
+
+					& .strip > img {
+						display: inline-block;
+						margin: 0.25em;
+						block-size: calc(var(--fs) * var(--stripFactor, 8));
+						inline-size: auto;
+						aspect-ratio: 1;
+						object-fit: cover;
+					}
+				}
+				body.isDesignsPage { --stripFactor: 4; }
+				body.isProjectsPage { --stripFactor: 6; }
+			{{ /css }}
+			{{- getBundle 'css', 'opengraph' -}}
+		</style>
+
+		<script>
+			{{ js 'opengraph' }}
+				const pageObjectKeys = {{ pageObjectKeys |> JSON.stringify }};
+				const fontImages = {{ fontImages |> JSON.stringify }};
+				const projectImages = {{ projectImages |> JSON.stringify }};
+				const allPages = Object.fromEntries(({{ allPages |> JSON.stringify }}).map(p => {
+					return [p[0], Object.fromEntries(pageObjectKeys.map((k, i) => [k, p[i]]))]; // Rebuild the object from the arrays
+				}));
+				function slugToNum(slug) { return parseInt(slug.replace(/-/, ''), 36) / 10e16; }
+				function render(context) {
+					const permalink = context.url;
+					const title = context.ogTitle || context.title;
+					
+					// Set up body class modifier
+					document.body.classList.toggle('isHome', context.title === 'Home');
+					document.body.classList.toggle('isProjectsPage', context.title === 'Projects');
+					document.body.classList.toggle('isDesignsPage', context.title === 'Designs');
+					document.body.classList.toggle('isFontsPage', context.title === 'Font Directory');
+					document.body.classList.toggle('isDesignPage', context.tags.includes('_designs'));
+					document.body.classList.toggle('isPostPage', context.tags.includes('_posts'));
+
+					// Adjust the logo at the top
+					let logoOverlay = '';
+					if (permalink.startsWith('/blog/')) { logoOverlay = 'Bloggy Corner'; }
+					else if (permalink.startsWith('/designs/')) { logoOverlay = 'Designs'; }
+					document.querySelector('[data-slot="logo-overlay"]').textContent = logoOverlay;
+
+					// Set the title and its scale
+					document.querySelector('[data-slot="title"]').textContent = title;
+					document.body.style.setProperty('--scale', context.scale || 1);
+
+					// Add the summary and/or tags
+					document.querySelector('[data-slot="summary"]').textContent = context.ogSummary || '';
+					document.querySelector('[data-slot="tags"]').textContent = Array.isArray(context.tags) && context.tags.length > 0 ? context.tags.map(t => `#${t}`).join(', ') : '';
+
+					// Insert image override
+					if (context.ogBg) {
+						document.body.style.setProperty('--ogBackground', `url("${context.ogBg}")`);
+					} else {
+						document.body.style.removeProperty('--ogBackground');
+					}
+
+					let imageStripItems = [];
+					if (context.url === '/projects/') {
+						imageStripItems = projectImages.slice().reverse().map(f => ({ thumbnail: f }));
+					} else if (context.url === '/fonts/') {
+						imageStripItems = fontImages.map(f => ({ thumbnail: f }));
+					} else if (context.url === '/designs/') {
+						imageStripItems = Object.values(allPages).filter(p => p.url.startsWith('/designs/') && p.url.length > ('/designs/').length && p.slug).sort((a, b) => slugToNum(a.slug) - slugToNum(b.slug)).slice(0, 20);
+					}
+					document.querySelector('[data-slot="strip"]').innerHTML = imageStripItems.map(e => `<img src="${e.thumbnail || e.customMetaImage}" alt="" width="512" height="512">`).join('');
+				}
+
+				// Initial conditions
+				document.addEventListener('DOMContentLoaded', () => {
+					let permalink = new URLSearchParams(window.location.search).get('permalink') || '';
+					if (permalink.startsWith('/') === false) {
+						permalink = `/${permalink}`;
+					}
+					if (permalink.endsWith('/') === false) {
+						permalink = `${permalink}/`;
+					}
+					if (!allPages[permalink]) {
+						permalink = '/'; // Default to homepage
+					}
+					const context = allPages[permalink];
+					render(context);
+				});
+			{{ /js }}
+			{{- getBundle 'js', 'opengraph' }}
+		</script>
+	</head>
+	<body class="isHome">
+		<open-graph>
+			<div class="logo-wrap" data-uncondition="isHome">
+				<div class="logo-inner">
+					{{ injectsvg 'logo', { class: 'logo' } }}
+
+					<span class="logo-overlay" data-slot="logo-overlay"></span>
+				</div>
+			</div>
+
+			<div class="strip" data-slot="strip"></div>
+			
+			<h1 class="title" data-slot="title">{{ allPages.find(p => p[0] === '/')[pageObjectKeys.indexOf('ogTitle')] }}</h1>
+
+			<p class="summary" data-slot="summary">{{ allPages.find(p => p[0] === '/')[pageObjectKeys.indexOf('ogSummary')] }}</p>
+
+			<p class="summary small" data-condition="isHome">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="block-size: 1.2em; inline-size: auto; vertical-align: sub;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+				{{ new URL(metadata.url).host }}
+			</p>
+
+			<p class="summary small" data-slot="tags"></p>
+		</open-graph>
+	</body>
+</html>

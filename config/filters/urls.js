@@ -45,12 +45,9 @@ export default function (eleventyConfig) {
 			}
 		}
 
-		if (url.endsWith('/index.html') === false) {
-			url = url.trim().replace(/\/$/, '/index.html'); // Ensure folder-like permalinks get treated as a standard /index.html link
-		}
-
-		const absolutePermalink = `${data.metadata.url}/${url.replace('index.html', 'og.html')}`;
-		return `https://v1.screenshot.11ty.dev/${encodeURIComponent(absolutePermalink)}/opengraph/`;
+		const queryString = new URLSearchParams({ permalink: url }).toString();
+		const absolutePermalink = `${data.metadata.url}/og/?${queryString}`;
+		return `https://v1.screenshot.11ty.dev/${encodeURIComponent(absolutePermalink)}`;
 	});
 
 	eleventyConfig.addFilter('absoluteUrl', function (string, base) {
