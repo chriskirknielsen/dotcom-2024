@@ -61,7 +61,7 @@
 			fills up all the rows since `1 / -1` makes the first item in the main column take up as much space as just this TOC row… */
 		grid-row: 1 / -9;
 		grid-column: --wide-end / --fullbleed-end;
-		justify-self: end;
+		justify-self: start;
 		align-self: start;
 		max-block-size: calc(100dvh - var(--layout-gutter) * 2);
 		overflow: auto;
