@@ -8,10 +8,10 @@
 	{{ /if }}
 	{{ set groupedPosts = postlist |> groupBy('data.year') }}
 	{{ set years = groupedPosts |> Object.keys |> sort |> reverse }}
-	{{ for year of years }}
+	{{ for i, year of years }}
 		{{ set posts = groupedPosts[year] }}
 		{{ if groupByYear }}
-			<details class="postlist-group" open>
+			<details class="postlist-group"{{ if i === 0 }} open{{ /if }}>
 				<summary class="postlist-group-label | u-fontSize-larger">
 					<span class="visually-hidden">Year</span>
 					<span class="postlist-group-label-text">{{ year }}</span>
