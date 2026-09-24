@@ -81,11 +81,12 @@ textarea:not([rows]) {
 	scroll-margin-block: 5ex;
 }
 
-/* Interactive elements should look interactive */
+/* Interactive elements should look interactive and not cause zoom */
 a,
 button,
 summary {
 	cursor: pointer;
+	touch-action: manipulation;
 }
 
 /* Hidden means hidden */
