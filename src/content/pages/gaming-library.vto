@@ -48,12 +48,14 @@
 	</div>
 	
 	<div class="form-label-wrap">
-		<label for="completed-status" class="fontWeight-bold">Completed:</label>
+		<label for="game-filter" class="fontWeight-bold">Filter:</label>
 		<div class="button button--select">
-			<select id="completed-status" data-games-completed>
-				<option value="any" selected>Any</option>
-				<option value="true">Yes</option>
-				<option value="false">No</option>
+			<select id="game-filter" data-games-filter>
+				<option value="all" selected>All</option>
+				<option value="completed">Completed</option>
+				<option value="unfinished">Unfinished</option>
+				<option value="physical">Physical</option>
+				<option value="digital">Digital</option>
 			</select>
 		</div>
 	</div>
@@ -82,13 +84,15 @@
 	{{ /set }}
 	{{ expander expanderLabel, { isExpanded: loopIndex === 1 } }}
 		{{ set gamesPerFormat = { physical: 0, digital: 0 } }}
-		{{ for g of games }}{{> gamesPerFormat[g.discs >= 1 ? 'physical' : 'digital']++ }}{{ /for }}
 		<ul class="gaming-platform-group" data-gaming-platform="{{ platformSlug }}">
 			{{ for i, game of games |> sortBy(false, false, 'sortTitle') }}
+				{{ set gameFormat = game.discs >= 1 ? 'physical' : 'digital' }}
+				{{> gamesPerFormat[gameFormat]++ }}
 				<li
 					class="gaming-box-wrap"
 					{{ if ['Essentials', 'Platinum'].includes(game.edition) }}data-gaming-edition="{{ game.edition |> toLowerCase |> replace(' ', '-') }}"{{ /if }}
-					data-gaming-completed="{{ game.completed || false |> toString }}"
+					data-gaming-completed="{{ game.completed ? 'completed' : 'unfinished' }}"
+					data-gaming-format="{{ gameFormat }}"
 					{{ if game.psnId }}data-gaming-psnid="{{ game.psnId }}"{{ /if }}
 					{{ if platformSlug === 'ps3' }}data-gaming-branding="{{ game.year < 2009 ? 'old' : 'new' }}"{{ /if }}
 					data-game="{{ game |> JSON.stringify |> escape }}"

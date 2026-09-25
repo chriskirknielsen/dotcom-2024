@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
 	document.querySelector('[data-gaming-toolbar]').hidden = false;
 
 	// Reset saved form selection on page load
-	eachDom('[data-games-sizing], [data-games-completed], [data-games-sort]', (select) => (select.value = select.querySelector('option[selected]').value));
+	eachDom('[data-games-sizing], [data-games-filter], [data-games-sort]', (select) => (select.value = select.querySelector('option[selected]').value));
 
 	eachDom('.gaming-box', (spine) => {
 		const button = document.createElement('button');
@@ -319,13 +319,19 @@ document.addEventListener('change', function (e) {
 		const sizeMap = { sm: '0.75em', md: '1em', lg: '1.25em' };
 		document.getElementById('games-library-expander').setAttribute('data-storage', isStack ? 'stack' : 'bookshelf');
 		eachDom('[data-gaming-platform]', (g) => (g.style.fontSize = sizeMap[selectedValue]));
-	} else if ((target = e.target.closest('[data-games-completed]'))) {
-		const selectedValue = target.value || 'any';
-		eachDom('[data-gaming-completed]', (g) => {
-			g.hidden = selectedValue !== 'any' && g.getAttribute('data-gaming-completed') !== selectedValue;
+	} else if ((target = e.target.closest('[data-games-filter]'))) {
+		const selectedValue = target.value || 'all';
+		eachDom('[data-gaming-completed][data-gaming-format]', (g) => {
+			let isHidden = false;
+			if (['completed', 'unfinished'].includes(selectedValue)) {
+				isHidden = g.getAttribute('data-gaming-completed') !== selectedValue;
+			} else if (['physical', 'digital'].includes(selectedValue)) {
+				isHidden = g.getAttribute('data-gaming-format') !== selectedValue;
+			}
+			g.hidden = selectedValue !== 'all' && isHidden;
 		});
 		eachDom('[data-gaming-format-stats]', (g) => {
-			g.hidden = selectedValue !== 'any';
+			g.hidden = selectedValue !== 'all';
 		});
 		eachDom('[data-gaming-count]', (g) => {
 			g.textContent = g.closest('.expander').querySelector('.gaming-platform-group').querySelectorAll(':scope > li:not([hidden])').length;
