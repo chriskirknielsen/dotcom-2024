@@ -506,7 +506,7 @@
 }
 
 /* Overrides for the stacked view */
-#games-library-expander[data-storage='stack'] {
+#gaming-library-expander[data-storage='stack'] {
 	& .gaming-platform-group {
 		container-type: inline-size;
 		isolation: isolate; /* We're going to use _ridiculous_ z-index values so let's isolate them */

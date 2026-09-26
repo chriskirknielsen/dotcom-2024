@@ -15,7 +15,7 @@ const regions = {
 
 const gameslibrary = await notionDatabaseQuery({
 	databaseId: process.env.NOTION_DATABASE_ID_LUDOTHEQUE,
-	label: 'games-library',
+	label: 'gaming-library',
 	propsToUse: ['Title', 'Sort Title', 'PSN ID', 'Edition', 'Platform', 'Region', 'DLC', 'Completed', 'Discs', 'Year', 'Parent item', 'Sub-item', 'Thumbnail', 'Boxart', 'Rating'],
 	filter: {
 		and: [

@@ -317,7 +317,7 @@ document.addEventListener('change', function (e) {
 		const isStack = target.value === 'stack';
 		const selectedValue = (isStack ? null : target.value) || 'md';
 		const sizeMap = { sm: '0.75em', md: '1em', lg: '1.25em' };
-		document.getElementById('games-library-expander').setAttribute('data-storage', isStack ? 'stack' : 'bookshelf');
+		document.getElementById('gaming-library-expander').setAttribute('data-storage', isStack ? 'stack' : 'bookshelf');
 		eachDom('[data-gaming-platform]', (g) => (g.style.fontSize = sizeMap[selectedValue]));
 	} else if ((target = e.target.closest('[data-games-filter]'))) {
 		const selectedValue = target.value || 'all';
