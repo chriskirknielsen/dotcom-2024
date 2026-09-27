@@ -5,6 +5,7 @@
 	permalink: '/stats/',
 	tags: ['_og'],
 	runAutoToc: true,
+	toc: true,
 	eleventyComputed: {
 		ogImageSummary: (data) => data.summary,
 	},
@@ -151,7 +152,7 @@
 {{ /function }}
 
 <h2>The Big Picture</h2>
-<p>A few key figures to sum it all up.</p>
+<p>A few key figures to sum up the metadata for this web site.</p>
 <div style="--flow-space: var(--size-m);">
 	<dl class="dl-tiles dl-tiles--flipped">
 		<div class="dl-tile">
@@ -263,7 +264,7 @@
 		</div>
 
 		<div class="dl-item-wrap">
-			<dt>Frequency by month</dt>
+			<dt>Frequency over months</dt>
 			<dd>
 				{{ buildSparklineFromData({
 					data: postsByDate.slice().reverse(), // Posts are usually sorted in ascending order
@@ -277,7 +278,7 @@
 </div>
 
 <h2 class="running"><span aria-hidden="true">🏃‍♂️</span> Running</h2>
-<p>Running is not my whole personality, but still, it’s fun data to visualise!</p>
+<p>While I am not a super serious runner, it’s fun to visualise that data.</p>
 <div style="--flow-space: var(--size-m);">
 	<dl class="dl-tiles dl-tiles--flipped">
 		<div class="dl-tile">
@@ -290,16 +291,21 @@
 		</div>
 		<div class="dl-tile">
 			<dt>Hours</dt>
-			<dd class="h3">{{ strava.moving_time / 3600 |> toRound }}</dd>
+			<dd class="h3">{{ strava.duration / 3600 |> toRound |> formatNumber }}</dd>
 		</div>
 		<div class="dl-tile">
-			<dt>Average Pace (Km)</dt>
-			{{ set averagePace = strava.moving_time / (strava.distance / 1000) }}
+			<dt>
+				<span class="visually-hidden">Average</span>
+				<span aria-hidden="true">Avg.</span>
+				Pace (per Km)
+			</dt>
+			{{ set averagePace = strava.duration / (strava.distance / 1000) }}
 			{{ set averagePaceM = Math.floor(averagePace / 60) }}
-			{{ set averagePaceS = averagePace % 60 |> toRound |> toString |> padStart(2, '0') }}
+			{{ set averagePaceS = averagePace % 60 |> toRound  }}
+			{{ if averagePaceS == 60 }}{{ set averagePaceM = averagePaceM + 1 }}{{ set averagePaceS = 0 }}{{ /if }}
 			<dd class="h3">
 				{{ averagePaceM }}<span aria-hidden="true">’</span><span class="visually-hidden">minutes</span>
-				{{ averagePaceS }}<span aria-hidden="true">”</span><span class="visually-hidden">seconds</span>
+				{{ averagePaceS |> toString |> padStart(2, '0') }}<span aria-hidden="true">”</span><span class="visually-hidden">seconds</span>
 			</dd>
 		</div>
 		<div class="dl-tile">
@@ -328,7 +334,7 @@
 					{{ /for }}
 				</ol>
 
-				<p class="fontStyle-italic fontSize-smaller">Don’t ask how the hell I went running every 4 days in 2023 because it baffles me.</p>
+				<p class="fontStyle-italic fontSize-smaller">Don’t ask how the hell I went running every 4 days in 2023 because it baffles even me.</p>
 			</dd>
 		</div>
 
