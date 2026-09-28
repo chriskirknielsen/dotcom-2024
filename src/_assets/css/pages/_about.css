@@ -64,7 +64,7 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	width: 100%;
+	inline-size: 100%;
 	padding: 1em clamp(0.25em, 0.25rem + 2vw, 2em) 0;
 	pointer-events: auto;
 	font-family: sans-serif;
@@ -104,7 +104,7 @@
 	display: flex;
 	align-items: stretch;
 	gap: 0.25em;
-	width: 100%;
+	inline-size: 100%;
 	margin-block-end: 0.25em;
 	font-size: 0.5em;
 	line-height: 1;
@@ -147,7 +147,7 @@
 .synth-waveform-labels {
 	display: flex;
 	justify-content: space-between;
-	width: 100%;
+	inline-size: 100%;
 }
 
 .synth-waveform-button {
@@ -163,8 +163,8 @@
 }
 
 .synth-speaker {
-	width: 100%;
-	height: 100%;
+	inline-size: 100%;
+	block-size: 100%;
 	background: repeating-linear-gradient(-45deg, var(--case-text-color), var(--case-text-color) calc(0.125em - 1px), transparent 0.125em, transparent 0.25em) 50% 50%;
 }
 
@@ -213,10 +213,10 @@
 .synth-keys {
 	flex: 1 0 auto;
 	display: grid;
-	gap: 0 0.5px;
+	gap: 0 1px;
 	grid-template-columns: repeat(calc(2 * var(--synth-white-keys)), minmax(0, 1fr));
 	grid-template-rows: 3fr 2fr;
-	height: clamp(5em, 25vw, 8em);
+	block-size: clamp(5em, 25vw, 8em);
 	padding-block: 1px var(--synth-keys-space-end);
 	padding-inline: 1px;
 	background: linear-gradient(to top, transparent, #504430 calc(var(--synth-keys-space-end) * 1.5), transparent) #807460;
@@ -245,8 +245,8 @@
 	all: initial;
 	font-family: var(--fontStack-monospace);
 	display: flex;
-	width: 1.5em;
-	height: 1.5em;
+	inline-size: 1.5em;
+	block-size: 1.5em;
 	justify-content: center;
 	align-items: center;
 	font-size: 0.5em;
@@ -323,7 +323,7 @@
 }
 
 .synth-slider-wrap {
-	width: 100%;
+	inline-size: 100%;
 	line-height: 0.5;
 }
 
@@ -332,13 +332,13 @@
 }
 
 .synth-slider-wrap[data-dir='v'] {
-	width: var(--thumb-thickness);
-	height: var(--track-vertical-height);
+	inline-size: var(--thumb-thickness);
+	block-size: var(--track-vertical-height);
 }
 
 .synth-slider {
-	width: 100%;
-	height: var(--thumb-height);
+	inline-size: 100%;
+	block-size: var(--thumb-height);
 	margin: 0;
 	background: transparent;
 	box-shadow: none;
@@ -346,13 +346,13 @@
 
 [data-dir='h'] .synth-slider {
 	flex: 1 0 0;
-	width: 0;
+	inline-size: 0;
 }
 
 [data-dir='v'] .synth-slider {
-	width: var(--track-vertical-height);
+	inline-size: var(--track-vertical-height);
 	max-width: var(--track-vertical-height);
-	height: var(--thumb-thickness);
+	block-size: var(--thumb-thickness);
 	transform-origin: 0 0;
 	transform: rotate(-90deg) translateX(-100%);
 }
@@ -366,8 +366,8 @@
 
 .synth-slider::-webkit-slider-runnable-track {
 	box-sizing: border-box;
-	width: 100%;
-	height: var(--track-thickness);
+	inline-size: 100%;
+	block-size: var(--track-thickness);
 	margin-block-end: calc((var(--thumb-height) - var(--track-thickness)) * 0.5);
 
 	border-radius: 0;
@@ -381,8 +381,8 @@
 
 .synth-slider::-moz-range-track {
 	box-sizing: border-box;
-	width: 100%;
-	height: var(--track-thickness);
+	inline-size: 100%;
+	block-size: var(--track-thickness);
 
 	border-radius: 0;
 	background-color: #303030;
@@ -393,8 +393,8 @@
 	cursor: ew-resize;
 
 	box-sizing: border-box;
-	width: var(--thumb-width);
-	height: var(--thumb-height);
+	inline-size: var(--thumb-width);
+	block-size: var(--thumb-height);
 	margin-block-start: calc((var(--thumb-height) - var(--track-thickness)) * -0.5);
 	padding: 0;
 
@@ -408,8 +408,8 @@
 
 [data-dir='v'] .synth-slider::-webkit-slider-thumb {
 	cursor: ns-resize;
-	width: var(--thumb-height);
-	height: var(--thumb-width);
+	inline-size: var(--thumb-height);
+	block-size: var(--thumb-width);
 
 	border-width: 0.1875em 0.125em;
 	border-color: #686049 #5b5749 #1f1f15 #343122;
@@ -425,8 +425,8 @@
 	cursor: ew-resize;
 
 	box-sizing: border-box;
-	width: var(--thumb-width);
-	height: var(--thumb-height);
+	inline-size: var(--thumb-width);
+	block-size: var(--thumb-height);
 	padding: 0;
 
 	border-style: solid;
@@ -440,8 +440,8 @@
 [data-dir='v'] .synth-slider::-moz-range-thumb {
 	cursor: ns-resize;
 
-	width: var(--thumb-height);
-	height: var(--thumb-width);
+	inline-size: var(--thumb-height);
+	block-size: var(--thumb-width);
 
 	border-width: 0.1875em 0.125em;
 	border-color: #686049 #5b5749 #1f1f15 #343122;
