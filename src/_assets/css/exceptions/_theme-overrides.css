@@ -635,7 +635,9 @@ html[data-theme='cyberpunk'] {
 	}
 
 	.announcement {
-		clip-path: polygon(0 50%, 0 0, 100% 0, 100% 50%, calc(100% - 1em) 100%, 1em 100%);
+		margin-inline: 0.75em;
+
+		clip-path: polygon(0 calc(100% - 0.75em), 0 0, 100% 0, 100% calc(100% - 0.75em), calc(100% - 0.75em) 100%, 0.75em 100%);
 
 		& :any-link {
 			--LINK-color: var(--color-canvas);
