@@ -307,6 +307,7 @@ html[data-theme='vapor'] {
 
 		border: 12px solid #d5cfca;
 		border-radius: 12px;
+		corner-shape: squircle; /* If supported this will look good without changing the radius */
 		background: var(--crt-frame);
 		box-shadow:
 			0 3px 0 #bbafa4,
@@ -328,15 +329,6 @@ html[data-theme='vapor'] {
 				padding: 0 0.25em;
 
 				line-height: 1.2;
-			}
-		}
-
-		@supports (corner-shape: bevel) {
-			corner-shape: squircle;
-
-			& > img {
-				corner-shape: superellipse(2);
-				border-radius: 30px;
 			}
 		}
 	}
