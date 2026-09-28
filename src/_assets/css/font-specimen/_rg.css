@@ -23,8 +23,8 @@ h2 {
 		inset-block-start: 0.5em;
 		inset-inline-start: -1.25em;
 
-		width: 0.75em;
-		height: 1em;
+		inline-size: 0.75em;
+		block-size: 1em;
 
 		font-size: 0.5em;
 		line-height: 1;
@@ -113,7 +113,7 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 	&::before {
 		content: '';
 		display: inline-block;
-		height: 1em;
+		block-size: 1em;
 	}
 }
 
@@ -127,7 +127,9 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 
 	text-decoration: none;
 	color: var(--palette-04);
-	text-shadow: 0 1px 0 var(--palette-01), 0 -1px 0 var(--palette-05);
+	text-shadow:
+		0 1px 0 var(--palette-01),
+		0 -1px 0 var(--palette-05);
 	border-radius: 4px;
 
 	transform: translateY(var(--dl-button-offset, 0px));
@@ -153,7 +155,9 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 		z-index: -1;
 
 		background: linear-gradient(-45deg, var(--palette-06, orange), var(--palette-07, yellow), var(--palette-06, orange));
-		box-shadow: inset 0 -1px 4px rgba(255, 255, 255, 0), inset 0 -0.25em 2em rgba(0, 0, 0, 0.25);
+		box-shadow:
+			inset 0 -1px 4px rgba(255, 255, 255, 0),
+			inset 0 -0.25em 2em rgba(0, 0, 0, 0.25);
 	}
 
 	&::after {
@@ -188,7 +192,9 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 
 .sentence-sample {
 	line-height: 1.1;
-	text-shadow: -2px 2px 0 var(--bg-main), -3px 3px 0 var(--palette-08);
+	text-shadow:
+		-2px 2px 0 var(--bg-main),
+		-3px 3px 0 var(--palette-08);
 }
 
 /* Hero section */
@@ -207,14 +213,14 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 .main-heading-bg {
 	position: relative;
 
-	width: 90%;
+	inline-size: 90%;
 	max-width: min(32rem, 60vw);
-	height: auto;
+	block-size: auto;
 	margin: auto;
 }
 
 .cogwheel {
-	width: 100%;
+	inline-size: 100%;
 
 	@media (prefers-reduced-motion: no-preference) {
 		animation: --revealScale 1s cubic-bezier(0.215, 0.61, 0.355, 1) 1;
@@ -240,7 +246,7 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 
 	inset: 0;
 
-	width: 75%;
+	inline-size: 75%;
 	margin: auto;
 
 	fill: currentColor;
@@ -269,7 +275,9 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 
 	font-size: min(16rem, var(--main-heading-magic-number));
 	color: var(--palette-01);
-	text-shadow: -2px 2px 0 var(--bg-main), -3px 3px 0 var(--palette-08);
+	text-shadow:
+		-2px 2px 0 var(--bg-main),
+		-3px 3px 0 var(--palette-08);
 }
 
 .main-heading-sub {
@@ -318,7 +326,8 @@ button.glyph:is(:hover, :focus-visible):not(#\#) {
 		/* d = h / (2*tan(60°)); with h = the height of the button */
 
 		border: 0;
-		background: linear-gradient(to bottom, var(--thumb-color) var(--switch-border), transparent 0) 0 100%,
+		background:
+			linear-gradient(to bottom, var(--thumb-color) var(--switch-border), transparent 0) 0 100%,
 			/* top border */ linear-gradient(to top, var(--thumb-color) var(--switch-border), transparent 0) 0 0,
 			/* bottom border */ linear-gradient(-60deg, transparent calc(50% - var(--switch-border)), var(--thumb-color) 0) no-repeat 0 0 / var(--switch-distance) 50%,
 			/* top left */ linear-gradient(60deg, transparent calc(50% - var(--switch-border)), var(--thumb-color) 0) no-repeat 100% 0 / var(--switch-distance) 50%,

@@ -730,8 +730,8 @@ html:not(.no-js) .freetype-option-nojs {
 
 	&::-webkit-slider-runnable-track {
 		box-sizing: border-box;
-		height: var(--track-thickness);
-		width: 100%;
+		block-size: var(--track-thickness);
+		inline-size: 100%;
 		margin-block-end: calc((var(--thumb-height) - var(--track-thickness)) * 0.5);
 
 		border-radius: 1px;
@@ -741,8 +741,8 @@ html:not(.no-js) .freetype-option-nojs {
 
 	&::-moz-range-track {
 		box-sizing: border-box;
-		height: var(--track-thickness);
-		width: 100%;
+		block-size: var(--track-thickness);
+		inline-size: 100%;
 		margin-block-end: calc((var(--thumb-height) - var(--track-thickness)) * 0.5);
 
 		border-radius: 1px;

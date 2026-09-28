@@ -117,9 +117,9 @@
 	inset-inline-start: 100%;
 
 	display: flex;
-	width: auto;
+	inline-size: auto;
 	max-width: unset;
-	height: calc(100% + 2 * var(--box-border-size-block) + var(--box-cover-padding-block-start, 0px));
+	block-size: calc(100% + 2 * var(--box-border-size-block) + var(--box-cover-padding-block-start, 0px));
 	aspect-ratio: var(--box-width) / var(--box-height);
 
 	border-block-style: solid;
@@ -180,9 +180,9 @@
 }
 
 .gaming-front-art {
-	width: 100%;
+	inline-size: 100%;
 	max-width: unset;
-	height: 100%;
+	block-size: 100%;
 	padding: var(--box-cover-padding, 0);
 	/* object-fit: cover; */
 }

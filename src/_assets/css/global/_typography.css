@@ -46,8 +46,8 @@ main {
 
 		flex: 1 0 0;
 		display: block;
-		height: 1.6em;
-		height: 1lh;
+		block-size: 1.6em;
+		block-size: 1lh;
 
 		background: linear-gradient(90deg, currentColor, transparent) no-repeat center / 100% 1px;
 	}

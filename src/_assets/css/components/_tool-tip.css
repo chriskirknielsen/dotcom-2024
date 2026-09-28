@@ -1,8 +1,8 @@
 tool-tip:not(:defined):not(:hover, :focus-visible, :focus-within) > .tip-content/*,
 tool-tip:defined > .tip-content:not(:popover-open)*/ {
 	position: absolute;
-	width: 1px;
-	height: 0;
+	inline-size: 1px;
+	block-size: 0;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
