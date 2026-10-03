@@ -205,16 +205,16 @@
 		{{ set physicalGamesPercentage = gamesPerFormat.physical / (gamesPerFormat.digital + gamesPerFormat.physical) * 100 |> toRound(1) }}
 		<p class="textAlign-center textWrap-balance fontSize-smaller fontStyle-italic" data-gaming-format-stats>
 			{{>
-				let emoji;
-				if (physicalGamesPercentage > 66.6) { emoji = '😁'; } // Good!
-				else if (physicalGamesPercentage < 5) { emoji = '😭'; } // Abysmally terrible
-				else if (physicalGamesPercentage < 33.3) { emoji ='😔'; } // Not great
-				else { emoji =  '😅'; } // Between 1/3 and 2/3, not too bad but could be better
+				let scoreOutOfFour = 0;
+				if (physicalGamesPercentage > 66.6) { scoreOutOfFour = 4; } // Good!
+				else if (physicalGamesPercentage > 33.3) { scoreOutOfFour = 3; } // Between 1/3 and 2/3, not too bad but could be better
+				else if (physicalGamesPercentage > 5) { scoreOutOfFour = 2; } // Not great
+				else { scoreOutOfFour = 1; } // Abysmally terrible
 			}}
-			{{ gamesPerFormat.physical > 0 && physicalGamesPercentage <= 66.6 ? 'Only' : '' }}
+			{{ gamesPerFormat.physical > 0 && scoreOutOfFour < 4 ? 'Only' : '' }}
 			{{ gamesPerFormat.physical > 0 ? gamesPerFormat.physical : 'None' }} of these games are physical versions
 			{{ physicalGamesPercentage > 0 ? `(${physicalGamesPercentage}%)` : '' }}
-			{{ emoji }}
+			{{ ['','😭','😔','😅','😁'][scoreOutOfFour] }}
 		</p>
 		{{ /if }}
 	{{ /expander }}
