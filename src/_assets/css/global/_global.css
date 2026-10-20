@@ -16,6 +16,10 @@ html {
 			scroll-behavior: smooth;
 		}
 	}
+
+	&.translated-rtl {
+		direction: rtl;
+	}
 }
 
 body {
