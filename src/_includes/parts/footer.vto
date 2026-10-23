@@ -20,15 +20,12 @@
 				<ul class="inline-list">
 					{{ for navItem of footerNav -}}
 						{{> let navHref = navItem.path;
-							if (navItem.path.includes('mailto:')) {
-								navHref = navItem.path.split('').map((c) => `&#${c.charCodeAt(0)};`).join('');
-							} else if (navItem.isRepoFileLink) {
+							if (navItem.isRepoFileLink) {
 								navHref = `${metadata.repo}/blob/main/${page.inputPath}`;
 							}
 						}}<li><a
 							href="{{ navHref }}"
 							{{ navItem.path |> getIsCurrentPage(page) }}
-							{{ if navItem.path.includes('mailto:') }}id="footer-email-link" class="u-email"{{ /if }}
 						>{{ navItem.label }}</a></li>
 					{{ /for -}}
 				</ul>

@@ -19,10 +19,6 @@ const slashPages = [
 	{ path: '/music/', label: '/music' },
 ];
 const gamesLibrary = { path: '/games/library/', label: 'Gaming Library' };
-const email = {
-	path: 'mailto:chriskirknielsen+dot-com@gmail.com',
-	label: 'Email',
-};
 
 export default {
 	rss, // Expose it via global data
@@ -46,6 +42,6 @@ export default {
 			{ path: '', label: 'Report Issue', isRepoFileLink: true }, // Empty link that gets replaced on every page with the GitHub one
 		],
 		[{ ...rss, label: 'RSS' }, ...socialFromEntry],
-		[email],
+		[{ path: '/contact/', label: 'Contact' }],
 	],
 };
