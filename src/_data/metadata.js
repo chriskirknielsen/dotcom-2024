@@ -16,7 +16,7 @@ export default {
 	author: {
 		name: 'Christopher Kirk-Nielsen',
 		shortname: 'Chris',
-		email: 'chriskirknielsen@gmail.com',
+		email: 'chriskirknielsen+dot-com@gmail.com',
 		mastodon: social.mastodon.url,
 		// bluesky: social.bluesky.url,
 	},
