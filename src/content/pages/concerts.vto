@@ -134,7 +134,8 @@
 			stub: 'stub-2012-05-25-justice.avif',
 			stubSize: [522, 321],
 			stubHue: 298,
-			commentary: 'Great show but this is where I got my ears damaged and I’ve had tinnitus since… it’s faint but constant. Always wear earplugs, kids! As a result it’s a bittersweet event…',
+			commentary: `Great show but this is where I got my ears damaged and I’ve had tinnitus since… it’s faint but constant. Always wear earplugs, kids! As a result it’s a bittersweet event…
+			![A very poor quality photo of a stage with a cross and a wall of Marshall amplifiers.](/assets/img/concert-stubs/photo-justice.avif)`,
 		},
 		{
 			date: '2012-06-25',
@@ -145,7 +146,9 @@
 			stub: 'stub-2012-06-25-deadmau5.avif',
 			stubSize: [516, 321],
 			stubHue: 298,
-			commentary: 'I built a “creepermau5” head for this, made of papier mâché, taking it with me in the train for 2 hours to get to Paris. It was loads of fun, and thankfully I could be in the front row so I could "lower" the head past the guardrail and not spoil the show for the people behind me. Joel Zimmerman (deadmau5) gave me some finger guns when he saw my creation, so that was cool.',
+			commentary: `I built a “creepermau5” head for this, made of papier mâché, taking it with me in the train for 2 hours to get to Paris. This was relevant because deadmau5 was a big Minecraft fan and had something like this in the game, I believe. It was loads of fun, and thankfully I could be in the front row so I could "lower" the head past the guardrail and not spoil the show for the people behind me. Joel Zimmerman (deadmau5) gave me some finger guns when he saw my creation, so that was cool. A photographer even took a really nice shot: [view on Flickr](https://www.flickr.com/photos/well_done/7444636652/in/photostream/lightbox/).
+			![A poor quality photo from the front row of the stage with the “Cube” and deadmau5 at the helm. You can see a security guard and a bunch of lights.](/assets/img/concert-stubs/photo-deadmau5-olympia.avif)
+			![A montage of the various steps to build the Creeper mau5head I made, which is based off of the Minecraft creeper. There is a papier mâché sphere with 9 layers, electrical wiring and batteries, and styrofoam ears with long rods within.](/assets/img/concert-stubs/photo-deadmau5-creeper.avif)`,
 		},
 		{
 			date: '2014-03-08',
@@ -158,6 +161,15 @@
 			stubHue: 28,
 			commentary: 'A wonderful evening with friends enjoying a Final Fantasy orchestral concert, couldn’t ask for more.',
 			type: 'orchestra',
+		},
+		{
+			date: '2014-05-28',
+			city: 'Paris, France',
+			venue: 'La Machine du Moulin Rouge',
+			main: 'The Glitch Mob',
+			seat: 'GA',
+			commentary: `It was fun to see them live but the venue did not make it easy to enjoy.
+			![A poor quality photo of a small stage lit with red light with three "tables" and DJs in front of them.](/assets/img/concert-stubs/photo-theglitchmob.avif)`,
 		},
 		{
 			date: '2015-08-25',
@@ -178,7 +190,8 @@
 			main: 'deadmau5',
 			sub: '+ Feed Me',
 			seat: { section: 'BALC1', row: 'GA7', seat: 13 },
-			commentary: 'One fun thing I remember about this show is a guy next to me seeing the bracelet (denoting I could buy alcohol) and saying “let me know if you want me to buy you some booze”. Had to politely explain “thanks but I can do that on my own”!',
+			commentary: `One fun thing I remember about this show is a guy next to me seeing the bracelet (denoting I could buy alcohol) and saying “let me know if you want me to buy you some booze” (was it a cop??). Had to politely explain “thanks but I can do that on my own”.
+			![A view slightly above the stage where bright light beams shine through parts of the “Cube” used as a DJ “station”.](/assets/img/concert-stubs/photo-deadmau5-hammerstein.avif)`,
 		},
 		{
 			date: '2017-05-03',
@@ -186,7 +199,8 @@
 			venue: 'Brooklyn Steel',
 			main: 'Tycho',
 			seat: 'GA',
-			commentary: 'Very good show, this one! Gutted I didn’t go to the following day’s show, as Khruangbin was opening!'
+			commentary: `Very good show, this one! Gutted I didn’t go to the following day’s show, as Khruangbin was opening!
+			![A poor quality photo of the stage with a deep orange wall, a black trapezoidal shape at the bottom, and a white circle above. There are a few microhpones stands and a drumkit.](/assets/img/concert-stubs/photo-tycho.avif)`
 		},
 		{
 			date: '2018-05-23',
@@ -342,7 +356,7 @@
 					</button>
 				</div>
 
-				<p>{{ event.commentary }}</p>
+				<div class="event-info-commentary | flow">{{ event.commentary |> markdown }}</div>
 			</div>
 		</dialog>
 		{{ /if }}
@@ -524,6 +538,13 @@
 		background-color: oklch(10% 80% var(--hue));
 		outline: 2px solid oklch(10% 80% var(--hue));
 		outline-offset: 2px;
+	}
+
+	.event-info-commentary img {
+		display: block;
+		inline-size: 100%;
+		max-inline-size: 42rem;
+		margin-inline: auto;
 	}
 </style>
 <script>
