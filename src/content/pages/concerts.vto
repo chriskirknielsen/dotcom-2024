@@ -291,7 +291,7 @@
 </div>
 
 <ol class="event-list">
-{{ for i, event of events.sort((a,b) => b.date.localeCompare(a.date)) }}
+{{ for i, event of events.sort((a, b) => b.date.localeCompare(a.date)) }}
 	<li class="event-item" style="--i: {{ i+1 }};{{ if event.stubHue }} --h: {{ event.stubHue }};{{ /if }}" aria-labelledby="concert-label-{{ i+1 }}">	
 		<div class="event-ticket-container">
 			<h2 id="concert-label-{{ i+1 }}" class="visually-hidden">{{ event.main }}</h2>
@@ -547,6 +547,8 @@
 		inline-size: 100%;
 		max-inline-size: 42rem;
 		margin-inline: auto;
+		margin-block-start: 1em;
+		margin-block-start: 1lh;
 	}
 </style>
 <script>
