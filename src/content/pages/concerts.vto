@@ -419,7 +419,7 @@
 		backface-visibility: hidden;
 		rotate: calc(sign(mod(var(--i), 2) - 0.5) * mod(5 * var(--i), 7) * 0.5deg * var(--a, 1));
 		
-		filter: drop-shadow(0 4px 4px #0008);
+		
 	}
 
 	.event-ticket--plaintext {
@@ -432,11 +432,13 @@
 		color: #000000;
 		border-inline: 2px dashed #0008;
 		background: oklch(95% 10% var(--hue));
+		box-shadow: 0 4px 4px #0008;
 	}
 
 	.event-ticket--scan {
 		zoom: 1.2;
 		transform: rotateY(180deg);
+		filter: drop-shadow(0 4px 4px #0008);
 	}
 
 	.event-list--show-scans .event-ticket-container:has(.event-ticket--scan) {
