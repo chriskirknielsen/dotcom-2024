@@ -26,6 +26,7 @@
 
 		a:any-link {
 			text-decoration: underline;
+			text-underline-offset: auto;
 		}
 
 		a:is([href^='#'], .header-logo, .button--tag) {
@@ -104,20 +105,26 @@
 			margin-block: 0;
 			padding-block: 0;
 		}
+		.homepage-social {
+			grid-template-columns: 1fr;
+		}
 
-		.hide-when-print,
-		[data-theme-condition],
-		.announcement,
-		.header-menu,
-		.footer > :not(p),
-		.footer-decorator,
-		.signoff-photo,
-		.signoff-decorators,
-		[data-about='facts'],
-		.synth,
-		.synth-instructions,
-		.filtering,
-		[data-codewrap-copy] {
+		:is(
+			.hide-when-print,
+			[data-theme-condition],
+			.announcement,
+			.header-menu,
+			.footer > :not(p),
+			.footer-decorator,
+			.toc,
+			.signoff,
+			main > article > footer + nav,
+			[data-about='facts'],
+			.synth,
+			.synth-instructions,
+			.filtering,
+			[data-codewrap-copy]
+		) {
 			display: none !important;
 		}
 	}
