@@ -9,11 +9,11 @@ Alright, I am a little late to the party but here is my [Interop 2027 ranking](h
 
 ## My shortlist
 
-1. 🥇 [CSS `flex-wrap: balance`](https://github.com/web-platform-tests/interop/issues/1350).
+1. [CSS `flex-wrap: balance`](https://github.com/web-platform-tests/interop/issues/1350).
 I re-implement this with block layout and inline-flex elements too often. Just gimme it.
-2. 🥈 [CSS `if()` function](https://github.com/web-platform-tests/interop/issues/1343).
+2. [CSS `if()` function](https://github.com/web-platform-tests/interop/issues/1343).
 This would be so good to have for my theming shenanigans. And a thousand other things.
-3. 🥉 [CSS `filter(image, ...filters)`](https://github.com/web-platform-tests/interop/issues/1449).
+3. [CSS `filter(image, ...filters)`](https://github.com/web-platform-tests/interop/issues/1449).
 How many times have set up pseudo-elements just to lower the opacity of a background image? That’s right, too many.
 4. [CSS gap decorations](https://github.com/web-platform-tests/interop/issues/1374).
 No more hacky pseudo-elements with `overflow: clip` and negative margins… yeah count me in.
@@ -65,3 +65,9 @@ We all have different lists, can you believe it?
 - [Sara Soueidan: My top picks for Interop 2027](https://www.sarasoueidan.com/blog/interop-2027-rankings/)
 - [Stuart Robson: My top picks for Interop 2027](https://www.alwaystwisted.com/articles/and-thats-my-rank-2027-edition)
 - [Tyler Sticka: My Interop 2027 Ranking](https://tylersticka.com/journal/interop-2027-rank/)
+
+<style>
+    article ol:not([class]) > li:nth-child(1)::marker { content: '🥇\2009' / '1'; }
+    article ol:not([class]) > li:nth-child(2)::marker { content: '🥈\2009' / '2'; }
+    article ol:not([class]) > li:nth-child(3)::marker { content: '🥉\2009' / '3'; }
+</style>
