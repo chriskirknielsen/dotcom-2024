@@ -63,7 +63,7 @@ We all have different lists, can you believe it?
 - [Jeremy Keith: Ranking proposals for Interop 2027](https://adactio.com/journal/22805)
 - [Paweł Grzybek: My Interop 2027 picks](https://pawelgrzybek.com/my-interop-2027-picks/)
 - [Sara Soueidan: My top picks for Interop 2027](https://www.sarasoueidan.com/blog/interop-2027-rankings/)
-- [Stuart Robson: My top picks for Interop 2027](https://www.alwaystwisted.com/articles/and-thats-my-rank-2027-edition)
+- [Stuart Robson: ... And That's My Rank! 2027 Edition](https://www.alwaystwisted.com/articles/and-thats-my-rank-2027-edition)
 - [Tyler Sticka: My Interop 2027 Ranking](https://tylersticka.com/journal/interop-2027-rank/)
 
 <style>
