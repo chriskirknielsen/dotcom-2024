@@ -363,10 +363,15 @@
 	const gamingMetaData = gamingLibraryData.meta;
 	const gamingTrophyData = gamingMetaData.totalTrophyData;
 	const gamingPlatformsCount = gamingMetaData.allPlatform.length;
-	const gamingGamesData = gamingLibraryData.data;
+	const gamingGamesData = gamingLibraryData.data.filter(g => !g.isTrophyEntryOnly);
 	const gamingGamesCount = gamingGamesData.length;
-	const gamingPhysicalCount = gamingGamesData.filter(g => g.discs).length;
-	const gamingCompletedCount = gamingGamesData.filter(g => g.completed).length;
+	const gamingGamesStats = gamingGamesData.reduce((agg, g) => {
+		if (g.discs) { agg.physical++; }
+		if (g.completed) { agg.completed++; }
+		return agg;
+	}, { physical: 0, completed: 0 });
+	const gamingPhysicalCount = gamingGamesStats.physical;
+	const gamingCompletedCount = gamingGamesStats.completed;
 }}
 <div style="--flow-space: var(--size-m);">
 	<dl class="dl-tiles dl-tiles--flipped">
