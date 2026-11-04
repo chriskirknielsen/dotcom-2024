@@ -56,15 +56,21 @@ Note that I initially had about 30+ items but I’ve reduced the list a little b
 
 We all have different lists, can you believe it?
 
-- [Ana Rodrigues: My Interop feature ranking](https://ohhelloana.blog/my-interop-2027/) (I love the context-dependent lists!)
-- [Cyd Stumpel: My picks for interop 2027](https://cydstumpel.nl/my-picks-for-interop-2027/)
-- [Declan Chidlow: My Interop 2027 Rankings](https://vale.rocks/micros/20261011-0700)
-- [Eric Meyer: My Interop 2027 Rankings](https://meyerweb.com/eric/thoughts/2026/10/14/my-interop-2027-rankings/)
-- [Jeremy Keith: Ranking proposals for Interop 2027](https://adactio.com/journal/22805)
-- [Paweł Grzybek: My Interop 2027 picks](https://pawelgrzybek.com/my-interop-2027-picks/)
-- [Sara Soueidan: My top picks for Interop 2027](https://www.sarasoueidan.com/blog/interop-2027-rankings/)
 - [Stuart Robson: ... And That's My Rank! 2027 Edition](https://www.alwaystwisted.com/articles/and-thats-my-rank-2027-edition)
+- [Ana Rodrigues: My Interop feature ranking](https://ohhelloana.blog/my-interop-2027/) (I love the context-dependent lists!)
 - [Tyler Sticka: My Interop 2027 Ranking](https://tylersticka.com/journal/interop-2027-rank/)
+- [Sara Soueidan: My top picks for Interop 2027](https://www.sarasoueidan.com/blog/interop-2027-rankings/)
+- [Declan Chidlow: My Interop 2027 Rankings](https://vale.rocks/micros/20261011-0700)
+- [Paweł Grzybek: My Interop 2027 picks](https://pawelgrzybek.com/my-interop-2027-picks/)
+- [Cyd Stumpel: My picks for interop 2027](https://cydstumpel.nl/my-picks-for-interop-2027/)
+- [David Marland: My Interop 2027 Preferences](https://www.hammerspace.co.uk/posts/interop2027-10-2026)
+- [Eric Meyer: My Interop 2027 Rankings](https://meyerweb.com/eric/thoughts/2026/10/14/my-interop-2027-rankings/)
+- [Roland Franke: My Interop 2027 CSS Wishlist: 10 Features](https://rolandfranke.nl/frontend-stories/my-interop-2027-css-wishlist/)
+- [Jeremy Keith: Ranking proposals for Interop 2027](https://adactio.com/journal/22805)
+- [Josh Comeau: The Future of CSS](https://www.joshwcomeau.com/css/interop-2027/)
+- [Remy Sharp: My 2027 Web Platform Feature Ranking](https://remysharp.com/2026/10/29/my-2027-web-platform-feature-ranking)
+- [Ky Decker: My Interop feature ranking](https://ky.fyi/posts/interop-2027)
+- [Alistair Shepherd: Interop Priority Ranking 2027](https://alistairshepherd.uk/writing/interop-priorities-2026/)
 
 <style>
     article ol:not([class]) > li:nth-child(1)::marker { content: '🥇\2009' / '1'; }
