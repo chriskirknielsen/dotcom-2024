@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import apiCache from './api-cache.js';
-import { Client as NotionClient } from '@notionhq/client';
+import Notion from '@notionhq/client';
+const { Client: NotionClient } = Notion;
 
 /**
  * Retrieve data from a Notion database.
