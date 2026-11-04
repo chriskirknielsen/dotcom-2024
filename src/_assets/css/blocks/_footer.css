@@ -76,6 +76,17 @@
 	&:has(li:hover) li:not(:hover) {
 		filter: opacity(0.75) grayscale(0.5);
 	}
+
+	@supports (flex-wrap: balance) {
+		display: flex;
+		flex-wrap: balance;
+		justify-content: center;
+		gap: calc(var(--gap) * 2);
+
+		& > li {
+			margin: 0;
+		}
+	}
 }
 
 .footer-message {
