@@ -47,6 +47,7 @@ ol > li > ol {
 	list-style-type: '';
 	display: flex;
 	flex-wrap: wrap;
+	flex-wrap: balance;
 	gap: max(8px, var(--list-gap, var(--size-xs)));
 }
 
