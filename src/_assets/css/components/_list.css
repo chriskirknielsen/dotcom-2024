@@ -100,6 +100,18 @@ li:has(> .list-item-icon) {
 	border: 1px solid var(--color-text);
 	background: var(--color-canvas);
 }
+@supports (flex-wrap: balance) {
+	.icon-badge-list > .inline-list:has(.icon-badge-list-item) {
+		display: flex;
+		flex-wrap: balance;
+		gap: var(--size-xs);
+		align-items: center;
+	}
+
+	.icon-badge-list-item {
+		margin: 0;
+	}
+}
 .icon-badge-list-icon {
 	& > svg {
 		--ICON-size: 1em;
