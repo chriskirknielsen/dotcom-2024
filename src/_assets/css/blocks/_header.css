@@ -162,7 +162,7 @@ html.no-js .header-themepicker {
 
 theme-picker {
 	/**
-		 * 1: padding on both sides + gap between items + expected buttons size.
+		 * 1: padding on both sides + gap between items + (expected buttons size * 4 buttons).
 		 * 2: CTA-radius-aware picker corner rounding.
 		 */
 	--PICKER-parent-inline-size: calc(var(--_cta-icon-size, 2.5em) + 2 * (var(--_cta-border-width) + var(--_cta-padding-inline)));
@@ -178,7 +178,12 @@ theme-picker {
 	flex-direction: column;
 	align-items: center;
 	gap: var(--PICKER-gap);
-	min-inline-size: calc(var(--PICKER-padding) * 2 + var(--PICKER-gap) + var(--PICKER-cta-inline-size) * 2); /* 1 */
+	min-inline-size: calc(var(--PICKER-padding) * 2 + var(--PICKER-gap) + var(--PICKER-cta-inline-size)); /* 1 */
+	inline-size: max-content;
+	max-inline-size: min(
+		100vi - var(--PICKER-parent-inline-size) - var(--PICKER-padding) * 2,
+		calc(var(--PICKER-padding) * 2 + var(--PICKER-gap) * 3 + var(--PICKER-cta-inline-size) * 4)
+	); /* 1 */
 	padding: var(--PICKER-padding);
 
 	color: var(--color-text);
@@ -202,8 +207,9 @@ theme-picker {
 .theme-picker-scheme-group {
 	flex: 1 0 auto;
 	display: flex;
-	gap: var(--size-xs);
+	gap: var(--size-2xs) var(--size-xs);
 	flex-wrap: wrap;
+	flex-wrap: balance;
 	align-items: start;
 	justify-content: center;
 }
