@@ -764,7 +764,7 @@
 		inherits: false;
 	}
 
-	.gaming-details-trophies-badge::after {
+	.gaming-details-trophies-badge[data-trophy-level='platinum']::after {
 		animation: --trophyAngleAnim 5s linear infinite;
 	}
 
@@ -943,8 +943,4 @@
 
 .gaming-trophies-stats {
 	grid-area: stats;
-
-	& .gaming-details-trophies-badge::after {
-		animation-play-state: paused; /* No animation needed */
-	}
 }
