@@ -442,7 +442,7 @@
 	--box-depth: 10;
 	--game-spine-bg: #e60012;
 	--game-spine-text: #f8f8f8;
-	--spine-font-family: Outfit, 'Gotham', 'Century Gothic', var(--spine-font-stack);
+	--spine-font-family: 'Outfit', 'Gotham', 'Century Gothic', var(--spine-font-stack);
 	--spine-font-weight: 500;
 	--spine-letter-spacing: 0.025em;
 	--spine-paper-gap: 0px;
@@ -564,7 +564,7 @@
 				}
 
 				&:has(> .gaming-front) {
-					transform: rotateY(-5deg) scale(1.1) translate3D(-15%, 0, 10rem);
+					transform: rotateY(-5deg) scale(1.1) translate3d(-15%, 0, 10rem);
 					transition-delay: inherit;
 				}
 			}
@@ -575,7 +575,7 @@
 /* Font overrides */
 [data-gaming-platform='ps1'],
 [data-gaming-platform='dreamcast'] {
-	--spine-font-family: LibreFranklin, 'Libre Franklin', 'Franklin Gothic', var(--spine-font-stack);
+	--spine-font-family: 'LibreFranklin', 'Libre Franklin', 'Franklin Gothic', var(--spine-font-stack);
 	--spine-font-weight: 800;
 	--spine-letter-spacing: 0.05em;
 
@@ -613,18 +613,18 @@
 	container: gamingDetailsDialog / inline-size;
 
 	@media (--small-viewport) {
-		dt {
+		& dt {
 			--GAP: var(--size-xs);
 		}
 	}
 
 	@container gamingDetailsDialog (inline-size < 20rem) {
-		dl {
+		& dl {
 			grid-template-columns: 1fr;
 			gap: 0;
 		}
 
-		dd + dt {
+		& dd + dt {
 			margin-block-start: var(--size-s);
 		}
 	}
@@ -665,6 +665,7 @@
 
 	border-block-start: 1px solid color-mix(in hsl, currentColor, transparent 75%);
 }
+
 .gaming-details-boxart {
 	align-self: center;
 	inline-size: min(90%, 12rem);
@@ -860,6 +861,7 @@
 
 		border-block-start: 1px solid currentColor;
 	}
+
 	&:not(:last-child) {
 		padding-block-end: var(--flow-space);
 
@@ -869,11 +871,12 @@
 	@container (inline-size < 42rem) {
 		contain-intrinsic-size: 220px;
 
-		.gaming-trophies-info {
+		& .gaming-trophies-info {
 			align-self: end;
 		}
-		.gaming-trophies-image,
-		.gaming-trophies-plat {
+
+		& .gaming-trophies-image,
+		& .gaming-trophies-plat {
 			align-self: start;
 		}
 	}
@@ -900,6 +903,7 @@
 	flex-direction: column;
 	gap: var(--size-xs);
 }
+
 .gaming-trophies-button {
 	display: inline-flex;
 

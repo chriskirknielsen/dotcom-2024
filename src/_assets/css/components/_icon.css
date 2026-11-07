@@ -9,6 +9,7 @@
 .inline-icon--middle {
 	vertical-align: middle;
 }
+
 .inline-icon--center {
 	vertical-align: calc(0.375em - 0.5 * var(--ICON-size, 1em)); /* Fallback */
 	/* Thanks to Roman Komarov: https://blog.kizu.dev/cap-height-align/#known-size-just-vertical-align */
@@ -20,10 +21,12 @@
 .link-label-anchor:has(svg, .inline-icon, .link-label-prefix) {
 	white-space: nowrap; /* Keep the icon/prefix stuck against the text */
 }
+
 .icon-text-pair > :not(.inline-icon, .icon-text-text),
 .link-label-anchor:has(svg, .inline-icon, .link-label-prefix) .link-label-text {
 	white-space: normal; /* Allow line breaking for the actual text */
 }
+
 .link-label-prefix {
 	display: inline-block;
 }
@@ -43,6 +46,7 @@
 	&[width='16'] {
 		padding: 0.125em; /* Square logos */
 	}
+
 	&[width='32'] {
 		padding-inline: 0.25em; /* Wide logos */
 	}

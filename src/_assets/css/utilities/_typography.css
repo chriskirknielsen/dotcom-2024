@@ -40,12 +40,9 @@
 .lineHeight-tight {
 	line-height: 1.4;
 }
-.lineHeight-dense {
-	line-height: 1.1;
-}
 
 .lineHeight-dense {
-	line-height: 1;
+	line-height: 1.1;
 }
 
 /** Font family */
@@ -58,6 +55,7 @@
 .fontWeight-regular {
 	font-weight: normal;
 }
+
 .fontWeight-bold {
 	font-weight: bold;
 }
@@ -72,9 +70,11 @@
 	text-align: left;
 	text-align: start;
 }
+
 .textAlign-center {
 	text-align: center;
 }
+
 .textAlign-end {
 	text-align: right;
 	text-align: end;
@@ -84,9 +84,11 @@
 .textTransform-uppercase {
 	text-transform: uppercase;
 }
+
 .textDecoration-underline {
 	text-decoration: underline;
 }
+
 .fontVariant-tabularNums {
 	font-variant-numeric: tabular-nums;
 }
@@ -94,10 +96,11 @@
 .textWrap-balance {
 	text-wrap: balance;
 }
+
 .textWrap-pretty {
 	text-wrap: pretty;
 }
+
 .textWrap-avoidShortLastLines {
 	text-wrap: pretty;
-	text-wrap: avoid-short-last-lines;
 }

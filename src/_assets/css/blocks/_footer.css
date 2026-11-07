@@ -56,7 +56,7 @@
 	text-align: center;
 	text-wrap: balance;
 
-	li {
+	& li {
 		display: inline-flex;
 		margin: var(--gap) calc(var(--gap) - 0.125ch); /* Because we have (and need?) the whitespace, using about quarter of a character width as a space width seems fine, which is then divided by two to share the space between each <li> */
 		vertical-align: middle; /* Due to some non-image items */
@@ -69,7 +69,7 @@
 		}
 	}
 
-	img {
+	& img {
 		image-rendering: pixelated;
 	}
 
@@ -135,14 +135,14 @@
 .footer-decorator {
 	grid-column: 1 / -1;
 
-	img,
-	svg {
+	& img,
+	& svg {
 		inline-size: 100%;
 		block-size: auto;
 		max-block-size: 320px;
 	}
 
-	img[width='1'][height='1'] {
+	& img[width='1'][height='1'] {
 		display: none;
 	}
 }

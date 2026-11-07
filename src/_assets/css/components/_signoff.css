@@ -21,7 +21,7 @@
 	}
 
 	&:has(.signoff-decorators) {
-		.signoff-body {
+		& .signoff-body {
 			padding-inline-end: calc(var(--signoff-deco-size) * 1.5);
 		}
 	}
@@ -72,10 +72,12 @@
 			rotate: 7deg;
 			translate: 0 125%;
 		}
+
 		&:nth-child(2) {
 			rotate: -4deg;
 			translate: -75% 50%;
 		}
+
 		&:nth-child(3) {
 			translate: -33% 0;
 		}

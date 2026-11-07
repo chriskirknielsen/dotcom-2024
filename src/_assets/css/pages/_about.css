@@ -1,17 +1,18 @@
 .about-pic-wrapper {
 	container-type: inline-size;
 }
+
 .about-pic {
 	inline-size: 100%;
 	max-inline-size: var(--ABOUT-pic-max, 12rem);
 	margin-inline: auto;
 	margin-block: var(--size-m);
 
-	figure {
+	& figure {
 		background: var(--color-accent);
 	}
 
-	img {
+	& img {
 		filter: grayscale(100%);
 		mix-blend-mode: luminosity;
 	}
@@ -22,7 +23,7 @@
 		float: right;
 		float: inline-end;
 
-		.flow > & + * {
+		& .flow > & + * {
 			--flow-space: 0;
 		}
 	}
@@ -50,8 +51,8 @@
 	--case-color: #b9b2a8;
 	--case-color-alt: #8d7e67;
 	--accent-color: #71382d;
-	--accent-color-alt: hsl(10, 80%, 51%);
-	--case-text-color: hsl(10, 10%, 15%);
+	--accent-color-alt: hsl(10deg, 80%, 51%);
+	--case-text-color: hsl(10deg, 10%, 15%);
 	--shadow-3d-out: inset 0.0625em 0.0625em 0.125em -0.0625em #fff8, inset -0.0625em -0.0625em 0.125em -0.0625em #0008;
 	--shadow-3d-drop: 0.0625em 0.0625em 0.125em #0004;
 	--track-vertical-height: 2em;
@@ -261,8 +262,9 @@
 }
 
 .synth-key[data-key='white'] {
-	--bg: hsl(65, 52%, 92%);
+	--bg: hsl(65deg, 52%, 92%);
 	--fg: black;
+
 	z-index: 1;
 	grid-column: calc(2 * var(--synth-key-index) - 1) / span 2;
 	grid-row: 1 / span 2;
@@ -281,6 +283,7 @@
 .synth-key[data-key='black'] {
 	--bg: #121619;
 	--fg: white;
+
 	z-index: 2;
 	grid-column: calc(2 * var(--synth-key-index) - 2) / span 2;
 	grid-row: 1 / span 1;
@@ -296,7 +299,8 @@
 }
 
 .synth-key[data-key='black']:not([disabled]):is(:active, [aria-pressed='true']) {
-	--synth-black-tip: hsl(132, 9%, 10%);
+	--synth-black-tip: hsl(132deg, 9%, 10%);
+
 	margin-block-end: 0.125em;
 	box-shadow:
 		0 0.125em 0.125em #000000bf,
@@ -410,15 +414,12 @@
 	cursor: ns-resize;
 	inline-size: var(--thumb-height);
 	block-size: var(--thumb-width);
+	margin-block-start: calc((var(--thumb-width) - var(--track-thickness)) * -0.5);
 
 	border-width: 0.1875em 0.125em;
 	border-color: #686049 #5b5749 #1f1f15 #343122;
 	background: linear-gradient(45deg, #595444, #3f3b2f);
 	box-shadow: -0.0625em 0 0.125em #0004;
-}
-
-[data-dir='v'] .synth-slider::-webkit-slider-thumb {
-	margin-block-start: calc((var(--thumb-width) - var(--track-thickness)) * -0.5);
 }
 
 .synth-slider::-moz-range-thumb {

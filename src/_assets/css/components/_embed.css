@@ -1,11 +1,13 @@
 .codepen-thumbnail {
 	inline-size: 100%;
 	object-fit: cover;
+
 	filter: brightness(0.75);
 }
 
 blockquote.remote-quote {
 	--remote-quote-border-width: 1px;
+
 	padding: calc(var(--layout-gutter) - var(--remote-quote-border-width));
 
 	border: var(--remote-quote-border-width) solid var(--color-text, currentColor);

@@ -12,12 +12,14 @@
 
 	white-space: nowrap;
 }
+
 .search-results-col-title {
 	inline-size: auto;
 	padding-inline: var(--size-s);
 
 	text-wrap: pretty;
 }
+
 .search-results-col-date {
 	inline-size: max-content;
 	padding-inline-end: var(--size-s);
@@ -32,6 +34,7 @@
 
 	color: var(--color-accent);
 }
+
 .search-results:not(:has(.search-results-item:not([hidden]) > .search-results-col-date:not(:empty))) .search-results-col-date {
 	display: none; /* When displaying a list of results that are all without a date, hide the date column */
 }

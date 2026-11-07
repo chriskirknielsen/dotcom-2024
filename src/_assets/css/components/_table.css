@@ -15,6 +15,7 @@ thead > tr > th {
 	text-transform: uppercase;
 	color: var(--color-accent);
 }
+
 tr > :is(td, th) {
 	padding-inline: var(--size-s);
 

@@ -122,7 +122,6 @@ time {
 /* Block */
 p {
 	text-wrap: pretty;
-	text-wrap: avoid-short-last-lines;
 }
 
 pre {
@@ -157,7 +156,7 @@ blockquote {
 		content: close-quote;
 	}
 
-	footer {
+	& footer {
 		font-size: var(--typeScale-n1);
 	}
 }

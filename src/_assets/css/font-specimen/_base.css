@@ -145,7 +145,6 @@ summary {
 
 	& :is(p, li) {
 		text-wrap: pretty;
-		text-wrap: avoid-short-last-lines;
 	}
 }
 

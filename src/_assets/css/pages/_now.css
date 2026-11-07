@@ -1,6 +1,6 @@
 .now-grid {
 	--now-item-min: min(100%, 16rem);
-	--now-item-mask: linear-gradient(0deg, hsl(0 0% 0% / 0), 67%, hsl(0 0% 0% / 0.75));
+	--now-item-mask: linear-gradient(0deg, hsl(0deg 0% 0% / 0), 67%, hsl(0deg 0% 0% / 0.75));
 	/* Keep it relatively faint */
 
 	display: grid;
@@ -56,7 +56,6 @@
 
 	text-wrap: balance;
 	text-wrap: pretty;
-	text-wrap: avoid-short-last-lines;
 }
 
 .now-item-image {
@@ -67,9 +66,9 @@
 	z-index: -1;
 	grid-row: 2 / -2;
 
-	block-size: 0; /*1*/
+	block-size: 0; /* 1 */
+	min-block-size: 100%; /* 1 */
 	inline-size: 100%;
-	min-block-size: 100%; /*1*/
 
 	object-fit: cover;
 	object-position: 50% 33%; /* Keep the focus higher into the image-fill space */

@@ -1,6 +1,7 @@
 .inline-size-100pc {
 	inline-size: 100%;
 }
+
 .maxInlineSize-superWideMaxContent {
 	max-inline-size: calc(var(--layout-max-content) * 1.5);
 }
@@ -8,6 +9,7 @@
 .display-inline {
 	display: inline;
 }
+
 .display-block {
 	display: block;
 }
@@ -19,6 +21,7 @@
 .marginBlockStart-auto {
 	margin-block-start: auto;
 }
+
 .marginInline-auto {
 	margin-inline: auto;
 }

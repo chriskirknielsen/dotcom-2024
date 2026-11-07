@@ -73,6 +73,7 @@
 .content-fullbleed {
 	grid-column: --fullbleed;
 }
+
 .content--with-gutters {
 	margin-inline: var(--layout-gutter);
 }

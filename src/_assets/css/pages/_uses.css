@@ -35,6 +35,7 @@
 		}
 	}
 }
+
 .macos-dock-inner {
 	padding-block-start: calc(var(--MACOSDOCK-padding) * var(--MACOSDOCK-overflow-factor));
 	padding-block-end: calc(
@@ -57,6 +58,7 @@
 		}
 	}
 }
+
 .macos-dock-list {
 	display: flex;
 	justify-content: safe center;
@@ -76,10 +78,12 @@
 		block-size: 1px;
 	}
 }
+
 .macos-dock-list li {
 	flex: 0 0 auto;
 	display: inline-flex;
 }
+
 .macos-dock-list img {
 	display: block;
 	inline-size: 4rem;

@@ -82,11 +82,11 @@
 		inline-size: auto;
 		block-size: 100%;
 
-		:is(path, circle) {
+		& :is(path, circle) {
 			vector-effect: non-scaling-stroke;
 		}
 
-		circle {
+		& circle {
 			stroke-width: var(--HOME-logo-line-weight);
 			fill: var(--HOME-logo-bg);
 		}

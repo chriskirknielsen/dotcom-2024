@@ -31,12 +31,12 @@
 }
 
 .header-logo {
-	.logo {
+	& .logo {
 		inline-size: auto;
 		block-size: 2rem;
 	}
 
-	.logo-paths use {
+	& .logo-paths use {
 		fill: var(--_logo-color-active);
 		stroke: var(--_logo-color);
 		clip-path: var(--CLIP, none);
@@ -124,10 +124,6 @@ html.no-js .header-themepicker {
 	--CTA-display: flex;
 }
 
-.theme-picker-scheme-label {
-	text-transform: uppercase;
-}
-
 .header-themepicker .header-themepicker-toggle ~ theme-picker {
 	visibility: hidden;
 	pointer-events: none;
@@ -189,7 +185,7 @@ theme-picker {
 	color: var(--color-text);
 	border: 1px solid var(--color-text);
 	border-radius: clamp(0px, var(--_corner) * 999, var(--_cta-border-radius) + var(--PICKER-padding)); /* 2 */
-	border-start-end-radius: 0; /* Top-right corner*/
+	border-start-end-radius: 0; /* Top-right corner */
 	background-color: var(--color-surface);
 	box-shadow: var(--_shadow-active);
 }
@@ -222,6 +218,7 @@ theme-picker {
 	font-size: var(--typeScale-n2);
 	line-height: 1;
 	text-align: center;
+	text-transform: uppercase;
 }
 
 @media (--small-viewport) {
@@ -266,13 +263,14 @@ theme-picker {
 	}
 
 	.header-nav {
-		order: 1; /* Place it last so the Theme button can appear on the same line as the logo*/
+		order: 1; /* Place it last so the Theme button can appear on the same line as the logo */
 		inline-size: 100%;
 	}
 
 	html.js .header-list {
 		justify-content: center;
 	}
+
 	.header-list {
 		flex-wrap: wrap;
 		flex-wrap: balance;

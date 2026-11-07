@@ -34,6 +34,7 @@ tool-tip {
 		/* --TOOLTIP-area-y: block-start; */
 		/* --TOOLTIP-offset-x-factor: 0; */
 	}
+
 	&[tip-position^='end'] {
 		--TOOLTIP-block: var(--TOOLTIP-inset-block) auto;
 		--TOOLTIP-arrow-y: -50%;
@@ -42,6 +43,7 @@ tool-tip {
 		/* --TOOLTIP-area-y: block-end; */
 		/* --TOOLTIP-offset-x-factor: 0; */
 	}
+
 	/* &[tip-position^='center'] {
 		--TOOLTIP-block: 50% auto;
 		--TOOLTIP-translate-y: -50%;
@@ -58,6 +60,7 @@ tool-tip {
 		--TOOLTIP-origin-x: calc(0% + var(--sqrt2) * var(--TOOLTIP-arrow-size));
         --TOOLTIP-area-x: span-inline-end;
 	} */
+
 	&[tip-position$='end'] {
 		--TOOLTIP-inline: auto 0;
 		--TOOLTIP-arrow-x: -100%;
@@ -65,6 +68,7 @@ tool-tip {
 		--TOOLTIP-origin-x: calc(100% - var(--sqrt2) * var(--TOOLTIP-arrow-size));
 		/* --TOOLTIP-area-x: span-inline-start; */
 	}
+
 	&[tip-position$='center'] {
 		--TOOLTIP-inline: 50%;
 		--TOOLTIP-translate-x: -50%;
@@ -86,20 +90,7 @@ tool-tip {
 			color: var(--color-surface);
 			background-color: var(--color-text);
 		}
-	}
 
-	@media (--accept-motion) {
-		&:not(:defined):is(:hover, :focus-visible, :focus-within) > .tip-content/*,
-		&:defined > .tip-content:popover-open*/ {
-			filter: drop-shadow(0px 3px 2px hsl(var(--_shadow-color) / 0.5));
-			transition: filter var(--easing-in-out) var(--anim-short);
-			animation:
-				--fadeIn var(--easing-in-out) var(--anim-short),
-				--scaleUp var(--easing-in-out) var(--anim-short);
-		}
-	}
-
-	& > .tip-content {
 		overflow: visible;
 
 		z-index: 2;
@@ -140,6 +131,17 @@ tool-tip {
 			margin-inline: var(--TOOLTIP-arrow-margin-inline, auto);
 
 			transform: translate(var(--TOOLTIP-arrow-x, 0%), var(--TOOLTIP-arrow-y, 0%)) rotate(45deg) scale(var(--TOOLTIP-arrow-scale, 0));
+		}
+	}
+
+	@media (--accept-motion) {
+		&:not(:defined):is(:hover, :focus-visible, :focus-within) > .tip-content/*,
+		&:defined > .tip-content:popover-open*/ {
+			filter: drop-shadow(0px 3px 2px hsl(var(--_shadow-color) / 0.5));
+			transition: filter var(--easing-in-out) var(--anim-short);
+			animation:
+				--fadeIn var(--easing-in-out) var(--anim-short),
+				--scaleUp var(--easing-in-out) var(--anim-short);
 		}
 	}
 

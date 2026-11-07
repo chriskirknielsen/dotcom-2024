@@ -123,6 +123,7 @@
 		&:nth-child(1) {
 			grid-row-start: 1;
 		}
+
 		&:nth-child(2) {
 			grid-row-start: 2;
 		}

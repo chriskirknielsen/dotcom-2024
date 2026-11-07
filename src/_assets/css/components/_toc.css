@@ -15,20 +15,20 @@
 	 * 2: Makes the pseudo content overflow _away_ from the list item content
 	 * 3: Ensure it doesn't shift the list item content
 	 */
-	ol {
+	& ol {
 		counter-reset: tocList;
 		list-style-type: ''; /* 1 */
 
-		ol {
+		& ol {
 			--toc-marker-type: upper-alpha;
 
-			ol {
+			& ol {
 				--toc-marker-type: lower-roman;
 			}
 		}
 	}
 
-	li {
+	& li {
 		counter-increment: tocList;
 
 		margin-block-end: max(8px, var(--size-xs));

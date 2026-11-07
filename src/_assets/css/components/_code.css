@@ -9,6 +9,7 @@ code-wrap {
 
 	display: block;
 }
+
 .codewrap-action {
 	isolation: isolate;
 }
@@ -21,6 +22,7 @@ code-wrap {
 		transition: transform var(--anim-short) var(--easing-in-out); /* Prevent overriding the default .button if motion is allowed */
 	}
 }
+
 .codewrap-action > [role='alert'] {
 	transition: transform var(--anim-short) var(--easing-in-out);
 
@@ -28,19 +30,23 @@ code-wrap {
 		transition: transform linear 0.1ms;
 	}
 }
+
 .codewrap-action > * {
 	@media (--reduce-motion) {
 		transition-duration: 0.1ms;
 	}
 }
+
 .codewrap-action > [data-codewrap-copy],
 .codewrap-action:has(> [role='alert']:not([aria-hidden='true'])) > * {
 	transform-origin: 0% 100%;
 }
+
 .codewrap-action > [role='alert']:not([aria-hidden='false']),
 .codewrap-action:has(> [role='alert']:not([aria-hidden='true'])) > [data-codewrap-copy] {
 	transform-origin: 100% 100%;
 }
+
 .codewrap-action:has(> [role='alert']:not([aria-hidden='true'])) [data-codewrap-copy],
 .codewrap-action > [role='alert']:not([aria-hidden='false']) {
 	transform: scale(0, 0.5);
@@ -80,6 +86,7 @@ code-wrap {
 	font-size: 0.875em;
 	letter-spacing: 0.01em;
 }
+
 .codeblock-toolbar-label .inline-icon {
 	--ICON-size: 1.25em;
 }
@@ -183,7 +190,6 @@ kbd {
 .token.string,
 .token.entity,
 .token.url,
-.token.string,
 .style .token.string,
 .token.attr-value {
 	color: var(--color-accent-alt, var(--color-accent));

@@ -92,7 +92,7 @@
 		outline-offset: var(--_focus-outline-offset);
 	}
 
-	.button-content {
+	& .button-content {
 		@media (--accept-motion) {
 			transition-property: visibility, transform, opacity;
 			transition-duration: var(--anim-short);

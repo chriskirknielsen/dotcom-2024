@@ -7,9 +7,11 @@
 	text-wrap: balance;
 	border: 0;
 }
+
 .filtering-legend {
 	margin-inline-end: var(--size-xs);
 }
+
 .filtering-item {
 	display: inline;
 
@@ -55,13 +57,11 @@
 	}
 
 	[data-view-transition-type] & {
-		& {
-			position: relative;
+		position: relative;
 
-			visibility: visible;
+		visibility: visible;
 
-			transition: none;
-		}
+		transition: none;
 
 		&[aria-hidden='true'] {
 			display: none;
@@ -98,6 +98,7 @@
 		&::view-transition-old(.filteredTileItem):only-child {
 			z-index: -1;
 		}
+
 		&::view-transition-new(.filteredTileItem):only-child {
 			--a: -1;
 			animation-direction: reverse;

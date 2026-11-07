@@ -1,5 +1,5 @@
 ol > li > ol {
-	list-style-type: lower-alpha; /* 1 > 1a, 1b; 2 > 2a...*/
+	list-style-type: lower-alpha; /* 1 > 1a, 1b; 2 > 2a... */
 }
 
 /* Inline list with a separator between each item except at the end of a line (whitespace collapse) */
@@ -61,6 +61,7 @@ li:has(> .list-item-icon) {
 
 	list-style-type: '';
 }
+
 .list-item-icon {
 	position: absolute;
 	inset-inline-end: calc(100% + 0.5ch);
@@ -89,6 +90,7 @@ li:has(> .list-item-icon) {
 		margin-block-start: var(--GAP, var(--size-s));
 	}
 }
+
 .icon-badge-list-item {
 	display: inline-flex;
 	align-items: center;
@@ -101,6 +103,7 @@ li:has(> .list-item-icon) {
 	border: 1px solid var(--color-text);
 	background: var(--color-canvas);
 }
+
 @supports (flex-wrap: balance) {
 	.icon-badge-list > .inline-list:has(.icon-badge-list-item) {
 		display: flex;
@@ -113,6 +116,7 @@ li:has(> .list-item-icon) {
 		margin: 0;
 	}
 }
+
 .icon-badge-list-icon {
 	& > svg {
 		--ICON-size: 1em;
@@ -139,6 +143,7 @@ li:has(> .list-item-icon) {
 	color: var(--color-canvas);
 	background: var(--color-text);
 }
+
 .icon-badge-list-label {
 	flex-grow: 1;
 	padding: 0 calc(var(--pad) * 2);
@@ -197,7 +202,7 @@ li:has(> .list-item-icon) {
 	}
 
 	.dl-tiles--flipped & {
-		dd {
+		& dd {
 			order: -1;
 		}
 	}

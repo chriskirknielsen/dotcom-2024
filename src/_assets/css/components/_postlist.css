@@ -41,16 +41,16 @@
 
 	@supports (display: grid-lanes) {
 		display: grid-lanes; /* Modern masonry implementation */
-		flow-tolerance: infinite; /* Keep items in order */
+		fit-tolerance: infinite; /* Keep items in order */
 	}
 }
 
 @media (--accept-motion) {
 	@supports (interpolate-size: allow-keywords) {
 		.postlist-group::details-content {
-			/*? Because of the default _expander.css styles having overflow-y: clip,
-			 * the cards stick outside this container on hover — this little trick ensures
-			 * they have enough room to grow without being cut off. */
+			/* Because of the default _expander.css styles having overflow-y: clip,
+			   the cards stick outside this container on hover — this little trick ensures
+			   they have enough room to grow without being cut off. */
 			margin-block: -2px -36px;
 			padding-block: 2px 36px;
 		}

@@ -65,17 +65,16 @@
 	}
 
 	@media (--accept-motion) {
+		transition-property: scale, rotate, translate;
+
 		&,
 		& > path {
-			transition: all var(--anim-short) var(--easing-in-out);
+			transition-duration: var(--anim-short);
+			transition-timing-function: var(--easing-in-out);
 		}
 
 		& > path {
 			transition-property: stroke-width, scale;
-		}
-
-		& {
-			transition-property: scale, rotate, translate;
 		}
 	}
 
