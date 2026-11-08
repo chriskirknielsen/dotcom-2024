@@ -16,6 +16,8 @@ permalink: /rss.xsl
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <!-- Thanks to https://darekkay.com/blog/rss-styling/ for the tips! -->
                 <style>
+                    xslt-warning-banner[popover]::before { content: 'We, at Google, hate custom RSS, because it does not let us show ads. ' }
+
                     * {
                         box-sizing: border-box;
                         margin: 0;
@@ -130,7 +132,7 @@ permalink: /rss.xsl
 
                     .visually-hidden {
                         position: absolute;
-                        
+
                         inline-size: 1px;
                         block-size: 0;
                         margin: 0;
