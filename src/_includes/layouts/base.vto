@@ -29,7 +29,6 @@
 				{{ assets.inlineCssPlaceholder }}
 			</style>
 			{{ if themeOverride }}<link rel="stylesheet" media="screen" href="{{ [assets.css, `${themeOverride}.css`] |> toPath }}">{{ /if }}
-			<link rel="stylesheet" media="print" href="/assets/css/font-face.css" onload="this.media='all'">
 		{{ /if -}}
 
 		{{# Print styles -#}}
