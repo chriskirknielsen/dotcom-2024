@@ -1,4 +1,5 @@
-import 'dotenv/config';
+import { loadEnvFile } from 'node:process';
+loadEnvFile();
 import apiCache from './api-cache.js';
 import { exchangeNpssoForAccessCode, exchangeAccessCodeForAuthTokens, getUserTitles } from 'psn-api';
 

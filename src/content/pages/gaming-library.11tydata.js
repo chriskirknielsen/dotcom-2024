@@ -1,4 +1,5 @@
-import 'dotenv/config';
+import { loadEnvFile } from 'node:process';
+loadEnvFile();
 import getPsnTrophyData from '../../../config/utils/psn-api.js';
 import notionDatabaseQuery from '../../../config/utils/notion-db.js';
 import { toCloudinary } from '../../../config/utils/image-transforms.js';

@@ -1,4 +1,5 @@
-import 'dotenv/config';
+import { loadEnvFile } from 'node:process';
+loadEnvFile();
 import notionDatabaseQuery from '../../../config/utils/notion-db.js';
 
 /**
