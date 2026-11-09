@@ -1,5 +1,4 @@
-import { loadEnvFile } from 'node:process';
-loadEnvFile();
+import 'dotenv/config';
 import apiCache from './api-cache.js';
 import Notion from '@notionhq/client';
 const { Client: NotionClient } = Notion;
