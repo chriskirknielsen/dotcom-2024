@@ -30,7 +30,6 @@
 		"@notionhq/client": "^5.30.0",
 		"cheerio": "^1.0.0",
 		"colorjs.io": "^0.6.0",
-		"eleventy-plugin-page-assets": "github:chriskirknielsen/eleventy-plugin-page-assets#patch-1",
 		"eleventy-plugin-robotstxt": "^0.0.4",
 		"eleventy-plugin-vento": "^5.4.3",
 		"esbuild": "^0.25.0",
@@ -42,6 +41,7 @@
 		"markdown-it-attrs": "^4.3.1",
 		"markdown-it-codewrap": "^1.0.1",
 		"netlify-plugin-cache": "^1.0.3",
+		"picomatch": "^4.0.7",
 		"psn-api": "^2.15.0",
 		"purgecss": "^9.1.0"
 	}

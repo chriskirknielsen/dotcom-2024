@@ -20,12 +20,12 @@ import mediaGallery from './config/shortcodes/media-gallery.js';
 
 import markdownLibrary from './config/libraries/markdown.js';
 
+import pageAssetsPlugin from './config/transforms/page-assets.js';
 import htmlTransforms from './config/transforms/html.js';
 
 import markdownIt from 'markdown-it';
 import { EleventyRenderPlugin, BundlePlugin } from '@11ty/eleventy';
 import pluginRss from '@11ty/eleventy-plugin-rss';
-import pageAssetsPluginMxbckFix from 'eleventy-plugin-page-assets';
 import pluginSyntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
 import { VentoPlugin } from 'eleventy-plugin-vento';
 import EleventyPluginRobotsTxt from 'eleventy-plugin-robotstxt';
@@ -80,17 +80,6 @@ export default async function (eleventyConfig) {
 	eleventyConfig.addPlugin(dateFilters);
 	eleventyConfig.addPlugin(urlFilters);
 	eleventyConfig.addPlugin(minifierFilters, { useCache: true });
-	eleventyConfig.addPlugin(pageAssetsPluginMxbckFix, {
-		mode: 'directory',
-		postsMatching: [
-			`${rootDir}/content/pages/**/index.{vto,njk,md}`, // Regular pages
-			`${rootDir}/content/posts/**/index.{vto,njk,md}`, // Regular posts
-			`${rootDir}/content/projects/**/index.{vto,njk,md}`, // Projects
-			`${rootDir}/content/fonts/*/*.{vto,njk}`, // Fonts
-		],
-		assetsMatching: '*.jpg|*.png|*.gif|*.avif|*.mp4|*.otf|*.woff|*.woff2|*.zip', // Images, videos, fonts, and archives
-		silent: true,
-	});
 	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
 		languages: ['md', 'html', 'njk', 'vto', 'css', 'js', 'scss', 'text', 'php', 'json'],
 		preAttributes: {
@@ -282,6 +271,17 @@ export default async function (eleventyConfig) {
 	});
 
 	//* Transforms
+	eleventyConfig.addPlugin(pageAssetsPlugin, {
+		mode: 'directory',
+		postsMatching: [
+			`${rootDir}/content/pages/**/index.{vto,njk,md}`, // Regular pages
+			`${rootDir}/content/posts/**/index.{vto,njk,md}`, // Regular posts
+			`${rootDir}/content/projects/**/index.{vto,njk,md}`, // Projects
+			`${rootDir}/content/fonts/*/*.{vto,njk}`, // Fonts
+		],
+		assetsMatching: '*.jpg|*.png|*.gif|*.avif|*.mp4|*.otf|*.woff|*.woff2|*.zip', // Images, videos, fonts, and archives
+		silent: true,
+	});
 	eleventyConfig.addPlugin(htmlTransforms, {
 		css: {
 			placeholder: assets.inlineCssPlaceholder,
