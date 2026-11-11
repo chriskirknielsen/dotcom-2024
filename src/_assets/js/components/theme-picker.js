@@ -9,6 +9,8 @@ class ThemePicker extends HTMLElement {
 		this.eventName = themes.eventName;
 		this.save = themes.save.bind(themes);
 		this.customThemeFormId = this.dataset.formId;
+		this.playThemeJingle = false; // By default, don't assume users want to listen to the jingles
+		this.jingles = new Map();
 
 		// Events handlers
 		this.addEventListener('click', this);
@@ -18,6 +20,7 @@ class ThemePicker extends HTMLElement {
 
 		// Set up a constructable stylesheet for user custom styles
 		this.styleStore = 'cknCustom';
+		this.soundStore = 'cknSound';
 		this.customSheet = new CSSStyleSheet();
 	}
 
@@ -99,6 +102,35 @@ class ThemePicker extends HTMLElement {
 		const isSameTheme = isSameThemeKey || isDefaultSameTarget || isDefaultSameSource; // If the visual result is the same, skip the transition
 		const useFallback =
 			isSameTheme || skipViewTransition || !document.startViewTransition || typeof ViewTransitionTypeSet !== 'function' || this.getPreferredMotion() === 'reduce';
+
+		// Interrupt any currently-playing jingle
+		if (this.jingle) {
+			this.jingle.pause();
+			this.jingle.removeAttribute('src');
+			delete this.jingle;
+		}
+
+		// Play jingle for non-custom themes when not muted
+		if (!isSameTheme && theme !== 'custom' && this.playThemeJingle) {
+			const themeKey = theme || this.defaults[this.getPreferredScheme()];
+
+			// If the jingle hasn't played before, create a reference to it that can be reused
+			if (!this.jingles.has(themeKey)) {
+				const audio = new Audio(`/assets/audio/theme-${themeKey}.mp3`);
+				this.jingles.set(themeKey, audio);
+			}
+
+			this.jingle = this.jingles.get(themeKey);
+			this.jingle.currentTime = 0; // In case it was interrupted mid-transition
+			this.jingle.addEventListener(
+				'ended',
+				() => {
+					this.jingle = null; // Remove the audio
+				},
+				{ once: true }
+			);
+			this.jingle.play();
+		}
 
 		const restoreAnim = async () => {
 			if (useFallback) {
@@ -237,16 +269,24 @@ class ThemePicker extends HTMLElement {
 		}
 
 		this.updateCustomThemeStyles();
+
+		if (window.localStorage.getItem(this.soundStore) === '1') {
+			const soundButton = this.querySelector(`[data-theme-custom-action='toggle-mute']`);
+			if (soundButton) {
+				soundButton.ariaPressed = 'true';
+				this.playThemeJingle = true;
+			}
+		}
 	}
 
 	handleEvent(e) {
 		if (e.type === 'click') {
 			const dialog = this.querySelector('dialog'); // There should only be one
 			const isTargetDialogBackdrop = e.target === dialog;
-			const customDialog = e.target.closest('[data-theme-custom-action]');
+			const customActionButton = e.target.closest('[data-theme-custom-action]');
 
-			if (customDialog || isTargetDialogBackdrop) {
-				const action = customDialog && customDialog.dataset.themeCustomAction;
+			if (customActionButton || isTargetDialogBackdrop) {
+				const action = customActionButton && customActionButton.dataset.themeCustomAction;
 
 				if (action === 'apply' || isTargetDialogBackdrop) {
 					this.updateCustomThemeStyles();
@@ -257,6 +297,21 @@ class ThemePicker extends HTMLElement {
 					requestAnimationFrame(() => {
 						dialog.showModal();
 					});
+				} else if (action === 'toggle-mute') {
+					const isUnmuted = customActionButton.ariaPressed === 'false'; // This returns the opposite of the previous state
+					this.playThemeJingle = isUnmuted;
+					customActionButton.ariaPressed = isUnmuted.toString();
+
+					if (isUnmuted) {
+						window.localStorage.setItem(this.soundStore, '1');
+					} else {
+						window.localStorage.removeItem(this.soundStore);
+					}
+
+					if (this.jingle) {
+						// End it to still trigger the `ended` event
+						this.jingle.currentTime = this.jingle.duration;
+					}
 				}
 			}
 		}
@@ -275,8 +330,8 @@ class ThemePicker extends HTMLElement {
 
 			if (e.key === 'Escape') {
 				const themePickerToggleButton = document.querySelector(`[aria-controls=${this.id}]`);
-				if (themePickerToggleButton && themePickerToggleButton.getAttribute('aria-pressed') === 'true') {
-					themePickerToggleButton.setAttribute('aria-pressed', 'false');
+				if (themePickerToggleButton && themePickerToggleButton.ariaPressed === 'true') {
+					themePickerToggleButton.ariaPressed = 'false';
 					themePickerToggleButton.focus(); // Restore focus to the toggler
 				}
 			} else if (isValidDigitKey && !e.target?.closest?.('input, textarea, [contenteditable]')) {
@@ -304,7 +359,7 @@ class ThemeButton extends HTMLElement {
 		// Set the button to pressed if it applies the current theme
 		this.button = this.querySelector('[data-theme-set]');
 		const isInitiallyActive = this.button.dataset.themeSet === themes.get();
-		this.button.setAttribute('aria-pressed', isInitiallyActive.toString());
+		this.button.ariaPressed = isInitiallyActive.toString();
 	}
 
 	handleEvent(e) {

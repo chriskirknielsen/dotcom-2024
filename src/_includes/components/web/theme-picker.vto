@@ -70,12 +70,39 @@
 				Apply <span class="visually-hidden">custom theme</span>
 			</span>
 		</tool-tip>
+		
 		<tool-tip tip-position="{{ tooltipPos }}">
 			<button type="button" class="button button--icon-only" aria-label="Customise" aria-describedby="theme-picker-custom-adjust-label" data-theme-custom-action="open">
 				{{ svg 'sliders', { width: 24, height: 24 } }}
 			</button>
 			<span class="tip-content" id="theme-picker-custom-adjust-label">
 				Adjust <span class="visually-hidden">custom theme styles</span>
+			</span>
+		</tool-tip>
+	</div>
+
+	<div class="theme-picker-scheme-group">
+		<span class="theme-picker-scheme-label">Sound</span>
+
+		<tool-tip tip-position="{{ tooltipPos }}">
+			{{ component 'cta', {
+				type: 'button',
+                label: '',
+                iconStack: {
+                    idle: 'sound-off',
+                    pressed: 'sound-on',
+                },
+				ctaAttr: {
+					'aria-pressed': 'false',
+					'aria-labelledby': 'theme-picker-sound-toggle',
+					'data-persist-pressed-style': '',
+					'data-theme-custom-action': 'toggle-mute',
+				},
+				iconClass: null,
+				iconSvgOpts: { width: 24, height: 24 },
+			} }}
+			<span class="tip-content" id="theme-picker-sound-toggle">
+				<span>Toggle theme jingles</span>
 			</span>
 		</tool-tip>
 	</div>
