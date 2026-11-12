@@ -1,5 +1,10 @@
 const stravaActivities = [
 	{
+		date: '2026-11-11T08:12:00Z',
+		distance: 7410,
+		duration: 3099,
+	},
+	{
 		location: 'Lyon, France',
 		date: '2026-10-15T10:00:00Z',
 		distance: 10800,
