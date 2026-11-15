@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import { glob } from 'node:fs/promises';
 import { Transform as TransformStream } from 'node:stream';
 import esbuild from 'esbuild';
-import { bundle as cssBundle, transform as cssTransform, Features as CSSFeatures } from 'lightningcss';
+import { bundle as cssBundle, transform as cssTransform, Features as cssFeatures } from 'lightningcss';
 import jsonTokensToCss from './json-tokens-to-css.js';
 import jsonTokensToFontFace from './json-tokens-to-font-face.js';
 
@@ -145,7 +145,7 @@ export default function (eleventyConfig, options) {
 					});
 					const transformed = cssTransform({
 						code: new TextEncoder().encode(bundled.code),
-						include: CSSFeatures.Nesting | CSSFeatures.MediaQueries,
+						include: cssFeatures.Nesting | cssFeatures.MediaQueries,
 						drafts: { customMedia: true },
 						minify: false,
 					});

@@ -39,8 +39,8 @@ export default function (eleventyConfig, options = {}) {
 		// Run PurgeCSS
 		if (content.includes(placeholder)) {
 			const pageList = getPageList(outputPath) || {};
-			const safelist = config.safelist.concat(pageList.safe || []);
-			const blocklist = config.blocklist.concat(pageList.block || []);
+			const safelist = config.safelist?.concat(pageList?.safe || []);
+			const blocklist = config.blocklist?.concat(pageList?.block || []);
 			const purgeCSSResults = await new PurgeCSS().purge({
 				content: [{ raw: content }],
 				css: pathToCss,

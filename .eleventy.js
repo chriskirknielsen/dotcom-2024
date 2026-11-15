@@ -39,8 +39,8 @@ const layoutsDir = `${includesDir}/layouts`; // Layouts folder
 const assetsDir = `_assets`; // Assets folder
 const BUILD_CONTEXT = ['serve', 'watch'].includes(process.env.ELEVENTY_RUN_MODE) ? 'DEV' : 'LIVE';
 const purgeCssList = {
-	_global: { safe: ['translated-rtl', 'popovertarget', 'popover'], block: [] }, // Preserve any pseudo-class for now (thanks laurentpayot; still broken in 7.0 https://github.com/FullHuman/purgecss/issues/978)
-	games: { safe: ['data-storage'] },
+	_global: { safe: ['translated-rtl', 'popovertarget', 'popover'], block: [] },
+	games: { safe: ['data-storage'], block: [] },
 };
 
 /** @param {import('@11ty/eleventy/UserConfig').default} eleventyConfig */

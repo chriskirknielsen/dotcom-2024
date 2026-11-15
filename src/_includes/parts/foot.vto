@@ -17,13 +17,13 @@
 {{ /if }}
 {{ if !metadata.nakedJs }}
 <script>
-	{{- getBundle 'js', 'foot' }}
-	{{- getBundle 'js', 'foot-toc' }}
-	{{- getBundle 'js', 'foot-codewrap' }}
-	{{- getBundle 'js', 'foot-about' }}
-	{{- getBundle 'js', 'foot-gameslibrary' }}
-	{{- getBundle 'js', 'foot-randompost' -}}
-	{{- getBundle 'js', 'foot-instantsearch' -}}
-	{{- getBundle 'js', 'foot-filteredtiles' -}}
+	{{ getBundle 'js', 'foot' }}
+	{{ getBundle 'js', 'foot-toc' }}
+	{{ getBundle 'js', 'foot-codewrap' }}
+	{{ getBundle 'js', 'foot-about' }}
+	{{ getBundle 'js', 'foot-gameslibrary' }}
+	{{ getBundle 'js', 'foot-randompost' }}
+	{{ getBundle 'js', 'foot-instantsearch' }}
+	{{ getBundle 'js', 'foot-filteredtiles' }}
 </script>
 {{ /if }}
