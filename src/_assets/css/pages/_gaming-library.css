@@ -117,6 +117,7 @@
 	inset-inline-start: 100%;
 
 	display: flex;
+	flex-direction: var(--box-front-branding-position, column);
 	inline-size: auto;
 	max-width: unset;
 	block-size: calc(100% + 2 * var(--box-border-size-block) + var(--box-cover-padding-block-start, 0px));
@@ -160,6 +161,17 @@
 			visibility: visible;
 			display: none;
 		}
+	}
+
+	/* Fake console label on the front cover */
+	&::before {
+		content: '';
+
+		display: block;
+		align-self: stretch;
+		aspect-ratio: var(--box-front-branding-ratio, 0);
+
+		background: var(--box-front-branding-background, transparent);
 	}
 
 	/* Fake corner (top-left) highlight, and a shadow for the part furthest away */
@@ -274,12 +286,18 @@
 	& .gaming-spine-top {
 		box-shadow: 0 0.125em 0 #0054a5;
 	}
+	& .gaming-box-wrap {
+		--box-front-branding-ratio: 460/67;
+		--box-front-branding-background: conic-gradient(#0054a5 0 0) no-repeat 0 100% / 100% 3%, var(--game-spine-bg);
+	}
 }
 
 [data-gaming-platform='ps4'] {
 	& .gaming-box-wrap {
 		--game-spine-top-text: #f8f8f8;
 		--game-spine-top-bg: #0054a5;
+		--box-front-branding-ratio: 460/67;
+		--box-front-branding-background: conic-gradient(var(--game-spine-top-text) 0 0) no-repeat 0 100% / 100% 3%, var(--game-spine-top-bg);
 	}
 }
 
@@ -292,8 +310,12 @@
 
 	& .gaming-box-wrap {
 		&[data-gaming-branding='old'] {
+			--box-front-branding-position: row;
+			--box-front-branding-ratio: 44/634;
 			--game-spine-top-text: #2c2e31;
 			--game-spine-top-bg: #d85454;
+			--box-front-branding-ratio: 43/631;
+			--box-front-branding-background: var(--game-spine-top-text);
 
 			& .gaming-spine-top {
 				inline-size: 100%;
@@ -309,6 +331,8 @@
 		&[data-gaming-branding='new'] {
 			--game-spine-top-text: #f8f8f8;
 			--game-spine-top-bg: #2c2e31;
+			--box-front-branding-ratio: 544/56;
+			--box-front-branding-background: conic-gradient(#d73333 0 0) no-repeat 0 100% / 100% 5%, var(--game-spine-top-bg);
 
 			& .gaming-spine-top {
 				box-shadow: 0 0.125em 0 #d85454;
@@ -317,7 +341,13 @@
 			&[data-gaming-edition='essentials'] {
 				--game-spine-text: #f8f8f8;
 				--game-spine-bg: #d73333;
+				--box-front-branding-background: var(--game-spine-bg);
 			}
+		}
+
+		& .gaming-front::before {
+			position: relative;
+			inset: var(--box-cover-padding, 0);
 		}
 	}
 
@@ -359,6 +389,9 @@
 	--game-spine-top-bg: #464a4f;
 
 	& .gaming-box-wrap {
+		--box-front-branding-ratio: 462/77;
+		--box-front-branding-background: var(--game-spine-top-bg);
+
 		&[data-gaming-edition='platinum'] {
 			--game-case-plastic: #c2dae8;
 			--game-spine-text: #bfd0d9;
@@ -384,6 +417,10 @@
 	--box-border-size-inline: 0;
 
 	& .gaming-box-wrap {
+		--box-front-branding-position: column-reverse;
+		--box-front-branding-ratio: 228/40;
+		--box-front-branding-background: var(--game-spine-bg);
+
 		&[data-gaming-edition='platinum'] {
 			--game-spine-text: #333639;
 			--game-spine-bg: #b4b8be;
@@ -422,6 +459,11 @@
 	--box-border-size-block: 0.125em;
 	--box-border-size-inline: 0;
 
+	& .gaming-box-wrap {
+		--box-front-branding-ratio: 251/28;
+		--box-front-branding-background: conic-gradient(var(--game-spine-top-text) 0 0) no-repeat 0 100% / 100% 3%, var(--game-spine-top-bg);
+	}
+
 	& .gaming-spine-logo {
 		background: #f8f8f8;
 	}
@@ -449,6 +491,17 @@
 	--box-border-size-block: 0.125em;
 	--box-border-size-inline: 0;
 
+	& .gaming-box-wrap {
+		--box-front-branding-ratio: 1;
+		--box-front-branding-background: var(--game-spine-bg);
+
+		& .gaming-front::before {
+			position: absolute;
+			inset: 0 auto auto 0;
+			inline-size: calc(86 / 394 * 100%);
+		}
+	}
+
 	& .gaming-spine-label {
 		font-size: calc(0.625em * var(--spine-title-scale)); /* Font needs to be slightly smaller for Switch spines, and needs less downscaling */
 		text-transform: uppercase;
@@ -468,6 +521,11 @@
 	--box-border-size-block: 0.125em;
 	--box-border-size-inline: 0.125em;
 
+	& .gaming-box-wrap {
+		--box-front-branding-ratio: 525/82;
+		--box-front-branding-background: var(--game-spine-bg);
+	}
+
 	& .gaming-box {
 		&::before {
 			content: '';
@@ -485,6 +543,11 @@
 
 	& .gaming-front {
 		--game-case-plastic: #5581c4;
+
+		&::before {
+			position: absolute;
+			inset: 2% 2% auto 2%;
+		}
 	}
 
 	& .gaming-spine-paper {
