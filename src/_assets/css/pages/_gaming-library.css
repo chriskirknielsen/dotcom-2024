@@ -560,6 +560,11 @@
 	--game-case-plastic: #333639;
 	--game-spine-top-text: #f8f8f8;
 	--game-spine-top-bg: #121313;
+
+	& .gaming-box-wrap {
+		--box-front-branding-ratio: 400/62;
+		--box-front-branding-background: conic-gradient(var(--game-spine-top-text) 0 0) no-repeat 0 100% / 100% 1.5%, var(--game-spine-top-bg);
+	}
 }
 
 [data-gaming-platform='gameboy'],
