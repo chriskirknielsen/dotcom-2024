@@ -87,7 +87,16 @@
 		<ul class="gaming-platform-group" data-gaming-platform="{{ platformSlug }}">
 			{{ for i, game of games |> sortBy(false, false, 'sortTitle') }}
 				{{ set gameFormat = game.discs >= 1 ? 'physical' : 'digital' }}
-				{{> gamesPerFormat[gameFormat]++ }}
+				{{>
+					gamesPerFormat[gameFormat]++;
+					let color;
+					if (game.title.includes('CONTROL')) { color = '#f99'; }
+					else if (game.title.includes('Grand Theft Auto') && game.title.toUpperCase().includes('VI')) { color = '#ff99f9'; } // GTA 6 and Vice City
+					else if (game.title.includes('Deus Ex')) { color = '#ffe38d'; }
+					if (color) {
+						game._accentColor = color;
+					}
+				}}
 				<li
 					class="gaming-box-wrap"
 					{{ if ['Essentials', 'Platinum'].includes(game.edition) }}data-gaming-edition="{{ game.edition |> toLowerCase |> replace(' ', '-') }}"{{ /if }}

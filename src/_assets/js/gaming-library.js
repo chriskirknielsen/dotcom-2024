@@ -39,7 +39,7 @@ function eachDom(s, fn, scope = document) {
 /** Creates the dialog markup for the game details to display. */
 function loadAndPopulateGameDetailDialog(target, navAnimSign = 0) {
 	openGame = target.closest('.gaming-box-wrap'); // Update to the currently open game's list item
-	const gameData = JSON.parse(target.closest('[data-game]').getAttribute('data-game'));
+	const gameData = JSON.parse(target.closest('[data-game]').dataset.game);
 	const dialog = document.getElementById('gaming-details-dialog');
 	const template = document.getElementById('gaming-details-dialog-template');
 	const trophySvgId = template.getAttribute('data-trophy-svg-id');
@@ -157,6 +157,11 @@ function loadAndPopulateGameDetailDialog(target, navAnimSign = 0) {
 		boxartImgEl.alt = '';
 		// boxartEl.removeAttribute('data-gaming-platform');
 		boxartEl.hidden = true;
+	}
+	if (gameData._accentColor) {
+		boxartEl.style.setProperty('--hypercard-glow-color', gameData._accentColor);
+	} else {
+		boxartEl.style.removeProperty('--hypercard-glow-color');
 	}
 
 	Array.from(dialog.childNodes).forEach((el) => el.remove());
