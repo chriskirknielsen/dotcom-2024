@@ -326,12 +326,6 @@
 						<time datetime="{{ event.date }}T12:00:00" class="event-ticket-date">
 							{{ new Date(`${event.date}T12:00:00`).toLocaleString(metadata.lang, { weekday: 'long' }) }} {{ eventNiceDate }}
 						</time>
-						{{ if event.commentary }}
-							<button type="button" command="show-modal" commandfor="concert-info-{{ i+1 }}" class="reset-button event-info-button linecap-auto">
-								{{ svg 'info', { class: 'button-icon' } }}
-								<span class="visually-hidden">Notes for {{ eventNiceDate }} event</span>
-							</button>
-						{{ /if }}
 					</div>
 				</div>
 				<div class="event-ticket-side">
@@ -349,6 +343,13 @@
 							<dd{{ if typeof event.seat !== 'object' }} class="visually-hidden"{{ /if }}>{{ typeof event.seat === 'object' ? event.seat.seat : 'N/A' }}</dd>
 						</div>
 					</dl>
+
+					{{ if event.commentary }}
+						<button type="button" command="show-modal" commandfor="concert-info-{{ i+1 }}" class="reset-button event-info-button linecap-auto">
+							{{ svg 'info', { class: 'button-icon' } }}
+							<span class="visually-hidden">Notes for {{ eventNiceDate }} event</span>
+						</button>
+					{{ /if }}
 				</div>
 			</div>
 		</div>
@@ -409,8 +410,7 @@
 		inline-size: 100%;
 		max-inline-size: 36rem;
 
-		transform-style: preserve-3d;
-		transition: transform var(--anim-short) var(--easing-in-out);
+		rotate: calc(sign(mod(var(--i), 2) - 0.5) * mod(5 * var(--i), 7) * 0.5deg * var(--a, 1));
 	}
 
 	.event-ticket-container > * {
@@ -419,12 +419,11 @@
 
 	.event-ticket {
 		align-self: center;
-
-		backface-visibility: hidden;
-		rotate: calc(sign(mod(var(--i), 2) - 0.5) * mod(5 * var(--i), 7) * 0.5deg * var(--a, 1));
 	}
 
 	.event-ticket--plaintext {
+		z-index: 2;
+
 		display: grid;
 		grid-template-columns: 1fr auto;
 		inline-size: 100%;
@@ -438,13 +437,28 @@
 	}
 
 	.event-ticket--scan {
+		z-index: 1;
+
 		zoom: 1.2;
-		transform: rotateY(180deg);
+		visibility: hidden;
 		filter: drop-shadow(0 4px 4px #0008);
 	}
 
 	.event-list--show-scans .event-ticket-container:has(.event-ticket--scan) {
-		transform: rotateY(180deg);
+		& .event-ticket--plaintext {
+			visibility: hidden;
+			block-size: 0; /* Allows the Info button to properly align to the image */
+		}
+
+		& .event-ticket--scan,
+		& .event-info-button {
+			visibility: visible;
+		}
+
+		& .event-info-button {
+			position: absolute;
+			inset: auto 2em 2em auto;
+		}
 	}
 
 	.event-ticket-center {
@@ -505,14 +519,16 @@
 		background: #000;
 	}
 	.event-ticket-side {
-		writing-mode: vertical-rl;
-		text-orientation: sideways-right;
+		display: grid;
+		grid-template-rows: 1fr auto;
 	}
 
 	.event-ticket-seating {
+		writing-mode: vertical-rl;
+		text-orientation: sideways-right;
+
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: repeat(2, auto);
 		gap: 0.25em 0.5em;
 
 		list-style-type: '';
@@ -539,13 +555,13 @@
 	.event-info-button {
 		--_cta-icon-size: 1.33em;
 
-		align-self: end;
+		justify-self: end;
 		padding: 0.25em;
 
 		font-size: var(--typeScale-n1);
 		color: #fff;
 		border: none;
-		border-radius: 0;
+		border-radius: 50%;
 		background: #000;
 	}
 	.event-info-button:is(:hover, :focus-visible) {
