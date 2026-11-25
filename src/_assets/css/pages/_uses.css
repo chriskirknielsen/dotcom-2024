@@ -13,9 +13,10 @@
 	position: relative;
 	z-index: 0;
 
+	inline-size: fit-content;
 	max-inline-size: 100%;
-	min-inline-size: fit-content;
 	margin-block-start: calc(var(--MACOSDOCK-padding) * -1 * var(--MACOSDOCK-overflow-factor));
+	margin-block-end: calc(var(--MACOSDOCK-padding) * 0.5);
 	margin-inline: auto;
 
 	&::before {
@@ -37,25 +38,24 @@
 }
 
 .macos-dock-inner {
+	--sidescroller-inset-inline: calc(2 * var(--MACOSDOCK-padding));
+	--sidescroller-offset-block: 0.125rem;
+	--sidescroller-block-size: 0.325rem;
+	--sidescroller-thumb-color-accent: #9c9c9c;
+	--sidescroller-track-color: transparent;
+
 	padding-block-start: calc(var(--MACOSDOCK-padding) * var(--MACOSDOCK-overflow-factor));
-	padding-block-end: calc(
-		var(--MACOSDOCK-padding) - clamp(0px, var(--scrollbar-size), 1px) * 6
-	); /* If there's any scrollbar, assume they are visible at all times, take up space, and are not overlays (6px for thin scrollbars, a quick and dirty average) */
-	overflow-x: auto;
-	overflow-y: clip;
+	padding-block-end: calc(var(--MACOSDOCK-padding) - var(--sidescroller-block-size));
 	overscroll-behavior: chain; /* If supported, this allows scroll-chaining but disables the bounce effect */
-	scrollbar-width: thin;
-	scrollbar-color: #808080 transparent;
 
 	mask:
 		conic-gradient(tan 0 0) no-repeat 0 100% / 100% var(--MACOSDOCK-padding),
 		linear-gradient(90deg, transparent 0%, tan var(--MACOSDOCK-padding), tan calc(100% - var(--MACOSDOCK-padding)), transparent 100%) no-repeat center 0 / 100%
 			calc(100% - var(--MACOSDOCK-padding));
 
-	@media (pointer: fine) {
-		&:not(:hover) {
-			scrollbar-color: #414141 transparent;
-		}
+	&:is(side-scroller:not(:defined)) {
+		scrollbar-width: thin;
+		scrollbar-color: #808080 transparent;
 	}
 }
 

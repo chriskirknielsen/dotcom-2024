@@ -1,0 +1,155 @@
+side-scroller {
+	position: relative;
+	display: block;
+	overflow: auto; /* The idea being that, block size would never overflow if it's not constrained */
+
+	/* This will not be :defined if an error occurs */
+	&:defined {
+		/* Available overrides:
+				--sidescroller-inset-inline: <length-percentage> How much inline padding (per side) to put around the scrollbar;
+				--sidescroller-offset-block: <length-percentage> Size of the gap between the content and the scrollbar;
+				--sidescroller-block-size: <length> How much height the scrollbar is supposed to take;
+				--sidescroller-thumb-radius: <length-percentage> Border-radius for the scrollbar thumb;
+				--sidescroller-thumb-color-accent: <color> Color for the scrollbar thumb, used to automatically compute a color for each state;
+				--sidescroller-thumb-color-idle: <color> Color for the scrollbar thumb when inactive;
+				--sidescroller-thumb-color-hover: <color> Color for the scrollbar thumb when hovered or focused;
+				--sidescroller-thumb-color-active: <color> Color for the scrollbar thumb when actively interacted with;
+				--sidescroller-track-color: <color|image> Color for the scrollbar track (background);
+			*/
+
+		/* Scrollbar cannot be shorter than 20% of the total width (seems reasonable, no?), so 40% on each side is the max */
+		--_sidescroller-inset-inline: min(40%, var(--sidescroller-inset-inline, 2rem));
+		--_sidescroller-offset-block: var(--sidescroller-offset-block, 0px);
+		--_sidescroller-offset-block-calc: var(--_sidescroller-offset-block);
+		--_sidescroller-inline-size: clamp(max(1rem, 10%), var(--_sidescroller-ratio, 0.5) * 100%, 100%);
+		--_sidescroller-block-size: var(--sidescroller-block-size, 0.75rem);
+		--_sidescroller-block-size-calc: var(--_sidescroller-block-size);
+		--_sidescroller-thumb-radius: var(--sidescroller-thumb-radius, 0.5rem);
+		--_sidescroller-track-color: var(--sidescroller-track-color, color-mix(in oklch, transparent 85%, currentColor));
+		/* ↓ With thanks to Miriam Suzanne https://codepen.io/editor/miriamsuzanne/pen/019cbad1-8aed-76cf-8496-2f90f56dd475 */
+		--_sidescroller-lightness: oklch(from currentColor clamp(0.5, l, 0.7) none none);
+		--_sidescroller-accent-color: var(--sidescroller-thumb-color-accent, color-mix(in oklch, currentColor, var(--_sidescroller-lightness) 100%));
+		--_sidescroller-thumb-color: var(--sidescroller-thumb-color-idle, initial);
+		--_sidescroller-thumb-color-calc: var(
+			--_sidescroller-thumb-color,
+			color-mix(in oklch, var(--_sidescroller-accent-color) var(--_sidescroller-thumb-opacity, 66.7%), transparent)
+		);
+
+		scrollbar-width: none;
+
+		/* &[can-expand] {
+			--_sidescroller-block-size-calc: calc(var(--_sidescroller-block-size) * 0.5);
+			--_sidescroller-offset-block-calc: calc(var(--_sidescroller-offset-block) + calc(var(--_sidescroller-block-size) * 0.5));
+
+			transition-property: --_sidescroller-block-size-calc, --_sidescroller-offset-block-calc;
+			transition-duration: 125ms;
+			transition-timing-function: ease-in-out;
+
+			& .side-scroller-input {
+				will-change: block-size, margin-block-start;
+			}
+
+			&:focus-within,
+			&:has(.side-scroller-input:hover) {
+				--_sidescroller-block-size-calc: var(--_sidescroller-block-size);
+				--_sidescroller-offset-block-calc: var(--_sidescroller-offset-block);
+			}
+		} */
+
+		&:has(.side-scroller-input:is(:hover, :focus-visible)),
+		&:focus-visible {
+			--_sidescroller-thumb-opacity: 83.3%;
+			--_sidescroller-thumb-color: var(--sidescroller-thumb-color-hover, initial);
+		}
+
+		&:has(.side-scroller-input:active) {
+			--_sidescroller-thumb-opacity: 100%;
+			--_sidescroller-thumb-color: var(--sidescroller-thumb-color-active, initial);
+		}
+
+		& .side-scroller-input {
+			box-sizing: border-box;
+
+			position: sticky;
+			inset-inline: var(--_sidescroller-inset-inline, 0);
+
+			display: block;
+			block-size: var(--_sidescroller-block-size-calc);
+			inline-size: calc(100% - 2 * var(--_sidescroller-inset-inline, 0px));
+			margin-block-start: var(--_sidescroller-offset-block-calc, 0);
+			margin-inline: auto;
+
+			appearance: none;
+			background: transparent;
+
+			&[hidden] {
+				display: none;
+			}
+
+			&::-webkit-slider-runnable-track {
+				block-size: 100%;
+
+				border-radius: 0;
+				background: var(--_sidescroller-track-color);
+			}
+
+			&::-moz-range-track {
+				block-size: 100%;
+
+				border-radius: 0;
+				background: var(--_sidescroller-track-color);
+			}
+
+			&::-webkit-slider-thumb {
+				block-size: var(--_sidescroller-block-size-calc);
+				inline-size: var(--_sidescroller-inline-size);
+
+				appearance: none;
+				border-radius: var(--_sidescroller-thumb-radius, 0);
+				border: 0;
+				background: var(--_sidescroller-thumb-color-calc);
+			}
+
+			&::-moz-range-thumb {
+				block-size: var(--_sidescroller-block-size-calc);
+				inline-size: var(--_sidescroller-inline-size);
+
+				border-radius: var(--_sidescroller-thumb-radius, 0);
+				border: 0;
+				background: var(--_sidescroller-thumb-color-calc);
+			}
+		}
+
+		/* ↓ With thanks to Curtis Wilcox https://codepen.io/editor/ccwilcox/pen/01a1c6b8-4d86-7389-a1c3-de2fe6cc7d7c */
+		&:focus-visible {
+			& ::-webkit-slider-thumb {
+				outline: 2px solid var(--_sidescroller-accent-color);
+				outline-offset: 2px;
+			}
+
+			& ::-moz-range-thumb {
+				outline: 2px solid var(--_sidescroller-accent-color);
+				outline-offset: 2px;
+			}
+		}
+	}
+}
+
+/* @property --_sidescroller-block-size-calc {
+	syntax: '<length-percentage>';
+	inherits: true;
+	initial-value: 16px;
+}
+
+@property --_sidescroller-offset-block-calc {
+	syntax: '<length-percentage>';
+	inherits: true;
+	initial-value: 8px;
+} */
+
+/* Seems to help some iOS Safari versions with computing _something_ instead of nothing at all ¯\_(ツ)_/¯ */
+@property --_sidescroller-thumb-color-calc {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: currentcolor;
+}

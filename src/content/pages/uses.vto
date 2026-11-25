@@ -41,7 +41,7 @@
 -	{{ svg 'keyboard', { width: 16, height: 16, class: 'inline-icon list-item-icon' } }} [8BitDo Retro Mechanical Keyboard](https://www.8bitdo.com/retro-mechanical-keyboard/)
 	My first mechanical keyboard, super satisfying to type on — and yes [it works on macOS](https://rknight.me/blog/using-the-8bitdo-keyboard-on-macos/) (I second Robb’s recommendation of Karabiner-Elements).
 -	{{ svg 'mouse', { width: 16, height: 16, class: 'inline-icon list-item-icon' } }} [Logitech MX Ergo S](https://www.amazon.com/dp/B0D6PTR6MP)
-	Ergonomic mouse to, hopefully, help my wrist stay away from RSI. Using the every affordable [Mac Mouse Fix](https://macmousefix.com/en/) for extra controls, namely omnidirectional scrolling with the trackball.
+	Ergonomic mouse to, hopefully, help my wrist stay away from a repetitive strain injury. Using the very affordable [Mac Mouse Fix](https://macmousefix.com/en/) for extra controls, namely omnidirectional scrolling with the trackball.
 -	{{ svg 'headphones', { width: 16, height: 16, class: 'inline-icon list-item-icon' } }} Audio
 	-	[Audio Technica ATH-CKS50TW2](https://www.audio-technica.com/en-us/ath-cks50tw2ml)
 		Some fancy Bluetooth earphones with noise cancelling that stay with me most of the work day.
@@ -72,8 +72,11 @@
 	The most excellent rectangle ever made. I use it when running or going out for errands.
 -	{{ svg 'controller', { width: 16, height: 16, class: 'inline-icon list-item-icon' } }} **PlayStation 5** (2020 disc model)
 	Good games, good consoles… can’t complain about my history with PlayStation. [Until now, sigh](https://blog.playstation.com/2026/07/01/physical-disc-production-ending-in-january-2028-for-new-games-releasing-on-playstation-consoles/).
--	{{ svg 'piano', { width: 16, height: 16, class: 'inline-icon list-item-icon' } }} [Novation Launchkey 37 MIDI keyboard](https://www.amazon.com/gp/product/B086N4W81X)
-	I made music a lot in the past, and this little toy is great to slowly get back into it.
+-	{{ svg 'piano', { width: 16, height: 16, class: 'inline-icon list-item-icon' } }} Music stuff
+	-	[Novation Launchkey 37 MIDI keyboard](https://www.amazon.com/gp/product/B086N4W81X)
+		I made music a lot in the past, and this little toy is great to slowly get back into it.
+	-	[M-VAVE FM-1](https://www.aliexpress.us/w/wholesale-m%2525252dvave-fm%2525252d1.html?g=y&SearchText=m-vave+fm-1&sortType=price_asc)
+		A tiny synth just for fun (with customisable [firmware](https://thefirmwarehub.com/)!)
 
 ## Software
 
@@ -152,8 +155,10 @@ My personal laptop’s pinned applications list looks a bit like this (Dark Mode
 	'1password': '1Password',
 	'settings': 'Settings',
 } }}
-<div class="macos-dock-wrapper"><div class="macos-dock"><div class="macos-dock-inner"><ul class="macos-dock-list">
+<div class="macos-dock-wrapper"><div class="macos-dock"><side-scroller class="macos-dock-inner"><ul class="macos-dock-list">
 {{- for file, label of macosDockIcons -}}
 	<li><tool-tip tip-flow="inline" tip-position="start center"><img src="/assets/img/macos-dock/{{ file }}.png" alt="{{ label }}" width="128" height="128" loading="lazy"><span class="tip-content">{{ label }}</span></tool-tip></li>
 {{- /for -}}
-</ul></div></div><p class="fontStyle-italic textAlign-center fontSize-smaller"><a href="https://www.trovster.com/about/uses#development">Inspired by Trevor Morris</a>. All icons belong to their respective authors.</p></div>
+</ul></side-scroller></div><p class="fontStyle-italic textAlign-center fontSize-smaller"><a href="https://www.trovster.com/about/uses#development">Inspired by Trevor Morris</a>. All icons belong to their respective authors.</p></div>
+
+{{ js 'foot-sidescroller' }}{{ include 'assets/js/components/side-scroller.js' }}{{ /js }}
