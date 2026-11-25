@@ -17,7 +17,7 @@
 }
 
 .floatster-media {
-	--r: calc(sin(var(--i) * 199 + var(--FL-seed)) * var(--FL-angle, 4deg));
+	--r: calc(sin(var(--i) * 199 + var(--FL-seed)) * 4deg);
 
 	position: relative;
 
@@ -37,8 +37,11 @@
 		}
 	}
 
-	&:hover {
-		transform: rotate(calc(var(--r) + sign(var(--r)) * 1deg)) scale(1.05);
+	&:not(:has(> hyper-card)),
+	&:has(> hyper-card:not(:defined)) {
+		&:hover {
+			transform: rotate(calc(var(--r) + sign(var(--r)) * 1deg)) scale(1.05);
+		}
 	}
 }
 
@@ -53,9 +56,6 @@
 .floatster-image {
 	aspect-ratio: var(--FL-img-ratio);
 
-	border-radius: var(--_corner);
-	box-shadow: var(--_shadow);
-
 	@media (prefers-reduced-motion: no-preference) {
 		transition: box-shadow var(--easing-bounce) var(--anim-long);
 	}
@@ -63,30 +63,45 @@
 	.floatster-media:is(:hover, :focus) & {
 		box-shadow: var(--_shadow-active);
 	}
+
+	hyper-card:not(:defined) & {
+		border-radius: var(--_corner);
+		box-shadow: var(--_shadow);
+	}
+
+	hyper-card:has(&) {
+		border-radius: var(--_corner);
+	}
 }
 
 .floatster-praise {
 	position: absolute;
-	inset-block-start: 100%;
-	inset-inline-start: var(--FL-praise-inline-pos, 100%);
+	inset-block-end: var(--size-xs);
+	inset-inline-end: var(--size-xs);
 
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	inline-size: 2em;
-	padding: 0.5em;
+	padding: 0.25em;
 	aspect-ratio: 1;
 
 	font-size: 0.75em;
 	line-height: 1;
-	text-shadow: -1px -1px 2px #0008;
-	border: 0 solid transparent;
-	border-width: var(--FL-praise-border, 1px 0 0 1px);
-	border-radius: 50%;
-	background: linear-gradient(90deg, var(--color-surface), var(--color-canvas)) padding-box no-repeat,
-		linear-gradient(hsl(var(--_shadow-color)), hsl(var(--_shadow-color))) border-box no-repeat 0 0 / var(--FL-praise-bg-border-size, 50% 100%);
+	color: maroon;
+	text-shadow:
+		0 0 1px #0008,
+		0 0 3px #0004,
+		0 0 5px #0001;
+	border: 0;
+	background: linear-gradient(170deg, #fff6d7, #fce29e, #d7b84a) no-repeat center / 99%; /* Sub-pixel fix */
 
-	translate: -50% -50%;
+	mask:
+		linear-gradient(135deg, tan 49.9%, transparent 50%) no-repeat 100% 100% / 50% 50%,
+		linear-gradient(225deg, tan 49.9%, transparent 50%) no-repeat 0% 100% / 50% 50%,
+		linear-gradient(315deg, tan 49.9%, transparent 50%) no-repeat 0% 0% / 50% 50%,
+		linear-gradient(45deg, tan 49.9%, transparent 50%) no-repeat 100% 0% / 50% 50%,
+		conic-gradient(tan 0 0) no-repeat center / 66.7% 66.7%;
 }
 
 @container (inline-size > 680px) {
@@ -106,15 +121,6 @@
 }
 
 @container (inline-size <= 680px) {
-	.floatster-item {
-		--FL-angle: 1.5deg;
-		--FL-praise-inline-pos: 50%;
-		--FL-praise-border: 1px;
-		--FL-praise-bg-border-size: 100% calc(50% + 1px);
-
-		clear: both;
-	}
-
 	.floatster-contents {
 		display: contents;
 	}

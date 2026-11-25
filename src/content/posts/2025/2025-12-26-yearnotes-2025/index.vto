@@ -451,7 +451,7 @@ itemsBySection: {
 ---
 
 {{ import { getPlatformIcon } from "../../../../_includes/globals.vto" }}
-{{ async function floatster(slug, w, h, detailPrefix = '') }}
+{{ async function floatsters(slug, w, h, detailPrefix = '') }}
 	{{ component 'floatster', {
 		slug: slug,
 		items: itemsBySection[slug].map((item) => {
@@ -550,7 +550,7 @@ itemsBySection: {
 		<p>
 			I started off so, so well. Three months, three books! Then I lost steam and didn’t read a book from April through October… (unless you count half of a friend’s book draft) Given I read nearly twice as many last year, this is bad even by my standards (admittedly, though, I am a slow reader — if you read fast, you have my admiration). Hoping to read more in 2026, so if you have recommendations, please send them my way!
 		</p>
-		{{ await floatster('books', 530, 800) }}
+		{{ await floatsters('books', 530, 800) }}
 	</div>
 </section>
 
@@ -631,7 +631,7 @@ itemsBySection: {
 		<p>
 			I watched a decent amount of TV shows, and I like to think it was varied. I did not get to <strong>White Lotus</strong> or <strong>Fallout</strong> — I guess I really want to watch Walton Goggins, eh? I haven’t seen the final <strong>Stranger Things</strong> season yet, but plan to in 2026, along with a rewatch of <strong>Parks and Recreation</strong>… it just needs to happen.
 		</p>
-		{{ await floatster('shows', 530, 800) }}
+		{{ await floatsters('shows', 530, 800) }}
 	</div>
 </section>
 
@@ -735,7 +735,7 @@ itemsBySection: {
 		<p>
 			It’s weird how I’m fine binging 3 TV show episodes in a row for nearly 2 hours, but sitting down to watch one movie in the same amount of time is nearly impossible. Go figure! I would have more to say about most of these movies but I’ll keep it spoiler-free.
 		</p>
-		{{ await floatster('movies', 530, 800) }}
+		{{ await floatsters('movies', 530, 800) }}
 	</div>
 </section>
 
@@ -836,7 +836,7 @@ itemsBySection: {
 			<li><strong>Venjent</strong> creates DnB songs from random video clips (as well as their own tracks). They are <em>ridiculously</em> talented, hear for yourself: <a href="https://www.youtube.com/watch?v=hHCTTa8UP9U">Bike Alarm</a> and <a href="https://www.youtube.com/watch?v=or76qIUqeVo">Sunken</a>.</li>
 			<li><strong>Pat’s Soundhouse</strong> made a glorious khaen performance that starts off as a <a href="https://www.youtube.com/watch?v=jcutNFPwXPE">car alarm</a> but ends up being so much more than that.</li>
 		</ul>
-		{{ await floatster('music', 500, 500) }}
+		{{ await floatsters('music', 500, 500) }}
 	</div>
 </section>
 
@@ -964,7 +964,7 @@ itemsBySection: {
 		<p>
 			I made some time for some gaming here and there (which, compared to all other media, is a lot, when I think about it…), and it is good to see it’s been pretty diverse for me this year between adventure, puzzle, and… wheeled sports? Not included below are my (mostly) daily puzzles like <a href="https://tiledwords.com/puzzles/daily">Tiled Words</a>, <a href="https://www.morningbrew.com/games/">(mini) crosswords</a>, and <a href="https://sudoku.com/killer/expert/">expert killer sudoku</a>. I’m also really looking forward to 2026 with a few specific games like <strong>Control: Resonant</strong>, and <strong>Star Wars: Galactic Racer</strong> (and yes, <strong>GTA VI</strong>, too), in addition to my backlog, such as <strong>A Plague Tale: Requiem</strong> and <strong>Stray</strong>, and maybe <strong>Disco Elysium</strong>.
 		</p>
-		{{ await floatster('games', 600, 800) }}
+		{{ await floatsters('games', 600, 800) }}
 	</div>
 </section>
 

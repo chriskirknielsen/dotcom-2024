@@ -12,6 +12,7 @@
 			{{ if item.image }}
 				{{ set imageUrl = item.image |> toCloudinary('c_pad,w_250') }}
 				{{ if item.link }}<a href="{{ item.link }}" class="floatster-media" aria-label="{{ item.title |> escape }} on {{ new URL(item.link).host.replace(/^www\./i, '') }}">{{ else }}<div class="floatster-media">{{ /if }}
+				<hyper-card>
 					<img
 						src="{{ imageUrl }}"
 						alt=""
@@ -21,6 +22,7 @@
 						{{ if (laziness === 'auto' && i < 3) }}loading="eager" fetchpriority="high"{{ else }}loading="lazy"{{ /if }}
 						>
 					{{ if item.praise }}<span class="floatster-praise" aria-hidden="true" title="{{ (praiseLabel || 'Recommended') |> escape }}">{{ praiseIcon || '👍' }}</span>{{ /if }}
+				</hyper-card>
 				{{ if !item.link }}</div>{{ else }}</a>{{ /if }}
 			{{ /if }}
 			<div class="floatster-contents | flow" style="--flow-space: var(--size-s);">
@@ -49,3 +51,5 @@
 	{{- /for -}}
 	</ul>
 </div>
+
+{{ js 'foot-hypercard' }}{{ include 'assets/js/components/hypercard.js' }}{{ /js }}
