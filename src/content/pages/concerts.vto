@@ -447,7 +447,7 @@
 	.event-list--show-scans .event-ticket-container:has(.event-ticket--scan) {
 		& .event-ticket--plaintext {
 			visibility: hidden;
-			block-size: 0; /* Allows the Info button to properly align to the image */
+			block-size: 0;
 		}
 
 		& .event-ticket--scan,
@@ -458,6 +458,23 @@
 		& .event-info-button {
 			position: absolute;
 			inset: auto 2em 2em auto;
+		}
+
+		@supports (position-anchor: --a) and (anchor-scope: --a) {
+			anchor-scope: --stub;
+
+			& .event-ticket--plaintext {
+				block-size: unset;
+			}
+
+			& .event-ticket--scan {
+				anchor-name: --stub;
+			}
+
+			& .event-info-button {
+				position-anchor: --stub;
+				position-area: span-start;
+			}
 		}
 	}
 
@@ -540,7 +557,7 @@
 	.event-ticket-seat {
 		display: grid;
 		grid-template-columns: subgrid;
-		
+
 		text-align: left;
 		text-align: start;
 	}
