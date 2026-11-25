@@ -42,7 +42,7 @@
 	--sidescroller-offset-block: 0.125rem;
 	--sidescroller-block-size: 0.325rem;
 	--sidescroller-thumb-color-accent: #9c9c9c;
-	--sidescroller-track-color: transparent;
+	--sidescroller-track-color: #181818;
 
 	padding-block-start: calc(var(--MACOSDOCK-padding) * var(--MACOSDOCK-overflow-factor));
 	padding-block-end: calc(var(--MACOSDOCK-padding) - var(--sidescroller-block-size));
