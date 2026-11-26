@@ -64,6 +64,10 @@
 		box-shadow: var(--_shadow-active);
 	}
 
+	hyper-card:defined &[class] {
+		box-shadow: none;
+	}
+
 	hyper-card:not(:defined) & {
 		border-radius: var(--_corner);
 		box-shadow: var(--_shadow);
