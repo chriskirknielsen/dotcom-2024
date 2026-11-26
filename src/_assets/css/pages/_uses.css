@@ -40,7 +40,7 @@
 .macos-dock-inner {
 	--sidescroller-inset-inline: calc(2 * var(--MACOSDOCK-padding));
 	--sidescroller-offset-block: 0.125rem;
-	--sidescroller-block-size: 0.325rem;
+	--sidescroller-block-size: 0.5rem;
 	--sidescroller-thumb-color-accent: #9c9c9c;
 	--sidescroller-track-color: #181818;
 
@@ -90,7 +90,7 @@
 	block-size: auto;
 
 	@media (prefers-reduced-motion: no-preference) {
-		&:hover {
+		&:is(:hover, :focus-visible) {
 			scale: 1.2;
 		}
 

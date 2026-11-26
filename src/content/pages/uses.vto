@@ -155,9 +155,9 @@ My personal laptop’s pinned applications list looks a bit like this (Dark Mode
 	'1password': '1Password',
 	'settings': 'Settings',
 } }}
-<div class="macos-dock-wrapper"><div class="macos-dock"><side-scroller class="macos-dock-inner"><ul class="macos-dock-list">
+<div class="macos-dock-wrapper"><div class="macos-dock"><side-scroller can-expand class="macos-dock-inner"><ul class="macos-dock-list">
 {{- for file, label of macosDockIcons -}}
-	<li><tool-tip tip-flow="inline" tip-position="start center"><img src="/assets/img/macos-dock/{{ file }}.png" alt="{{ label }}" width="128" height="128" loading="lazy"><span class="tip-content">{{ label }}</span></tool-tip></li>
+	<li><tool-tip tip-flow="inline" tip-position="start center"><img src="/assets/img/macos-dock/{{ file }}.png" alt="{{ label }}" width="128" height="128" loading="lazy" tabindex="0"><span class="tip-content">{{ label }}</span></tool-tip></li>
 {{- /for -}}
 </ul></side-scroller></div><p class="fontStyle-italic textAlign-center fontSize-smaller"><a href="https://www.trovster.com/about/uses#development">Inspired by Trevor Morris</a>. All icons belong to their respective authors.</p></div>
 

@@ -37,7 +37,7 @@ side-scroller {
 
 		scrollbar-width: none;
 
-		/* &[can-expand] {
+		&[can-expand] {
 			--_sidescroller-block-size-calc: calc(var(--_sidescroller-block-size) * 0.5);
 			--_sidescroller-offset-block-calc: calc(var(--_sidescroller-offset-block) + calc(var(--_sidescroller-block-size) * 0.5));
 
@@ -54,7 +54,7 @@ side-scroller {
 				--_sidescroller-block-size-calc: var(--_sidescroller-block-size);
 				--_sidescroller-offset-block-calc: var(--_sidescroller-offset-block);
 			}
-		} */
+		}
 
 		&:has(.side-scroller-input:is(:hover, :focus-visible)),
 		&:focus-visible {
@@ -135,7 +135,7 @@ side-scroller {
 	}
 }
 
-/* @property --_sidescroller-block-size-calc {
+@property --_sidescroller-block-size-calc {
 	syntax: '<length-percentage>';
 	inherits: true;
 	initial-value: 16px;
@@ -145,7 +145,7 @@ side-scroller {
 	syntax: '<length-percentage>';
 	inherits: true;
 	initial-value: 8px;
-} */
+}
 
 /* Seems to help some iOS Safari versions with computing _something_ instead of nothing at all ¯\_(ツ)_/¯ */
 @property --_sidescroller-thumb-color-calc {
